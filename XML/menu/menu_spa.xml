@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<menu>
+	<archivo>
+		<texto>Archivo</texto>
+		<nuevo>Nuevo Auto</nuevo>
+		<nueva>Nueva ER</nueva>
+		<abrir>Abrir</abrir>
+		<guardar>Guardar</guardar>
+		<guardarc>Guardar como</guardarc>
+		<guardare>Abrir ejercicio</guardare>
+		<imprimir>Imprimir</imprimir>
+		<salir>Salir</salir>
+		<ejercicio>Nuevo ejercicio</ejercicio>
+	</archivo>
+	<opciones>
+		<texto>Opciones</texto>
+		<configuracion>Preferencias</configuracion>
+		<idioma>Idiomas</idioma>
+		<Spanish>Español</Spanish>
+		<English>Inglés</English>
+	</opciones>	
+	<ayuda>
+		<texto>Ayuda</texto>
+		<buscar>Buscar..</buscar>
+		<manual>Manual de usuario..</manual>
+	</ayuda>
+	<accesibilidad>
+		<texto>Accesibilidad</texto>
+		<acerca>Acerca de</acerca>
+		<activar>Activar</activar>
+	</accesibilidad>
+	<algoritmos>
+		<texto>Algoritmos</texto>
+		<ER_AFND>Expresión regular a Autómata</ER_AFND>
+		<AFNDLambda_to_AFND>AFN-lambda a AFND</AFNDLambda_to_AFND>
+		<AFN_to_AFD>AFN a AFD</AFN_to_AFD>
+		<MinimizacionAFD>Mimización AFD</MinimizacionAFD>
+		<equivalentes>Equivalencia de autómatas</equivalentes>
+		<afd_to_er>AFD a ER</afd_to_er>
+		<er>Expresión Regular</er>
+	</algoritmos>
+	<usuarios>
+		<texto>Usuarios</texto>
+	    <consultar>Consultar info</consultar>
+	    <actualizar>Actualizar usuario</actualizar>
+	    <buscar>Buscar alumno</buscar>
+	    <titulo>Panel Datos Usuario</titulo>
+	    <nombre>Nombre usuario: </nombre>
+		<cons>Ejercicios consultados: </cons>
+		<bien>Ejercicios bien hechos: </bien>
+		<mal>Ejercicios mal hechos: </mal>
+	</usuarios>
+	<log>
+		<consola>Consola</consola>
+		<comandos>Línea de Comandos</comandos>
+	</log>
+	<tooltip>
+		<opciones>Menú de opciones</opciones>
+		<accesibilidad>Menú de accesibilidad</accesibilidad>
+		<idioma>Selección de idioma</idioma>
+		<imprimir>Imprimir el contenido del panel</imprimir>
+		<salir>Salir de la aplicación</salir>
+		<abrir>Abrir archivo existente</abrir>
+		<archivo>Menú de archivo</archivo>
+		<nuevoAuto>Crear nuevo autómata</nuevoAuto>
+		<nuevaER>Crear nueva expresión regular</nuevaER>
+		<guardar>Guardar contenido del panel</guardar>
+		<guardarComo>Guardar contenido del panel como tipo de archivo</guardarComo>
+		<config>Congifuración de la aplicación</config>
+		<espanyol>Español</espanyol>
+		<ingles>Inglés</ingles>
+		<ayuda>Menú de ayuda</ayuda>
+		<buscar>Buscar información del alumno</buscar>
+		<manual>Consultar el manual</manual>
+		<access>¿Qué es la accesibilidad?</access>
+		<activar>Activar accesibilidad</activar>
+		<algoritmos>Menú de algoritmos</algoritmos>
+		<ERtoAFNDL>Algoritmo de transformación de expresión regualar a autómata lambda</ERtoAFNDL>
+		<AFNDtoAFD>Algoritmo de transformación de autómata no determinista a determinista</AFNDtoAFD>
+		<AFNDLtoAFND>Algoritmo de transformación de autómata lambda a automata sin lambda</AFNDLtoAFND>
+		<minimizacion>Algoritmo de minimización de autómtas finitos</minimizacion>
+		<equivalencia>Algoritmo de equivalencia de autómatas</equivalencia>
+		<afd_to_er>Algoritmo de transformación de autómata a expresion regular</afd_to_er>
+		<estado>Dibujar estados</estado>
+		<arista>Dibujar aristas</arista>
+		<borrar>Borrar elementos</borrar>
+		<editar>Editar atributos y elementos</editar>
+		<ejercicio>Crear nuevo ejercicio</ejercicio>
+		<guardarEj>Abrir un ejercicio</guardarEj>
+		<usu>Menú de usuarios</usu>
+		<info>Consultar la información de usuario</info>
+		<actualizar>Actualizar información del usuario</actualizar>
+		<popUpar>Cambia las propiedades de la arista seleccionada, como los símbolos, o los estados origen y destino</popUpar>
+		<popUpest>Cambia las propiedades del estado seleccionado, como el nombre, si es final o inicial</popUpest>
+		<copiar>Copia el autómata completo(ctrl+c)</copiar>
+		<pegar>Pega el autómata copiado(crtl+v)</pegar>
+		<cortar>Corta el autómata completo(ctrl+x)</cortar>
+		<borrarP>Limpia el panel de dibujos</borrarP>
+	</tooltip>
+	<jtree>
+		<ejemplos>Ejemplos de autómatas</ejemplos>
+		<ejercicios>Ejercicios</ejercicios>
+		<lenguaje>Lenguaje</lenguaje>
+		<minim>Miminimización</minim>
+		<afn>Transformación AFN->AFD</afn>
+		<afnl>Transformación AFNLambda->AFN</afnl>
+		<eafd>Ejemplos de AFD</eafd>
+		<eafn>Ejemplos de AFN</eafn>
+		<eafnl>Ejemplos de AFND-lambda</eafnl>
+		<afdtoer>Transformación AFD->ER</afdtoer>
+		<eautos>Equivalencia Autómatas</eautos>
+		<eerauto>Equivalencia Expresión Autómata</eerauto>
+		<eautoer>Equivalencia Autómata Expresión</eautoer>
+		<eers>Equivalencia Expresiones</eers>                           
+	</jtree>
+	<popup>
+		<estado>Cambiar propiedades del estado</estado>
+		<arista>Cambiar propiedades de la arista</arista>
+	</popup>
+</menu>
+	

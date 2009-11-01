@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<menu>
+	<archivo>
+		<texto>File</texto>
+		<nuevo>New Autho</nuevo>
+		<nueva>New RE</nueva>
+		<abrir>Open</abrir>
+		<guardar>Save</guardar>
+		<guardarc>Save as</guardarc>
+		<guardare>Open exercise</guardare>
+		<imprimir>Print</imprimir>
+		<salir>Exit</salir>
+		<ejercicio>New exercise</ejercicio>
+	</archivo>
+	<opciones>
+		<texto>Opciones</texto>
+		<configuracion>Preferencias</configuracion>
+		<idioma>Languages</idioma>
+		<Spanish>Spanish</Spanish>
+		<English>English</English>
+	</opciones>	
+	<ayuda>
+		<texto>Help</texto>
+		<buscar>Search..</buscar>
+		<manual>User manual..</manual>
+	</ayuda>
+	<accesibilidad>
+		<texto>Accesibility</texto>
+		<acerca>What is</acerca>
+		<activar>Enable accesibility</activar>
+	</accesibilidad>
+	<algoritmos>
+		<texto>Algorithms</texto>
+		<ER_AFND>Regular expression to automata</ER_AFND>
+		<AFNDLambda_to_AFND>AFND-lamdba to AFND</AFNDLambda_to_AFND>
+		<AFN_to_AFD>AFN to AFD</AFN_to_AFD>
+		<MinimizacionAFD>Mimization AFD</MinimizacionAFD>
+		<equivalentes>Equivalency of automatas</equivalentes>
+		<afd_to_er>AFD to ER</afd_to_er>
+		<er>Regular Expression</er>
+	</algoritmos>
+	<usuarios>
+		<texto>Users</texto>
+	    <consultar>Show info</consultar>
+	    <actualizar>Update user</actualizar>
+	    <buscar>Find student</buscar>
+	    <titulo>User Data Panel</titulo>
+	    <nombre>User name: </nombre>
+		<cons>Consultation exercises: </cons>
+		<bien>Exercises well done: </bien>
+		<mal>Exercises incorrectly set: </mal>
+	</usuarios>
+	<log>
+		<consola>Console</consola>
+		<comandos>Command line</comandos>
+	</log>
+	<tooltip>
+		<opciones>Options menu</opciones>
+		<accesibilidad>Accessibility menu</accesibilidad>
+		<idioma>Language selection</idioma>
+		<imprimir>Prints panel content</imprimir>
+		<salir>Applications exit</salir>
+		<abrir>Open an existing file</abrir>
+		<archivo>File menu</archivo>
+		<nuevoAuto>Create new automata</nuevoAuto>
+		<nuevaER>Create new regular expression</nuevaER>
+		<guardar>Save panel content</guardar>
+		<guardarComo>Save panel content as a file</guardarComo>
+		<config>Applications configuration</config>
+		<espanyol>Spanish</espanyol>
+		<ingles>English</ingles>
+		<ayuda>Help menu</ayuda>
+		<buscar>Find student info</buscar>
+		<manual></manual>
+		<access>What´s accessibility?</access>
+		<activar>Enable accessibility</activar>
+		<algoritmos>Algorithms menu</algoritmos>
+		<ERtoAFNDL>Algorithm of transformation from regular  expression to a lambda automata</ERtoAFNDL>
+		<AFNDtoAFD>Algorithm of transformation from deterministic automata to a non-deterministic</AFNDtoAFD>
+		<AFNDLtoAFND>Algorithm of transformation from lambda automata to a without lambda automata</AFNDLtoAFND>
+		<minimizacion>Minimization of deterministic automata algorithm</minimizacion>
+		<equivalencia>Algorithm of automatas equivalence</equivalencia>
+		<afd_to_er>Algorithm of transformation from automata to regular expression</afd_to_er>
+		<estado>Draw states</estado>
+		<arista>Draw arrows</arista>
+		<borrar>Delete elements</borrar>
+		<editar>Edit attributes and elements</editar>
+		<ejercicio>Create new exercise</ejercicio>
+		<guardarEj>Open an exercise</guardarEj>
+		<usu>Users menu</usu>
+		<info>Show user information</info>
+		<actualizar>Update user info</actualizar>
+		<popUpar>Change the properties of the selected arrow, like the symbols, or the the initial or destiny state</popUpar>
+		<popUpest>Change the properties of the selected state, like the name, final or initial property</popUpest>
+		<copiar>Copy the complete automata(ctrl+c)</copiar>
+		<pegar>Paste the copied automata(ctrl+v)</pegar>
+		<cortar>Cut the complete automata(ctrl+x)</cortar>
+		<borrarP>Clean the panel</borrarP>
+	</tooltip>
+	<jtree>
+		<ejemplos>Examples of automata</ejemplos>
+		<ejercicios>Exercises</ejercicios>
+		<lenguaje>Languages</lenguaje>
+		<minim>Miminimization</minim>
+		<afn>Transformation AFN->AFD</afn>
+		<afnl>Transformation AFNLambda->AFN</afnl>
+		<eafd>AFD examples</eafd>
+		<eafn>AFN examples</eafn>
+		<eafnl>AFND-lambda examples</eafnl>
+		<afdtoer>Transformation AFD->ER</afdtoer>
+		<eautos>Automatas Equivalence</eautos>
+		<eerauto>Automata Expression Equivalence</eerauto>
+		<eautoer>Expression Automata Equivalence</eautoer>
+		<eers>Expressions Equivalence</eers>   
+	</jtree>
+	<popup>
+		<estado>Change state properties</estado>
+		<arista>Change arrow properties</arista>
+	</popup>
+</menu>
