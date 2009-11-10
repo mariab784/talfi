@@ -1,0 +1,21 @@
+#summary One-sentence summary of this page.
+#labels Minimizacion,estados,problemas,marcar
+
+= Introduction =
+
+Un pequeño resumen de los problemas en los primeros contactos del *TALFi PRIMIGENIO* para marcar los pasos.
+
+
+= Details =
+
+*El ejemplo 10 estalla.* 
+
+El metodo paso() de la clase MinimizacionAFD solo hace un paso (seguramente de ahí el singular) pero luego sube el numero de pasos ¿?¿?.
+
+Marcar los pasos con la implementación original parecía sencillo, pero se torna complicado con ese diseño.
+
+
+
+
+
+
