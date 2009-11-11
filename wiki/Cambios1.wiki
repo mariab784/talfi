@@ -11,9 +11,7 @@ Anotaciones de los cambios que hemos llevado a cabo estos días
 Tras emplear la mayor parte del tiempo en entender el código del proyecto y su estructuración, resumimos las adaptaciones en el código:
 
 -Adaptación de los Menús XML.
--Clase VistaGrafica:
-  Añadidos los botones para dibujar AP y Maquinas de Turing en el menú principal.
-  Incluimos dos atributos booleanos para diferenciar entre autómatas y máquinas de Turing.
+-Clase VistaGrafica: Añadidos los botones para dibujar AP y Maquinas de Turing en el menú principal. Incluimos dos atributos booleanos para diferenciar entre autómatas y máquinas de Turing.
 
 -Creación de la clase AutomataPila en el paquete que engloba todos los autómatas, que hereda de AutomataFNDLambda.
 
