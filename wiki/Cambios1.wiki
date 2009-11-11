@@ -1,0 +1,21 @@
+#summary Modificaciones realizadas para poder procesar Autómatas de Pila y Máquinas de Turing
+#labels cambios
+
+= Introduction =
+
+Anotaciones de los cambios que hemos llevado a cabo estos días
+
+
+= Details =
+
+Tras emplear la mayor parte del tiempo en entender el código del proyecto y su estructuración, resumimos las adaptaciones en el código:
+
+-Adaptación de los Menús XML.
+-Clase VistaGrafica:
+  Añadidos los botones para dibujar AP y Maquinas de Turing en el menú principal.
+  Incluimos dos atributos booleanos para diferenciar entre autómatas y máquinas de Turing.
+
+-Creación de la clase AutomataPila en el paquete que engloba todos los autómatas, que hereda de AutomataFNDLambda.
+
+
+Al mismo tiempo, estamos también trabajando en la minimización de AFD, para mostrar claramente los pasos, y comprobando los ejemplos que ya formaban parte de la aplicación. Así, podemos reutilizar la parte del código mas eficiente, y mejorar las deficiencias, que ya sea por falta de tiempo o no haber realizado testings suficientes, hemos ido descubriendo a medida de trabajar sobre el material de nuestros compañeros.
