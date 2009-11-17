@@ -15,10 +15,11 @@ El metodo paso() de la clase MinimizacionAFD solo hace un paso (seguramente de a
 
 Marcar los pasos con la implementación original parecía sencillo, pero se torna complicado con ese diseño.
 
+Doble minimización del ejemplo 1. 
+
+
 = Corte y confección. =
 
 Añadida la clase registro para incluir el numero de paso donde marcamos un estado. Modificado todos los booleanos del mapa de hachis de la tabla por la clase registro para almacenar también el número de paso.
-
-
 
 
