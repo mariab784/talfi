@@ -7,4 +7,4 @@
 
 = Details =
 
-Hemos creado la clase OyentePilaAP, y en la interfaz Vista hemos añadido los metodos getPila y getTuring, para poder recuperar el argumento en OyenteArista
+Hemos creado la clase OyentePilaAP, y en la interfaz Vista hemos añadido los metodos getPila y getTuring, para poder recuperar el argumento en OyenteArista.
