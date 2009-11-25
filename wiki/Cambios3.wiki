@@ -1,0 +1,119 @@
+#summary Cambios para introducir ejemplos de Autómatas a Pila.
+#labels Cambios,Visualización,EjemplosAP
+
+= Introduction =
+
+Cambios para introducir ejemplos de Autómatas a Pila.
+
+
+= Details =
+
+= Cambios en la clase AccesoAEjemplos =
+
+*Añadimos al procedimiento devolverListadoEjemplos:*
+ArrayList<String> ejemplosAP = new ArrayList<String>();
+		tipo=documento.getElementsByTagName("autompila");
+		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
+		
+		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
+			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
+			 ejemplosAP.add(var);
+			 j++;
+		}	
+		
+		arbol.put("APila",ejemplosAP);
+
+*Añadimos al procedimiento actualizaXMLEjemplos:*
+fich+="\t\t</afnlambda>\n\t\t<autompila>\n";
+			
+			array=xml.get("APila");
+			it=array.iterator();
+			i=1;
+			
+			while(it.hasNext()){
+				String s=it.next();
+				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
+				i++;
+			}
+			i++;
+			
+			if(tipo.equals("AutomataPila")){
+				String nombre="Ejemplo"+i;
+				String rutaFichero="XML/ejemplos/AP/"+nombre+".xml";
+				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));
+				bw.append(texto);
+				bw.close();
+				fich+="\t\t\t<ejemplo>"+nombre+"</ejemplo>\n";
+			}
+			
+			fich+="\t\t</autompila>\n\t</ejemplos>\n\t<ejercicios>\n\t\t<lenguaje>\n";
+
+*Añadimos al procedimineto actualizaXMLEjercicios:*
+array=xml.get("AP");
+			it=array.iterator();
+			i=1;
+			
+			while(it.hasNext()){
+				String s=it.next();
+				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
+				i++;
+			}
+			
+			fich+="\t\t</autompila>\n\t</ejemplos>\n\t<ejercicios>\n\t\t<lenguaje>\n";
+
+
+= Cambios en la clase AccesoAEjemplos =
+*Añadimos la cabecera import modelo.automatas.AutomataPila*
+
+*Añadimos al procedimiento creaPanelIzquierda:*
+Vector<String> ejemplosAP=new Vector<String>();
+		ejemplosAP.addAll(datosEjemplos.get("APila"));
+.
+.
+.
+hsEjemplos.put(m.devuelveMensaje("jtree.eap",1),ejemplosAP);
+
+*Añadimos al procedimiento dobleClick:*
+if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.eap",1))) {
+			panelCentral.getPanel().cargarAutomata("XML/ejemplos/AP/"+nombreEjemplo.toString()+".xml");
+			panelCentral.getPanel().setTipoAutomata("AutomataPila");
+			deleteExpresion();
+			activaToogleButtons();
+			panelCentral.desactivarEjercicio();
+			this.repaint();
+			rutaVista=null;
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+*Añadimos al procedimiento oyenteAbrir:*
+if(a instanceof AutomataPila)panelCentral.getPanel().setTipoAutomata("AutomataPila");
+
+
+= Cambios en la clase ParserXML =
+*Añadimos al procedimiento extraerAutomata:*
+if (var.equals("AutomataPila")){
+			
+			automata = new AutomataPila();		
+		}
+
+= Cambio en los archivos XML =
+*Añadimos a arbol.xml*
+<autompila>
+			<ejemplo>Ejemplo1</ejemplo>
+			<ejemplo>Ejemplo2</ejemplo>
+			<ejemplo>Ejemplo3</ejemplo>
+		</autompila>
+
+*En la carpeta /XML/EJEMPLOS añadimos*
+Una subcarpeta llamada AP con los ejemplos de AP's dentro.
+
+*Añadimos a menu_spa.xml*
+<jtree>
+.
+.
+.
+<eap>Ejemplos de AP</eap>
+
+.
+.
+.
+</jtree>
