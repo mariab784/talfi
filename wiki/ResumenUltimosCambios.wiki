@@ -1,0 +1,15 @@
+#summary One-sentence Recopilación de cambios sobre APs
+#labels cambios,pila,simbolos,aristas,transiciones
+
+= Introduction =
+
+Breve explicación de los avances en procesamiento de APs.
+
+
+= Details =
+
+Ya hemos conseguido guardar la información necesaria para trabajar con APs. Lo que ocurre, que para reutilizar el máximo codigo posible tenemos que incluir pequeñas modificaciones que afectan a los AF que ya teníamos implementados. 
+
+Ahora mismo estamos trabajando en cómo dibujar las aristas de los APs, siguiendo la idea de cómo se dibujan las de los AF. En ocasiones tenemos que crear clases que contengan algunos de los atributos de otras clases que estaban creadas, para poder coger la información que es básica y común, sin repetir código.
+
+Además, hemos incluido un XML con símbolos especiales (lambda, cima de la pila) que tomaremos como estándar para la aplicación, para que en un futuro si se desean modificar se pueda hacer de manera sencilla.
