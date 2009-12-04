@@ -21,3 +21,9 @@ Doble minimización del ejemplo 1.
 = Corte y confección. =
 
 Añadida la clase registro para incluir el numero de paso donde marcamos un estado. Modificado todos los booleanos del mapa de hachis de la tabla por la clase registro para almacenar también el número de paso.
+
+= Traducir la tabla de minimización. =
+
+Recordar xml estructura arbol etiquetas que tu quieras.
+recordar los getnodes.
+mostrar información añadida en el html
