@@ -1,0 +1,17 @@
+#summary Cambios definitivos en la parte grafica sobre aristas.
+#labels cambios,definitivos,aristas
+
+= Introduction =
+
+Ultimas modificaciones.
+
+
+= Details =
+
+Hemos realizado algunas modificaciones sobre las aristas de los automatas.
+
+AristaInterface engloba todos los metodos comunes de los distintos tipos de aristas posibles. Ademas, AristaGeneral es una clase abstracta que contiene los atributos comunes a estas.
+
+Cada una de las clases que utilizamos para procesar las aristas de los automatas implementan y extienden las estructuras enunciadas mas arriba.
+
+Ademas, hemos modificado la forma de guardar las transiciones en los AF, con el fin de evitar lo mas posible las repeticiones y conseguir que la minimizacion funcione correctamente.
