@@ -1,0 +1,71 @@
+Errores:
+   - No lo he mirado pero supongo que habeís incluido un manual de la aplicación
+     por consola.(++++++ HECHO:metido anexo en la memoria)
+     
+  INTERFAZ:
+    - Al añadirse los ejercios no se guarda las posiciones de los estados.
+   	 (++++++ HECHO)
+    
+    - Si se parte de otro ejercicio y se borra la información del automata el fichero resultado tiene porquería.
+      Es decir, abrir ejercicio y guardarlo como genera porquería en cuanto se modifica algo del fichero.
+      (++++ HECHO)
+      
+    - Problema con los alfabetos, no se cogen de las flechas, en el fichero interno siempre estan 'a' y 'b'.
+     (++++ RESUELTO)
+    - Al mostrar todos los pasos se cortan las imagenes desde que tenemos coordenadas.
+      (+++++ AGRANDADAS y centradas)
+    
+    - Los sufijos extra de renombramiento deberían desaparecer.
+      (++++++ RESUELTO)
+    
+
+  ALGORITMOS:
+    - Problema al minimizar automata.
+      (++++ RESUELTO EL DEL EJEMPLO3.xml)
+    - Problemas al borrar automatas estados finitos e iniciales.
+      (+++ RESUELTO)
+    - Problemas con el alfabeto almacenado, no es mínimo.
+      (++++ RESUELTO)
+
+Posibles mejoras:
+
+ INTERFAZ:
+   - flechas si sólo hay una mejor que sea sin curva, si hay 2 con curva (+++++++ HECHO)
+   
+   -> puntos de anclajes de las flechas al menos 4, mejor incluso 8 puntos de anclajes(+++++ HECHO: 4 puntos de anclaje)
+     
+   - estados, al pintarlos mejor que el punto de anclaje sea el centro en vez del lateral izquierdo arriba
+     que es el que existe actualmente.(++++++ RESUELTO)
+     
+   - Copiar, cortar y pegar no funcionan, sería bueno poder copiar un automata y meterlo en un ejercicio.
+   	(++++ HECHO)(++++ añadida funcionalidad con CTRL+c CTRL+v CTRL+x)
+   	(++++ además se puede elimnar la parte seleccionada de un automata mediante el botón suprimir(DEL))
+   	
+   - Poder seleccionar un automata y moverlo en el canvas estaría bien.
+   	(++++++ HECHO, cuando se esta en modo edicion=flecha)
+   
+   - Se puede detectar muy facil si es AFD, AF o AF-\ en vez de tener que introducir el tipo de automata que he
+     dibujado. (++++ HECHO ya no hay que introducir el tipo de automata, hecho como dices en mail)
+   
+   - No tiene memoria sobre la última carpeta abierta.  (++++ HECHO)
+   
+   - En cada modo de ejecución la flecha del cursor podría ser diferente.(++++ HECHO)
+   
+   - Ejercicios de equivalencia entre lenguajes, ER y AF
+     (++++ estan aquellos que permiten dar el automata(o er) equivalente, no los que te piden: decide si son equivalentes estos dos automatas)
+   
+   - División de la pantalla de ejercicios en más partes para que se vea el enunciado mientras se genera la solución
+   (++++ HAY UN BOTON QUE MUESTRA EL HTML DEL EJERICIO CON EL ENUNCIADO Y EL AUTOMATA)
+   
+   - Generar un curso con ejercicios y huecos donde se permita pintar la solución y se corrija automáticamente,
+     sin necesidad de utilizar la aplicación.
+
+
+  ALGORITMOS:
+   - La tabla de minimizacion no incluye la información de en que paso y por que motivo son indistinguibles los
+     estados.
+   - En la minimización no se incluye el diagrama de transiciones inversas.
+   - Minimización se debería mostrar en que iteración se genera la cruz en la tabla y debido a que par de estados
+     indistinguibles.
+   - Realizar un algorítmo que detecte los estados no deterministas y que los pinte otro color, o similar.
+
