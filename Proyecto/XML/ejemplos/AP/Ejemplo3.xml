@@ -1,0 +1,35 @@
+<authomata>
+	<type>
+		<item>AutomataPila</item>
+	</type>
+	<alphabet>
+		<item>Z</item>
+		<item>a</item>
+		<item>b</item>
+		<item>A</item>
+		<item>B</item>
+		<item>e</item>
+	</alphabet>
+	<states>
+		<state>S0</state>
+		<state>S1</state>
+	</states>
+	<init>
+		<state>S0</state>
+	</init>
+	<finals>
+		<state>S1</state>
+	</finals>
+	<arrows>
+		<arrow>
+			<state>S0</state>
+			<state>S0</state>
+			<item>a,Z/AZ  b,Z/BZ   a,A/AA   b,B/BB   a,B/e   b,A/e</item>
+		</arrow>
+		<arrow>
+			<state>S0</state>
+			<state>S1</state>
+			<item>e,Z/e</item>
+		</arrow>
+	</arrows>
+</authomata>
