@@ -1,0 +1,10 @@
+TALFi es una aplicación cuyo objetivo es ser una herramienta para el aprendizaje y el uso de diversos algoritmos aplicados al tratamiento de autómatas.  Con TALFi podemos crear autómatas y ver sus transformaciones en otros autómatas, gracias a los diferentes algoritmos que se pueden aplicar sobre ellos. Es una herramienta de fácil uso, capaz de ser usada en un terminal o bajo una interfaz gráfica. La aplicación se puede ejecutar bajo previa instalación en un equipo o vía internet.
+TALFi dispone de una base de datos con diversos ejemplos de autómatas, la cual puede ser ampliada por el usuario con nuevos autómatas creados por él mismo. Además la aplicación posee una base de datos con ejercicios que también puede ser extendida, pero en este caso sólo por el administrador.
+La aplicación está pensada para ser una herramienta de ayuda para los estudiantes que cursen asignaturas donde se traten temas de lenguajes formales y autómatas.
+
+
+1.2 TALFi (English version)
+
+TALFi is an application whose goal is to be a tool for learning and using various algorithms dealing with automatas. With TALFi you can create automata and view the automata transformations into other automata by using the different algorithms that can be applied to them. The program is easy to use and it can be used in a consola or a graphical interface. The application can be used online through the Internet or it can be installed in any computer to be used offline.
+TALFi has a database with examples of automata. These examples can be extended by the user with new automata created by himself. The application also has a database with exercises that can be extended by an administrator.
+The application is designed to be used by students learning subjects about formal languages and automata.

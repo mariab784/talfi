@@ -1,0 +1,49 @@
+<traductorhtml>
+	<minimizacion>
+		<title>Minimization algorithm result</title>
+		<input>Input</input>
+		<output>Output</output>
+		<steps>Steps-Minimization table</steps>
+	</minimizacion>
+	<equivalencia>
+		<title>Equivanlency result and steps</title>
+		<no>They are not equivalent</no>
+		<si>They are equivalent</si>
+		<input>Automata 1</input>
+		<output>Automata 2</output>
+		<steps>Steps-Equivalency table</steps>
+	</equivalencia>
+	<ERtoAFNDL>
+		<title>Regular Expression to AFND-Lambda result and steps</title>
+		<exp>Regular Expression</exp>
+		<final>Final Automata</final>
+		<er>Regular expression : </er>
+		<arbol>Expresions sintactic tree</arbol>
+		<paso>Automata of step </paso>
+	</ERtoAFNDL>
+	<ejercicio>
+		<title>Automatas exercise</title>
+		<enunciado>Exercise text</enunciado>
+		<entrada>Automata's exercise input</entrada>
+	</ejercicio>
+	<AFNTOAFD>
+		<title>Transformation from AFN to AFD results</title>
+	</AFNTOAFD>
+	<AFNLTOAFN>
+		<title>Transformation from AFN Lambda to AFN results</title>
+	</AFNLTOAFN>
+	<AFDTOER>
+		<title>Automata to Regular expression, result and steps</title>
+		<entrada>Input automata</entrada>
+	</AFDTOER>
+	<automata>
+		<inicial>Initial State: </incial>
+		<finales>Final states: </finales>
+		<estados>States: </estados>
+		<alfabeto>Alphabet: </alfabeto>
+		<tipo>Type: </tipo>
+		<entrada>Input</entrada>
+		<pasos>Steps</pasos>
+		<salida>Output</salida>
+	</automata>
+</traductorhtml>

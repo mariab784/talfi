@@ -1,0 +1,230 @@
+html {
+	margin: 0;
+	padding: 0;
+	}
+body {
+	background-color: #B0E0E6;
+}
+a:link { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: white;
+	}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: white;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	color: #9685BA;
+	}
+div#cabecera{
+	background-color: white;
+	position: absolute;
+  	left: 1%;
+  	top: 0;
+  	height: 12%;
+  	right: 1%;
+  	margin: 0;
+	padding: 0;
+	border-width: thin;
+	border-style: solid; 
+}
+div#resultado h2{
+	text-decoration: underline;
+	text-transform: uppercase;
+	text-align: center;
+}
+div#resultado{
+    position: absolute;
+	top: 14%;
+	margin: 0;
+	padding: 0;
+	border-left-width: medium;
+	border-left-style: solid; 
+	border-right-width: medium;
+	border-right-style: solid;
+	border-top-width: medium;
+	border-top-style: solid; 
+	border-bottom-width: medium;
+	border-bottom-style: solid;
+	left: 1%;
+	width: 44%;
+	text-align: center;
+	font-weight: bold;
+}
+div#resultado table{
+	margin-left: auto;
+	margin-right: auto;
+}
+div#resultado table td {
+	border-width: medium;
+	border-style: double;
+	border-color: red; 
+}
+div#resultado table th {
+	border-width: medium;
+	border-style: double;
+	border-color: red; 
+}
+div#authomata img{
+	border-width: thin;
+	border-style: solid; 
+	margin-left: auto;
+	margin-right: auto;
+}
+div#authomata {
+	position: absolute;
+	border-left-width: medium;
+	border-left-style: solid; 
+	border-right-width: medium;
+	border-right-style: solid;
+	border-top-width: medium;
+	border-top-style: solid;
+	border-bottom-width: medium;
+	border-bottom-style: solid;
+  	top: 14%;
+  	right: 1%;
+  	width: 44%;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+}
+div#authomata table{
+	margin-left: auto;
+	margin-right: auto;
+}
+div#authomata table td {
+	border-width: medium;
+	border-style: double;
+	border-color: red; 
+}
+div#authomata table th {
+	border-width: medium;
+	border-style: double;
+	border-color: red; 
+}
+div#expresion{
+	position: absolute;
+	text-align: center;
+	top: 12%;
+	left: 1%;
+	right: 1%;
+	height: 10%;
+	border-width: medium;
+	border-style: solid; 
+	font-size: large;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+div#arbol{
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	border-width: medium;
+	border-style: solid; 
+	top: 22%;
+	left: 1%;
+	right: 1%;
+	height: 70%;
+	background-color: white;
+}
+div#arbol img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+}
+div#cuerpo{
+	position: absolute;
+	top: 94%;
+	margin: 0;
+	padding: 0;
+	left: 1%;
+	right: 1%;
+	font-size: large;
+	text-decoration: underline;
+	font-weight: bold;
+	text-align: center;
+	border-left-width: thin;
+	border-left-style: solid;
+	border-right-width: thin;
+	border-right-style: solid;
+}
+div#cuerpoER{
+	position: absolute;
+	top: 24%;
+	margin: 0;
+	padding: 0;
+	left: 1%;
+	right: 1%;
+	font-size: large;
+	text-decoration: underline;
+	font-weight: bold;
+	text-align: center;
+	border-left-width: thin;
+	border-left-style: solid;
+	border-right-width: thin;
+	border-right-style: solid;
+}
+div#cuerpo img{
+	margin-left: auto;
+	margin-right: auto;
+	border-width: thin;
+	border-style: solid; 
+}
+div#cuerpo h2,h4{
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+div#cuerpoER img{
+	margin-left: auto;
+	margin-right: auto;
+	border-width: thin;
+	border-style: solid; 
+}
+div#cuerpoER h2,h4{
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+div#enunciado{
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	border-width: medium;
+	border-style: solid; 
+	top: 22%;
+	left: 1%;
+	right: 1%;
+	height: 30%;
+	background-color: white;
+}
+div#fotoAutomata{
+	position: absolute;
+	top: 65%;
+	margin: 0;
+	padding: 0;
+	left: 1%;
+	right: 1%;
+	font-size: large;
+	text-decoration: underline;
+	font-weight: bold;
+	text-align: center;
+	border-left-width: thin;
+	border-left-style: solid;
+	border-right-width: thin;
+	border-right-style: solid;
+}
+div#fotoAutomata h2,h4{
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+div#fotoAutomata img{
+	margin-left: auto;
+	margin-right: auto;
+	border-width: thin;
+	border-style: solid; 
+}
