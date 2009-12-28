@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<mensajes>
+	<ayuda>
+		To run the project write:
+		TALF.jar path.xml [-p][options]
+		Options: -m : Minimum Automata
+				  -t1: Transform AFNDLambda_->AFND
+				  -t2: Transform AFN_->AFD
+				  etc 
+	</ayuda>
+	<AFNtoAFD>
+		<iniciar>
+			Transformation Algorithm from AFN to AFD
+		</iniciar>
+		<error1>
+			error, the automata is not an AFD
+		</error1>
+		<finalizado>
+			Automata transformation succesful
+		</finalizado>
+	</AFNtoAFD>
+	<AFNDLambdatoAFND>
+		<iniciar>
+			Transformation Algorithm from AFNDLambda a AFND
+		</iniciar>
+		<error1>
+			error, the automata is not an AFND with Lambda Transitions
+		</error1>
+		<finalizado>
+			Automata transformation successful
+		</finalizado>
+	</AFNDLambdatoAFND>
+	<minimizacion>
+		<iniciar>
+			MINIMIZATION ALGORITHM
+		</iniciar>
+		<error1>
+			error the automata is malformed
+		</error1>
+		<estNuevos>
+			List of new states:
+		</estNuevos>
+		<estInicialNuevo>
+			New initial state:
+		</estInicialNuevo>
+		<ListaFinNuevos>
+			List of new final states:
+		</ListaFinNuevos>
+		<minimizado>
+			Automata minimized:
+		</minimizado>
+		<tablaPasos>
+			Tabla after steps:
+		</tablaPasos>
+		<noAgrupa>
+			There are no changes:
+		</noAgrupa>
+		<agrupa>
+			There are changes:
+		</agrupa>
+	</minimizacion>
+	<equivalencia>
+		<inicio>
+			Equivalences algorithm
+		</inicio>
+	</equivalencia>
+	<ERToLambda>
+		<inicio>
+			Algorithm of transformation from Regular Expression to lambda automata
+		</inicio>
+		<paso>
+			Step number
+		</paso>
+		<concat>
+			The concatenation of two automata
+		</concat>
+		<union>
+			The union of two automata
+		</union>
+		<asterisco>
+			A new automata that recognize the zero or more times repetition of the old automata 
+		</asterisco>
+		<unaRepeticion>
+			A new automata that recognize the one or more times repetition of the old automata
+		</unaRepeticion>
+		<letra>
+			A new automata that recognize a unique letter
+		</letra>
+		<vacio>
+			Automata that recognize the lambda symbol
+		</vacio>
+		<lambda>
+			End of the algorithm
+		</lambda>
+		<fin>
+			Empty automata
+		</fin>
+	</ERToLambda>
+	<AFD_TO_ER>
+		<inicio>
+			From automata to regular expression algorithm
+		</inicio>
+		<eliminar>
+			Eliminating state: 
+		</eliminar>
+		<expresion>
+			Final regular expression: 
+		</expresion>
+	</AFD_TO_ER>
+	<expregular>
+		<operadores>
+			Syntax error with the operators in the regular expression
+		</operadores>
+		<letras>
+			Error. Unrecognized letter in the alphabet
+		</letras>
+	</expregular>
+	<canvas>
+		<estadovacioT>
+			Without name
+		</estadovacioT>
+		<estadovacioM>
+			Error. There is no state name
+		</estadovacioM>
+		<estadorepetidoT>
+			Duplicate state
+		</estadorepetidoT>
+		<estadorepetidoM>
+			Error. The automata has already this state name
+		</estadorepetidoM>
+		<nombreIncorrectoM>
+			Error. State name can´t finished with "_$"
+		</nombreIncorrectoM>
+		<nombreIncorrectoT>
+			Error in state name
+		</nombreIncorrectoT>
+		<aristavaciaT>
+			Without name
+		</aristavaciaT>
+		<aristavaciaM>
+			Error. There is no edge name
+		</aristavaciaM>
+		<errorArista>
+			Error. Edge transition relation mistaken
+		</errorArista>
+		<aristasinestadosT>
+			Empty state list
+		</aristasinestadosT>
+		<aristasinestadosM>
+			No state in the automata to paint the edge
+		</aristasinestadosM>
+		<noinicial>
+			There is no initial state in the automata
+		</noinicial>
+		<noarrows>
+			There are not any arrow, this is not a valid automata
+		</noarrows>
+	</canvas>
+	<parser>
+		<noarchivo>
+			Error, file not found
+		</noarchivo>
+		<entsalida>
+			I/O error
+		</entsalida>
+		<sax>
+			SAX parser error
+		</sax>
+	</parser>
+	<vista>
+		<titulo>
+			Runtime error
+		</titulo>
+		<expresion>
+			Regular Expression
+		</expresion>
+		<actualizar>
+			Update user
+		</actualizar>
+		<contraseña>
+			Password:
+		</contraseña>
+		<repetir>
+			Retype password:
+		</repetir>
+		<nombre>
+			User name:
+		</nombre>
+		<nombreU>
+			Name:
+		</nombreU>
+		<dni>
+			User DNI (only numbers):
+		</dni>
+		<aceptar>
+			Accept
+		</aceptar>
+		<cancelar>
+			Cancel
+		</cancelar>
+		<dni2>
+			User DNI:
+		</dni2>
+		<reg>
+			Register
+		</reg>
+		<nuevo>
+			New user
+		</nuevo>
+		<aniadir>
+			Add to BD
+		</aniadir>
+		<noBD>
+			Do not add
+		</noBD>
+		<BDej>
+			Do you want to add the saved example to the DB?
+		</BDej>
+		<BDejer>
+			Do you want to add the saved exercise to the DB?
+		</BDejer>
+		<BD>
+			Save in DB?
+		</BD>
+		<ejecucion>
+			Runtime error
+		</ejecucion>
+		<navegador>
+			It is impossible to find any web browser
+		</navegador>
+		<tipoAuto>
+			Automata type
+		</tipoAuto>
+		<tipoA>
+			Chose the automata type
+		</tipoA>
+		<alfabeto>
+			Type the Alphabet
+		</alfabeto>
+		<guardarE>
+			Cannot save exercises by this way
+		</guardarE>
+		<tipoE>
+			Exercise Type
+		</tipoE>
+		<tipoEjer>
+			Choose exercise type
+		</tipoEjer>
+		<noejer>
+			This file does not have a valid exercise
+		</noejer>
+		<update>
+			Update data
+		</update>
+		<noDNI>
+			Invalid DNI
+		</noDNI>
+		<buscaDNI>
+			Type the student´s DNI to search, only numbers
+		</buscaDNI>
+		<nouser>
+			There are not any user with this DNI
+		</nouser>
+		<nousuario>
+			The user does not exists
+		</nousuario>
+		<datos>
+			Incorrect user data
+		</datos>
+		<updateBD>
+			The DB has not been updated
+		</updateBD>
+		<solucion>
+			Paint solution
+		</solucion>
+		<lambda>
+			Invalid character /, it represents the lambda symbol
+		</lambda>
+		<introER>
+			Type the expression
+		</introER>
+		<errAlf>
+			Error in alphabet
+		</errAlf>
+		<introAlf>
+			Type the characters of the alphabet separated by comas
+		</introAlf>
+		<regDNI>
+			The DNI is already registered
+		</regDNI>
+		<numDNI>
+		 	The DNI must be a number
+		</numDNI>
+		<passrepass>
+			Bouth password must be the same
+		</passrepass>
+		<vacio>
+			One or more text fields are empty
+		</vacio>
+		<alta>
+			Alta usuario
+		</alta>
+		<final>
+			Is Final
+		</final>
+		<inicial>
+			Is Initial
+		</inicial>
+		<nestado>
+			State Nameo
+		</nestado>
+		<estados>
+			States
+		</estados>
+		<est>
+			State
+		</est>
+		<arist>
+			Arrow
+		</arist>
+		<sym>
+			Type arrow symbols (it can be more than one separated by comas)
+		</sym>
+		<ap1>
+			Type arrow symbols (it can be more than one separated by comas)
+
+		</ap1>
+		<ap2>
+			Top of the stack
+		</ap2>
+		<ap3>
+			Stack symbols to push(
+		</ap3>
+		<ap3p2>
+			 to push off)
+		</ap3p2>
+		<sym3>
+			Tape symbol  / New tape symbol(# means blank symbol), direction (L,R,N)
+
+		</sym3>
+		<hasta>
+			To: 
+		</hasta>
+		<desde>
+			From:
+		</desde>
+		<pegar>
+			Paste
+		</pegar>
+		<copiar>
+			Copy
+		</copiar>
+		<cortar>
+			Cut
+		</cortar>
+		<ercopy>
+			Copy error
+		</ercopy>
+		<erpaste>
+			Paste error
+		</erpaste>
+		<ercut>
+			Cut error
+		</ercut>
+		<yaauto>
+			Is impossible paste, there is another automata in the panel
+		</yaauto>
+	</vista>
+	<equivalenciajo>
+		<second>Second Automata</second>
+		<equiv>Equivalence</equiv>
+		<noequiv>No Equivalence</noequiv>
+		<segundo>Draw the second automata and press the equivalence button again</segundo>
+		<no>They are not equivalent</no>
+		<si>They are equivalent</si>
+	</equivalenciajo>
+	<pasos>
+		<pregunta>Steps?</pregunta>
+		<preguntaG>Do you want to see all the steps?</preguntaG>
+		<con>With steps</con>
+		<sin>Without steps</sin>
+	</pasos>
+	<ejercicio>
+		<er>Regular expression</er>
+		<error>Error</error>
+		<tipo>Type of automata</tipo>
+		<html>Show wepage with the exercise</html>
+		<mandar>Send</mandar>
+		<bien>Well done</bien>
+		<resultado>Results</resultado>
+		<mal>Bad done</mal>
+		<escribir>Write solution</escribir>
+		<dibujar>Draw solution</dibujar>
+		<escribirc>Write the exercise and append the solution</escribirc>
+		<guardar>Save</guardar>
+		<escribirER>Write the exercise on the top and write the regular expression</escribirER>
+		<alf>Alfabeto</alf>
+		<escribirAut>Write the exercise on the top and draw the automata</escribirAut>
+	</ejercicio>
+	<controlador>
+		<param>Param error</param>
+		<auto>Incorrect automata</auto>
+	</controlador>
+</mensajes>

@@ -1,0 +1,15 @@
+++++++
+
+Minimización del ejemplo3.xml
+
+La solución es el fichero saleMinimización_ej3.html que tiene varios errores.
+Entre ellos la incongruencia de que p_0 es equivalente con p_2 y p_0 es equivalent con p_4
+pero de forma independiente.
+
+El resultado final aparece en el fichero solEx 5.pdf.
+
+La imagen solucionMInej3.jpg es la captura de la pantalla de la aplicación.
+
+
+
+RESUELTO!
