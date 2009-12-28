@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<authomata>
+	<RExpr>
+		<item>a+b</item>
+	</RExpr>
+	<type>
+		<item>AutomataFD</item>
+	</type>
+	<alphabet>
+		<item>a</item>
+		<item>b</item>
+		<item>c</item>
+	</alphabet>
+	<states>	 
+		<state>S1</state>
+		<state>S2</state>
+	</states>
+	<init>   
+		<state>S1</state>
+	</init>
+	<finals>
+		<state>S1</state>
+		<state>S2</state>
+	</finals>
+	<arrows>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>a</item>
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S2</state>
+			<item>b</item>
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S2</state>
+			<item>a</item>
+		</arrow>	
+	</arrows>
+</authomata>

@@ -1,0 +1,14 @@
+<!ELEMENT item (#PCDATA)>
+<!ELEMENT STEPS (STEP)>
+<!ELEMENT STEP (Algorithm,RExpression,authomata)>
+<!ELEMENT Algorithm (#PCDATA)>
+<!ELEMENT authomata (RExpr, type, alphabet,states,init,finals,arrows)>
+<!ELEMENT RExpr (item)+>
+<!ELEMENT type (item)+>
+<!ELEMENT alphabet (item)+>
+<!ELEMENT states (state)+>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT init (state)>
+<!ELEMENT finals (state)+>
+<!ELEMENT arrows (arrow)+>
+<!ELEMENT arrow (state,state,item)>
