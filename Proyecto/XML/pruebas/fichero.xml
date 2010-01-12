@@ -1,33 +1,55 @@
 <authomata>
 	<type>
-		<item>AutomataFD</item>
+		<item>AutomataFND</item>
 	</type>
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
+		<item>c</item>
 	</alphabet>
 	<states>
+		<state>S0</state>
 		<state>S1</state>
-		<state>S3</state>
 		<state>S2</state>
+		<state>S3</state>
 		<state>S4</state>
 	</states>
 	<init>
-		<state>S1</state>
+		<state>S0</state>
 	</init>
 	<finals>
 		<state>S4</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>S1</state>
+		<state>S0</state>
 		<state>S3</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
+		<state>S0</state>
+		<state>S1</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S4</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
 		<state>S1</state>
 		<state>S2</state>
-		<item>a</item>
+		<item>c</item>
+	</arrow>
+		<arrow>
+		<state>S2</state>
+		<state>S4</state>
+		<item>c</item>
 	</arrow>
 		<arrow>
 		<state>S3</state>
@@ -36,24 +58,19 @@
 	</arrow>
 		<arrow>
 		<state>S3</state>
-		<state>S4</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S2</state>
-		<state>S1</state>
+		<state>S3</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>S2</state>
+		<state>S4</state>
 		<state>S4</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
 		<state>S4</state>
-		<state>S4</state>
+		<state>S2</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>S1</nombre><x>192</x><y>169</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>242</x><y>428</y></estadoCoord><estadoCoord><nombre>S2</nombre><x>521</x><y>189</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>513</x><y>435</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>S0</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>612</x><y>299</y></estadoCoord><estadoCoord><nombre>S2</nombre><x>554</x><y>121</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>366</x><y>121</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>308</x><y>299</y></estadoCoord></coordenadas></authomata>
