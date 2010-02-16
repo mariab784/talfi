@@ -28,7 +28,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import accesoBD.Mensajero;
 import modelo.AutomatasException;
+import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
+import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
 import vista.vistaGrafica.Arista;
 import vista.vistaGrafica.AristaAP;
@@ -392,7 +394,8 @@ public class OyenteArista extends MouseAdapter {
 							if(!canvas.getAlfabeto().estaLetra(ss)){
 								canvas.getAlfabeto().aniadirLetra(ss);
 							} //System.out.println(ss);//XXX
-							canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+							//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+							canvas.anadeArista(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));	
 						}
 						dialog.setVisible(false);
 					} catch(NullPointerException ex){
@@ -744,16 +747,18 @@ public class OyenteArista extends MouseAdapter {
 		  
 		try{
 			nombreArista=nomArs.getText();
-			StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
-			
-			while(st.hasMoreTokens()){
-				String ss=st.nextToken();
+			String s = nomArs.getText();
+			//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+			int i = 0;
+			while(/*st.hasMoreTokens()*/i < s.length()){
+				String ss= "" + s.charAt(i);//st.nextToken();
 				if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
 				if(!canvas.getAlfabetoPila().estaLetra(ss)){
 					canvas.getAlfabetoPila().aniadirLetra(ss);
 				} //System.out.println(ss);//XXX
 
 				aristaAP.anadirPila(ss);
+				i++;
 			//	System.out.println("TRANS: "+ss);
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
 			}
@@ -761,7 +766,35 @@ public class OyenteArista extends MouseAdapter {
 			dialog.setVisible(false);
 			
 			canvas.anadeAristaAP(aristaAP);
+			
+			String ini = canvas.getEstadoInicial();
+			canvas.getAP().setEstadoInicial(ini);
+			System.out.println("ESTADO INICIAL: " + canvas.getAP().getEstadoInicial());
+			
+			Alfabeto a = canvas.getAlfabeto();
+			canvas.getAP().setAlfabeto(a);
+			System.out.println("ALF: " + canvas.getAP().getAlfabeto());
+			
+			Alfabeto_Pila alf = canvas.getAlfabetoPila();
+			canvas.getAP().setAlfabetoPila(alf);
+			System.out.println("ALF PILA: " + canvas.getAP().getAlfabetoPila());
+			
+			ArrayList<AristaAP> arist = canvas.getListaAristasPila();
+			canvas.getAP().setAPNuevo(arist);
+			System.out.println("ARISTAS: " + ((AutomataPila) canvas.getAP()).getAutomataPila());
+			
+			ArrayList<String> estad = canvas.getNombreEstados();
+			canvas.getAP().setEstados(estad);
+			System.out.println("ESTADOS: " + canvas.getAP().getEstados());
+			
+			ArrayList<String> estFin = canvas.getListaFinales();
+			canvas.getAP().setEstadosFinales(estFin);
+			System.out.println("ESTADOS FINALES: " + canvas.getAP().getEstadosFinales());
 			//dialogCimaPila();
+			
+		//	System.out.println(canvas.getNombreEstados());
+		//	System.out.println(canvas.getAP());
+			
 		} catch(NullPointerException ex){
 			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
 		}
@@ -925,8 +958,7 @@ public class OyenteArista extends MouseAdapter {
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		//System.out.println("CIMA:" + cima);
 		//System.out.println("LAMBDA:" + lambda);
-		
-		
+		canvas.creaAP();
 		
 		JOptionPane pane=new JOptionPane();
 		//mensajero=Mensajero.getInstancia();

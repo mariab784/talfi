@@ -292,7 +292,7 @@ public class AutomataPila{
 	 * @return alfabetoPila.
 	 */
 	@SuppressWarnings("unused")
-	private Alfabeto getAlfabetoPila() {
+	public Alfabeto getAlfabetoPila() {
 		return alfabetoPila;
 	}
 	//-------------------------------------------------------------

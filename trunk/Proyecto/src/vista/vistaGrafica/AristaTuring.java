@@ -3,25 +3,27 @@ package vista.vistaGrafica;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import vista.AristaInterface;
+
 /**
  * La clase arista define los parñmetros de las aristas de Turing de la interfaz grñfica
  *  @author Rocño Barrigñete, Mario Huete, Luis San Juan
  *
  */
-public class AristaTuring {
+public class AristaTuring extends AristaGeneral implements AristaInterface{
 
-	protected java.awt.geom.Rectangle2D bounds = new java.awt.Rectangle(0, 0);
+//	protected java.awt.geom.Rectangle2D bounds = new java.awt.Rectangle(0, 0);
 	
-	private int x;
+/*	private int x;
 	private int y;
 	private int fx;
 	private int fy;
 	String origen;
-	String destino;
+	String destino;*/
 	ArrayList<String> entradaCinta;
 	String simboloCinta;
 	String direccion;
-	boolean marcado;
+//	boolean marcada;
 	
 	/**
 	 * Establece los datos iniciales de la arista en la interfaz grñfica
@@ -33,14 +35,15 @@ public class AristaTuring {
 	 * @param destino nombre del estado de destino
 	 */
 	public AristaTuring(int x,int y,int fx, int fy,String origen,String destino) {
-		this.x=x;
+		super(x,y,fx,fy,origen,destino);
+	/*	this.x=x;
 		this.y=y;
 		this.fx=fx;
-		this.fy=fy;
+		this.fy=fy;*/
 		this.entradaCinta = new ArrayList</*AristaGeneral*/String>();
-		this.marcado = false;
-		this.origen=origen;
-		this.destino=destino;
+		//this.marcada = false;
+	//	this.origen=origen;
+	//	this.destino=destino;
 	}
 	
 	public String getDireccion(){ return direccion;}
@@ -51,14 +54,14 @@ public class AristaTuring {
 	 * @return true si la arista esta seleccionada
 	 */
 	
-	public boolean getMarcados(){ return marcado;}
+	public boolean getMarcada(){ return marcada;}
 	
 	/**
 	 * Marca (o desmarca) la arista
 	 * @param marcada si true marca la arista, si false la desmarca
 	 */
 	
-	public void setMarcados(boolean b){ marcado = b;}
+	public void setMarcada(boolean b){ marcada = b;}
 	
 	/**
 	 * Mñtodo accesor de la lista de simbolos de entrada
