@@ -4,7 +4,7 @@
 package modelo;
 
 /**
- * Clase de excepción definida en al aplicación y que se lanza siempre que se
+ * Clase de excepciÃ±n definida en al aplicaciÃ±n y que se lanza siempre que se
  * en cuentra un problema en la misma
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -15,17 +15,17 @@ public class AutomatasException extends Exception {
 	protected String mensaje;
 	
 	/**
-	 * Constructor de la excepción con el mensaje que se le
-	 * pasa por parámetro
-	 * @param s mensaje de la excepción
+	 * Constructor de la excepciÃ±n con el mensaje que se le
+	 * pasa por parÃ±metro
+	 * @param s mensaje de la excepciÃ±n
 	 */
 	public AutomatasException(String s){
 		mensaje=s;
 	}
 	
 	/**
-	 * Método accesor del mensaje
-	 * @return mensaje de la excepción
+	 * MÃ±todo accesor del mensaje
+	 * @return mensaje de la excepciÃ±n
 	 */
 	public String getMensaje(){
 		return mensaje;

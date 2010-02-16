@@ -22,7 +22,7 @@ public class AutomataFD implements Automata{
 	protected HashMap<String,Coordenadas> coordenadasGraficas;
 	
 	/**
-	 * Constructor que crea un automata finito determinista vacío
+	 * Constructor que crea un automata finito determinista vacÃ±o
 	 */
 	public AutomataFD() {
 		coordenadasGraficas=null;
@@ -139,9 +139,9 @@ public class AutomataFD implements Automata{
 	}
 	
 	/**
-	 * Establece lista estados de aceptación del automata uno a uno
-	 * recorriendo la lista que se le pasa y añadiendo cada estado
-	 * @param estado nueva lista de estados de aceptación
+	 * Establece lista estados de aceptaciÃ±n del automata uno a uno
+	 * recorriendo la lista que se le pasa y aÃ±adiendo cada estado
+	 * @param estado nueva lista de estados de aceptaciÃ±n
 	 */
 	public void setEstadosFinales2(ArrayList<String> estado) {
 		// TODO Auto-generated method stub

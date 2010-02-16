@@ -18,7 +18,7 @@ import modelo.expresion_regular.ExpresionRegularImpl;
 
 /**
  * Clase que implementa las funciones asociadas a los ejercicios
- * de la aplicaciÛn asÌ como a su correciÛn.
+ * de la aplicaci√±n as√± como a su correci√±n.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -32,10 +32,10 @@ public class Ejercicio_imp implements Ejercicio{
 	private String ruta;
 
 	/**
-	 * Constructor que crea un ejercicio con los par·metros que se le pasan
+	 * Constructor que crea un ejercicio con los par√±metros que se le pasan
 	 * @param enunciado enunciado del ejrcicio
 	 * @param entrada entrada del usuario
-	 * @param resultado soluciÛn del ejercicio
+	 * @param resultado soluci√±n del ejercicio
 	 * @param alf alfabeto del ejercicio
 	 * @param tipo identificador de cadena de texto con el tipo del ejercicio:
 	 * "Lenguaje" o "Automatas"
@@ -87,7 +87,7 @@ public class Ejercicio_imp implements Ejercicio{
 				Automata a3=algAFN_AFD.ejecutar(false);
 				//(YA TENEMOS EL AUTOMATA QUE VAMOS A COMPARAR PARA LA RESPUESTA QUE NOS DAN)
 				////(ahora vamos a calcular el automata para el resultado que tenemos almacenado
-				//que deberÌa ser un string! para poder compararlos despuÈs
+				//que deber√±a ser un string! para poder compararlos despu√±s
 				if(resultado instanceof String ){
 					er = new ExpresionRegularImpl(alf,(String)resultado);
 					ArbolER arbErRes=er.getArbolER();
@@ -179,7 +179,7 @@ public class Ejercicio_imp implements Ejercicio{
 			//
 			//(YA TENEMOS EL AUTOMATA QUE VAMOS A COMPARAR PARA LA RESPUESTA QUE NOS DAN)
 			////(ahora vamos a calcular el automata para la respuesta que nos han dado
-			//para poder compararlos despuÈs
+			//para poder compararlos despu√±s
 				
 				if (!(respuesta instanceof AutomataFD)) {
 					if (respuesta instanceof AutomataFNDLambda) {
@@ -204,7 +204,7 @@ public class Ejercicio_imp implements Ejercicio{
 			else 
 				algEquivalencia.registraAutomata2(a);
 			algEquivalencia.ejecutar(false);
-			return algEquivalencia.getResultado();//devuelve el resultado de la correcciÛn
+			return algEquivalencia.getResultado();//devuelve el resultado de la correcci√±n
 		}
 		return false;
 	}

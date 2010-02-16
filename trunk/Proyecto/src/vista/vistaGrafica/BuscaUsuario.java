@@ -15,7 +15,7 @@ import accesoBD.usuariosBD.Usuario;
 
 /**
  * Clase que se encarga de mostrar el campo de texto para buscar
- * a un usuario e inicia la búaqueda
+ * a un usuario e inicia la bÃ±aqueda
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -34,8 +34,8 @@ public class BuscaUsuario extends JPanel {
 	
 	/**
 	 * Lanza un panel que permite buscar los datos de un usuario
-	 * @param padre JDialog que llama a  buscar usuario y donde se imprimirá
-	 * la información de usuario que se ha buscado
+	 * @param padre JDialog que llama a  buscar usuario y donde se imprimirÃ±
+	 * la informaciÃ±n de usuario que se ha buscado
 	 */
 	public BuscaUsuario(JDialog padre){
 		super(new BorderLayout());

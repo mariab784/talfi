@@ -24,7 +24,7 @@ import accesoBD.usuariosBD.AccesBDUsuarios;
 import accesoBD.usuariosBD.Usuario;
 
 /**
- * Clase que gestiona la actualización de usuarios
+ * Clase que gestiona la actualizaciÃ±n de usuarios
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -45,7 +45,7 @@ private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Solicita los datos para la actualizacion de un usuario
-	 * @param padre ventana de actualización
+	 * @param padre ventana de actualizaciÃ±n
 	 * @param user usuario que se va actualizar, son sus datos antiguos
 	 */
 	public ActualizaUsuario(JDialog padre,Usuario user,Vista v){
@@ -104,15 +104,15 @@ private static final long serialVersionUID = 1L;
 		nombre=new JTextField(20);
 		nombre.setText(usr.getNombre());
 		nombre.addKeyListener(new OyenteKey());
-		JLabel p=new JLabel(m.devuelveMensaje("vista.contraseña",2));
+		JLabel p=new JLabel(m.devuelveMensaje("vista.contraseÃ±a",2));
 		password=new JPasswordField(20);
 		try {
-			String contraseña=AccesBDUsuarios.getInstancia().buscarUsuarioContraseña(usr.getNombre());
-			password.setText(contraseña);
+			String contraseÃ±a=AccesBDUsuarios.getInstancia().buscarUsuarioContraseÃ±a(usr.getNombre());
+			password.setText(contraseÃ±a);
 			password.addKeyListener(new OyenteKey());
 			JLabel rp=new JLabel(m.devuelveMensaje("vista.repetir",2));
 			repassword=new JPasswordField(20);
-			repassword.setText(contraseña);
+			repassword.setText(contraseÃ±a);
 			repassword.addKeyListener(new OyenteKey());
 			JLabel d=new JLabel(m.devuelveMensaje("vista.dni",2));
 			dni=new JTextField(20);
@@ -141,7 +141,7 @@ private static final long serialVersionUID = 1L;
 	/**
 	 * Clase que se encarga de detectar las pulsaciones de teclas sobre los campos de texto
 	 * para actulizar el usuario
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteKey extends KeyAdapter{

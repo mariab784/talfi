@@ -6,15 +6,15 @@ import java.util.Iterator;
 
 /**
  * Clase que define las funciones de un automata finito no determinista
- * que adem·s pueda incluir transiciones lambda
+ * que adem√±s pueda incluir transiciones lambda
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
 public class AutomataFNDLambda extends AutomataFND {
 	
 	/**
-	* Construye un automata finito determinista, posteriormente al irsele aÒadiendo
-	* aristas y transiciones lambda se convertir· en indeterminista lambda
+	* Construye un automata finito determinista, posteriormente al irsele a√±adiendo
+	* aristas y transiciones lambda se convertir√± en indeterminista lambda
 	*/
 	public AutomataFNDLambda() {
 		super();
@@ -23,8 +23,8 @@ public class AutomataFNDLambda extends AutomataFND {
 	@Override
 	/**
 	 * Dado un estado y una letra devuelve los estados a los que va con ella
-	 * @param estado del que se quiere sacar la informaciÛn
-	 * @param letra que usamos para ver a quÈ estado llegamos
+	 * @param estado del que se quiere sacar la informaci√±n
+	 * @param letra que usamos para ver a qu√± estado llegamos
 	 * @return  arraylist con los estados que visita el estado con la letra
 	 */
 	public ArrayList<String> deltaExtendida(String estado,String letra){
@@ -35,8 +35,8 @@ public class AutomataFNDLambda extends AutomataFND {
 	}
 	/**
 	 * Dado una lista de estados y una letra devuelve los estados a los que van con ella
-	 * @param estados de los que se quiere sacar la informaciÛn
-	 * @param letra que usamos para ver a quÈ estados llegamos
+	 * @param estados de los que se quiere sacar la informaci√±n
+	 * @param letra que usamos para ver a qu√± estados llegamos
 	 * @return arraylist con los estados que visitan los estados con la letra
 	 */
 	public ArrayList<String> deltaExtendida2(ArrayList<String> estados,String letra){
@@ -65,7 +65,7 @@ public class AutomataFNDLambda extends AutomataFND {
 		ArrayList<String> retorno= new ArrayList<String>();
 		ArrayList<String> retornoaux= new ArrayList<String>();
 		
-		//Si estado no tiene ning˙n enlace, o no tiene ninguno lambda, devolvemos estado (siempre podemos ir al mismo estado usando lambda)
+		//Si estado no tiene ning√±n enlace, o no tiene ninguno lambda, devolvemos estado (siempre podemos ir al mismo estado usando lambda)
 		if ((hs==null)||(hs.get("/")==null)){
 			retorno.add(estado);
 			return retorno;

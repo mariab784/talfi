@@ -11,7 +11,7 @@ import modelo.automatas.Alfabeto_imp;
 import accesoBD.Mensajero;
 
 /**
- * Clase que  modifica la información de la arista que el usuario haya
+ * Clase que  modifica la informaciÃ±n de la arista que el usuario haya
  * decidido
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -23,9 +23,9 @@ public class OyenteModificaAristaActionListener implements ActionListener {
 	private Mensajero mensajero;
 	
 	/**
-	 * Constructor de la clase modificadora de la infromación de la arista
+	 * Constructor de la clase modificadora de la infromaciÃ±n de la arista
 	 * @param a arista a midificar
-	 * @param m oyente que muestra de la información de la arista de donde se consiguen
+	 * @param m oyente que muestra de la informaciÃ±n de la arista de donde se consiguen
 	 * los nuevos datos introducidos por el usuario
 	 */
 	public OyenteModificaAristaActionListener(Arista a,OyenteArista m){
@@ -35,9 +35,9 @@ public class OyenteModificaAristaActionListener implements ActionListener {
 	}
 	
 	/**
-	 * Método que obtiene los datos nuevos de la arista e inicia la actualización
+	 * MÃ±todo que obtiene los datos nuevos de la arista e inicia la actualizaciÃ±n
 	 * del panel de dibujos con ellos
-	 * @param e evento de pulsación del botón
+	 * @param e evento de pulsaciÃ±n del botÃ±n
 	 */
 	public void actionPerformed(ActionEvent e){
 		this.mensajero=Mensajero.getInstancia();

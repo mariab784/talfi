@@ -6,8 +6,8 @@ package accesoBD.usuariosBD;
 import java.util.ArrayList;
 
 /**
- * Clase que agrupa los atributos del usuario registrado de la plicación,
- * así como sus datos y la forma en que se actualizan. 
+ * Clase que agrupa los atributos del usuario registrado de la plicaciÃ±n,
+ * asÃ± como sus datos y la forma en que se actualizan. 
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -24,9 +24,9 @@ public class Usuario {
 	private static Usuario usuario;
 	
 	/**
-	 * Método singleton que devuelve la instacina única de la 
-	 * clase de usuario de la base de datos de usuarios de la aplicación.
-	 * @return instancia de Usuario vacío
+	 * MÃ±todo singleton que devuelve la instacina Ã±nica de la 
+	 * clase de usuario de la base de datos de usuarios de la aplicaciÃ±n.
+	 * @return instancia de Usuario vacÃ±o
 	 */
 	public static Usuario getInstancia(){
 		if(usuario==null) usuario=new Usuario();
@@ -35,18 +35,18 @@ public class Usuario {
 	
 	
 	/**
-	 * Constructor de usuario vacío
+	 * Constructor de usuario vacÃ±o
 	 */
 	public Usuario() {
 		
 	}
 	/**
-	 * Constructor de un usuario usando los datos que entran como parámetros
+	 * Constructor de un usuario usando los datos que entran como parÃ±metros
 	 * @param nombre nombre del usuario
 	 * @param dni nombre con el que se registra en la base de datos
-	 * @param ejerciciosConsultados número de ejrcicios consultados
-	 * @param ejerciciosBien número de ejercicios que ha rsuelto correctamente
-	 * @param ejerciciosMal número de ejercicios mal resueltos
+	 * @param ejerciciosConsultados nÃ±mero de ejrcicios consultados
+	 * @param ejerciciosBien nÃ±mero de ejercicios que ha rsuelto correctamente
+	 * @param ejerciciosMal nÃ±mero de ejercicios mal resueltos
 	 */
 	public Usuario(String nombre, int dni,String password,
 			ArrayList<String> ejerciciosConsultados,
@@ -61,7 +61,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesor del password del usuario 
+	 * MÃ±todo accesor del password del usuario 
 	 * @return el password del usuario
 	 */
 	public String getPassword() {
@@ -69,7 +69,7 @@ public class Usuario {
 	}
 
 	/**
-	 * Método modificador del password de usuario
+	 * MÃ±todo modificador del password de usuario
 	 * @param password nuevo password del usuario
 	 */
 	public void setPassword(String password) {
@@ -78,7 +78,7 @@ public class Usuario {
 
 
 	/**
-	 * Método accesor del nombre del usuario 
+	 * MÃ±todo accesor del nombre del usuario 
 	 * @return el nombre del usuario
 	 */
 	public String getNombre() {
@@ -86,7 +86,7 @@ public class Usuario {
 	}
 	
 	/**
-	 *  Método modificador del nombre de usuario
+	 *  MÃ±todo modificador del nombre de usuario
 	 * @param nombre nuevo nombre del usuario
 	 */
 	public void setNombre(String nombre) {
@@ -94,7 +94,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesor del nombre de registro del usuario  
+	 * MÃ±todo accesor del nombre de registro del usuario  
 	 * @return nombre de registro el usuario
 	 */
 	public int getDni() {
@@ -102,7 +102,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesor del nombre de registro del usuario 
+	 * MÃ±todo accesor del nombre de registro del usuario 
 	 * @param dni nuevo nombre de registro
 	 */
 	public void setDni(int dni) {
@@ -110,7 +110,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesro de la lista de ejercicios consultados por el usuario
+	 * MÃ±todo accesro de la lista de ejercicios consultados por el usuario
 	 * @return la lista con los ejercicios consultados
 	 */
 	public ArrayList<String> getEjerciciosConsultados() {
@@ -118,7 +118,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método modificador de los ejercicios consultados
+	 * MÃ±todo modificador de los ejercicios consultados
 	 * @param ejerciciosConsultados nueva lista de ejercicios consultados
 	 */
 	public void setEjerciciosConsultados(ArrayList<String> ejerciciosConsultados) {
@@ -126,7 +126,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesor de ejercicios bien resueltos por el usuario
+	 * MÃ±todo accesor de ejercicios bien resueltos por el usuario
 	 * @return lista con los ejercicios resueltos por el usuario correctamente
 	 */
 	public ArrayList<String> getEjerciciosBien() {
@@ -134,7 +134,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método modificador de la lista de ejrcicios resueltos correctamente
+	 * MÃ±todo modificador de la lista de ejrcicios resueltos correctamente
 	 * @param ejerciciosBien nueva lista con lo ejercicios bien resueltos
 	 */
 	public void setEjerciciosBien(ArrayList<String> ejerciciosBien) {
@@ -142,7 +142,7 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método accesor de ejercicios mal resueltos por el usuario
+	 * MÃ±todo accesor de ejercicios mal resueltos por el usuario
 	 * @return lista con los ejercicios resueltos por el usuario incorrectamente
 	 */
 	public ArrayList<String> getEjerciciosMal() {
@@ -150,31 +150,31 @@ public class Usuario {
 	}
 	
 	/**
-	 * Método modificador de los ejercicios mal resueltos
+	 * MÃ±todo modificador de los ejercicios mal resueltos
 	 * @param ejerciciosMal nueva lista con los ejercicios mal resueltos
 	 */
 	public void setEjerciciosMal(ArrayList<String> ejerciciosMal) {
 		this.ejerciciosMal = ejerciciosMal;
 	}
 	/**
-	 * Método para añadir un ejercicio consultado al usuario
-	 * @param ruta ruta del ejercicio a añadir
+	 * MÃ±todo para aÃ±adir un ejercicio consultado al usuario
+	 * @param ruta ruta del ejercicio a aÃ±adir
 	 */
 	public void addEjercicioConsultado(String ruta) {
 		if (!ejerciciosConsultados.contains(ruta))
 			this.ejerciciosConsultados.add(ruta);
 	}
 	/**
-	 * Método para añadir un ejercicio bien resuelto al usuario
-	 * @param ruta ruta del ejercicio a añadir
+	 * MÃ±todo para aÃ±adir un ejercicio bien resuelto al usuario
+	 * @param ruta ruta del ejercicio a aÃ±adir
 	 */
 	public void addEjercicioBien(String ruta) {
 		if (!ejerciciosBien.contains(ruta))
 			this.ejerciciosBien.add(ruta);
 	}
 	/**
-	 * Método para añadir un ejercicio mal resuelto al usuario
-	 * @param ruta ruta del ejercicio a añadir
+	 * MÃ±todo para aÃ±adir un ejercicio mal resuelto al usuario
+	 * @param ruta ruta del ejercicio a aÃ±adir
 	 */
 	public void addEjercicioMal(String ruta) {
 		if (!ejerciciosMal.contains(ruta))

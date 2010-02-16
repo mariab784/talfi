@@ -20,8 +20,8 @@ import accesoBD.usuariosBD.AccesBDUsuarios;
 import accesoBD.usuariosBD.Usuario;
 
 /**
- * Clase que se encarga de la muestra de la información del usuaurio de
- * la aplicación que recibe en el constructor
+ * Clase que se encarga de la muestra de la informaciÃ±n del usuaurio de
+ * la aplicaciÃ±n que recibe en el constructor
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -61,13 +61,13 @@ public class DatosUsuario extends JPanel {
 		nombre.setText(usr.getNombre());
 		nombre.setEditable(false);
 		nombre.setEnabled(true);
-		JLabel p=new JLabel(m.devuelveMensaje("vista.contraseña",2));
+		JLabel p=new JLabel(m.devuelveMensaje("vista.contraseÃ±a",2));
 		password=new JTextField(20);
 		password.setEditable(false);
 		password.setEnabled(true);
 		try {
-			String contraseña=AccesBDUsuarios.getInstancia().buscarUsuarioContraseña(usr.getNombre());
-			password.setText(contraseña);
+			String contraseÃ±a=AccesBDUsuarios.getInstancia().buscarUsuarioContraseÃ±a(usr.getNombre());
+			password.setText(contraseÃ±a);
 			JLabel d=new JLabel(m.devuelveMensaje("vista.dni2",2));
 			dni=new JTextField(20);
 			Integer i=(Integer)usr.getDni();

@@ -13,8 +13,8 @@ import modelo.expresion_regular.*;
 
 
 /**
- *  Algortimo de transformación de expresión regular a automata finito
- *  no determinista con lambdas usando el método de Kleene
+ *  Algortimo de transformaciÃ±n de expresiÃ±n regular a automata finito
+ *  no determinista con lambdas usando el mÃ±todo de Kleene
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -31,9 +31,9 @@ public class ERToAFNDLambda implements Algoritmo {
 	private Mensajero m;
 	
 	/**
-	 * Constructor del algortimo al que le llegan el arbol sintáctico y el alfabeto
-	 * @param a arbol sintáactico de la expresión regular
-	 * @param b alfabeto de la expresión
+	 * Constructor del algortimo al que le llegan el arbol sintÃ±ctico y el alfabeto
+	 * @param a arbol sintÃ±actico de la expresiÃ±n regular
+	 * @param b alfabeto de la expresiÃ±n
 	 */
 	public ERToAFNDLambda(ArbolER a, Alfabeto b){
 		arbol=a;
@@ -45,10 +45,10 @@ public class ERToAFNDLambda implements Algoritmo {
 	}
 	
 	/**
-	 * Método pincipal del algoritmo que lanza la ejecución recursiva
-	 * recorriendo el arbol de la expresión.
+	 * MÃ±todo pincipal del algoritmo que lanza la ejecuciÃ±n recursiva
+	 * recorriendo el arbol de la expresiÃ±n.
 	 * @param muestraPasos true si se deben mostrar los pasos, false si no.
-	 * @return Automata el automata lambda que reconoce la expresión
+	 * @return Automata el automata lambda que reconoce la expresiÃ±n
 	 */
 	public Automata ejecutar(boolean muestraPasos){
 		if(muestraPasos){
@@ -73,17 +73,17 @@ public class ERToAFNDLambda implements Algoritmo {
 		if(c.equals(".")){
 			AutomataFNDLambda ai = recorreARB(muestraPasos,arb.getHijoIZ());
 			AutomataFNDLambda ad = recorreARB(muestraPasos,arb.getHijoDR());
-			//// se añaden los estados y transiciones de los anteriores
+			//// se aÃ±aden los estados y transiciones de los anteriores
 			auto=copiaAutomata(ai,auto);
 			auto=copiaAutomata(ad,auto);
 			//// estado inicial el del primer automata
 			auto.setEstadoInicial(ai.getEstadoInicial());
-			/// transiciones del estado final del primero an inicial del 2º automata
+			/// transiciones del estado final del primero an inicial del 2Ã± automata
 			Iterator<String> iest=ai.getEstadosFinales().iterator();
 			while(iest.hasNext()){
 				auto.insertaArista(iest.next(),ad.getEstadoInicial(),"/");
 			}
-			////estado final los del 2º automata
+			////estado final los del 2Ã± automata
 			lfin=ad.getEstadosFinales();
 			auto.setEstadosFinales(lfin);
 			if(muestraPasos){
@@ -97,10 +97,10 @@ public class ERToAFNDLambda implements Algoritmo {
 		if(c.equals("+")){
 			AutomataFNDLambda ai = recorreARB(muestraPasos,arb.getHijoIZ());
 			AutomataFNDLambda ad = recorreARB(muestraPasos,arb.getHijoDR());
-			//// se añaden los estados y transiciones de los anteriores
+			//// se aÃ±aden los estados y transiciones de los anteriores
 			auto=copiaAutomata(ai,auto);
 			auto=copiaAutomata(ad,auto);
-			//// se añaden los nuevo estados inicial y final únicos
+			//// se aÃ±aden los nuevo estados inicial y final Ã±nicos
 			String s= "S"+estados;
 			estados++;
 			String sf = "S"+estados;
@@ -126,9 +126,9 @@ public class ERToAFNDLambda implements Algoritmo {
 		} 
 		if(c.equals("^+")){
 			AutomataFNDLambda ai = recorreARB(muestraPasos,arb.getHijoIZ());
-			//// se añaden los estados y transiciones del anterior
+			//// se aÃ±aden los estados y transiciones del anterior
 			auto=copiaAutomata(ai,auto);
-			//// se añaden el nuevo estado inicial 
+			//// se aÃ±aden el nuevo estado inicial 
 			String s= "S"+estados;
 			estados++;
 			auto.insertaVertice(s);
@@ -148,9 +148,9 @@ public class ERToAFNDLambda implements Algoritmo {
 		}
 		if(c.equals("*")){
 			AutomataFNDLambda ai = recorreARB(muestraPasos,arb.getHijoIZ());
-			//// se añaden los estados y transiciones del anterior
+			//// se aÃ±aden los estados y transiciones del anterior
 			auto=copiaAutomata(ai,auto);
-			//// se añaden el nuevo estado inicial que también es final
+			//// se aÃ±aden el nuevo estado inicial que tambiÃ±n es final
 			String s= "S"+estados;
 			estados++;
 			auto.insertaVertice(s);
@@ -170,11 +170,11 @@ public class ERToAFNDLambda implements Algoritmo {
 			return auto;
 		}
 		/*if(c.equals("/")){
-			/// unico estado inicial y final con transicines / a él mismo
+			/// unico estado inicial y final con transicines / a Ã±l mismo
 			String s= "S"+estados;
 			estados++;
 			auto.insertaVertice(s);
-			//// nuevo estado inicial y sus trasiciones / a él mismo
+			//// nuevo estado inicial y sus trasiciones / a Ã±l mismo
 			auto.setEstadoInicial(s);
 			auto.insertaArista(s,s,"/");
 			//// unico estado final
@@ -189,11 +189,11 @@ public class ERToAFNDLambda implements Algoritmo {
 			return auto;
 		}*/
 		if(c.equals("%")){
-			/// unico estado inicial con transicines / a él mismo
+			/// unico estado inicial con transicines / a Ã±l mismo
 			String s= "S"+estados;
 			estados++;;
 			auto.insertaVertice(s);
-			//// nuevo estado inicial y sus transiciones / a él mismo
+			//// nuevo estado inicial y sus transiciones / a Ã±l mismo
 			auto.setEstadoInicial(s);
 			auto.insertaArista(s,s,"/");
 			//// no hay estados finales

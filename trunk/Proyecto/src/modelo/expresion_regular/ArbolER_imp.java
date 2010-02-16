@@ -13,7 +13,7 @@ public class ArbolER_imp implements ArbolER{
 	private String expresion;
 	
 	/**
-	 * Constructor que inicializa el ·rbol vacÌo
+	 * Constructor que inicializa el √±rbol vac√±o
 	 */
 	public ArbolER_imp(){
 		this.raiz=null;
@@ -22,9 +22,9 @@ public class ArbolER_imp implements ArbolER{
 	}
 	
 	/**
-	 * Constructor q e genera el ·rbol con el nodo raÌz y los
-	 * hijos vacÌos
-	 * @param raiz el car·cter que tendr· el ·rbol en la raÌz
+	 * Constructor q e genera el √±rbol con el nodo ra√±z y los
+	 * hijos vac√±os
+	 * @param raiz el car√±cter que tendr√± el √±rbol en la ra√±z
 	 */
 	public ArbolER_imp(String raiz){
 		this.raiz=raiz;
@@ -33,11 +33,11 @@ public class ArbolER_imp implements ArbolER{
 	}
 	
 	/**
-	 * Contructor del ·rbol completo con la raÌz y los dos hijos
-	 * que se le pasan como par·metros
+	 * Contructor del √±rbol completo con la ra√±z y los dos hijos
+	 * que se le pasan como par√±metros
 	 * @param hijoIz nuevo hijo izquierdo
 	 * @param hijoDr nuevo hijo derecho
-	 * @param raiz nuevo car·cter en la raÌz
+	 * @param raiz nuevo car√±cter en la ra√±z
 	 */
 	public ArbolER_imp(ArbolER hijoIz, ArbolER hijoDr, String raiz){
 		this.raiz=raiz;

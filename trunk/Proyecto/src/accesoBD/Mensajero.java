@@ -16,8 +16,8 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 /**
- * Clase que se encarga de la gestión de los mansajes según el idioma que se
- * detecte en la versión de java instalada, puede cambiarse dinámicamente
+ * Clase que se encarga de la gestiÃ±n de los mansajes segÃ±n el idioma que se
+ * detecte en la versiÃ±n de java instalada, puede cambiarse dinÃ±micamente
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -29,7 +29,7 @@ public class Mensajero {
 	/**
 	 * El mensajero es un Singleton por tanto contiene una instancia de si mismo
 	 * y aqui la devuelve de forma estatica
-	 * @return Mensajero instancia de Mensajero para la aplicación
+	 * @return Mensajero instancia de Mensajero para la aplicaciÃ±n
 	 */
 	public static Mensajero getInstancia(){ 
 		if(mensajero==null) mensajero=new Mensajero();
@@ -50,8 +50,8 @@ public class Mensajero {
 	/**
 	 * Devuelve el mensaje segun el idioma, el campo y el sector
 	 * @param campo campo del xml donde se encuentra el mensaje
-	 * @param sector selección del archivo xml donde buscar
-	 * @return Mensaje cadana con el mensaje en el idioma específico
+	 * @param sector selecciÃ±n del archivo xml donde buscar
+	 * @return Mensaje cadana con el mensaje en el idioma especÃ±fico
 	 */
 	public String devuelveMensaje(String campo, int sector) {
 		int idioma=0;
@@ -110,7 +110,7 @@ public class Mensajero {
 	}
 	/**
 	 * Actualizacion del idioma
-	 * @param idioma false=ingles, true=español
+	 * @param idioma false=ingles, true=espaÃ±ol
 	 */
 	public void setIdioma(boolean idioma) {
 		this.language=idioma;

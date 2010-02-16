@@ -33,8 +33,8 @@ public class ParserXML implements Parser{
 	private static ParserXML parser;
 	
 	/**
-	 * Método singleton que permite obtener la instancia única
-	 * del parser en la aplicación
+	 * MÃ±todo singleton que permite obtener la instancia Ã±nica
+	 * del parser en la aplicaciÃ±n
 	 * @return el parser xml 
 	 */
 	public static ParserXML getInstancia(){

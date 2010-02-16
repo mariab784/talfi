@@ -14,8 +14,8 @@ import modelo.automatas.Alfabeto;
 import modelo.automatas.Alfabeto_imp;
 
 /**
- *  Clase que implemta la creaciÛn del panel de introducciÛn del alfabeto para
- *  la expresiÛn regular y crea tambiÈn el alfabeto si todo va bien
+ *  Clase que implemta la creaci√±n del panel de introducci√±n del alfabeto para
+ *  la expresi√±n regular y crea tambi√±n el alfabeto si todo va bien
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -32,10 +32,10 @@ public class PanelAlfabeto extends JPanel {
 	private Mensajero m;
 	
 	/**
-	 * Constructor del panel de la introducciÛn del alfabeto sobre la ventana
-	 * que recibe y que posteriormente crea el alfabeto si est· correctamente 
+	 * Constructor del panel de la introducci√±n del alfabeto sobre la ventana
+	 * que recibe y que posteriormente crea el alfabeto si est√± correctamente 
 	 * introducido
-	 * @param dialogo ventana a la que se le aÒadir· el panel del alfabeto
+	 * @param dialogo ventana a la que se le a√±adir√± el panel del alfabeto
 	 */
 	public PanelAlfabeto(JDialog dialogo){
 		super();
@@ -109,8 +109,8 @@ public class PanelAlfabeto extends JPanel {
 	}
 	
 	/**
-	 * MÈtodo accesor del atributo que indica si todo ha ido bien en la
-	 * construcciÛn del alfabeto
+	 * M√±todo accesor del atributo que indica si todo ha ido bien en la
+	 * construcci√±n del alfabeto
 	 * @return true si ha ido bien, false si no
 	 */
 	public boolean getAceptar(){

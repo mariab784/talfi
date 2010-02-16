@@ -26,7 +26,7 @@ public class BarraHerramientas extends JToolBar implements ActionListener {
 	private JToggleButton seleccionado;
 	
 	/**
-	 * Creación de la barra de herramientas que contiene los botones de dibujo
+	 * CreaciÃ±n de la barra de herramientas que contiene los botones de dibujo
 	 * de automatas, recibe el panel de dibujo
 	 * @param canvas panel de dibujo de automatas
 	 */
@@ -38,8 +38,8 @@ public class BarraHerramientas extends JToolBar implements ActionListener {
 	}
 	
 	/**
-	 * Añade un boton en la barra de herramientas
-	 * @param boton nuevo boton a añadir
+	 * AÃ±ade un boton en la barra de herramientas
+	 * @param boton nuevo boton a aÃ±adir
 	 */
 	public void aniadirBotton(JToggleButton boton){
 		this.grupo.add(boton);
@@ -50,7 +50,7 @@ public class BarraHerramientas extends JToolBar implements ActionListener {
 	
 	
 	/**
-	 * Oyente para la pulsación de un boton
+	 * Oyente para la pulsaciÃ±n de un boton
 	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -14,8 +14,8 @@ import accesoBD.Mensajero;
 import modelo.automatas.Alfabeto_imp;
 
 /**
- * Clase que  modifica la información de la arista que el usuario haya
- * decidido, se lanza por pulsación tecla sobre un campo de texto
+ * Clase que  modifica la informaciÃ±n de la arista que el usuario haya
+ * decidido, se lanza por pulsaciÃ±n tecla sobre un campo de texto
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -26,9 +26,9 @@ public class OyenteModificaAristaKeyAdapter extends KeyAdapter {
 	private Mensajero mensajero;
 	
 	/**
-	 * Constructor de la clase modificadora de la infromación de la arista
+	 * Constructor de la clase modificadora de la infromaciÃ±n de la arista
 	 * @param a arista a midificar
-	 * @param m oyente que muestra de la información de la arista de donde se consiguen
+	 * @param m oyente que muestra de la informaciÃ±n de la arista de donde se consiguen
 	 * los nuevos datos introducidos por el usuario
 	 */
 	public OyenteModificaAristaKeyAdapter(Arista a,OyenteArista m){
@@ -38,9 +38,9 @@ public class OyenteModificaAristaKeyAdapter extends KeyAdapter {
 	}
 	
 	/**
-	 * Método que obtiene los datos nuevos de la arista e inicia la actualización
-	 * del panel de dibujos con ellos, sólo si se ha pulsado al tecla intro
-	 * @param e evento de pulsación de tecla
+	 * MÃ±todo que obtiene los datos nuevos de la arista e inicia la actualizaciÃ±n
+	 * del panel de dibujos con ellos, sÃ±lo si se ha pulsado al tecla intro
+	 * @param e evento de pulsaciÃ±n de tecla
 	 */
 	public void keyPressed(KeyEvent e){
 		this.mensajero=Mensajero.getInstancia();

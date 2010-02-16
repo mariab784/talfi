@@ -32,8 +32,8 @@ public class ParserEjercicio {
 	
 	/**
 	 * Extrae un ejercicio desde un xml
-	 * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn
+	 * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
 	 */
 	public Ejercicio extraerEjercicio(String ruta) throws AutomatasException {
@@ -96,9 +96,9 @@ public class ParserEjercicio {
 	}
 	
 	/**
-	 * Extrae un ejercicio de tipo Automata-ExpresiÛn Regular
-	 * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo AFDTOER
+	 * Extrae un ejercicio de tipo Automata-Expresi√±n Regular
+	 * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo AFDTOER
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
 	 */
 	public Ejercicio extraerEjercicioAFDTOER(String ruta)  throws AutomatasException {
@@ -107,7 +107,7 @@ public class ParserEjercicio {
 		DOMParser parser = new DOMParser();
 		
 		String enunciado=null;
-		String output=null;//lo que habr· que comparar en un futuro
+		String output=null;//lo que habr√± que comparar en un futuro
 		Automata input=null;
 		Alfabeto alf=null;
 		
@@ -214,8 +214,8 @@ public class ParserEjercicio {
 
 	/**
 	 * Extrae un ejercicio de tipo Lenguaje-Expresion regular
-	 * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo lenguaje
+	 * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo lenguaje
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
 	 */
 	public Ejercicio extraerEjercicioLenguaje(String ruta) throws AutomatasException {
@@ -224,7 +224,7 @@ public class ParserEjercicio {
 		DOMParser parser = new DOMParser();
 		
 		String enunciado=null;
-		String output=null;//lo que habr· que comparar en un futuro
+		String output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -279,8 +279,8 @@ public class ParserEjercicio {
 	
     /**
      * Extrae un ejercicio de tipo Minimizacion de automatas
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioAutomatas(String ruta) throws AutomatasException {
@@ -289,7 +289,7 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		Automata input=null;
-		Automata output=null;//lo que habr· que comparar en un futuro
+		Automata output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -453,10 +453,10 @@ public class ParserEjercicio {
 	}
 	
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas no deterministas en 
+     * Extrae un ejercicio de tipo transformaci√±n de automatas no deterministas en 
      *  deterministas
-     * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioAFNAFD(String ruta) throws AutomatasException  {
@@ -466,7 +466,7 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		Automata input=null;
-		Automata output=null;//lo que habr· que comparar en un futuro
+		Automata output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -620,9 +620,9 @@ public class ParserEjercicio {
 	}
 
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas labmda a automatas sin lambda
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * Extrae un ejercicio de tipo transformaci√±n de automatas labmda a automatas sin lambda
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioAFNLAFN(String ruta) throws AutomatasException{
@@ -632,7 +632,7 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		Automata input=null;
-		Automata output=null;//lo que habr· que comparar en un futuro
+		Automata output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -786,9 +786,9 @@ public class ParserEjercicio {
 	}
 	
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas labmda a automatas sin lambda
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * Extrae un ejercicio de tipo transformaci√±n de automatas labmda a automatas sin lambda
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioEquivAutos(String ruta) throws AutomatasException{
@@ -798,7 +798,7 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		Automata input=null;
-		Automata output=null;//lo que habr· que comparar en un futuro
+		Automata output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -952,9 +952,9 @@ public class ParserEjercicio {
 	}
 	
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas labmda a automatas sin lambda
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * Extrae un ejercicio de tipo transformaci√±n de automatas labmda a automatas sin lambda
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioEquivAutoER(String ruta) throws AutomatasException{
@@ -964,7 +964,7 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		Automata input=null;
-		Automata output=null;//lo que habr· que comparar en un futuro
+		Automata output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -1118,9 +1118,9 @@ public class ParserEjercicio {
 	}
 	
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas labmda a automatas sin lambda
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * Extrae un ejercicio de tipo transformaci√±n de automatas labmda a automatas sin lambda
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioEquivERAuto(String ruta) throws AutomatasException{
@@ -1129,7 +1129,7 @@ public class ParserEjercicio {
 		DOMParser parser = new DOMParser();
 		
 		String enunciado=null;
-		String output=null;//lo que habr· que comparar en un futuro
+		String output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 
@@ -1184,9 +1184,9 @@ public class ParserEjercicio {
 	}
 	
 	/**
-     * Extrae un ejercicio de tipo transformaciÛn de automatas labmda a automatas sin lambda
-      * @param ruta ruta xml donde se realizar· la extracciÛn 
-	 * @return Ejercicio resultado de la extracciÛn, de tipo automatas
+     * Extrae un ejercicio de tipo transformaci√±n de automatas labmda a automatas sin lambda
+      * @param ruta ruta xml donde se realizar√± la extracci√±n 
+	 * @return Ejercicio resultado de la extracci√±n, de tipo automatas
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
      */
 	public Ejercicio extraerEjercicioEquivERs(String ruta) throws AutomatasException{
@@ -1195,7 +1195,7 @@ public class ParserEjercicio {
 		DOMParser parser = new DOMParser();
 		
 		String enunciado=null;
-		String output=null;//lo que habr· que comparar en un futuro
+		String output=null;//lo que habr√± que comparar en un futuro
 		Alfabeto alf=null;
 		
 

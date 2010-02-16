@@ -8,7 +8,7 @@ import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
 
 /**
- * Clase que  modifica la información del estado que el usuario haya
+ * Clase que  modifica la informaciÃ±n del estado que el usuario haya
  * decidido
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -20,9 +20,9 @@ public class OyenteModificaEstadoActionListener implements ActionListener {
 	private Mensajero mensajero;
 	
 	/**
-	 * Constructor de la clase modificadora de la infromación del estado
+	 * Constructor de la clase modificadora de la infromaciÃ±n del estado
 	 * @param e estado a midificar
-	 * @param m oyente que muestra de la información del estado de donde se consiguen
+	 * @param m oyente que muestra de la informaciÃ±n del estado de donde se consiguen
 	 * los nuevos datos introducidos por el usuario
 	 */
 	public OyenteModificaEstadoActionListener(Estado e,OyenteArista m){
@@ -32,9 +32,9 @@ public class OyenteModificaEstadoActionListener implements ActionListener {
 	}
 	
 	/**
-	 * Método que obtiene los datos nuevos del estado e inicia la actualización
+	 * MÃ±todo que obtiene los datos nuevos del estado e inicia la actualizaciÃ±n
 	 * del panel de dibujos con ellos
-	 * @param e evento de pulsación del botón
+	 * @param e evento de pulsaciÃ±n del botÃ±n
 	 */
 	public void actionPerformed(ActionEvent e){
 		this.mensajero=Mensajero.getInstancia();

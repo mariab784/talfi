@@ -41,7 +41,7 @@ public class Controlador_imp implements Controlador{
 	private Mensajero mensajero;
 	
 	/**
-	 * Constructor del Controlador vacÌo
+	 * Constructor del Controlador vac√±o
 	 */
 	public Controlador_imp(){
 		query=new ArrayList<String>();
@@ -51,9 +51,9 @@ public class Controlador_imp implements Controlador{
 	}
 	
 	/**
-	 * MÈtodo singleton que obtiene la instancia del Controlador si 
-	 * est· creada y sino crea una nueva
-	 * @return el controlador de la aplicaciÛn
+	 * M√±todo singleton que obtiene la instancia del Controlador si 
+	 * est√± creada y sino crea una nueva
+	 * @return el controlador de la aplicaci√±n
 	 */
 	public static Controlador getInstancia() {
 		if (instancia==null) {
@@ -223,8 +223,8 @@ public class Controlador_imp implements Controlador{
 			}
 			xmlSalida=rutaxml;
 			salida.toString();
-			//se recargarÌa y se llmarÌa a la clase de pintado en la interfaz grafica con el objeto salida
-			//eso fuera de ese metodo, serÌa despues del ejecuta query con la salida obtenida
+			//se recargar√±a y se llmar√±a a la clase de pintado en la interfaz grafica con el objeto salida
+			//eso fuera de ese metodo, ser√±a despues del ejecuta query con la salida obtenida
 		}
 			else {
 				mensajero=Mensajero.getInstancia();

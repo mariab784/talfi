@@ -11,8 +11,8 @@ import accesoBD.Mensajero;
 import modelo.AutomatasException;
 
 /**
- * Clase que guarda el último automata que se ha copiado o cortado y que se puede 
- * pegar a continuación 
+ * Clase que guarda el Ã±ltimo automata que se ha copiado o cortado y que se puede 
+ * pegar a continuaciÃ±n 
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -30,7 +30,7 @@ public class CopiarPegar {
 	
 	/**
 	 * Metodo singleton de la clase que asegura que solo habra una instancia del objeto
-	 * en la aplicación.
+	 * en la aplicaciÃ±n.
 	 * @return instancia del objeto CopiarPegar
 	 */
 	public static CopiarPegar getInstancia(){

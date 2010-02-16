@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * La clase arista define los par·metros de las aristas de Turing de la interfaz gr·fica
- *  @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
+ * La clase arista define los par√±metros de las aristas de Turing de la interfaz gr√±fica
+ *  @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
  *
  */
 public class AristaTuring {
@@ -24,7 +24,7 @@ public class AristaTuring {
 	boolean marcado;
 	
 	/**
-	 * Establece los datos iniciales de la arista en la interfaz gr·fica
+	 * Establece los datos iniciales de la arista en la interfaz gr√±fica
 	 * @param x coordenada x del estado de inicio
 	 * @param y coordenada y del estado de inicio
 	 * @param fx coordenada x del estado destion
@@ -47,7 +47,7 @@ public class AristaTuring {
 	
 	public void setDireccion(String s){ direccion= s;}
 	/**
-	 * MÈtodo accesro de la caracterÌstica de la arista
+	 * M√±todo accesro de la caracter√±stica de la arista
 	 * @return true si la arista esta seleccionada
 	 */
 	
@@ -61,7 +61,7 @@ public class AristaTuring {
 	public void setMarcados(boolean b){ marcado = b;}
 	
 	/**
-	 * MÈtodo accesor de la lista de simbolos de entrada
+	 * M√±todo accesor de la lista de simbolos de entrada
 	 * @return lista de simbolos de entrada entradaSimbolos
 	 */
 	
@@ -69,7 +69,7 @@ public class AristaTuring {
 	
 	
 	/**
-	 * MÈtodo que aÒade nuevo simbolo de entrada
+	 * M√±todo que a√±ade nuevo simbolo de entrada
 	 * @param s simbolo de entrada
 	 */
 	
@@ -83,7 +83,7 @@ public class AristaTuring {
 
 	
 	/**
-	 * MÈtodo que aÒade nuevo simbolo de pila
+	 * M√±todo que a√±ade nuevo simbolo de pila
 	 * @param s simbolo de pila
 	 */
 	
@@ -92,14 +92,14 @@ public class AristaTuring {
 
 	
 	/**
-	 * MÈtodo accesor de la cima de la pila
+	 * M√±todo accesor de la cima de la pila
 	 * @return cima de la pila cimaPila
 	 */
 	
 	public String getSimboloCinta(){ return simboloCinta;}
 	
 	/**
-	 * MÈtodo modificador de la cima de la pila
+	 * M√±todo modificador de la cima de la pila
 	 * @param s cima de la pila cimaPila
 	 */
 	
@@ -109,7 +109,7 @@ public class AristaTuring {
 	}
 	
 	/**
-	 * MÈtodo modificador de la cima de la pila
+	 * M√±todo modificador de la cima de la pila
 	 * @param x nueva coordenada x del origen
 	 */
 	
@@ -118,7 +118,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada x del estado origen
+	 * M√±todo modificador de la coordenada x del estado origen
 	 * @param x nueva coordenada x del origen
 	 */
 	public void setX(int x) {
@@ -126,7 +126,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada y del estado origen
+	 * M√±todo accesor de la coordenada y del estado origen
 	 * @return coordenada y del origen
 	 */
 	public int getY() {
@@ -134,7 +134,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada y del estado origen
+	 * M√±todo modificador de la coordenada y del estado origen
 	 * @param y nueva coordenada y del origen
 	 */
 	public void setY(int y) {
@@ -142,7 +142,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada x del estado destino
+	 * M√±todo accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
 	public int getFx() {
@@ -150,7 +150,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada x del estado destino
+	 * M√±todo modificador de la coordenada x del estado destino
 	 * @param fx nueva coordenada x del destino
 	 */
 	public void setFx(int fx) {
@@ -158,7 +158,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada x del estado destino
+	 * M√±todo accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
 	public int getFy() {
@@ -166,7 +166,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada y del estado destino
+	 * M√±todo modificador de la coordenada y del estado destino
 	 * @param fy nueva coordenada y del destino
 	 */
 	public void setFy(int fy) {
@@ -174,7 +174,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo accesor del nombre del estado origen
+	 * M√±todo accesor del nombre del estado origen
 	 * @return nombre del estado origen
 	 */
 	public String getOrigen() {
@@ -182,7 +182,7 @@ public class AristaTuring {
 	}
 	
 	/**
-	 * MÈtodo modificador del nombre del estado origen
+	 * M√±todo modificador del nombre del estado origen
 	 * @param origen nuevo nombre del origen
 	 */
 	public void setOrigen(String origen) {
@@ -190,7 +190,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo accesor del nombre del estado destino
+	 * M√±todo accesor del nombre del estado destino
 	 * @return monbre del estado destino
 	 */
 	public String getDestino() {
@@ -198,7 +198,7 @@ public class AristaTuring {
 	}
 
 	/**
-	 * MÈtodo modificador del nombre del estado destino
+	 * M√±todo modificador del nombre del estado destino
 	 * @param destino nuevo nombre del destino
 	 */
 	public void setDestino(String destino) {
@@ -207,7 +207,7 @@ public class AristaTuring {
 
 	
 	/**
-	 * MÈtodo accesor de la etiqueta de la arista
+	 * M√±todo accesor de la etiqueta de la arista
 	 * @return nombre de la arista(letra que realiza la transicion)
 	 */
 /*	public String getEtiqueta() {
@@ -215,7 +215,7 @@ public class AristaTuring {
 	}*/
 
 	/**
-	 * MÈtodo midificador de la etiqueta de la arista
+	 * M√±todo midificador de la etiqueta de la arista
 	 * @param etiqueta nueva etiqueta de la atista
 	 */
 /*	public void setEtiqueta(String etiqueta) {
@@ -223,9 +223,9 @@ public class AristaTuring {
 	}*/
 	
 	/**
-	 * Establece la cercania de la arista a un punto de la interfaz gr·fica
+	 * Establece la cercania de la arista a un punto de la interfaz gr√±fica
 	 * @param p punto del que se quiere saber la distancia a al arista
-	 * @return true si est· encima, false si no
+	 * @return true si est√± encima, false si no
 	 */
 	public boolean estaCerca(Point p){
 		if(bounds.contains(p)){
@@ -235,7 +235,7 @@ public class AristaTuring {
 	}
 	
 	/**
-	 * MÈtodo accesro de la caracterÌstica de la arista
+	 * M√±todo accesro de la caracter√±stica de la arista
 	 * @return true si la arista esta seleccionada
 	 */
 /*	public boolean getMarcada() {
@@ -251,9 +251,9 @@ public class AristaTuring {
 	}*/
 	
 	/**
-	 * MÈtodo que devuelve la arista en formato texto con los nombre de los estados
-	 * origen y destino, la etiqueta y si est· maarcada o no
-	 * @return cadena con la informaciÛn de la arista
+	 * M√±todo que devuelve la arista en formato texto con los nombre de los estados
+	 * origen y destino, la etiqueta y si est√± maarcada o no
+	 * @return cadena con la informaci√±n de la arista
 	 */
 	public String toString() {
 		return "d("+origen+","+entradaCinta+","+")=("+destino+","+simboloCinta+","+direccion+")";//+"("+marcada+")";

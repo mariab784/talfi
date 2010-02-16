@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import accesoBD.Mensajero;
 
 /**
- * Clase que implementa la interfaz de expresiÛn regular e implementa las funcines
- * que las mismas realizan en la aplicaciÛn.
+ * Clase que implementa la interfaz de expresi√±n regular e implementa las funcines
+ * que las mismas realizan en la aplicaci√±n.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -26,12 +26,12 @@ public class ExpresionRegularImpl implements ExpresionRegular {
 	private int j;
 
 	/**
-	 * Constructor de expresion regular que inicializa la expresion y calcula el ·rbol
-	 * sint·ctico de la misma de manera recursiva y con una sola pasada.
-	 * @param a alfaberto de la expresiÛn
-	 * @param exp cadena que representa la expresiÛn regular
-	 * @throws AutomatasException lanza la excepciÛn si la expresiÛn est· mal construida
-	 * o tiene un error sint·ctico. 
+	 * Constructor de expresion regular que inicializa la expresion y calcula el √±rbol
+	 * sint√±ctico de la misma de manera recursiva y con una sola pasada.
+	 * @param a alfaberto de la expresi√±n
+	 * @param exp cadena que representa la expresi√±n regular
+	 * @throws AutomatasException lanza la excepci√±n si la expresi√±n est√± mal construida
+	 * o tiene un error sint√±ctico. 
 	 */
 	public ExpresionRegularImpl(Alfabeto a,String exp)throws AutomatasException{
 		i=0;

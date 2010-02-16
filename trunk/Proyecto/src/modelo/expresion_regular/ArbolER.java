@@ -1,7 +1,7 @@
 package modelo.expresion_regular;
 
 /**
- * Interfaz que define la funcionalidad de los ·rbole sint·cticos para
+ * Interfaz que define la funcionalidad de los √±rbole sint√±cticos para
  * expresiones regulares. 
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -9,58 +9,58 @@ package modelo.expresion_regular;
 public interface ArbolER {
 	
 	/**
-	 * MÈtodo accesro del hijo derecho del ·rbol, que a su vez
-	 * ser· tambiÁen un ·rbol del mismo tipo
-	 * @return al ·rbo,que representa el hijo derecho
+	 * M√±todo accesro del hijo derecho del √±rbol, que a su vez
+	 * ser√± tambi√±en un √±rbol del mismo tipo
+	 * @return al √±rbo,que representa el hijo derecho
 	 */
 	public ArbolER getHijoDR();
 	
 	/**
-	 * MÈtodo accesro del hijo izquierdo del ·rbol, que a su vez
-	 * ser· tambiÁen un ·rbol del mismo tipo
-	 * @return al ·rbo,que representa el hijo izquierdo
+	 * M√±todo accesro del hijo izquierdo del √±rbol, que a su vez
+	 * ser√± tambi√±en un √±rbol del mismo tipo
+	 * @return al √±rbo,que representa el hijo izquierdo
 	 */
 	public ArbolER getHijoIZ();
 	
 	/**
-	 * MÈtodo modificador del hijo derecho del ·rbol
-	 * @param hijoDR el ·rbol que ser· el hijo derecho
+	 * M√±todo modificador del hijo derecho del √±rbol
+	 * @param hijoDR el √±rbol que ser√± el hijo derecho
 	 */
 	public void setHijoDR(ArbolER hijoDR);
 	
 	/**
-	 * MÈtodo modificador del hijo izquierdo del ·rbol
-	 * @param hijoIZ el ·rbol que ser· el hijo izquierdo
+	 * M√±todo modificador del hijo izquierdo del √±rbol
+	 * @param hijoIZ el √±rbol que ser√± el hijo izquierdo
 	 */
 	public void setHijoIZ(ArbolER hijoIZ);
 	
 	/**
-	 * MÈtodo accesor del car·ceter de la raÌz del ·rbol
-	 * @return el car·cter que contiene la raÌz
+	 * M√±todo accesor del car√±ceter de la ra√±z del √±rbol
+	 * @return el car√±cter que contiene la ra√±z
 	 */
 	public String getRaiz();
 	
 	/**
-	 * MÈtodo modificador del car·ceter de la raÌz del ·rbol
-	 * @param raiz el nuevo car·cter que ser· la raÌz del ·rbol
+	 * M√±todo modificador del car√±ceter de la ra√±z del √±rbol
+	 * @param raiz el nuevo car√±cter que ser√± la ra√±z del √±rbol
 	 */
 	public void setTextoRaiz(String raiz);
 	
 	/**
-	 * MÈtodo de conversiÛn a cadena de caracteres del ·rbol
-	 * @return representaciÛn en modo texto del ·rbol
+	 * M√±todo de conversi√±n a cadena de caracteres del √±rbol
+	 * @return representaci√±n en modo texto del √±rbol
 	 */
 	public String toString();
 	
 	/**
-	 * MÈtodo accesro de la expresiÛn regular que origina al ·rbol
-	 * @return la cadena que representa la expresiÛn regular
+	 * M√±todo accesro de la expresi√±n regular que origina al √±rbol
+	 * @return la cadena que representa la expresi√±n regular
 	 */
 	public String getER();
 	
 	/**
-	 * MÈtodo modificador de la expresiÛn regular            
-	 * @param er la nuava expresiÛn regular
+	 * M√±todo modificador de la expresi√±n regular            
+	 * @param er la nuava expresi√±n regular
 	 */
 	public void setER(String er);
 

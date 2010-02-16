@@ -20,10 +20,10 @@ import modelo.automatas.*;
 /**
  * 
  * ALGORITMO DE MInIMIZACION DE UN AUTOMATA FINITO DETERMINISTA
- * si el automata que se pasa no es determinista se deber· traducir a un afd
+ * si el automata que se pasa no es determinista se deber√± traducir a un afd
  * 
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
- *  @author Luis San Juan, Rocio Barrig¸ete, Mario Huete
+ *  @author Luis San Juan, Rocio Barrig√±ete, Mario Huete
  *
  */
 public class MinimizacionAFD implements Algoritmo{
@@ -48,7 +48,7 @@ public class MinimizacionAFD implements Algoritmo{
 		this.soloEquivalencia = soloEquivalencia;
 	}
     
-	/*En esta funciÛn voy a aÒadir un estado trampa explicito al automata que recibamos*/ 
+	/*En esta funci√±n voy a a√±adir un estado trampa explicito al automata que recibamos*/ 
 	private Automata trampea (Automata ent){
 		Automata nuevo = new AutomataFD();
 		try {
@@ -209,7 +209,7 @@ public class MinimizacionAFD implements Algoritmo{
             }
 		}
 		
-		//A partir de aquÌ vamos a marcar los pares no marcados al inicializar
+		//A partir de aqu√± vamos a marcar los pares no marcados al inicializar
 		//HashMap<String,HashMap<String,Registro>> tablaCopia = (HashMap<String,HashMap<String,Registro>>) tabla.clone();
 		Iterator<String> pares=listaVertices.iterator();
 		System.out.println(pares);
@@ -225,18 +225,18 @@ public class MinimizacionAFD implements Algoritmo{
 				HashMap<String,Registro> fila = tabla.get(primera);
 				Iterator<String> segundo = fila.keySet().iterator();
 				while (segundo.hasNext()){
-					System.out.println("y tambiÈn paso por esta mierda de sitio");
+					System.out.println("y tambi√±n paso por esta mierda de sitio");
 					String segunda = segundo.next();
 					System.out.println(segunda);
 					if (tabla.get(primera).get(segunda).getMarcado()){
 						ArrayList<String> aristas=automataEntrada.getAristasVertice(primera);
 						System.out.println("aki no tamos marcados");
 						ArrayList<String> aristas2 =automataEntrada.getAristasVertice(segunda);
-						System.out.println("aquÌ vamos a ver que son las putas aristas");
+						System.out.println("aqu√± vamos a ver que son las putas aristas");
 						System.out.println(primera);
 						System.out.println(segunda);
 						/* tengo que mirar si donde va la primera componente de cada una de las aristas
-						 * y despuÈs de mirar eso mirar si esos estados est·n marcados, si est·n marcados
+						 * y despu√±s de mirar eso mirar si esos estados est√±n marcados, si est√±n marcados
 						 * marco los nuevos estados, si no estan marcados paso de ellos y lo dejo para el siguiente paso
 						 */
 						Iterator<String> itArista1=aristas.iterator();
@@ -378,7 +378,7 @@ public class MinimizacionAFD implements Algoritmo{
 			}
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		//se chequean los estados que no tienen parejas y se aÒaden a la lista de estados final
+		//se chequean los estados que no tienen parejas y se a√±aden a la lista de estados final
 		//con el mismo nombre
 		Iterator<String> itAntiguos=listaEstadosAntiguos.iterator();
 		while(itAntiguos.hasNext()) {
@@ -607,7 +607,7 @@ public class MinimizacionAFD implements Algoritmo{
 		while(it.hasNext()) {
 			String estado=it.next();
 			if (!estado.contains("[")) {
-				//si no se ha reducido se aÒade a los estados (finales) y normales
+				//si no se ha reducido se a√±ade a los estados (finales) y normales
 				if (listaEstadosFinales.contains(estado)) nuevosEstadosFinales.add(estado);
 				nuevosEstados.add(estado);
 			}
@@ -622,7 +622,7 @@ public class MinimizacionAFD implements Algoritmo{
 						if (!estadosReagrupables.contains(estado2))
 							estadosReagrupables.add(estado2);
 						if (estadoNuevo!=null) {
-							//coinciden hay que agrupar(viene ya agrupado, se aÒade a la lista)
+							//coinciden hay que agrupar(viene ya agrupado, se a√±ade a la lista)
 							//y las transiciones
 							if (!listaEstadosAsociados.contains(estado)&&(!listaEstadosAsociados.contains(estado2))) {
 								listaEstadosAsociados.add(estado);
@@ -779,7 +779,7 @@ public class MinimizacionAFD implements Algoritmo{
 	}
 /////////////////////////////////////////////////////////////////////////////////////
 	private boolean noRepite(String macroEstadoReagrupado,ArrayList<String> nestados) {
-		// TODO Auto-generated method stubÁ
+		// TODO Auto-generated method stub√±
 		ArrayList<String> mer=new ArrayList<String>();
 		String nuevo=macroEstadoReagrupado.replace("[","");
 		nuevo=nuevo.replace("]","");
@@ -1028,7 +1028,7 @@ public class MinimizacionAFD implements Algoritmo{
 	 * 
 	 */
 	public Automata ejecutar(boolean pasos) {
-		automataEntrada=aÒadirIndices(automataEntrada);
+		automataEntrada=a√±adirIndices(automataEntrada);
 		automataSalida=new AutomataFD();
 		controlador=Controlador_imp.getInstancia();
 		
@@ -1156,8 +1156,8 @@ public void registraControlador(Controlador controlador) {
 }
 
 /**
- * MÈtodo accesor de la tabla de minimizaciÛn del algoritmo
- * @return la tabla de minimizaciÛn de tipo HashMap<String,HashMap<String,Boolean>>
+ * M√±todo accesor de la tabla de minimizaci√±n del algoritmo
+ * @return la tabla de minimizaci√±n de tipo HashMap<String,HashMap<String,Boolean>>
  */
 public HashMap<String,HashMap<String,Registro>> getTablaMinimizacion() {
 	return tabla;
@@ -1239,7 +1239,7 @@ private String traducirXML(Automata automata) {
 		return salida+"</table>";
 	}
 	
-	private Automata aÒadirIndices(Automata a) {
+	private Automata a√±adirIndices(Automata a) {
 		Automata automata=new AutomataFD();
 		Iterator<String> itEst=a.getEstados().iterator();
 		ArrayList<String> nEstados=new ArrayList<String>();

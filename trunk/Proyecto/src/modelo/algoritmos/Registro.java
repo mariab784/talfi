@@ -30,7 +30,7 @@ public class Registro {
 		return estaditos;
 	}
 	
-	public void setEstados(String porestos){ //porqué estados lo meto
+	public void setEstados(String porestos){ //porquÃ± estados lo meto
 		estaditos = porestos;
 	}
 	

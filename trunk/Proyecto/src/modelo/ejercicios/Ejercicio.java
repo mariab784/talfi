@@ -7,7 +7,7 @@ import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
 
 /**
- * Interfaz que define las funcions de los ejercicios en la aplicación
+ * Interfaz que define las funcions de los ejercicios en la aplicaciÃ±n
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -26,7 +26,7 @@ public interface Ejercicio {
 	public Object getEntrada();
 	/**
 	 * Devuelve el resultado de un ejercicio
-	 * @return Resultado obtiene el resultado de la correción
+	 * @return Resultado obtiene el resultado de la correciÃ±n
 	 */
 	public Object getResultado();
 	/**
@@ -39,7 +39,7 @@ public interface Ejercicio {
 	 * Autocorrige el ejercicio
 	 * @param respuesta respuesta del usuario
 	 * @return true: bien hecho, false: mal hecho
-	 * @throws AutomatasException lanza la excepción si hay algún error
+	 * @throws AutomatasException lanza la excepciÃ±n si hay algÃ±n error
 	 * al aplicar alguno de los algoritmos
 	 */
 	public boolean corregir(Object respuesta)throws AutomatasException;

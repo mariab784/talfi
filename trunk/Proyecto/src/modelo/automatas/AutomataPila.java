@@ -11,7 +11,7 @@ import vista.vistaGrafica.AristaAP;
 
 /**
  * Clase que implementa la funcionalidad de los automatas de pila
- *  @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan 
+ *  @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan 
  *
  */
 /******************************************************************/
@@ -27,7 +27,7 @@ public class AutomataPila{
 	private HashMap<String,Coordenadas> coordenadasGraficas;
 	///////////////////////////////////////////////////////////////
 	
-	//MÈtodos//////////////////////////////////////////////////////
+	//M√±todos//////////////////////////////////////////////////////
 	//-------------------------------------------------------------
 	public AutomataPila(){
 		coordenadasGraficas=null;
@@ -39,15 +39,15 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que introduce nuevo autÛmata de pila.
-	 * @param a , el nuevo autÛmata de pila.
+	 * M√±todo que introduce nuevo aut√±mata de pila.
+	 * @param a , el nuevo aut√±mata de pila.
 	 */
 	public void setAPNuevo(ArrayList<AristaAP> a) {
 		this.automata = a;
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve el alfabeto del autÛmata de pila.
+	 * M√±todo que devuelve el alfabeto del aut√±mata de pila.
 	 * @return alfabeto , el alfabeto de entrada.
 	 */
 	public Alfabeto getAlfabeto() {
@@ -56,7 +56,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * Devuelve las aristas que salen de un estado en el autÛmata.
+	 * Devuelve las aristas que salen de un estado en el aut√±mata.
 	 * @param estado , estado del que se quieren calcular las aristas salientes.
 	 * @return lista de todas las aristas del estado.
 	 */
@@ -68,7 +68,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve el estado inicial del autÛmata de pila.
+	 * M√±todo que devuelve el estado inicial del aut√±mata de pila.
 	 * @return estadoInicial.
 	 */
 	public String getEstadoInicial() {
@@ -77,7 +77,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve todos los estados del autÛmata de pila.
+	 * M√±todo que devuelve todos los estados del aut√±mata de pila.
 	 * @return estados.
 	 */
 	public ArrayList<String> getEstados() {
@@ -86,7 +86,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve los estados finales del autÛmata de pila.
+	 * M√±todo que devuelve los estados finales del aut√±mata de pila.
 	 * @return estadosFinales.
 	 */
 	public ArrayList<String> getEstadosFinales() {
@@ -95,8 +95,8 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta una arista nueva en el autÛmata de pila.
-	 * @param estado origen, estado destino, sÌmbolos, cima y apilar/desapilar.
+	 * M√±todo que inserta una arista nueva en el aut√±mata de pila.
+	 * @param estado origen, estado destino, s√±mbolos, cima y apilar/desapilar.
 	 */
 	public void insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
 		// TODO Auto-generated method stub
@@ -115,7 +115,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta un estado nuevo en autÛmata de pila
+	 * M√±todo que inserta un estado nuevo en aut√±mata de pila
 	 * @param estado.
 	 */
 	public void insertaEstado(String estado) {
@@ -126,7 +126,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta un alfabeto de entrada en un autÛmata de pila.
+	 * M√±todo que inserta un alfabeto de entrada en un aut√±mata de pila.
 	 * @param alfabeto.
 	 */
 	public void setAlfabeto(Alfabeto alfabeto) {
@@ -135,7 +135,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta el estado inicial de un autÛmata de pila.
+	 * M√±todo que inserta el estado inicial de un aut√±mata de pila.
 	 * @param estado.
 	 */
 	public void setEstadoInicial(String estado) {
@@ -144,7 +144,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta una lista de estados en un autÛmata de pila.
+	 * M√±todo que inserta una lista de estados en un aut√±mata de pila.
 	 * @param estados.
 	 */
 	public void setEstados(ArrayList<String> estados) {
@@ -153,7 +153,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta una lista de estados finales en un autÛmata de pila.
+	 * M√±todo que inserta una lista de estados finales en un aut√±mata de pila.
 	 * @param estados.
 	 */
 	public void setEstadosFinales(ArrayList<String> estados) {
@@ -162,7 +162,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta un estado final de un autÛmata de pila.
+	 * M√±todo que inserta un estado final de un aut√±mata de pila.
 	 * @param estado.
 	 */
 	public void setEstadoFinal(String estado) {
@@ -171,7 +171,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta un estado (no final) en un autÛmata de pila.
+	 * M√±todo que inserta un estado (no final) en un aut√±mata de pila.
 	 * @param estado.
 	 */
 	public void setEstadoNoFinal(String estado) {
@@ -180,7 +180,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve las coordenadas de un estado.
+	 * M√±todo que devuelve las coordenadas de un estado.
 	 * @param estado.
 	 * @return coordenadas.
 	 */
@@ -190,7 +190,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta nuevas coordenadas a un estado del autÛmata de pila.
+	 * M√±todo que inserta nuevas coordenadas a un estado del aut√±mata de pila.
 	 * @param estado , cord.
 	 */
 	public void setCoordenadas(String estado, Coordenadas cord) {
@@ -200,7 +200,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que verifica si existem coordenadas.
+	 * M√±todo que verifica si existem coordenadas.
 	 * @return bool.
 	 */
 	public boolean hayCoordenadas() {
@@ -209,7 +209,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve la lista de estados a la que se llega desde el estado que
+	 * M√±todo que devuelve la lista de estados a la que se llega desde el estado que
 	 * se pasa con la letra que se le pasa.
 	 * @param estado , estado incial desde el que se buscan los destinos.
 	 * @param letra , letra que etiqueta las transiciones que se devuelven.
@@ -231,11 +231,11 @@ public class AutomataPila{
     }
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve una lista con las letras de las transiciones entre dos
-	 * estados que se pasan como par·metros.
+	 * M√±todo que devuelve una lista con las letras de las transiciones entre dos
+	 * estados que se pasan como par√±metros.
 	 * @param origen , estado de inicio para buscar las tansiciones.
-	 * @param destino , estado de finalizaciÛn para buscar las transiciones.
-	 * @return simbolos , ArrayList con las letras que tiene la transiciÛn.
+	 * @param destino , estado de finalizaci√±n para buscar las transiciones.
+	 * @return simbolos , ArrayList con las letras que tiene la transici√±n.
 	 */
 	public ArrayList<String> getLetraTransicion(String origen, String destino) {
 		// TODO Auto-generated method stub
@@ -245,7 +245,7 @@ public class AutomataPila{
 		while(automata.indexOf(arista) != -1){
 			if((automata.get(i).contieneOrigen(origen))&&(automata.get(i).contieneDestino(destino))){
 				//simbolos.add(estado);
-				//XXX me falta algo,que ser·?,pues meter 
+				//XXX me falta algo,que ser√±?,pues meter 
 				//XXX entradasimbolos en simbolos
 			}
 			i++;
@@ -255,11 +255,11 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve una lista con la salida de la transiciÛn entre dos
-	 * estados que se pasan como par·metros.
+	 * M√±todo que devuelve una lista con la salida de la transici√±n entre dos
+	 * estados que se pasan como par√±metros.
 	 * @param origen , estado de inicio para buscar la salida.
-	 * @param destino , estado de finalizaciÛn para buscar la salida.
-	 * @return estados , ArrayList con la salida que tiene la transiciÛn.
+	 * @param destino , estado de finalizaci√±n para buscar la salida.
+	 * @return estados , ArrayList con la salida que tiene la transici√±n.
 	 */
 	public ArrayList<String> getSalidaTransicion(String origen, String destino) {
 		// TODO Auto-generated method stub
@@ -269,7 +269,7 @@ public class AutomataPila{
 		while(automata.indexOf(arista) != -1){
 			if((automata.get(i).contieneOrigen(origen))&&(automata.get(i).contieneDestino(destino))){
 				//simbolos.add(estado);
-				//XXX me falta algo,que ser·?,pues meter 
+				//XXX me falta algo,que ser√±?,pues meter 
 				//XXX salidaPila en simbolos
 			}
 			i++;
@@ -279,7 +279,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve el autÛmata de pila en cuestiÛn.
+	 * M√±todo que devuelve el aut√±mata de pila en cuesti√±n.
 	 * @return automata.
 	 */
 	public ArrayList<AristaAP> getAutomata() {
@@ -288,7 +288,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que devuelve el alfabeto de pila.
+	 * M√±todo que devuelve el alfabeto de pila.
 	 * @return alfabetoPila.
 	 */
 	@SuppressWarnings("unused")
@@ -297,7 +297,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que inserta el alfabeto de pila a un autÛmata de pila.
+	 * M√±todo que inserta el alfabeto de pila a un aut√±mata de pila.
 	 * @param alf.
 	 */
 	@SuppressWarnings("unused")
@@ -306,7 +306,7 @@ public class AutomataPila{
 	}
 	//-------------------------------------------------------------
 	/**
-	 * MÈtodo que verifica si una palabra es reconocida por el autÛmata de pila.
+	 * M√±todo que verifica si una palabra es reconocida por el aut√±mata de pila.
 	 * @param palabra.
 	 * @return bool.
 	 */

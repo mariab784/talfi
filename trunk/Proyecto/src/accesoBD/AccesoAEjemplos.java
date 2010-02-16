@@ -22,8 +22,8 @@ import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 /**
  * Clase que se encarga de la lectura y escriturade un xml que contiene los 
- * ejercicios/ejemplos y a partir del cual se crear· el ·rbol de 
- * ejemplos/ejericios de la interfaz gr·fica
+ * ejercicios/ejemplos y a partir del cual se crear√± el √±rbol de 
+ * ejemplos/ejericios de la interfaz gr√±fica
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -32,9 +32,9 @@ public class AccesoAEjemplos {
 	private static AccesoAEjemplos instancia;
 	
 	/**
-	 * MÈtodo Singleton que contiene la ˙nica instancia de la clase
-	 * para toda la aplicaciÛn y que la devuelve de forma est·tica
-	 * @return AccesoAEjemplos instancia de AccesoAEjemplos para la aplicaciÛn
+	 * M√±todo Singleton que contiene la √±nica instancia de la clase
+	 * para toda la aplicaci√±n y que la devuelve de forma est√±tica
+	 * @return AccesoAEjemplos instancia de AccesoAEjemplos para la aplicaci√±n
 	 */
 	public static AccesoAEjemplos getInstancia(){
 		if(instancia==null) instancia=new AccesoAEjemplos();
@@ -42,10 +42,10 @@ public class AccesoAEjemplos {
 	}
 	
 	/**
-	 * MÈtodo que lee del xml y devuelve la colecciÛn con los ejemplos almacenados
+	 * M√±todo que lee del xml y devuelve la colecci√±n con los ejemplos almacenados
 	 * en el archivo xml
-	 * @return colecciÛn de ejemplos del xml
-	 * @throws AutomatasException lanza la excepciÛn si hay alg˙n problema al parsear
+	 * @return colecci√±n de ejemplos del xml
+	 * @throws AutomatasException lanza la excepci√±n si hay alg√±n problema al parsear
 	 * el archivo xml
 	 */
 	public HashMap<String,ArrayList<String>> devolverListadoEjemplos() throws AutomatasException {
@@ -141,10 +141,10 @@ public class AccesoAEjemplos {
 	}
 	
 	/**
-	 * MÈtodo que lee del xml y devuelve la colecciÛn con los ejercicios almacenados
+	 * M√±todo que lee del xml y devuelve la colecci√±n con los ejercicios almacenados
 	 * en el archivo xml
-	 * @return colecciÛn de ejercicios del xml
-	 * @throws AutomatasException lanza la excepciÛn si hay alg˙n problema al parsear
+	 * @return colecci√±n de ejercicios del xml
+	 * @throws AutomatasException lanza la excepci√±n si hay alg√±n problema al parsear
 	 * el archivo xml
 	 */
 	public HashMap<String,ArrayList<String>> devolverListadoEjercicios() throws AutomatasException {
@@ -270,12 +270,12 @@ public class AccesoAEjemplos {
 	}
 
 	/**
-	 * MÈtodo que actualiza el archivo xml de construcciÛn del ·rbol de ejemplos
-	 * con un nuevo ejemplo del tipo que recibe por par·metro
+	 * M√±todo que actualiza el archivo xml de construcci√±n del √±rbol de ejemplos
+	 * con un nuevo ejemplo del tipo que recibe por par√±metro
 	 * @param texto contiene el ejemplo en formato texto
 	 * @param tipo nuevo ejemplo a insertar en el arbol
-	 * @throws AutomatasException lanza una excepciÛn si no se puede crear el nuevo
-	 * ejemplo o no se puede mofificar el archivo xml de generaciÛn del ·rbol
+	 * @throws AutomatasException lanza una excepci√±n si no se puede crear el nuevo
+	 * ejemplo o no se puede mofificar el archivo xml de generaci√±n del √±rbol
 	 */
 	public void actualizaXMLEjemplos(String texto, String tipo) throws AutomatasException{
 		// TODO Auto-generated method stub
@@ -536,12 +536,12 @@ public class AccesoAEjemplos {
 	}
 	
 	/**
-	 * MÈtodo que actualiza el archivo xml de construcciÛn del ·rbol de ejercicios
-	 * con un nuevo ejercicio del tipo que recibe por par·metro
+	 * M√±todo que actualiza el archivo xml de construcci√±n del √±rbol de ejercicios
+	 * con un nuevo ejercicio del tipo que recibe por par√±metro
 	 * @param texto contiene el ejercico en formato texto
 	 * @param tipo nuevo ejercicio a insertar en el arbol
-	 * @throws AutomatasException lanza una excepciÛn si no se puede crear el nuevo
-	 * ejercicio o no se puede mofificar el archivo xml de generaciÛn del ·rbol
+	 * @throws AutomatasException lanza una excepci√±n si no se puede crear el nuevo
+	 * ejercicio o no se puede mofificar el archivo xml de generaci√±n del √±rbol
 	 */
 	public void actualizaXMLEjercicios(String texto, String tipo) throws AutomatasException {
 		// TODO Auto-generated method stub

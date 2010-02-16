@@ -32,7 +32,7 @@ public interface Vista {
 	/**
 	 * Muestra una web html con la ruta como parametro
 	 * @param pasos true si se muestran los pasos, false si no
-	 * @param rutahtml ruta del archivo html de la página web
+	 * @param rutahtml ruta del archivo html de la pÃ±gina web
 	 */
 	public void muestraHtml(boolean pasos, String rutahtml);
 	/**
@@ -42,7 +42,7 @@ public interface Vista {
 	public void setExpresion(String exp);
 	
 	/**
-	 * Borra la expresión que haya en la vista gráfica
+	 * Borra la expresiÃ±n que haya en la vista grÃ±fica
 	 */
 	public void deleteExpresion();
 	/**
@@ -50,7 +50,7 @@ public interface Vista {
 	 * @param exp expresion regular del automata si la hay
 	 * @param alfabeto alfabeto del automta 
 	 * @return xml con el automata
-	 * @throws AutomatasException lanza la excepción si no se ha podido parsear el
+	 * @throws AutomatasException lanza la excepciÃ±n si no se ha podido parsear el
 	 * automata en el xml
 	 */
 	public String traducirXML(String exp, Alfabeto alfabeto)throws AutomatasException;
@@ -66,36 +66,36 @@ public interface Vista {
 	public void activaToogleButtons();
 	
 	/**
-	 * Método que reconstruye la vista por completo de nuevo.
+	 * MÃ±todo que reconstruye la vista por completo de nuevo.
 	 */
 	public void reconstruir();
 
 	/**
-	 * Método que modifica el automata de la vista
+	 * MÃ±todo que modifica el automata de la vista
 	 * @param a nuevo automata de la vista
 	 */
 	public void setAutomata(Automata a);
 	
 	/**
-	 * Método que reconstruye el panel del usuario con
-	 * la información actualizada
+	 * MÃ±todo que reconstruye el panel del usuario con
+	 * la informaciÃ±n actualizada
 	 */
 	public void reconstruirPanelUsuario();
 	
 	/**
-	 * Método que reconstruye el panel JTree de ejemplos/ejercicios con
-	 * la información actualizada de los nuevo ejemplos/ejercicios
+	 * MÃ±todo que reconstruye el panel JTree de ejemplos/ejercicios con
+	 * la informaciÃ±n actualizada de los nuevo ejemplos/ejercicios
 	 */
 	void reconstruirPanelJTree();
 	
 	/**
-	 * Método que comprueba si se puede dibujar en la vista
+	 * MÃ±todo que comprueba si se puede dibujar en la vista
 	 * @return true si se puede dibujar, false si no
 	 */
 	public boolean dibujar();
 	
 	/**
-	 * Metodo que devuelve la ruta del último directorio usado para abriro guardar
+	 * Metodo que devuelve la ruta del Ã±ltimo directorio usado para abriro guardar
 	 * @return cadena con la ruta absoluta del directorio
 	 */
 	public String getRutaPredef();

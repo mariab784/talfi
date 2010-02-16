@@ -10,8 +10,8 @@ import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
 
 /**
- * Clase que  modifica la información del estado que el usuario haya
- * decidido, se lanza por pulsación tecla sobre un campo de texto
+ * Clase que  modifica la informaciÃ±n del estado que el usuario haya
+ * decidido, se lanza por pulsaciÃ±n tecla sobre un campo de texto
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -22,9 +22,9 @@ public class OyenteModificaEstadoKeyAdapter extends KeyAdapter {
 	private Mensajero mensajero;
 	
 	/**
-	 * Constructor de la clase modificadora de la infromación del estado
+	 * Constructor de la clase modificadora de la infromaciÃ±n del estado
 	 * @param e estado a midificar
-	 * @param m oyente que muestra de la información del estado de donde se consiguen
+	 * @param m oyente que muestra de la informaciÃ±n del estado de donde se consiguen
 	 * los nuevos datos introducidos por el usuario
 	 */
 	public OyenteModificaEstadoKeyAdapter(Estado e,OyenteArista m){
@@ -34,9 +34,9 @@ public class OyenteModificaEstadoKeyAdapter extends KeyAdapter {
 	}
 	
 	/**
-	 * Método que obtiene los datos nuevos del estado e inicia la actualización
-	 * del panel de dibujos con ellos, sólo si se ha pulsado al tecla intro
-	 * @param e evento de pulsación de tecla
+	 * MÃ±todo que obtiene los datos nuevos del estado e inicia la actualizaciÃ±n
+	 * del panel de dibujos con ellos, sÃ±lo si se ha pulsado al tecla intro
+	 * @param e evento de pulsaciÃ±n de tecla
 	 */
 	public void keyPressed(KeyEvent e){
 		this.mensajero=Mensajero.getInstancia();

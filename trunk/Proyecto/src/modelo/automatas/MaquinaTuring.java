@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 /**
  * Clase que implementa la funcionalidad de los automatas de pila
- *  @author Rocío Barrigüete, Mario Huete, Luis San Juan 
+ *  @author RocÃ±o BarrigÃ±ete, Mario Huete, Luis San Juan 
  *
  */
 public class MaquinaTuring extends AutomataFNDLambda{

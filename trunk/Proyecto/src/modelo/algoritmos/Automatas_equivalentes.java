@@ -32,7 +32,7 @@ public class Automatas_equivalentes implements Algoritmo{
 	 */
 	public Automata ejecutar(boolean muestraPasos) {
 		// TODO Auto-generated method stub
-		//se genera un "automata" no conexo con los dos autÛmatas.
+		//se genera un "automata" no conexo con los dos aut√±matas.
 		System.out.println("AUTO1:"+automata1);
 		System.out.println("AUTO2:"+automata2);
 		if (!automata1.getAlfabeto().getListaLetras().containsAll(automata2.getAlfabeto().getListaLetras())) {
@@ -87,7 +87,7 @@ public class Automatas_equivalentes implements Algoritmo{
 	
 	private Automata generaAutomataConjunto() {
 		//une los automatas 1 y 2. en un solo "automata", obviando que no es conexo y
-		//que en el fondo es la uniÛn de dos tablas de transiciones delta.
+		//que en el fondo es la uni√±n de dos tablas de transiciones delta.
 		Automata aux=new AutomataFD();
 		
 		ArrayList<String> estados=automata1.getEstados();
@@ -144,18 +144,18 @@ public class Automatas_equivalentes implements Algoritmo{
 	}
 	
 	/**
-	 * MÈtodo que inicializa el primero de los dos automatas de los que
+	 * M√±todo que inicializa el primero de los dos automatas de los que
 	 * se quiere hacer la equivalencia
-	 * @param a automata nuevo que ser· el primero para ejecutar el algoritmo
+	 * @param a automata nuevo que ser√± el primero para ejecutar el algoritmo
 	 */
 	public void registraAutomata1(Automata a) {
 		automata1=a;
 	}
 	
 	/**
-	 * MÈtodo que inicializa el segundo de los dos automatas de los que
+	 * M√±todo que inicializa el segundo de los dos automatas de los que
 	 * se quiere hacer la equivalencia
-	 * @param a automata nuevo que ser· el segundo para ejecutar el algoritmo
+	 * @param a automata nuevo que ser√± el segundo para ejecutar el algoritmo
 	 */
 	public void registraAutomata2(Automata a) {
 		automata2=a;
@@ -208,7 +208,7 @@ public class Automatas_equivalentes implements Algoritmo{
 	}
 	
 	/**
-	 * MÈtodo accesor del resultado del algoritmo
+	 * M√±todo accesor del resultado del algoritmo
 	 * @return true si son equivalentes y false en otro caso
 	 */
 	public boolean getResultado(){
