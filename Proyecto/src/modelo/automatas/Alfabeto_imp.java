@@ -96,6 +96,16 @@ public class Alfabeto_imp implements Alfabeto{
 		return alfabeto.get(pos);
 	}
 	
-	
+	public String toString() {
+			
+			String s = "";
+			int i = 0;
+			while (i < alfabeto.size()){
+				s += alfabeto.get(i);
+				i++;
+				
+			}
+			return s;
+		}
 	
 }

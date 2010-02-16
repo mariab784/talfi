@@ -74,5 +74,7 @@ public interface Alfabeto {
 	 * @return la letra de la posiciñn pasada
 	 */
 	public String dameLetraPos(int pos);
+	 
+	public String toString();
 	
 }

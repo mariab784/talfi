@@ -40,5 +40,7 @@ public interface Alfabeto_Pila {
 	 * @return al ArrayList de letras del alfabeto
 	 */
 	public ArrayList<String> getListaLetras();
+	
+	public String toString();
 
 }

@@ -46,9 +46,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+
 import java.util.Vector;
 import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
+
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
@@ -77,15 +79,22 @@ public class VistaGrafica extends JFrame implements Vista{
 	private String rutaxml2;
 	private boolean preparadoEquivalencia;
 	private JDialog dialog;
+	/****/
+	private JDialog d;
+	/****/
 	private JMenuBar menu;
 	private PanelCentral panelCentral;
 	private BarraHerramientas tool;
+	private JToolBar tool2;
 	private JToggleButton estado;
 	private JToggleButton arista;
+	/****/
+	private JToggleButton estaPalabra;
+	/****/
 	private JToggleButton borrar;
 	private JToggleButton editar;
 	private JToolBar nuevos;
-//	private JButton nuevoAutomata;
+	private JButton nuevoAutomata;
 	private JButton nuevaER;
 	private JButton ejercicio;
 	private JTextArea consola;
@@ -108,10 +117,12 @@ public class VistaGrafica extends JFrame implements Vista{
 	private JButton pegar;
 	private JButton cortar;
 	
-	
+
+	private Mensajero mensajero;
 	private static boolean pila;
 	private static boolean turing;
-
+	private JTextField nomArs;
+	
 	
 	/**
 	 * Constructor de la ventana de la aplicaciñn, vista grñfica
@@ -158,14 +169,19 @@ public class VistaGrafica extends JFrame implements Vista{
 		loginD.setVisible(true);
 		setVisible(false);
 		panelIzquierda=creaPanelIzquierda();
+		/***/
+		creaPanelNorte2();
 		panelCentral=new PanelCentral(this);
+		panelNorte=creaPanelNorte();
+		/***/
+		//panelCentral=new PanelCentral(this);
 		controlador=Controlador_imp.getInstancia();
 		menu=creaMenu();
 		preparadoEquivalencia=false;
 		panel=new JPanel(new BorderLayout());
 		this.setJMenuBar(menu);
 		panel.add(new JScrollPane(panelCentral),BorderLayout.CENTER);
-		panelNorte=creaPanelNorte();
+		//panelNorte=creaPanelNorte();
 		panel.add(panelNorte,BorderLayout.NORTH);
 		panel.add(panelIzquierda,BorderLayout.WEST);
 		this.setContentPane(panel);
@@ -178,11 +194,15 @@ public class VistaGrafica extends JFrame implements Vista{
 		panelIzquierda.setMaximumSize(d);
 		requestFocus();
 		addKeyListener(new OyenteCopiarPegar(panelCentral.getCanvas()));
+		
+		
+		/*****/
+		mensajero=Mensajero.getInstancia();
+		/****/
 	}
-	
-
-
-	
+	/****/
+	public JToolBar getTool2(){return tool2;}
+	/****/
 	public static boolean getPila(){return pila;}
 	public static boolean getTuring(){return turing;}
 	public static void setPila(boolean valor){pila = valor;}
@@ -214,7 +234,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		panelNorte=creaPanelNorte();
 		panelIzquierda=creaPanelIzquierda();
 		panel.add(panelNorte,BorderLayout.NORTH);
-		//panel.add(sur,BorderLayout.SOUTH);
+		panel.add(sur,BorderLayout.SOUTH); //antes comentado
 		panel.add(panelIzquierda,BorderLayout.WEST);
 		this.setContentPane(panel);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -445,16 +465,141 @@ public class VistaGrafica extends JFrame implements Vista{
 		m.add(usuarios);
 		return m;
 	}
+	/*********************/
+	private void mostrarResultado(int r){
+		
+		String msg = "";
+		switch (r){
+		
+		case 0: msg += "NO Acepta por estado final \n NO Acepta por pila vacia"; break;
+		case 1: msg += "NO Acepta por estado final \n Acepta por pila vacia"; break;
+		case 2: msg += "Acepta por estado final \n NO Acepta por pila vacia"; break;
+		case 3: msg += "Acepta por estado final \n Acepta por pila vacia"; break;
+		}
+		
+		JOptionPane pane=new JOptionPane();
+		d=pane.createDialog(null);
+		JPanel panelD= new JPanel(new GridLayout(10,10));
+		JPanel panelC=new JPanel(new GridLayout(10,10));
+		JLabel etiqN=new JLabel(msg); //XXX
+		
+		JPanel panelB=  new JPanel();
+		JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
+		
+		aceptar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				d.setVisible(false);
+			}
+		});
+	
+		panelB.add(aceptar);
+		panelD.add(etiqN);
+		panelD.add(panelC);
+		panelD.add(panelB);
+		d.setContentPane(panelD);
+		d.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		d.setSize(new Dimension(250,300));
+		d.setVisible(true);
+		
+	}
+	
+	private void actionAceptar(){
+		
+		String palabra = nomArs.getText();
+		
+		dialog.setVisible(false);
+		try{
+			int r = panelCentral.getCanvas().getAP().reconocePalabra(palabra);
+			//System.out.println("S::: " + s);
+			mostrarResultado(r);
+			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
+				mostrarResultado("BIEEEN!");			 		
+			else
+				mostrarResultado("CASI! PERO NO");*/
+	 	
+		}
+		catch(Exception ex){
+			if ( panelCentral.getCanvas().getListaEstados().isEmpty() ) //XXX
+				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	private void creaPanelNorte2(){
+		
+		
+		tool2= new JToolBar();
+		
+		estaPalabra=new JToggleButton(new ImageIcon("imagenes/estaPalabra.jpg"));
+		estaPalabra.setMargin(new java.awt.Insets(0,0,0,0));
+		estaPalabra.setName("estaPalabra");
+		estaPalabra.setToolTipText("ASDJAKDFJSAHJ"); //XXX
+
+		tool2.add(estaPalabra); //aniadirBotton
+		
+		estaPalabra.addActionListener(new ActionListener(){
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				JOptionPane pane=new JOptionPane();
+				
+				dialog=pane.createDialog(null);
+				JPanel panelD=new JPanel(new GridLayout(4,1));
+				JPanel panelC=new JPanel(new GridLayout(1,4));
+				JLabel etiqN=new JLabel("JLABEL"); //XXX
+				nomArs=new JTextField();
+				
+				nomArs.addKeyListener(new KeyAdapter(){
+					public void keyPressed(KeyEvent e){
+						if(e.getKeyCode()==KeyEvent.VK_ENTER){
+							actionAceptar();
+						}
+					}
+				});
+				JPanel panelB=  new JPanel();
+				JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
+				aceptar.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						actionAceptar();
+					}
+				});
+				JButton cancelar=new JButton(mensajero.devuelveMensaje("vista.cancelar",2));
+				
+				cancelar.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						dialog.setVisible(false);
+					}
+				});
+				panelB.add(aceptar);
+				panelB.add(cancelar);
+				panelD.add(etiqN);
+				panelD.add(nomArs);
+				panelD.add(panelC);
+				panelD.add(panelB);
+				dialog.setContentPane(panelD);
+				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+				dialog.setSize(new Dimension(400,150));
+				dialog.setVisible(true);
+				
+
+			}
+			
+			
+		});
+		
+	}
 	
 	private JPanel creaPanelNorte(){
 		Mensajero mensajero=Mensajero.getInstancia();
 		JPanel n= new JPanel();
 		n.setBackground(Color.BLUE);
 		nuevos= new JToolBar();
-	//	nuevoAutomata=new JButton(new ImageIcon("imagenes/automata.jpg"));
-	//	nuevoAutomata.setMargin(new java.awt.Insets(0,0,0,0));
-	//	nuevoAutomata.setToolTipText(mensajero.devuelveMensaje("tooltip.nuevoAuto",1));
-	//	nuevoAutomata.addActionListener(new OyenteAutomata());
+		nuevoAutomata=new JButton(new ImageIcon("imagenes/automata.jpg"));
+		nuevoAutomata.setMargin(new java.awt.Insets(0,0,0,0));
+		nuevoAutomata.setToolTipText(mensajero.devuelveMensaje("tooltip.nuevoAuto",1));
+		nuevoAutomata.addActionListener(new OyenteAutomata());
 		nuevaER=new JButton(new ImageIcon("imagenes/er.jpeg"));
 		nuevaER.setMargin(new java.awt.Insets(0,0,0,0));
 		nuevaER.setToolTipText(mensajero.devuelveMensaje("tooltip.nuevaER",1));
@@ -463,10 +608,11 @@ public class VistaGrafica extends JFrame implements Vista{
 		ejercicio.setMargin(new java.awt.Insets(0,0,0,0));
 		ejercicio.setToolTipText(mensajero.devuelveMensaje("tooltip.ejercicio",1));
 		ejercicio.addActionListener(new OyenteEjercicio());
-	//	nuevos.add(nuevoAutomata);
+		nuevos.add(nuevoAutomata);
 		nuevos.add(nuevaER);
 		if(admin)nuevos.add(ejercicio);
 		tool=new BarraHerramientas(panelCentral.getPanel());
+		
 		estado=new JToggleButton(new ImageIcon("imagenes/estado.jpg"));
 		estado.setMargin(new java.awt.Insets(0,0,0,0));
 		estado.setToolTipText(mensajero.devuelveMensaje("tooltip.estado",1));
@@ -474,7 +620,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		arista=new JToggleButton(new ImageIcon("imagenes/linea.jpg"));
 		arista.setMargin(new java.awt.Insets(0,0,0,0));
 		arista.setName("arista");
-		arista.setToolTipText(mensajero.devuelveMensaje("tooltip.arista",1));
+		arista.setToolTipText(mensajero.devuelveMensaje("tooltip.arista",1)); //XXX
+
 		borrar=new JToggleButton(new ImageIcon("imagenes/borrar.jpg"));
 		borrar.setMargin(new java.awt.Insets(0,0,0,0));
 		borrar.setToolTipText(mensajero.devuelveMensaje("tooltip.borrar",1));
@@ -551,10 +698,13 @@ public class VistaGrafica extends JFrame implements Vista{
 		n.add(nuevos);
 		n.add(del);
 		n.add(tool);
+		n.add(tool2);
 		tool.aniadirBotton(editar);
 		tool.aniadirBotton(estado);
 		tool.aniadirBotton(arista);
 		tool.aniadirBotton(borrar);
+
+
 		JToolBar expr=new JToolBar();
 		JPanel panelEr=new JPanel();
 		JLabel e =new JLabel(mensajero.devuelveMensaje("algoritmos.er",1));
@@ -1076,7 +1226,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		consola.append(a.toString());
 		
 	}
-	
+
 	/**
 	 * Clase oyente del boton de menu pare ejecutar algortimos que se distinguen segñn
 	 * el entro que se le pasa al oyente
@@ -1145,6 +1295,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		borrar.setEnabled(true);
 		arista.setEnabled(true);
 		estado.setEnabled(true);
+		estaPalabra.setEnabled(true);
+
 		dibujar=true;
 		panelCentral.getPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 	}
@@ -1155,6 +1307,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		borrar.setEnabled(false);
 		arista.setEnabled(false);
 		estado.setEnabled(false);
+		estaPalabra.setEnabled(false);
 		dibujar=false;
 		panelCentral.getPanel().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}
@@ -1367,6 +1520,21 @@ public class VistaGrafica extends JFrame implements Vista{
 			}
 		}
 	}
+	
+	
+	
+
+
+
+
+
+
+
+
+	
+	
+	
+	
 	
 	/**
 	 * Clase que se encarga de las gestiones del usuario para gusrdar automtas en

@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import vista.vistaGrafica.Arista;
+import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
@@ -203,17 +204,44 @@ public class CanvasMouseAdapter extends MouseAdapter {
 		canvas.setAlfabeto(canvas.minimizarAlfabeto());
 	}
 
+	@SuppressWarnings("unchecked")
 	private void modificarRelacinesEstado(Estado est) {
 		// TODO Auto-generated method stub
-		ArrayList<Arista> lArist=new ArrayList<Arista>();
-		Iterator<Arista> iArist=canvas.getListaAristas().iterator();
-		while(iArist.hasNext()){
-			Arista a=iArist.next();
-			if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
-				lArist.add(a);
-			}		
+		
+		ArrayList/*<Arista>*/ lArist = null; Iterator/*<Arista>*/ iArist = null; int tipo = -1;
+		
+		lArist=new ArrayList/*<Arista>*/();
+		if (!canvas.getListaAristas().isEmpty()){
+		/*ArrayList<Arista>*/ //lArist=new ArrayList/*<Arista>*/();
+		/*Iterator<Arista>*/ iArist=canvas.getListaAristas().iterator(); 
+				tipo = 0;
 		}
-		canvas.setListaAristas(lArist);
+		
+		if (!canvas.getListaAristasPila().isEmpty()){
+			iArist=canvas.getListaAristasPila().iterator(); 
+			tipo = 1;
+			
+		}
+		while(iArist.hasNext()){
+			//Arista a = null; AristaAP ap = null;
+			Object obj = iArist.next(); 
+			if (obj instanceof Arista){/* a = (Arista)obj;*/
+				if(!(((Arista)obj).getDestino().equals(est.getEtiqueta()))&&!(((Arista)obj).getOrigen().equals(est.getEtiqueta()))){
+					( (ArrayList<Arista>)lArist ).add((Arista)obj);
+				}
+			}
+			else{/* ap = (AristaAP)obj;*/
+				if(!(((AristaAP)obj).getDestino().equals(est.getEtiqueta()))&&!(((AristaAP)obj).getOrigen().equals(est.getEtiqueta()))){
+					( (ArrayList<AristaAP>)lArist ).add((AristaAP)obj);
+				}
+			}
+			
+			//Arista a=iArist.next();
+	/*		if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
+				lArist.add(a);
+			}	*/	
+		}
+		canvas.setListaAristas(lArist,tipo);
 		canvas.setAlfabeto(canvas.minimizarAlfabeto());
 	}
 	

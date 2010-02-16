@@ -51,4 +51,15 @@ public class AlfabetoPila_imp implements Alfabeto_Pila {
 		return alfabeto;
 	}
 
+	public String toString() {
+		
+		String s = "";
+		int i = 0;
+		while (i < alfabeto.size()){
+			s += alfabeto.get(i);
+			i++;
+			
+		}
+		return s;
+	}
 }

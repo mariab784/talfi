@@ -33,9 +33,10 @@ import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFNDLambda;
+import modelo.automatas.AutomataPila;
 
 /**
- * Clase que almacena y trata toda la informaci√±n de los automatas que salen en la interfaz
+ * Clase que almacena y trata toda la informaciÛn de los automatas que salen en la interfaz
  * grafica y donde se realiza el pintado de automatas.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -63,7 +64,12 @@ public class AutomataCanvas extends JScrollPane {
 	private ArrayList<String> listaFinales;
 	private Alfabeto alfabeto;
 	private Alfabeto_Pila alfabetoPila;
+	
+	
 	private boolean apd;
+	
+	private AutomataPila ap;
+	
 	private Mensajero m;
 	
 	
@@ -88,15 +94,42 @@ public class AutomataCanvas extends JScrollPane {
 		addMouseListener(c);
 		OyenteEditar editar=new OyenteEditar(this);
 		OyenteArista arista=new OyenteArista(this,c);
+		
+
 		addMouseListener(editar);
 		addMouseListener(arista);
 		addMouseMotionListener(editar);
 		addMouseMotionListener(arista);
+		
 	}
 		
-	public boolean getPila(){ return vista.getPila();}
+	public void creaAP(){
+		
+		if (ap == null){ ap = new AutomataPila(); }
+	}
 	
-	public boolean getTuring(){ return vista.getTuring();}
+	public void borraAP(){ap = null;}
+	
+	public AutomataPila getAP(){return ap;}
+	
+	public ArrayList<String> getNombreEstados(){
+		
+		ArrayList<String> s = new ArrayList<String>();
+		int i = 0;
+		while (i < listaEstados.size()){
+			s.add(listaEstados.get(i).getEtiqueta());
+			i++;
+		}
+		return s;
+	}
+	
+
+	
+	public  boolean getAPD(){return apd;}
+	
+	public boolean getPila(){ return VistaGrafica.getPila();}
+	
+	public static boolean getTuring(){ return VistaGrafica.getTuring();}
 	
 	/**
 	 * Devuelve el alfabeto del automata
@@ -149,8 +182,11 @@ public class AutomataCanvas extends JScrollPane {
 	 * Establece la lista de aristas
 	 * @param listaAristas nueva lista de aristas el automata
 	 */
-	public void setListaAristas(ArrayList<Arista> listaAristas) {
-		this.listaAristas = listaAristas;
+	@SuppressWarnings("unchecked")
+	public void setListaAristas(ArrayList listaAristas, int tipo) {
+		if (tipo == 0)
+			this.listaAristas = (ArrayList<Arista>)listaAristas;
+		else this.listaAristasAP = (ArrayList<AristaAP>)listaAristas;
 	}
 
 	/**
@@ -178,7 +214,7 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * M√±todo accesor del boton de dibujo que est√± pulsado, depende del entero
+	 * MÈtodo accesor del boton de dibujo que est· pulsado, depende del entero
 	 * @return entero que representa le boton pulsado
 	 */
 	public int getEstadoB() {
@@ -320,11 +356,11 @@ public class AutomataCanvas extends JScrollPane {
 				g2.setStroke(STROKE);
 				g2.setColor(Color.black);
 			
-				if ( !aristaAP.getMarcados() ){ 
+				if ( !aristaAP.getMarcada() ){ 
 					//Mensajero m=Mensajero.getInstancia();	
 					String separador = m.devuelveMensaje("simbolos.separador",4);
 					if (etiquetaAux.equals("")){ 
-						etiquetaAux = dameEtiqueta(aristaAP.getEntradaSimbolos()) + separador + aristaAP.getCimaPila() + separador + dameEtiqueta(aristaAP.getSalidaPila());
+						etiquetaAux = dameEtiqueta(aristaAP.getEntradaSimbolos(),0) + separador + aristaAP.getCimaPila() + separador + dameEtiqueta(aristaAP.getSalidaPila(),1);
 						j = i+1;
 					}
 				
@@ -335,9 +371,9 @@ public class AutomataCanvas extends JScrollPane {
 						destinos = aristaAP.getDestino().equals( aux.getDestino());
 						origen = aristaAP.getOrigen().equals( aux.getOrigen());
 
-						if (destinos && origen && !aux.getMarcados() ) {
-							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaSimbolos()) + separador + aux.getCimaPila() + separador + dameEtiqueta(aux.getSalidaPila());
-							aux.setMarcados(true);
+						if (destinos && origen && !aux.getMarcada() ) {
+							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaSimbolos(),0) + separador + aux.getCimaPila() + separador + dameEtiqueta(aux.getSalidaPila(),1);
+							aux.setMarcada(true);
 						//j++;
 						}
 					
@@ -361,6 +397,7 @@ public class AutomataCanvas extends JScrollPane {
 						}
 						else {
 							CurvedArrow curva=null;
+							//System.out.println("ARISTA A PINTAR: " + aristaAP);
 							if(aristaAP.getOrigen().equals(aristaAP.getDestino()))curva=new CurvedArrow(aristaAP.getX()+20,aristaAP.getY()+8,aristaAP.getFx()-20,aristaAP.getFy()+8, 3);
 							else {
 								int angulo=0;
@@ -412,11 +449,11 @@ public class AutomataCanvas extends JScrollPane {
 				g2.setStroke(STROKE);
 				g2.setColor(Color.black);
 			
-				if ( !aristaT.getMarcados() ){ 
+				if ( !aristaT.getMarcada() ){ 
 					//Mensajero m=Mensajero.getInstancia();	
 					String separador = m.devuelveMensaje("simbolos.separador",4);
 					if (etiquetaAux.equals("")){ 
-						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta()) + separador + aristaT.getSimboloCinta() + separador + /*dameEtiqueta(*/aristaT.getDireccion()/*)*/;
+						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta(),0) + separador + aristaT.getSimboloCinta() + separador + /*dameEtiqueta(*/aristaT.getDireccion()/*)*/;
 						j = i+1;
 					}
 				
@@ -427,9 +464,9 @@ public class AutomataCanvas extends JScrollPane {
 						destinos = aristaT.getDestino().equals( aux.getDestino());
 						origen = aristaT.getOrigen().equals( aux.getOrigen());
 
-						if (destinos && origen && !aux.getMarcados() ) {
-							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaCinta()) + separador + aux.getSimboloCinta() + separador + /*dameEtiqueta(*/aux.getDireccion()/*SalidaPila())*/;
-							aux.setMarcados(true);
+						if (destinos && origen && !aux.getMarcada() ) {
+							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaCinta(),0) + separador + aux.getSimboloCinta() + separador + /*dameEtiqueta(*/aux.getDireccion()/*SalidaPila())*/;
+							aux.setMarcada(true);
 						//j++;
 						}
 					
@@ -571,58 +608,7 @@ public class AutomataCanvas extends JScrollPane {
 				g.drawPolygon(x, y, 3);
 			}
 		}
-/*		Iterator<Arista> itArist=listaAristas.iterator();
-		while(itArist.hasNext()) {
-			Arista a=itArist.next();
-			java.awt.Graphics2D g2=(java.awt.Graphics2D)g; 
-			Stroke s=g2.getStroke();
-			g2.setStroke(STROKE);
-			g2.setColor(Color.black);
-			boolean noPintar=false;
-			String etiqueta=a.getEtiqueta();
-			String repetida=seRepite(listaAristas,a);
-			if (repetida!=null) {
-				if (repetida.equals("yaesta")) {
-					noPintar=true;
-				}
-				etiqueta=repetida;
-			}
-			if (a.getX()>a.getFx()) {
-				CurvedArrow curva=null;
-				if(a.getOrigen().equals(a.getDestino()))curva=new CurvedArrow(a.getX()+20,a.getY()+8,a.getFx()-20,a.getFy()+8, 3);
-				else {
-					int angulo=2;
-					if (esUnica(a)) angulo=0;
-					if (a.getY()>a.getFy())
-						curva=new CurvedArrow(a.getX()-15,a.getY()-15,a.getFx()+12,a.getFy()+19, angulo);
-					else curva=new CurvedArrow(a.getX()-15,a.getY()+15,a.getFx()+12,a.getFy()-19, angulo);
-				}
-				curva.draw((Graphics2D) g);
-				if (noPintar!=true) {
-					curva.setLabel(etiqueta);
-					curva.drawText(g);
-				}
-			}
-			else {
-				CurvedArrow curva=null;
-				if(a.getOrigen().equals(a.getDestino()))curva=new CurvedArrow(a.getX()+20,a.getY()+8,a.getFx()-20,a.getFy()+8, 3);
-				else {
-					int angulo=1;
-					if (esUnica(a)) angulo=0;
-					if (a.getY()>a.getFy()) 
-						curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-12,a.getFy()+19, angulo);
-					else curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-12,a.getFy()-19,angulo);
-				}
-				curva.draw((Graphics2D) g);
-				curva.setLabel(etiqueta);
-				if (noPintar!=true) {
-					curva.setLabel(etiqueta);
-					curva.drawText(g);
-				}
-			}
-			noPintar=false;
-			g2.setStroke(s);
-		}*/
+
 		
 		
 		boolean esPila = getPila();
@@ -652,7 +638,7 @@ public class AutomataCanvas extends JScrollPane {
 	/**
 	 * Crea un archivo xml con los datos del automata
 	 * @return texto xml con el automata
-	 * @throws AutomatasException lanza la excepci√±n si el qutomata no tiene estado inicial
+	 * @throws AutomatasException lanza la excepciÛn si el qutomata no tiene estado inicial
 	 */
 	public String traducirXML()throws AutomatasException {
 		//Mensajero m=Mensajero.getInstancia();
@@ -759,9 +745,9 @@ public class AutomataCanvas extends JScrollPane {
 	public void cargarAutomataNuevo(Automata a){
 		//en un futuro se cargara desde un xml??estas cosas hay q decidirlas,
 		//igual se puede dejar asi.... no habria problema creo yo, porque seria
-		//el controlador el que lo pasa a la interfaz grafica, y √±sta a esta clase: AutomataCanvas
+		//el controlador el que lo pasa a la interfaz grafica, y Èsta a esta clase: AutomataCanvas
 		//IDEA: generar un poligono regular a partir de los vertices, el radio
-		//del pol√±gono deberia aumentar dependiendo del numero de vertives
+		//del polÌgono deberia aumentar dependiendo del numero de vertives
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
 		Iterator<String> itEst=a.getEstados().iterator();
@@ -856,6 +842,7 @@ public class AutomataCanvas extends JScrollPane {
     	alfabetoPila = null;
     	estadoInicial="";
     	apd = false;
+    	ap = null;
     	this.repaint();
     	vista.requestFocus();
 	}
@@ -867,10 +854,10 @@ public class AutomataCanvas extends JScrollPane {
 	public String generarImagenJPg(String ruta) {
 		
 		desmarcarAristas(listaAristas);
-        // Le asignamos un tama√±o a la imagen
+        // Le asignamos un tamaÒo a la imagen
         int width = 768, height = 512;
 
-        // Creamos una imagen con ese tama√±o y con su correspondiente formato de
+        // Creamos una imagen con ese tamaÒo y con su correspondiente formato de
         // color
         BufferedImage imagen = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
@@ -959,14 +946,14 @@ public class AutomataCanvas extends JScrollPane {
         // Ejecutamos el metodo Dispose para finalizar
         gimg.dispose();
 
-        // Se crea un flujo de datos, en este caso ser√± FileOutPutStream, aunque
-        // pod√±s utilizar cualquier otro.
+        // Se crea un flujo de datos, en este caso ser· FileOutPutStream, aunque
+        // podÈs utilizar cualquier otro.
 
         FileOutputStream out;
         try {
             out = new FileOutputStream(new File(ruta));
 
-            // Se decodifica la imagen y se env√±a al flujo.
+            // Se decodifica la imagen y se envÌa al flujo.
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             encoder.encode(imagen);
 
@@ -1049,7 +1036,7 @@ public class AutomataCanvas extends JScrollPane {
 	/**
 	 * Busca algun estado que se llame como etiqueta
 	 * @param etiqueta etiqueta con el nombre del estado a buscar
-	 * @return Estado que se busca si est√±, sino null
+	 * @return Estado que se busca si est·, sino null
 	 */
 	public Estado buscaEstado(String etiqueta){
 		Iterator<Estado> it=listaEstados.iterator();
@@ -1063,19 +1050,14 @@ public class AutomataCanvas extends JScrollPane {
 	
 	private String seRepite(ArrayList<Arista> la, Arista a) {
 		//Iterator<Arista> it=la.iterator();
-		Arista n = a;
 		String repetida=a.getEtiqueta();
-		ArrayList<Arista> s = la;
 		int i=0;
 		while(i<la.size()) {
-			Arista aux=s.get(i);
-			if (a.getDestino()!=null){
-				if ((a.getDestino().equals(aux.getDestino()))&&(a.getOrigen().equals(aux.getOrigen()))&&(!a.getEtiqueta().equals(aux.getEtiqueta()))) {
-					if (aux.getMarcada()) return "yaesta";
-					repetida+=","+aux.getEtiqueta();
-				}
+			Arista aux=la.get(i);
+			if ((a.getDestino().equals(aux.getDestino()))&&(a.getOrigen().equals(aux.getOrigen()))&&(!a.getEtiqueta().equals(aux.getEtiqueta()))) {
+				if (aux.getMarcada()) return "yaesta";
+				repetida+=","+aux.getEtiqueta();
 			}
-			//else la.remove(n);
 			i++;
 		}
 		if (repetida.contains(",")) {
@@ -1091,13 +1073,16 @@ public class AutomataCanvas extends JScrollPane {
 
 	
 	
-	
-	private String dameEtiqueta(ArrayList<String> a){
+	// 0 para simbolos, 1 para transicion de pila
+	private String dameEtiqueta(ArrayList<String> a, int tipo){
 	
 		Iterator<String> it = a.iterator();
 		String r = it.next();
 		while (it.hasNext()){
-			r+=","+it.next();
+			if (tipo == 0)
+				r+=",";
+			//else r+=
+			r += it.next();
 		}
 		return r;
 	}
@@ -1113,15 +1098,15 @@ public class AutomataCanvas extends JScrollPane {
 		while(it.hasNext()) {
 			/*Arista*/Object aux=it.next();
 			if (aux instanceof Arista)((Arista)aux).setMarcada(false);
-			else if (aux instanceof AristaAP)((AristaAP)aux).setMarcados(false);
-			if (aux instanceof AristaTuring)((AristaTuring)aux).setMarcados(false);
+			else if (aux instanceof AristaAP)((AristaAP)aux).setMarcada(false);
+			if (aux instanceof AristaTuring)((AristaTuring)aux).setMarcada(false);
 		}
 	}
 
 	/**
-	 * M√±todo que selecciona los estados que est√±n dentro del rect√±ngulo que recibe
-	 * @param bounds rect√±ngulo que va a mirar si contiene a los estados
-	 * @return devuelve el n√±mero de estados seleccionados
+	 * MÈtodo que selecciona los estados que est·n dentro del rect·ngulo que recibe
+	 * @param bounds rect·ngulo que va a mirar si contiene a los estados
+	 * @return devuelve el n˙mero de estados seleccionados
 	 */
 	public int seleccionaEstadosEnElrectangulo(Rectangle bounds) {
 		// TODO Auto-generated method stub
@@ -1139,8 +1124,8 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * M√±todo que dibuja el rect√±ngilo que recibe por par√±metro
-	 * @param bounds rect√±ngulo a dibujar
+	 * MÈtodo que dibuja el rect·ngilo que recibe por par·metro
+	 * @param bounds rect·ngulo a dibujar
 	 */
 	public void drawBounds(Rectangle bounds) {
 		// TODO Auto-generated method stub
@@ -1155,7 +1140,7 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * M√±todo que deselecciona todos los estados del automata
+	 * MÈtodo que deselecciona todos los estados del automata
 	 */
 	public void deseleccionaEstados() {
 		// TODO Auto-generated method stub
@@ -1213,22 +1198,46 @@ public class AutomataCanvas extends JScrollPane {
 		listaEstados=listaN;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void modificarRelacinesEstado(Estado est) {
 		// TODO Auto-generated method stub
-		ArrayList<Arista> lArist=new ArrayList<Arista>();
-		Iterator<Arista> iArist=listaAristas.iterator();
-		while(iArist.hasNext()){
-			Arista a=iArist.next();
-			if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
-				lArist.add(a);
-			}		
+		ArrayList/*<Arista>*/ lArist = null; Iterator/*<Arista>*/ iArist = null; int tipo = -1;
+		
+		lArist=new ArrayList/*<Arista>*/();
+		if (!listaAristas.isEmpty()){
+		/*ArrayList<Arista>*/ //lArist=new ArrayList/*<Arista>*/();
+		/*Iterator<Arista>*/ iArist=listaAristas.iterator(); tipo = 0;
 		}
-		setListaAristas(lArist);
+		
+		if (!listaAristasAP.isEmpty()){
+			iArist=listaAristasAP.iterator(); tipo = 1;
+			
+		}
+		while(iArist.hasNext()){
+			//Arista a = null; AristaAP ap = null;
+			Object obj = iArist.next(); 
+			if (obj instanceof Arista){/* a = (Arista)obj;*/
+				if(!(((Arista)obj).getDestino().equals(est.getEtiqueta()))&&!(((Arista)obj).getOrigen().equals(est.getEtiqueta()))){
+					( (ArrayList<Arista>)lArist ).add((Arista)obj);
+				}
+			}
+			else{/* ap = (AristaAP)obj;*/
+				if(!(((AristaAP)obj).getDestino().equals(est.getEtiqueta()))&&!(((AristaAP)obj).getOrigen().equals(est.getEtiqueta()))){
+					( (ArrayList<AristaAP>)lArist ).add((AristaAP)obj);
+				}
+			}
+			
+			//Arista a=iArist.next();
+	/*		if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
+				lArist.add(a);
+			}	*/	
+		}
+		setListaAristas(lArist,tipo);
 		setAlfabeto(minimizarAlfabeto());
 	}
 	
 	/**
-	 * M√±todo que calcula las letras del alfabto a partir de la lista
+	 * MÈtodo que calcula las letras del alfabto a partir de la lista
 	 * de las aristas del automata
 	 * @return el alfabeto del automata
 	 */
@@ -1277,18 +1286,14 @@ public class AutomataCanvas extends JScrollPane {
 		if ( getListaAristasPila().isEmpty() ) return -1;
 		else{
 			int i = 0;
-			//Iterator<AristaAP> it = getListaAristasPila().iterator();
+			
 			while (i < getListaAristasPila().size() ){
 				AristaAP aux = getListaAristasPila().get(i);
 				boolean destinos = a.getDestino().equals( aux.getDestino());
 				boolean origen = a.getOrigen().equals( aux.getOrigen());
 				boolean cima = a.getCimaPila().equals( aux.getCimaPila());
 				boolean salida = iguales(a.getSalidaPila(),aux.getSalidaPila());
-				
-/*				if ( destinos && origen && cima && salida) {
-					combinarEntrada(aux, a.getEntradaSimbolos()); //XXX
-					return i;
-				}*/
+
 				
 				if ( destinos && origen && cima ){
 					
@@ -1307,36 +1312,20 @@ public class AutomataCanvas extends JScrollPane {
 			
 		}
 	}
-	
-/*	private void combinarEntrada(AristaAP a, ArrayList<String> e){
-		
-		Iterator<String> it = e.iterator();
-		while (it.hasNext()){
-			String s = it.next();
-			if (!a.getEntradaSimbolos().contains(s))
-				a.getEntradaSimbolos().add(s);
-		}
-		
-	}*/
-	
+
 	private int existeTransicion(AristaTuring a){
 		
 		
 		if ( getListaAristasTuring().isEmpty() ) return -1;
 		else{
 			int i = 0;
-			//Iterator<AristaAP> it = getListaAristasPila().iterator();
+			
 			while (i < getListaAristasTuring().size() ){
 				AristaTuring aux = getListaAristasTuring().get(i);
 				boolean destinos = a.getDestino().equals( aux.getDestino());
 				boolean origen = a.getOrigen().equals( aux.getOrigen());
 				boolean simboloCinta = a.getSimboloCinta().equals( aux.getSimboloCinta());
 				boolean direccion = a.getDireccion().equals(aux.getDireccion());
-				
-/*				if ( destinos && origen && cima && salida) {
-					combinarEntrada(aux, a.getEntradaSimbolos()); //XXX
-					return i;
-				}*/
 				
 				if ( destinos && origen && simboloCinta ){
 					
@@ -1356,33 +1345,7 @@ public class AutomataCanvas extends JScrollPane {
 		}
 		
 		
-/*		if ( getListaAristasTuring().isEmpty() ) return -1;
-		else{
-			int i = 0;
-			//Iterator<AristaTuring> it = getListaAristasTuring().iterator();
-			while (i < getListaAristasPila().size() ){
-				AristaAP aux = it.next();
-				boolean destinos = a.getDestino().equals( aux.getDestino());
-				boolean origen = a.getOrigen().equals( aux.getOrigen());
-				boolean simboloCinta = a.getCimaPila().equals( aux.getCimaPila());
-			//	boolean salida = iguales(a.getSalidaPila(),aux.getSalidaPila());
-				
-/*				if ( destinos && origen && cima && salida) {
-					combinarEntrada(aux, a.getEntradaSimbolos()); //XXX
-					return i;
-				}*/
-				
-			/*	if ( destinos && origen && cima ) 
-					if (salida){ 
-						combinarEntrada(aux, a.getEntradaSimbolos()); //XXX
-						return i;
-					}
-					else return -2;
-				i++;*/
-			/*}
-			return -1;
-			
-		}*/
+
 	}
 	
 	private void combinarEntrada(AristaAP a, ArrayList<String> e){
@@ -1413,9 +1376,12 @@ public class AutomataCanvas extends JScrollPane {
 	private boolean compruebaAPD(){
 		
 		int i = 0;
-		//int tama√±o = listaAristasAP.size();
-		boolean esta = listaAristasAP.get(i).getEntradaSimbolos().contains(OyenteArista.getLambda()); 
+
+		boolean esta;
 		while (i < listaAristasAP.size()){
+			
+			esta = listaAristasAP.get(i).getEntradaSimbolos().contains(OyenteArista.getLambda()); 
+		
 			if (esta && (listaAristasAP.get(i).getEntradaSimbolos().size() > 1) ) return false;
 			else i++;
 		}
@@ -1447,8 +1413,6 @@ public class AutomataCanvas extends JScrollPane {
 				throw new AutomatasException(m.devuelveMensaje("canvas.notransvalida",2));
 			}
 			
-			//if (!apd) apd = compruebaAPD();
-			
 		}								//cambiar tb lo de mensajes en ingles
 		catch (AutomatasException ex){
 			JOptionPane.showMessageDialog(null,ex.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
@@ -1466,40 +1430,136 @@ public class AutomataCanvas extends JScrollPane {
 				throw new AutomatasException(m.devuelveMensaje("canvas.notransvalida",2));
 			}
 			
-			if (!apd) apd = compruebaAPD();
+			apd = compruebaAPD();
 			
 		}								//cambiar tb lo de mensajes en ingles
 		catch (AutomatasException ex){
 			JOptionPane.showMessageDialog(null,ex.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	
-	/*public AutomataCanvas(){
+	/********************************************************************************/
+	/********************************************************************************/
+	private int existeTransicion(Arista a){
 		
-		listaAristasAP = new ArrayList<AristaAP>();
-		listaEstados = new ArrayList<Estado>();
 		
+		if ( getListaAristas().isEmpty() ) return -1;
+		else{
+			int i = 0;
+
+			while (i < getListaAristas().size() ){
+				Arista aux = getListaAristas().get(i);
+				boolean destinos = a.getDestino().equals( aux.getDestino());
+				boolean origen = a.getOrigen().equals( aux.getOrigen());
+				boolean simbolos = a.getEtiqueta().equals(aux.getEtiqueta());
+
+				
+				if ( destinos && origen  ){
+	
+					if (simbolos) return -2;
+					
+				}	
+				i++;
+			}
+			return -1;
+			
+		}
 		
 	}
-	
-	public void setPila(boolean b){}
+		/********************************************************************************/
+		/********************************************************************************/
+	public void anadeArista(Arista a){
+		
+
+			int i = existeTransicion(a);
+			if ( i == -1 ) listaAristas.add(a);
+
+	}
+
 	public static void main(String[] args){
 		
-		AutomataCanvas a = new AutomataCanvas();
-		a.listaEstados.add(new Estado(0,0,"s1"));
-		AristaAP arist = new AristaAP(0,0,0,0,"S1","S1");
-		arist.anadirSimbolo("a");
+		//AutomataCanvas a = new AutomataCanvas(null);
+		AutomataPila aut = new AutomataPila();
+		AutomataPila aut2 = new AutomataPila();
+		//a.listaEstados.add(new Estado(0,0,"s1"));
+		aut.getEstados().add("s1");
+		aut.getEstados().add("s2");
+		aut.setEstadoInicial("s1");
+		aut.setEstadoFinal("s2");
+
+		aut2.getEstados().add("s1");
+		aut2.getEstados().add("s2");
+		aut2.setEstadoInicial("s1");
+		aut2.setEstadoFinal("s2");
+		//System.out.println("ESTADOS: " + aut.getEstados());
+		
+		AristaAP arist;
+		arist = new AristaAP(0,0,0,0,"s1","s2");
+		arist.anadirSimbolo("\\");
 		arist.setCimaPila("Z");
 		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		aut2.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("0");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		aut2.anadeArista(arist);
+
+		
+/*		arist = new AristaAP(0,0,0,0,"s2","s3");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s3","s2");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+
+		
+		aut.anadeArista(arist);
+		
+
+		
+	/*	arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z"); 
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);*/
+		
+/*		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("\\");
+		//System.out.println("LAMBDA: \\" );
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);*/
+		
+//		System.out.println("ARISTAS: " + aut.getAutomataPila());
+		ArrayList<String> lp = new  ArrayList<String>();
+		lp.add("0");
+		lp.add("000");
+		lp.add("00");
+
+		
+		AutomataPila.compruebaPalabras(aut, aut2, lp);
+		//aut.reconocePalabra("0"/*, true*/);
+		
 		//a.anadeAristaAP(arist);
-		arist = new AristaAP(0,0,0,0,"S1","S1");
+		/*arist = new AristaAP(0,0,0,0,"S1","S1");
 		arist.anadirSimbolo("b");
 		arist.setCimaPila("X");
-		arist.anadirPila("X");
+		arist.anadirPila("X");*/
 		//a.anadeAristaAP(arist);
 		
-		a.pintaAristaPila(a.getGraphics());
-	}*/
+		//a.pintaAristaPila(a.getGraphics());
+	}
 
 }
