@@ -41,7 +41,7 @@ import vista.vistaGrafica.Estado;
 import java.util.ArrayList;
 import java.lang.Exception;
 /**
- * Clase que se encarga de a√±adir las aristas al dibujo si la infromaci√±n
+ * Clase que se encarga de aÒadir las aristas al dibujo si la infromaciÛn
  * que se le pide al usuario es correcta 
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -77,9 +77,9 @@ public class OyenteArista extends MouseAdapter {
 
 	
 	/**
-	 * Clase que crea el oyente de dibujar aristas y a√±adirlas al dibujo
+	 * Clase que crea el oyente de dibujar aristas y aÒadirlas al dibujo
 	 * @param c panel de dibujos sobre el que se pinta
-	 * @param m oyente de a√±adir y borrar estados y borrasr aristas, padre de este
+	 * @param m oyente de aÒadir y borrar estados y borrasr aristas, padre de este
 	 */
 	public OyenteArista(AutomataCanvas c,CanvasMouseAdapter m){
 		super();
@@ -89,8 +89,8 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * Devuelve la ventana de di√±logo del panel
-	 * @return ventana de di√±logo
+	 * Devuelve la ventana de di·logo del panel
+	 * @return ventana de di·logo
 	 */
 	public JDialog getDialog(){
 		return dialog;
@@ -105,7 +105,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo que devuelve el componente gr√±fico que contiene una lista con todos
+	 * MÈtodo que devuelve el componente gr·fico que contiene una lista con todos
 	 * los estado como posibles inicios de la arista
 	 * @return menu con los posibles estados de inicio que contiene todos lo estado
 	 */
@@ -114,16 +114,16 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo que devuelve el componente gr√±fico que contiene una lista con todos
+	 * MÈtodo que devuelve el componente gr·fico que contiene una lista con todos
 	 * los estado como posibles finales de la arista
-	 * @return menu con los posibles estados de finalizaci√±n que contiene todos lo estado
+	 * @return menu con los posibles estados de finalizaciÛn que contiene todos lo estado
 	 */
 	public JComboBox getHasta() {
 		return hasta;
 	}
 
 	/**
-	 * M√±todo que devuelve el nombre del estado origen de la arista
+	 * MÈtodo que devuelve el nombre del estado origen de la arista
 	 * @return nombre del estado origen
 	 */
 	public String getEstadoOrigen() {
@@ -131,7 +131,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo que establece el nombre del estado origen de la arista
+	 * MÈtodo que establece el nombre del estado origen de la arista
 	 * @param estadoOrigen nombre nuevo del estado origen
 	 */
 	public void setEstadoOrigen(String estadoOrigen) {
@@ -139,7 +139,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo que devuelve el nombre del estado destino de la arista
+	 * MÈtodo que devuelve el nombre del estado destino de la arista
 	 * @return nombre del estado destino
 	 */
 	public String getEstadoDestino() {
@@ -147,7 +147,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo que establece el nombre del estado destino de la arista
+	 * MÈtodo que establece el nombre del estado destino de la arista
 	 * @param estadoDestino nombre nuevo del estado destino
 	 */
 	public void setEstadoDestino(String estadoDestino) {
@@ -155,7 +155,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo que devuelve el nombre del estado
+	 * MÈtodo que devuelve el nombre del estado
 	 * @return nombre del estado
 	 */
 	public String getNombreEstado() {
@@ -163,7 +163,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo modificador del nombre del estado
+	 * MÈtodo modificador del nombre del estado
 	 * @param nombreEstado nuevo nombre del estado
 	 */
 	public void setNombreEstado(String nombreEstado) {
@@ -171,7 +171,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo que devuelve el nombre de la arista, las letras de la mismo
+	 * MÈtodo que devuelve el nombre de la arista, las letras de la mismo
 	 * @return nombre de la arista
 	 */
 	public String getNombreArista() {
@@ -179,7 +179,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo modificador del nombre de la arista
+	 * MÈtodo modificador del nombre de la arista
 	 * @param nombreArista nuevo nombre de la arista, las letras de la misma
 	 */
 	public void setNombreArista(String nombreArista) {
@@ -187,7 +187,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo accesor del campo de texto donde se escribe el nombre de la arista, las
+	 * MÈtodo accesor del campo de texto donde se escribe el nombre de la arista, las
 	 * letras de la misma
 	 * @return el campo de texto del nombre de la arista
 	 */
@@ -196,7 +196,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo modificador del campo de texto donde se escribe el nombre de la arista, las
+	 * MÈtodo modificador del campo de texto donde se escribe el nombre de la arista, las
 	 * letras de la misma
 	 * @param nomArs nuevo campo de texto del nombre de la arista
 	 */
@@ -205,7 +205,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo accesor del campo de texto donde se escribe el nombre del estado
+	 * MÈtodo accesor del campo de texto donde se escribe el nombre del estado
 	 * @return el campo de texto del nombre del estado
 	 */
 	public JTextField getNomEst() {
@@ -213,7 +213,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todo modificador del campo de texto donde se escribe el nombre del estado
+	 * MÈtodo modificador del campo de texto donde se escribe el nombre del estado
 	 * @param nomEst nuevo campo de texto del nombre del estado
 	 */
 	public void setNomEst(JTextField nomEst) {
@@ -226,9 +226,9 @@ public class OyenteArista extends MouseAdapter {
 	
 	public static String getBlanco(){return blanco;}
 	/**
-	 * M√±todo que detecta la pulsaci√±n sobre el panel, si debajo hay un estado
-	 * y se ha pulsado el boton derecho se inicia la creaci√±n de la arista
-	 * @param e evento de pulsaci√±n de tecla del rat√±n
+	 * MÈtodo que detecta la pulsaciÛn sobre el panel, si debajo hay un estado
+	 * y se ha pulsado el boton derecho se inicia la creaciÛn de la arista
+	 * @param e evento de pulsaciÛn de tecla del ratÛn
 	 */
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -241,10 +241,10 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo que detecta que se ha soltado una tecla sobre el panel,
-	 * si es la tecla izquierda y hab√±a un estado origen al pulsarla y 
-	 * se est√± dibujando una arista el dibujo se completa pidiendo las
-	 * letras que llevar√± la arista
+	 * MÈtodo que detecta que se ha soltado una tecla sobre el panel,
+	 * si es la tecla izquierda y habÌa un estado origen al pulsarla y 
+	 * se est· dibujando una arista el dibujo se completa pidiendo las
+	 * letras que llevar· la arista
 	 * @param e evento de soltado de tecla 
 	 */
 	public void mouseReleased(MouseEvent e) {
@@ -271,9 +271,9 @@ public class OyenteArista extends MouseAdapter {
 	}
 
 	/**
-	 * M√±todoq ue detecta que se est√± arrastrnado el rat√±n sobre el panel con uan tecla
-	 * pulsada, si es la izquierda y hab√±a un estado debajo al pulsarla se va dibujando
-	 * la arista al arrastrar para a√±adirse al soltar si es sobre otro estado.
+	 * MÈtodoq ue detecta que se est· arrastrnado el ratÛn sobre el panel con uan tecla
+	 * pulsada, si es la izquierda y habÌa un estado debajo al pulsarla se va dibujando
+	 * la arista al arrastrar para aÒadirse al soltar si es sobre otro estado.
 	 */
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -286,11 +286,11 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * M√±todo que detecta que se ha pulsado y soltado una tecla del rat√±n sobre el panel
-	 * si se ha hecho con el boon detrecho y debajo hab√±a un estado o una arista se 
+	 * MÈtodo que detecta que se ha pulsado y soltado una tecla del ratÛn sobre el panel
+	 * si se ha hecho con el boon detrecho y debajo habÌa un estado o una arista se 
 	 * muestra l popUp menu correspondiente, sino se muestra un menui con las opciones 
 	 * de copiar y pegar para automatas.
-	 * @param e evento de pulsaci√±n de tecla de rat√±n
+	 * @param e evento de pulsaciÛn de tecla de ratÛn
 	 */
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -443,8 +443,8 @@ public class OyenteArista extends MouseAdapter {
 	}
 	/**
 	 * Clase que se encarga de preparar la transicion de automatas de pila
-	 * @param a arista de la que se extrae la infromaci√±n que se muestra
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @param a arista de la que se extrae la infromaciÛn que se muestra
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -492,7 +492,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Extraer la informacion de el simbolo de cinta consumido en una transicion de maquina de turing
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	private void actionAristaTuring(){ ///////////*********************************/////////////////
@@ -526,7 +526,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Extraer la informacion de las simbolos de entrada consumidos en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -555,7 +555,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Extraer la informacion de la cima de la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -664,7 +664,7 @@ public class OyenteArista extends MouseAdapter {
 	}
 	/**
 	 * Configura el dialogo para extraer la cima de la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -738,7 +738,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Extraer la informacion de las transiciones de la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -781,7 +781,7 @@ public class OyenteArista extends MouseAdapter {
 			
 			ArrayList<AristaAP> arist = canvas.getListaAristasPila();
 			canvas.getAP().setAPNuevo(arist);
-			System.out.println("ARISTAS: " + ((AutomataPila) canvas.getAP()).getAutomataPila());
+			System.out.println("ARISTAS: " + canvas.getAP().getAutomataPila());
 			
 			ArrayList<String> estad = canvas.getNombreEstados();
 			canvas.getAP().setEstados(estad);
@@ -817,7 +817,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Configura el dialogo para extraer los movimientos en la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -865,7 +865,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Crea el dialogo para extraer los movimientos en la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	private void dialogTransicionPila(){
@@ -878,7 +878,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Crea el dialogo para extraer la cima de la pila en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -947,7 +947,7 @@ public class OyenteArista extends MouseAdapter {
 	
 	/**
 	 * Configura el dialogo para extraer los simbolos consumidos en una transicion automata de pila
-	 * @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
+	 * @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	
@@ -1001,8 +1001,8 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * Crea el di√±logo con la infromaci√±n de la arista que recibe como par√±metro
-	 * @param a arista de la que se extrae la infromaci√±n que se muestra
+	 * Crea el di·logo con la infromaciÛn de la arista que recibe como par·metro
+	 * @param a arista de la que se extrae la infromaciÛn que se muestra
 	 */
 	protected void createDialogArista(Arista a){
 		Mensajero m=Mensajero.getInstancia();
@@ -1052,8 +1052,8 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
-	 * Crea el di√±logo con la infromaci√±n del estado que recibe como par√±metro
-	 * @param e estado del que se extrae la infromaci√±n que se muestra
+	 * Crea el di·logo con la infromaciÛn del estado que recibe como par·metro
+	 * @param e estado del que se extrae la infromaciÛn que se muestra
 	 */
 	protected void createDialogEstado(Estado e){
 		Mensajero m=Mensajero.getInstancia();

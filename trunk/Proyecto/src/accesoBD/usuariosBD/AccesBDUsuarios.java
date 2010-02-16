@@ -173,7 +173,7 @@ public class AccesBDUsuarios {
 	 * @throws AutomatasException lanza la excepcion si hay algun problema
 	 * con el fichero de la base de datos o al parsearlo.
 	 */
-	public String buscarUsuarioContraseÃ±a(String nombre) throws AutomatasException {
+	public String buscarUsuarioContraseña(String nombre) throws AutomatasException {
 		String ruta="XML/usuarios_ejercicios/bdUsuarios.xml";
 		Mensajero mensajero=Mensajero.getInstancia();
 		encriptador=EncriptadorString.getInstancia();

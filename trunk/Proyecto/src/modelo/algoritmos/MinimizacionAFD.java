@@ -1028,7 +1028,7 @@ public class MinimizacionAFD implements Algoritmo{
 	 * 
 	 */
 	public Automata ejecutar(boolean pasos) {
-		automataEntrada=aÃ±adirIndices(automataEntrada);
+		automataEntrada=añadirIndices(automataEntrada);
 		automataSalida=new AutomataFD();
 		controlador=Controlador_imp.getInstancia();
 		
@@ -1239,7 +1239,7 @@ private String traducirXML(Automata automata) {
 		return salida+"</table>";
 	}
 	
-	private Automata aÃ±adirIndices(Automata a) {
+	private Automata añadirIndices(Automata a) {
 		Automata automata=new AutomataFD();
 		Iterator<String> itEst=a.getEstados().iterator();
 		ArrayList<String> nEstados=new ArrayList<String>();
