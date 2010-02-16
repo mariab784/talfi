@@ -22,7 +22,7 @@ import accesoBD.Mensajero;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 /**
- * Clase que encapsula la gestión de la base de datos de usuarios, tanto para acceder
+ * Clase que encapsula la gestiÃ±n de la base de datos de usuarios, tanto para acceder
  * como para modificar cualquier parte de la misma.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -35,8 +35,8 @@ public class AccesBDUsuarios {
 	private Mensajero m;
 	
 	/**
-	 * Método singleton que devuelve la instacina única de la 
-	 * clase de acceso a la base de datos de usuarios de la aplicación.
+	 * MÃ±todo singleton que devuelve la instacina Ã±nica de la 
+	 * clase de acceso a la base de datos de usuarios de la aplicaciÃ±n.
 	 * @return instancia de AccesBDUsuarios
 	 */
 	public static AccesBDUsuarios getInstancia(){
@@ -46,8 +46,8 @@ public class AccesBDUsuarios {
 	
 	
 	/**
-	 * Método que busca un usuario apartir de su nombre
-	 * @param nombre nombre del usuario que se quiere saber la contraseña
+	 * MÃ±todo que busca un usuario apartir de su nombre
+	 * @param nombre nombre del usuario que se quiere saber la contraseÃ±a
 	 * @return Usuario al que pertenece el nombre, nul si no hay ninguno
 	 * @throws AutomatasException lanza la excepcion si hay algun problema
 	 * con el fichero de la base de datos o al parsearlo.
@@ -107,7 +107,7 @@ public class AccesBDUsuarios {
 	
 	/**
 	 * Busca un usuario por el dni registrado en la base de datos
-	 * @param dni dni por el que se va a realizar la búsqueda
+	 * @param dni dni por el que se va a realizar la bÃ±squeda
 	 * @return usuario al que corresponde el dni, null si no hay ninguno
 	 * @throws AutomatasException lanza la excepcion si hay algun problema
 	 * con el fichero de la base de datos o al parsearlo.
@@ -167,13 +167,13 @@ public class AccesBDUsuarios {
 	}
 	
 	/**
-	 * Método que devuelve la contraseña de un usuario a apartir de su nombre
-	 * @param nombre nombre del usuario que se quiere saber la contraseña
-	 * @return String con la contraseña del usuario
+	 * MÃ±todo que devuelve la contraseÃ±a de un usuario a apartir de su nombre
+	 * @param nombre nombre del usuario que se quiere saber la contraseÃ±a
+	 * @return String con la contraseÃ±a del usuario
 	 * @throws AutomatasException lanza la excepcion si hay algun problema
 	 * con el fichero de la base de datos o al parsearlo.
 	 */
-	public String buscarUsuarioContraseña(String nombre) throws AutomatasException {
+	public String buscarUsuarioContraseÃ±a(String nombre) throws AutomatasException {
 		String ruta="XML/usuarios_ejercicios/bdUsuarios.xml";
 		Mensajero mensajero=Mensajero.getInstancia();
 		encriptador=EncriptadorString.getInstancia();
@@ -205,11 +205,11 @@ public class AccesBDUsuarios {
 	
 	
 	/**
-	 * Método que actualiza un usuario que ha cambiado sus datos registrados
+	 * MÃ±todo que actualiza un usuario que ha cambiado sus datos registrados
 	 * en la base de datos.
 	 * @param antiguo usuario antiguo que se va a actualizar
 	 * @param nuevo nuevos datos del usuario a actualizar
-	 * @throws AutomatasException se lanza si hay algún problema de entrada/salida 
+	 * @throws AutomatasException se lanza si hay algÃ±n problema de entrada/salida 
 	 * con el fichero que contiene la base de datos
 	 */
 	public void actualizarUsuario(Usuario antiguo,Usuario nuevo) throws AutomatasException {
@@ -253,9 +253,9 @@ public class AccesBDUsuarios {
 	}
 	
 	/**
-	 * Método para insertar un usuario en la base de datos
+	 * MÃ±todo para insertar un usuario en la base de datos
 	 * @param nuevo usuario que se va a insertar
-	 * @throws AutomatasException se lanza si hay algún problema de entrada/salida 
+	 * @throws AutomatasException se lanza si hay algÃ±n problema de entrada/salida 
 	 * con el fichero que contiene la base de datos 
 	 */
 	public void insetarUsuario(Usuario nuevo) throws AutomatasException{
@@ -313,8 +313,8 @@ public class AccesBDUsuarios {
 	
 	
 	/**
-	 * Método para listar todos los usuarios registrados en la base de 
-	 * datos de la aplicación
+	 * MÃ±todo para listar todos los usuarios registrados en la base de 
+	 * datos de la aplicaciÃ±n
 	 * @return devuevle un ArrayList de con los usuarios
 	 * @throws AutomatasException
 	 */

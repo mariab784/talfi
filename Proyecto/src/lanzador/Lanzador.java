@@ -8,7 +8,7 @@ import vista.vistaGrafica.*;
 import controlador.*;
 
 /**
- * Ejecuta la aplicación: MAIN PRINCIPAL
+ * Ejecuta la aplicaciÃ±n: MAIN PRINCIPAL
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */ 
@@ -30,7 +30,7 @@ public class Lanzador {
 	}
 	
 	/**
-	 * Método que lleva a cabo la inicialización de la vista gráfica
+	 * MÃ±todo que lleva a cabo la inicializaciÃ±n de la vista grÃ±fica
 	 * y el controlador y los asocia
 	 */
 	public void ejecuta() {

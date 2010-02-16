@@ -14,9 +14,9 @@ public interface Controlador {
 	
 	/**
 	 * Ejecuta una la query que se pasa,ejemplo: TALF -p -m [rutaxml]
-	 * @param query línea de comandos que entra
-	 * @throws AutomatasException lanza la excpeción si ocurre cualquier 
-	 * problema al analizar la query o en la ejecución de los algortimos.  
+	 * @param query lÃ±nea de comandos que entra
+	 * @throws AutomatasException lanza la excpeciÃ±n si ocurre cualquier 
+	 * problema al analizar la query o en la ejecuciÃ±n de los algortimos.  
 	 */
 	public void ejecutaQuery(String query)throws AutomatasException;
 	/**
@@ -31,7 +31,7 @@ public interface Controlador {
 	public void trataMensaje(String mensaje);
 	/**
 	 * Establece el idioma de la aplicacion
-	 * @param idioma nuevo idioma de la aplicación
+	 * @param idioma nuevo idioma de la aplicaciÃ±n
 	 */
 	public void setIdioma(boolean idioma);
 

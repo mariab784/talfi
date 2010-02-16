@@ -64,8 +64,8 @@ public class PanelCentral extends JPanel {
 	private JButton boton;
 	
 	/**
-	 * Constructor del panel que recibe la vista sobre la que se aÒade
-	 * @param v vista gr·fica que contiene el panel
+	 * Constructor del panel que recibe la vista sobre la que se a√±ade
+	 * @param v vista gr√±fica que contiene el panel
 	 */
 	public PanelCentral(VistaGrafica v){
 		super(new BorderLayout());
@@ -657,8 +657,8 @@ public class PanelCentral extends JPanel {
 	/**
 	 * Traduce el ejercicio a un fichero xml
 	 * @param tipo de ejercicio que se va a traducir a cadena
-	 * @return cadena de caracteres enformato xml que contendr· al ejercicio
-	 * @throws AutomatasException se lanza si hay alg˙n problema al parsear el ejercicio
+	 * @return cadena de caracteres enformato xml que contendr√± al ejercicio
+	 * @throws AutomatasException se lanza si hay alg√±n problema al parsear el ejercicio
 	 * @throws IOException se lanza si no se puede abrir un fichero de pruebas
 	 */
 	private String traducirXMLEjercicio(String tipo)throws AutomatasException, IOException {
@@ -819,7 +819,7 @@ public class PanelCentral extends JPanel {
 		 
 		/**
 		 * Guarda el ejercicio al pulsar el boton de guardar
-		 * @param e evento de pulsaciÛn de raton sobre el boton
+		 * @param e evento de pulsaci√±n de raton sobre el boton
 		 */
 		public void actionPerformed(ActionEvent e){
 			Mensajero m=Mensajero.getInstancia();

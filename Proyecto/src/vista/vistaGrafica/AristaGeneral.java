@@ -16,7 +16,7 @@ public class AristaGeneral {
 	}
 	
 	/**
-	 * Método accesro de la característica de la arista
+	 * MÃ±todo accesro de la caracterÃ±stica de la arista
 	 * @return true si la arista esta seleccionada
 	 */
 	public boolean getMarcada() {

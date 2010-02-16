@@ -11,25 +11,25 @@ import modelo.automatas.Alfabeto;
 public interface ExpresionRegular {
 
 	/**
-	 * Metodo accesor de la expresión regular
-	 * @return la expresión regular almacenada
+	 * Metodo accesor de la expresiÃ±n regular
+	 * @return la expresiÃ±n regular almacenada
 	 */
 	public String getExpresionRegular();
 	
 	/**
-	 * Método accesor del árbol sin´tactico de la expresión
-	 * @return el arbol sintáctico de la expresión
+	 * MÃ±todo accesor del Ã±rbol sinÃ±tactico de la expresiÃ±n
+	 * @return el arbol sintÃ±ctico de la expresiÃ±n
 	 */
 	public ArbolER getArbolER();
 	
 	/**
-	 * Método accesor del alfabeto de la expresión
-	 * @return el alfabeto de la expresión
+	 * MÃ±todo accesor del alfabeto de la expresiÃ±n
+	 * @return el alfabeto de la expresiÃ±n
 	 */
 	public Alfabeto getAlfabeto();
 	
 	/**
-	 * Método modificador del alfabeto de la expresion
+	 * MÃ±todo modificador del alfabeto de la expresion
 	 * @param alfabeto lista de latras que conforman un alfabeto
 	 */
 	public void setAlfabeto(Alfabeto alfabeto);

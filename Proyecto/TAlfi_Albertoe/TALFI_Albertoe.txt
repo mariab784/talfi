@@ -1,13 +1,13 @@
 Errores:
-   - No lo he mirado pero supongo que habeÌs incluido un manual de la aplicaciÛn
+   - No lo he mirado pero supongo que habe√±s incluido un manual de la aplicaci√±n
      por consola.(++++++ HECHO:metido anexo en la memoria)
      
   INTERFAZ:
-    - Al aÒadirse los ejercios no se guarda las posiciones de los estados.
+    - Al a√±adirse los ejercios no se guarda las posiciones de los estados.
    	 (++++++ HECHO)
     
-    - Si se parte de otro ejercicio y se borra la informaciÛn del automata el fichero resultado tiene porquerÌa.
-      Es decir, abrir ejercicio y guardarlo como genera porquerÌa en cuanto se modifica algo del fichero.
+    - Si se parte de otro ejercicio y se borra la informaci√±n del automata el fichero resultado tiene porquer√±a.
+      Es decir, abrir ejercicio y guardarlo como genera porquer√±a en cuanto se modifica algo del fichero.
       (++++ HECHO)
       
     - Problema con los alfabetos, no se cogen de las flechas, en el fichero interno siempre estan 'a' y 'b'.
@@ -15,7 +15,7 @@ Errores:
     - Al mostrar todos los pasos se cortan las imagenes desde que tenemos coordenadas.
       (+++++ AGRANDADAS y centradas)
     
-    - Los sufijos extra de renombramiento deberÌan desaparecer.
+    - Los sufijos extra de renombramiento deber√±an desaparecer.
       (++++++ RESUELTO)
     
 
@@ -24,48 +24,48 @@ Errores:
       (++++ RESUELTO EL DEL EJEMPLO3.xml)
     - Problemas al borrar automatas estados finitos e iniciales.
       (+++ RESUELTO)
-    - Problemas con el alfabeto almacenado, no es mÌnimo.
+    - Problemas con el alfabeto almacenado, no es m√±nimo.
       (++++ RESUELTO)
 
 Posibles mejoras:
 
  INTERFAZ:
-   - flechas si sÛlo hay una mejor que sea sin curva, si hay 2 con curva (+++++++ HECHO)
+   - flechas si s√±lo hay una mejor que sea sin curva, si hay 2 con curva (+++++++ HECHO)
    
    -> puntos de anclajes de las flechas al menos 4, mejor incluso 8 puntos de anclajes(+++++ HECHO: 4 puntos de anclaje)
      
    - estados, al pintarlos mejor que el punto de anclaje sea el centro en vez del lateral izquierdo arriba
      que es el que existe actualmente.(++++++ RESUELTO)
      
-   - Copiar, cortar y pegar no funcionan, serÌa bueno poder copiar un automata y meterlo en un ejercicio.
-   	(++++ HECHO)(++++ aÒadida funcionalidad con CTRL+c CTRL+v CTRL+x)
-   	(++++ adem·s se puede elimnar la parte seleccionada de un automata mediante el botÛn suprimir(DEL))
+   - Copiar, cortar y pegar no funcionan, ser√±a bueno poder copiar un automata y meterlo en un ejercicio.
+   	(++++ HECHO)(++++ a√±adida funcionalidad con CTRL+c CTRL+v CTRL+x)
+   	(++++ adem√±s se puede elimnar la parte seleccionada de un automata mediante el bot√±n suprimir(DEL))
    	
-   - Poder seleccionar un automata y moverlo en el canvas estarÌa bien.
+   - Poder seleccionar un automata y moverlo en el canvas estar√±a bien.
    	(++++++ HECHO, cuando se esta en modo edicion=flecha)
    
    - Se puede detectar muy facil si es AFD, AF o AF-\ en vez de tener que introducir el tipo de automata que he
      dibujado. (++++ HECHO ya no hay que introducir el tipo de automata, hecho como dices en mail)
    
-   - No tiene memoria sobre la ˙ltima carpeta abierta.  (++++ HECHO)
+   - No tiene memoria sobre la √±ltima carpeta abierta.  (++++ HECHO)
    
-   - En cada modo de ejecuciÛn la flecha del cursor podrÌa ser diferente.(++++ HECHO)
+   - En cada modo de ejecuci√±n la flecha del cursor podr√±a ser diferente.(++++ HECHO)
    
    - Ejercicios de equivalencia entre lenguajes, ER y AF
      (++++ estan aquellos que permiten dar el automata(o er) equivalente, no los que te piden: decide si son equivalentes estos dos automatas)
    
-   - DivisiÛn de la pantalla de ejercicios en m·s partes para que se vea el enunciado mientras se genera la soluciÛn
+   - Divisi√±n de la pantalla de ejercicios en m√±s partes para que se vea el enunciado mientras se genera la soluci√±n
    (++++ HAY UN BOTON QUE MUESTRA EL HTML DEL EJERICIO CON EL ENUNCIADO Y EL AUTOMATA)
    
-   - Generar un curso con ejercicios y huecos donde se permita pintar la soluciÛn y se corrija autom·ticamente,
-     sin necesidad de utilizar la aplicaciÛn.
+   - Generar un curso con ejercicios y huecos donde se permita pintar la soluci√±n y se corrija autom√±ticamente,
+     sin necesidad de utilizar la aplicaci√±n.
 
 
   ALGORITMOS:
-   - La tabla de minimizacion no incluye la informaciÛn de en que paso y por que motivo son indistinguibles los
+   - La tabla de minimizacion no incluye la informaci√±n de en que paso y por que motivo son indistinguibles los
      estados.
-   - En la minimizaciÛn no se incluye el diagrama de transiciones inversas.
-   - MinimizaciÛn se deberÌa mostrar en que iteraciÛn se genera la cruz en la tabla y debido a que par de estados
+   - En la minimizaci√±n no se incluye el diagrama de transiciones inversas.
+   - Minimizaci√±n se deber√±a mostrar en que iteraci√±n se genera la cruz en la tabla y debido a que par de estados
      indistinguibles.
-   - Realizar un algorÌtmo que detecte los estados no deterministas y que los pinte otro color, o similar.
+   - Realizar un algor√±tmo que detecte los estados no deterministas y que los pinte otro color, o similar.
 

@@ -62,7 +62,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 
 	/**
 	 * El traductorHTML es un singleton por tanto tiene una instancia de si mismo de forma estatica, lo convierte en unico
-	 * @return TraductorHTML de la aplicaciÛn
+	 * @return TraductorHTML de la aplicaci√±n
 	 */
 	public static TraductorHTML getInstancia(){
 		if(traductor==null) traductor=new TraductorHTML();
@@ -71,9 +71,9 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 	
 	/**
 	 * Traduce un automata de un fichero xml a una pagina html
-	 * @param ruta xml donde se buscar· el automata
-	 * @return codigo html de la p·gina a crear
-	 * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+	 * @param ruta xml donde se buscar√± el automata
+	 * @return codigo html de la p√±gina a crear
+	 * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
 	 * abrir o encontrar el fichero xml o al parsear el automata del xml
 	 */
 	
@@ -212,9 +212,9 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 
 	/**
 	 * Traduce una expresion regular de un fichero xml a una pagina html
-	 * @param ruta xml donde se buscar· la expresiÛn
-	 * @return codigo html de la p·gina a crear
-	 * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+	 * @param ruta xml donde se buscar√± la expresi√±n
+	 * @return codigo html de la p√±gina a crear
+	 * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
 	 * abrir o encontrar el fichero xml o al parsear el automata del xml
 	 */
 	
@@ -276,8 +276,8 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 /**
  * Traduce a html los pasos y resultado del algoritmo de minimizacion
  * @param ruta xml con los pasos y  resultado del algortimo
- * @return codigo html de la p·gina a crear
- * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+ * @return codigo html de la p√±gina a crear
+ * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
  * abrir o encontrar el fichero xml o al parsear
  */
 	
@@ -397,7 +397,7 @@ public String traducirPasosMinimizacion(String ruta)throws AutomatasException  {
 			bw.append("</table></div>");
 			bw.append("<div id='authomata'>");
 			
-			//GENERACI”N DE LOS PASOS DE MINIMIZACION
+			//GENERACI√±N DE LOS PASOS DE MINIMIZACION
 			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.input",3)+"</p><img src='imagenEntrada.jpg' alt='Input'></p>");
 			HashMap<String,HashMap<String,Registro>> tabla=new HashMap<String,HashMap<String,Registro>>();
 			
@@ -504,8 +504,8 @@ public String traducirPasosMinimizacion(String ruta)throws AutomatasException  {
 /**
  * Traduce el resultado y los pasos del algoritmo de equivalencia
  * @param ruta xml con los pasos y  resultado del algortimo
- * @return codigo html de la p·gina a crear
- * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+ * @return codigo html de la p√±gina a crear
+ * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
  * abrir o encontrar el fichero xml o al parsear
  */
 @SuppressWarnings("unchecked")
@@ -544,7 +544,7 @@ public String traducirPasosEquivalencia(String ruta)throws AutomatasException  {
 		bw.append("</div>");
 		bw.append("<div id='authomata'>");
 		
-		//GENERACI”N DE LOS PASOS DE MINIMIZACION
+		//GENERACI√±N DE LOS PASOS DE MINIMIZACION
 		
 		HashMap<String,HashMap<String,Registro>> tabla=new HashMap<String,HashMap<String,Registro>>();
 		
@@ -649,8 +649,8 @@ public String traducirPasosEquivalencia(String ruta)throws AutomatasException  {
 /**
  * Traduce los pasos de ejecucion y resultado del algoritmo AFN->AFD
  * @param ruta xml con los pasos y  resultado del algortimo
- * @return codigo html de la p·gina a crear
- * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+ * @return codigo html de la p√±gina a crear
+ * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
  * abrir o encontrar el fichero xml o al parsear
  */
 public String traducirPasosAFND_AFD(String ruta)throws AutomatasException  {
@@ -822,8 +822,8 @@ public String traducirPasosAFND_AFD(String ruta)throws AutomatasException  {
 /**
  * Traduce los pasos y resultado del algoritmo AFNDL->AFND
  * @param ruta xml con los pasos y  resultado del algortimo
- * @return codigo html de la p·gina a crear
- * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+ * @return codigo html de la p√±gina a crear
+ * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
  * abrir o encontrar el fichero xml o al parsear
  */
 public String traducirPasosAFNDL_AFND(String ruta)throws AutomatasException  {
@@ -999,8 +999,8 @@ public String traducirPasosAFNDL_AFND(String ruta)throws AutomatasException  {
 /**
  * Traduce los pasos y resultado del algoritmo ER->AFNDL
  * @param ruta xml con los pasos y  resultado del algortimo
- * @return codigo html de la p·gina a crear
- * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+ * @return codigo html de la p√±gina a crear
+ * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
  * abrir o encontrar el fichero xml o al parsear
  */
 public String traducirPasosER_AFNDL(String ruta)throws AutomatasException  {
@@ -1168,15 +1168,15 @@ public String traducirPasosER_AFNDL(String ruta)throws AutomatasException  {
 //////////////GENERACION DE IMAGEN DE UN ARBOL BINARIO//////////////////////
 /**
  * Genera una imagen jpg de un arbol binario de expresion regular
- * @param arbol arbol sint·ctico de la expresiÛn que queremos dibujar
- * @param ruta lugar donde se guardar· la imagen generada
+ * @param arbol arbol sint√±ctico de la expresi√±n que queremos dibujar
+ * @param ruta lugar donde se guardar√± la imagen generada
  */
 public void generarImagenArbolER(ArbolER arbol,String ruta) {
 	
-    // Le asignamos un tamaÒo a la imagen
+    // Le asignamos un tama√±o a la imagen
     int width = 1024, height =512;
 
-    // Creamos una imagen con ese tamaÒo y con su correspondiente formato de
+    // Creamos una imagen con ese tama√±o y con su correspondiente formato de
     // color
     BufferedImage imagen = new BufferedImage(width, height,
             BufferedImage.TYPE_INT_RGB);
@@ -1198,7 +1198,7 @@ public void generarImagenArbolER(ArbolER arbol,String ruta) {
     try {
         out = new FileOutputStream(new File(ruta));
 
-        // Se decodifica la imagen y se envÌa al flujo.
+        // Se decodifica la imagen y se env√±a al flujo.
         JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
         encoder.encode(imagen);
 
@@ -1244,7 +1244,7 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 
 	/**
 	 * Genera una imagen jpg de un automata
-	 * @param ruta lugar donde se guardar· la imagen generada
+	 * @param ruta lugar donde se guardar√± la imagen generada
 	 * @param automata automata que queremos dibujar
 	 */
 	public void generarImagenJPG(String ruta, Automata automata) {
@@ -1252,10 +1252,10 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 		int radio=20;
 		cargarAutomataNuevo(automata);
 	
-        // Le asignamos un tamaÒo a la imagen
+        // Le asignamos un tama√±o a la imagen
         int width = 768, height = 512;
 
-        // Creamos una imagen con ese tamaÒo y con su correspondiente formato de
+        // Creamos una imagen con ese tama√±o y con su correspondiente formato de
         // color
         BufferedImage imagen = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
@@ -1344,14 +1344,14 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
         // Ejecutamos el metodo Dispose para finalizar
         gimg.dispose();
 
-        // Se crea un flujo de datos, en este caso ser· FileOutPutStream, aunque
-        // podÈs utilizar cualquier otro.
+        // Se crea un flujo de datos, en este caso ser√± FileOutPutStream, aunque
+        // pod√±s utilizar cualquier otro.
 
         FileOutputStream out;
         try {
             out = new FileOutputStream(new File(ruta));
 
-            // Se decodifica la imagen y se envÌa al flujo.
+            // Se decodifica la imagen y se env√±a al flujo.
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             encoder.encode(imagen);
 
@@ -1478,8 +1478,8 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 	/**
 	 * Traduce los pasos y resultado del algoritmo ER->AFNDL
 	 * @param ruta xml con los pasos y  resultado del algortimo
-	 * @return codigo html de la p·gina a crear
-	 * @throws AutomatasException  lanza la excepciÛn si hay alg˙n problema al
+	 * @return codigo html de la p√±gina a crear
+	 * @throws AutomatasException  lanza la excepci√±n si hay alg√±n problema al
 	 * abrir o encontrar el fichero xml o al parsear
 	 */
 	public String traducirPasosAFDTOER(String ruta)throws AutomatasException  {
@@ -1620,10 +1620,10 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 	}
 	
 	/**
-	 * Traduce un ejrcicio a una p·gina html con el enunciado entexto y una foto del automata
+	 * Traduce un ejrcicio a una p√±gina html con el enunciado entexto y una foto del automata
 	 * @param ruta ruta xml del fichero que contiene el ejrcicio
-	 * @return ruta de la p·gina html
-	 * @throws AutomatasException lanza una excepciÛn si hay alg˙n problema con el
+	 * @return ruta de la p√±gina html
+	 * @throws AutomatasException lanza una excepci√±n si hay alg√±n problema con el
 	 * fichero xml o al parsearlo.
 	 */
 	public String traducirEjercicio(String ruta)throws AutomatasException  {

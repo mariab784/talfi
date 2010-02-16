@@ -19,8 +19,8 @@ import accesoBD.usuariosBD.*;
 
 
 /**
- * Clase que muestra el panel de incio de sesión de usuarios si los datos son
- * correctos buscándolos en la base de datos, o permite
+ * Clase que muestra el panel de incio de sesiÃ±n de usuarios si los datos son
+ * correctos buscÃ±ndolos en la base de datos, o permite
  * pasar al registro de un nuevo usuario
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -38,7 +38,7 @@ public class LoginUsuarios extends JPanel {
 	
 	/**
 	 * Construye el panel de login con el boton de registrar un nuevo usuario
-	 * @param padre ventana a la que se le añade al panel de login
+	 * @param padre ventana a la que se le aÃ±ade al panel de login
 	 */
 	public LoginUsuarios(JDialog padre){
 		super();
@@ -57,7 +57,7 @@ public class LoginUsuarios extends JPanel {
 		pBotones.add(registra);
 		JLabel usu=new JLabel(m.devuelveMensaje("vista.nombreU",2));
 		JPanel usur=new JPanel();
-		JLabel pas=new JLabel(m.devuelveMensaje("vista.contraseña",2));
+		JLabel pas=new JLabel(m.devuelveMensaje("vista.contraseÃ±a",2));
 		JPanel pass=new JPanel();
 		usur.add(usu);
 		usur.add(usuario);
@@ -77,9 +77,9 @@ public class LoginUsuarios extends JPanel {
 	public class OyenteLogin implements ActionListener{
 		
 		/**
-		 * Método que implementa la comprobación de los datos introducidos
+		 * MÃ±todo que implementa la comprobaciÃ±n de los datos introducidos
 		 * y si son correctos inicia sesion 
-		 * @param e evento de pulsación sobre el boton
+		 * @param e evento de pulsaciÃ±n sobre el boton
 		 */
 		public void actionPerformed(ActionEvent e){
 			String nombre=usuario.getText();
@@ -88,9 +88,9 @@ public class LoginUsuarios extends JPanel {
 			for(int i=0;i<pass.length;i++)
 				passw+=pass[i];
 			try {
-				String contraseñaBD=AccesBDUsuarios.getInstancia().buscarUsuarioContraseña(nombre);
+				String contraseÃ±aBD=AccesBDUsuarios.getInstancia().buscarUsuarioContraseÃ±a(nombre);
 				boolean correcto=true;
-				correcto=passw.equals(contraseñaBD);
+				correcto=passw.equals(contraseÃ±aBD);
 				if(!correcto)
 					JOptionPane.showMessageDialog(null,m.devuelveMensaje("vista.datos",2),"Error",JOptionPane.ERROR_MESSAGE);
 				else {
@@ -118,9 +118,9 @@ public class LoginUsuarios extends JPanel {
 	public class OyenteLoginKey extends KeyAdapter{
 		
 		/**
-		 * Método que implementa la comprobación de los datos introducidos
+		 * MÃ±todo que implementa la comprobaciÃ±n de los datos introducidos
 		 * y si son correctos inicia sesion 
-		 * @param e evento de pulsación de tecla sobre el campo de texto
+		 * @param e evento de pulsaciÃ±n de tecla sobre el campo de texto
 		 */
 		public void keyPressed(KeyEvent e){
 			if(e.getKeyCode()==KeyEvent.VK_ENTER){
@@ -130,9 +130,9 @@ public class LoginUsuarios extends JPanel {
 				for(int i=0;i<pass.length;i++)
 					passw+=pass[i];
 				try {
-					String contraseñaBD=AccesBDUsuarios.getInstancia().buscarUsuarioContraseña(nombre);
+					String contraseÃ±aBD=AccesBDUsuarios.getInstancia().buscarUsuarioContraseÃ±a(nombre);
 					boolean correcto=true;
-					correcto=passw.equals(contraseñaBD);
+					correcto=passw.equals(contraseÃ±aBD);
 					if(!correcto)
 						JOptionPane.showMessageDialog(null,m.devuelveMensaje("vista.datos",2),"Error",JOptionPane.ERROR_MESSAGE);
 					else {
@@ -160,8 +160,8 @@ public class LoginUsuarios extends JPanel {
 	public class OyenteRegistra implements ActionListener{
 		
 		/**
-		 * Método que implementa la creación del panel de registro de usuario
-		 * @param e evento de pulsación sobre el boton de registro
+		 * MÃ±todo que implementa la creaciÃ±n del panel de registro de usuario
+		 * @param e evento de pulsaciÃ±n sobre el boton de registro
 		 */
 		public void actionPerformed(ActionEvent e){
 			m=Mensajero.getInstancia();

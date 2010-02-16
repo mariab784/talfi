@@ -10,7 +10,7 @@ import javax.swing.*;
 import accesoBD.Mensajero;
 
 /**
- * Clase que crea el panel de introduciÛn de exoresiÛn regular y 
+ * Clase que crea el panel de introduci√±n de exoresi√±n regular y 
  * realiza las gestiones para crear el arbol inario correspondiente 
  * a la misma
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
@@ -32,9 +32,9 @@ public class PanelExpresionRegular extends JPanel{
 	private Mensajero m;
 	
 	/**
-	 * Constructor que crea el panel para introducir la expresiÛn, dicho panel
-	 * se aÒadir· a la ventana que se le pasa como par·metro
-	 * @param parent ventana sore la que se aÒadir· el panel
+	 * Constructor que crea el panel para introducir la expresi√±n, dicho panel
+	 * se a√±adir√± a la ventana que se le pasa como par√±metro
+	 * @param parent ventana sore la que se a√±adir√± el panel
 	 */
 	public PanelExpresionRegular(JDialog parent){
 		padre=parent;
@@ -98,17 +98,17 @@ public class PanelExpresionRegular extends JPanel{
 	}
 	
 	/**
-	 * MÈtodo accesor de la variable opciÛn que indica los posibles casos de introduccÛn
-	 * de exxpresiÛn
-	 * @return 1 si la expresÛn es no vacÌa, 2 si es vacÌa y 0 si se cancela el algoritmo
+	 * M√±todo accesor de la variable opci√±n que indica los posibles casos de introducc√±n
+	 * de exxpresi√±n
+	 * @return 1 si la expres√±n es no vac√±a, 2 si es vac√±a y 0 si se cancela el algoritmo
 	 */
 	public int getOpcion(){
 		return this.opcion;
 	}
 	
 	/**
-	 * MÈtodo accesro de la variable que indica si se realizar· el algoritmo
-	 * de transformaciÛn a automata por pasos
+	 * M√±todo accesro de la variable que indica si se realizar√± el algoritmo
+	 * de transformaci√±n a automata por pasos
 	 * @return true si se realiza por pasos, false si no
 	 */
 	public boolean isPasos(){
@@ -116,8 +116,8 @@ public class PanelExpresionRegular extends JPanel{
 	}
 	
 	/**
-	 * MÈtodo que devuelve la expresiÛn introducida
-	 * @return espresiÛn regular que se ha introducido
+	 * M√±todo que devuelve la expresi√±n introducida
+	 * @return espresi√±n regular que se ha introducido
 	 */
 	public String getExp(){
 		return expresion;

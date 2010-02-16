@@ -10,8 +10,8 @@ import accesoBD.AccesoAEjemplos;
 import accesoBD.Mensajero;
 
 /**
- * Clase que crea el panel que pregunta al usuario si desea aÒadir el ejercicio
- * guardado a la Base de Datos, e inicia lo tr·mites para realizarlo en caso
+ * Clase que crea el panel que pregunta al usuario si desea a√±adir el ejercicio
+ * guardado a la Base de Datos, e inicia lo tr√±mites para realizarlo en caso
  * afirmativo
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -27,12 +27,12 @@ public class PanelAniadirEjerBD extends JPanel{
 	private Mensajero m;
 	
 	/**
-	 * Constructor del panel que recibe la ventana sobre la que se aÒadir· y
-	 * el tipo de ejercicio y el texto que lo representa, asÌ como la vista
-	 * gr·fica para actualizar el arbol de ejercicios
-	 * @param parent ventna sobre la que se aÒadir· el panel
-	 * @param v vista gr·fica
-	 * @param texto representaciÛn del ejercicio en texto
+	 * Constructor del panel que recibe la ventana sobre la que se a√±adir√± y
+	 * el tipo de ejercicio y el texto que lo representa, as√± como la vista
+	 * gr√±fica para actualizar el arbol de ejercicios
+	 * @param parent ventna sobre la que se a√±adir√± el panel
+	 * @param v vista gr√±fica
+	 * @param texto representaci√±n del ejercicio en texto
 	 * @param tipo tipo de ejercicio
 	 */
 	public PanelAniadirEjerBD(JDialog parent,Vista v,String texto,String tipo){
@@ -78,8 +78,8 @@ public class PanelAniadirEjerBD extends JPanel{
 		}
 		
 		/**
-		 * MÈtodo que lleva a cabo la actualizaciÛn del xml de ejemplos/ejercicios y
-		 * la actulziaciÛn de la vista gr·fica
+		 * M√±todo que lleva a cabo la actualizaci√±n del xml de ejemplos/ejercicios y
+		 * la actulziaci√±n de la vista gr√±fica
 		 * @param e evento de boton
 		 */
 		public void actionPerformed(ActionEvent e){

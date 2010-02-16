@@ -1,1 +1,1 @@
-He abierto un automata, lo he borrado y he colocado únicamente un estado y lo he guardado y genera ese fichero.
+He abierto un automata, lo he borrado y he colocado Ã±nicamente un estado y lo he guardado y genera ese fichero.

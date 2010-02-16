@@ -11,7 +11,7 @@ import accesoBD.Mensajero;
 import controlador.Controlador;
 import controlador.Controlador_imp;
 /**
- * Algoritmo de transformación de automatas no deterministas con
+ * Algoritmo de transformaciÃ±n de automatas no deterministas con
  * transiciones lambda a automatas no deterministas que no tienen 
  * transiciones lambda
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
@@ -45,7 +45,7 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 	}
 	
 	/**
-	 * Función principal que tranforma un automata con transiciones lambda a uno sin transiciones lambda
+	 * FunciÃ±n principal que tranforma un automata con transiciones lambda a uno sin transiciones lambda
 	 * @param pasos booleano para saber si transformar mostrando los pasos o no
 	 */
 	public Automata ejecutar(boolean pasos) {
@@ -108,7 +108,7 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 	/**
 	 * Guardamos el automata para poder mostrarlo correctamente en formato XML
 	 * 
-	 * @return devolvemos un String con toda la información
+	 * @return devolvemos un String con toda la informaciÃ±n
 	 */
 	private String traducirPasos() {
 		String fichero="<table>";
@@ -138,7 +138,7 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 	/**
 	 * Traducimos el automata saliente para poder mostrarlo correctamente en formato XML
 	 * @param automata automata que queremos pasar a XML
-	 * @return String con toda la información en formato XML
+	 * @return String con toda la informaciÃ±n en formato XML
 	 */
 	private String traducirXML(Automata automata) {
 		String fichero="<authomata>\n\t<type>\n\t\t<item>";
@@ -189,10 +189,10 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 	}
 	
 	/**
-	 * Función usada en ejecutar(). Da el resultado para cada estado con todas las letras
+	 * FunciÃ±n usada en ejecutar(). Da el resultado para cada estado con todas las letras
 	 * @param v1 estado del que queremos saber el resultado parcial
 	 * @param letras conjunto de letras del alfabeto que usaremos para conseguir el resultado
-	 * @return ArrayList<ArrayList<String>> con la información de cada estado con todas las letras del alfabeto
+	 * @return ArrayList<ArrayList<String>> con la informaciÃ±n de cada estado con todas las letras del alfabeto
 	 */
 	private ArrayList<ArrayList<String>> resultadoPar(String v1,ArrayList<String> letras) {
 		
@@ -240,7 +240,7 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 	
 	
 	/**
-	 * Devuelve el XML que contiene la información del automata
+	 * Devuelve el XML que contiene la informaciÃ±n del automata
 	 */
 	public String getXML() {
 		// TODO Auto-generated method stub

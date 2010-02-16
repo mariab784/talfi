@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * La clase arista define los par·metros de las aristas para AP de la interfaz gr·fica
- *  @author RocÌo Barrig¸ete, Mario Huete, Luis San Juan
+ * La clase arista define los par√±metros de las aristas para AP de la interfaz gr√±fica
+ *  @author Roc√±o Barrig√±ete, Mario Huete, Luis San Juan
  *
  */
 public class AristaAP {
@@ -25,7 +25,7 @@ public class AristaAP {
 
 	
 	/**
-	 * Establece los datos iniciales de la arista en la interfaz gr·fica
+	 * Establece los datos iniciales de la arista en la interfaz gr√±fica
 	 * @param x coordenada x del estado de inicio
 	 * @param y coordenada y del estado de inicio
 	 * @param fx coordenada x del estado destion
@@ -46,21 +46,21 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor de la lista de simbolos de entrada marcados
+	 * M√±todo accesor de la lista de simbolos de entrada marcados
 	 * @return lista de simbolos de entrada entradaSimbolos
 	 */
 	
 	public boolean getMarcados(){ return marcado;}
 	
 	/**
-	 * MÈtodo modificador de una posicion de la lista de simbolos de entrada marcados
+	 * M√±todo modificador de una posicion de la lista de simbolos de entrada marcados
 	 * @param b valor de marcado
 	 */
 	
 	public void setMarcados(boolean b){ marcado = b;}
 	
 	/**
-	 * MÈtodo accesor de la lista de simbolos de entrada
+	 * M√±todo accesor de la lista de simbolos de entrada
 	 * @return lista de simbolos de entrada entradaSimbolos
 	 */
 	
@@ -68,7 +68,7 @@ public class AristaAP {
 	
 	
 	/**
-	 * MÈtodo que aÒade nuevo simbolo de entrada
+	 * M√±todo que a√±ade nuevo simbolo de entrada
 	 * @param s simbolo de entrada
 	 */
 	
@@ -82,7 +82,7 @@ public class AristaAP {
 
 	
 	/**
-	 * MÈtodo que aÒade nuevo simbolo de pila
+	 * M√±todo que a√±ade nuevo simbolo de pila
 	 * @param s simbolo de pila
 	 */
 	
@@ -95,21 +95,21 @@ public class AristaAP {
 	
 	
 	/**
-	 * MÈtodo accesor de la cima de la pila
+	 * M√±todo accesor de la cima de la pila
 	 * @return cima de la pila cimaPila
 	 */
 	
 	public ArrayList<String> getSalidaPila(){ return salidaPila;}
 	
 	/**
-	 * MÈtodo accesor de la cima de la pila
+	 * M√±todo accesor de la cima de la pila
 	 * @return cima de la pila cimaPila
 	 */
 	
 	public String getCimaPila(){ return cimaPila;}
 	
 	/**
-	 * MÈtodo modificador de la cima de la pila
+	 * M√±todo modificador de la cima de la pila
 	 * @param s cima de la pila cimaPila
 	 */
 	
@@ -119,7 +119,7 @@ public class AristaAP {
 	}
 	
 	/**
-	 * MÈtodo modificador de la cima de la pila
+	 * M√±todo modificador de la cima de la pila
 	 * @param x nueva coordenada x del origen
 	 */
 	
@@ -128,7 +128,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada x del estado origen
+	 * M√±todo modificador de la coordenada x del estado origen
 	 * @param x nueva coordenada x del origen
 	 */
 	public void setX(int x) {
@@ -136,7 +136,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada y del estado origen
+	 * M√±todo accesor de la coordenada y del estado origen
 	 * @return coordenada y del origen
 	 */
 	public int getY() {
@@ -144,7 +144,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada y del estado origen
+	 * M√±todo modificador de la coordenada y del estado origen
 	 * @param y nueva coordenada y del origen
 	 */
 	public void setY(int y) {
@@ -152,7 +152,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada x del estado destino
+	 * M√±todo accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
 	public int getFx() {
@@ -160,7 +160,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada x del estado destino
+	 * M√±todo modificador de la coordenada x del estado destino
 	 * @param fx nueva coordenada x del destino
 	 */
 	public void setFx(int fx) {
@@ -168,7 +168,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor de la coordenada x del estado destino
+	 * M√±todo accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
 	public int getFy() {
@@ -176,7 +176,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo modificador de la coordenada y del estado destino
+	 * M√±todo modificador de la coordenada y del estado destino
 	 * @param fy nueva coordenada y del destino
 	 */
 	public void setFy(int fy) {
@@ -184,7 +184,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor del nombre del estado origen
+	 * M√±todo accesor del nombre del estado origen
 	 * @return nombre del estado origen
 	 */
 	public String getOrigen() {
@@ -192,7 +192,7 @@ public class AristaAP {
 	}
 	
 	/**
-	 * MÈtodo modificador del nombre del estado origen
+	 * M√±todo modificador del nombre del estado origen
 	 * @param origen nuevo nombre del origen
 	 */
 	public void setOrigen(String origen) {
@@ -200,7 +200,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo accesor del nombre del estado destino
+	 * M√±todo accesor del nombre del estado destino
 	 * @return monbre del estado destino
 	 */
 	public String getDestino() {
@@ -208,7 +208,7 @@ public class AristaAP {
 	}
 
 	/**
-	 * MÈtodo modificador del nombre del estado destino
+	 * M√±todo modificador del nombre del estado destino
 	 * @param destino nuevo nombre del destino
 	 */
 	public void setDestino(String destino) {
@@ -217,7 +217,7 @@ public class AristaAP {
 
 	
 	/**
-	 * MÈtodo accesor de la etiqueta de la arista
+	 * M√±todo accesor de la etiqueta de la arista
 	 * @return nombre de la arista(letra que realiza la transicion)
 	 */
 /*	public String getEtiqueta() {
@@ -225,7 +225,7 @@ public class AristaAP {
 	}*/
 
 	/**
-	 * MÈtodo midificador de la etiqueta de la arista
+	 * M√±todo midificador de la etiqueta de la arista
 	 * @param etiqueta nueva etiqueta de la atista
 	 */
 /*	public void setEtiqueta(String etiqueta) {
@@ -233,9 +233,9 @@ public class AristaAP {
 	}*/
 	
 	/**
-	 * Establece la cercania de la arista a un punto de la interfaz gr·fica
+	 * Establece la cercania de la arista a un punto de la interfaz gr√±fica
 	 * @param p punto del que se quiere saber la distancia a al arista
-	 * @return true si est· encima, false si no
+	 * @return true si est√± encima, false si no
 	 */
 	public boolean estaCerca(Point p){
 		if(bounds.contains(p)){
@@ -245,7 +245,7 @@ public class AristaAP {
 	}
 	
 	/**
-	 * MÈtodo accesro de la caracterÌstica de la arista
+	 * M√±todo accesro de la caracter√±stica de la arista
 	 * @return true si la arista esta seleccionada
 	 */
 /*	public boolean getMarcada() {
@@ -261,9 +261,9 @@ public class AristaAP {
 	}*/
 	
 	/**
-	 * MÈtodo que devuelve la arista en formato texto con los nombre de los estados
-	 * origen y destino, la etiqueta y si est· maarcada o no
-	 * @return cadena con la informaciÛn de la arista
+	 * M√±todo que devuelve la arista en formato texto con los nombre de los estados
+	 * origen y destino, la etiqueta y si est√± maarcada o no
+	 * @return cadena con la informaci√±n de la arista
 	 */
 	public String toString() {
 		return "d("+origen+","+entradaSimbolos+","+cimaPila+")=("+destino+","+salidaPila+")";//+"("+marcada+")";

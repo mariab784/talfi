@@ -21,7 +21,7 @@ import accesoBD.usuariosBD.Usuario;
 
 /**
  * Clase que se encarga de rear el panel de registro de usuario mediante la 
- * introducciÛn de sus datos.
+ * introducci√±n de sus datos.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
@@ -40,10 +40,10 @@ public class RegUsuario extends JPanel {
 	private Mensajero m;
 	
 	/**
-	 * Constructor del panel de registro de usuario que se aÒadir· a la ventana que se pasa
-	 * como par·mero
+	 * Constructor del panel de registro de usuario que se a√±adir√± a la ventana que se pasa
+	 * como par√±mero
 	 * @param ab ventana anterior a la que se vuelve si se cancela el registro de usuario
-	 * @param padre ventana a la que se aÒadir· el panel
+	 * @param padre ventana a la que se a√±adir√± el panel
 	 */
 	public RegUsuario(JDialog ab,JDialog padre){
 		super(new BorderLayout());
@@ -111,7 +111,7 @@ public class RegUsuario extends JPanel {
 		JLabel n=new JLabel(m.devuelveMensaje("vista.nombre",2));
 		nombre=new JTextField(20);
 		nombre.addKeyListener(new OyenteKey());
-		JLabel p=new JLabel(m.devuelveMensaje("vista.contraseÒa",2));
+		JLabel p=new JLabel(m.devuelveMensaje("vista.contrase√±a",2));
 		password=new JPasswordField(20);
 		password.addKeyListener(new OyenteKey());
 		JLabel rp=new JLabel(m.devuelveMensaje("vista.repetir",2));
@@ -137,7 +137,7 @@ public class RegUsuario extends JPanel {
 	}
 	
 	/**
-	 *  Clase oyente que se encarga de aÒadir el nuevo usuario con sus datos introducidos
+	 *  Clase oyente que se encarga de a√±adir el nuevo usuario con sus datos introducidos
 	 *  al pulsar la tecla intro sobre alguno de los campos de texto
 	 *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
 	 *
@@ -145,9 +145,9 @@ public class RegUsuario extends JPanel {
 	public class OyenteKey extends KeyAdapter{
 		
 		/**
-		 * MÈtodo que detecta pulsaciÛn de teclado sobre los campos de texto y que aÒade
+		 * M√±todo que detecta pulsaci√±n de teclado sobre los campos de texto y que a√±ade
 		 * el usuario a la base de datos si la ecla pulsada es intro y todos los datos
-		 * est· correctamente introducidos
+		 * est√± correctamente introducidos
 		 * @param e evento de teclado  
 		 */
 		public void keyPressed(KeyEvent e){

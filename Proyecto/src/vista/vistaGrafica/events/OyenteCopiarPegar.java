@@ -11,7 +11,7 @@ import accesoBD.Mensajero;
 import vista.vistaGrafica.AutomataCanvas;
 
 /**
- * Clase oyentye que recibe los eventos de teclado de la ventana principal de la aplicación.
+ * Clase oyentye que recibe los eventos de teclado de la ventana principal de la aplicaciÃ±n.
  * Recibe los eventos control+c, control+v, control+x y supr para copiar, pegar, cortar y
  * eliminar estados selecionados respectivamente.
  * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
@@ -23,7 +23,7 @@ public class OyenteCopiarPegar implements KeyListener {
 	private boolean control;
 	
 	/**
-	 * Constructor del oyente que incializa la varibel de deteccción de pulsación de la
+	 * Constructor del oyente que incializa la varibel de deteccciÃ±n de pulsaciÃ±n de la
 	 * tecla control a false y establece el canvas de dibujo con e que recibe
 	 * @param a
 	 */

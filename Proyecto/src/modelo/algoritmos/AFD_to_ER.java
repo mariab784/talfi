@@ -14,9 +14,9 @@ import modelo.automatas.AutomataFD;
 import modelo.expresion_regular.ExpresionRegular;
 
 /**
- * Clase que implementa el algoritmo de transformación de automata finito
- * a expresión regular
- * @author Miguel Ballesteros, José Antonio Blanes, Samer Nabhan
+ * Clase que implementa el algoritmo de transformaciÃ±n de automata finito
+ * a expresiÃ±n regular
+ * @author Miguel Ballesteros, JosÃ± Antonio Blanes, Samer Nabhan
  */
 public class AFD_to_ER implements Algoritmo {
 
@@ -30,9 +30,9 @@ public class AFD_to_ER implements Algoritmo {
 	private AutomataFD resultadosParciales;
 	
 	/**
-	 * Constructor del Algortimo de obtención de expresión regular
+	 * Constructor del Algortimo de obtenciÃ±n de expresiÃ±n regular
 	 * a partir de Automata
-	 * @param a automata del que queremos obtener la expresión regular
+	 * @param a automata del que queremos obtener la expresiÃ±n regular
 	 */
 	public AFD_to_ER(Automata a){
 		automataEntrada=a;
@@ -42,8 +42,8 @@ public class AFD_to_ER implements Algoritmo {
 	}
 	
 	/**
-	 * Nétodo que devuelve el String con la expresión regular resultante
-	 * @return String con la expresión regular
+	 * NÃ±todo que devuelve el String con la expresiÃ±n regular resultante
+	 * @return String con la expresiÃ±n regular
 	 */
 	public ExpresionRegular cogeSalida(){
 		return er;
@@ -289,8 +289,8 @@ public class AFD_to_ER implements Algoritmo {
 	/**
 	 * Clase que calcula la expresion regular de un estado a aprtir de
 	 * la de su padre y teniendo en cuenta las transiciones que llegan y salen 
-	 * de él mismo.
-	 * @author Miguel Ballesteros, José Antonio Blanes, Samer Nabhan
+	 * de Ã±l mismo.
+	 * @author Miguel Ballesteros, JosÃ± Antonio Blanes, Samer Nabhan
 	 *
 	 */
 	public class EstadoString {
@@ -301,7 +301,7 @@ public class AFD_to_ER implements Algoritmo {
 		/**
 		 * Constructor de la clase con el nombre del estado y el padre
 		 * que tiene en el grafo
-		 * @param nombre del estado del que queremos calcular la expresión
+		 * @param nombre del estado del que queremos calcular la expresiÃ±n
 		 * @param padre padre que le precede en el grafo
 		 */
 		public EstadoString(String nombre, EstadoString padre){
@@ -310,15 +310,15 @@ public class AFD_to_ER implements Algoritmo {
 		}
 		
 		/**
-		 * Métoido accesor de la expresión totla del estado del objeto
-		 * @return String con la expresión del estado
+		 * MÃ±toido accesor de la expresiÃ±n totla del estado del objeto
+		 * @return String con la expresiÃ±n del estado
 		 */
 		public String getExpresion(){
 			return expresion;
 		}
 		
 		/**
-		 * Método accesor del nombre del estado del objeto
+		 * MÃ±todo accesor del nombre del estado del objeto
 		 * @return String con el nombre del estado
 		 */
 		public String getNombreEstado(){
@@ -326,9 +326,9 @@ public class AFD_to_ER implements Algoritmo {
 		}
 		
 		/**
-		 * Método que calcula la expresión del estado teniendo en cueta la del padre
-		 * concatenada con la que los une y si este estado tiene transiciones de él
-		 * a él mismo también.
+		 * MÃ±todo que calcula la expresiÃ±n del estado teniendo en cueta la del padre
+		 * concatenada con la que los une y si este estado tiene transiciones de Ã±l
+		 * a Ã±l mismo tambiÃ±n.
 		 */
 		public void calculaExpresionEstado(){
 			String erPadre=padre.getExpresion();
@@ -363,8 +363,8 @@ public class AFD_to_ER implements Algoritmo {
 				expresion=erPadre+hijoER;
 		}
 		/**
-		 * Método establece la expresión total del estado
-		 * @param expresion expresión del estado
+		 * MÃ±todo establece la expresiÃ±n total del estado
+		 * @param expresion expresiÃ±n del estado
 		 */
 		public void setExpresion(String expresion){
 			this.expresion=expresion;

@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class AutomataFND extends AutomataFD {
 	
 	/**
-	* Construye un automata finito determinista, posteriormente al irsele añadiendo
-	* aristas se convertirá en indeterminista
+	* Construye un automata finito determinista, posteriormente al irsele aÃ±adiendo
+	* aristas se convertirÃ± en indeterminista
 	*/
 	public AutomataFND() {
 		super();

@@ -20,7 +20,7 @@ import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 
 /**
- * Clase que ejecuta los procedimeintos para llevar a cabo la transformaciÛn desde
+ * Clase que ejecuta los procedimeintos para llevar a cabo la transformaci√±n desde
  * un automata no determinista a uno determinista
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -158,7 +158,7 @@ public class AFN_to_AFD implements Algoritmo{
 		xml+="<exit><steps>"+traducirTablaTraduccion()+"</steps>";
 		xml+="<result>"+traducirXML(automataSalida)+"</result></exit>";
 		//HAY QUE TRADUCIR A XML LA Tbla de correspondencia junto con el automata, para que salga como en apuntes en la salida
-		//XML...... intentar que sea lo m·s parseable posible
+		//XML...... intentar que sea lo m√±s parseable posible
 		//VIGILAR QUE LA TABLA DE CORRESPONDENCIA ESTE CORRECTA PARA XML, ver ejemplo 10, 
 		//resultado minimizacion ok, pero la tabla no esta tan claro que este bien
 		return automataSalida;

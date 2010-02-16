@@ -114,7 +114,7 @@ public class VistaGrafica extends JFrame implements Vista{
 
 	
 	/**
-	 * Constructor de la ventana de la aplicación, vista gráfica
+	 * Constructor de la ventana de la aplicaciÃ±n, vista grÃ±fica
 	 */
 	public VistaGrafica(){
 		super("TALFi");	
@@ -765,7 +765,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 	
 	private void un_solo_click(int selRow,TreePath selPath) {
-		//mostrar algo con la descripción del ejemplo???
+		//mostrar algo con la descripciÃ±n del ejemplo???
 	}
 	
 	private void dobleClick(int selRow, TreePath selPath) {
@@ -1078,9 +1078,9 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 	
 	/**
-	 * Clase oyente del boton de menu pare ejecutar algortimos que se distinguen según
+	 * Clase oyente del boton de menu pare ejecutar algortimos que se distinguen segÃ±n
 	 * el entro que se le pasa al oyente
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteMenuItem implements ActionListener {
@@ -1203,7 +1203,7 @@ public class VistaGrafica extends JFrame implements Vista{
 
 	/**
 	 * Clase que se encarga de preparar el panel de dibujos
-	 * @author Rocío Barrigüete, Mario Huete, Luis San Juan
+	 * @author RocÃ±o BarrigÃ±ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	public class OyenteAutomataGeneral implements ActionListener{
@@ -1221,7 +1221,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	/**
 	 * Clase que se encarga de preparar el panel de dibujos para cear automatas
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteAutomata extends OyenteAutomataGeneral implements ActionListener{
@@ -1236,7 +1236,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	/**
 	 * Clase que se encarga de preparar el panel de dibujos para cear automatas de pila
-	 * @author Rocío Barrigüete, Mario Huete, Luis San Juan
+	 * @author RocÃ±o BarrigÃ±ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	public class OyenteAutomataPila extends OyenteAutomataGeneral implements ActionListener{
@@ -1257,7 +1257,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	/**
 	 * Clase que se encarga de preparar el panel de dibujos para cear automatas de Turing
-	 * @author Rocío Barrigüete, Mario Huete, Luis San Juan
+	 * @author RocÃ±o BarrigÃ±ete, Mario Huete, Luis San Juan
 	 *
 	 */
 	public class OyenteAutomataTuring extends OyenteAutomataGeneral implements ActionListener{
@@ -1277,9 +1277,9 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 	
 	/**
-	 * Clase que se encarga de mostrar las opciones para creación de automats a partir
-	 * de una expresión regular introducida
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * Clase que se encarga de mostrar las opciones para creaciÃ±n de automats a partir
+	 * de una expresiÃ±n regular introducida
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteExpr implements ActionListener{
@@ -1371,7 +1371,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	/**
 	 * Clase que se encarga de las gestiones del usuario para gusrdar automtas en
 	 * archivos xml
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteAbrir implements ActionListener{
@@ -1423,7 +1423,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	/**
 	 * Clase que se encarga de realizar las estiones con el usuario de guardar los
 	 * automatas en archivos xml
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteGuardarC implements ActionListener{
@@ -1491,8 +1491,8 @@ public class VistaGrafica extends JFrame implements Vista{
 	/**
 	 * Clase que se encarga de realizar las estiones con el usuario de guardar los
 	 * automatas en archivos xml, si ya estaba guardado en un ruta lo guarda en la
-	 * misma sobreescribiéndolo, sino muestra un dialogo de guardado
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * misma sobreescribiÃ±ndolo, sino muestra un dialogo de guardado
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteGuardar implements ActionListener{
@@ -1578,9 +1578,9 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 
 	/**
-	 * Calse que se encarga de la implementación de guardar ejericios según
-	 * su tipo, y de la creación del panel correspondiente
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * Calse que se encarga de la implementaciÃ±n de guardar ejericios segÃ±n
+	 * su tipo, y de la creaciÃ±n del panel correspondiente
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteEjercicio implements ActionListener{
@@ -1633,7 +1633,7 @@ public class VistaGrafica extends JFrame implements Vista{
 
 	/**
 	 * Clase que se encarga de gestionar la forma de guardar los ejercicios en archivos xml
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteAbrirEjer implements ActionListener{
@@ -1676,8 +1676,8 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 
 	/**
-	 * Clase que se encarga de gestionar la actualización de suarios de la base de datos
-	 * @author Miguel Ballesteros, José Antnio Blanes, Samer Nabhan
+	 * Clase que se encarga de gestionar la actualizaciÃ±n de suarios de la base de datos
+	 * @author Miguel Ballesteros, JosÃ± Antnio Blanes, Samer Nabhan
 	 *
 	 */
 	public class OyenteActualizar implements ActionListener{
@@ -1685,7 +1685,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		private Vista vista;
 		
 		/**
-		 * Creación del oyente que recibe la vista sobre la que se actualzia el usuario
+		 * CreaciÃ±n del oyente que recibe la vista sobre la que se actualzia el usuario
 		 * @param v vista de la que se gestiona el usuario a actualziar
 		 */
 		public OyenteActualizar(Vista v){

@@ -12,9 +12,9 @@ public class EncriptadorString {
 	private static EncriptadorString encriptador;
 	
 	/**
-	 * Método singleton que devuelve la instacina única de la 
+	 * MÃ±todo singleton que devuelve la instacina Ã±nica de la 
 	 * clase de encriptacion de String de la base de datos de 
-	 * usuarios de la aplicación.
+	 * usuarios de la aplicaciÃ±n.
 	 * @return instancia de EncriptadorString
 	 */
 	public static EncriptadorString getInstancia(){

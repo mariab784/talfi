@@ -35,7 +35,7 @@ import modelo.automatas.Automata;
 import modelo.automatas.AutomataFNDLambda;
 
 /**
- * Clase que almacena y trata toda la informaciÛn de los automatas que salen en la interfaz
+ * Clase que almacena y trata toda la informaci√±n de los automatas que salen en la interfaz
  * grafica y donde se realiza el pintado de automatas.
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -178,7 +178,7 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * MÈtodo accesor del boton de dibujo que est· pulsado, depende del entero
+	 * M√±todo accesor del boton de dibujo que est√± pulsado, depende del entero
 	 * @return entero que representa le boton pulsado
 	 */
 	public int getEstadoB() {
@@ -652,7 +652,7 @@ public class AutomataCanvas extends JScrollPane {
 	/**
 	 * Crea un archivo xml con los datos del automata
 	 * @return texto xml con el automata
-	 * @throws AutomatasException lanza la excepciÛn si el qutomata no tiene estado inicial
+	 * @throws AutomatasException lanza la excepci√±n si el qutomata no tiene estado inicial
 	 */
 	public String traducirXML()throws AutomatasException {
 		//Mensajero m=Mensajero.getInstancia();
@@ -759,9 +759,9 @@ public class AutomataCanvas extends JScrollPane {
 	public void cargarAutomataNuevo(Automata a){
 		//en un futuro se cargara desde un xml??estas cosas hay q decidirlas,
 		//igual se puede dejar asi.... no habria problema creo yo, porque seria
-		//el controlador el que lo pasa a la interfaz grafica, y Èsta a esta clase: AutomataCanvas
+		//el controlador el que lo pasa a la interfaz grafica, y √±sta a esta clase: AutomataCanvas
 		//IDEA: generar un poligono regular a partir de los vertices, el radio
-		//del polÌgono deberia aumentar dependiendo del numero de vertives
+		//del pol√±gono deberia aumentar dependiendo del numero de vertives
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
 		Iterator<String> itEst=a.getEstados().iterator();
@@ -867,10 +867,10 @@ public class AutomataCanvas extends JScrollPane {
 	public String generarImagenJPg(String ruta) {
 		
 		desmarcarAristas(listaAristas);
-        // Le asignamos un tamaÒo a la imagen
+        // Le asignamos un tama√±o a la imagen
         int width = 768, height = 512;
 
-        // Creamos una imagen con ese tamaÒo y con su correspondiente formato de
+        // Creamos una imagen con ese tama√±o y con su correspondiente formato de
         // color
         BufferedImage imagen = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
@@ -959,14 +959,14 @@ public class AutomataCanvas extends JScrollPane {
         // Ejecutamos el metodo Dispose para finalizar
         gimg.dispose();
 
-        // Se crea un flujo de datos, en este caso ser· FileOutPutStream, aunque
-        // podÈs utilizar cualquier otro.
+        // Se crea un flujo de datos, en este caso ser√± FileOutPutStream, aunque
+        // pod√±s utilizar cualquier otro.
 
         FileOutputStream out;
         try {
             out = new FileOutputStream(new File(ruta));
 
-            // Se decodifica la imagen y se envÌa al flujo.
+            // Se decodifica la imagen y se env√±a al flujo.
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             encoder.encode(imagen);
 
@@ -1049,7 +1049,7 @@ public class AutomataCanvas extends JScrollPane {
 	/**
 	 * Busca algun estado que se llame como etiqueta
 	 * @param etiqueta etiqueta con el nombre del estado a buscar
-	 * @return Estado que se busca si est·, sino null
+	 * @return Estado que se busca si est√±, sino null
 	 */
 	public Estado buscaEstado(String etiqueta){
 		Iterator<Estado> it=listaEstados.iterator();
@@ -1119,9 +1119,9 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * MÈtodo que selecciona los estados que est·n dentro del rect·ngulo que recibe
-	 * @param bounds rect·ngulo que va a mirar si contiene a los estados
-	 * @return devuelve el n˙mero de estados seleccionados
+	 * M√±todo que selecciona los estados que est√±n dentro del rect√±ngulo que recibe
+	 * @param bounds rect√±ngulo que va a mirar si contiene a los estados
+	 * @return devuelve el n√±mero de estados seleccionados
 	 */
 	public int seleccionaEstadosEnElrectangulo(Rectangle bounds) {
 		// TODO Auto-generated method stub
@@ -1139,8 +1139,8 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * MÈtodo que dibuja el rect·ngilo que recibe por par·metro
-	 * @param bounds rect·ngulo a dibujar
+	 * M√±todo que dibuja el rect√±ngilo que recibe por par√±metro
+	 * @param bounds rect√±ngulo a dibujar
 	 */
 	public void drawBounds(Rectangle bounds) {
 		// TODO Auto-generated method stub
@@ -1155,7 +1155,7 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	/**
-	 * MÈtodo que deselecciona todos los estados del automata
+	 * M√±todo que deselecciona todos los estados del automata
 	 */
 	public void deseleccionaEstados() {
 		// TODO Auto-generated method stub
@@ -1228,7 +1228,7 @@ public class AutomataCanvas extends JScrollPane {
 	}
 	
 	/**
-	 * MÈtodo que calcula las letras del alfabto a partir de la lista
+	 * M√±todo que calcula las letras del alfabto a partir de la lista
 	 * de las aristas del automata
 	 * @return el alfabeto del automata
 	 */
@@ -1413,7 +1413,7 @@ public class AutomataCanvas extends JScrollPane {
 	private boolean compruebaAPD(){
 		
 		int i = 0;
-		//int tamaÒo = listaAristasAP.size();
+		//int tama√±o = listaAristasAP.size();
 		boolean esta = listaAristasAP.get(i).getEntradaSimbolos().contains(OyenteArista.getLambda()); 
 		while (i < listaAristasAP.size()){
 			if (esta && (listaAristasAP.get(i).getEntradaSimbolos().size() > 1) ) return false;

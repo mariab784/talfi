@@ -15,16 +15,16 @@ public class Alfabeto_imp implements Alfabeto{
 	private ArrayList<String> alfabeto;
 	
 	/**
-	 * Constructor que crea un afabeto vacío, sin letras, sólo lambda
+	 * Constructor que crea un afabeto vacÃ±o, sin letras, sÃ±lo lambda
 	 */
 	public Alfabeto_imp(){
 		alfabeto=new ArrayList<String>();
 	}
 	
 	/**
-	 * Constructor que crea un afabeto a apartir de una lista de letras ademñas de lmbda
-	 * que se añade siempre
-	 * @param lista lista con las letras que contendrá el alfabeto
+	 * Constructor que crea un afabeto a apartir de una lista de letras ademÃ±as de lmbda
+	 * que se aÃ±ade siempre
+	 * @param lista lista con las letras que contendrÃ± el alfabeto
 	 */
 	public Alfabeto_imp(ArrayList<String> lista) {
 		alfabeto=lista;

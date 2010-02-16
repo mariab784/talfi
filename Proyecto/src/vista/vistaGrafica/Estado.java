@@ -26,7 +26,7 @@ public class Estado {
 		this.seleccionado=false;
 	}
 	/**
-	 * MÈtodo accesro de la coordenada x del estado
+	 * M√±todo accesro de la coordenada x del estado
 	 * @return coordenada x del estado
 	 */
 	public int getX(){
@@ -34,7 +34,7 @@ public class Estado {
 	}
 	
 	/**
-	 * MÈtodo accesro de la coordenada y del estado
+	 * M√±todo accesro de la coordenada y del estado
 	 * @return coordenada y del estado
 	 */
 	public int getY(){
@@ -43,7 +43,7 @@ public class Estado {
 	
 	/**
 	 * Establece el punto donde esta el estado en la interfaz
-	 * @param p punto nuevo donde se situar· el estado
+	 * @param p punto nuevo donde se situar√± el estado
 	 */
 	public void setPoint(Point p){
 		this.x=p.x;
@@ -68,7 +68,7 @@ public class Estado {
 	
 	/**
 	 * Devuelve si un estado esta seleccionado o no
-	 * @return true si est· seleccionado, false si no
+	 * @return true si est√± seleccionado, false si no
 	 */
 	public boolean isSelected(){
 		return seleccionado;

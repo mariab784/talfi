@@ -23,7 +23,7 @@ import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
 
 /**
- * Clase que se encarga de aÒadir y borrar los estados al dibujo si la infromaciÛn
+ * Clase que se encarga de a√±adir y borrar los estados al dibujo si la infromaci√±n
  * que se le pide al usuario es correcta y borrar aristas del dibujo
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -44,7 +44,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	private AutomataCanvas canvas;
 	
 	/**
-	 * Constructor del mouseAdapter del panel de dibujo que recibe como par·metro
+	 * Constructor del mouseAdapter del panel de dibujo que recibe como par√±metro
 	 * @param c panel de dibujo de automatas
 	 */
 	public CanvasMouseAdapter(AutomataCanvas c){
@@ -59,7 +59,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 	
 	/**
-	 * MÈtodo accesor que indica si del estado selecionado es final
+	 * M√±todo accesor que indica si del estado selecionado es final
 	 * @return true si es final, false si no
 	 */
 	public boolean isEsFinal() {
@@ -67,7 +67,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo modificador de la porpiedad es final del estado selecionado 
+	 * M√±todo modificador de la porpiedad es final del estado selecionado 
 	 * @param esFinal indica que a aprtir de ahora el estado es final o no
 	 */
 	public void setEsFinal(boolean esFinal) {
@@ -75,7 +75,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo accesor que indica si del estado selecionado es inicial
+	 * M√±todo accesor que indica si del estado selecionado es inicial
 	 * @return true si es inicial, false si no
 	 */
 	public boolean isEsInicial() {
@@ -83,7 +83,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo modificador de la porpiedad es inicial del estado selecionado 
+	 * M√±todo modificador de la porpiedad es inicial del estado selecionado 
 	 * @param esInicial indica que a aprtir de ahora el estado es inicial o no
 	 */
 	public void setEsInicial(boolean esInicial) {
@@ -91,7 +91,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo que indica si el automata tiene estado inicial
+	 * M√±todo que indica si el automata tiene estado inicial
 	 * @return true si tiene estado inicial, false si no
 	 */
 	public boolean isTieneEstadoInicial() {
@@ -99,7 +99,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo que establece la propiedad del automata de tener estado inicial
+	 * M√±todo que establece la propiedad del automata de tener estado inicial
 	 * o no
 	 * @param tieneEstadoInicial indica si a aprtir de ahora es automata tiene 
 	 * estado inicial o no
@@ -125,16 +125,16 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * Devuelve la ventana de di·logo del panel
-	 * @return ventana de di·logo
+	 * Devuelve la ventana de di√±logo del panel
+	 * @return ventana de di√±logo
 	 */
 	public JDialog getDialog() {
 		return dialog;
 	}
 
 	/**
-	 * Estableca una nueva ventna de di·logo
-	 * @param dialog nueva entan de di·logo
+	 * Estableca una nueva ventna de di√±logo
+	 * @param dialog nueva entan de di√±logo
 	 */
 	public void setDialog(JDialog dialog) {
 		this.dialog = dialog;
@@ -157,10 +157,10 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 
 	/**
-	 * MÈtodo que detectya que se ha pulsado y soltado una tecla del ratÛn, si
-	 * es la izquierda dependiando del boton de la barra de herramientas que estÈ
-	 * seleccionado se aÒade un estado o una arista
-	 * @param e evento de pulsaciÛn de tecla de ratÛn
+	 * M√±todo que detectya que se ha pulsado y soltado una tecla del rat√±n, si
+	 * es la izquierda dependiando del boton de la barra de herramientas que est√±
+	 * seleccionado se a√±ade un estado o una arista
+	 * @param e evento de pulsaci√±n de tecla de rat√±n
 	 */
 	public void mousePressed(MouseEvent e){
 		//buscar estado cercano y lanzarlo desde su corteza(en caso de que sea arista)
@@ -345,8 +345,8 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 		
 	/**
-	 * MÈtodo que detecta si el estado cuyo nombre que recibe como par·metro
-	 * est· ya aÒadido en el panel de dibujos
+	 * M√±todo que detecta si el estado cuyo nombre que recibe como par√±metro
+	 * est√± ya a√±adido en el panel de dibujos
 	 * @param etiqueta nombre del estado abuscar
 	 * @return true si ya hay un estado con ese nombre, false si no
 	 */
@@ -360,9 +360,9 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 	
 	/**
-	 * Detecta si el string que recibe est· vacÌo
-	 * @param s string que queremos comprobar que no es vacÌo
-	 * @return true si es vacÌo, false si no
+	 * Detecta si el string que recibe est√± vac√±o
+	 * @param s string que queremos comprobar que no es vac√±o
+	 * @return true si es vac√±o, false si no
 	 */
 	protected boolean esVacio(String s){
 		int i=0;
@@ -375,7 +375,7 @@ public class CanvasMouseAdapter extends MouseAdapter {
 	}
 	
 	/**
-	 * MÈtodo que indica si un nombre de estado, que recibe como par·metero, es 
+	 * M√±todo que indica si un nombre de estado, que recibe como par√±metero, es 
 	 * correcto o no. No lo es si acaba en "_$"
 	 * @param nombreEstado nombre del estado que se quiere comprobar
 	 * @return true si es correcto, false si no
