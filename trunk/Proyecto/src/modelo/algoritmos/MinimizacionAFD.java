@@ -471,7 +471,7 @@ public class MinimizacionAFD implements Algoritmo{
 						Iterator<Pareja> enesimoIt=listaEstadosReducibles.iterator();
 						while(enesimoIt.hasNext()) {
 							Pareja e=enesimoIt.next();
-							if(e.uno_u_otro(destino)) {
+							if(e.uno_u_otro(destino) && destino != null) {
 								automataSalida.insertaArista(estado.toString(), e.toString(), ar1);
 								}
 							
@@ -1268,14 +1268,15 @@ private String traducirXML(Automata automata) {
 				while(itDest.hasNext()) {
 					String dest=itDest.next();
 					String ndest=thash.get(dest);
-					automata.insertaArista(thash.get(estado), ndest, letra);
+					if (ndest != null){
+						automata.insertaArista(thash.get(estado), ndest, letra);
 					//insertar pero no olvidar el subindice!!
-					
+					}
 				}
 			}
 		}
 		//RENOMBRAR ESTADOS
-		AutomataFD automata2 = new AutomataFD();
+		//AutomataFD automata2 = new AutomataFD();
 		return automata;
 	}
 	
