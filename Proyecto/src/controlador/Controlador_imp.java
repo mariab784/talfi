@@ -157,6 +157,14 @@ public class Controlador_imp implements Controlador{
 			case 3: {
 				//obtener automata en xml de la query tambien.
 				Automata a=obtenerAutomata();
+				if (a instanceof AutomataFNDLambda){
+					TRANSFORMA_AFNDLambda_AFND(a,pasos);
+					a = (AutomataFND) salida;
+					}
+				if (a instanceof AutomataFND){
+					Transforma_AFND_AFD(a,pasos);
+					a = (AutomataFD)salida;	
+				}
 				//lanzamiento de algoritmo de minimizacion de automatas
 				minimizacion(a,pasos);
 				break;
