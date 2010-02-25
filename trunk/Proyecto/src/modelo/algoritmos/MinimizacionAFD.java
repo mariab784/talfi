@@ -1275,6 +1275,7 @@ private String traducirXML(Automata automata) {
 			}
 		}
 		//RENOMBRAR ESTADOS
+		AutomataFD automata2 = new AutomataFD();
 		return automata;
 	}
 	

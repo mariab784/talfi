@@ -1054,7 +1054,7 @@ public class AutomataCanvas extends JScrollPane {
 		int i=0;
 		while(i<la.size()) {
 			Arista aux=la.get(i);
-			if ((a.getDestino().equals(aux.getDestino()))&&(a.getOrigen().equals(aux.getOrigen()))&&(!a.getEtiqueta().equals(aux.getEtiqueta()))) {
+			if ((a.getDestino()!= null && aux.getDestino()!=null)&&((a.getDestino().equals(aux.getDestino()))&&(a.getOrigen().equals(aux.getOrigen()))&&(!a.getEtiqueta().equals(aux.getEtiqueta())))) {
 				if (aux.getMarcada()) return "yaesta";
 				repetida+=","+aux.getEtiqueta();
 			}
