@@ -1,214 +1,32 @@
-<exit><steps><table><flecha><estado>S2</estado><letra>a</letra><destino>[S12, S3]</destino><letra>b</letra><destino>0</destino></flecha><flecha><estado>S1</estado><letra>a</letra><destino>[S12, S3]</destino><letra>b</letra><destino>0</destino></flecha><flecha><estado>S0</estado><letra>a</letra><destino>[S2, S1]</destino><letra>b</letra><destino>0</destino></flecha><flecha><estado>S12</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>0</destino></flecha><flecha><estado>S3</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>0</destino></flecha><flecha><estado>S6</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S7]</destino></flecha><flecha><estado>S5</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S7]</destino></flecha><flecha><estado>S4</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S6, S5]</destino></flecha><flecha><estado>S10</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S9]</destino></flecha><flecha><estado>S8</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S9]</destino></flecha><flecha><estado>S7</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S9]</destino></flecha><flecha><estado>S9</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S10, S8, S12, S9]</destino></flecha><flecha><estado>S11</estado><letra>a</letra><destino>[S2, S1]</destino><letra>b</letra><destino>[S6, S5]</destino></flecha></table></steps><result><authomata>
+<exit><steps><table><flecha><estado>S1</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>[S2]</destino><letra>c</letra><destino>0</destino></flecha><flecha><estado>S0</estado><letra>a</letra><destino>[S1]</destino><letra>b</letra><destino>0</destino><letra>c</letra><destino>0</destino></flecha><flecha><estado>S2</estado><letra>a</letra><destino>0</destino><letra>b</letra><destino>0</destino><letra>c</letra><destino>0</destino></flecha></table></steps><result><authomata>
 	<type>
 		<item>AutomataFND</item>
 	</type>
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
+		<item>c</item>
 	</alphabet>
 	<states>
-		<state>S2</state>
 		<state>S1</state>
 		<state>S0</state>
-		<state>S12</state>
-		<state>S3</state>
-		<state>S6</state>
-		<state>S5</state>
-		<state>S4</state>
-		<state>S10</state>
-		<state>S8</state>
-		<state>S7</state>
-		<state>S9</state>
-		<state>S11</state>
+		<state>S2</state>
 	</states>
 	<init>
-		<state>S11</state>
+		<state>S0</state>
 	</init>
 	<finals>
-		<state>S3</state>
-		<state>S7</state>
-		<state>S9</state>
-		<state>S10</state>
-		<state>S12</state>
+		<state>S0</state>
+		<state>S2</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>S2</state>
-		<state>S12</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S2</state>
-		<state>S3</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
 		<state>S1</state>
-		<state>S12</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S1</state>
-		<state>S3</state>
-		<item>a</item>
+		<state>S2</state>
+		<item>b</item>
 	</arrow>
 		<arrow>
 		<state>S0</state>
-		<state>S2</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S1</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S6</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S6</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S6</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S6</state>
-		<state>S7</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S5</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S5</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S5</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S5</state>
-		<state>S7</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S4</state>
-		<state>S6</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S4</state>
-		<state>S5</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S10</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S10</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S10</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S10</state>
-		<state>S9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S8</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S8</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S8</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S8</state>
-		<state>S9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S7</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S7</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S7</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S7</state>
-		<state>S9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S9</state>
-		<state>S10</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S9</state>
-		<state>S8</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S9</state>
-		<state>S12</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S9</state>
-		<state>S9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S11</state>
-		<state>S6</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S11</state>
-		<state>S5</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>S11</state>
-		<state>S2</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S11</state>
 		<state>S1</state>
 		<item>a</item>
 	</arrow>

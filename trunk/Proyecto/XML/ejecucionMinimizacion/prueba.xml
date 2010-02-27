@@ -1,4 +1,4 @@
-null<result><authomata>
+<exit><steps><step><table><column><key>t21</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t10</key><fila><state>t21</state><compatible>false</compatible><paso>2</paso><estado>t2-Q0</estado></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t32</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>Q14</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>null</compatible></fila><fila><state>Q03</state><compatible>null</compatible></fila></column><column><key>Q03</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila><fila><state>Q03</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>t21</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t10</key><fila><state>t21</state><compatible>false</compatible><paso>2</paso><estado>t2-Q0</estado></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t32</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>Q14</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>null</compatible></fila><fila><state>Q03</state><compatible>null</compatible></fila></column><column><key>Q03</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila><fila><state>Q03</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>t21</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t10</key><fila><state>t21</state><compatible>false</compatible><paso>2</paso><estado>t2-Q0</estado></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>false</compatible><paso>2</paso><estado>t3-Q1</estado></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>t32</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q03</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila></column><column><key>Q14</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>null</compatible></fila><fila><state>Q03</state><compatible>null</compatible></fila></column><column><key>Q03</key><fila><state>t21</state><compatible>null</compatible></fila><fila><state>t10</state><compatible>null</compatible></fila><fila><state>t32</state><compatible>null</compatible></fila><fila><state>Q14</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila><fila><state>Q03</state><compatible>null</compatible></fila></column></table></step></steps><result><authomata>
 	<type>
 		<item>AutomataFD</item>
 	</type>
@@ -11,16 +11,12 @@ null<result><authomata>
 		<state>t2</state>
 		<state>t3</state>
 		<state>Q0</state>
-		<state>Q1</state>
-		<state>Q2</state>
 	</states>
 	<init>
 		<state>t1</state>
 	</init>
 	<finals>
 		<state>Q0</state>
-		<state>Q1</state>
-		<state>Q2</state>
 	</finals>
 	<arrows>
 		<arrow>
@@ -50,7 +46,7 @@ null<result><authomata>
 	</arrow>
 		<arrow>
 		<state>t3</state>
-		<state>Q1</state>
+		<state>Q0</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
@@ -60,27 +56,7 @@ null<result><authomata>
 	</arrow>
 		<arrow>
 		<state>Q0</state>
-		<state>Q1</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>Q1</state>
 		<state>Q0</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>Q1</state>
-		<state>Q1</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>Q2</state>
-		<state>Q0</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>Q2</state>
-		<state>null</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
