@@ -5,7 +5,6 @@
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
-		<item>c</item>
 	</alphabet>
 	<states>
 		<state>S0</state>
@@ -18,11 +17,17 @@
 		<state>S0</state>
 	</init>
 	<finals>
+		<state>S2</state>
 		<state>S4</state>
 	</finals>
 	<arrows>
 		<arrow>
 		<state>S0</state>
+		<state>S0</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S0</state>
 		<state>S3</state>
 		<item>b</item>
 	</arrow>
@@ -37,38 +42,33 @@
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>S0</state>
-		<state>S4</state>
+		<state>S1</state>
+		<state>S2</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>S1</state>
 		<state>S2</state>
-		<item>c</item>
-	</arrow>
-		<arrow>
 		<state>S2</state>
-		<state>S4</state>
-		<item>c</item>
-	</arrow>
-		<arrow>
-		<state>S3</state>
-		<state>S1</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
+		<state>S2</state>
+		<state>S2</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
 		<state>S3</state>
-		<state>S3</state>
+		<state>S4</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
 		<state>S4</state>
 		<state>S4</state>
-		<item>a</item>
+		<item>b</item>
 	</arrow>
 		<arrow>
 		<state>S4</state>
-		<state>S2</state>
+		<state>S4</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
