@@ -1,6 +1,6 @@
 <authomata>
 	<type>
-		<item>AutomataFD</item>
+		<item>AutomataFNDLambda</item>
 	</type>
 	<alphabet>
 		<item>a</item>
