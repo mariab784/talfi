@@ -1,57 +1,88 @@
 <authomata>
 	<type>
-		<item>AutomataFND</item>
+		<item>AutomataFD</item>
 	</type>
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
-		<item>/</item>
 	</alphabet>
 	<states>
-		<state>S0</state>
-		<state>S1</state>
-		<state>S2</state>
-		<state>S3</state>
-		<state>S4</state>
-		<state>S5</state>
+		<state>t1</state>
+		<state>t2</state>
+		<state>t3</state>
+		<state>Q0</state>
+		<state>Q1</state>
+		<state>Q2</state>
 	</states>
 	<init>
-		<state>S4</state>
+		<state>t1</state>
 	</init>
 	<finals>
-		<state>S5</state>
+		<state>Q0</state>
+		<state>Q1</state>
+		<state>Q2</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>S0</state>
-		<state>S1</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>S1</state>
-		<state>S5</state>
-		<item>/</item>
-	</arrow>
-		<arrow>
-		<state>S2</state>
-		<state>S3</state>
+		<state>t1</state>
+		<state>t2</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>S3</state>
-		<state>S5</state>
-		<item>/</item>
+		<state>t1</state>
+		<state>t3</state>
+		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>S4</state>
-		<state>S0</state>
-		<item>/</item>
+		<state>t2</state>
+		<state>Q0</state>
+		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>S4</state>
-		<state>S2</state>
-		<item>/</item>
+		<state>t2</state>
+		<state>t3</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t3</state>
+		<state>t2</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t3</state>
+		<state>Q1</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q0</state>
+		<state>Q0</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q0</state>
+		<state>Q1</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q1</state>
+		<state>Q0</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q1</state>
+		<state>Q1</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q2</state>
+		<state>Q0</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q2</state>
+		<state>null</state>
+		<item>a</item>
 	</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>S0</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>598</x><y>330</y></estadoCoord><estadoCoord><nombre>S2</nombre><x>598</x><y>171</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>460</x><y>90</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>322</x><y>170</y></estadoCoord><estadoCoord><nombre>S5</nombre><x>322</x><y>329</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>t1</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>t2</nombre><x>598</x><y>330</y></estadoCoord><estadoCoord><nombre>t3</nombre><x>598</x><y>171</y></estadoCoord><estadoCoord><nombre>Q0</nombre><x>460</x><y>90</y></estadoCoord><estadoCoord><nombre>Q1</nombre><x>322</x><y>170</y></estadoCoord><estadoCoord><nombre>Q2</nombre><x>322</x><y>329</y></estadoCoord></coordenadas></authomata>
