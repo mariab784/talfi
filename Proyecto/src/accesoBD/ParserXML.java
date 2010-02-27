@@ -77,7 +77,10 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		}	
 		
 		Automata automata=null;
-		
+		if (var.equals("AutomataFNDLambda")){
+			
+			automata = new AutomataFNDLambda();		
+		}
 		if (var.equals("AutomataFD")){
 			
 			automata = new AutomataFD();		
@@ -86,10 +89,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 			automata = new AutomataFND();		
 		}
-		if (var.equals("AutomataFNDLambda")){
-			
-			automata = new AutomataFNDLambda();		
-		}
+
 		/*********************************************************/
 		if (var.equals("AutomataPila")){
 			

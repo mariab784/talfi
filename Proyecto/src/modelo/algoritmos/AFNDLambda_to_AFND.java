@@ -185,6 +185,7 @@ public class AFNDLambda_to_AFND implements Algoritmo {
 			}
 			fichero+="</arrows>\n";
 			fichero+="</authomata>";
+			xml = fichero;
 			return fichero;
 	}
 	

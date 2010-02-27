@@ -1,10 +1,11 @@
-<exit><steps><table><flecha><estado>t1=[S0]</estado><letra>a</letra><destino>[S1, S0]</destino><letra>b</letra><destino>[S0, S3]</destino></flecha><flecha><estado>t2=[S0, S3]</estado><letra>a</letra><destino>[S1, S0]</destino><letra>b</letra><destino>[S0, S3, S4]</destino></flecha><flecha><estado>t3=[S1, S0]</estado><letra>a</letra><destino>[S2, S1, S0]</destino><letra>b</letra><destino>[S0, S3]</destino></flecha><flecha><estado>t4=[S0, S3, S4]</estado><letra>a</letra><destino>[S1, S0, S4]</destino><letra>b</letra><destino>[S0, S3, S4]</destino></flecha><flecha><estado>t5=[S2, S1, S0]</estado><letra>a</letra><destino>[S2, S1, S0]</destino><letra>b</letra><destino>[S2, S0, S3]</destino></flecha><flecha><estado>t6=[S1, S0, S4]</estado><letra>a</letra><destino>[S2, S1, S0, S4]</destino><letra>b</letra><destino>[S0, S3, S4]</destino></flecha><flecha><estado>t7=[S2, S0, S3]</estado><letra>a</letra><destino>[S2, S1, S0]</destino><letra>b</letra><destino>[S2, S0, S3, S4]</destino></flecha><flecha><estado>t8=[S2, S1, S0, S4]</estado><letra>a</letra><destino>[S2, S1, S0, S4]</destino><letra>b</letra><destino>[S2, S0, S3, S4]</destino></flecha><flecha><estado>t9=[S2, S0, S3, S4]</estado><letra>a</letra><destino>[S2, S1, S0, S4]</destino><letra>b</letra><destino>[S2, S0, S3, S4]</destino></flecha></table></steps><result><authomata>
+<exit><steps><table><flecha><estado>t1=[S0]</estado><letra>b</letra><destino>[S3]</destino><letra>a</letra><destino>[S1, S0, S4]</destino><letra>c</letra><destino>null</destino></flecha><flecha><estado>t2=[S3]</estado><letra>b</letra><destino>[S1, S3]</destino><letra>a</letra><destino>null</destino><letra>c</letra><destino>null</destino></flecha><flecha><estado>t3=[S1, S0, S4]</estado><letra>b</letra><destino>[S3]</destino><letra>a</letra><destino>[S1, S0, S4, S2]</destino><letra>c</letra><destino>[S1, S0, S4, S2]</destino></flecha><flecha><estado>t4=[S1, S3]</estado><letra>b</letra><destino>[S1, S3]</destino><letra>a</letra><destino>null</destino><letra>c</letra><destino>[S1, S0, S4, S2]</destino></flecha><flecha><estado>t5=[S1, S0, S4, S2]</estado><letra>b</letra><destino>[S3]</destino><letra>a</letra><destino>[S1, S0, S4, S2]</destino><letra>c</letra><destino>[S1, S0, S4, S2]</destino></flecha></table></steps><result><authomata>
 	<type>
 		<item>AutomataFD</item>
 	</type>
 	<alphabet>
-		<item>a</item>
 		<item>b</item>
+		<item>a</item>
+		<item>c</item>
 	</alphabet>
 	<states>
 		<state>t1</state>
@@ -12,21 +13,13 @@
 		<state>t3</state>
 		<state>t4</state>
 		<state>t5</state>
-		<state>t6</state>
-		<state>t7</state>
-		<state>t8</state>
-		<state>t9</state>
 	</states>
 	<init>
 		<state>t1</state>
 	</init>
 	<finals>
-		<state>t4</state>
+		<state>t3</state>
 		<state>t5</state>
-		<state>t6</state>
-		<state>t7</state>
-		<state>t8</state>
-		<state>t9</state>
 	</finals>
 	<arrows>
 		<arrow>
@@ -45,11 +38,6 @@
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>t2</state>
-		<state>t3</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
 		<state>t3</state>
 		<state>t2</state>
 		<item>b</item>
@@ -57,6 +45,11 @@
 		<arrow>
 		<state>t3</state>
 		<state>t5</state>
+		<item>c</item>
+	</arrow>
+		<arrow>
+		<state>t3</state>
+		<state>t5</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
@@ -66,57 +59,22 @@
 	</arrow>
 		<arrow>
 		<state>t4</state>
-		<state>t6</state>
-		<item>a</item>
+		<state>t5</state>
+		<item>c</item>
 	</arrow>
 		<arrow>
 		<state>t5</state>
-		<state>t7</state>
+		<state>t2</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
 		<state>t5</state>
 		<state>t5</state>
-		<item>a</item>
+		<item>c</item>
 	</arrow>
 		<arrow>
-		<state>t6</state>
-		<state>t4</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t6</state>
-		<state>t8</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t7</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t7</state>
 		<state>t5</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t8</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t8</state>
-		<state>t8</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t9</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t9</state>
-		<state>t8</state>
+		<state>t5</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
