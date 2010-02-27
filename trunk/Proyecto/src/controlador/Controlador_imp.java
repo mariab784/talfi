@@ -142,7 +142,7 @@ public class Controlador_imp implements Controlador{
 			}
 			case 1: {
 				//obtener automata en xml de la query tambien.
-				Automata a=obtenerAutomata();
+				Automata a= obtenerAutomata();
 				//lanzamiento de algoritmo de traduccion de AFND-lambda a AFND
 				TRANSFORMA_AFNDLambda_AFND(a,pasos);
 				break;
