@@ -1058,7 +1058,7 @@ private Automata renombrarSufijos(Automata a) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		automata = min.ejecutar(true);
+		automata = min.ejecutar(false);
 	}
 	//RENOMBRAR ESTADOS
 	return automata;

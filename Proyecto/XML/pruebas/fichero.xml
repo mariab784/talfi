@@ -1,124 +1,76 @@
 <authomata>
 	<type>
-		<item>AutomataFD</item>
+		<item>AutomataFND</item>
 	</type>
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
 	</alphabet>
 	<states>
-		<state>t1</state>
-		<state>t2</state>
-		<state>t3</state>
-		<state>t4</state>
-		<state>t5</state>
-		<state>t6</state>
-		<state>t7</state>
-		<state>t8</state>
-		<state>t9</state>
+		<state>S0</state>
+		<state>S1</state>
+		<state>S2</state>
+		<state>S3</state>
+		<state>S4</state>
 	</states>
 	<init>
-		<state>t1</state>
+		<state>S0</state>
 	</init>
 	<finals>
-		<state>t4</state>
-		<state>t5</state>
-		<state>t6</state>
-		<state>t7</state>
-		<state>t8</state>
-		<state>t9</state>
+		<state>S2</state>
+		<state>S4</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>t1</state>
-		<state>t2</state>
+		<state>S0</state>
+		<state>S0</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>t1</state>
-		<state>t3</state>
+		<state>S0</state>
+		<state>S3</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S1</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>t2</state>
-		<state>t4</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t2</state>
-		<state>t3</state>
+		<state>S0</state>
+		<state>S0</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>t3</state>
-		<state>t2</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t3</state>
-		<state>t5</state>
+		<state>S1</state>
+		<state>S2</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>t4</state>
-		<state>t4</state>
+		<state>S2</state>
+		<state>S2</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>t4</state>
-		<state>t6</state>
+		<state>S2</state>
+		<state>S2</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>t5</state>
-		<state>t7</state>
+		<state>S3</state>
+		<state>S4</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>t5</state>
-		<state>t5</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t6</state>
-		<state>t4</state>
+		<state>S4</state>
+		<state>S4</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>t6</state>
-		<state>t8</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t7</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t7</state>
-		<state>t5</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t8</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t8</state>
-		<state>t8</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t9</state>
-		<state>t9</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t9</state>
-		<state>t8</state>
+		<state>S4</state>
+		<state>S4</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>t1</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>t2</nombre><x>562</x><y>372</y></estadoCoord><estadoCoord><nombre>t3</nombre><x>617</x><y>277</y></estadoCoord><estadoCoord><nombre>t4</nombre><x>598</x><y>171</y></estadoCoord><estadoCoord><nombre>t5</nombre><x>514</x><y>100</y></estadoCoord><estadoCoord><nombre>t6</nombre><x>406</x><y>100</y></estadoCoord><estadoCoord><nombre>t7</nombre><x>322</x><y>170</y></estadoCoord><estadoCoord><nombre>t8</nombre><x>303</x><y>277</y></estadoCoord><estadoCoord><nombre>t9</nombre><x>358</x><y>372</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>S0</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>612</x><y>299</y></estadoCoord><estadoCoord><nombre>S2</nombre><x>554</x><y>121</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>366</x><y>121</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>308</x><y>299</y></estadoCoord></coordenadas></authomata>
