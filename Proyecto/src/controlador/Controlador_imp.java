@@ -163,9 +163,12 @@ public class Controlador_imp implements Controlador{
 					}
 				if (a instanceof AutomataFND){
 					Transforma_AFND_AFD(a,pasos);
-					a = (AutomataFD)salida;	
+					a = (AutomataFD)salida;
+					
 				}
 				//lanzamiento de algoritmo de minimizacion de automatas
+				minimizacion(a,pasos);
+				a = (AutomataFD)salida;
 				minimizacion(a,pasos);
 				break;
 			}
