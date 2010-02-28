@@ -157,17 +157,37 @@ public class Controlador_imp implements Controlador{
 			case 3: {
 				//obtener automata en xml de la query tambien.
 				Automata a=obtenerAutomata();
+				Automata b = null;
 				if (a instanceof AutomataFNDLambda){
 					TRANSFORMA_AFNDLambda_AFND(a,pasos);
 					a = (AutomataFND) salida;
+					try {
+						 b = (AutomataFND) a.clone();
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					}
 				if (a instanceof AutomataFND){
+					if (b != null)
+					Transforma_AFND_AFD(b,pasos);
+					else{ 
 					Transforma_AFND_AFD(a,pasos);
-					a = (AutomataFD)salida;
+					}
+					 a = (AutomataFD)salida;
+					 try {
+						b = (AutomataFD) a.clone();
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-				}
+					}
 				//lanzamiento de algoritmo de minimizacion de automatas
-				minimizacion(a,pasos);
+				if (b != null)
+					minimizacion(b,pasos);
+				else 
+					minimizacion(a,pasos);
 				//a = (AutomataFD)salida;
 				//minimizacion(a,pasos);
 				break;
