@@ -168,8 +168,8 @@ public class Controlador_imp implements Controlador{
 				}
 				//lanzamiento de algoritmo de minimizacion de automatas
 				minimizacion(a,pasos);
-				a = (AutomataFD)salida;
-				minimizacion(a,pasos);
+				//a = (AutomataFD)salida;
+				//minimizacion(a,pasos);
 				break;
 			}
 			case 4: {
