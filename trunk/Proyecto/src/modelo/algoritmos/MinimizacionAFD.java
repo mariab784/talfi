@@ -186,7 +186,7 @@ public class MinimizacionAFD implements Algoritmo{
 	
 	/**
 	 *Se encarga de ir recorriendo la tabla y comprobar si hay alguna casilla que modificar
-	 *Además marca porque estados vamos a realizar la minimización 
+	 *Además marca los estados por los que vamos a realizar la minimización 
 	 * 
 	*/
 	private void paso(){   //El metodo paso muestra la tabla por consola y luego marca
