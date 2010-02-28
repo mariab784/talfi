@@ -22,7 +22,7 @@ import modelo.automatas.*;
  * ALGORITMO DE MInIMIZACION DE UN AUTOMATA FINITO DETERMINISTA
  * si el automata que se pasa no es determinista se deber√± traducir a un afd
  * 
- *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
+ * 
  *  @author Luis San Juan, Rocio Barrig√±ete, Mario Huete
  *
  */
@@ -185,7 +185,8 @@ public class MinimizacionAFD implements Algoritmo{
 	}
 	
 	/**
-	 *Se encarga de ir recorriendo la tabla y comprobar si hay alguna casilla que modificar 
+	 *Se encarga de ir recorriendo la tabla y comprobar si hay alguna casilla que modificar
+	 *Adem·s marca porque estados vamos a realizar la minimizaciÛn 
 	 * 
 	*/
 	private void paso(){   //El metodo paso muestra la tabla por consola y luego marca
@@ -279,77 +280,6 @@ public class MinimizacionAFD implements Algoritmo{
  }
 		
 		
-
-		
-
-
-	/*private void paso() {
-		System.out.println("---------------------------");
-		System.out.println(tabla.toString());
-		System.out.println(".....");
-		ArrayList<String> listaVertices=automataEntrada.getEstados();
-		//ArrayList<String> listaEstFinales=automataEntrada.getEstadosFinales();
-		boolean hayCambios=false;
-		Iterator<String> it=listaVertices.iterator();
-		System.out.println("LV"+listaVertices);
-		while(it.hasNext()) {
-			String v1=it.next();
-			HashMap<String,Registro> fila=tabla.get(v1);
-			Iterator<String> itClaves=fila.keySet().iterator();
-			System.out.println("V1:"+v1+"....KEYSET:"+fila.keySet());
-			int paso = 1;
-			//ArrayList<String> listaNueva=(ArrayList<String>) listaVertices.clone();
-			//Iterator<String> itClaves=listaNueva.iterator();
-			while(itClaves.hasNext()) {
-				String v2=itClaves.next();
-				System.out.println("V2:"+v2);
-				//no esta marcado todavia
-				if (tabla.get(v1).get(v2).getMarcado()) {
-					System.out.println("NO ESTA TODAVIA");
-					ArrayList<String> aristas=automataEntrada.getAristasVertice(v1);
-					System.out.println("ARISTAS:"+aristas);
-					if (aristas.size()==0) aristas=automataEntrada.getAristasVertice(v2);
-					Iterator<String> itArista=aristas.iterator();
-					while(itArista.hasNext()) {
-							//	REPASAR BIEN ESTO
-						String letra=itArista.next();
-						String v1_letra=automataEntrada.funcion_delta(v1, letra);
-						String v2_letra=automataEntrada.funcion_delta(v2, letra);
-						if ((v1_letra==null&&v2_letra!=null) || (v1_letra!=null&&v2_letra==null)) {
-							System.out.println("V1:"+v1+",V2"+v2);
-							Registro prueba = new Registro (paso, false);
-							fila.put(v2,prueba);
-							tabla.put(v1,fila);
-						}
-						if ((v1_letra!=null)&&(v2_letra!=null)) {
-							System.out.println("ddsdf"+v1+" "+v1_letra);
-							System.out.println("ddsdf"+v2+" "+v2_letra);
-							if (tabla.get(v1_letra).get(v2_letra) != null){
-								Boolean estaMarcado=tabla.get(v1_letra).get(v2_letra).getMarcado();
-								if (estaMarcado==null) estaMarcado=tabla.get(v2_letra).get(v1_letra).getMarcado();
-								if (estaMarcado!=null) {
-									//HAY QUE DEJAR CONSTANCIA DEL RESULTADO EN LA TABLA
-									if (fila.get(v2).getMarcado()!=estaMarcado&&estaMarcado==false)hayCambios=true;
-									System.out.println("Marco:["+v1+","+v2+"]");
-									System.out.println("estaMarcado:"+estaMarcado);
-									HashMap<String,HashMap<String,Registro>> clon=(HashMap<String,HashMap<String,Registro>>)tabla.clone();
-									//fila.put(v2,estaMarcado);
-									Registro anota = new Registro(paso, false);
-									if (estaMarcado==false)fila.put(v2,anota);
-									tabla.put(v1,fila);
-							}
-							//if (!tabla.equals(clon)) hayCambios=true;
-							//else hayCambios=false;
-							}//if
-						}//if
-					}//while
-				}//if
-			}//if
-			paso++;
-		}//while*/
-		//if (hayCambios) numPasos++;
-	//}
-	
 	/**
 	 * Una vez terminada la tabla se genera el automata de salida con los estados asociados
 	 */
@@ -391,28 +321,6 @@ public class MinimizacionAFD implements Algoritmo{
 			}
 			if (!marcado) listaEstadosNuevos.add(s);
 		}
-		//////////////////////////////////////////////////////////////////////////////////////////
-		//se chequean si hay repeticiones para 3 estados.
-		/*if (listaEstadosReducibles.size()>=3) {
-			Iterator<Pareja> itRep=listaEstadosReducibles.iterator();
-			while(itRep.hasNext()) {
-				Pareja p1=itRep.next();
-				if (itRep.hasNext()) {
-					Pareja p2=itRep.next();
-					if (p1.coinciden(p2)) {
-						if(itRep.hasNext()) {
-							Pareja p3=itRep.next();
-							if (p1.coinciden(p3)) {
-								if (p2.coinciden(p3)) {
-									//Comprobar coincidencia
-								}
-							}
-						}
-					}
-					
-				}
-			}
-		}*/
 		/////////////////////////////////////////////////////////////////////////////////////////
 		//Se genera la lista de estados final
 		Iterator<Pareja> itReduc=listaEstadosReducibles.iterator();
