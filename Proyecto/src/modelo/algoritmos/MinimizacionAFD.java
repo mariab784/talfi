@@ -535,12 +535,14 @@ public class MinimizacionAFD implements Algoritmo{
 							if (!listaEstadosAsociados.contains(estado)&&(!listaEstadosAsociados.contains(estado2))) {
 								listaEstadosAsociados.add(estado);
 								listaEstadosAsociados.add(estado2);
-								nuevosEstados.add(estadoNuevo);
-								if (listaEstadosFinales.contains(estado)||listaEstadosFinales.contains(estado2)) {
-									nuevosEstadosFinales.add(estadoNuevo);
-								}
-								if (estadoInicial.equals(estado)||estadoInicial.equals(estado2)) {
-									nuevosEstadosFinales.add(estadoNuevo);
+								if (this.noRepite(estadoNuevo, nuevosEstados)){
+									nuevosEstados.add(estadoNuevo);
+									if (listaEstadosFinales.contains(estado)||listaEstadosFinales.contains(estado2)) {
+										nuevosEstadosFinales.add(estadoNuevo);
+									}
+									if (estadoInicial.equals(estado)||estadoInicial.equals(estado2)) {
+										nuevosEstadosFinales.add(estadoNuevo);
+									}
 								}
 							}
 						}
@@ -999,6 +1001,7 @@ public class MinimizacionAFD implements Algoritmo{
 
 private Automata renombrarSufijos(Automata a) {
 	Automata automata=new AutomataFD();
+	this.quitaInaccesibles(a);
 	Iterator<String> itEst=a.getEstados().iterator();
 	ArrayList<String> nEstados=new ArrayList<String>();
 	ArrayList<String> nEstadosFin=new ArrayList<String>();
@@ -1050,6 +1053,24 @@ private Automata renombrarSufijos(Automata a) {
 				
 			}
 		}
+	}
+	AutomataFD au2 = null;
+	try {
+		 au2 = (AutomataFD) automata.clone();
+	} catch (CloneNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	automata = this.quitaInaccesibles(au2);
+	if (!au2.getEstados().equals(automata.getEstados())){
+		MinimizacionAFD min = null;
+		try {
+			min = new MinimizacionAFD(au2);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		automata = min.ejecutar(true);
 	}
 	//RENOMBRAR ESTADOS
 	return automata;
