@@ -480,20 +480,8 @@ public class MinimizacionAFD implements Algoritmo{
 		public String toString() {
 			return "["+e1+","+e2+"]";
 		}
-		public boolean equals(Pareja p) {
-			return (e1.equals(p.e1)&&e2.equals(p.e2));
-		}
 		boolean uno_u_otro(String s) {
 			return ((e1.equals(s))||(e2.equals(s)));
-		}
-		boolean primero(String s) {
-			return (e1.equals(s));
-		}
-		boolean segundo(String s){
-			return (e2.equals(s));
-		}
-		boolean coinciden(Pareja p) {
-			return (e1.equals(p.e1)||(e2.equals(p.e2))||(e1.equals(p.e2)||(e2.equals(p.e1))));
 		}
 	}
 	
