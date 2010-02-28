@@ -35,8 +35,6 @@ public class Controlador_imp implements Controlador{
 	private static Controlador instancia;
 	private ArrayList<String> query;
 	private Object salida;
-	private Object salida2;
-	private Object salida3;
 	private String xmlSalida;
 	private boolean pasos;
 	private ArrayList<Vista> vistas;
@@ -162,7 +160,7 @@ public class Controlador_imp implements Controlador{
 				Automata b = null;
 				if (a instanceof AutomataFNDLambda){
 					TRANSFORMA_AFNDLambda_AFND(a,pasos);
-					a = (AutomataFND) salida3;
+					a = (AutomataFND) salida;
 					try {
 						 b = (AutomataFND) a.clone();
 					} catch (CloneNotSupportedException e) {
@@ -176,7 +174,7 @@ public class Controlador_imp implements Controlador{
 					else{ 
 					Transforma_AFND_AFD(a,pasos);
 					}
-					 a = (AutomataFD)salida2;
+					 a = (AutomataFD)salida;
 					 try {
 						b = (AutomataFD) a.clone();
 					} catch (CloneNotSupportedException e) {
@@ -271,7 +269,7 @@ public class Controlador_imp implements Controlador{
 		if (a instanceof AutomataFND && !(a instanceof AutomataFNDLambda)) {
 			AFN_to_AFD algAFNAFD=new AFN_to_AFD(a);
 			algAFNAFD.registraControlador(this);
-			salida2=algAFNAFD.ejecutar(pasos);
+			salida=algAFNAFD.ejecutar(pasos);
 			String xml=algAFNAFD.getXML();
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionAFNAFD"+brr+"prueba.xml";
@@ -285,7 +283,7 @@ public class Controlador_imp implements Controlador{
 				e.printStackTrace();
 			}
 			xmlSalida=rutaxml;
-			salida2.toString();
+			salida.toString();
 		}
 		else {
 			mensajero=Mensajero.getInstancia();
@@ -300,7 +298,7 @@ public class Controlador_imp implements Controlador{
 		if (a instanceof AutomataFNDLambda) {
 			AFNDLambda_to_AFND algLambda=new AFNDLambda_to_AFND(a);
 			algLambda.registraControlador(this);
-			salida3=algLambda.ejecutar(pasos);
+			salida=algLambda.ejecutar(pasos);
 			/*Obtencion del xml de salida del algoritmo */
 			String xml=algLambda.getXML();
 			String brr=new Character((char)92).toString();
@@ -315,7 +313,7 @@ public class Controlador_imp implements Controlador{
 				e.printStackTrace();
 			}
 			xmlSalida=rutaxml;
-			salida3.toString();
+			salida.toString();
 		}
 	}
 	private void afdtoer(Automata a,boolean pasos)throws AutomatasException {
