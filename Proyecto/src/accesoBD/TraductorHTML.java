@@ -44,7 +44,7 @@ import modelo.expresion_regular.ExpresionRegularImpl;
 
 
 /**
- * @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
+ * @author Rocio Barrigüete, Mario Huete, Luis San Juan
  *
  */
 public class TraductorHTML { 
