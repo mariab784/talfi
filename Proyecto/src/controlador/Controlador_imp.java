@@ -159,6 +159,8 @@ public class Controlador_imp implements Controlador{
 				Automata a=obtenerAutomata();
 				Automata b = null;
 				if (a instanceof AutomataFNDLambda){
+					Controlador_imp con2 = new Controlador_imp();
+					con2.ejecutaQuery("TALF -p-t1 prueba.xml");
 					TRANSFORMA_AFNDLambda_AFND(a,pasos);
 					a = (AutomataFND) salida;
 					try {
