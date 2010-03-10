@@ -63,6 +63,12 @@ public abstract class Gramatica {
 		this.variableInicial = variableInicial;
 	}
 	
+	/**
+	 * 
+	 * @param clave
+	 * @param p
+	 * Nuestro método para combinar dentro de la tabla
+	 */
 	public void anadeProduccion (String clave, Produccion p){
 		if (producciones.containsKey(clave)){
 			producciones.get(clave).add(p);
