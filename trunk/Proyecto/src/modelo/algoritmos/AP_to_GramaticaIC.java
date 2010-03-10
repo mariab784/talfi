@@ -4,7 +4,7 @@
 package modelo.algoritmos;
 
 /**
- * @author anicetobacter
+ * @author Rocio Barrigüete, Mario Huete, Luis San Juan
  *
  */
 public class AP_to_GramaticaIC {
