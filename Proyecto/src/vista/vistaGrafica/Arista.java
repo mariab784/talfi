@@ -2,14 +2,13 @@ package vista.vistaGrafica;
 
 import java.awt.Point;
 
-import vista.AristaInterface;
 
 /**
  * La clase arista define los parámetros de las aristas de la interfaz gráfica
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
-public class Arista extends AristaGeneral implements AristaInterface{
+public class Arista extends AristaGeneral /*implements AristaInterface*/{
 	
 /*	protected java.awt.geom.Rectangle2D bounds = new java.awt.Rectangle(0, 0);
 	
@@ -51,7 +50,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesro de la característica de la arista
 	 * @return true si la arista esta seleccionada
 	 */
-	public boolean getMarcada() {
+/*	public boolean getMarcada() {
 		return marcada;
 	}
 	
@@ -59,7 +58,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Marca (o desmarca) la arista
 	 * @param marcada si true marca la arista, si false la desmarca
 	 */
-	public void setMarcada(boolean marcada) {
+/*	public void setMarcada(boolean marcada) {
 		this.marcada=marcada;
 	}
 	
@@ -69,7 +68,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada x del estado origen
 	 * @return coordenada x del origen
 	 */
-	public int getX() {
+/*	public int getX() {
 		return x;
 	}
 
@@ -77,7 +76,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada x del estado origen
 	 * @param x nueva coordenada x del origen
 	 */
-	public void setX(int x) {
+/*	public void setX(int x) {
 		this.x = x;
 	}
 
@@ -85,7 +84,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada y del estado origen
 	 * @return coordenada y del origen
 	 */
-	public int getY() {
+/*	public int getY() {
 		return y;
 	}
 
@@ -93,7 +92,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada y del estado origen
 	 * @param y nueva coordenada y del origen
 	 */
-	public void setY(int y) {
+/*	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -101,7 +100,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
-	public int getFx() {
+/*	public int getFx() {
 		return fx;
 	}
 
@@ -109,7 +108,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada x del estado destino
 	 * @param fx nueva coordenada x del destino
 	 */
-	public void setFx(int fx) {
+/*	public void setFx(int fx) {
 		this.fx = fx;
 	}
 
@@ -117,7 +116,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
-	public int getFy() {
+/*	public int getFy() {
 		return fy;
 	}
 
@@ -125,7 +124,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada y del estado destino
 	 * @param fy nueva coordenada y del destino
 	 */
-	public void setFy(int fy) {
+/*	public void setFy(int fy) {
 		this.fy = fy;
 	}
 
@@ -133,7 +132,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor del nombre del estado origen
 	 * @return nombre del estado origen
 	 */
-	public String getOrigen() {
+/*	public String getOrigen() {
 		return origen;
 	}
 	
@@ -141,7 +140,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador del nombre del estado origen
 	 * @param origen nuevo nombre del origen
 	 */
-	public void setOrigen(String origen) {
+/*	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
 
@@ -149,7 +148,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método accesor del nombre del estado destino
 	 * @return monbre del estado destino
 	 */
-	public String getDestino() {
+/*	public String getDestino() {
 		return destino;
 	}
 
@@ -157,7 +156,7 @@ public class Arista extends AristaGeneral implements AristaInterface{
 	 * Método modificador del nombre del estado destino
 	 * @param destino nuevo nombre del destino
 	 */
-	public void setDestino(String destino) {
+	/*	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 
