@@ -12,8 +12,7 @@ public abstract class Gramatica {
 	
 	private ArrayList<String> variables;
 	private ArrayList<String> simbolos;
-	/* cambiar String por lo que toque*/
-	private HashMap<String,ArrayList<String>> producciones;
+	private HashMap<String,ArrayList<Produccion>> producciones;
 	private String variableInicial;
 	/**
 	 * @return the variables
@@ -42,13 +41,13 @@ public abstract class Gramatica {
 	/**
 	 * @return the producciones
 	 */
-	public HashMap<String, ArrayList<String>> getProducciones() {
+	public HashMap<String, ArrayList<Produccion>> getProducciones() {
 		return producciones;
 	}
 	/**
 	 * @param producciones the producciones to set
 	 */
-	public void setProducciones(HashMap<String, ArrayList<String>> producciones) {
+	public void setProducciones(HashMap<String, ArrayList<Produccion>> producciones) {
 		this.producciones = producciones;
 	}
 	/**
