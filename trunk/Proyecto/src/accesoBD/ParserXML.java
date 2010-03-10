@@ -93,7 +93,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		/*********************************************************/
 		if (var.equals("AutomataPila")){
 			
-			//automata = new AutomataPila();		
+			automata = new AutomataPila();		
 		}
 		/*********************************************************/
 		if (var.equals("MaquinaTuring")){
