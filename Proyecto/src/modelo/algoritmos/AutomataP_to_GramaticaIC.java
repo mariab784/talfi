@@ -3,16 +3,27 @@
  */
 package modelo.algoritmos;
 
+import accesoBD.Mensajero;
 import controlador.Controlador;
 import modelo.Algoritmo;
 import modelo.automatas.*;
+//import modelo.expresion_regular.ExpresionRegular;
+import modelo.gramatica.GramaticaIC;
 
 /**
- * @author anicetobacter
+ * @author Rocio Barrigüete, Mario Huete, Luis San Juan
  *
  */
 public class AutomataP_to_GramaticaIC implements Algoritmo {
 
+	private String xml;
+	private Automata automataEntrada;
+	private GramaticaIC gic;
+	private Controlador controlador;
+	private Mensajero mensajero;
+	private String Gramatica;
+	
+	private AutomataPila resultadosParciales;
 	/**
 	 * 
 	 */
