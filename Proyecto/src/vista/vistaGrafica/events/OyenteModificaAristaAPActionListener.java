@@ -46,6 +46,10 @@ public class OyenteModificaAristaAPActionListener implements ActionListener{
 		this.mensajero=Mensajero.getInstancia();
 		try{
 			//mouse.setNombreArista(mouse.getNomArs().getText());
+			if (mouse.getNomArs().getText().isEmpty() || mouse.getNomCima().getText().isEmpty() || 
+					mouse.getNomTrans().getText().isEmpty())
+				throw new NullPointerException();
+			
 			StringTokenizer st=new StringTokenizer(mouse.getNomArs().getText(),",");
 			ArrayList<String> ass = new ArrayList<String>();
 			String ss = null;
