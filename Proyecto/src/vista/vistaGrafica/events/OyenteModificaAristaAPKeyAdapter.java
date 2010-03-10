@@ -40,68 +40,16 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 	public void keyPressed(KeyEvent e){
 		this.mensajero=Mensajero.getInstancia();
 		if(e.getKeyCode()==KeyEvent.VK_ENTER){
-		/*	try{
-				
-				
-				mouse.setNombreArista(mouse.getNomArs().getText());
-				StringTokenizer st=new StringTokenizer(mouse.getNomArs().getText(),",");
-				String ss;
-				AristaAP arist = null;
-				while(st.hasMoreTokens()){
-					ss=st.nextToken();
-					if(mouse.getCanvas().getAlfabeto()==null) mouse.getCanvas().setAlfabeto(new Alfabeto_imp());
-					if(!mouse.getCanvas().getAlfabeto().estaLetra(ss)){
-						mouse.getCanvas().getAlfabeto().aniadirLetra(ss);
-					}
-					mouse.setEstadoOrigen(mouse.getDesde().getSelectedItem().toString());
-					mouse.setEstadoDestino(mouse.getHasta().getSelectedItem().toString());
-					Estado o=mouse.getCanvas().buscaEstado(mouse.getEstadoOrigen());
-					Estado d=mouse.getCanvas().buscaEstado(mouse.getEstadoDestino());
-					mouse.getCanvas().getListaAristasPila().remove(arista); //XXX int x,int y,int fx, int fy,String origen,String destino
-					arist = new AristaAP(o.getX(),o.getY(),d.getX(),d.getY(),o.getEtiqueta(),d.getEtiqueta());
-					mouse.getCanvas().getListaAristasPila().add(arist);
-				}
-				mouse.getCanvas().setAlfabeto(mouse.getMouse().getCanvas().minimizarAlfabeto());
-				//cima
-				if(mouse.getCanvas().getAlfabetoPila()==null) mouse.getCanvas().setAlfabetoPila(new AlfabetoPila_imp());
-				ss = mouse.getNomCima().getText();
-				if(!mouse.getCanvas().getAlfabetoPila().estaLetra(ss)){
-					mouse.getCanvas().getAlfabetoPila().aniadirLetra(ss);
-				}
-				//transicion pila
-				arist.setCimaPila(ss);
-				int i = 0;
-				ArrayList<String> ass = new ArrayList<String>();
-				ss = mouse.getNomTrans().getText();
-				while(/*st.hasMoreTokens()*//*i < ss.length()){
-					String s= "" + ss.charAt(i);//st.nextToken();
 
-					if(!mouse.getCanvas().getAlfabetoPila().estaLetra(s)){
-						mouse.getCanvas().getAlfabetoPila().aniadirLetra(s);
-					} //System.out.println(ss);//XXX
-					ass.add(s);
-
-					i++;
-				//	System.out.println("TRANS: "+ss);
-					//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
-				}
-				
-				System.out.println("EDIT ARIS: " + arist);
-				arist.setSalida(ass);
-				mouse.getCanvas().setAlfabeto(mouse.getMouse().getCanvas().minimizarAlfabeto());
-				mouse.getCanvas().setAlfabetoPila(mouse.getMouse().getCanvas().minimizarAlfabetoPila());
-				mouse.getDialog().setVisible(false);
-			} catch(NullPointerException ex){
-				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
-			}*/
 			
 			this.mensajero=Mensajero.getInstancia();
 			try{
 				//mouse.setNombreArista(mouse.getNomArs().getText());
 				StringTokenizer st=new StringTokenizer(mouse.getNomArs().getText(),",");
 				ArrayList<String> ass = new ArrayList<String>();
+				String ss = null;
 				while(st.hasMoreTokens()){
-					String ss=st.nextToken();
+					ss=st.nextToken();
 					ass.add(ss);
 					if(mouse.getCanvas().getAlfabeto()==null) mouse.getCanvas().setAlfabeto(new Alfabeto_imp());
 					if(!mouse.getCanvas().getAlfabeto().estaLetra(ss)){
@@ -117,16 +65,21 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 					//System.out.println("LISTARISTAS: " + mouse.getCanvas().getListaAristas());
 					AristaAP arist = new AristaAP(o.getX(),o.getY(),d.getX(),d.getY(), o.getEtiqueta(),d.getEtiqueta());
 					arist.setSimbolos(ass);
-					arist.setCimaPila(mouse.getNomCima().getText());
+					ss = mouse.getNomCima().getText();
+					arist.setCimaPila(ss);
+					if(mouse.getCanvas().getAlfabetoPila()==null) mouse.getCanvas().setAlfabetoPila(new AlfabetoPila_imp());
+					if(!mouse.getCanvas().getAlfabetoPila().estaLetra(ss)){
+						mouse.getCanvas().getAlfabetoPila().aniadirLetra(ss);
+					}
 					ass = new ArrayList<String>();
 					String transicion =  mouse.getNomTrans().getText();
 					int i = 0;
 					while(i < transicion.length()){
-						String ss= "" + transicion.charAt(i);
+						ss= "" + transicion.charAt(i);
 						ass.add(ss);
-						if(mouse.getCanvas().getAlfabeto()==null) mouse.getCanvas().setAlfabeto(new Alfabeto_imp());
-						if(!mouse.getCanvas().getAlfabeto().estaLetra(ss)){
-							mouse.getCanvas().getAlfabeto().aniadirLetra(ss);
+						if(mouse.getCanvas().getAlfabetoPila()==null) mouse.getCanvas().setAlfabetoPila(new AlfabetoPila_imp());
+						if(!mouse.getCanvas().getAlfabetoPila().estaLetra(ss)){
+							mouse.getCanvas().getAlfabetoPila().aniadirLetra(ss);
 						}
 					
 					i++;
@@ -138,7 +91,7 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 				mouse.getCanvas().setAlfabetoPila(mouse.getMouse().getCanvas().minimizarAlfabetoPila());
 					
 					
-					System.out.println("ARISTA CAMBIADA: " + arist);
+					//System.out.println("ARISTA CAMBIADA: " + arist);
 					
 				mouse.getDialog().setVisible(false);
 
