@@ -63,6 +63,16 @@ public abstract class Gramatica {
 		this.variableInicial = variableInicial;
 	}
 	
+	public void anadeProduccion (String clave, Produccion p){
+		if (producciones.containsKey(clave)){
+			producciones.get(clave).add(p);
+		}
+		else {
+			ArrayList<Produccion> nuevoP = new ArrayList<Produccion>();
+			nuevoP.add(p);
+			producciones.put(clave, nuevoP);
+		}
+	}
 	
 	
 	
