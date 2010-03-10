@@ -5,6 +5,7 @@ package modelo.algoritmos;
 
 import accesoBD.Mensajero;
 import controlador.Controlador;
+import controlador.Controlador_imp;
 import modelo.Algoritmo;
 import modelo.automatas.*;
 //import modelo.expresion_regular.ExpresionRegular;
@@ -27,9 +28,14 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	/**
 	 * 
 	 */
-	public AutomataP_to_GramaticaIC() {
+	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
+		automataEntrada=a;
+		mensajero=Mensajero.getInstancia();
+		xml=new String();
+		controlador=Controlador_imp.getInstancia();
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see modelo.Algoritmo#ejecutar(boolean)
