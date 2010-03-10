@@ -5,11 +5,13 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import vista.vistaGrafica.Arista;
+import vista.vistaGrafica.AristaAP;
+import vista.vistaGrafica.AristaGeneral;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.Estado;
 
 /**
- * Clase que implementa los mÃ±todoa para mover estado y aristas del automata
+ * Clase que implementa los métodoa para mover estado y aristas del automata
  * sobre el panel de dibujo
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
@@ -21,11 +23,11 @@ public class OyenteEditar extends MouseAdapter {
 	private AutomataCanvas canvas;
 	private Estado estado;
 	private Point punto;
-	private Arista arista;
+	private AristaGeneral arista; //cambiado antes Arista
 	private int count;
 	
 	/**
-	 * CreaciÃ±n del oyente que recibe el panel de dibujos
+	 * Creación del oyente que recibe el panel de dibujos
 	 * @param c panel de dibujos de automatas
 	 */
 	public OyenteEditar(AutomataCanvas c){
@@ -34,10 +36,10 @@ public class OyenteEditar extends MouseAdapter {
 	}
 	
 	/**
-	 * Evento de pulsaciÃ±n de tecla de ratÃ±n, si es la tecla izquierda
-	 * y estÃ± sobre un estado o una arista esta se podrÃ± mover en el dibujo
+	 * Evento de pulsación de tecla de ratón, si es la tecla izquierda
+	 * y está sobre un estado o una arista esta se podrá mover en el dibujo
 	 * siempre y cuando se haya seleccionado el boton de editar
-	 * @param e evento de pulsaciÃ±n de tecla de ratÃ±n
+	 * @param e evento de pulsación de tecla de ratón
 	 */
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -56,23 +58,26 @@ public class OyenteEditar extends MouseAdapter {
 				}
 			} else {
 				arista=canvas.aristaEn(e.getPoint());
-				if(arista!=null){
-					punto=e.getPoint();
-				} else {
-					punto=e.getPoint();
-					canvas.deseleccionaEstados();
-					count=0;
-				}
+				//if (arista instanceof AristaAP) System.out.println("yeahyeahyeah OYENTE EDITAR");
+				//if (arista instanceof Arista){
+					if(arista!=null){
+						punto=e.getPoint();
+					} else {
+						punto=e.getPoint();
+						canvas.deseleccionaEstados();
+						count=0;
+					}
+				//}	
 			}
 		}
 	}
 	
 	/**
-	 * MÃ±todo que detecta el evento de soltar la tecla del ratÃ±n, si tenÃ±a algÃ±n
-	 * estado o arista seleccionado con el ratÃ±n se deselecciona y ya no se puede 
-	 * mover hasta pulsarlo de nuevo, se pinta la arista/estado en el puntÃ±
-	 * Ã±ltimo en el que se dejÃ±
-	 * @param e evendo de dejar de pulsar tecla de ratÃ±n
+	 * Método que detecta el evento de soltar la tecla del ratón, si tenía algún
+	 * estado o arista seleccionado con el ratón se deselecciona y ya no se puede 
+	 * mover hasta pulsarlo de nuevo, se pinta la arista/estado en el puntó
+	 * último en el que se dejó
+	 * @param e evendo de dejar de pulsar tecla de ratón
 	 */
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -88,12 +93,12 @@ public class OyenteEditar extends MouseAdapter {
 	}
 
 	/**
-	 * MÃ±todo que detecta cuando se estÃ± moviendo el ratÃ±n sobre el panel de dibujo con
-	 * en botÃ±n pulsado, si tiene un estadoo varios o una arista seleccionados se van 
-	 * moviendo y pintando segÃ±n se mueve, sino no hace nada
+	 * Método que detecta cuando se está moviendo el ratón sobre el panel de dibujo con
+	 * en botón pulsado, si tiene un estadoo varios o una arista seleccionados se van 
+	 * moviendo y pintando según se mueve, sino no hace nada
 	 * @param e evento de movimiento minetras pulsa tecla
 	 */
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MouseEvent e) { //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 		// TODO Auto-generated method stub
 		if(canvas.getEstadoB()!=editar) return;
 		if(estado!=null){

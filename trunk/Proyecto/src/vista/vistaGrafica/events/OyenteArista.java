@@ -32,8 +32,10 @@ import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
+import vista.AristaInterface;
 import vista.vistaGrafica.Arista;
 import vista.vistaGrafica.AristaAP;
+import vista.vistaGrafica.AristaGeneral;
 import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.CurvedArrow;
@@ -48,7 +50,6 @@ import java.lang.Exception;
  */
 public class OyenteArista extends MouseAdapter {
 
-	private final String separador = "|";
 	private final int arista=4;
 	private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 	private static java.awt.Color COLOR = new java.awt.Color(.5f, .5f, .5f, .5f);
@@ -63,6 +64,8 @@ public class OyenteArista extends MouseAdapter {
 	private String nombreEstado;
 	private String nombreArista;
 	private JTextField nomArs;
+	private JTextField nomCima;
+	private JTextField nomTrans;
 	private JTextField nomEst;
 	private JComboBox desde;
 	private JComboBox hasta;
@@ -196,6 +199,23 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	/**
+	 * Método accesor del campo de texto donde se escribe el nombre de la arista, la
+	 * cima de la misma
+	 * @return el campo de texto del nombre de la arista
+	 */
+	public JTextField getNomCima() {
+		return nomCima;
+	}
+	/**
+	 * Método accesor del campo de texto donde se escribe el nombre de la arista, la
+	 * transicion de la misma
+	 * @return el campo de texto del nombre de la arista
+	 */
+	public JTextField getNomTrans() {
+		return nomTrans;
+	}
+	
+	/**
 	 * Método modificador del campo de texto donde se escribe el nombre de la arista, las
 	 * letras de la misma
 	 * @param nomArs nuevo campo de texto del nombre de la arista
@@ -306,13 +326,18 @@ public class OyenteArista extends MouseAdapter {
 				itemEst.addActionListener(new OyenteItemPopupEstado(est,this));
 				menu.show(canvas,e.getPoint().x,e.getPoint().y);
 			}
-			Arista arist=canvas.aristaEn(e.getPoint());
+			AristaInterface/*General*/ arist=canvas.aristaEn(e.getPoint()); /**************** OJO AKI *********************/
 			if(arist!=null){
 				menu=new JPopupMenu();
 				JMenuItem itemArist=new JMenuItem(mensajero.devuelveMensaje("popup.arista",1));
 				itemArist.setToolTipText(mensajero.devuelveMensaje("tooltip.popUpar",1));
 				menu.add(itemArist);
-				itemArist.addActionListener(new OyenteItemPopupArista(arist,this));
+				if (arist instanceof Arista)itemArist.addActionListener(new OyenteItemPopupArista((Arista)arist,this));
+				else if (arist instanceof AristaAP){ 
+					//System.out.println("uo uo uo");
+					itemArist.addActionListener(new OyenteItemPopupAristaAP((AristaAP)arist,this));
+					
+				}
 				menu.show(canvas,e.getPoint().x,e.getPoint().y);
 			}
 			if(arist==null&&est==null&&canvas.getVista().dibujar()){
@@ -767,29 +792,29 @@ public class OyenteArista extends MouseAdapter {
 			
 			canvas.anadeAristaAP(aristaAP);
 			
-			String ini = canvas.getEstadoInicial();
-			canvas.getAP().setEstadoInicial(ini);
-			System.out.println("ESTADO INICIAL: " + canvas.getAP().getEstadoInicial());
+			//String ini = canvas.getEstadoInicial();
+			//canvas.getAP().setEstadoInicial(ini);
+			System.out.println("ESTADO INICIAL: " + canvas.getEstadoInicial());
 			
-			Alfabeto a = canvas.getAlfabeto();
-			canvas.getAP().setAlfabeto(a);
-			System.out.println("ALF: " + canvas.getAP().getAlfabeto());
+			//Alfabeto a = canvas.getAlfabeto();
+			//canvas.getAP().setAlfabeto(a);
+			System.out.println("ALF: " + canvas.getAlfabeto());
 			
-			Alfabeto_Pila alf = canvas.getAlfabetoPila();
-			canvas.getAP().setAlfabetoPila(alf);
-			System.out.println("ALF PILA: " + canvas.getAP().getAlfabetoPila());
+			//Alfabeto_Pila alf = canvas.getAlfabetoPila();
+			//canvas.getAP().setAlfabetoPila(alf);
+			System.out.println("ALF PILA: " + canvas.getAlfabetoPila());
 			
-			ArrayList<AristaAP> arist = canvas.getListaAristasPila();
-			canvas.getAP().setAPNuevo(arist);
-			System.out.println("ARISTAS: " + canvas.getAP().getAutomataPila());
+			//ArrayList<AristaAP> arist = canvas.getListaAristasPila();
+			//canvas.getAP().setAPNuevo(arist);
+			System.out.println("ARISTAS: " + canvas.getListaAristasPila());
 			
-			ArrayList<String> estad = canvas.getNombreEstados();
-			canvas.getAP().setEstados(estad);
-			System.out.println("ESTADOS: " + canvas.getAP().getEstados());
+			//ArrayList<String> estad = canvas.getNombreEstados();
+			//canvas.getAP().setEstados(estad);
+			System.out.println("ESTADOS: " + canvas.getNombreEstados());
 			
-			ArrayList<String> estFin = canvas.getListaFinales();
-			canvas.getAP().setEstadosFinales(estFin);
-			System.out.println("ESTADOS FINALES: " + canvas.getAP().getEstadosFinales());
+			//ArrayList<String> estFin = canvas.getListaFinales();
+			//canvas.getAP().setEstadosFinales(estFin);
+			System.out.println("ESTADOS FINALES: " + canvas.getListaFinales());
 			//dialogCimaPila();
 			
 		//	System.out.println(canvas.getNombreEstados());
@@ -958,8 +983,10 @@ public class OyenteArista extends MouseAdapter {
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		//System.out.println("CIMA:" + cima);
 		//System.out.println("LAMBDA:" + lambda);
-		canvas.creaAP();
-		
+		canvas.creaAP(); 
+		/************************************************/
+		//NO SEGURO CREARLO AKI
+		/************************************************/
 		JOptionPane pane=new JOptionPane();
 		//mensajero=Mensajero.getInstancia();
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
@@ -1050,6 +1077,73 @@ public class OyenteArista extends MouseAdapter {
 		dialog.setSize(new Dimension(300,150));
 		dialog.setVisible(true);
 	}
+	
+	/**
+	 * Crea el diálogo con la infromación de la arista del automata de pila que recibe como parámetro
+	 * @param a arista de la que se extrae la infromación que se muestra
+	 */
+	protected void createDialogAristaAP(AristaAP a){
+		Mensajero m=Mensajero.getInstancia();
+		JOptionPane pane=new JOptionPane();
+		//mensajero=Mensajero.getInstancia();
+		dialog=pane.createDialog(null,m.devuelveMensaje("vista.arist",2));
+		JPanel panelD=new JPanel(new GridLayout(4,1));
+		//JPanel panelE=new JPanel(new GridLayout(4,1));
+		//JPanel panelF=new JPanel(new GridLayout(4,1));
+		JLabel etiqN=new JLabel(m.devuelveMensaje("vista.sym",2));
+		nomArs=new JTextField(a.toStringSimbolos()); //REVISAR
+
+		JLabel etiqC=new JLabel(/*m.devuelveMensaje("vista.sym",2)*/"CIMA");
+		nomCima=new JTextField(a.getCimaPila());
+		JLabel etiqT=new JLabel(/*m.devuelveMensaje(*/"vista.sym"/*,2)*/);
+		nomTrans=new JTextField(a.toStringTransicion());
+		nomArs.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this)); //REVISARRRRRRRR
+		Vector<String> v=new Vector<String>();
+		Iterator<Estado> iAr=canvas.getListaEstados().iterator();
+		while(iAr.hasNext()){
+			Estado es=iAr.next();
+			v.add(es.getEtiqueta());
+		}
+		JPanel panelCombo=new JPanel();
+		JLabel e1=new JLabel(m.devuelveMensaje("vista.desde",2));
+		desde=new JComboBox(v);
+		desde.setSelectedItem(a.getOrigen());
+		JLabel e2=new JLabel(m.devuelveMensaje("vista.hasta",2));
+		hasta=new JComboBox(v);
+		hasta.setSelectedItem(a.getDestino());
+		panelCombo.add(e1);
+		panelCombo.add(desde); 
+		panelCombo.add(e2);
+		panelCombo.add(hasta);
+		JPanel panelB=  new JPanel(); 
+		JButton aceptar=new JButton(m.devuelveMensaje("vista.aceptar",2));
+		aceptar.addActionListener(new OyenteModificaAristaAPActionListener(a,this)); //REVISARRRRRRRR
+		JButton cancelar=new JButton(m.devuelveMensaje("vista.cancelar",2));
+		cancelar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				dialog.setVisible(false);
+			}
+		});
+		panelB.add(aceptar);
+		panelB.add(cancelar);
+		panelD.add(etiqN);
+		panelD.add(nomArs);
+		panelD.add(etiqC);
+		panelD.add(nomCima);
+		panelD.add(etiqT);
+		panelD.add(nomTrans);
+		panelD.add(panelCombo);
+		panelD.add(panelB);
+//		panelD.add(panelE);
+//		panelD.add(panelF);
+		dialog.setContentPane(panelD);
+		
+		dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		dialog.setSize(new Dimension(/*300*/400,/*150*/350));
+		dialog.setVisible(true);
+	}
+	
+	
 	
 	/**
 	 * Crea el diálogo con la infromación del estado que recibe como parámetro

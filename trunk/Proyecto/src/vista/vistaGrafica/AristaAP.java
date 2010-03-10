@@ -3,14 +3,18 @@ package vista.vistaGrafica;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import vista.AristaInterface;
+
+import accesoBD.Mensajero;
+
+
 
 /**
  * La clase arista define los parámetros de las aristas para AP de la interfaz gráfica
  *  @author Rocío Barrigüete, Mario Huete, Luis San Juan
  *
  */
-public class AristaAP extends AristaGeneral implements AristaInterface{
+@SuppressWarnings("unchecked")
+public class AristaAP extends AristaGeneral implements /*AristaInterface,*/ Comparable{
 	
 	protected java.awt.geom.Rectangle2D bounds = new java.awt.Rectangle(0, 0);
 	
@@ -54,14 +58,14 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * @return lista de simbolos de entrada entradaSimbolos
 	 */
 	
-	public boolean getMarcada(){ return marcada;}
+/*	public boolean getMarcada(){ return marcada;}
 	
 	/**
 	 * Método modificador de una posicion de la lista de simbolos de entrada marcados
 	 * @param b valor de marcado
 	 */
 	
-	public void setMarcada(boolean b){ marcada = b;}
+/*	public void setMarcada(boolean b){ marcada = b;}
 	
 	/**
 	 * Método accesor de la lista de simbolos de entrada
@@ -133,7 +137,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * @param x nueva coordenada x del origen
 	 */
 	
-	public int getX() {
+/*	public int getX() {
 		return x;
 	}
 
@@ -141,7 +145,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada x del estado origen
 	 * @param x nueva coordenada x del origen
 	 */
-	public void setX(int x) {
+/*	public void setX(int x) {
 		this.x = x;
 	}
 
@@ -149,7 +153,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada y del estado origen
 	 * @return coordenada y del origen
 	 */
-	public int getY() {
+/*	public int getY() {
 		return y;
 	}
 
@@ -157,7 +161,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada y del estado origen
 	 * @param y nueva coordenada y del origen
 	 */
-	public void setY(int y) {
+/*	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -165,7 +169,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
-	public int getFx() {
+/*	public int getFx() {
 		return fx;
 	}
 
@@ -173,7 +177,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada x del estado destino
 	 * @param fx nueva coordenada x del destino
 	 */
-	public void setFx(int fx) {
+/*	public void setFx(int fx) {
 		this.fx = fx;
 	}
 
@@ -181,7 +185,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método accesor de la coordenada x del estado destino
 	 * @return coordenada x del destino
 	 */
-	public int getFy() {
+/*	public int getFy() {
 		return fy;
 	}
 
@@ -189,7 +193,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador de la coordenada y del estado destino
 	 * @param fy nueva coordenada y del destino
 	 */
-	public void setFy(int fy) {
+/*	public void setFy(int fy) {
 		this.fy = fy;
 	}
 
@@ -197,7 +201,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método accesor del nombre del estado origen
 	 * @return nombre del estado origen
 	 */
-	public String getOrigen() {
+/*	public String getOrigen() {
 		return origen;
 	}
 	
@@ -205,7 +209,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador del nombre del estado origen
 	 * @param origen nuevo nombre del origen
 	 */
-	public void setOrigen(String origen) {
+/*	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
 
@@ -213,7 +217,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método accesor del nombre del estado destino
 	 * @return monbre del estado destino
 	 */
-	public String getDestino() {
+/*	public String getDestino() {
 		return destino;
 	}
 
@@ -221,7 +225,7 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	 * Método modificador del nombre del estado destino
 	 * @param destino nuevo nombre del destino
 	 */
-	public void setDestino(String destino) {
+/*	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 
@@ -278,6 +282,31 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 	public String toString() {
 		return "d("+origen+","+entradaSimbolos+","+cimaPila+")=("+destino+","+salidaPila+")";//+"("+marcada+")";
 	}
+	/**
+	 * Método que devuelve los simbolos de entrada que se consumen en la arista en formato texto
+	 *  @return cadena con los simbolos consumidos en la arista
+	 */
+	public String toStringSimbolos() {
+		String s = "";
+		int tam = this.getEntradaSimbolos().size();
+		for(int i = 0; i < tam; i++){
+			s += this.getEntradaSimbolos().get(i);
+			if (i != tam-1)	 s+= ",";
+			
+		}
+		return s;
+	}
+	/**
+	 * Método que devuelve la transicion de pila de la arista en formato texto
+	 * @return cadena con la información de la transicion de pila de la arista
+	 */
+	public String toStringTransicion() {
+		String s = "";
+		int tam = this.getSalidaPila().size();
+		for(int i = 0; i < tam; i++){
+			s += this.getSalidaPila().get(i);
+		}
+		return s;	}
 	
 	public void setSimbolos(ArrayList<String> simbolos) {
 		// TODO Auto-generated method stub
@@ -298,5 +327,38 @@ public class AristaAP extends AristaGeneral implements AristaInterface{
 			 return true;
 		 else return false;
 	 }
+
+	public int compareTo(Object arg0) {
+		AristaAP a2 = (AristaAP)arg0;
+		Mensajero mensajero = Mensajero.getInstancia();
+		String lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		/*if (cadena1.compareTo(cadena2) == 0)
+   System.out.println("cadena1 y cadena2 son iguales");
+else
+if (cadena1.compareTo(cadena2) < 0)
+  System.out.println ("cadena1 va antes que cadena2");
+else
+if (cadena1.compareTo(cadena2) > 0)
+  System.out.println("cadena2 va después que cadena1");
+*/
+		// TODO Auto-generated method stub
+		/*if ( this.getOrigen().compareTo(a2.getOrigen() ) != 0 &&
+				!this.getEntradaSimbolos().contains(lambda)) return 1;
+		else return -1;*/
+		int origenes = this.getOrigen().compareTo(a2.getOrigen() );
+		
+		if ( origenes > 0 ) return 1;
+		
+		if ( origenes == 0 ){
+			
+			if (!this.getEntradaSimbolos().contains(lambda)) return -1;
+			else return 1;
+		}
+		else return -1;
+		
+		/*!= 0 &&
+		!this.getEntradaSimbolos().contains(lambda)*/
+		
+	}
 	
 }
