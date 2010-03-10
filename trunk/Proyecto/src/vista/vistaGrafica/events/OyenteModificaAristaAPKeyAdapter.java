@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
-import vista.vistaGrafica.Arista;
+//import vista.vistaGrafica.Arista;
 import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
@@ -40,7 +40,7 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 	public void keyPressed(KeyEvent e){
 		this.mensajero=Mensajero.getInstancia();
 		if(e.getKeyCode()==KeyEvent.VK_ENTER){
-			try{
+		/*	try{
 				
 				
 				mouse.setNombreArista(mouse.getNomArs().getText());
@@ -73,7 +73,7 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 				int i = 0;
 				ArrayList<String> ass = new ArrayList<String>();
 				ss = mouse.getNomTrans().getText();
-				while(/*st.hasMoreTokens()*/i < ss.length()){
+				while(/*st.hasMoreTokens()*//*i < ss.length()){
 					String s= "" + ss.charAt(i);//st.nextToken();
 
 					if(!mouse.getCanvas().getAlfabetoPila().estaLetra(s)){
@@ -93,7 +93,61 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 				mouse.getDialog().setVisible(false);
 			} catch(NullPointerException ex){
 				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
+			}*/
+			
+			this.mensajero=Mensajero.getInstancia();
+			try{
+				//mouse.setNombreArista(mouse.getNomArs().getText());
+				StringTokenizer st=new StringTokenizer(mouse.getNomArs().getText(),",");
+				ArrayList<String> ass = new ArrayList<String>();
+				while(st.hasMoreTokens()){
+					String ss=st.nextToken();
+					ass.add(ss);
+					if(mouse.getCanvas().getAlfabeto()==null) mouse.getCanvas().setAlfabeto(new Alfabeto_imp());
+					if(!mouse.getCanvas().getAlfabeto().estaLetra(ss)){
+						mouse.getCanvas().getAlfabeto().aniadirLetra(ss);
+					}
+				}	
+					mouse.setEstadoOrigen(mouse.getDesde().getSelectedItem().toString());
+					mouse.setEstadoDestino(mouse.getHasta().getSelectedItem().toString());
+					Estado o=mouse.getCanvas().buscaEstado(mouse.getEstadoOrigen());
+					Estado d=mouse.getCanvas().buscaEstado(mouse.getEstadoDestino());
+					mouse.getCanvas().getListaAristasPila().remove(arista); //int x,int y,int fx, int fy,String origen,String destino)
+
+					//System.out.println("LISTARISTAS: " + mouse.getCanvas().getListaAristas());
+					AristaAP arist = new AristaAP(o.getX(),o.getY(),d.getX(),d.getY(), o.getEtiqueta(),d.getEtiqueta());
+					arist.setSimbolos(ass);
+					arist.setCimaPila(mouse.getNomCima().getText());
+					ass = new ArrayList<String>();
+					String transicion =  mouse.getNomTrans().getText();
+					int i = 0;
+					while(i < transicion.length()){
+						String ss= "" + transicion.charAt(i);
+						ass.add(ss);
+						if(mouse.getCanvas().getAlfabeto()==null) mouse.getCanvas().setAlfabeto(new Alfabeto_imp());
+						if(!mouse.getCanvas().getAlfabeto().estaLetra(ss)){
+							mouse.getCanvas().getAlfabeto().aniadirLetra(ss);
+						}
+					
+					i++;
+					}
+					arist.setSalida(ass);
+					mouse.getCanvas().getListaAristasPila().add(arist);
+				
+				mouse.getCanvas().setAlfabeto(mouse.getMouse().getCanvas().minimizarAlfabeto());
+				mouse.getCanvas().setAlfabetoPila(mouse.getMouse().getCanvas().minimizarAlfabetoPila());
+					
+					
+					System.out.println("ARISTA CAMBIADA: " + arist);
+					
+				mouse.getDialog().setVisible(false);
+
+			} catch(NullPointerException ex){
+				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
 			}
+			
+			
+			
 		}
 	}
 	
