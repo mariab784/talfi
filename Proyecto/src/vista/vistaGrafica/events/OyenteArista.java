@@ -1097,7 +1097,9 @@ public class OyenteArista extends MouseAdapter {
 		nomCima=new JTextField(a.getCimaPila());
 		JLabel etiqT=new JLabel(/*m.devuelveMensaje(*/"vista.sym"/*,2)*/);
 		nomTrans=new JTextField(a.toStringTransicion());
-		nomArs.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this)); //REVISARRRRRRRR
+		nomArs.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this));
+		nomCima.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this));
+		nomTrans.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this));//REVISARRRRRRRR
 		Vector<String> v=new Vector<String>();
 		Iterator<Estado> iAr=canvas.getListaEstados().iterator();
 		while(iAr.hasNext()){
