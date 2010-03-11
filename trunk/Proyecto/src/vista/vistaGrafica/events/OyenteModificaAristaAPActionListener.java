@@ -94,9 +94,7 @@ public class OyenteModificaAristaAPActionListener implements ActionListener{
 			
 			mouse.getCanvas().setAlfabeto(mouse.getMouse().getCanvas().minimizarAlfabeto());
 			mouse.getCanvas().setAlfabetoPila(mouse.getMouse().getCanvas().minimizarAlfabetoPila());
-			System.out.println("ALFABETO: " + mouse.getMouse().getCanvas().getAlfabeto());	
-			System.out.println("ALFABETO PILA: " + mouse.getMouse().getCanvas().getAlfabetoPila());	
-				//System.out.println("ARISTA CAMBIADA: " + arist);
+
 				
 			mouse.getDialog().setVisible(false);
 
