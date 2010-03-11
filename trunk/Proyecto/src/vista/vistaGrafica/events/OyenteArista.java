@@ -854,7 +854,7 @@ public class OyenteArista extends MouseAdapter {
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
-		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.ap3",2) + lambda + mensajero.devuelveMensaje("vista.ap3p2",2));
+		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.ap3",2));
 		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
@@ -992,7 +992,8 @@ public class OyenteArista extends MouseAdapter {
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
-		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.ap1",2) + "\n" + lambda + mensajero.devuelveMensaje("vista.ap1p2",2));
+		System.out.println(mensajero.devuelveMensaje("vista.ap1p2",2));
+		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.ap1",2));
 		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
