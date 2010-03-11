@@ -93,10 +93,7 @@ public class OyenteModificaAristaAPKeyAdapter extends KeyAdapter {
 				
 				mouse.getCanvas().setAlfabeto(mouse.getMouse().getCanvas().minimizarAlfabeto());
 				mouse.getCanvas().setAlfabetoPila(mouse.getMouse().getCanvas().minimizarAlfabetoPila());
-					
-					
-					//System.out.println("ARISTA CAMBIADA: " + arist);
-					
+
 				mouse.getDialog().setVisible(false);
 
 			} catch(NullPointerException ex){
