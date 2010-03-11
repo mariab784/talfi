@@ -328,12 +328,7 @@
 		<ap2>
 			Cima de pila
 		</ap2>
-		<ap3>
-			Simbolos de pila a apilar (
-		</ap3>
-		<ap3p2>
-			 para desapilar)
-		</ap3p2>
+		<ap3>Simbolos de pila a apilar / desapilar</ap3>
 		<sym3>
 			Simbolo de cinta  / Nuevo simbolo de cinta(# es un blanco), direccion (I,D,N)
 		</sym3>
