@@ -144,8 +144,17 @@ public class OyenteEditar extends MouseAdapter {
 
 	private void modificaAristasEstado(Estado origen2,Point newPoint) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<canvas.getListaAristas().size();i++){
-			Arista a=canvas.getListaAristas().get(i);
+		
+		int tam = 0; int tipo = 0;
+		if(!canvas.getListaAristas().isEmpty()) tam = canvas.getListaAristas().size();
+		if (!canvas.getListaAristasPila().isEmpty()){ tam = canvas.getListaAristasPila().size(); tipo = 1;}
+		//if (!canvas.getListaAristasTuring().isEmpty()){ tam = canvas.getListaAristasTuring().size(); tipo = 2;}
+		for(int i=0;i</*canvas.getListaAristas().size()*/tam;i++){
+			AristaGeneral a = null;
+			if (tipo == 0) a=canvas.getListaAristas().get(i);
+			else if (tipo == 1) a=canvas.getListaAristasPila().get(i);
+			//else a=canvas.getListaAristasTuring().get(i);
+			//Arista a=canvas.getListaAristas().get(i);
 			if(a.getOrigen().equals(origen2.getEtiqueta())){
 				a.setX(newPoint.x);
 				a.setY(newPoint.y);
