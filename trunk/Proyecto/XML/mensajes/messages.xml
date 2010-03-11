@@ -321,19 +321,10 @@
 		<sym>
 			Type arrow symbols (it can be more than one separated by comas)
 		</sym>
-		<ap1>
-			Type arrow symbols (it can be more than one separated by comas)
-
-		</ap1>
 		<ap2>
 			Top of the stack
 		</ap2>
-		<ap3>
-			Stack symbols to push(
-		</ap3>
-		<ap3p2>
-			 to push off)
-		</ap3p2>
+		<ap3>Stack symbols to push / push off</ap3>
 		<sym3>
 			Tape symbol  / New tape symbol(# means blank symbol), direction (L,R,N)
 
