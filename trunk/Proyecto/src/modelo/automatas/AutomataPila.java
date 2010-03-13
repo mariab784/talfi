@@ -7,19 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import javax.swing.JOptionPane;
-
-import modelo.AutomatasException;
-
-import com.sun.servicetag.SystemEnvironment;
-
 import accesoBD.Mensajero;
-
 import vista.vistaGrafica.AristaAP;
-import vista.vistaGrafica.events.OyenteArista;
-
-
 
 /**
  * Clase que implementa la funcionalidad de los automatas de pila
@@ -29,6 +18,7 @@ import vista.vistaGrafica.events.OyenteArista;
 /******************************************************************/
 public class AutomataPila extends AutomataFND{
 	
+	private final  static String nombreAux = "aux";
 	//Atributos////////////////////////////////////////////////////
 	private String estadoInicial;
 	private ArrayList<String> estadosFinales;
@@ -43,16 +33,16 @@ public class AutomataPila extends AutomataFND{
 	private String lambda;
 	private String fondoPila;
 	
-	private boolean porEstado;
-	private boolean porPila;
+
+
 
 	private ArrayList<Integer> aristasQueDesapilan; // esto tocarlo tb en la parte visual
 	private ArrayList<Integer> aristasLambda;
 	
 //	private boolean[] visitados;
 	
-	private static ArrayList<Boolean> result1;
-	private static ArrayList<Boolean> result2;
+	private ArrayList<AristaAP> aristasPilaVacia;
+	private String estadoPilaVacia;
 	
 	//private  ArrayList<CiclosYSoluciones> listaCiclos;
 	//como en la arte grafica se meten al final no hay problema (creo)
@@ -73,8 +63,8 @@ public class AutomataPila extends AutomataFND{
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 		aristasQueDesapilan = new ArrayList<Integer>();
 		aristasLambda = new ArrayList<Integer>();
-		
-//		visitados = null;
+		aristasPilaVacia = null;
+		estadoPilaVacia = null;
 	}
 	//-------------------------------------------------------------
 	public AutomataPila(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
@@ -1002,39 +992,58 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	}
 	
 	/**
-	 * Recoloca primero las aristas sin \, y luego las ke tienen \
-	 * (Metodo en pruebas, tambien en un futuro deberia romper los ciclos)
+	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
 	 */
-	private void organizarAristas(){
+
+	private void convertirPilaVacia(){
 		
-		//boolean conLambda = false;
-//		System.out.println("ARISTAS: " + this.automata);
-		//System.out.println("ARISTAS ke desapilan: " + this.aristasQueDesapilan);
-//		System.out.println("ARISTAS lambda: " + this.aristasLambda);
-		
-		//System.out.println("ARISTAS iniciales: " + this.automata);
-		Iterator<Integer> it = aristasLambda.iterator(); int i = 0;
-		AristaAP aristAux = null; Integer indice = null; //ArrayList<AristaAP> autAux = new ArrayList<AristaAP>();
-		int centinel = 0;
-		while (it.hasNext()){
+		int i = 0; int j = 0;
+		estadoPilaVacia = nombreAux;
+		aristasPilaVacia = new ArrayList<AristaAP>();
+		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
+		String est = this.getEstadosFinales().get(i);
+		System.out.println("est final: " + est);
+		int tamAlfpila = this.alfabetoPila.getListaLetras().size();
+		System.out.println("tamAlfpila : " + tamAlfpila);
+		int tamEstFin = this.getEstadosFinales().size();
+		System.out.println("tamEstFin : " + tamEstFin);
+		while ( (i < tamEstFin) && (j < tamAlfpila) ){
 			
-			indice = it.next();
-			i = indice.intValue() - centinel;
+			//(int x,int y,int fx, int fy,String origen,String destino)
+			AristaAP a = new AristaAP(0,0,0,0,est,estadoPilaVacia);
+			simboloPila = this.alfabetoPila.getListaLetras().get(j);
+			a.anadirSimbolo(lambda);
+			a.setCimaPila(simboloPila);
+			ArrayList<String> trans = new ArrayList<String>();
+			trans.add(lambda);
+			a.setSalida(trans);
+			this.aristasPilaVacia.add(a);
+			a = new AristaAP(0,0,0,0,estadoPilaVacia,estadoPilaVacia);
+			a.setOrigen(estadoPilaVacia);
+			a.anadirSimbolo(lambda);
+			a.setCimaPila(simboloPila);
+			a.setSalida(trans);
+			this.aristasPilaVacia.add(a);
 			
+			
+			if (j == (tamAlfpila -1)) {
 				
-			aristAux = automata.get(i);
+				 
+				if (i != (tamEstFin -1)){
+					i++;
+					est = this.getEstadosFinales().get(i);
+					j = 0;
+				}
+				else {j++; }
+			}
+			else {j++; }
+			System.out.println("I: " + i + " J : " + j);
 			
-			automata.remove(i);
-			//System.out.println("ARISTAS quitado: " + this.automata);
-			automata.add(aristAux);
-			//System.out.println("ARISTAS puesto: " + this.automata);
-			centinel++;
 		}
 		
-		//System.out.println("ARISTAS final: " + this.automata);
-		//System.out.println("ARISTAS ke desapilan: " + this.aristasQueDesapilan);
-//		System.out.println("ARISTAS lambda: " + this.aristasLambda);
+		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
 	}
+	
 	
 	/**
 	 * Método que verifica si una palabra es reconocida por el autómata de pila.
@@ -1043,53 +1052,26 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 * @return bool.
 	 */
 	//y si devolvemos un entero mejor??
-	public int reconocePalabra(final String palabra){
+	public /*int*/void reconocePalabra(final String palabra){
 
 //REVISAR ESTO
 //		if (palabra.equals(lambda) && estadosFinales.contains(estadoInicial) )  return true;
 		try{
+
+	//dentro de compruebaAPD hace un sort() a las aristas		
 			apd = compruebaAPD();
 		if (this.apd)System.out.println("DETERMINISTA!!!");
 		else System.out.println("SH*T!!!");
-		recogeAristasEspeciales();
-//		if (!( this.aristasLambda.isEmpty() ) )organizarAristas();
 		
-/*		System.out.println("ESTADOS: " + this.estados);
+		if (!this.estadosFinales.isEmpty()) convertirPilaVacia();
 		
-		System.out.println("ARISTAS: " + this.automata);*/
-		System.out.println("ESTADOS: " + getEstados());
-		System.out.println("ARISTAS : " + getAutomataPila());
-		System.out.println("ARISTAS ke desapilan: " + this.aristasQueDesapilan);
-		System.out.println("ARISTAS lambda: " + this.aristasLambda);
-		ArrayList<String> pila = new ArrayList<String>();
-		pila.add(fondoPila);
-		String estado = estadoInicial;
-		ArrayList<Integer> listaEstados;
-		int iPalabra = 0;
-		String simbolo = "" + palabra.charAt(iPalabra);
-		listaEstados = buscaEstados(estado,fondoPila,simbolo,true);
-		//System.out.println("LISTA ESTADOS INICIAL: " + listaEstados);
-		//mirar porque si hubiera lambda no estoy segura,a parte no se si va
-		//esta puesto como si no hubiera, de ahi el segundo 1 
+		if (this.aristasQueDesapilan.isEmpty() && this.estadosFinales.isEmpty()) 
+			System.out.println("LENGUAJE VACIO");
+
 		
-		
-		
-		if (this.estadosFinales.isEmpty()) porEstado = false;
-		else porEstado = estaPorEstado(listaEstados,pila,0,fondoPila,palabra,/*1*/0,estado);
-		
-		if (this.aristasQueDesapilan.isEmpty()) porPila = false;
-		else porPila = 	estaPorPila(listaEstados,pila,0,fondoPila,palabra,/*1*/0,estado);
-		
-		if (porEstado && porPila){System.out.println("ESTADO Y PILA"); return 3;}
-		else if (porEstado && !porPila){System.out.println("ESTADO"); return 2;}
-		else if (!porEstado && porPila){System.out.println("PILA"); return 1;}
-		else/*if (!porEstado && !porPila)*/{System.out.println("NANAI"); return 0;}
-		
-		//return false;
-		
-			 //XXX PARA KE NO PETE!!!! PENSANDO EN DEVOLVER UN NUMERO MEJOR KE BOOLEAN
+
 		}
-		catch (StackOverflowError e){System.out.println("FALLO POR CICLOS");return -1;}
+		catch (StackOverflowError e){System.out.println("FALLO grrrrrrrr");}
 	}
 	//-------------------------------------------------------------
 
@@ -1101,30 +1083,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 * */
 	public static void compruebaPalabras(AutomataPila aut1, AutomataPila aut2, ArrayList<String> listaPalabras){
 		
-		Iterator<String> it = listaPalabras.iterator();
-		result1 = new ArrayList<Boolean>();
-		result2 = new ArrayList<Boolean>();
-		String pal = null; int r1; int r2;
-		aut1.recogeAristasEspeciales(); aut2.recogeAristasEspeciales();
-		while (it.hasNext()){
-			
-			pal = it.next();
-			
-			r1 = aut1.reconocePalabra(pal);
-			if (r1 != 0)/*acepta*/ result1.add(new Boolean(true));
-			else result1.add(new Boolean(false));
-	
-			
-			
-			r2 = aut2.reconocePalabra(pal);
-			if (r2 != 0)/*acepta*/ result2.add(new Boolean(true));
-			else result2.add(new Boolean(false));
 
-		}
-			System.out.println("Lista pal: " + listaPalabras);
-			System.out.println("Lista aut1: " + result1);
-			System.out.println("Lista aut2: " + result2);
-		
 	}
 }
 /******************************************************************/
