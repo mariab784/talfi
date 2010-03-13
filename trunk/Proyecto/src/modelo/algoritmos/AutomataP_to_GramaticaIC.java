@@ -64,6 +64,15 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	}
 
+	public GramaticaIC AP_Gramatica(){
+		
+		
+		
+		
+		return null;
+		
+	}
+
 	/**
 	 * @param args
 	 */
