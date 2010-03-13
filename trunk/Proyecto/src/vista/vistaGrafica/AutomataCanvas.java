@@ -1531,6 +1531,7 @@ public class AutomataCanvas extends JScrollPane {
 //		aut.getEstados().add("s4");
 		aut.setEstadoInicial("s1");
 		aut.setEstadoFinal("s3");
+		aut.setEstadoFinal("s2");
 
 /*		aut2.getEstados().add("s1");
 		aut2.getEstados().add("s2");
@@ -1569,7 +1570,7 @@ public class AutomataCanvas extends JScrollPane {
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s2");
+		arist = new AristaAP(0,0,0,0,"s1","s3");
 //		arist.anadirSimbolo("0");
 		arist.anadirSimbolo("1");
 		arist.setCimaPila("C");
@@ -1640,7 +1641,7 @@ public class AutomataCanvas extends JScrollPane {
 		
 		aut.anadeArista(arist);*/
 		 //una vez ordenado no puedes desordenar
-		System.out.println("ARISTAS: " + aut.getAutomataPila());
+		//System.out.println("ARISTAS: " + aut.getAutomataPila());
 
 /*		ArrayList<String> lp = new  ArrayList<String>();
 		lp.add("0");
@@ -1648,6 +1649,10 @@ public class AutomataCanvas extends JScrollPane {
 		lp.add("00");*/
 	
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
+		Alfabeto_Pila alf = new AlfabetoPila_imp();
+		alf.aniadirLetra("Z");
+		alf.aniadirLetra("C");
+		aut.setAlfabetoPila(alf);
 		aut.reconocePalabra("0101"/*, true*/);
 		
 		//a.anadeAristaAP(arist);
