@@ -509,9 +509,9 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 		dialog.setVisible(false);
 		try{
-			int r = panelCentral.getCanvas().getAP().reconocePalabra(palabra);
+			/*int r = */panelCentral.getCanvas().getAP().reconocePalabra(palabra);
 			//System.out.println("S::: " + s);
-			mostrarResultado(r);
+			//mostrarResultado(r);
 			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
 				mostrarResultado("BIEEEN!");			 		
 			else
