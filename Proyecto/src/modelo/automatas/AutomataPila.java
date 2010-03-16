@@ -1090,16 +1090,48 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 */
 	public ArrayList<String> dameCimasEstado (String estado){
 		Iterator<AristaAP> it = this.automata.iterator();
-		ArrayList<String> devuelve = new ArrayList<String>();
+		ArrayList<String> devuelve = null;
 		while (it.hasNext()){
 			AristaAP aux = it.next();
 			if (aux.getOrigen().equals(estado)){
+				if (devuelve == null) devuelve = new ArrayList<String>();
 				if (!devuelve.contains(aux.getCimaPila())) devuelve.add(aux.getCimaPila());
 			}
 			
 		}
 		return devuelve;
 	}
+	
+	/**
+	 * @param estado
+	 * @param cima
+	 * @return Lista de Letras que llevan de ese estado con esa cima a algun lugar
+	 */
+	public ArrayList<String> dameLetraEstadoCima(String estado, String cima){
+		Iterator<AristaAP> it = this.automata.iterator();
+		ArrayList<String> devuelve = null;
+		while (it.hasNext()){
+			AristaAP aux = it.next();
+			if (aux.getOrigen().equals(estado) && aux.getCimaPila().equals(cima)){
+				devuelve = aux.getEntradaSimbolos();
+			}
+			
+		}
+		return devuelve;
+	}
+	public ArrayList<String> dameFinPilaEstadoLetra(String estado, String cima, String letra){
+		Iterator<AristaAP> it = this.automata.iterator();
+		ArrayList<String> devuelve = null;
+		while (it.hasNext()){
+			AristaAP aux = it.next();
+			if (aux.getOrigen().equals(estado) && aux.getCimaPila().equals(cima) && aux.getEntradaSimbolos().contains(letra) ){
+				devuelve = aux.getSalidaPila();
+			}
+			
+		}
+		return devuelve;
+	}
+
 	//-------------------------------------------------------------
 
 	
