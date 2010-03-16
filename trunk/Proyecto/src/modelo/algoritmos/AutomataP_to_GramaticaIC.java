@@ -69,12 +69,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public GramaticaIC AP_Gramatica(){
 		
 		
 		GramaticaIC gic = new GramaticaIC();
 		gic.setVariableInicial("S");
-		ArrayList<String> estados = this.automataEntrada.getEstados();
+		ArrayList<String> estados = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it = estados.iterator();
 		while (it.hasNext()){
 			Produccion p = new Produccion();
@@ -85,18 +86,33 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		 * y añadiendo todos los estados con simbolo de pila)*/
 		
 		
-		ArrayList<String> estados2 = this.automataEntrada.getEstados();
-		ArrayList<String> estados3 = this.automataEntrada.getEstados();
+		ArrayList<String> estados2 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
+		ArrayList<String> estados3 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it2 = estados2.iterator();
 		String estado = null;
+		//Recorremos los estados "que ponemos despues del primer corchete"
+		
 		while (it2.hasNext()){
 			estado = it2.next();
 			ArrayList<String> alfabetoPila = this.automataEntrada.dameCimasEstado(estado);
 			Iterator<String> letra = alfabetoPila.iterator();
 			String estaLetra = null;
+			//recorremos las cimas posibles para ese estado en las transiciones
+			
 			while (letra.hasNext()){
 				estaLetra = letra.next();
-				
+				String actual;
+				ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra);
+				if(posibles != null) {
+					Iterator<String> itp = posibles.iterator();
+					while (itp.hasNext()){
+						actual = itp.next();
+						Iterator<String> it3 = estados3.iterator();
+						while (it3.hasNext()){
+							String estado2 = it3.next();
+						}
+					}
+				}
 			}
 			
 		}
