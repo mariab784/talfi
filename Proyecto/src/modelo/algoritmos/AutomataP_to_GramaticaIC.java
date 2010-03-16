@@ -3,6 +3,9 @@
  */
 package modelo.algoritmos;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import accesoBD.Mensajero;
 import controlador.Controlador;
 import controlador.Controlador_imp;
@@ -10,6 +13,7 @@ import modelo.Algoritmo;
 import modelo.automatas.*;
 //import modelo.expresion_regular.ExpresionRegular;
 import modelo.gramatica.GramaticaIC;
+import modelo.gramatica.Produccion;
 
 /**
  * @author Rocio Barrigüete, Mario Huete, Luis San Juan
@@ -18,7 +22,7 @@ import modelo.gramatica.GramaticaIC;
 public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	private String xml;
-	private Automata automataEntrada;
+	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
 	private Controlador controlador;
 	private Mensajero mensajero;
@@ -30,7 +34,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 */
 	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
-		automataEntrada=a;
+		automataEntrada=(AutomataPila) a;
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
 		controlador=Controlador_imp.getInstancia();
@@ -66,8 +70,28 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	}
 
 	public GramaticaIC AP_Gramatica(){
+		
+		
 		GramaticaIC gic = new GramaticaIC();
-		return null;
+		gic.setVariableInicial("S");
+		ArrayList<String> estados = this.automataEntrada.getEstados();
+		Iterator<String> it = estados.iterator();
+		while (it.hasNext()){
+			Produccion p = new Produccion();
+			p.anadeCadena(this.automataEntrada.getEstadoInicial()+"Z"+it.next());
+			gic.anadeProduccion("S", p);
+		}
+		/* Aquí hemos Iniciado la gramatica, con simbolo inicial S 
+		 * y añadiendo todos los estados con simbolo de pila)*/
+		
+		
+		ArrayList<String> estados2 = this.automataEntrada.getEstados();
+		ArrayList<String> estados3 = this.automataEntrada.getEstados();
+		Iterator<String> it2 = estados2.iterator();
+		while (it2.hasNext()){
+			
+		}
+		return gic;
 		
 	}
 
