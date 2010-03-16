@@ -4,6 +4,11 @@
 package modelo.gramatica;
 import java.util.*;
 
+import vista.vistaGrafica.Estado;
+
+import modelo.automatas.Alfabeto;
+import modelo.automatas.Alfabeto_Pila;
+
 /**
  * @author Rocio Barrigüete, Mario Huete, Luis San Juan
  *
@@ -13,7 +18,40 @@ public abstract class Gramatica {
 	private ArrayList<String> variables;
 	private ArrayList<String> simbolos;
 	private HashMap<String,ArrayList<Produccion>> producciones;
-	private String variableInicial;
+	private String variableInicial; //meter en xml como con Z y lambda? de momento pongo S a pincho
+	
+	public Gramatica(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila){
+		
+		variables = new ArrayList<String>();
+		simbolos = alf.getListaLetras();
+		variableInicial = "S";
+		creaVariables(est, alfPila);
+	}
+	
+	private void creaVariables(ArrayList<Estado> est,Alfabeto_Pila alfPila){
+		
+		variables.add(variableInicial);
+		
+		int i = 0; int j = 0; int k = 0;
+		int numEstados = est.size(); int tamAlfPila = alfPila.getListaLetras().size();
+		String e1; String e2; String sp;
+		while ((i < numEstados)){
+			
+			e1 = est.get(i).getEtiqueta(); 
+			e2 = est.get(j).getEtiqueta(); 
+			sp = alfPila.getListaLetras().get(k);
+			
+			variables.add("["+e1+sp+e2+"]");
+			
+			if (j < est.size()-1) j++;
+			else {j = 0; i++;}
+			
+		}
+		
+		
+		
+	}
+	
 	/**
 	 * @return the variables
 	 */
