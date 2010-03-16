@@ -34,24 +34,21 @@ public abstract class Gramatica {
 		
 		variables.add(variableInicial);
 		
-		int i = 0; int j = 0; int k = 0;
+		
 		int numEstados = est.size(); int tamAlfPila = alfPila.getListaLetras().size();
-		String e1; String e2; String sp;
-		while ((i < numEstados)){
-			
-			e1 = est.get(i).getEtiqueta(); 
-			e2 = est.get(j).getEtiqueta(); 
-			sp = alfPila.getListaLetras().get(k);
-			
-			variables.add("["+e1+sp+e2+"]");
-			
-			if (j < est.size()-1) j++;
-			else {j = 0; i++;}
-			
-		}
+		String e1; String sp;
 		
+		for (int i = 0; i < numEstados; i++){
+			e1 = est.get(i).getEtiqueta();
+			for (int j = 0; j < tamAlfPila; j++){
+				sp = alfPila.getListaLetras().get(j);
+				for (int k = 0; k < numEstados; k++){
+					variables.add("["+e1+sp+est.get(k).getEtiqueta()+"]");
+					
+				}
 		
-		
+			}
+	}
 	}
 	
 	/**
