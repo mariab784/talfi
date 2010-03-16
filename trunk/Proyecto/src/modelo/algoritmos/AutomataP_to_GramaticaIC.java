@@ -103,12 +103,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			//recorremos las cimas posibles para ese estado en las transiciones
 			
 			Iterator<String> estadoF = estados4.iterator();
-			while (estadoF.hasNext()){
-				String estadoFF = estadoF.next(); 
-				while (letra.hasNext()){
-					estaLetra = letra.next();
-					String actual;
-					ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra);
+			while (letra.hasNext()){
+				estaLetra = letra.next();
+				String actual;
+				ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra); 
+				while (estadoF.hasNext()){
+					String estadoFF = estadoF.next();
 					if(posibles != null) {
 						Iterator<String> itp = posibles.iterator();
 						while (itp.hasNext()){
