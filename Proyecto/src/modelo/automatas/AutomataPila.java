@@ -16,6 +16,14 @@ import vista.vistaGrafica.AristaAP;
  *
  */
 /******************************************************************/
+/**
+ * @author anicetobacter
+ *
+ */
+/**
+ * @author anicetobacter
+ *
+ */
 public class AutomataPila extends AutomataFND{
 	
 	private final  static String nombreAux = "aux";
@@ -1072,6 +1080,25 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 
 		}
 		catch (StackOverflowError e){System.out.println("FALLO grrrrrrrr");}
+	}
+	
+	
+	/**
+	 * @param estado
+	 * @return lista de las cimas posibles para un estado
+	 * Lo utilizaremos en varios en algoritmos
+	 */
+	public ArrayList<String> dameCimasEstado (String estado){
+		Iterator<AristaAP> it = this.automata.iterator();
+		ArrayList<String> devuelve = new ArrayList<String>();
+		while (it.hasNext()){
+			AristaAP aux = it.next();
+			if (aux.getOrigen().equals(estado)){
+				if (!devuelve.contains(aux.getCimaPila())) devuelve.add(aux.getCimaPila());
+			}
+			
+		}
+		return devuelve;
 	}
 	//-------------------------------------------------------------
 

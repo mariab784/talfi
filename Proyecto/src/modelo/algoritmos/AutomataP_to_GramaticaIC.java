@@ -88,7 +88,16 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		ArrayList<String> estados2 = this.automataEntrada.getEstados();
 		ArrayList<String> estados3 = this.automataEntrada.getEstados();
 		Iterator<String> it2 = estados2.iterator();
+		String estado = null;
 		while (it2.hasNext()){
+			estado = it2.next();
+			ArrayList<String> alfabetoPila = this.automataEntrada.dameCimasEstado(estado);
+			Iterator<String> letra = alfabetoPila.iterator();
+			String estaLetra = null;
+			while (letra.hasNext()){
+				estaLetra = letra.next();
+				
+			}
 			
 		}
 		return gic;
