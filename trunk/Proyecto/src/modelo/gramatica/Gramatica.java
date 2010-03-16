@@ -20,7 +20,9 @@ public abstract class Gramatica {
 	private HashMap<String,ArrayList<Produccion>> producciones;
 	private String variableInicial; //meter en xml como con Z y lambda? de momento pongo S a pincho
 	
-	public Gramatica(){}
+	public Gramatica(){
+		this.producciones = new HashMap<String,ArrayList<Produccion>>();
+	}
 	
 	public Gramatica(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila){
 		

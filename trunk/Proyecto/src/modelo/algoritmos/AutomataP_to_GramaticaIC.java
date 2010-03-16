@@ -6,6 +6,8 @@ package modelo.algoritmos;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import vista.vistaGrafica.AristaAP;
+
 import accesoBD.Mensajero;
 import controlador.Controlador;
 import controlador.Controlador_imp;
@@ -97,52 +99,54 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		while (it2.hasNext()){
 			estado = it2.next();
 			ArrayList<String> alfabetoPila = this.automataEntrada.dameCimasEstado(estado);
-			Iterator<String> letra = alfabetoPila.iterator();
-			String estaLetra = null;
-			
-			//recorremos las cimas posibles para ese estado en las transiciones
-			
-			Iterator<String> estadoF = estados4.iterator();
-			//Para crear producciones solo en caso de que haya transiciones con esa cima de pila
-			while (letra.hasNext()){
-				estaLetra = letra.next();
-				String actual;
-				ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra); 
-				//Los estados que pueden convertirse en finales
-				while (estadoF.hasNext()){
-					String estadoFF = estadoF.next();
-					//genero el simbolo que será la clave de una nueva serie de producciones
-					String simbolos = "["+estado+estaLetra+estadoFF+"]";
-					if(posibles != null) {
-						Iterator<String> itp = posibles.iterator();
-						//Las posibles letras que llevan a transicion
-						while (itp.hasNext()){
-							actual = itp.next();
-							Iterator<String> it3 = estados3.iterator();
-							//Para generar todas las combinaciones posibles
-							while (it3.hasNext()){
-								String estado2 = it3.next();
-								if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null ){
-									ArrayList<ArrayList<String>> listaApila = this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual);
-									Iterator<ArrayList<String>> itApilas = listaApila.iterator();
-									Produccion p = null;
-									//Recorro los simbolos que apareceran en la cima de pila
-									while (itApilas.hasNext()){
-										p = new Produccion();
-										ArrayList<String> futuras = itApilas.next();
-										p.anadeCadena(actual);
-										if (futuras.size() == 1){
-											if (!futuras.get(0).equals("/")){
-												p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+			if(alfabetoPila!=null){
+				Iterator<String> letra = alfabetoPila.iterator();
+				String estaLetra = null;
+				
+				//recorremos las cimas posibles para ese estado en las transiciones
+				
+				Iterator<String> estadoF = estados4.iterator();
+				//Para crear producciones solo en caso de que haya transiciones con esa cima de pila
+				while (letra.hasNext()){
+					estaLetra = letra.next();
+					String actual;
+					ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra); 
+					//Los estados que pueden convertirse en finales
+					while (estadoF.hasNext()){
+						String estadoFF = estadoF.next();
+						//genero el simbolo que será la clave de una nueva serie de producciones
+						String simbolos = "["+estado+estaLetra+estadoFF+"]";
+						if(posibles != null) {
+							Iterator<String> itp = posibles.iterator();
+							//Las posibles letras que llevan a transicion
+							while (itp.hasNext()){
+								actual = itp.next();
+								Iterator<String> it3 = estados3.iterator();
+								//Para generar todas las combinaciones posibles
+								while (it3.hasNext()){
+									String estado2 = it3.next();
+									if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null ){
+										ArrayList<ArrayList<String>> listaApila = this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual);
+										Iterator<ArrayList<String>> itApilas = listaApila.iterator();
+										Produccion p = null;
+										//Recorro los simbolos que apareceran en la cima de pila
+										while (itApilas.hasNext()){
+											p = new Produccion();
+											ArrayList<String> futuras = itApilas.next();
+											p.anadeCadena(actual);
+											if (futuras.size() == 1){
+												if (!futuras.get(0).equals("/")){
+													p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+												}
 											}
-										}
-										else if (futuras.size()>0){
-											p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
-											p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
-											
-										}
-										gic.anadeProduccion(simbolos, p);	
-									}	
+											else if (futuras.size()>0){
+												p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+												p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
+												
+											}
+											gic.anadeProduccion(simbolos, p);	
+										}	
+									}
 								}
 							}
 						}
@@ -159,7 +163,140 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		AutomataPila aut = new AutomataPila();
+//		AutomataPila aut2 = new AutomataPila();
+		//a.listaEstados.add(new Estado(0,0,"s1"));
+		aut.getEstados().add("s1");
+		aut.getEstados().add("s2");
+		aut.getEstados().add("s3");
+//		aut.getEstados().add("s4");
+		aut.setEstadoInicial("s1");
+		aut.setEstadoFinal("s3");
+		aut.setEstadoFinal("s2");
+
+/*		aut2.getEstados().add("s1");
+		aut2.getEstados().add("s2");
+		aut2.setEstadoInicial("s1");
+		aut2.setEstadoFinal("s2");*/
+		//System.out.println("ESTADOS: " + aut.getEstados());
+		
+		AristaAP arist;
+		
+		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+
+		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("Z");
+		arist.anadirPila("CZ");
+		
+		aut.anadeArista(arist);	
+		
+		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("0");
+		arist.setCimaPila("C");
+		arist.anadirPila("CC");
+		
+		aut.anadeArista(arist);	
+	
+		arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("1");
+		arist.setCimaPila("C");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s1","s3");
+//		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("1");
+		arist.setCimaPila("C");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);		
+
+//		AristaAP borrada = 	aut.getAutomataPila().remove(2);
+//		System.out.println("ARISTA borrada: " + borrada );
+
+/*		arist = new AristaAP(0,0,0,0,"s3","s2");
+		//arist.anadirSimbolo("0");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist); 
+		
+//		aut2.anadeArista(arist);
+
+		
+		arist = new AristaAP(0,0,0,0,"s1","s2");
+//		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("1");
+		arist.setCimaPila("A");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+/*		arist = new AristaAP(0,0,0,0,"s3","s2");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+
+		
+		aut.anadeArista(arist);
+		
+
+		
+	/*	arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z"); 
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);*/
+		
+/*		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("\\");
+		//System.out.println("LAMBDA: \\" );
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);*/
+		 //una vez ordenado no puedes desordenar
+		//System.out.println("ARISTAS: " + aut.getAutomataPila());
+
+/*		ArrayList<String> lp = new  ArrayList<String>();
+		lp.add("0");
+		lp.add("000");
+		lp.add("00");*/
+	
+//		AutomataPila.compruebaPalabras(aut, aut2, lp);
+		Alfabeto_Pila alf = new AlfabetoPila_imp();
+		alf.aniadirLetra("Z");
+		alf.aniadirLetra("C");
+		aut.setAlfabetoPila(alf);
+		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
+		System.out.println(a.AP_Gramatica().getProducciones().toString());
+		// TODO Auto-generated method subs
 
 	}
 
