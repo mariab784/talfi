@@ -85,7 +85,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		/* Aquí hemos Iniciado la gramatica, con simbolo inicial S 
 		 * y añadiendo todos los estados con simbolo de pila)*/
 		
-		
+		//declaraciones de ArrayList Auxiliares y de iterators que comentamos despues
 		ArrayList<String> estados2 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		ArrayList<String> estados3 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		ArrayList<String> estados4 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
@@ -103,19 +103,47 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			//recorremos las cimas posibles para ese estado en las transiciones
 			
 			Iterator<String> estadoF = estados4.iterator();
+			//Para crear producciones solo en caso de que haya transiciones con esa cima de pila
 			while (letra.hasNext()){
 				estaLetra = letra.next();
 				String actual;
 				ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra); 
+				//Los estados que pueden convertirse en finales
 				while (estadoF.hasNext()){
 					String estadoFF = estadoF.next();
+					//genero el simbolo que será la clave de una nueva serie de producciones
+					String simbolos = "["+estado+estaLetra+estadoFF+"]";
 					if(posibles != null) {
 						Iterator<String> itp = posibles.iterator();
+						//Las posibles letras que llevan a transicion
 						while (itp.hasNext()){
 							actual = itp.next();
 							Iterator<String> it3 = estados3.iterator();
+							//Para generar todas las combinaciones posibles
 							while (it3.hasNext()){
 								String estado2 = it3.next();
+								if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null ){
+									ArrayList<ArrayList<String>> listaApila = this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual);
+									Iterator<ArrayList<String>> itApilas = listaApila.iterator();
+									Produccion p = null;
+									//Recorro los simbolos que apareceran en la cima de pila
+									while (itApilas.hasNext()){
+										p = new Produccion();
+										ArrayList<String> futuras = itApilas.next();
+										p.anadeCadena(actual);
+										if (futuras.size() == 1){
+											if (!futuras.get(0).equals("/")){
+												p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+											}
+										}
+										else if (futuras.size()>0){
+											p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+											p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
+											
+										}
+										gic.anadeProduccion(simbolos, p);	
+									}	
+								}
 							}
 						}
 					}

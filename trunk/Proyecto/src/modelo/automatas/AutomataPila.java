@@ -1119,13 +1119,14 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		}
 		return devuelve;
 	}
-	public ArrayList<String> dameFinPilaEstadoLetra(String estado, String cima, String letra){
+	public ArrayList<ArrayList<String>> dameFinPilaEstadoLetra(String estado, String cima, String letra){
 		Iterator<AristaAP> it = this.automata.iterator();
-		ArrayList<String> devuelve = null;
+		ArrayList<ArrayList<String>> devuelve = null;
 		while (it.hasNext()){
 			AristaAP aux = it.next();
 			if (aux.getOrigen().equals(estado) && aux.getCimaPila().equals(cima) && aux.getEntradaSimbolos().contains(letra) ){
-				devuelve = aux.getSalidaPila();
+				if (devuelve == null) devuelve = new ArrayList<ArrayList<String>>();
+				devuelve.add(aux.getSalidaPila());
 			}
 			
 		}
