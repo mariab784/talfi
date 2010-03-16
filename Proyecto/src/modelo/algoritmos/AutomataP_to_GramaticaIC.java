@@ -88,8 +88,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		ArrayList<String> estados2 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		ArrayList<String> estados3 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
+		ArrayList<String> estados4 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it2 = estados2.iterator();
 		String estado = null;
+		
 		//Recorremos los estados "que ponemos despues del primer corchete"
 		
 		while (it2.hasNext()){
@@ -97,25 +99,30 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			ArrayList<String> alfabetoPila = this.automataEntrada.dameCimasEstado(estado);
 			Iterator<String> letra = alfabetoPila.iterator();
 			String estaLetra = null;
+			
 			//recorremos las cimas posibles para ese estado en las transiciones
 			
-			while (letra.hasNext()){
-				estaLetra = letra.next();
-				String actual;
-				ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra);
-				if(posibles != null) {
-					Iterator<String> itp = posibles.iterator();
-					while (itp.hasNext()){
-						actual = itp.next();
-						Iterator<String> it3 = estados3.iterator();
-						while (it3.hasNext()){
-							String estado2 = it3.next();
+			Iterator<String> estadoF = estados4.iterator();
+			while (estadoF.hasNext()){
+				String estadoFF = estadoF.next(); 
+				while (letra.hasNext()){
+					estaLetra = letra.next();
+					String actual;
+					ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra);
+					if(posibles != null) {
+						Iterator<String> itp = posibles.iterator();
+						while (itp.hasNext()){
+							actual = itp.next();
+							Iterator<String> it3 = estados3.iterator();
+							while (it3.hasNext()){
+								String estado2 = it3.next();
+							}
 						}
 					}
 				}
 			}
-			
 		}
+			
 		return gic;
 		
 	}
