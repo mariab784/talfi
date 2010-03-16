@@ -19,6 +19,7 @@ public class GramaticaIC extends Gramatica {
 	/**
 	 * 
 	 */
+	public GramaticaIC(){}
 	public GramaticaIC(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila) {
 		// TODO Auto-generated constructor stub
 		super(alf,est,alfPila);
