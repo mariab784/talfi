@@ -135,7 +135,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 											ArrayList<String> futuras = itApilas.next();
 											p.anadeCadena(actual);
 											if (futuras.size() == 1){
-												if (!futuras.get(0).equals("/")){
+												if (!futuras.get(0).equals("\\")){
 													p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
 												}
 											}
