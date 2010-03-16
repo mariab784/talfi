@@ -43,6 +43,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@Override
 	public Automata ejecutar(boolean muestraPasos) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -65,10 +66,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	}
 
 	public GramaticaIC AP_Gramatica(){
-		
-		
-		
-		
+		GramaticaIC gic = new GramaticaIC();
 		return null;
 		
 	}
