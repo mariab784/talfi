@@ -12,6 +12,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
+import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
@@ -63,7 +64,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		}
 		
 		Document documento = parser.getDocument();
-		Alfabeto_imp alf= new Alfabeto_imp();		
+		Alfabeto_imp alf= new Alfabeto_imp();
+		AlfabetoPila_imp alfP= new AlfabetoPila_imp();
 		ArrayList<String> estad= new ArrayList<String>();
 		ArrayList<String> finalss= new ArrayList<String>();
 
@@ -107,7 +109,17 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			 alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
 			 i++;
 		}
-		automata.setAlfabeto(alf);				
+		automata.setAlfabeto(alf);
+		
+		if (documento.getElementsByTagName("alphabetP") != null){
+			
+			nodos = documento.getElementsByTagName("alphabetP");
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				 alfP.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			((AutomataPila)automata).setAlfabetoPila(alfP);
+		}
 		
 		nodos = documento.getElementsByTagName("states");		
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
@@ -131,7 +143,11 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		nodos = documento.getElementsByTagName("arrow");
 		for (int i = 0; i < nodos.getLength(); i++){
 			for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
-				automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
+				if (automata instanceof AutomataPila){
+										
+				}
+					
+				else	automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
 				x= x+6;
 			}
 		}

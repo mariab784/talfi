@@ -6,10 +6,12 @@
 	<alphabet>
 		<item>0</item>
 		<item>1</item>
-		<item>c</item>
-		<item>Z</item>
-		<item>e</item>
 	</alphabet>
+		<alphabetP>
+		<item>0</item>
+		<item>1</item>
+		<item>Z</item>
+	</alphabetP>
 	<states>	 
 		<state>S0</state>
 		<state>S1</state>
@@ -25,16 +27,36 @@
 			<state>S0</state>	
 			<state>S0</state>
 			<item>a</item>
+			<cima>Z</cima>
+			<trans>Z</trans>
 		</arrow>
 		<arrow>
 			<state>S0</state>	
 			<state>S1</state>
-			<item>c,Z/Z</item>
+			<item>c</item>
+			<cima>Z</cima>
+			<trans>Z</trans>
 		</arrow>
 		<arrow>
 			<state>S1</state>	
 			<state>S1</state>
-			<item>0,0/e   1,1/e   e,Z/e</item>
+			<item>0</item>
+			<cima>Z</cima>
+			<trans>\\</trans>
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>1</item>
+			<cima>1</cima>
+			<trans>Z</trans>
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>\\</item>
+			<cima>Z</cima>
+			<trans>\\</trans>
 		</arrow>		
 	</arrows>
 </authomata>
