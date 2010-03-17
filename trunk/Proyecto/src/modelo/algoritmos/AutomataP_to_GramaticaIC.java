@@ -29,6 +29,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private Controlador controlador;
 	private Mensajero mensajero;
 	private String Gramatica;
+	private String lambda;
+	private String fondoPila;
 	
 	private AutomataPila resultadosParciales;
 	/**
@@ -40,6 +42,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
 		controlador=Controlador_imp.getInstancia();
+		Mensajero mensajero = Mensajero.getInstancia();
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 	}
 	
 
@@ -81,7 +86,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		Iterator<String> it = estados.iterator();
 		while (it.hasNext()){
 			Produccion p = new Produccion();
-			p.anadeCadena(this.automataEntrada.getEstadoInicial()+"Z"+it.next());
+			p.anadeCadena(this.automataEntrada.getEstadoInicial()+fondoPila+it.next());
 			gic.anadeProduccion("S", p);
 		}
 		/* Aquí hemos Iniciado la gramatica, con simbolo inicial S 
@@ -135,7 +140,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 											ArrayList<String> futuras = itApilas.next();
 											p.anadeCadena(actual);
 											if (futuras.size() == 1){
-												if (!futuras.get(0).equals("\\")){
+												if (!futuras.get(0).equals(lambda)){
 													p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
 												}
 											}
