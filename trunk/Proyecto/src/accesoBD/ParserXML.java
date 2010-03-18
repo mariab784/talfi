@@ -7,9 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 import org.xml.sax.*;
+
+import vista.vistaGrafica.AristaAP;
+
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
 import modelo.automatas.AlfabetoPila_imp;
@@ -109,11 +114,14 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			 alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
 			 i++;
 		}
-		automata.setAlfabeto(alf);
+		//if (automata instanceof AutomataPila) ((AutomataPila)automata).setAlfabeto(alf);
+		//if (automata instanceof Turing) ((Turing)automata).setAlfabeto(alf);
+		/*else*/ automata.setAlfabeto(alf);
 		
-		if (documento.getElementsByTagName("alphabetP") != null){
+		nodos = documento.getElementsByTagName("alphabetP");
+		if (nodos.item(0) != null){
 			
-			nodos = documento.getElementsByTagName("alphabetP");
+			
 			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
 				 alfP.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
 				 i++;
@@ -144,16 +152,68 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		for (int i = 0; i < nodos.getLength(); i++){
 			for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
 				if (automata instanceof AutomataPila){
-										
+			/*		String ent = "";
+					
+					String nombreArista=nodos.item(i).getChildNodes().item(x).getTextContent();
+					StringTokenizer st=new StringTokenizer(nombreArista,",");
+										while(st.hasMoreTokens()){
+						String ss=st.nextToken();
+						
+						ent o(ss);
+					}*/
+					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+					
+					
+					ArrayList<String> entrada = new ArrayList<String>();
+					String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+					StringTokenizer st=new StringTokenizer(s3,",");
+					while(st.hasMoreTokens()){
+
+						entrada.add(st.nextToken());
+					}
+					
+					
+					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+					
+					
+					
+					//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+					int indice = 0;
+					ArrayList<String> salida = new ArrayList<String>();
+					if (s5.compareTo("\\") != 0){
+						while(/*st.hasMoreTokens()*/indice < s5.length()){
+							String ss= "" + s5.charAt(indice);//st.nextToken();
+							salida.add(ss);
+							indice++;
+					//	System.out.println("TRANS: "+ss);
+						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+						}
+					}
+					else { salida.add("\\");}
+					
+					/*System.out.println("S1: " + s1);
+					System.out.println("S2: " + s2);
+					System.out.println("S3: " + s3);
+					System.out.println("S4: " + s4);
+					System.out.println("S5: " + s5);*/
+					
+					x = x+ 10;
+					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
+					((AutomataPila)automata).insertaArista(s1,s2,entrada,s4,salida);				
 				}
 					
-				else	automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
-				x= x+6;
+				else	{automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
+				x= x+6;}
 			}
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////
 		nodos=documento.getElementsByTagName("estadoCoord");
+		if (automata instanceof AutomataPila)System.out.println("ENTRA EN AUTOPILA" + ((AutomataPila)automata).getAut());
+		else System.out.println("ENTRA EN AUTOPILA" + automata.getAutomata());
+
 		if (nodos.getLength()==0) return automata;
 		if (nodos==null) return automata;
 		for(int i=0;i< nodos.getLength();i++) {
@@ -161,6 +221,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 			automata.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 		}
+		
 		return automata;		
 	}
 
