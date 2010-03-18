@@ -62,6 +62,7 @@ public class AutomataFD implements Automata{
 	
 	public ArrayList<String> getAristasVertice(String vertice) {
 		// TODO Auto-generated method stub
+		System.out.println(" AUF: " + automata);
 		if (automata.get(vertice)==null) return new ArrayList<String>();
 		Iterator<String> it=automata.get(vertice).keySet().iterator();
 		ArrayList<String> aristas=new ArrayList<String>();
