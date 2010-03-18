@@ -36,6 +36,8 @@ public class AutomataPila extends AutomataFND{
 	private ArrayList<String> estados;
 	private ArrayList<AristaAP> automata;
 	private HashMap<String,Coordenadas> coordenadasGraficas;
+//	protected HashMap<String, HashMap</*String*/ArrayList<String>,ArrayList<String>>> aut;
+	protected HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>> aut;
 	private boolean apd;
 	
 	private String lambda;
@@ -73,7 +75,7 @@ public class AutomataPila extends AutomataFND{
 		aristasLambda = new ArrayList<Integer>();
 		aristasPilaVacia = null;
 		estadoPilaVacia = null;
-	}
+		aut=new HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>();	}
 	//-------------------------------------------------------------
 	public AutomataPila(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 			ArrayList<String> est, ArrayList<AristaAP> aut, boolean det){
@@ -285,10 +287,14 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	public ArrayList<String> getAristasVertice(String estado) {
 		// TODO Auto-generated method stub
 		int indice = automata.indexOf(estado);
+		System.out.println(" AUPILA: " + automata);
+		System.out.println("INDICE AUPILA: " + indice);
 		ArrayList<String> simbolos = null;
 		if (indice != -1){
 			simbolos = automata.get(indice).getEntradaSimbolos();
+			System.out.println("SIMBOLOS AUPILA: " + simbolos);
 		}
+		
 		return simbolos;
 	}
 	//-------------------------------------------------------------
@@ -325,23 +331,104 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 */
 	public void insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
 		// TODO Auto-generated method stub
-		int indice = automata.indexOf(origen);
+		
+		System.out.println("ORIGEN: " + origen);
+		System.out.println("DESTINO: " + destino);
+		System.out.println("SIMBOLOS: " + simbolos);
+		System.out.println("CIMA: " + cima);
+		System.out.println("SALIDA: " + salida);
+		
+		
+		if (aut.get(origen)==null) {
+//HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
+//HashMap<ArrayList<String>,ArrayList<String>>			
+HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
+	new HashMap<ArrayList<String>,ArrayList<String>>();
+//HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>
+HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
+	new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
+//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
+HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
+	new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
+
+			hs.put(salida,simbolos);
+			hs1.put(destino,hs);
+			hs2.put(cima, hs1);
+			aut.put(origen, hs2);
+			//ArrayList<String> al=new ArrayList<String>();
+			//al.add(destino);
+			/*hs.put(salida, al);
+			
+			hs1.put(cima, hs);
+			hs2.put(simbolos, hs1);
+			aut.put(origen, hs2);*/
+			
+		}	
+		
+		//ArrayList<String> aux=automata.get(verticeV).get(letra);
+		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
+		HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> aux = 
+			aut.get(origen).get(cima);
+		
+			if (aux != null){
+				
+				System.out.println("lalalalal");
+			}
+			else{
+				HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
+					new HashMap<ArrayList<String>,ArrayList<String>>();
+				//HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>
+				HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
+					new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
+				//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
+				HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
+					new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
+				
+				//aut.get(origen).put(cima, simbolos);
+				hs.put(salida, simbolos);
+				hs1.put(destino,hs);
+				//hs2.put(cima, hs1);
+				aut.get(origen).put(cima,hs1);
+				//aut.get(origen).put(cima, hs2);
+				
+			}
+				
+		
+		
+		
+//		ArrayList<String> aux = null; 
+		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
+/*		if (aut.get(origen) != null && aut.get(origen).get(cima) != null && 
+			aut.get(origen).get(cima).get(destino) != null)
+				aux = aut.get(origen).get(cima).get(destino).get(salida);
+/*		HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> aux=aut.get(origen).get(simbolos)/*.get(cima).get(salida)*/;
+/*		if (aux!=null) {
+			for (int i = 0; i < simbolos.size(); i++)
+			if (!aux.contains(simbolos.get(i))) aux.add(simbolos.get(i));
+		}
+/*		else {
+			//aux=new ArrayList<String>();
+			//aux.add(destino);
+			aut.get(origen).get(cima).get(destino).put(salida, simbolos);
+		} //revisar antes no comentado XXX
+/*		int indice = automata.indexOf(origen);
 		int x,y,fx,fy;
 		x=0; y=0; fx=0; fy=0;
 
 		
 		if (!apd){
 			apd = ( simbolos.size() >1 ) && simbolos.contains(lambda);
-		}
-		AristaAP arista = new AristaAP(x,y,fx,fy,origen,destino);
+		}*/
+/*		AristaAP arista = new AristaAP(/*x,y,fx,fy,*//*origen,destino);
 		arista.setCimaPila(cima);
 		arista.setSimbolos(simbolos);
 		arista.setSalida(salida);
-		if(indice == -1)
+/*		if(indice == -1)
 			automata.add(arista);
 		else if(!automata.get(indice).equals(arista))
 			automata.add(arista);	
-		else return;
+		else return;*/
+		
 	}
 	//-------------------------------------------------------------
 	/**
@@ -519,6 +606,13 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		return automata;
 	}
 	//-------------------------------------------------------------
+	
+	public HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
+ getAut(){
+		
+		return aut;
+	}
+	
 	/**
 	 * Método que devuelve el alfabeto de pila.
 	 * @return alfabetoPila.
@@ -1144,6 +1238,10 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	public static void compruebaPalabras(AutomataPila aut1, AutomataPila aut2, ArrayList<String> listaPalabras){
 		
 
+	}
+	public String toString() {
+		return "Estados:"+estados.toString()+"\n"+"Estados Finales: "+estadosFinales.toString()+"" +
+				"\n"+automata.toString();
 	}
 }
 /******************************************************************/
