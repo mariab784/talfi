@@ -31,6 +31,20 @@ public class AristaAP extends AristaGeneral implements /*AristaInterface,*/ Comp
 
 	
 	/**
+	 * Establece los datos iniciales de la arista al cargar un ejercicio
+	 * @param x coordenada x del estado de inicio
+	 * @param y coordenada y del estado de inicio
+	 * @param fx coordenada x del estado destion
+	 * @param fy coordenada y del estado destino
+	 * @param origen nombre del estado de origen
+	 * @param destino nombre del estado de destino
+	 */
+	public AristaAP(String origen,String destino) {
+		
+		super(origen,destino);
+	}
+	
+	/**
 	 * Establece los datos iniciales de la arista en la interfaz gráfica
 	 * @param x coordenada x del estado de inicio
 	 * @param y coordenada y del estado de inicio
