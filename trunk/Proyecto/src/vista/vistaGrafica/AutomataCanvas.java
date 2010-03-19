@@ -752,6 +752,8 @@ public class AutomataCanvas extends JScrollPane {
 		//del polígono deberia aumentar dependiendo del numero de vertives
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
+		if (a instanceof AutomataPila) this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();
+		
 		Iterator<String> itEst=a.getEstados().iterator();
 		
 		double r=160.0;//deberia variar segun numero de estads??? facil de hacer
