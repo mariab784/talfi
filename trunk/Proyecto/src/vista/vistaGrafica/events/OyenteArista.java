@@ -795,6 +795,7 @@ public class OyenteArista extends MouseAdapter {
 			//String ini = canvas.getEstadoInicial();
 			//canvas.getAP().setEstadoInicial(ini);
 			System.out.println("ESTADO INICIAL: " + canvas.getEstadoInicial());
+			//System.out.println("coordenadas: " + canvas.g);
 			
 			//Alfabeto a = canvas.getAlfabeto();
 			//canvas.getAP().setAlfabeto(a);
