@@ -367,12 +367,58 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		
 		//ArrayList<String> aux=automata.get(verticeV).get(letra);
 		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
-		HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> aux = 
-			aut.get(origen).get(cima);
 		
-			if (aux != null){
+			if (aut.get(origen).get(cima) != null){
 				
-				System.out.println("lalalalal");
+				if (aut.get(origen).get(cima).get(destino) != null){
+					
+				 
+				  if (aut.get(origen).get(cima).get(destino).containsKey(salida)){
+					  
+						Iterator<String> it = simbolos.iterator();
+						while (it.hasNext()){
+							
+							String s = it.next();
+
+							if (!aut.get(origen).get(cima).get(destino).get(salida).contains(s))
+								aut.get(origen).get(cima).get(destino).get(salida).add(s);
+						}
+					  
+				  }
+				  else{
+			/*		  HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
+							new HashMap<ArrayList<String>,ArrayList<String>>();
+					  hs.put(salida, simbolos);*/
+					  aut.get(origen).get(cima).get(destino).put(salida, simbolos);
+				  }
+				  /*if (aut.get(origen).get(cima).get(destino).get(salida) != null){ //bucle ?
+						
+						System.out.println("ISISIISISISISIS");
+					}*/
+					
+					
+					
+				}
+				else{
+					HashMap<ArrayList<String>,ArrayList<String>> hs =
+						new HashMap<ArrayList<String>,ArrayList<String>>();
+					HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
+						new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
+					//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
+				//	HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
+				//		new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
+					
+					//aut.get(origen).put(cima, simbolos);
+					//hs.put(salida, simbolos);
+					hs.put(salida,simbolos);
+					hs1.put(destino,hs);
+					//hs2.put(cima, hs1);
+					aut.get(origen).get(cima).put(destino, hs);
+					
+				}
+					
+					
+				
 			}
 			else{
 				HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
@@ -381,8 +427,8 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
 					new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
 				//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
-				HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
-					new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
+				//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
+				//	new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
 				
 				//aut.get(origen).put(cima, simbolos);
 				hs.put(salida, simbolos);
@@ -393,7 +439,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				
 			}
 				
-		
+			System.out.println("AUTOMAP INSERTAARIST: \n" + aut);
 		
 		
 //		ArrayList<String> aux = null; 
