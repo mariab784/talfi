@@ -149,6 +149,18 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 												p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
 												
 											}
+											boolean pasa = true;
+											if(gic.getProducciones().get(simbolos) != null){
+												
+												ArrayList<Produccion> quita = gic.getProducciones().get(simbolos);
+												Iterator<Produccion> it19 = quita.iterator();
+												while (it19.hasNext()){
+													Produccion aux = it19.next();
+													if (aux.getConcatenacion().toString().contains(p.getConcatenacion().toString()))
+														pasa = false;
+												}
+											}
+											if(gic.getProducciones().get(simbolos) == null || pasa)	
 											gic.anadeProduccion(simbolos, p);	
 										}	
 									}
