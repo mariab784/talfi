@@ -6,8 +6,13 @@
 		<item>0</item>
 		<item>1</item>
 		<item>Z</item>
-		<item>e</item>
+		<item>\</item>
 	</alphabet>
+	<alphabetP>
+		<item>0</item>
+		<item>1</item>
+		<item>Z</item>
+	</alphabetP>
 	<states>
 		<state>S0</state>
 		<state>S1</state>
@@ -19,20 +24,90 @@
 		<state>S1</state>
 	</finals>
 	<arrows>
-		<arrow>
+		<arrow>	
+			<state>S0</state>	
 			<state>S0</state>
-			<state>S0</state>
-			<item>0,Z/0Z   0,1/01   1,Z/1Z   1,0/10   0,0/00   1,1/11   e,Z/e</item>
+			<item>0</item>
+			<cima>Z</cima>
+			<trans>0Z</trans>
 		</arrow>
 		<arrow>
+			<state>S0</state>	
 			<state>S0</state>
-			<state>S1</state>
-			<item>0,0/e   1,1/e</item>
+			<item>0</item>
+			<cima>1</cima>
+			<trans>01</trans>				
 		</arrow>
 		<arrow>
-			<state>S1</state>
-			<state>S1</state>
-			<item>0,0/e   1,1/e   e,Z/e</item>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>1</item>
+			<cima>Z</cima>
+			<trans>1Z</trans>				
 		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>1</item>
+			<cima>0</cima>
+			<trans>10</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>0</item>
+			<cima>0</cima>
+			<trans>00</trans>				
+		</arrow>		
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>1</item>
+			<cima>1</cima>
+			<trans>11</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>\</item>
+			<cima>Z</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S1</state>
+			<item>0</item>
+			<cima>0</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S1</state>
+			<item>1</item>
+			<cima>1</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>0</item>
+			<cima>0</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>1</item>
+			<cima>1</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S1</state>	
+			<state>S1</state>
+			<item>\</item>
+			<cima>Z</cima>
+			<trans>\</trans>				
+		</arrow>										
 	</arrows>
-</authomata>
+<coordenadas>
+<estadoCoord><nombre>S0</nombre><x>292</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>492</x><y>169</y></estadoCoord></coordenadas></authomata>
