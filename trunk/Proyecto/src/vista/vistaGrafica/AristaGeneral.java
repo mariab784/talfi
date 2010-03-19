@@ -17,6 +17,11 @@ public abstract class AristaGeneral implements AristaInterface{
 	
 	protected boolean marcada;
 	
+	public AristaGeneral(String origen,String destino){
+		this.origen=origen;
+		this.destino=destino;
+	}
+	
 	public AristaGeneral(int x,int y,int fx, int fy,String origen,String destino){
 		
 		this.x=x;
