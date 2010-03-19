@@ -7,7 +7,7 @@
 		<item>0</item>
 		<item>1</item>
 	</alphabet>
-		<alphabetP>
+	<alphabetP>
 		<item>0</item>
 		<item>1</item>
 		<item>Z</item>
@@ -26,7 +26,7 @@
 		<arrow>
 			<state>S0</state>	
 			<state>S0</state>
-			<item>a</item>
+			<item>a,b</item>
 			<cima>Z</cima>
 			<trans>Z</trans>
 		</arrow>
@@ -34,19 +34,19 @@
 			<state>S0</state>	
 			<state>S1</state>
 			<item>c</item>
+			<cima>C</cima>
+			<trans>CZ</trans>
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>0</item>
 			<cima>Z</cima>
 			<trans>Z</trans>
 		</arrow>
 		<arrow>
-			<state>S1</state>	
-			<state>S1</state>
-			<item>0</item>
-			<cima>Z</cima>
-			<trans>\\</trans>
-		</arrow>
-		<arrow>
-			<state>S1</state>	
-			<state>S1</state>
+			<state>S0</state>	
+			<state>S0</state>
 			<item>1</item>
 			<cima>1</cima>
 			<trans>Z</trans>
@@ -54,9 +54,10 @@
 		<arrow>
 			<state>S1</state>	
 			<state>S1</state>
-			<item>\\</item>
+			<item>\</item>
 			<cima>Z</cima>
-			<trans>\\</trans>
+			<trans>\</trans>
 		</arrow>		
 	</arrows>
-</authomata>
+<coordenadas>
+<estadoCoord><nombre>S0</nombre><x>292</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>492</x><y>169</y></estadoCoord></coordenadas></authomata>
