@@ -201,7 +201,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					
 					x = x+ 10;
 					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
-					((AutomataPila)automata).insertaArista(s1,s2,entrada,s4,salida);				
+					((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
 				}
 					
 				else	{automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
@@ -211,8 +211,6 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		
 		////////////////////////////////////////////////////////////////////////////////
 		nodos=documento.getElementsByTagName("estadoCoord");
-		if (automata instanceof AutomataPila)System.out.println("ENTRA EN AUTOPILA" + ((AutomataPila)automata).getAut());
-		else System.out.println("ENTRA EN AUTOPILA" + automata.getAutomata());
 
 		if (nodos.getLength()==0) return automata;
 		if (nodos==null) return automata;
