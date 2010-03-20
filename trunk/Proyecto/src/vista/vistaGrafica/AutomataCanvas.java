@@ -129,6 +129,8 @@ public class AutomataCanvas extends JScrollPane {
 	
 	public  boolean getAPD(){return apd;}
 	
+	public void setPila(boolean b){ VistaGrafica.setPila(b);}
+
 	public boolean getPila(){ return VistaGrafica.getPila();}
 	
 	public static boolean getTuring(){ return VistaGrafica.getTuring();}
@@ -588,9 +590,11 @@ public class AutomataCanvas extends JScrollPane {
 		else desmarcarAristas(listaAristas);
 		
 		g.clearRect(0,0,2000,2000);
+
 		Iterator<Estado> itEst=listaEstados.iterator();
 		while(itEst.hasNext()) {
 			Estado state=itEst.next();
+			
 			Point point=new Point(state.getX(),state.getY());
 			drawBackground(g, state, point, Color.yellow);
 			g.setColor(Color.black);
@@ -752,7 +756,8 @@ public class AutomataCanvas extends JScrollPane {
 		//del polígono deberia aumentar dependiendo del numero de vertives
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
-		if (a instanceof AutomataPila) this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();
+		//if (a instanceof AutomataPila){setPila(false);}
+		if (a instanceof AutomataPila){setPila(true); this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();}
 		
 		Iterator<String> itEst=a.getEstados().iterator();
 		
@@ -788,10 +793,45 @@ public class AutomataCanvas extends JScrollPane {
 			listaFinales.add(itFinales.next());
 		}
 		//aristas
+		if((a instanceof AutomataPila)){
+			
+			
+			Iterator<AristaAP> iAP = ((AutomataPila) a).getAutomataPila().iterator();
+			while (iAP.hasNext()){
+				AristaAP arAP = iAP.next();
+				
+				Iterator<Estado> itEstNuevos=listaEstados.iterator();
+				while(itEstNuevos.hasNext()) {
+				
+					Estado aux=itEstNuevos.next();
+					
+					if (aux.getEtiqueta().equals(arAP.getOrigen())) {
+						arAP.setX(aux.getX());
+						arAP.setY(aux.getY());
+						
+					}
+					if (aux.getEtiqueta().equals(arAP.getDestino())) {
+						arAP.setFx(aux.getX());
+						arAP.setFy(aux.getY());
+						
+					}
+			}
+			this.listaAristasAP.add(arAP.clone());
+			}
+			
+			
+		}
+		if(!(a instanceof AutomataPila)){
+			
+			
+		
 		Iterator<String> itEst2=a.getEstados().iterator();
 		while(itEst2.hasNext()) {
 			String est=itEst2.next();
 			ArrayList<String> letrasV=a.getAristasVertice(est);
+			
+
+			//System.out.println("LETRASV : " + letrasV); //XXX
 			if(letrasV!=null){
 				Iterator<String> itLetras=letrasV.iterator();
 				while(itLetras.hasNext()) {
@@ -817,12 +857,22 @@ public class AutomataCanvas extends JScrollPane {
 								fy=aux.getY();
 							}
 						}
-						Arista arista=new Arista(x,y,fx,fy,letra,est,estadoDestino);
-						listaAristas.add(arista);
+					/*	if (a instanceof AutomataPila){
+							AristaAP aristaAP=new AristaAP(x,y,fx,fy,est,estadoDestino);
+							listaAristasAP.add(aristaAP);
+							
+						} */
+						//else if (a instanceof MaquinaTuring)
+					//	else{
+							Arista arista=new Arista(x,y,fx,fy,letra,est,estadoDestino);
+							listaAristas.add(arista);
+					//	}
+						
 					}
 				}
 			}
 		}
+		}//llave si no AP
 		String brr=new Character((char)92).toString();
 		String ruta=System.getProperty("user.dir")+brr+"HTML"+brr+"imagen.jpg";
 		generarImagenJPg(ruta);
@@ -847,6 +897,7 @@ public class AutomataCanvas extends JScrollPane {
     	estadoInicial="";
     	apd = false;
     	ap = null;
+    	setPila(false);
     	this.repaint();
     	vista.requestFocus();
 	}
