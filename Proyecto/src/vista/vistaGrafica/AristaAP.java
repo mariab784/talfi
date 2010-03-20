@@ -375,4 +375,11 @@ if (cadena1.compareTo(cadena2) > 0)
 		
 	}
 	
+	public AristaAP clone(){
+		AristaAP a = new AristaAP(getX(),getY(),getFx(),getFy(),getOrigen(),getDestino());
+		a.setSimbolos(this.getEntradaSimbolos());
+		a.setCimaPila(this.getCimaPila());
+		a.setSalida(this.getSalidaPila());
+		return a;
+	}
 }
