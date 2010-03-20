@@ -37,7 +37,7 @@ public class AutomataPila extends AutomataFND{
 	private ArrayList<AristaAP> automata;
 	private HashMap<String,Coordenadas> coordenadasGraficas;
 //	protected HashMap<String, HashMap</*String*/ArrayList<String>,ArrayList<String>>> aut;
-	protected HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>> aut;
+//	protected HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>> aut;
 	private boolean apd;
 	
 	private String lambda;
@@ -47,7 +47,7 @@ public class AutomataPila extends AutomataFND{
 
 
 	private ArrayList<Integer> aristasQueDesapilan; // esto tocarlo tb en la parte visual
-	private ArrayList<Integer> aristasLambda;
+//	private ArrayList<Integer> aristasLambda;
 	
 //	private boolean[] visitados;
 	
@@ -65,17 +65,21 @@ public class AutomataPila extends AutomataFND{
 		estados=new ArrayList<String>();
 		estadosFinales=new ArrayList<String>();
 		alfabeto=new Alfabeto_imp();
+		
 		//alfabetoMenosL=new Alfabeto_imp();
 		automata=new ArrayList<AristaAP>();
 		apd = true; ///////REVISAR PARA MODIFICARLO
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+		alfabetoPila = new AlfabetoPila_imp();
+		alfabetoPila.aniadirLetra(fondoPila);
 		aristasQueDesapilan = new ArrayList<Integer>();
-		aristasLambda = new ArrayList<Integer>();
+//		aristasLambda = new ArrayList<Integer>();
 		aristasPilaVacia = null;
 		estadoPilaVacia = null;
-		aut=new HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>();	}
+//		aut=new HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>();	
+	}
 	//-------------------------------------------------------------
 	public AutomataPila(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 			ArrayList<String> est, ArrayList<AristaAP> aut, boolean det){
@@ -286,7 +290,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 */
 	public ArrayList<String> getAristasVertice(String estado) {
 		// TODO Auto-generated method stub
-		int indice = automata.indexOf(estado);
+		int indice = 1;// = aut.keySet(estado);// .indexOf(estado);
 		System.out.println(" AUPILA: " + automata);
 		System.out.println("INDICE AUPILA: " + indice);
 		ArrayList<String> simbolos = null;
@@ -325,11 +329,21 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		return estadosFinales;
 	}
 	//-------------------------------------------------------------
+	public void insertaArista2(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
+
+		AristaAP arist = new AristaAP(origen,destino);
+		arist.setCimaPila(cima);
+		arist.setSalida(salida);
+		arist.setSimbolos(simbolos);
+		anadeArista(arist);
+		
+	}
+	
 	/**
 	 * Método que inserta una arista nueva en el autómata de pila.
 	 * @param estado origen, estado destino, símbolos, cima y apilar/desapilar.
 	 */
-	public void insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
+/*	public void insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("ORIGEN: " + origen);
@@ -363,7 +377,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 			hs2.put(simbolos, hs1);
 			aut.put(origen, hs2);*/
 			
-		}	
+/*		}	
 		
 		//ArrayList<String> aux=automata.get(verticeV).get(letra);
 		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
@@ -389,7 +403,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 			/*		  HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
 							new HashMap<ArrayList<String>,ArrayList<String>>();
 					  hs.put(salida, simbolos);*/
-					  aut.get(origen).get(cima).get(destino).put(salida, simbolos);
+/*					  aut.get(origen).get(cima).get(destino).put(salida, simbolos);
 				  }
 				  /*if (aut.get(origen).get(cima).get(destino).get(salida) != null){ //bucle ?
 						
@@ -398,7 +412,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 					
 					
 					
-				}
+/*				}
 				else{
 					HashMap<ArrayList<String>,ArrayList<String>> hs =
 						new HashMap<ArrayList<String>,ArrayList<String>>();
@@ -475,7 +489,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 			automata.add(arista);	
 		else return;*/
 		
-	}
+//	}
 	//-------------------------------------------------------------
 	/**
 	 * Método que inserta un estado nuevo en autómata de pila
@@ -653,11 +667,11 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	}
 	//-------------------------------------------------------------
 	
-	public HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
+/*	public HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
  getAut(){
 		
 		return aut;
-	}
+	}*/
 	
 	/**
 	 * Método que devuelve el alfabeto de pila.
@@ -687,17 +701,17 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	 * @param boolean estadoFinal, true si acepta por estado final, false si es por pila vacia
 	 * @return bool.
 	 */
-	private ArrayList<Integer> buscaEstados(String estado, String cima, String simbolo, boolean conSimbolo){
+/*	private ArrayList<Integer> buscaEstados(String estado, String cima, String simbolo, boolean conSimbolo){
 		/*Esto es un poco idea feliz. No se si seria mejor usar hashmap, y decidir si esta solo el
 		 * simbolo, solo lambda, o ambos*/
-		ArrayList<Integer> s = null;
+/*		ArrayList<Integer> s = null;
 		int i = 0;
 /*		System.out.println("**datos entrada**");
 		System.out.println("ESTADO PARAM ENTRADA: " + estado);
 		System.out.println("CIMA PARAM ENTRADA: " + cima);
 		System.out.println("SIMBOLO PARAM ENTRADA: " + simbolo);*/
 	//	if (simbolo == null) return null; //CAMBIADO
-		if (cima == null) return s;
+/*		if (cima == null) return s;
 		
 		while (i < automata.size()){
 			
@@ -727,7 +741,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		}
 		System.out.println("LISTAESTADOS DEVUELVE: " + s);
 		return s;
-	}
+	}*/
 
 	//-------------------------------------------------------------------------------------------
 	
@@ -741,8 +755,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	 * @param int iPila, indice auxiliar que nos indica la posicion de la cima de la pila antes de actualizarla
 	 * @return ArrayList<String> devuelve la pila ya actualizada para esta transicion concreta
 	 */
-	@SuppressWarnings("unchecked")
-	private ArrayList<String> actualizaPila( ArrayList<String> salidaPila, ArrayList<String> pila,
+/*	private ArrayList<String> actualizaPila( ArrayList<String> salidaPila, ArrayList<String> pila,
 			String cima, int iPila){
 		//por definicion simpre se desapila
 		ArrayList<String> aux;
@@ -755,7 +768,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		System.out.println("CIMA ENTRADA: " + cima);
 		System.out.println("IPILA ENTRADA: " + iPila); */
 		
-		if (aux.isEmpty()) return null;
+/*		if (aux.isEmpty()) return null;
 		
 		aux.remove(iPila);
 		
@@ -771,7 +784,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		} */
 		//if (salidaPila.contains(fondoPila)) return aux;
 			
-		int i = salidaPila.size()-1;
+/*		int i = salidaPila.size()-1;
 		String sim;
 		if (!salidaPila.contains(lambda)){
 			while (i >= 0){
@@ -785,21 +798,21 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		System.out.println("pila de entrada: " + pila);
 		System.out.println("tamaño pila de entrada: " + pila.size());*/
 		
-		return aux;
+/*		return aux;
 		
-	}
+	}*/
 
 	
 	
 	//--------------------------------------------------------------------------------------------
-	private boolean estaPorPila(ArrayList<Integer> listaEstados, ArrayList<String> pila, int iPila, String cimaPila,
+/*	private boolean estaPorPila(ArrayList<Integer> listaEstados, ArrayList<String> pila, int iPila, String cimaPila,
 			String palabra,	int iPalabra, String estado){
 				
 		if (listaEstados == null){
 			
 			if(pila == null || pila.isEmpty()){
 
-				if (iPalabra /*>*/== palabra.length() || iguales(palabra,lambda)){//cambiado > por ==
+				if (iPalabra /*>*//*== palabra.length() || iguales(palabra,lambda)){//cambiado > por ==
 					System.out.println("BIEEEEEEEEEEEEEN"); return true;
 				}
 				else {System.out.println("TE PEINASSSSSSS NO TERMINAASTE DE PROCESAR LA CADENA"); return false;}
@@ -835,7 +848,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				System.out.println("ESTADO: " + estado);
 				System.out.println("***	FIN INFORMACION DE ENTRADA***");*/
 				
-				while ( it.hasNext() ){ 
+	/*			while ( it.hasNext() ){ 
 
 					String simboloAux = null;
 					Integer indice = it.next();
@@ -852,7 +865,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 
 
 		//			System.out.println("INDICE BUCLE: " + indice.toString());
-					AristaAP a = automata.get(indice.intValue());
+	/*				AristaAP a = automata.get(indice.intValue());
 		//			System.out.println("ARISTA BUCLE: " + a);
 					
 					
@@ -914,7 +927,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 						if( estaPorPila(listaAux, pilaAux , iPilaAux, cimaPilaAux ,palabra,
 												iPalabra,estadoAux) ) return true; //REVISAR
 					}
-					/*else*/if (!(a.getEntradaSimbolos().contains(lambda)) || 
+					/*else*//*if (!(a.getEntradaSimbolos().contains(lambda)) || 
 							((a.getEntradaSimbolos().contains(lambda)) &&	(a.getEntradaSimbolos().size() != 1) ) ){
 		
 						estadoAux = a.getDestino();
@@ -952,7 +965,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 						System.out.println("***	FIN INFORMACION DE REC***");*/
 						
 						
-						if( estaPorPila(listaAux, pilaAux , iPilaAux, cimaPilaAux ,palabra,
+/*						if( estaPorPila(listaAux, pilaAux , iPilaAux, cimaPilaAux ,palabra,
 									iPalabra+1,estadoAux) ) return true; //REVISAR			
 					}
 				}//llave while
@@ -960,17 +973,17 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				
 				
 		return false;//para ke no pete
-	}
+	}*/
 	
 	
 	
-	private boolean estaPorEstado(ArrayList<Integer> listaEstados, ArrayList<String> pila, int iPila, String cimaPila,
+/*	private boolean estaPorEstado(ArrayList<Integer> listaEstados, ArrayList<String> pila, int iPila, String cimaPila,
 	String palabra,	int iPalabra, String estado){
 		
 		if (listaEstados == null){
 			if (iguales(palabra,lambda) ) System.out.println("IGUALEEES");
 			System.out.println("IPALABRA: " + iPalabra);
-			if (iPalabra /*>*/== palabra.length() || iguales(palabra,lambda)){ //cambiado > por ==
+			if (iPalabra /*>*//*== palabra.length() || iguales(palabra,lambda)){ //cambiado > por ==
 				if ( estadosFinales.contains(estado)){ System.out.println("BIEEEEEEEEEEEEEN"); return true;}
 				else {System.out.println("OOOOOOOOH ACABASTE EN UN ESTADO QUE NO ACEPTA estado"); return false;}
 			}
@@ -1019,7 +1032,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				
 				
 			//	System.out.println("INDICE BUCLE: " + indice.toString());
-				AristaAP a = automata.get(indice.intValue());
+/*				AristaAP a = automata.get(indice.intValue());
 			//	System.out.println("ARISTA BUCLE: " + a);
 															
 				if (a.getEntradaSimbolos().contains(lambda) ){
@@ -1075,7 +1088,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				}
 				
 				
-				/*else*/if (!(a.getEntradaSimbolos().contains(lambda)) || 
+				/*else*//*if (!(a.getEntradaSimbolos().contains(lambda)) || 
 					((a.getEntradaSimbolos().contains(lambda)) &&	(a.getEntradaSimbolos().size() != 1) ) ){
 					
 					
@@ -1116,12 +1129,12 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		
 		
 		return false;//para ke no pete
-	}
+	}*/
 	
 
 	
 	
-	public void recogeAristasEspeciales(){
+/*	public void recogeAristasEspeciales(){
 		//metodo para ver si tenemos aristas que desapilar alguna vez
 		// y para guardar aristas con transicion lamdba, para comprobar ciclos
 		
@@ -1137,7 +1150,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 			i++;
 		}
 //		System.out.println("ARISTAS lambda: " + this.aristasLambda);
-	}
+	}*/
 	
 	/**
 	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
