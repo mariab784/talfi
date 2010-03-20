@@ -27,14 +27,53 @@
 	</finals>
 	<arrows>
 		<arrow>
+			<state>S0</state>	
 			<state>S0</state>
-			<state>S0</state>
-			<item>a,Z/AZ  b,Z/BZ   a,A/AA   b,B/BB   a,B/e   b,A/e</item>
+			<item>a</item>
+			<cima>Z</cima>
+			<trans>AZ</trans>				
 		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>b</item>
+			<cima>Z</cima>
+			<trans>BZ</trans>				
+		</arrow>		
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>a</item>
+			<cima>A</cima>
+			<trans>AA</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>b</item>
+			<cima>B</cima>
+			<trans>BB</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>a</item>
+			<cima>B</cima>
+			<trans>\</trans>				
+		</arrow>
+		<arrow>
+			<state>S0</state>	
+			<state>S0</state>
+			<item>b</item>
+			<cima>A</cima>
+			<trans>\</trans>				
+		</arrow>					
 		<arrow>
 			<state>S0</state>
 			<state>S1</state>
-			<item>e,Z/e</item>
+			<item>\</item>
+			<cima>Z</cima>
+			<trans>\</trans>	
 		</arrow>
 	</arrows>
 </authomata>
