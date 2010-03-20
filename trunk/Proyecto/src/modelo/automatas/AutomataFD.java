@@ -66,7 +66,7 @@ public class AutomataFD implements Automata{
 		if (automata.get(vertice)==null) return new ArrayList<String>();
 		Iterator<String> it=automata.get(vertice).keySet().iterator();
 		ArrayList<String> aristas=new ArrayList<String>();
-		while(it.hasNext()) aristas.add(it.next());
+		while(it.hasNext()){ String ar = it.next(); System.out.println("AR: " + ar); aristas.add(ar); }
 		return aristas;
 	}
 	
