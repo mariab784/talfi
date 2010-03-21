@@ -1639,6 +1639,7 @@ public class VistaGrafica extends JFrame implements Vista{
 							bw.close();
 							JOptionPane pane=new JOptionPane();
 							dialog=pane.createDialog(m.devuelveMensaje("vista.BD", 2));
+							System.out.println("VISTAGRAFICA ANADIR A EJS: tipo " + panelCentral.getPanel().getTipoAutomata());
 							PanelAniadirEjemploBD p=new PanelAniadirEjemploBD(dialog,vista,texto,panelCentral.getPanel().getTipoAutomata());
 							dialog.setContentPane(p);
 							dialog.setSize(new Dimension(500,120));
