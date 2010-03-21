@@ -68,6 +68,7 @@ public class AccesoAEjemplos {
 			// TODO Auto-generated catch block
 			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
 		}
+
 		
 		Document documento = parser.getDocument();
 		
@@ -153,6 +154,8 @@ public class AccesoAEjemplos {
 		
 		String ruta="XML/arbolEjemplos/arbol.xml";
 		try {
+			
+			
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			
 			
@@ -524,7 +527,7 @@ public class AccesoAEjemplos {
 				i++;
 			}
 			
-			fich+="\t\t</equivERss>\n\t</ejercicios>\n</jtree>";
+			fich+="\t\t</equivERs>\n\t</ejercicios>\n</jtree>";
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
 			bw.append(fich);
