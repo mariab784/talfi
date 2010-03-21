@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import vista.vistaGrafica.Arista;
-import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaGeneral;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.Estado;
