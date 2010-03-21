@@ -24,8 +24,10 @@ import vista.vistaGrafica.AutomataCanvas;
 
 public class OyentePalabra extends MouseAdapter /*implements ActionListener*/{
 
+	@SuppressWarnings("unused")
 	private String palabra;
 	private JDialog dialog;
+	@SuppressWarnings("unused")
 	private AutomataCanvas canvas;
 	//private String nombreArista;
 	private JTextField nomArs;
