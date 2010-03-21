@@ -3,16 +3,12 @@
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
-		<item>Z</item>
 		<item>a</item>
 		<item>b</item>
-		<item>A</item>
-		<item>B</item>
-		<item>e</item>
 	</alphabet>
 	<alphabetP>
-		<item>0</item>
-		<item>1</item>
+		<item>A</item>
+		<item>B</item>
 		<item>Z</item>
 	</alphabetP>	
 	<states>
