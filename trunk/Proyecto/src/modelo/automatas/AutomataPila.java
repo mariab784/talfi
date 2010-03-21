@@ -82,7 +82,7 @@ public class AutomataPila extends AutomataFND{
 	}
 	//-------------------------------------------------------------
 	public AutomataPila(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
-			ArrayList<String> est, ArrayList<AristaAP> aut, boolean det){
+			ArrayList<String> est, ArrayList<AristaAP> aut){
 		
 
 		estadoInicial = estadoI;
@@ -93,34 +93,22 @@ public class AutomataPila extends AutomataFND{
 		estados = est;
 		automata = aut;
 		
-		apd = det;
+		apd = compruebaAPD();
 		aristasQueDesapilan = new ArrayList<Integer>();
 		
 	}
 	//-------------------------------------------------------------
 public void anadeArista(AristaAP a){
 		
-	//	try{
+
 			int i = existeTransicion(a);
 			if ( i == -1 ) this.automata.add(a);
-		/*	else if (i == -2){
-				Mensajero m=Mensajero.getInstancia();
-				throw new AutomatasException(m.devuelveMensaje("canvas.notransvalida",2));
-			}*/
-			//Collections.sort(getAutomataPila());
-	//		if (apd) apd = compruebaAPD(a); //REVISAR AQUI Y EN AUTOMATA CANVAS KE ES LO MISMO
-			
-	//	}								//cambiar tb lo de mensajes en ingles
-	/*	catch (AutomatasException ex){
-			JOptionPane.showMessageDialog(null,ex.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
-		}*/
 	}
 	
 /******************************************************************************/
-//cambiar a privado luego!!!!!!!!!!
+
 @SuppressWarnings("unchecked")
-public boolean compruebaAPD(){  //usar contieneEntrada
-	//buscaEstados(String estado, String cima, String simbolo, boolean conSimbolo)
+private boolean compruebaAPD(){  
 	//libro dice:
 	/*
 	 * d(q,a,X) tiene como maximo un elemento para cualkier q en Q, a en E o a = lambda, y X en T.
@@ -140,27 +128,18 @@ public boolean compruebaAPD(){  //usar contieneEntrada
 	while (i < this.getAutomataPila().size()){
 		
 		AristaAP aux = this.getAutomataPila().get(i);
-//		System.out.println("ARISTA A: " + a);
-//		System.out.println("ARISTA AUX: " + aux);
+
 		if ((aux.getEntradaSimbolos().size() > 1) && (aux.getEntradaSimbolos().contains(lambda))) return false;
 		
 		if ( iguales(a.getOrigen(),aux.getOrigen()) ){
 			
 			if (!iguales(a.getCimaPila(),aux.getCimaPila())) i++;
-			// aqui estariamos con dos aristas ke tienen el mismo origen y la misma cima
-			// nos keda mirar si hay mas de una posibilidad para moverse
-			// puede ser ke ambos tengan un mismo simbolo, o que haya lambdas, no?
 			else{
 				if (this.contieneEntrada(a, aux)) return false;
-				//if (iguales(a.getSalidaPila(),aux.getSalidaPila())) return false;
-			//contieneEntrada compara si algunas de las entradas de aux esta en las entradas de a
-			//si es false es ke no comparten simbolos, pero y si una o ambas contiene lambda?
 				if (a.getEntradaSimbolos().contains(lambda) || aux.getEntradaSimbolos().contains(lambda))
-					return false;
-				
+					return false;				
 				i++;
-			}
-			
+			}			
 		}
 		else i++;
 		
@@ -192,18 +171,13 @@ private int existeTransicion(AristaAP a){
 			boolean origen = a.getOrigen().equals( aux.getOrigen());
 			boolean cima = a.getCimaPila().equals( aux.getCimaPila());
 			boolean salida = iguales(a.getSalidaPila(),aux.getSalidaPila());
-
 			
 			if ( destinos && origen && cima ){
 				
 				if (salida){ 
 					combinarEntrada(aux, a.getEntradaSimbolos()); //XXX
 					return i;
-				}
-				
-				
-			//	if (contieneEntrada(aux, a)) return -2;
-				
+				}			
 			}	
 			i++;
 		}
@@ -288,7 +262,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 * @param estado , estado del que se quieren calcular las aristas salientes.
 	 * @return lista de todas las aristas del estado.
 	 */
-	public ArrayList<String> getAristasVertice(String estado) {
+/*	public ArrayList<String> getAristasVertice(String estado) {
 		// TODO Auto-generated method stub
 		int indice = 1;// = aut.keySet(estado);// .indexOf(estado);
 		System.out.println(" AUPILA: " + automata);
@@ -300,7 +274,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		}
 		
 		return simbolos;
-	}
+	}*/
 	//-------------------------------------------------------------
 	/**
 	 * Método que devuelve el estado inicial del autómata de pila.
@@ -1299,8 +1273,9 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 
 	}
 	public String toString() {
-		return "Estados:"+estados.toString()+"\n"+"Estados Finales: "+estadosFinales.toString()+"" +
-				"\n"+automata.toString();
+		return "Estados:"+estados.toString()+"\n"+"Estados Finales: "+estadosFinales.toString()+"\n"+
+		"Estados Inicial: "+estadoInicial.toString() + "\n"+"Alfabeto: "+alfabeto.toString()+
+		"\n"+"Alfabeto Pila: "+alfabetoPila.toString()+"\n"+"Determinista: "+apd+"\n"+automata.toString();
 	}
 }
 /******************************************************************/
