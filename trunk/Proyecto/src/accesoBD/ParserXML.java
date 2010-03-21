@@ -13,7 +13,6 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 
-import vista.vistaGrafica.AristaAP;
 
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
@@ -152,15 +151,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		for (int i = 0; i < nodos.getLength(); i++){
 			for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
 				if (automata instanceof AutomataPila){
-			/*		String ent = "";
-					
-					String nombreArista=nodos.item(i).getChildNodes().item(x).getTextContent();
-					StringTokenizer st=new StringTokenizer(nombreArista,",");
-										while(st.hasMoreTokens()){
-						String ss=st.nextToken();
-						
-						ent o(ss);
-					}*/
+
 					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
 					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
 					

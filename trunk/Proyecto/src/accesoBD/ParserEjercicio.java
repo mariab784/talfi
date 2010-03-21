@@ -44,11 +44,23 @@ public class ParserEjercicio {
 		try {
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			
-			String tipo=null;
+//			String tipo=null;
 			Document documento = parser.getDocument();
 			
-			NodeList tipoEnun=documento.getElementsByTagName("tipo");
-			tipo=tipoEnun.item(0).getTextContent();
+/*			NodeList tipoEnun=documento.getElementsByTagName("type");
+			tipo= tipoEnun.item(1).getChildNodes().item(0).getTextContent();*///tipoEnun.item(0).getTextContent();
+//			NodeList tipo = documento.getElementsByTagName("type");
+
+			NodeList tipoE = documento.getElementsByTagName("type");
+			 
+			String tipo = null;
+			for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
+				 tipo = tipoE.item(0).getChildNodes().item(i).getTextContent();
+				 i++;
+				 
+			}			
+			
+			System.out.println("TIPO: " + tipo);
 			
 			if(tipo.equals("Lenguaje")){
 				return extraerEjercicioLenguaje(ruta);
@@ -77,7 +89,12 @@ public class ParserEjercicio {
 			if(tipo.equals("EquivERs")){
 				return extraerEjercicioEquivERs(ruta);
 			}
-			
+			if(tipo.equals("EjAutomataPila")){
+				return extraerEjercicioPila(ruta);
+			}
+/*			if(tipo.equals("Turing")){
+				return extraerEjercicioTuring(ruta);
+			}*/
 			return null;
 			
 		} catch (FileNotFoundException e) {
@@ -94,6 +111,132 @@ public class ParserEjercicio {
 			throw e;
 		}
 	}
+	
+	
+	
+	
+	/**
+	 * Extrae un ejercicio de tipo Automata Pila
+	 * @param ruta ruta xml donde se realizarñ la extracciñn 
+	 * @return Ejercicio resultado de la extracciñn, de tipo AutomataPil
+	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
+	 */
+	public Ejercicio extraerEjercicioPila(String ruta) throws AutomatasException {
+		
+		Mensajero mensajero=Mensajero.getInstancia();
+		DOMParser parser = new DOMParser();
+		
+		String enunciado=null;
+		String output=null;//lo que habrñ que comparar en un futuro
+		Automata input=null;
+		Alfabeto alf=null;
+		
+		try {
+			parser.parse(new InputSource(new FileInputStream(ruta)));
+
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
+		}
+		
+		Document documento = parser.getDocument();
+		
+		NodeList tipoEnun=documento.getElementsByTagName("enunciado");
+		enunciado=tipoEnun.item(0).getTextContent();
+		
+		NodeList tipo = documento.getElementsByTagName("input");
+		String var=null;
+		
+		int fin=tipo.getLength();
+		for(int i=0;i<fin;i++){
+			 
+			tipo = documento.getElementsByTagName("type");
+			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
+				 var = tipo.item(i).getChildNodes().item(j).getTextContent();
+				 j++;	 
+			}	
+				
+			if (var.equals("AutomataFD")){		
+				input = new AutomataFD();		
+			}
+			if (var.equals("AutomataFND")){		
+				input = new AutomataFND();		
+			}
+			if (var.equals("AutomataFNDLambda")){			
+				input = new AutomataFNDLambda();		
+			}	
+			
+			alf=new Alfabeto_imp();
+			tipo = documento.getElementsByTagName("alphabet");
+			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
+				alf.aniadirLetra(tipo.item(i).getChildNodes().item(j).getTextContent());
+				j++;
+			}
+			input.setAlfabeto(alf);				
+				
+			ArrayList<String> estad=new ArrayList<String>();
+			tipo = documento.getElementsByTagName("states");		
+			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
+				estad.add(tipo.item(i).getChildNodes().item(j).getTextContent());
+				j++;
+			}
+			input.setEstados(estad);
+				
+			tipo = documento.getElementsByTagName("init");
+			input.setEstadoInicial(tipo.item(i).getChildNodes().item(1).getTextContent());
+			
+			ArrayList<String> finalss=new ArrayList<String>();
+			tipo = documento.getElementsByTagName("finals");
+			for (int j = 1; j < tipo.item(i).getChildNodes().getLength(); j++) {
+				finalss.add(tipo.item(i).getChildNodes().item(j).getTextContent());
+				j++;
+			}
+			input.setEstadosFinales(finalss);		
+
+			tipo = documento.getElementsByTagName("arrows");
+			ArrayList<String> arrow=null;
+			for (int j = 1; j < tipo.item(i).getChildNodes().getLength(); j++){
+				for(int k=1; k < tipo.item(i).getChildNodes().item(j).getChildNodes().getLength();k++){
+					if(arrow==null)arrow=new ArrayList<String>();
+					arrow.add(tipo.item(i).getChildNodes().item(j).getChildNodes().item(k).getTextContent());
+					k++;
+				}
+				if(arrow!=null)input.insertaArista(arrow.get(0),arrow.get(1),arrow.get(2));
+				arrow=null;
+				j++;
+			}
+		}
+		
+		tipo = documento.getElementsByTagName("output");
+		
+		fin=tipo.getLength();
+		for(int i=0;i<fin;i++){
+			 
+			tipo = documento.getElementsByTagName("RExpr");
+			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
+				 var = tipo.item(i).getChildNodes().item(j).getTextContent();
+				 output=var;
+				 j++;	 
+			}
+		}
+		return new Ejercicio_imp(enunciado,input,output,alf,"AFDTOER",ruta);
+
+		
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Extrae un ejercicio de tipo Automata-Expresiñn Regular
