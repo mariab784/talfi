@@ -187,10 +187,17 @@ public class AutomataCanvas extends JScrollPane {
 	 * @param listaAristas nueva lista de aristas el automata
 	 */
 	@SuppressWarnings("unchecked")
-	public void setListaAristas(ArrayList listaAristas, int tipo) {
-		if (tipo == 0)
-			this.listaAristas = (ArrayList<Arista>)listaAristas;
-		else this.listaAristasAP = (ArrayList<AristaAP>)listaAristas;
+	public void setListaAristas(ArrayList<Arista> lista) {
+
+			this.listaAristas = lista;
+
+
+	}
+	
+	public void setListaAristasAP(ArrayList<AristaAP> listaAP) {
+
+		listaAristasAP = listaAP;
+		
 	}
 
 	/**
@@ -347,7 +354,6 @@ public class AutomataCanvas extends JScrollPane {
 		
 		
 		if (!listaAristasAP.isEmpty()){	
-		
 			int numAristas = listaAristasAP.size();
 			int j = 0;
 			int i = 0;
@@ -649,14 +655,49 @@ public class AutomataCanvas extends JScrollPane {
 	public String traducirXML()throws AutomatasException {
 		//Mensajero m=Mensajero.getInstancia();
 		if(!this.estadoInicial.equals("")&&!(this.estadoInicial==null)){
-			String fichero="<authomata>\n\t<type>\n\t\t<item>";
+			//String fichero = null;
+			//if (this.getPila()) fichero="<authomataP>\n\t<type>\n\t\t<item>";
+			//else if (this.getTuring())
+			/*else*/String fichero="<authomata>\n\t<type>\n\t\t<item>";
 			fichero+=tipoAutomata()+"</item>\n\t</type>\n";
-			Iterator<Arista> itArist=listaAristas.iterator();
+			Iterator<Arista> itArist = null; Iterator<AristaAP> itAristAP = null;
+			if (this.getPila()){
+				itAristAP=listaAristasAP.iterator();
+				while (itAristAP.hasNext()){
+					AristaAP a = itAristAP.next();
+					ArrayList<String> s = a.getEntradaSimbolos();
+					String letra;
+					for(int i = 0; i < s.size(); i++){
+						letra = s.get(i);
+						if(!alfabeto.dameListaLetras().contains(letra)){
+							alfabeto.aniadirLetra(letra);						
+						}	
+					}
+					letra = a.getCimaPila();
+					if(!alfabetoPila.dameListaLetras().contains(letra))
+						alfabetoPila.aniadirLetra(letra);					
+					
+					s = a.getSalidaPila();
+					for(int i = 0; i < s.size(); i++){
+						letra = s.get(i);
+						if(!alfabetoPila.dameListaLetras().contains(letra)){
+							alfabetoPila.aniadirLetra(letra);							
+						}	
+					}
+					
+				}
+			
+			}
+			//if(this.getTuring())
+			else {
+				itArist=listaAristas.iterator();
+			//Iterator<Arista> itArist=listaAristas.iterator();
 			//se genera el alfabeto para el xml
-			while(itArist.hasNext()) {
-				String letra=itArist.next().getEtiqueta();
-				if (!alfabeto.dameListaLetras().contains(letra)) {
-					alfabeto.aniadirLetra(letra);
+				while(itArist.hasNext()) {
+					String letra=itArist.next().getEtiqueta();
+					if (!alfabeto.dameListaLetras().contains(letra)) {
+						alfabeto.aniadirLetra(letra);
+					}
 				}
 			}
 			if(alfabeto!=null){
@@ -666,6 +707,18 @@ public class AutomataCanvas extends JScrollPane {
 					fichero+="\t<item>"+itAlfabeto.next()+"</item>\n\t";
 				}
 				fichero+="</alphabet>\n\t";
+				
+				if (this.getPila()){
+					Iterator<String> itAlfabetoP=alfabetoPila.dameListaLetras().iterator();
+
+					fichero+="\t<alphabetP>\n\t";
+					while(itAlfabetoP.hasNext()) {
+						fichero+="\t<item>"+itAlfabetoP.next()+"</item>\n\t";
+					}
+					fichero+="</alphabetP>\n\t";
+		
+				}
+				
 				//se genera la lista de estados y se guarda en el xml
 				Iterator<Estado> itEst=listaEstados.iterator();
 				fichero+="<states>\n\t";
@@ -682,17 +735,55 @@ public class AutomataCanvas extends JScrollPane {
 				}
 				fichero+="</finals>\n\t";
 				//GENERACION DE LAS ARISTAS!
+				
+				
 				fichero+="<arrows>\n\t";
-				Iterator<Arista> itArista=listaAristas.iterator();
-				while(itArista.hasNext()) {
-					Arista a=itArista.next();
-					fichero+="\t<arrow>\n\t";
-					fichero+="\t<state>"+a.getOrigen()+"</state>\n\t";
-					fichero+="\t<state>"+a.getDestino()+"</state>\n\t";
-					fichero+="\t<item>"+a.getEtiqueta()+"</item>\n\t</arrow>\n\t";
+				
+				if (this.getPila()){
+
+					Iterator<AristaAP> itAristaAP=listaAristasAP.iterator();
+					while(itAristaAP.hasNext()) {
+						AristaAP a=itAristaAP.next();
+						fichero+="\t<arrow>\n\t";
+						fichero+="\t<state>"+a.getOrigen()+"</state>\n\t";
+						fichero+="\t<state>"+a.getDestino()+"</state>\n\t";
+						fichero+="\t<item>";
+						for(int i = 0; i < a.getEntradaSimbolos().size(); i++){
+							
+							fichero+=a.getEntradaSimbolos().get(i);
+							if(i != a.getEntradaSimbolos().size()-1)
+								fichero+=",";
+							
+						}
+						fichero+="</item>\n\t";
+						
+						fichero+="\t<cima>"+a.getCimaPila()+"</cima>\n\t";
+						fichero+="\t<trans>";
+						for(int i = 0; i < a.getSalidaPila().size(); i++){
+							
+							fichero+=a.getSalidaPila().get(i);
+							
+						}
+						fichero+="</trans>\n\t";
+						fichero+="\t</arrow>\n\t";
+					}
+					
+				}
+				else{
+				
+					Iterator<Arista> itArista=listaAristas.iterator();
+					while(itArista.hasNext()) {
+						Arista a=itArista.next();
+						fichero+="\t<arrow>\n\t";
+						fichero+="\t<state>"+a.getOrigen()+"</state>\n\t";
+						fichero+="\t<state>"+a.getDestino()+"</state>\n\t";
+						fichero+="\t<item>"+a.getEtiqueta()+"</item>\n\t</arrow>\n\t";
+					}
+					
+					////////////////////////////////////////////////////////////////////
 				}
 				fichero+="</arrows>\n";
-				////////////////////////////////////////////////////////////////////
+				
 				fichero+="<coordenadas>\n";
 				Iterator<Estado> itEstc=listaEstados.iterator();
 				while(itEstc.hasNext()) {
@@ -704,7 +795,9 @@ public class AutomataCanvas extends JScrollPane {
 				}
 				fichero+="</coordenadas>";
 				////////////////////////////////////////////////////////////////////
-				fichero+="</authomata>";
+				//if (this.getPila())fichero+="</authomataP>";
+				//if (this.getTuring())
+				/*else*/ fichero+="</authomata>";
 				//fuera hay que decidir donde se guarda el fichero
 				return fichero;
 			} else {
@@ -1057,7 +1150,7 @@ public class AutomataCanvas extends JScrollPane {
 				else {
 					int angulo=2;
 					if (a instanceof Arista) if (esUnica((Arista)a)) angulo=0;
-					if (a instanceof AristaAP) System.out.println("MUAHAHAHAAH");
+					//if (a instanceof AristaAP) System.out.println("MUAHAHAHAAH");
 					if (a.getY()>a.getFy())
 						curva=new CurvedArrow(a.getX()-15,a.getY()-15,a.getFx()+15,a.getFy()+15, angulo);
 					else curva=new CurvedArrow(a.getX()-15,a.getY()+15,a.getFx()+15,a.getFy()-15, angulo);
@@ -1217,6 +1310,8 @@ public class AutomataCanvas extends JScrollPane {
 	}
 
 	private String tipoAutomata(){
+		if(this.getPila()) return "AutomataPila";
+		//if(this.getTuring()) return "Turing";
 		Automata auto=new AutomataFNDLambda();
 		if(alfabeto.dameListaLetras().contains(OyenteArista.getLambda()))
 			return "AutomataFNDLambda";
@@ -1267,40 +1362,70 @@ public class AutomataCanvas extends JScrollPane {
 	@SuppressWarnings("unchecked")
 	private void modificarRelacinesEstado(Estado est) {
 		// TODO Auto-generated method stub
-		ArrayList/*<Arista>*/ lArist = null; Iterator/*<Arista>*/ iArist = null; int tipo = -1;
+	/*	ArrayList<Arista> lArist = null; ArrayList<AristaAP> lAristAP = null;
+		Iterator<Arista> iArist = null; Iterator<AristaAP> iAristAP = null; 
+		int tipo = -1;
 		
-		lArist=new ArrayList/*<Arista>*/();
-		if (!listaAristas.isEmpty()){
-		/*ArrayList<Arista>*/ //lArist=new ArrayList/*<Arista>*/();
-		/*Iterator<Arista>*/ iArist=listaAristas.iterator(); tipo = 0;
+		lArist=new ArrayList<Arista>();
+		if (!getListaAristas().isEmpty()){
+			lArist=new ArrayList<Arista>();
+			iArist=getListaAristas().iterator(); 
+			tipo = 0;
 		}
 		
-		if (!listaAristasAP.isEmpty()){
-			iArist=listaAristasAP.iterator(); tipo = 1;
+		if (!getListaAristasPila().isEmpty()){
+			lAristAP=new ArrayList<AristaAP>();
+			iAristAP=getListaAristasPila().iterator(); 
+			tipo = 1;
 			
 		}
-		while(iArist.hasNext()){
+    
+		if(iArist != null || iAristAP != null)	{
+			String etiqueta = est.getEtiqueta();
+			if (iArist != null)
+			while(iArist.hasNext()){
 			//Arista a = null; AristaAP ap = null;
-			Object obj = iArist.next(); 
-			if (obj instanceof Arista){/* a = (Arista)obj;*/
-				if(!(((Arista)obj).getDestino().equals(est.getEtiqueta()))&&!(((Arista)obj).getOrigen().equals(est.getEtiqueta()))){
-					( (ArrayList<Arista>)lArist ).add((Arista)obj);
-				}
+				Arista obj = iArist.next(); 
+				
+				
+					if(!(obj.getDestino().equals(etiqueta))&&
+							!(obj.getOrigen().equals(etiqueta))){
+							lArist.add(obj);
+					}
+				
 			}
-			else if (obj instanceof AristaAP){/* ap = (AristaAP)obj;*/
-				if(!(((AristaAP)obj).getDestino().equals(est.getEtiqueta()))&&!(((AristaAP)obj).getOrigen().equals(est.getEtiqueta()))){
-					( (ArrayList<AristaAP>)lArist ).add((AristaAP)obj);
+			if (iAristAP != null){
+				while(iAristAP.hasNext()){
+				//Arista a = null; AristaAP ap = null;
+					AristaAP obj = iAristAP.next(); 
+					
+					
+						if(!(obj.getDestino().equals(etiqueta))&&
+								!(obj.getOrigen().equals(etiqueta))){
+								lAristAP.add(obj);
+						}
+					
 				}
-			}
+		}	
+		Iterator<Estado> itEst = getListaEstados().iterator();
+		ArrayList<Estado> nEstados = new ArrayList<Estado>();
+		while (itEst.hasNext()){
+			Estado e = itEst.next();
+			if (!est.getEtiqueta().equals(e.getEtiqueta()))
+				nEstados.add(e);
 			
-			//Arista a=iArist.next();
-	/*		if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
-				lArist.add(a);
-			}	*/	
 		}
-		setListaAristas(lArist,tipo);
+		setListaEstados(nEstados);
+		setListaAristas(lArist);
+
 		setAlfabeto(minimizarAlfabeto());
-		//si pila añadir setAlfabetoPila
+		if(!getListaAristasPila().isEmpty()){
+			setListaAristasAP(lAristAP);
+			setAlfabetoPila(minimizarAlfabetoPila());
+			getAP().setAPNuevo(lAristAP);
+		}
+		else{setListaAristas(lArist);}
+	}*/
 	}
 	
 	/**
@@ -1309,16 +1434,36 @@ public class AutomataCanvas extends JScrollPane {
 	 * @return el alfabeto del automata
 	 */
 	public Alfabeto minimizarAlfabeto(){
-		Iterator<Arista> iA=listaAristas.iterator();
+		Iterator<?> iA = null;
+		if (m == null) m = Mensajero.getInstancia();
+		String lambda = m.devuelveMensaje("simbolos.lambda",4);
+		if (!listaAristas.isEmpty()) iA=listaAristas.iterator();
+		else if (!listaAristasAP.isEmpty()) iA=listaAristasAP.iterator();
 		Alfabeto alf=new Alfabeto_imp();
 		while(iA.hasNext()){
-			Arista a=iA.next();
-			StringTokenizer st=new StringTokenizer(a.getEtiqueta(),",");
-			while(st.hasMoreTokens()){
-				String ss=st.nextToken();
-				if(!alf.estaLetra(ss)){
-					alf.aniadirLetra(ss);
+			/*Arista*/Object a=iA.next();
+			
+			if (a instanceof Arista) {
+				StringTokenizer st =null;
+				st=new StringTokenizer(((Arista)a).getEtiqueta(),",");
+				while(st.hasMoreTokens()){
+					String ss=st.nextToken();
+					if(!alf.estaLetra(ss)&&!lambda.equals(ss)){
+						alf.aniadirLetra(ss);
+					}
 				}
+			}
+			if (a instanceof AristaAP) {
+				
+				for(int i = 0; i < ((AristaAP) a).getEntradaSimbolos().size(); i++){
+					String sim = ((AristaAP) a).getEntradaSimbolos().get(i);
+					if(!alf.estaLetra(sim)&&
+							!lambda.equals(sim)){
+						alf.aniadirLetra(sim);
+					}					
+					
+				}
+
 			}
 		}
 		return alf;
@@ -1333,16 +1478,17 @@ public class AutomataCanvas extends JScrollPane {
 		Iterator<AristaAP> iA=listaAristasAP.iterator();
 		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		if (m == null) m = Mensajero.getInstancia();
+		String lambda = m.devuelveMensaje("simbolos.lambda",4);
 		alf.aniadirLetra(m.devuelveMensaje("simbolos.cima",4));
 		while(iA.hasNext()){
 			AristaAP a=iA.next();
 			String letra = a.getCimaPila();
-			if (!alf.estaLetra(letra)) alf.aniadirLetra(letra);
+			if (!alf.estaLetra(letra)&&!lambda.equals(letra)) alf.aniadirLetra(letra);
 			int i = 0;
 			ArrayList<String> s = a.getSalidaPila();
 			while(i < s.size()){
 				String ss= s.get(i);
-				if(!alf.estaLetra(ss)){
+				if(!alf.estaLetra(ss)&&!lambda.equals(ss)){
 					alf.aniadirLetra(ss);
 				} 
 				i++;
@@ -1524,6 +1670,7 @@ public class AutomataCanvas extends JScrollPane {
 			}
 			
 			apd = compruebaAPD();*/
+			ap.setAPNuevo(listaAristasAP);
 			ap.anadeArista(a);
 			listaAristasAP = ap.getAutomataPila();
 		//	if(ap.getApd())System.out.println("DETERMINISTA!!!");
