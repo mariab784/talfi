@@ -51,6 +51,7 @@ import java.util.Vector;
 import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
 
+import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
@@ -80,7 +81,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	private boolean preparadoEquivalencia;
 	private JDialog dialog;
 	/****/
-	private JDialog d;
+//	private JDialog d;
 	/****/
 	private JMenuBar menu;
 	private PanelCentral panelCentral;
@@ -466,7 +467,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		return m;
 	}
 	/*********************/
-	private void mostrarResultado(int r){
+/*	private void mostrarResultado(int r){
 		
 		String msg = "";
 		switch (r){
@@ -501,7 +502,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		d.setSize(new Dimension(250,300));
 		d.setVisible(true);
 		
-	}
+	}*/
 	
 	private void actionAceptar(){
 		
@@ -509,8 +510,13 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 		dialog.setVisible(false);
 		try{
-			/*int r = */panelCentral.getCanvas().getAP().reconocePalabra(palabra);
-			//System.out.println("S::: " + s);
+			//(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
+			//ArrayList<String> est, ArrayList<AristaAP> aut)
+			AutomataCanvas c = panelCentral.getCanvas();
+			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
+					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
+			/*int r = *///panelCentral.getCanvas().getAP().reconocePalabra(palabra);
+			System.out.println("AP CONSTRUIDO BOTON::: " + ap);
 			//mostrarResultado(r);
 			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
 				mostrarResultado("BIEEEN!");			 		
@@ -1223,8 +1229,8 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	public void setAutomata(Automata a) {
 		panelCentral.getPanel().cargarAutomataNuevo(a);
-		consola.append(a.toString());
-		
+		//consola.append(a.toString()); //XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX
+		System.out.println(a);
 	}
 
 	/**
