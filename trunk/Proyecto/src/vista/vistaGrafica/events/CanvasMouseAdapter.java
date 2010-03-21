@@ -222,47 +222,55 @@ public class CanvasMouseAdapter extends MouseAdapter {
 		canvas.setAlfabeto(canvas.minimizarAlfabeto());
 	}
 
-	@SuppressWarnings("unchecked")
+
 	private void modificarRelacinesEstado(Estado est) {
 		// TODO Auto-generated method stub
 		
-		ArrayList/*<Arista>*/ lArist = null; Iterator/*<Arista>*/ iArist = null; int tipo = -1;
+		ArrayList<Arista> lArist = null;
+		ArrayList<AristaAP> lAristAP = null;
+		Iterator<Arista> iArist = null; 
+		Iterator<AristaAP> iAristAP = null; 
 		
-		lArist=new ArrayList/*<Arista>*/();
+		
 		if (!canvas.getListaAristas().isEmpty()){
-		/*ArrayList<Arista>*/ //lArist=new ArrayList/*<Arista>*/();
-		/*Iterator<Arista>*/ iArist=canvas.getListaAristas().iterator(); 
-				tipo = 0;
+			lArist=new ArrayList<Arista>();
+			iArist=canvas.getListaAristas().iterator(); 
 		}
 		
 		if (!canvas.getListaAristasPila().isEmpty()){
-			iArist=canvas.getListaAristasPila().iterator(); 
-			tipo = 1;
-			
+			lAristAP=new ArrayList<AristaAP>();
+			iAristAP=canvas.getListaAristasPila().iterator(); 			
 		}
     
-	if(iArist != null)	
-		while(iArist.hasNext()){
+		if(iArist != null || iAristAP != null)	{
+			String etiqueta = est.getEtiqueta();
+			if (iArist != null){
+				while(iArist.hasNext()){
 			//Arista a = null; AristaAP ap = null;
-			Object obj = iArist.next(); 
-			if (obj instanceof Arista){/* a = (Arista)obj;*/
-				if(!(((Arista)obj).getDestino().equals(est.getEtiqueta()))&&!(((Arista)obj).getOrigen().equals(est.getEtiqueta()))){
-					( (ArrayList<Arista>)lArist ).add((Arista)obj);
+					Arista obj = iArist.next(); 
+					if(!(obj.getDestino().equals(etiqueta))&&
+						!(obj.getOrigen().equals(etiqueta))){
+								lArist.add(obj);
+					}				
 				}
 			}
-			else{/* ap = (AristaAP)obj;*/
-				if(!(((AristaAP)obj).getDestino().equals(est.getEtiqueta()))&&!(((AristaAP)obj).getOrigen().equals(est.getEtiqueta()))){
-					( (ArrayList<AristaAP>)lArist ).add((AristaAP)obj);
+			if (iAristAP != null){
+				while(iAristAP.hasNext()){
+					AristaAP obj = iAristAP.next(); 					
+						if(!(obj.getDestino().equals(etiqueta))&&
+							!(obj.getOrigen().equals(etiqueta))){
+								lAristAP.add(obj);
+						}					
 				}
+			}	
+
+			canvas.setAlfabeto(canvas.minimizarAlfabeto());
+			if(!canvas.getListaAristasPila().isEmpty()){
+				canvas.setListaAristasAP(lAristAP);
+				canvas.setAlfabetoPila(canvas.minimizarAlfabetoPila());
 			}
-			
-			//Arista a=iArist.next();
-	/*		if(!(a.getDestino().equals(est.getEtiqueta()))&&!(a.getOrigen().equals(est.getEtiqueta()))){
-				lArist.add(a);
-			}	*/	
+			else{canvas.setListaAristas(lArist);}
 		}
-		canvas.setListaAristas(lArist,tipo);
-		canvas.setAlfabeto(canvas.minimizarAlfabeto());
 	}
 	
 	private JDialog createDialogEstado(){
