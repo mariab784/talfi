@@ -115,7 +115,8 @@
 		<eautos>Equivalencia Autómatas</eautos>
 		<eerauto>Equivalencia Expresión Autómata</eerauto>
 		<eautoer>Equivalencia Autómata Expresión</eautoer>
-		<eers>Equivalencia Expresiones</eers>                           
+		<eers>Equivalencia Expresiones</eers>
+		<taps>Transformación APs</taps>                           
 	</jtree>
 	<popup>
 		<estado>Cambiar propiedades del estado</estado>
