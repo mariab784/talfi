@@ -115,7 +115,8 @@
 		<eautos>Automatas Equivalence</eautos>
 		<eerauto>Automata Expression Equivalence</eerauto>
 		<eautoer>Expression Automata Equivalence</eautoer>
-		<eers>Expressions Equivalence</eers>   
+		<eers>Expressions Equivalence</eers>
+		<taps>Pushdown Authomata Conversion</taps>   
 	</jtree>
 	<popup>
 		<estado>Change state properties</estado>
