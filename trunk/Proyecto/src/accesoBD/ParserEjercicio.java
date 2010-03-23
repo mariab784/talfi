@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -14,11 +16,13 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
+import modelo.automatas.AutomataPila;
 import modelo.automatas.Coordenadas;
 import modelo.ejercicios.Ejercicio;
 import modelo.ejercicios.Ejercicio_imp;
@@ -89,7 +93,7 @@ public class ParserEjercicio {
 			if(tipo.equals("EquivERs")){
 				return extraerEjercicioEquivERs(ruta);
 			}
-			if(tipo.equals("EjAutomataPila")){
+			if(tipo.equals("TransformacionPila")){
 				return extraerEjercicioPila(ruta);
 			}
 /*			if(tipo.equals("Turing")){
@@ -118,7 +122,7 @@ public class ParserEjercicio {
 	/**
 	 * Extrae un ejercicio de tipo Automata Pila
 	 * @param ruta ruta xml donde se realizarñ la extracciñn 
-	 * @return Ejercicio resultado de la extracciñn, de tipo AutomataPil
+	 * @return Ejercicio resultado de la extracciñn, de tipo AutomataPila
 	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
 	 */
 	public Ejercicio extraerEjercicioPila(String ruta) throws AutomatasException {
@@ -128,9 +132,9 @@ public class ParserEjercicio {
 		
 		String enunciado=null;
 		String output=null;//lo que habrñ que comparar en un futuro
-		Automata input=null;
+		AutomataPila input=null;
 		Alfabeto alf=null;
-		
+		AlfabetoPila_imp alfPila=null;
 		try {
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 
@@ -154,82 +158,110 @@ public class ParserEjercicio {
 		NodeList tipoEnun=documento.getElementsByTagName("enunciado");
 		enunciado=tipoEnun.item(0).getTextContent();
 		
-		NodeList tipo = documento.getElementsByTagName("input");
-		String var=null;
-		
-		int fin=tipo.getLength();
-		for(int i=0;i<fin;i++){
+		NodeList nodos = documento.getElementsByTagName("type");
+		String var = null;
+		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+			 var = nodos.item(0).getChildNodes().item(i).getTextContent();
+			 i++;
 			 
-			tipo = documento.getElementsByTagName("type");
-			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
-				 var = tipo.item(i).getChildNodes().item(j).getTextContent();
-				 j++;	 
-			}	
+		}
+
+			if (var.equals("AutomataPila")){
 				
-			if (var.equals("AutomataFD")){		
-				input = new AutomataFD();		
-			}
-			if (var.equals("AutomataFND")){		
-				input = new AutomataFND();		
-			}
-			if (var.equals("AutomataFNDLambda")){			
-				input = new AutomataFNDLambda();		
+				input = new AutomataPila();	
 			}	
 			
 			alf=new Alfabeto_imp();
-			tipo = documento.getElementsByTagName("alphabet");
-			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
-				alf.aniadirLetra(tipo.item(i).getChildNodes().item(j).getTextContent());
-				j++;
+			nodos = documento.getElementsByTagName("alphabet");
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				if(!nodos.item(0).getChildNodes().item(i).getTextContent().equals("\\"))
+					alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
 			}
-			input.setAlfabeto(alf);				
+			input.setAlfabeto(alf);			
+			
+			
+			alfPila=new AlfabetoPila_imp();
+			nodos = documento.getElementsByTagName("alphabetP");
 				
-			ArrayList<String> estad=new ArrayList<String>();
-			tipo = documento.getElementsByTagName("states");		
-			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
-				estad.add(tipo.item(i).getChildNodes().item(j).getTextContent());
-				j++;
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				 alfPila.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
 			}
+			
+			input.setAlfabetoPila(alfPila);
+			
+			ArrayList<String> estad=new ArrayList<String>();
+			nodos = documento.getElementsByTagName("states");		
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+		}
 			input.setEstados(estad);
 				
-			tipo = documento.getElementsByTagName("init");
-			input.setEstadoInicial(tipo.item(i).getChildNodes().item(1).getTextContent());
+			nodos = documento.getElementsByTagName("init");
+			input.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
 			
 			ArrayList<String> finalss=new ArrayList<String>();
-			tipo = documento.getElementsByTagName("finals");
-			for (int j = 1; j < tipo.item(i).getChildNodes().getLength(); j++) {
-				finalss.add(tipo.item(i).getChildNodes().item(j).getTextContent());
-				j++;
+			nodos = documento.getElementsByTagName("finals");
+			for (int i = 1; i < nodos.item(0).getChildNodes().getLength(); i++) {
+				finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
 			}
 			input.setEstadosFinales(finalss);		
 
-			tipo = documento.getElementsByTagName("arrows");
-			ArrayList<String> arrow=null;
-			for (int j = 1; j < tipo.item(i).getChildNodes().getLength(); j++){
-				for(int k=1; k < tipo.item(i).getChildNodes().item(j).getChildNodes().getLength();k++){
-					if(arrow==null)arrow=new ArrayList<String>();
-					arrow.add(tipo.item(i).getChildNodes().item(j).getChildNodes().item(k).getTextContent());
-					k++;
+			
+			nodos = documento.getElementsByTagName("arrow");
+			for (int i = 0; i < nodos.getLength(); i++){
+				for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
+					
+					
+					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+					
+					
+					ArrayList<String> entrada = new ArrayList<String>();
+					String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+					StringTokenizer st=new StringTokenizer(s3,",");
+					while(st.hasMoreTokens()){
+
+						entrada.add(st.nextToken());
+					}
+					
+					
+					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+		
+					int indice = 0;
+					ArrayList<String> salida = new ArrayList<String>();
+					if (s5.compareTo("\\") != 0){
+						while(/*st.hasMoreTokens()*/indice < s5.length()){
+							String ss= "" + s5.charAt(indice);//st.nextToken();
+							salida.add(ss);
+							indice++;
+											}
+					}
+					else { salida.add("\\");}
+					
+			
+					x = x+ 10;
+					((AutomataPila)input).insertaArista2(s1,s2,entrada,s4,salida);
+					
 				}
-				if(arrow!=null)input.insertaArista(arrow.get(0),arrow.get(1),arrow.get(2));
-				arrow=null;
-				j++;
+			}	
+			
+
+			nodos=documento.getElementsByTagName("estadoCoord");
+
+			//if (nodos.getLength()==0) return automata;
+			//if (nodos==null) return automata;
+			for(int i=0;i< nodos.getLength();i++) {
+				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
+						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
+				input.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 			}
-		}
 		
-		tipo = documento.getElementsByTagName("output");
-		
-		fin=tipo.getLength();
-		for(int i=0;i<fin;i++){
-			 
-			tipo = documento.getElementsByTagName("RExpr");
-			for (int j = 1; j <tipo.item(i).getChildNodes().getLength(); j++) {
-				 var = tipo.item(i).getChildNodes().item(j).getTextContent();
-				 output=var;
-				 j++;	 
-			}
-		}
-		return new Ejercicio_imp(enunciado,input,output,alf,"AFDTOER",ruta);
+		return new Ejercicio_imp(enunciado,input,output,alf,alfPila,"TRANSFORMACIONPILA",ruta);
 
 		
 	}
