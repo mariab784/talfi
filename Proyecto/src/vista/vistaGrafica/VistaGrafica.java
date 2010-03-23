@@ -845,6 +845,11 @@ public class VistaGrafica extends JFrame implements Vista{
 		Vector<String> ejerciciosEquivERs=new Vector<String>();
 		ejerciciosEquivERs.addAll(datosEjercicios.get("EquivERs"));
 		
+		Vector<String> ejsTransformacionPila=new Vector<String>();
+		ejsTransformacionPila.addAll(datosEjercicios.get("TransformacionPila"));
+		
+		
+		
 		hsEjercicios.put(m.devuelveMensaje("jtree.lenguaje",1), ejerciciosLenguaje);
 		hsEjercicios.put(m.devuelveMensaje("jtree.minim",1), ejerciciosMinimizacion);
 		hsEjercicios.put(m.devuelveMensaje("jtree.afn",1),ejerciciosAFNAFD);
@@ -854,6 +859,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		hsEjercicios.put(m.devuelveMensaje("jtree.eautoer",1), ejerciciosEquivAutoER);
 		hsEjercicios.put(m.devuelveMensaje("jtree.eerauto",1), ejerciciosEquivERAuto);
 		hsEjercicios.put(m.devuelveMensaje("jtree.eers",1), ejerciciosEquivERs);
+		hsEjercicios.put(m.devuelveMensaje("jtree.taps",1), ejsTransformacionPila);
 		
 		Hashtable<String,Hashtable<String,Vector<String>>> hs=new Hashtable<String,Hashtable<String,Vector<String>>>();
 		hs.put(m.devuelveMensaje("jtree.ejemplos",1), hsEjemplos);
@@ -985,7 +991,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		}
 		/*********************************************************/
 		
-		
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.lenguaje",1))) {
 			panelCentral.cargarEjercicio("XML/ejercicios/Lenguaje/"+nombreEjemplo.toString()+".xml");
 			deleteExpresion();
@@ -1022,6 +1027,13 @@ public class VistaGrafica extends JFrame implements Vista{
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 
+		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.taps",1))) {
+			panelCentral.cargarEjercicio("XML/ejercicios/Transformacion_Pila/"+nombreEjemplo.toString()+".xml");
+			deleteExpresion();
+			rutaVista=null;
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+		
 		requestFocus();
 	}
 	
