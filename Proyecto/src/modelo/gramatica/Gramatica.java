@@ -120,7 +120,19 @@ public abstract class Gramatica {
 	}
 	
 	
-	
+	public String toString(){
+		
+		String s ="";
+		
+		s+="Inicial: " + variableInicial + "\n";
+		s+="Variables " + variables  + "\n";
+		s+="Terminales: " + simbolos + "\n";
+		s+="Producciones: " + producciones + "\n";
+		
+		return s;
+		
+		
+	}
 	
 
 	

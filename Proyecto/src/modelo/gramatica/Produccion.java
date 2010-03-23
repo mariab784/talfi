@@ -46,5 +46,16 @@ public class Produccion {
 		// TODO Auto-generated method stub
 
 	}
+	public String toString(){
+		String s = "";
+		int i = 0;
+		while(i < concatenacion.size()){
+			s += concatenacion.get(i) + ",";
+			i++;
+			
+		}
+		return s;
+		
+	}
 
 }
