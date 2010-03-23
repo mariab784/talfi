@@ -70,5 +70,8 @@
 		</equivERAuto>
 		<equivERs>
 		</equivERs>
+		<transformacionPila>
+			<ejemplo>Ejercicio1</ejemplo>
+		</transformacionPila>
 	</ejercicios>
 </jtree>
