@@ -35,6 +35,7 @@ import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
+import modelo.automatas.AutomataPila;
 import modelo.ejercicios.Ejercicio;
 
 /**
@@ -406,7 +407,16 @@ public class PanelCentral extends JPanel {
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
 	    		}
-	    	}
+	    		if (rutaXml.contains("Transformacion_Pila")) {
+	    			setEjercicio(parser.extraerEjercicioPila(rutaXml));
+	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
+	    			panel.cargarAutomataNuevo((AutomataPila)ejercicio.getEntrada());
+	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
+	    			vista.desactivaToogleButtons();
+	    			vista.requestFocus();
+	    		}
+	    	} 
+
 	    	enunciado.setText(ejercicio.getEnunciado());
 	    	corregir.setEnabled(true);
 	    	Usuario usr=Usuario.getInstancia();
