@@ -1,85 +1,85 @@
-null<result><authomata>
+<exit><steps><step><table><column><key>Q54</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q43</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q5-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>tramposo5</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>null</compatible></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q32</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>2</paso><estado>Q4-Q5</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>3</paso><estado>Q3-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q21</key><fila><state>Q54</state><compatible>false</compatible><paso>4</paso><estado>Q1-Q4</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q10</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>4</paso><estado>Q3-tramp</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q2-tramp</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>2</paso><estado>Q2-Q4</estado></fila><fila><state>Q21</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q10</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>Q54</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q43</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q5-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>tramposo5</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>null</compatible></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q32</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>2</paso><estado>Q4-Q5</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>3</paso><estado>Q3-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q21</key><fila><state>Q54</state><compatible>false</compatible><paso>4</paso><estado>Q1-Q4</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q10</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>4</paso><estado>Q3-tramp</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q2-tramp</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>2</paso><estado>Q2-Q4</estado></fila><fila><state>Q21</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q10</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>Q54</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q43</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q5-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>tramposo5</key><fila><state>Q54</state><compatible>null</compatible></fila><fila><state>Q43</state><compatible>null</compatible></fila><fila><state>tramposo5</state><compatible>null</compatible></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q32</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>2</paso><estado>Q4-Q5</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>3</paso><estado>Q3-tramp</estado></fila><fila><state>Q32</state><compatible>null</compatible></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q21</key><fila><state>Q54</state><compatible>false</compatible><paso>4</paso><estado>Q1-Q4</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q21</state><compatible>null</compatible></fila><fila><state>Q10</state><compatible>null</compatible></fila></column><column><key>Q10</key><fila><state>Q54</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q43</state><compatible>false</compatible><paso>4</paso><estado>Q3-tramp</estado></fila><fila><state>tramposo5</state><compatible>false</compatible><paso>2</paso><estado>Q2-tramp</estado></fila><fila><state>Q32</state><compatible>false</compatible><paso>2</paso><estado>Q2-Q4</estado></fila><fila><state>Q21</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>Q10</state><compatible>null</compatible></fila></column></table></step></steps><result><authomata>
 	<type>
 		<item>AutomataFD</item>
 	</type>
 	<alphabet>
-		<item>b</item>
 		<item>a</item>
+		<item>b</item>
 	</alphabet>
 	<states>
-		<state>t1</state>
-		<state>t2</state>
-		<state>t3</state>
-		<state>tramposo</state>
-		<state>Q0</state>
 		<state>Q1</state>
+		<state>Q2</state>
+		<state>Q3</state>
+		<state>Q4</state>
+		<state>Q5</state>
+		<state>tramposo</state>
 	</states>
 	<init>
-		<state>t1</state>
+		<state>Q1</state>
 	</init>
 	<finals>
-		<state>t3</state>
-		<state>Q1</state>
+		<state>Q2</state>
+		<state>Q5</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>t1</state>
-		<state>t2</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t1</state>
-		<state>t3</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t2</state>
-		<state>Q0</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t2</state>
-		<state>tramposo</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>t3</state>
-		<state>tramposo</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>t3</state>
-		<state>tramposo</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>tramposo</state>
-		<state>tramposo</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>tramposo</state>
-		<state>tramposo</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>Q0</state>
-		<state>Q0</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>Q0</state>
 		<state>Q1</state>
-		<item>a</item>
-	</arrow>
-		<arrow>
-		<state>Q1</state>
-		<state>tramposo</state>
+		<state>Q2</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
 		<state>Q1</state>
+		<state>Q3</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q2</state>
+		<state>Q3</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q2</state>
 		<state>Q1</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q3</state>
+		<state>Q4</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q3</state>
+		<state>Q3</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q4</state>
+		<state>Q5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q4</state>
+		<state>tramposo</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>Q5</state>
+		<state>Q3</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>Q5</state>
+		<state>Q4</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>tramposo</state>
+		<state>tramposo</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>tramposo</state>
+		<state>tramposo</state>
 		<item>a</item>
 	</arrow>
 	</arrows>

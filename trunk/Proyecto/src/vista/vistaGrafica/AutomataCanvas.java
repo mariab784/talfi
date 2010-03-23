@@ -661,6 +661,7 @@ public class AutomataCanvas extends JScrollPane {
 			/*else*/String fichero="<authomata>\n\t<type>\n\t\t<item>";
 			fichero+=tipoAutomata()+"</item>\n\t</type>\n";
 			Iterator<Arista> itArist = null; Iterator<AristaAP> itAristAP = null;
+			String lambda = m.devuelveMensaje("simbolos.lambda",4);
 			if (this.getPila()){
 				itAristAP=listaAristasAP.iterator();
 				while (itAristAP.hasNext()){
@@ -669,18 +670,18 @@ public class AutomataCanvas extends JScrollPane {
 					String letra;
 					for(int i = 0; i < s.size(); i++){
 						letra = s.get(i);
-						if(!alfabeto.dameListaLetras().contains(letra)){
+						if(!alfabeto.dameListaLetras().contains(letra)&& !letra.equals(lambda)){
 							alfabeto.aniadirLetra(letra);						
 						}	
 					}
 					letra = a.getCimaPila();
-					if(!alfabetoPila.dameListaLetras().contains(letra))
+					if(!alfabetoPila.dameListaLetras().contains(letra) && !letra.equals(lambda))
 						alfabetoPila.aniadirLetra(letra);					
 					
 					s = a.getSalidaPila();
 					for(int i = 0; i < s.size(); i++){
 						letra = s.get(i);
-						if(!alfabetoPila.dameListaLetras().contains(letra)){
+						if(!alfabetoPila.dameListaLetras().contains(letra) && !letra.equals(lambda)){
 							alfabetoPila.aniadirLetra(letra);							
 						}	
 					}
@@ -713,7 +714,9 @@ public class AutomataCanvas extends JScrollPane {
 
 					fichero+="\t<alphabetP>\n\t";
 					while(itAlfabetoP.hasNext()) {
-						fichero+="\t<item>"+itAlfabetoP.next()+"</item>\n\t";
+						String let = itAlfabetoP.next();
+						if (!let.equals(lambda))
+						fichero+="\t<item>"+let+"</item>\n\t";
 					}
 					fichero+="</alphabetP>\n\t";
 		
