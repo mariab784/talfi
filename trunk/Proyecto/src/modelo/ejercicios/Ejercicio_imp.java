@@ -8,6 +8,7 @@ import modelo.algoritmos.AFN_to_AFD;
 import modelo.algoritmos.Automatas_equivalentes;
 import modelo.algoritmos.ERToAFNDLambda;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
@@ -30,6 +31,7 @@ public class Ejercicio_imp implements Ejercicio{
 	private Alfabeto alf;
 	private String tipo;
 	private String ruta;
+	private Alfabeto_Pila alfPila;
 
 	/**
 	 * Constructor que crea un ejercicio con los parñmetros que se le pasan
@@ -47,8 +49,22 @@ public class Ejercicio_imp implements Ejercicio{
 		this.alf=alf;
 		this.tipo=tipo;
 		this.ruta=ruta;
+		alfPila = null;
 	}
-	
+	/**
+	 * Constructor que crea un ejercicio con los parñmetros que se le pasan
+	 * @param enunciado enunciado del ejrcicio
+	 * @param entrada entrada del usuario
+	 * @param resultado soluciñn del ejercicio
+	 * @param alf alfabeto del ejercicio
+	 * @param alfPila alfabeto de Pila del ejercicio
+	 * @param tipo identificador de cadena de texto con el tipo del ejercicio:
+	 * "Lenguaje" o "Automatas"
+	 */
+	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,Alfabeto_Pila alfPila, String tipo,String ruta) {
+		this(enunciado, entrada, resultado,alf, tipo,ruta);
+		this.alfPila = alfPila;
+	}
 	
 	
 	public String getEnunciado() {
