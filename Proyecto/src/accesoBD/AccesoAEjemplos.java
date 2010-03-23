@@ -268,6 +268,16 @@ public class AccesoAEjemplos {
 			 j++;
 		}	
 		arbol.put("EquivERs",ejerciciosEquivERs);
+		//AP
+		ArrayList<String> ejerciciosAP=new ArrayList<String>();
+		tipo=documento.getElementsByTagName("transformacionPila");
+		
+		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
+			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
+			 ejerciciosAP.add(var);
+			 j++;
+		}	
+		arbol.put("TransformacionPila",ejerciciosAP);
 		
 		return arbol;
 	}
@@ -527,7 +537,18 @@ public class AccesoAEjemplos {
 				i++;
 			}
 			
-			fich+="\t\t</equivERs>\n\t</ejercicios>\n</jtree>";
+			fich+="\t\t</equivERs>\n\t\t<transformacionPila>\n";
+	/////////////////AP
+			array=xml.get("TransformacionPila");
+			it=array.iterator();
+			i=1;		
+			while(it.hasNext()){
+				String s=it.next();
+				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
+				i++;
+			}
+			
+			fich+="\t\t</transformacionPila>\n\t</ejercicios>\n</jtree>";
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
 			bw.append(fich);
@@ -826,7 +847,29 @@ public class AccesoAEjemplos {
 				fich+="\t\t\t<ejemplo>"+nombre+"</ejemplo>\n";
 			}
 			
-			fich+="\t\t</equivERs>\n\t</ejercicios>\n</jtree>";
+			fich+="\t\t</equivERs>\n\t\t<transformacionPila>\n";
+			
+			array=xml.get("TransformacionPila");
+
+			it=array.iterator();
+			i=1;
+			
+			while(it.hasNext()){
+				String s=it.next();
+				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
+				i++;
+			}
+			
+			if(tipo.equals("TransformacionPila")){
+				String nombre="Ejercicio"+i;
+				String rutaFichero="XML/ejercicios/AutomataPila/"+nombre+".xml";
+				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));
+				bw.append(texto);
+				bw.close();
+				fich+="\t\t\t<ejemplo>"+nombre+"</ejemplo>\n";
+			}
+			
+			fich+="\t\t</transformacionPila>\n\t</ejercicios>\n</jtree>";
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
 			bw.append(fich);

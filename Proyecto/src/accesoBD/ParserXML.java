@@ -110,8 +110,9 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		NodeList nodos = documento.getElementsByTagName("alphabet");
 		
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-			 alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
-			 i++;
+			if(!nodos.item(0).getChildNodes().item(i).getTextContent().equals("\\"))
+				alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+			i++;
 		}
 		//if (automata instanceof AutomataPila) ((AutomataPila)automata).setAlfabeto(alf);
 		//if (automata instanceof Turing) ((Turing)automata).setAlfabeto(alf);
