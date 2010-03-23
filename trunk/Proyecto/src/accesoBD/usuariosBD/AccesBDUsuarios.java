@@ -342,7 +342,9 @@ public class AccesBDUsuarios {
 		for (int i = 0; i <tipo.getLength(); i++) {
 			String nomb=tipo.item(i).getChildNodes().item(1).getTextContent();
 			String pass=tipo.item(i).getChildNodes().item(3).getTextContent();
+			
 			int dni=Integer.parseInt(tipo.item(i).getChildNodes().item(5).getTextContent());
+			System.out.println("DNI ACCESSBDUSUA: " + dni);
 			String ejrCons=tipo.item(i).getChildNodes().item(7).getTextContent();
 			String ejrBien=tipo.item(i).getChildNodes().item(9).getTextContent();
 			String ejrMal=tipo.item(i).getChildNodes().item(11).getTextContent();
