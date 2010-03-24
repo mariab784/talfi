@@ -4,6 +4,7 @@
 package modelo.gramatica;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vista.vistaGrafica.Estado;
 
@@ -20,6 +21,13 @@ public class GramaticaIC extends Gramatica {
 	 * 
 	 */
 	public GramaticaIC(){}
+	
+	public GramaticaIC(ArrayList<String> v, ArrayList<String> s, 
+			HashMap<String,ArrayList<Produccion>> p,String vInicial){
+		
+		super(v,s,p,vInicial);
+	}
+	
 	public GramaticaIC(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila) {
 		// TODO Auto-generated constructor stub
 		super(alf,est,alfPila);

@@ -22,6 +22,16 @@ public abstract class Gramatica {
 	
 	public Gramatica(){
 		this.producciones = new HashMap<String,ArrayList<Produccion>>();
+		this.variables = new ArrayList<String>();
+	}
+	
+	public Gramatica(ArrayList<String> v, ArrayList<String> s, 
+			HashMap<String,ArrayList<Produccion>> p,String vInicial){
+		
+		variables = v;
+		simbolos = s;
+		producciones = p;
+		variableInicial = vInicial;
 	}
 	
 	public Gramatica(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila){
