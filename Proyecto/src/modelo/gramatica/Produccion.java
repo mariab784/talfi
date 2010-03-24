@@ -50,7 +50,8 @@ public class Produccion {
 		String s = "";
 		int i = 0;
 		while(i < concatenacion.size()){
-			s += concatenacion.get(i) + ",";
+			s += concatenacion.get(i);
+			if (i != concatenacion.size()-1) s+= ",";
 			i++;
 			
 		}
