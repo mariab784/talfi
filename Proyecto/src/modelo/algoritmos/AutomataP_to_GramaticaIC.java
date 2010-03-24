@@ -80,7 +80,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	public GramaticaIC AP_Gramatica(){
 		
 		
-		GramaticaIC gic = new GramaticaIC();
+		/*GramaticaIC*/ gic = new GramaticaIC();
 		gic.setVariableInicial("S");
 		ArrayList<String> estados = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it = estados.iterator();
@@ -160,8 +160,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 														pasa = false;
 												}
 											}
-											if(gic.getProducciones().get(simbolos) == null || pasa)	
+											if(gic.getProducciones().get(simbolos) == null || pasa)	{
 											gic.anadeProduccion(simbolos, p);	
+											gic.getVariables().add(simbolos); //añadido
+											}
 										}	
 									}
 								}
@@ -179,6 +181,17 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	/**
 	 * @param args
 	 */
+	public GramaticaIC getGic(){
+		if(gic == null){
+//			gic = new GramaticaIC();
+//			gic.setProducciones(producciones);
+		System.out.println("GIC null");	
+			
+		}
+
+		return gic;
+	}
+	
 	public static void main(String[] args) {
 		AutomataPila aut = new AutomataPila();
 //		AutomataPila aut2 = new AutomataPila();
