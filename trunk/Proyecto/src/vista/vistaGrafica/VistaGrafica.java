@@ -49,6 +49,8 @@ import java.util.Iterator;
 
 import java.util.Vector;
 import modelo.AutomatasException;
+import modelo.algoritmos.AutomataP_to_GramaticaIC;
+import modelo.algoritmos.GIC_to_FNC;
 import modelo.automatas.Alfabeto;
 
 import modelo.automatas.Alfabeto_Pila;
@@ -59,6 +61,7 @@ import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
 import modelo.automatas.MaquinaTuring;
 import modelo.ejercicios.Ejercicio;
+import modelo.gramatica.GramaticaIC;
 /**
  *  En esta clase esta toda la gestion y ejecucion de la interfaz grafica swing de la aplicacion
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
@@ -517,6 +520,20 @@ public class VistaGrafica extends JFrame implements Vista{
 					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
 			/*int r = *///panelCentral.getCanvas().getAP().reconocePalabra(palabra);
 			System.out.println("AP CONSTRUIDO BOTON::: " + ap);
+			System.out.println("**********************************************************");
+			AutomataP_to_GramaticaIC g = new AutomataP_to_GramaticaIC(ap);
+			System.out.println("producciones: " + g.getGic());
+			g.AP_Gramatica();
+			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic());
+			
+			while(piticli.getTablaTieneMarcas()){
+				
+				if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
+				else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
+				piticli.transforma_FNG();
+			}
+			System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+
 			//mostrarResultado(r);
 			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
 				mostrarResultado("BIEEEN!");			 		

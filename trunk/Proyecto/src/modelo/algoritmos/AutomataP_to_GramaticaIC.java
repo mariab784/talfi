@@ -84,9 +84,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		gic.setVariableInicial("S");
 		ArrayList<String> estados = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it = estados.iterator();
+		gic.getVariables().add("S");//añadido
 		while (it.hasNext()){
 			Produccion p = new Produccion();
-			p.anadeCadena(this.automataEntrada.getEstadoInicial()+fondoPila+it.next());
+			p.anadeCadena("["+this.automataEntrada.getEstadoInicial()+fondoPila+it.next()+"]");
+			
 			gic.anadeProduccion("S", p);
 		}
 		/* Aquí hemos Iniciado la gramatica, con simbolo inicial S 
@@ -161,8 +163,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 												}
 											}
 											if(gic.getProducciones().get(simbolos) == null || pasa)	{
-											gic.anadeProduccion(simbolos, p);	
-											gic.getVariables().add(simbolos); //añadido
+											gic.anadeProduccion(simbolos, p);
+											//añadido
+											if(!estaEnVariables(simbolos))
+												gic.getVariables().add(simbolos); //añadido
 											}
 										}	
 									}
@@ -176,6 +180,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			
 		return gic;
 		
+	}
+	
+	private boolean estaEnVariables(String s){
+		
+		return gic.getVariables().contains(s);
 	}
 
 	/**
@@ -196,13 +205,15 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		AutomataPila aut = new AutomataPila();
 //		AutomataPila aut2 = new AutomataPila();
 		//a.listaEstados.add(new Estado(0,0,"s1"));
-		aut.getEstados().add("s1");
-		aut.getEstados().add("s2");
-		aut.getEstados().add("s3");
-//		aut.getEstados().add("s4");
-		aut.setEstadoInicial("s1");
-		aut.setEstadoFinal("s3");
-		aut.setEstadoFinal("s2");
+aut.getEstados().add("s0");//		aut.getEstados().add("s1");
+aut.getEstados().add("s1");//		aut.getEstados().add("s2");
+aut.getEstados().add("s2");//		aut.getEstados().add("s3");
+
+		//		aut.getEstados().add("s4");
+
+aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
+aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
+//		aut.setEstadoFinal("s2");
 
 /*		aut2.getEstados().add("s1");
 		aut2.getEstados().add("s2");
@@ -212,39 +223,39 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		AristaAP arist;
 		
-		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
-		arist.anadirPila("Z");
+		arist.anadirPila("AZ");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
 
-		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
-		arist.setCimaPila("Z");
-		arist.anadirPila("CZ");
+		arist.setCimaPila("A");//		arist.setCimaPila("Z");
+		arist.anadirPila("AA");//		arist.anadirPila("CZ");
 		
 		aut.anadeArista(arist);	
 		
-		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("0");
-		arist.setCimaPila("C");
-		arist.anadirPila("CC");
+		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
+		arist.setCimaPila("A");//		arist.setCimaPila("C");
+		arist.anadirPila("\\");//		arist.anadirPila("CC");
 		
 		aut.anadeArista(arist);	
 	
-		arist = new AristaAP(0,0,0,0,"s2","s2");
-		arist.anadirSimbolo("1");
-		arist.setCimaPila("C");
+		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("A");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s3");
+		arist = new AristaAP(0,0,0,0,"s1","s2");//		arist = new AristaAP(0,0,0,0,"s1","s3");
 //		arist.anadirSimbolo("0");
-		arist.anadirSimbolo("1");
-		arist.setCimaPila("C");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("Z");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);		
@@ -322,10 +333,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
 		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
-		alf.aniadirLetra("C");
+		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
-		System.out.println(a.AP_Gramatica().getProducciones().toString());
+		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		// TODO Auto-generated method subs
 
 	}
