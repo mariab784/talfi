@@ -138,6 +138,20 @@ public abstract class Gramatica {
 		s+="Variables " + variables  + "\n";
 		s+="Terminales: " + simbolos + "\n";
 		s+="Producciones: " + producciones + "\n";
+//		int tam = producciones.size();
+//		System.out.println("tammm: " + tam);
+		System.out.println("variables: " + variables);
+/*		for(int i = 0; i < tam; i++){
+			
+			System.out.println("KE HAY EN PRODUCCIONES? ");
+			String var = variables.get(i);
+			System.out.println("claave: " + var);
+			ArrayList<Produccion> p = producciones.get(var);
+			System.out.println(p.size());
+			System.out.println(p);
+			for(int j = 0; j< p.size(); j++)
+				System.out.println(producciones.get(variables.get(i)).get(j));
+		}*/
 		
 		return s;
 		

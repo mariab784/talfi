@@ -70,82 +70,89 @@ public class GIC_to_FNC {
 	}
 	//------------------------------------------------------------
 	public void/*Gramatica*/ transforma_FNG(){
-		Gramatica gramatica = null;
-		String variableInicial = gramaticaSalida.getVariableInicial();
+
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
 		lon = variables.size(); 
 		tabla = new boolean[lon][lon]; 
 		inicializarTabla();
 		tablaTieneMarcas=false;
-		columna = null;
-		
-		//boolean hayMarcadas = false;
-		for(int i=0; i<lon; i++){
+
+		for(int i=0; i<lon; i++){ //recorre variables fila
 			String simboloFila = variables.get(i);
 			String simboloColumna = null;
 			ArrayList<Produccion> produccionesDeFila = producciones.get(simboloFila);
-//			System.out.println("PROD FILA: " + produccionesDeFila);
-			for(int j=0; j<lon; j++) {
+		//	System.out.println("PROD FILA: " + produccionesDeFila);
+			for(int j=0; j<lon; j++) { //recorre variables columna
 				simboloColumna = variables.get(j);
 				
-				//System.out.println("simboloColumna: " + simboloColumna);
-				//System.out.println("PROD FILA: " + produccionesDeFila);
+			//	System.out.println("simboloColumna: " + simboloColumna);
+			//	System.out.println("PROD FILA: " + produccionesDeFila);
 				Iterator<Produccion> it = produccionesDeFila.iterator();
 				boolean enc = false;
 				
 				while (it.hasNext() && !enc){
 					Produccion aux = it.next();
 					int k = 0;
-					int tam = aux.getConcatenacion().size();
-						while (k < tam){
-					//			System.out.println("aux.getConcatenacion(): " + aux.getConcatenacion());
-								String primerSimbolo = aux.getConcatenacion().get(k).charAt(0) + "";
-					//			System.out.println("simboloColumna: " + simboloColumna);
-					//			System.out.println("primerSimbolo: " + primerSimbolo);
+
+							//	System.out.println("aux.getConcatenacion(): " + aux.getConcatenacion());
+								String primerSimbolo = aux.getConcatenacion().get(0).charAt(0) + "";
+							//	System.out.println("simboloColumna: " + simboloColumna);
+							//	System.out.println("primerSimbolo: " + primerSimbolo);
 								if (simboloColumna.equals(primerSimbolo)){
 									tabla[i][j] = true; enc = true;
 									tablaTieneMarcas=true;
-								//	System.out.println("**I J MARCADAS**: " + i + "," + j);
+									//System.out.println("**I J MARCADAS**: " + i + "," + j);
 									//if (!hayMarcadas){
-										if (columna == null) 
-											columna = new HashMap<Integer,ArrayList<Integer>>();
-										
-										if (columna.isEmpty()){
-											ArrayList<Integer> a = new ArrayList<Integer>();
-											a.add(new Integer(i));
-											columna.put(new Integer(j), a);	
-											clave = j;
-										}
-										else{
-											if (columna.containsKey(j)){
-											
-												ArrayList<Integer> a = columna.get(j);
-												a.add(new Integer(i));
-												columna.put(new Integer(j), a);
-											}
-										}
-										
-								//	}
 								}
 								k++;
-						}
-						//if (columna != null) hayMarcadas = true;
 				}
 			}
 		}
-//		System.out.println("**PRIMERA COLUMNA**: " + columna);
-//		pintaTabla();
-		//return gramatica;
+		pintaTabla();
+		calculaColumna();
+
 	}
 	//------------------------------------------------------------
+	private void calculaColumna(){
+		columna = null;
+		ArrayList<Integer> f = new ArrayList<Integer>();
+		int i = 0;
+		boolean enc = false;
+		while(i < lon && !enc){
+			for(int j = 0; j <lon; j++){
+				if (tabla[j][i]){
+					if(columna == null){
+						columna = new HashMap<Integer,ArrayList<Integer>>();
+						clave = i;
+						enc = true;
+					}
+					f.add(j);					
+				}	
+			}
+			i++;
+		}
+		if (columna != null )columna.put(clave, f);
+	}
+	
 	public void pintaTabla(){
-		for(int i=0; i<lon; i++)
-			for(int j=0; j<lon; j++)
 		
-				System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
-		
-
+		for(int i = 0; i <lon; i++){
+			if (i == 0) System.out.print("  ");
+			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+		}
+		System.out.println();
+		for(int i=0; i<lon; i++){
+			for(int j=0; j<lon; j++){
+				String s;
+				if (j == 0)
+					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+				if (tabla[i][j]) System.out.print("X ");
+				else System.out.print("- ");
+				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
+			}
+			System.out.println();
+		}
 	}
 	
 	public void inicializarTabla() {
@@ -161,115 +168,136 @@ public class GIC_to_FNC {
 		return aa.contains(clave);
 	}
 	//************************************************************	
+	@SuppressWarnings("unchecked")
 	public void sustituir(){
-		
-		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
-//		System.out.println("producciones" + producciones);
+		 
+		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();		
 		ArrayList<Produccion> produccionesDeColumna = producciones.get(gramaticaSalida.getVariables().get(clave));
-		
-//		System.out.println("produccionesDeColumna" + produccionesDeColumna);
 
 		ArrayList<Integer> filas = columna.get(clave);
 		Iterator<Integer> itFilas = filas.iterator();
 
+		ArrayList<Produccion> pnueva = null;
 		while (itFilas.hasNext()){
+			pnueva = new ArrayList<Produccion>();
 			Integer indice = itFilas.next();
+			String var = gramaticaSalida.getVariables().get(indice);
 			ArrayList<Produccion> produccionesDeFilas = producciones.get(gramaticaSalida.getVariables().get(indice.intValue()));
 //			System.out.println("produccionesDeFilas " + produccionesDeFilas);
-			int i = 0;int tam = produccionesDeFilas.get(0).getConcatenacion().size();
-			while( i < tam){
-				String p = produccionesDeFilas.get(0).getConcatenacion().get(i);
+			int i = 0;int tam = produccionesDeFilas.size();
+			
+			while( i < tam){ //recorre las producciones filas marcadas
+				Produccion aux2 = produccionesDeFilas.get(i);
+			
+				ArrayList<String> ayay = ((ArrayList<String>)aux2.getConcatenacion().clone());
+				String p = ayay.get(0);
 				String pp = "" +  p.charAt(0);
 //				System.out.println("p " + p);
-				
+				Produccion nueva = null;
 				if (pp.equals(gramaticaSalida.getVariables().get(clave))){
-					String aux2 = null;
-					
-					Iterator<String> itProdCol = produccionesDeColumna.get(0).getConcatenacion().iterator();
-					while (itProdCol.hasNext()){
-						String aux3 = itProdCol.next();
-						if (p.length() > 1){ 
-							aux2 = aux3.concat(p.substring(1));
+//					System.out.println("produccionesDeFilasDespues " + produccionesDeFilas);
+//					System.out.println("produccionesDeColumnaNocambian?" + produccionesDeColumna);
+					Iterator<Produccion> itProdCol = produccionesDeColumna/*.get(0).getConcatenacion()*/.iterator();
+					aux2.getConcatenacion().remove(0);
+					while (itProdCol.hasNext()){ //recorre las producciones de las columnas
+						nueva = new Produccion();
+						Produccion aux3 = itProdCol.next();
+						ArrayList<String> nueva2 = (ArrayList<String>)aux3.getConcatenacion().clone();
+//						System.out.println("nueva2: "+ nueva2);
+//						System.out.println("aux3: "+ aux3);
+						
+//						System.out.println("aux2: "+ aux2);
+						for(int k = 0; k< aux2.getConcatenacion().size();k++){
+							nueva2.add(aux2.getConcatenacion().get(k));
+							
 						}
-						else aux2 = aux3;
-						
-//						System.out.println("produccionesDeFilas.get(0).getConcatenacion() " + produccionesDeFilas.get(0).getConcatenacion());
-//						System.out.println("produccionesDeFilas.get(0).getConcatenacion().get(i) " + produccionesDeFilas.get(0).getConcatenacion().get(i));
-						
-						produccionesDeFilas.get(0).anadeCadena(aux2);
-					}
-					produccionesDeFilas.get(0).getConcatenacion().remove(i);
+						nueva.setConcatenacion(nueva2);
+//						System.out.println("nueva: "+ nueva);
+
+						pnueva.add(nueva);
+						//System.out.println("produccionesDeFilasfinal: "+ produccionesDeFilas);
+						//System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
+					}					
 				}
-				
+				else{
+					pnueva.add(aux2);
+//					System.out.println("temporal: " + pnueva);					
+				}
 				i++;
 			}
-
-
+			gramaticaSalida.getProducciones().remove(var);
+			gramaticaSalida.getProducciones().put(var, pnueva);
 		}
-		
-
+		System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
 	}
 	//************************************************************
+	
+	@SuppressWarnings("unchecked")
 	public void sustituirDiagonal(){
 		
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
-		ArrayList<Produccion> produccionesDiagonal = producciones.get(gramaticaSalida.getVariables().get(clave));
-		System.out.println("produccionesDiagonal" + produccionesDiagonal);
-		int i = 0;
-		boolean enc = false;
+		ArrayList<Produccion> produccionesDiagonal;
+		produccionesDiagonal = producciones.get(gramaticaSalida.getVariables().get(clave));
+//		System.out.println("produccionesDiagonal" + produccionesDiagonal);
 		String var = gramaticaSalida.getVariables().get(clave);
 		String nVar = null;
-		while (i < produccionesDiagonal.size() && !enc){
-			
-			String aux = produccionesDiagonal.get(0).getConcatenacion().get(i);
-			System.out.println("aux: " + aux);
-			String s = aux.charAt(0) + "";
-			if (s.equals(var)){
-				String aux2 = null;
-				if (aux.length() > 1) 
-					aux2 = aux.substring(1);
+		int tam = gramaticaSalida.getVariables().size()-1;
+		String ultVar = gramaticaSalida.getVariables().get(tam);
+		char nVarAux = new Character ((char)(ultVar.charAt(0)+1) ) ;
+		nVar =  nVarAux + "";
+		//System.out.println("nVar.charValue()" + nVar);
+				gramaticaSalida.getVariables().add(nVar);
+		/**************************************************************************************/
+		/**nueva variable creada,ahora hay ke crear las producciones de la nueva variable**/
+		ArrayList<Produccion> p = new ArrayList<Produccion>();		
+		ArrayList<Produccion> produccionesNuevas = new ArrayList<Produccion>();
+		Produccion pod;
+		ArrayList<String> concat;
+		for(int j = 0; j < produccionesDiagonal.size(); j++){
+			Produccion paux = produccionesDiagonal.get(j);
+
+			ArrayList<String> a = paux.getConcatenacion();
+			if(!var.equals(a.get(0))){
 				
-				enc = true;
-				char nVarAux = new Character ((char)(var.charAt(0)+1) ) ;
-				nVar =  nVarAux + "";
-				//System.out.println("nVar.charValue()" + nVar);
-				gramaticaSalida.getVariables().add(/*var.concat(var)*/nVar);
-				ArrayList<Produccion> p = new ArrayList<Produccion>();
-				Produccion pod = new Produccion();
-				pod.anadeCadena(/*var*/aux2);
-				System.out.println("nVar " + nVar);
-				pod.anadeCadena(aux2.concat(nVar));
+				p.add(paux);
+				concat = (ArrayList<String>)a.clone();
+				concat.add(nVar);
+				pod = new Produccion();
+				pod.setConcatenacion(concat);
 				p.add(pod);
-				System.out.println("p nueva: " + p);
-				gramaticaSalida.getProducciones().put(/*var.concat(var)*/nVar, p);
-
-				
-				produccionesDiagonal.get(0).getConcatenacion(). remove(i);
-				
-
-				
+//				System.out.println("p " + p);
 			}
-			i++;
-			
+			else{
+				concat = (ArrayList<String>)a.clone();
+				concat.remove(0);
+				pod = new Produccion();
+				pod.setConcatenacion(concat);
+				produccionesNuevas.add(pod);
+//				System.out.println("pod1 " + pod);
+				//pod = new Produccion();
+				pod = new Produccion();
+				concat = (ArrayList<String>)a.clone();
+				concat.remove(0);
+				pod.setConcatenacion(concat);
+				pod.anadeCadena(nVar);
+//				System.out.println("pod2 " + pod);
+				produccionesNuevas.add(pod);
+//				System.out.println("produccionesNuevas " + produccionesNuevas);
+			}
 		}
-		Produccion produccionesNuevas = new Produccion();
-		produccionesNuevas.setConcatenacion(produccionesDiagonal.get(0).getConcatenacion());
-		int tam = produccionesDiagonal.get(0).getConcatenacion().size();
-		for(int j = 0; j < tam; j++){
-			String adds = produccionesDiagonal.get(0).getConcatenacion().get(j);
-			System.out.println("adds" + adds);
-			produccionesNuevas.getConcatenacion().add(adds.concat(nVar));	
-		}
-		ArrayList<Produccion> pfinal = new ArrayList<Produccion>();
-		pfinal.add(produccionesNuevas);
-		gramaticaSalida.getProducciones().remove(clave);
-		gramaticaSalida.getProducciones().put(var, pfinal);
+		
+
+		gramaticaSalida.getProducciones().remove(var);
+		gramaticaSalida.getProducciones().put(var, p);
+		gramaticaSalida.getProducciones().put(nVar, produccionesNuevas);
+		
+		System.out.println("GRAMATICA salida: " + gramaticaSalida.getProducciones());
 	}
 	
 	//************************************************************
 	public static void main(String[] args){
 		
-/*		Gramatica g = new GramaticaIC();
+		GramaticaIC g = new GramaticaIC();
 		g.setVariableInicial("S");
 		ArrayList<String> s = new ArrayList<String>();
 		s.add("S");s.add("T");s.add("U");
@@ -282,32 +310,59 @@ public class GIC_to_FNC {
 		Produccion pod = new Produccion();
 		HashMap<String,ArrayList<Produccion>> lala = new  HashMap<String,ArrayList<Produccion>>();
 
-
 		p = new ArrayList<Produccion>();
 		pod = new Produccion();
-		pod.anadeCadena("\\"); pod.anadeCadena("a"); pod.anadeCadena("UTT"); pod.anadeCadena("abT"); p.add(pod); 
+		pod.anadeCadena("\\"); 
+		p.add(pod);
+		pod = new Produccion();
+		pod.anadeCadena("a");
+		p.add(pod);
+		pod = new Produccion();
+		pod.anadeCadena("T"); pod.anadeCadena("T"); 
+		p.add(pod); 
 		lala.put("S",p);
+		
+//		System.out.println("GRAMATICA: " + lala);
 
-
-		p = new ArrayList<Produccion>();
-		pod = new Produccion();
-		pod.anadeCadena("UT"); pod.anadeCadena("ab"); p.add(pod); 
-		lala.put("T",p);
 		
 		p = new ArrayList<Produccion>();
 		pod = new Produccion();
-		pod.anadeCadena("UTT"); pod.anadeCadena("abT"); pod.anadeCadena("bbb"); p.add(pod); 
+		pod.anadeCadena("U"); pod.anadeCadena("T");
+		p.add(pod); 
+		pod = new Produccion();
+		pod.anadeCadena("a"); pod.anadeCadena("b");
+		p.add(pod); 
+		lala.put("T",p);
+
+//		System.out.println("GRAMATICA: " + lala);
+
+
+		
+
+		
+		p = new ArrayList<Produccion>();
+		pod = new Produccion();
+		pod.anadeCadena("T"); pod.anadeCadena("T");
+		p.add(pod);
+		pod = new Produccion();
+		pod.anadeCadena("b"); pod.anadeCadena("b"); pod.anadeCadena("b"); 
+		p.add(pod); 
 		lala.put("U",p);
 		
-
-
+//		System.out.println("GRAMATICA: " + lala);
+		
 
 		
 		g.setProducciones(lala);
 		
+/*		HashMap<Integer,ArrayList<ArrayList<Integer>>> prueba = new HashMap<Integer,ArrayList<ArrayList<Integer>>>();
+		ArrayList<Integer> gr = new ArrayList<Integer>();
+		ArrayList<ArrayList<Integer>> gr2 = new ArrayList<ArrayList<Integer>>();
+		gr.add(new Integer(2));
+		gr2.add(gr); 
+		prueba.put(2, gr2); gr2.add(gr); prueba.put(3, gr2); prueba.put(4, gr2);
 
-		
-
+		System.out.println("veamos: " + prueba);*/
 		
 		System.out.println("GRAMATICA: " + g);
 		GIC_to_FNC piticli = new GIC_to_FNC(g);
@@ -316,12 +371,13 @@ public class GIC_to_FNC {
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 			piticli.transforma_FNG();
+			
 		}
 		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
 		
 		
-	}*/
-		AutomataPila aut = new AutomataPila();
+	
+/*		AutomataPila aut = new AutomataPila();
 //		AutomataPila aut2 = new AutomataPila();
 		//a.listaEstados.add(new Estado(0,0,"s1"));
 		aut.getEstados().add("s1");
@@ -338,7 +394,8 @@ public class GIC_to_FNC {
 		aut2.setEstadoFinal("s2");*/
 		//System.out.println("ESTADOS: " + aut.getEstados());
 		
-		AristaAP arist;
+//AKI XXX
+/*		AristaAP arist;
 		
 		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
@@ -393,7 +450,7 @@ public class GIC_to_FNC {
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 			piticli.transforma_FNG();
 		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());*/
 
 	}
 }
