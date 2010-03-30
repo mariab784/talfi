@@ -23,6 +23,7 @@ import modelo.gramatica.Produccion;
  */
 public class AutomataP_to_GramaticaIC implements Algoritmo {
 
+	private static final char comienzo = 'C';
 	private String xml;
 	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
@@ -177,9 +178,28 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				}
 			}
 		}
-			
+		traduceVariables();	
 		return gic;
 		
+	}
+	
+	private void traduceVariables(){
+		
+		ArrayList<String> nVariables = new ArrayList<String>();
+		nVariables.add(gic.getVariableInicial());
+		System.out.println("Inicial!: " + nVariables);
+		int tam = gic.getVariables().size();
+		char ultima = comienzo;
+		for(int i = 0; i <tam; i++){
+			
+			char nVar = new Character ((char)(ultima+1) ) ;
+			ultima = nVar;
+			String s = nVar + "";
+			nVariables.add(s);
+			//nVar =  nVarAux + "";
+		}
+		System.out.println("final!: " + nVariables);
+
 	}
 	
 	private boolean estaEnVariables(String s){
