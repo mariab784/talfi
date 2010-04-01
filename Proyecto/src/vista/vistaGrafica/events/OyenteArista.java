@@ -475,7 +475,7 @@ public class OyenteArista extends MouseAdapter {
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
-		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym3",2) + blanco + mensajero.devuelveMensaje("vista.sym3p1",2));
+		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym3",2));
 		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
@@ -621,7 +621,7 @@ public class OyenteArista extends MouseAdapter {
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
-		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym3p3",2)/* + lambda + m.devuelveMensaje("vista.ap3p2",2)*/);
+		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym5",2));
 		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
@@ -881,7 +881,7 @@ public class OyenteArista extends MouseAdapter {
 		JDialog d=pane.createDialog(null,mensajero.devuelveMensaje("vista.arist",2));
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
-		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym3p2",2)  + blanco + mensajero.devuelveMensaje("vista.sym3p1",2));
+		JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.sym4",2));
 		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
