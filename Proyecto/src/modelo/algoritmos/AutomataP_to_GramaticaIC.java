@@ -77,6 +77,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	}
 
+	/**
+	 * @return Gramatica resultado de aplicar el algoritmo
+	 * para hallar una gramatica indepenediente de contexto
+	 * a partir de un automata de pila dado.
+	 */
 	@SuppressWarnings("unchecked")
 	public GramaticaIC AP_Gramatica(){
 		
