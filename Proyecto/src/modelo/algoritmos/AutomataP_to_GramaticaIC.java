@@ -4,7 +4,9 @@
 package modelo.algoritmos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 import vista.vistaGrafica.AristaAP;
 
@@ -39,7 +41,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 */
 	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
-		automataEntrada=(AutomataPila) a;
+		automataEntrada=((AutomataPila) a).convertirPilaVacia();
+		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
 		controlador=Controlador_imp.getInstancia();
@@ -87,6 +90,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		
 		/*GramaticaIC*/ gic = new GramaticaIC();
+		gic.setSimbolos(automataEntrada.getAlfabeto().getListaLetras());//añadido
 		gic.setVariableInicial("S");
 		ArrayList<String> estados = (ArrayList<String>) this.automataEntrada.getEstados().clone();
 		Iterator<String> it = estados.iterator();
@@ -188,14 +192,16 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void traduceVariables(){
 		
 		ArrayList<String> nVariables = new ArrayList<String>();
+		ArrayList<String> variables = gic.getVariables();
 		nVariables.add(gic.getVariableInicial());
-		System.out.println("Inicial!: " + nVariables);
+//		System.out.println("Inicial!: " + nVariables);
 		int tam = gic.getVariables().size();
 		char ultima = comienzo;
-		for(int i = 0; i <tam; i++){
+		for(int i = 1; i <tam; i++){
 			
 			char nVar = new Character ((char)(ultima+1) ) ;
 			ultima = nVar;
@@ -203,8 +209,58 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			nVariables.add(s);
 			//nVar =  nVarAux + "";
 		}
-		System.out.println("final!: " + nVariables);
+//		System.out.println("final!: " + nVariables);
+//		System.out.println("antiguas!: " + gic.getVariables());
+//		System.out.println("gic antigua: " + gic);
+		HashMap<String,ArrayList<Produccion>> produc = gic.getProducciones();
+		HashMap<String,ArrayList<Produccion>> nproducciones =
+			new HashMap<String,ArrayList<Produccion>>();
+		Set claves = produc.keySet();
+		Iterator<String> itClaves = claves.iterator();
+		String claveActual;
+//		int i = 0;
+		while(itClaves.hasNext()){ //recorremos las claves para coger las producciones
+			claveActual = itClaves.next();
+			ArrayList<Produccion> aProduccionActual = produc.get(claveActual);
+			System.out.println("aProduccionActual: " + aProduccionActual);
+			Iterator<Produccion> itProd = aProduccionActual.iterator();
+			ArrayList<Produccion> nuevaListaProduccion = new ArrayList<Produccion>();
+			while(itProd.hasNext()){ //recorremos cada una de las producciones de las claves
+				Produccion p = itProd.next();
+				ArrayList<String> pSeparadas = p.getConcatenacion();
+				Iterator<String> itPSeparadas = pSeparadas.iterator();
+				Produccion nuevaProduccion = new Produccion();
+				boolean pasa = false;
+				while(itPSeparadas.hasNext() && !pasa){ //recorremos los string que componen las producciones
+					String trozo = itPSeparadas.next();
+					System.out.println("trozo: " + trozo);
+					
+					switch (dimeTipo(trozo)){// 0 simbolo o lambda 1 variable 2 novale 
+					
+					case 0 : nuevaProduccion.anadeCadena(trozo); break;
+					case 1 :  int indice = variables.indexOf(trozo); System.out.println("indice: " + indice);  
+								break;
+					case 2 : pasa = true; break;
+					
+					}
+				}
+				
+			}
+		}
+		System.out.println("esta!!");
+	}
+	
+	private int dimeTipo(String cadena){
+		
 
+		if (gic.getSimbolos().contains(cadena) || lambda.equals(cadena))
+			return 0;
+		if (gic.getVariables().contains(cadena))
+			return 1;//System.out.println("variable!!");
+		else
+			return 2;//System.out.println("SHIT");
+		
+		
 	}
 	
 	private boolean estaEnVariables(String s){
@@ -360,6 +416,10 @@ aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
 		alf.aniadirLetra("Z");
 		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
+		Alfabeto al = new Alfabeto_imp();
+		al.aniadirLetra("a");
+		al.aniadirLetra("b");
+		aut.setAlfabeto(al);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		// TODO Auto-generated method subs
