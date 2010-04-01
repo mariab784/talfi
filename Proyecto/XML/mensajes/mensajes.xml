@@ -330,8 +330,14 @@
 		</ap2>
 		<ap3>Simbolos de pila a apilar / desapilar</ap3>
 		<sym3>
-			Simbolo de cinta  / Nuevo simbolo de cinta(# es un blanco), direccion (I,D,N)
+			Simbolo de cinta
 		</sym3>
+		<sym4>
+			Nuevo simbolo de cinta
+		</sym4>
+		<sym5>
+			direccion
+		</sym5>
 		<hasta>
 			Hasta: 
 		</hasta>
