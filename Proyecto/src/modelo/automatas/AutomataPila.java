@@ -95,6 +95,7 @@ public class AutomataPila extends AutomataFND{
 		
 		apd = compruebaAPD();
 		aristasQueDesapilan = new ArrayList<Integer>();
+		aristasPilaVacia = new ArrayList<AristaAP>();
 		
 	}
 	//-------------------------------------------------------------
@@ -1130,10 +1131,17 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
 	 */
 
-	private void convertirPilaVacia(){
+	public AutomataPila convertirPilaVacia(){
+		//String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
+		//ArrayList<String> est, ArrayList<AristaAP> aut
+		System.out.println("this: " + this);
 		
+		
+		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
+				this.getAlfabetoPila(),this.getEstados(),this.getAutomataPila());
 		int i = 0; int j = 0;
 		estadoPilaVacia = nombreAux;
+		aut.getEstados().add(estadoPilaVacia);//añadido
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
 		String est = this.getEstadosFinales().get(i);
@@ -1152,13 +1160,17 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 			ArrayList<String> trans = new ArrayList<String>();
 			trans.add(lambda);
 			a.setSalida(trans);
-			this.aristasPilaVacia.add(a);
+			aut.getAutomataPila().add(a);
+			aut.aristasPilaVacia.add(a);
+			//this.aristasPilaVacia.add(a);
 			a = new AristaAP(0,0,0,0,estadoPilaVacia,estadoPilaVacia);
 			a.setOrigen(estadoPilaVacia);
 			a.anadirSimbolo(lambda);
 			a.setCimaPila(simboloPila);
 			a.setSalida(trans);
-			this.aristasPilaVacia.add(a);
+			//this.aristasPilaVacia.add(a);
+			aut.aristasPilaVacia.add(a);
+			aut.getAutomataPila().add(a);
 			
 			
 			if (j == (tamAlfpila -1)) {
@@ -1177,6 +1189,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		}
 		
 		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
+		return aut;
 	}
 	
 	
