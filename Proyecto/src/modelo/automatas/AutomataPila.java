@@ -1134,7 +1134,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	public AutomataPila convertirPilaVacia(){
 		//String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 		//ArrayList<String> est, ArrayList<AristaAP> aut
-		System.out.println("this: " + this);
+//		System.out.println("this: " + this);
 		
 		
 		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
@@ -1145,11 +1145,11 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
 		String est = this.getEstadosFinales().get(i);
-		System.out.println("est final: " + est);
+//		System.out.println("est final: " + est);
 		int tamAlfpila = this.alfabetoPila.getListaLetras().size();
-		System.out.println("tamAlfpila : " + tamAlfpila);
+//		System.out.println("tamAlfpila : " + tamAlfpila);
 		int tamEstFin = this.getEstadosFinales().size();
-		System.out.println("tamEstFin : " + tamEstFin);
+//		System.out.println("tamEstFin : " + tamEstFin);
 		while ( (i < tamEstFin) && (j < tamAlfpila) ){
 			
 			//(int x,int y,int fx, int fy,String origen,String destino)
@@ -1184,11 +1184,11 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 				else {j++; }
 			}
 			else {j++; }
-			System.out.println("I: " + i + " J : " + j);
+//			System.out.println("I: " + i + " J : " + j);
 			
 		}
 		
-		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
+//		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
 		return aut;
 	}
 	
