@@ -25,7 +25,7 @@ import modelo.gramatica.Produccion;
  */
 public class AutomataP_to_GramaticaIC implements Algoritmo {
 
-	private static final char comienzo = 'C';
+	private static final char comienzo = 'A';
 	private String xml;
 	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
@@ -41,8 +41,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 */
 	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
-		automataEntrada=((AutomataPila) a).convertirPilaVacia();
-		System.out.println("afinal: " + a);
+		automataEntrada=((AutomataPila) a)/*.convertirPilaVacia()*/;
+//		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
 		controlador=Controlador_imp.getInstancia();
@@ -195,59 +195,129 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@SuppressWarnings("unchecked")
 	private void traduceVariables(){
 		
-		ArrayList<String> nVariables = new ArrayList<String>();
+		System.out.println("***AL PRINCIPIO***");
+		System.out.println("Variables: " + this.gic.getVariables());
+		System.out.println("Producciones: " + this.gic.getProducciones());
+		System.out.println("******************");
+		
+		HashMap<String,ArrayList<Produccion>> nProduc = null;
+		int tamano;// = produc.size();
+		boolean terminado = false;
+		//int i = 0;
 		ArrayList<String> variables = gic.getVariables();
-		nVariables.add(gic.getVariableInicial());
-//		System.out.println("Inicial!: " + nVariables);
-		int tam = gic.getVariables().size();
-		char ultima = comienzo;
-		for(int i = 1; i <tam; i++){
-			
-			char nVar = new Character ((char)(ultima+1) ) ;
-			ultima = nVar;
-			String s = nVar + "";
-			nVariables.add(s);
-			//nVar =  nVarAux + "";
-		}
-//		System.out.println("final!: " + nVariables);
-//		System.out.println("antiguas!: " + gic.getVariables());
-//		System.out.println("gic antigua: " + gic);
 		HashMap<String,ArrayList<Produccion>> produc = gic.getProducciones();
-		HashMap<String,ArrayList<Produccion>> nproducciones =
-			new HashMap<String,ArrayList<Produccion>>();
-		Set claves = produc.keySet();
-		Iterator<String> itClaves = claves.iterator();
-		String claveActual;
-//		int i = 0;
-		while(itClaves.hasNext()){ //recorremos las claves para coger las producciones
-			claveActual = itClaves.next();
-			ArrayList<Produccion> aProduccionActual = produc.get(claveActual);
-			System.out.println("aProduccionActual: " + aProduccionActual);
-			Iterator<Produccion> itProd = aProduccionActual.iterator();
-			ArrayList<Produccion> nuevaListaProduccion = new ArrayList<Produccion>();
-			while(itProd.hasNext()){ //recorremos cada una de las producciones de las claves
-				Produccion p = itProd.next();
-				ArrayList<String> pSeparadas = p.getConcatenacion();
-				Iterator<String> itPSeparadas = pSeparadas.iterator();
-				Produccion nuevaProduccion = new Produccion();
-				boolean pasa = false;
-				while(itPSeparadas.hasNext() && !pasa){ //recorremos los string que componen las producciones
-					String trozo = itPSeparadas.next();
-					System.out.println("trozo: " + trozo);
-					
-					switch (dimeTipo(trozo)){// 0 simbolo o lambda 1 variable 2 novale 
-					
-					case 0 : nuevaProduccion.anadeCadena(trozo); break;
-					case 1 :  int indice = variables.indexOf(trozo); System.out.println("indice: " + indice);  
-								break;
-					case 2 : pasa = true; break;
-					
+		ArrayList<String> nuVariables = null;
+		while (!terminado){
+			
+			/*ArrayList<String>*/ nuVariables = new ArrayList<String>();
+			
+			/*HashMap<String,ArrayList<Produccion>>*/ nProduc = new HashMap<String,ArrayList<Produccion>>();
+			
+			tamano = produc.size();
+			for(int i = 0; i < tamano; i++){ //recorremos todas las producciones ke hay con las variables
+				String var = variables.get(i);
+				ArrayList<Produccion> nListaProd = new  ArrayList<Produccion>();
+				ArrayList<Produccion> listaProd = produc.get(var);
+				int j = 0;
+				int tamListaProd = listaProd.size();
+				Produccion nProd = null; 
+				while(j < tamListaProd){
+					nProd = new Produccion();
+					Produccion prod = listaProd.get(j);
+					ArrayList<String> nConcat= compruebaContatenacion(prod);
+
+					if (nConcat != null && !nConcat.isEmpty()){ 
+						nProd.setConcatenacion(nConcat); 
+						nListaProd.add(nProd);
 					}
+
+					j++;				
 				}
+				if (!nListaProd.isEmpty()){nProduc.put(var, nListaProd); nuVariables.add(var);}
 				
 			}
+			if (iguales(produc,nProduc)) terminado = true;
+			produc = (HashMap<String, ArrayList<Produccion>>) nProduc.clone();
+			variables = (ArrayList<String>) nuVariables.clone();
+		//	tamano = variables.size(); //REVISAR
+			System.out.println("***EN CADA VUELTA***");
+			System.out.println("nuVariables: " + nuVariables);
+			System.out.println("nProduc: " + nProduc);
+			System.out.println("Variables: " + variables);
+			System.out.println("produc: " + produc);
+			System.out.println("********************");
+			//System.out.println("nProduc!: " + nProduc);
 		}
-		System.out.println("esta!!");
+		this.gic.setProducciones(nProduc);
+		this.gic.setVariables(nuVariables);
+		System.out.println("Inicial!: " + this.gic.getProducciones());
+		System.out.println("nProduc!: " + nProduc);
+//**********************************hasta aki OK***************************************************//
+		
+		
+		
+		ArrayList<String> nVariables = new ArrayList<String>();
+		
+		nVariables.add(gic.getVariableInicial());
+//		System.out.println("Inicial!: " + nVariables);
+
+
+		System.out.println("nVariables!: " + nVariables);	
+		
+		int tam = gic.getVariables().size();
+		char ultima = comienzo; char nVar = comienzo;
+		for(int i = 1; i <tam; i++){
+			
+			nVar = new Character (ultima) ;
+			ultima = (char)(nVar + 1);
+			if (nVar != 'S'){
+				String s = nVar + "";
+				nVariables.add(s);
+			}
+		}
+
+	}
+	
+	private boolean iguales(HashMap<String,ArrayList<Produccion>> ant,
+			HashMap<String,ArrayList<Produccion>> nuevo){
+		
+		Set<String> clavesAnt = ant.keySet();
+		Set<String> clavesNuevas = nuevo.keySet();
+		
+		if (clavesAnt.size() != clavesNuevas.size()) return false;
+		
+		Iterator<String> itAnt = clavesAnt.iterator();
+		while (itAnt.hasNext()){
+			
+			String s = itAnt.next();
+			if (!clavesNuevas.contains(s)) return false;
+		}
+		return true;
+	}
+	
+	
+	private ArrayList<String> compruebaContatenacion(Produccion prod){
+		
+		ArrayList<String> salida = new ArrayList<String>();
+		ArrayList<String> concat = prod.getConcatenacion();
+		int tam = concat.size(); int i = 0;
+		String s;
+		while(i<tam){
+			s = concat.get(i);
+			if (compruebaElemento(s)){
+				salida.add(s);				
+			}
+			else return null;
+			i++;
+		}		
+		return salida;
+	}
+	
+	private boolean compruebaElemento(String s){
+		
+		if(dimeTipo(s) == 2)	return false;
+		else	return true;
+
 	}
 	
 	private int dimeTipo(String cadena){
@@ -318,6 +388,14 @@ aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
 		arist.anadirPila("AA");//		arist.anadirPila("CZ");
 		
 		aut.anadeArista(arist);	
+		
+		//añadido//
+/*		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z");//		arist.setCimaPila("Z");
+		arist.anadirPila("\\");//		arist.anadirPila("CZ");
+		
+		aut.anadeArista(arist);	*/
 		
 		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
