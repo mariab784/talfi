@@ -398,7 +398,7 @@ aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 		
 		aut.anadeArista(arist);	*/
 		
-		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("0");//		arist.anadirSimbolo("0");
 		arist.setCimaPila("1");//		arist.setCimaPila("C");
 		arist.anadirPila("\\");//		arist.anadirPila("CC");
