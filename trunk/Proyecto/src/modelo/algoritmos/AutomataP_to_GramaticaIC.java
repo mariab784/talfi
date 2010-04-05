@@ -196,13 +196,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@SuppressWarnings("unchecked")
 	private void traduceVariables(){
 		
-		System.out.println("***AL PRINCIPIO***");
+/*		System.out.println("***AL PRINCIPIO***");
 		System.out.println("Variables: " + this.gic.getVariables());
 		System.out.println("Producciones: " + this.gic.getProducciones());
-		System.out.println("******************");
+		System.out.println("******************");*/
 		
 		HashMap<String,ArrayList<Produccion>> nProduc = null;
-		int tamano;// = produc.size();
+		int tamano = 0;// = produc.size();
 		boolean terminado = false;
 		//int i = 0;
 		ArrayList<String> variables = gic.getVariables();
@@ -241,29 +241,29 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			produc = (HashMap<String, ArrayList<Produccion>>) nProduc.clone();
 			variables = (ArrayList<String>) nuVariables.clone();
 		//	tamano = variables.size(); //REVISAR
-			System.out.println("***EN CADA VUELTA***");
+/*			System.out.println("***EN CADA VUELTA***");
 			System.out.println("nuVariables: " + nuVariables);
 			System.out.println("nProduc: " + nProduc);
 			System.out.println("Variables: " + variables);
 			System.out.println("produc: " + produc);
-			System.out.println("********************");
+			System.out.println("********************");*/
 			//System.out.println("nProduc!: " + nProduc);
 		}
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nuVariables);
-		System.out.println("Inicial!: " + this.gic.getProducciones());
-		System.out.println("nProduc!: " + nProduc);
+//		System.out.println("Prod simplificadas!: " + this.gic.getProducciones());
+//		System.out.println("nProduc!: " + nProduc);
 //**********************************hasta aki OK***************************************************//
 		
 		
-		
+
 		ArrayList<String> nVariables = new ArrayList<String>();
 		
 		nVariables.add(gic.getVariableInicial());
 //		System.out.println("Inicial!: " + nVariables);
 
 
-		System.out.println("nVariables!: " + nVariables);	
+//		System.out.println("nVariables!: " + nVariables);	
 		
 		int tam = gic.getVariables().size();
 		char ultima = comienzo; char nVar = comienzo;
@@ -277,6 +277,39 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 
+//		System.out.println("nVariables!: " + nVariables);
+//		System.out.println("Variables!: " + gic.getVariables());
+		
+		nProduc = new HashMap<String,ArrayList<Produccion>>();
+		tamano = /*produc*/nVariables.size();
+		variables = gic.getVariables();
+		for(int i = 0; i < tamano; i++){ //recorremos todas las producciones ke hay con las variables
+			String var = variables.get(i);
+			String nnVar = nVariables.get(i);
+			ArrayList<Produccion> nListaProd = new  ArrayList<Produccion>();
+			ArrayList<Produccion> listaProd = produc.get(var);
+			int j = 0;
+			int tamListaProd = listaProd.size();
+			Produccion nProd = null; 
+			while(j < tamListaProd){
+				nProd = new Produccion();
+				Produccion prod = listaProd.get(j);
+				ArrayList<String> nConcat= /*comprueba*/nuevaContatenacion(prod,variables,nVariables);
+
+				//if (nConcat != null && !nConcat.isEmpty()){ 
+					nProd.setConcatenacion(nConcat); 
+					nListaProd.add(nProd);
+				//}
+
+				j++;				
+			}
+			if (!nListaProd.isEmpty()){nProduc.put(nnVar, nListaProd); /*nuVariables.add(var);*/}
+			
+		}
+		
+		this.gic.setProducciones(nProduc);
+		this.gic.setVariables(nVariables);
+	//	System.out.println("nProduc!: " + nProduc);
 	}
 	
 	private boolean iguales(HashMap<String,ArrayList<Produccion>> ant,
@@ -295,6 +328,39 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		}
 		return true;
 	}
+	
+
+	private ArrayList<String> nuevaContatenacion(Produccion prod,ArrayList<String> variables,
+			ArrayList<String> nVariables ){
+		
+		ArrayList<String> salida = new ArrayList<String>();
+		ArrayList<String> concat = prod.getConcatenacion();
+		int tam = concat.size(); int i = 0;
+		String s;
+		while(i<tam){
+			s = concat.get(i);
+			/*		if (gic.getSimbolos().contains(cadena) || lambda.equals(cadena))
+			return 0;
+		if (gic.getVariables().contains(cadena))
+			return 1;//System.out.println("variable!!");
+		else
+			return 2;//System.out.println("SHIT");*/ //tomamos como imposible el 2
+			if (/*comprueba*/dimeTipo(s) == 0){
+				salida.add(s);				
+			}
+			else if(dimeTipo(s) == 1){
+				int ind = variables.indexOf(s);
+				//System.out.println("IND: " + ind);
+				String ns = nVariables.get(ind);
+				salida.add(ns);
+			}
+			else{System.out.println("E X P L O S I O N !!!!!"); return null;}
+			i++;
+		}		
+		return salida;
+	}
+	
+	
 	
 	
 	private ArrayList<String> compruebaContatenacion(Produccion prod){
@@ -359,13 +425,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		//a.listaEstados.add(new Estado(0,0,"s1"));
 aut.getEstados().add("s0");//		aut.getEstados().add("s1");
 aut.getEstados().add("s1");//		aut.getEstados().add("s2");
-//aut.getEstados().add("s2");//		aut.getEstados().add("s3");
+aut.getEstados().add("s2");//		aut.getEstados().add("s3");
 
 		//		aut.getEstados().add("s4");
 
 aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
-aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
-//		aut.setEstadoFinal("s2");
+//aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
+		aut.setEstadoFinal("s2");
 
 /*		aut2.getEstados().add("s1");
 		aut2.getEstados().add("s2");
@@ -376,17 +442,17 @@ aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 		AristaAP arist;
 		
 		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("1");
+		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
-		arist.anadirPila("1Z");//		arist.anadirPila("Z");
+		arist.anadirPila("AZ");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
 
 		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("1");
-		arist.setCimaPila("1");//		arist.setCimaPila("Z");
-		arist.anadirPila("11");//		arist.anadirPila("CZ");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("A");//		arist.setCimaPila("Z");
+		arist.anadirPila("AA");//		arist.anadirPila("CZ");
 		
 		aut.anadeArista(arist);	
 		
@@ -399,23 +465,23 @@ aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 		aut.anadeArista(arist);	*/
 		
 		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("0");//		arist.anadirSimbolo("0");
-		arist.setCimaPila("1");//		arist.setCimaPila("C");
+		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
+		arist.setCimaPila("A");//		arist.setCimaPila("C");
 		arist.anadirPila("\\");//		arist.anadirPila("CC");
 		
 		aut.anadeArista(arist);	
 	
 		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s2","s2");
-		arist.anadirSimbolo("\\");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("Z");		//arist.setCimaPila("C");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("A");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s1","s3");
+		arist = new AristaAP(0,0,0,0,"s1","s2");//		arist = new AristaAP(0,0,0,0,"s1","s3");
 //		arist.anadirSimbolo("0");
-		arist.anadirSimbolo("0");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("1");		//arist.setCimaPila("C");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("Z");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);		
@@ -493,11 +559,11 @@ aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
 		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
-		alf.aniadirLetra("1");//		alf.aniadirLetra("C");
+		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
 		Alfabeto al = new Alfabeto_imp();
-		al.aniadirLetra("1");
-		al.aniadirLetra("0");
+		al.aniadirLetra("a");
+		al.aniadirLetra("b");
 		aut.setAlfabeto(al);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
