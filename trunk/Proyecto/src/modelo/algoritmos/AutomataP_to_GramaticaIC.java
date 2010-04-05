@@ -368,7 +368,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			s = concat.get(i);
 			
 			if (compruebaElemento(s)){
-				if (!s.equals(lambda) && (tam == 1))salida.add(s);
+				if (!s.equals(lambda))salida.add(s);
+				else if (tam == 1) salida.add(s);
 
 			}
 			else return null;
