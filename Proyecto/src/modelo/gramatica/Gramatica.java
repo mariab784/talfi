@@ -140,7 +140,7 @@ public abstract class Gramatica {
 		s+="Producciones: " + producciones + "\n";
 //		int tam = producciones.size();
 //		System.out.println("tammm: " + tam);
-		System.out.println("variables: " + variables);
+//		System.out.println("variables: " + variables);
 /*		for(int i = 0; i < tam; i++){
 			
 			System.out.println("KE HAY EN PRODUCCIONES? ");

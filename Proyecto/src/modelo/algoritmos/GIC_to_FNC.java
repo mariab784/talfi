@@ -6,8 +6,10 @@ import java.util.Iterator;
 
 import vista.vistaGrafica.AristaAP;
 
+import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_Pila;
+import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.AutomataPila;
 import modelo.gramatica.Gramatica;
 import modelo.gramatica.GramaticaIC;
@@ -364,7 +366,7 @@ public class GIC_to_FNC {
 
 		System.out.println("veamos: " + prueba);*/
 		
-		System.out.println("GRAMATICA: " + g);
+	/*	System.out.println("GRAMATICA: " + g);
 		GIC_to_FNC piticli = new GIC_to_FNC(g);
 		while(piticli.getTablaTieneMarcas()){
 			
@@ -373,19 +375,21 @@ public class GIC_to_FNC {
 			piticli.transforma_FNG();
 			
 		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());*/
 		
 		
 	
-/*		AutomataPila aut = new AutomataPila();
+		AutomataPila aut = new AutomataPila();
 //		AutomataPila aut2 = new AutomataPila();
 		//a.listaEstados.add(new Estado(0,0,"s1"));
-		aut.getEstados().add("s1");
-		aut.getEstados().add("s2");
-		aut.getEstados().add("s3");
-//		aut.getEstados().add("s4");
-		aut.setEstadoInicial("s1");
-		aut.setEstadoFinal("s3");
+aut.getEstados().add("s0");//		aut.getEstados().add("s1");
+aut.getEstados().add("s1");//		aut.getEstados().add("s2");
+aut.getEstados().add("s2");//		aut.getEstados().add("s3");
+
+		//		aut.getEstados().add("s4");
+
+aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
+//aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 		aut.setEstadoFinal("s2");
 
 /*		aut2.getEstados().add("s1");
@@ -394,52 +398,134 @@ public class GIC_to_FNC {
 		aut2.setEstadoFinal("s2");*/
 		//System.out.println("ESTADOS: " + aut.getEstados());
 		
-//AKI XXX
-/*		AristaAP arist;
+		AristaAP arist;
 		
-		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
+		arist.setCimaPila("Z");
+		arist.anadirPila("AZ");//		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+		
+
+		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("A");//		arist.setCimaPila("Z");
+		arist.anadirPila("AA");//		arist.anadirPila("CZ");
+		
+		aut.anadeArista(arist);	
+		
+		//añadido//
+/*		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z");//		arist.setCimaPila("Z");
+		arist.anadirPila("\\");//		arist.anadirPila("CZ");
+		
+		aut.anadeArista(arist);	*/
+		
+		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
+		arist.setCimaPila("A");//		arist.setCimaPila("C");
+		arist.anadirPila("\\");//		arist.anadirPila("CC");
+		
+		aut.anadeArista(arist);	
+	
+		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("A");		//arist.setCimaPila("C");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		arist = new AristaAP(0,0,0,0,"s1","s2");//		arist = new AristaAP(0,0,0,0,"s1","s3");
+//		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("Z");		//arist.setCimaPila("C");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);		
+
+//		AristaAP borrada = 	aut.getAutomataPila().remove(2);
+//		System.out.println("ARISTA borrada: " + borrada );
+
+/*		arist = new AristaAP(0,0,0,0,"s3","s2");
+		//arist.anadirSimbolo("0");
+		arist.anadirSimbolo("\\");
 		arist.setCimaPila("Z");
 		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
-
-		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("a");
-		arist.setCimaPila("Z");
-		arist.anadirPila("CZ");
-		
-		aut.anadeArista(arist);	
-		
-		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s3","s4");
 		arist.anadirSimbolo("0");
-		arist.setCimaPila("C");
-		arist.anadirPila("CC");
-		
-		aut.anadeArista(arist);	
-	
-		arist = new AristaAP(0,0,0,0,"s2","s2");
-		arist.anadirSimbolo("1");
-		arist.setCimaPila("C");
-		arist.anadirPila("\\");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s3");
+		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("0");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist); 
+		
+//		aut2.anadeArista(arist);
+
+		
+		arist = new AristaAP(0,0,0,0,"s1","s2");
 //		arist.anadirSimbolo("0");
 		arist.anadirSimbolo("1");
-		arist.setCimaPila("C");
-		arist.anadirPila("\\");
+		arist.setCimaPila("A");
+		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
+/*		arist = new AristaAP(0,0,0,0,"s3","s2");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+
+		
+		aut.anadeArista(arist);
+		
+
+		
+	/*	arist = new AristaAP(0,0,0,0,"s2","s2");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z"); 
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);*/
+		
+/*		arist = new AristaAP(0,0,0,0,"s3","s4");
+		arist.anadirSimbolo("\\");
+		//System.out.println("LAMBDA: \\" );
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);*/
+		 //una vez ordenado no puedes desordenar
+		//System.out.println("ARISTAS: " + aut.getAutomataPila());
+
+/*		ArrayList<String> lp = new  ArrayList<String>();
+		lp.add("0");
+		lp.add("000");
+		lp.add("00");*/
+	
+//		AutomataPila.compruebaPalabras(aut, aut2, lp);
 		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
-		alf.aniadirLetra("C");
+		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
+		Alfabeto al = new Alfabeto_imp();
+		al.aniadirLetra("a");
+		al.aniadirLetra("b");
+		aut.setAlfabeto(al);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
-		System.out.println(a.AP_Gramatica().getProducciones().toString());
+		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		
 		
 		
@@ -450,7 +536,7 @@ public class GIC_to_FNC {
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 			piticli.transforma_FNG();
 		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());*/
+		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
 
 	}
 }
