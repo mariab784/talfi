@@ -196,11 +196,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@SuppressWarnings("unchecked")
 	private void traduceVariables(){
 		
-/*		System.out.println("***AL PRINCIPIO***");
-		System.out.println("Variables: " + this.gic.getVariables());
-		System.out.println("Producciones: " + this.gic.getProducciones());
-		System.out.println("******************");*/
-		
 		HashMap<String,ArrayList<Produccion>> nProduc = null;
 		int tamano = 0;// = produc.size();
 		boolean terminado = false;
@@ -210,9 +205,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		ArrayList<String> nuVariables = null;
 		while (!terminado){
 			
-			/*ArrayList<String>*/ nuVariables = new ArrayList<String>();
-			
-			/*HashMap<String,ArrayList<Produccion>>*/ nProduc = new HashMap<String,ArrayList<Produccion>>();
+			nuVariables = new ArrayList<String>();
+			nProduc = new HashMap<String,ArrayList<Produccion>>();
 			
 			tamano = produc.size();
 			for(int i = 0; i < tamano; i++){ //recorremos todas las producciones ke hay con las variables
@@ -240,31 +234,17 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			if (iguales(produc,nProduc)) terminado = true;
 			produc = (HashMap<String, ArrayList<Produccion>>) nProduc.clone();
 			variables = (ArrayList<String>) nuVariables.clone();
-		//	tamano = variables.size(); //REVISAR
-/*			System.out.println("***EN CADA VUELTA***");
-			System.out.println("nuVariables: " + nuVariables);
-			System.out.println("nProduc: " + nProduc);
-			System.out.println("Variables: " + variables);
-			System.out.println("produc: " + produc);
-			System.out.println("********************");*/
-			//System.out.println("nProduc!: " + nProduc);
 		}
+		
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nuVariables);
-//		System.out.println("Prod simplificadas!: " + this.gic.getProducciones());
-//		System.out.println("nProduc!: " + nProduc);
+
 //**********************************hasta aki OK***************************************************//
 		
 		
 
 		ArrayList<String> nVariables = new ArrayList<String>();
-		
 		nVariables.add(gic.getVariableInicial());
-//		System.out.println("Inicial!: " + nVariables);
-
-
-//		System.out.println("nVariables!: " + nVariables);	
-		
 		int tam = gic.getVariables().size();
 		char ultima = comienzo; char nVar = comienzo;
 		for(int i = 1; i <tam; i++){
@@ -277,12 +257,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 
-//		System.out.println("nVariables!: " + nVariables);
-//		System.out.println("Variables!: " + gic.getVariables());
 		
 		nProduc = new HashMap<String,ArrayList<Produccion>>();
-		tamano = /*produc*/nVariables.size();
+		tamano = nVariables.size();
 		variables = gic.getVariables();
+		ArrayList<String> noSirven = new ArrayList<String>();
 		for(int i = 0; i < tamano; i++){ //recorremos todas las producciones ke hay con las variables
 			String var = variables.get(i);
 			String nnVar = nVariables.get(i);
@@ -294,24 +273,36 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			while(j < tamListaProd){
 				nProd = new Produccion();
 				Produccion prod = listaProd.get(j);
-				ArrayList<String> nConcat= /*comprueba*/nuevaContatenacion(prod,variables,nVariables);
+				ArrayList<String> nConcat= nuevaContatenacion(prod,variables,nVariables);
 
-				//if (nConcat != null && !nConcat.isEmpty()){ 
 					nProd.setConcatenacion(nConcat); 
 					nListaProd.add(nProd);
-				//}
 
 				j++;				
 			}
-			if (!nListaProd.isEmpty()){nProduc.put(nnVar, nListaProd); /*nuVariables.add(var);*/}
+			if (!inservible(nListaProd)/*nListaProd.isEmpty()*/){nProduc.put(nnVar, nListaProd); }
+			else {noSirven.add(nnVar);}
 			
+		}
+		
+		if (!noSirven.isEmpty()){
+			int tama = noSirven.size();
+			for(int i = 0; i < tama; i++){
+				String s = noSirven.get(i);
+				nVariables.remove(s);
+			}
 		}
 		
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nVariables);
-	//	System.out.println("nProduc!: " + nProduc);
+
 	}
-	
+	/*****************************************************************************************************/
+	private boolean inservible(ArrayList<Produccion> nListaProd){
+			
+		return (nListaProd.size() == 1) && (nListaProd.get(0).getConcatenacion().size() == 1);
+	}
+	/*****************************************************************************************************/
 	private boolean iguales(HashMap<String,ArrayList<Produccion>> ant,
 			HashMap<String,ArrayList<Produccion>> nuevo){
 		
@@ -351,7 +342,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			else if(dimeTipo(s) == 1){
 				int ind = variables.indexOf(s);
 				//System.out.println("IND: " + ind);
-				String ns = nVariables.get(ind);
+				String ns = null;//nVariables.get(ind);
+				if (inservible(gic.getProducciones().get(s)) )
+					ns = gic.getProducciones().get(s).get(0).getConcatenacion().get(0);
+				else ns = nVariables.get(ind);
 				salida.add(ns);
 			}
 			else{System.out.println("E X P L O S I O N !!!!!"); return null;}
