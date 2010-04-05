@@ -235,7 +235,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			produc = (HashMap<String, ArrayList<Produccion>>) nProduc.clone();
 			variables = (ArrayList<String>) nuVariables.clone();
 		}
-		
+		System.out.println("producciones sin cambiar: " + nProduc);
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nuVariables);
 
@@ -347,7 +347,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				if (inservible(gic.getProducciones().get(s)) )
 					ns = gic.getProducciones().get(s).get(0).getConcatenacion().get(0);
 				else ns = nVariables.get(ind);
-				salida.add(ns);
+				
+				if (!ns.equals(lambda))salida.add(ns);
 			}
 			else{System.out.println("E X P L O S I O N !!!!!"); return null;}
 			i++;
@@ -365,22 +366,15 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		int tam = concat.size(); int i = 0;
 		String s;
 		while(i<tam){
-			s = concat.get(i);
-			
-			if (compruebaElemento(s)){
-				if (!s.equals(lambda))salida.add(s);
-				else if (tam == 1) salida.add(s);
 
-			}
-			else return null;
 			
-/*			if (tam == 1) salida.add(s);
-			
-			if ( !(s.equals(lambda) && (tam == 1)) && compruebaElemento(s)){
+			s = concat.get(i);
+			if (compruebaElemento(s)){
 				salida.add(s);				
 			}
-			else return null;*/
+			else return null;
 			i++;
+	
 		}		
 		return salida;
 	}
@@ -453,7 +447,18 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		
 		aut.anadeArista(arist);
 		
+		/*******/
 
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("\\");//		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+	/******/	
+		
+		
 		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("A");//		arist.setCimaPila("Z");
