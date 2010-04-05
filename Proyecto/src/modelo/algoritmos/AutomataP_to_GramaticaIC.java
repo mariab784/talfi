@@ -366,10 +366,19 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		String s;
 		while(i<tam){
 			s = concat.get(i);
+			
 			if (compruebaElemento(s)){
-				salida.add(s);				
+				if (!s.equals(lambda) && (tam == 1))salida.add(s);
+
 			}
 			else return null;
+			
+/*			if (tam == 1) salida.add(s);
+			
+			if ( !(s.equals(lambda) && (tam == 1)) && compruebaElemento(s)){
+				salida.add(s);				
+			}
+			else return null;*/
 			i++;
 		}		
 		return salida;
