@@ -400,6 +400,18 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		
 		AristaAP arist;
 		
+		
+		/*******/
+
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("\\");//		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+	/******/
+		
 		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
