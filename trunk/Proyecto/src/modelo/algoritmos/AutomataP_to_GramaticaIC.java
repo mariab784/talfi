@@ -259,6 +259,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 		
 		nProduc = new HashMap<String,ArrayList<Produccion>>();
+		String vIni = gic.getVariableInicial();
 		tamano = nVariables.size();
 		variables = gic.getVariables();
 		ArrayList<String> noSirven = new ArrayList<String>();
@@ -280,7 +281,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 				j++;				
 			}
-			if (!inservible(nListaProd)/*nListaProd.isEmpty()*/){nProduc.put(nnVar, nListaProd); }
+			if ((!inservible(nListaProd)) || (nnVar.equals(vIni))/*nListaProd.isEmpty()*/){nProduc.put(nnVar, nListaProd); }
 			else {noSirven.add(nnVar);}
 			
 		}
