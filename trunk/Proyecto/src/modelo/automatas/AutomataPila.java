@@ -1250,10 +1250,11 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 	public ArrayList<String> dameLetraEstadoCima(String estado, String cima){
 		Iterator<AristaAP> it = this.automata.iterator();
 		ArrayList<String> devuelve = null;
+		devuelve = new ArrayList<String>();
 		while (it.hasNext()){
 			AristaAP aux = it.next();
 			if (aux.getOrigen().equals(estado) && aux.getCimaPila().equals(cima)){
-				devuelve = aux.getEntradaSimbolos();
+				devuelve.addAll(aux.getEntradaSimbolos());
 			}
 			
 		}

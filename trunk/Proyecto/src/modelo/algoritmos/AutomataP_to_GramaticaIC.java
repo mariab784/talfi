@@ -122,9 +122,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				
 				//recorremos las cimas posibles para ese estado en las transiciones
 				
-				Iterator<String> estadoF = estados4.iterator();
+				
 				//Para crear producciones solo en caso de que haya transiciones con esa cima de pila
 				while (letra.hasNext()){
+					Iterator<String> estadoF = estados4.iterator();
 					estaLetra = letra.next();
 					String actual;
 					ArrayList<String> posibles = this.automataEntrada.dameLetraEstadoCima(estado, estaLetra); 
@@ -358,12 +359,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		//a.listaEstados.add(new Estado(0,0,"s1"));
 aut.getEstados().add("s0");//		aut.getEstados().add("s1");
 aut.getEstados().add("s1");//		aut.getEstados().add("s2");
-aut.getEstados().add("s2");//		aut.getEstados().add("s3");
+//aut.getEstados().add("s2");//		aut.getEstados().add("s3");
 
 		//		aut.getEstados().add("s4");
 
 aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
-aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
+aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
 //		aut.setEstadoFinal("s2");
 
 /*		aut2.getEstados().add("s1");
@@ -375,17 +376,17 @@ aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
 		AristaAP arist;
 		
 		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("a");
+		arist.anadirSimbolo("1");
 		arist.setCimaPila("Z");
-		arist.anadirPila("AZ");//		arist.anadirPila("Z");
+		arist.anadirPila("1Z");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 		
 
 		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("a");
-		arist.setCimaPila("A");//		arist.setCimaPila("Z");
-		arist.anadirPila("AA");//		arist.anadirPila("CZ");
+		arist.anadirSimbolo("1");
+		arist.setCimaPila("1");//		arist.setCimaPila("Z");
+		arist.anadirPila("11");//		arist.anadirPila("CZ");
 		
 		aut.anadeArista(arist);	
 		
@@ -398,23 +399,23 @@ aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
 		aut.anadeArista(arist);	*/
 		
 		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
-		arist.setCimaPila("A");//		arist.setCimaPila("C");
+		arist.anadirSimbolo("0");//		arist.anadirSimbolo("0");
+		arist.setCimaPila("1");//		arist.setCimaPila("C");
 		arist.anadirPila("\\");//		arist.anadirPila("CC");
 		
 		aut.anadeArista(arist);	
 	
 		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s2","s2");
-		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("A");		//arist.setCimaPila("C");
+		arist.anadirSimbolo("\\");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("Z");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s2");//		arist = new AristaAP(0,0,0,0,"s1","s3");
+		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s1","s3");
 //		arist.anadirSimbolo("0");
-		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("Z");		//arist.setCimaPila("C");
+		arist.anadirSimbolo("0");		//arist.anadirSimbolo("1");
+		arist.setCimaPila("1");		//arist.setCimaPila("C");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);		
@@ -492,11 +493,11 @@ aut.setEstadoFinal("s2");//		aut.setEstadoFinal("s3");
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
 		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
-		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
+		alf.aniadirLetra("1");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
 		Alfabeto al = new Alfabeto_imp();
-		al.aniadirLetra("a");
-		al.aniadirLetra("b");
+		al.aniadirLetra("1");
+		al.aniadirLetra("0");
 		aut.setAlfabeto(al);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
