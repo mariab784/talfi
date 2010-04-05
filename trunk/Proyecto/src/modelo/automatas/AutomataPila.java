@@ -574,12 +574,13 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
 		int i = 0;
 		ArrayList<String> estados = new ArrayList<String>(); 
 		AristaAP arista = automata.get(i);
-		while(automata.indexOf(arista) != -1){
+		while(i<automata.size()){
+			
 			if(automata.get(i).contieneOrigen(estado)){
 				estados.add(estado);
 			}
-			i++;
 			arista = automata.get(i);
+			i++;
 		}
 		return estados;
     }
