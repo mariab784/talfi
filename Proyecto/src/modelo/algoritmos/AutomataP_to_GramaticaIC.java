@@ -41,7 +41,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 */
 	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
-		automataEntrada=((AutomataPila) a)/*.convertirPilaVacia()*/;
+		automataEntrada=((AutomataPila) a).convertirPilaVacia();
 //		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
