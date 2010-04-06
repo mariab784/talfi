@@ -25,12 +25,13 @@ public abstract class Gramatica {
 		this.variables = new ArrayList<String>();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Gramatica(ArrayList<String> v, ArrayList<String> s, 
 			HashMap<String,ArrayList<Produccion>> p,String vInicial){
 		
-		variables = v;
+		variables = (ArrayList<String>) v.clone();
 		simbolos = s;
-		producciones = p;
+		producciones = clonar(p);//(HashMap<String, ArrayList<Produccion>>) p.clone();
 		variableInicial = vInicial;
 	}
 	
@@ -40,6 +41,37 @@ public abstract class Gramatica {
 		simbolos = alf.getListaLetras();
 		variableInicial = "S";
 		creaVariables(est, alfPila);
+	}
+	
+	private HashMap<String, ArrayList<Produccion>> clonar(HashMap<String, ArrayList<Produccion>> p){
+		
+		HashMap<String, ArrayList<Produccion>> nuevo = new HashMap<String, ArrayList<Produccion>>();
+		
+		Set<String> claves = p.keySet();
+		Iterator<String> itClaves = claves.iterator();
+		while (itClaves.hasNext()){
+			String c = itClaves.next();
+			ArrayList<Produccion> listaProd = p.get(c);
+			ArrayList<Produccion> nListaProd = new ArrayList<Produccion>();
+			Iterator<Produccion> itListaProd = listaProd.iterator();
+			Produccion nProd = null;
+			while(itListaProd.hasNext()){
+				Produccion prod = itListaProd.next();
+				nProd = new Produccion();
+				ArrayList<String> nConcat = new ArrayList<String>();
+				Iterator<String> itConcat = prod.getConcatenacion().iterator();
+				while(itConcat.hasNext()){
+					String s = itConcat.next();
+					nConcat.add(s);
+				}
+				nProd.setConcatenacion(nConcat);
+				nListaProd.add(nProd);
+			}
+			
+			nuevo.put(c, nListaProd);
+		}
+		
+		return nuevo;
 	}
 	
 	private void creaVariables(ArrayList<Estado> est,Alfabeto_Pila alfPila){
