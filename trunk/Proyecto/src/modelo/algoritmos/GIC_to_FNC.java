@@ -33,7 +33,7 @@ public class GIC_to_FNC {
 	private boolean tablaTieneMarcas;
 	//************************************************************
 	public GIC_to_FNC(GramaticaIC g){
-		gramaticaEntrada = g;
+		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
 		transforma_FNG();
 	}
@@ -231,6 +231,8 @@ public class GIC_to_FNC {
 			gramaticaSalida.getProducciones().put(var, pnueva);
 		}
 		System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
+		System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
+
 	}
 	//************************************************************
 	
@@ -404,12 +406,12 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		/*******/
 
 		
-		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+/*		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("\\");
 		arist.setCimaPila("Z");
 		arist.anadirPila("\\");//		arist.anadirPila("Z");
 		
-		aut.anadeArista(arist);
+		aut.anadeArista(arist);*/
 	/******/
 		
 		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
@@ -537,6 +539,8 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		al.aniadirLetra("b");
 		aut.setAlfabeto(al);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
+		
+		System.out.println("aut :\n" + aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		
 		
@@ -548,7 +552,10 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 			piticli.transforma_FNG();
 		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
+		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+
+//		System.out.println("gram.getProducciones() " + piticli.getGramaticaSalida().getProducciones());
 
 	}
 }
