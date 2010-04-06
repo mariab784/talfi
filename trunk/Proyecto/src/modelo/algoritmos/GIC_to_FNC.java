@@ -216,7 +216,7 @@ public class GIC_to_FNC {
 						nueva.setConcatenacion(nueva2);
 //						System.out.println("nueva: "+ nueva);
 
-						pnueva.add(nueva);
+						if (!esta(nueva,pnueva))pnueva.add(nueva);
 						//System.out.println("produccionesDeFilasfinal: "+ produccionesDeFilas);
 						//System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
 					}					
@@ -235,6 +235,30 @@ public class GIC_to_FNC {
 
 	}
 	//************************************************************
+	private boolean esta(Produccion pnueva, ArrayList<Produccion >lprod){
+		ArrayList<String> concat = pnueva.getConcatenacion();
+		Iterator<Produccion> itProd = lprod.iterator();
+		while(itProd.hasNext()){
+			Produccion p = itProd.next();
+			ArrayList<String> pConcat = p.getConcatenacion(); 
+			if (iguales(concat,pConcat)) return true;
+		}
+		return false;
+	}
+	
+	private boolean iguales(ArrayList<String> a1, ArrayList<String> a2){
+		
+		if (a1.size() != a2.size()) return false;
+		int i = 0; int tam = a1.size();
+		while(i < tam){
+			String ss1 = a1.get(i); String ss2 = a2.get(i);
+			if (!ss1.equals(ss2)) return false;
+			
+			i++;
+		}
+		return true;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public void sustituirDiagonal(){
