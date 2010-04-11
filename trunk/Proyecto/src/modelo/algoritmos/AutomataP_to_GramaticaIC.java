@@ -567,16 +567,18 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		lp.add("00");*/
 	
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
-		Alfabeto_Pila alf = new AlfabetoPila_imp();
+/*		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
 		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
 		Alfabeto al = new Alfabeto_imp();
 		al.aniadirLetra("a");
 		al.aniadirLetra("b");
-		aut.setAlfabeto(al);
+		aut.setAlfabeto(al);*/
+		System.out.println("AUT:\n" + aut);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
+		
 		// TODO Auto-generated method subs
 
 	}

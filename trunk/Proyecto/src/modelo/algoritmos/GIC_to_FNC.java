@@ -204,7 +204,11 @@ public class GIC_to_FNC {
 					while (itProdCol.hasNext()){ //recorre las producciones de las columnas
 						nueva = new Produccion();
 						Produccion aux3 = itProdCol.next();
+						
 						ArrayList<String> nueva2 = (ArrayList<String>)aux3.getConcatenacion().clone();
+						
+						
+						
 //						System.out.println("nueva2: "+ nueva2);
 //						System.out.println("aux3: "+ aux3);
 						
@@ -554,14 +558,14 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		lp.add("00");*/
 	
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
-		Alfabeto_Pila alf = new AlfabetoPila_imp();
+/*		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
 		alf.aniadirLetra("A");//		alf.aniadirLetra("C");
 		aut.setAlfabetoPila(alf);
 		Alfabeto al = new Alfabeto_imp();
 		al.aniadirLetra("a");
 		al.aniadirLetra("b");
-		aut.setAlfabeto(al);
+		aut.setAlfabeto(al);*/
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		
 		System.out.println("aut :\n" + aut);
@@ -578,6 +582,9 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		}
 		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
 		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+		piticli.getGramaticaSalida().creaListaPalabras();
+
+//		System.out.println("con terminales: " + piticli.getGramaticaSalida().getProdConTerminal());
 
 //		System.out.println("gram.getProducciones() " + piticli.getGramaticaSalida().getProducciones());
 

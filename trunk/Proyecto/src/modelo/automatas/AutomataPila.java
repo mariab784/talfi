@@ -104,8 +104,36 @@ public void anadeArista(AristaAP a){
 
 			int i = existeTransicion(a);
 			if ( i == -1 ) this.automata.add(a);
+			anadeSimbolosAlf(a.getEntradaSimbolos());
+			anadeSimbolosAlfPila(a.getCimaPila(),a.getSalidaPila());
 	}
 	
+/******************************************************************************/
+public void anadeSimbolosAlf(ArrayList<String> a){
+	
+	Iterator<String> itA = a.iterator();
+	while(itA.hasNext()){
+		String s = itA.next();
+		if (!this.alfabeto.getListaLetras().contains(s) && !s.equals(lambda))
+			this.alfabeto.aniadirLetra(s);
+		
+	}
+	
+}
+/******************************************************************************/
+public void anadeSimbolosAlfPila(String c,ArrayList<String> a){
+	
+	if (!this.alfabetoPila.getListaLetras().contains(c) && !c.equals(lambda))
+		this.alfabetoPila.aniadirLetra(c);
+	Iterator<String> itA = a.iterator();
+	while(itA.hasNext()){
+		String s = itA.next();
+		if (!this.alfabetoPila.getListaLetras().contains(s) && !s.equals(lambda))
+			this.alfabetoPila.aniadirLetra(s);
+		
+	}
+	
+}
 /******************************************************************************/
 
 @SuppressWarnings("unchecked")
@@ -259,25 +287,6 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 
 	//-------------------------------------------------------------
 	/**
-	 * Devuelve las aristas que salen de un estado en el autómata.
-	 * @param estado , estado del que se quieren calcular las aristas salientes.
-	 * @return lista de todas las aristas del estado.
-	 */
-/*	public ArrayList<String> getAristasVertice(String estado) {
-		// TODO Auto-generated method stub
-		int indice = 1;// = aut.keySet(estado);// .indexOf(estado);
-		System.out.println(" AUPILA: " + automata);
-		System.out.println("INDICE AUPILA: " + indice);
-		ArrayList<String> simbolos = null;
-		if (indice != -1){
-			simbolos = automata.get(indice).getEntradaSimbolos();
-			System.out.println("SIMBOLOS AUPILA: " + simbolos);
-		}
-		
-		return simbolos;
-	}*/
-	//-------------------------------------------------------------
-	/**
 	 * Método que devuelve el estado inicial del autómata de pila.
 	 * @return estadoInicial.
 	 */
@@ -313,158 +322,6 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		anadeArista(arist);
 		
 	}
-	
-	/**
-	 * Método que inserta una arista nueva en el autómata de pila.
-	 * @param estado origen, estado destino, símbolos, cima y apilar/desapilar.
-	 */
-/*	public void insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("ORIGEN: " + origen);
-		System.out.println("DESTINO: " + destino);
-		System.out.println("SIMBOLOS: " + simbolos);
-		System.out.println("CIMA: " + cima);
-		System.out.println("SALIDA: " + salida);
-		
-		
-		if (aut.get(origen)==null) {
-//HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
-//HashMap<ArrayList<String>,ArrayList<String>>			
-HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
-	new HashMap<ArrayList<String>,ArrayList<String>>();
-//HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>
-HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
-	new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
-//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
-HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
-	new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
-
-			hs.put(salida,simbolos);
-			hs1.put(destino,hs);
-			hs2.put(cima, hs1);
-			aut.put(origen, hs2);
-			//ArrayList<String> al=new ArrayList<String>();
-			//al.add(destino);
-			/*hs.put(salida, al);
-			
-			hs1.put(cima, hs);
-			hs2.put(simbolos, hs1);
-			aut.put(origen, hs2);*/
-			
-/*		}	
-		
-		//ArrayList<String> aux=automata.get(verticeV).get(letra);
-		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
-		
-			if (aut.get(origen).get(cima) != null){
-				
-				if (aut.get(origen).get(cima).get(destino) != null){
-					
-				 
-				  if (aut.get(origen).get(cima).get(destino).containsKey(salida)){
-					  
-						Iterator<String> it = simbolos.iterator();
-						while (it.hasNext()){
-							
-							String s = it.next();
-
-							if (!aut.get(origen).get(cima).get(destino).get(salida).contains(s))
-								aut.get(origen).get(cima).get(destino).get(salida).add(s);
-						}
-					  
-				  }
-				  else{
-			/*		  HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
-							new HashMap<ArrayList<String>,ArrayList<String>>();
-					  hs.put(salida, simbolos);*/
-/*					  aut.get(origen).get(cima).get(destino).put(salida, simbolos);
-				  }
-				  /*if (aut.get(origen).get(cima).get(destino).get(salida) != null){ //bucle ?
-						
-						System.out.println("ISISIISISISISIS");
-					}*/
-					
-					
-					
-/*				}
-				else{
-					HashMap<ArrayList<String>,ArrayList<String>> hs =
-						new HashMap<ArrayList<String>,ArrayList<String>>();
-					HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
-						new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
-					//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
-				//	HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
-				//		new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
-					
-					//aut.get(origen).put(cima, simbolos);
-					//hs.put(salida, simbolos);
-					hs.put(salida,simbolos);
-					hs1.put(destino,hs);
-					//hs2.put(cima, hs1);
-					aut.get(origen).get(cima).put(destino, hs);
-					
-				}
-					
-					
-				
-			}
-			else{
-				HashMap<ArrayList<String>,ArrayList<String>> hs= //salidapila,simbolos
-					new HashMap<ArrayList<String>,ArrayList<String>>();
-				//HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>
-				HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> hs1 = //destino,hs
-					new HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>();
-				//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>
-				//HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2 = //cima,hs1
-				//	new HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>();
-				
-				//aut.get(origen).put(cima, simbolos);
-				hs.put(salida, simbolos);
-				hs1.put(destino,hs);
-				//hs2.put(cima, hs1);
-				aut.get(origen).put(cima,hs1);
-				//aut.get(origen).put(cima, hs2);
-				
-			}
-				
-			System.out.println("AUTOMAP INSERTAARIST: \n" + aut);
-		
-		
-//		ArrayList<String> aux = null; 
-		//HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>
-/*		if (aut.get(origen) != null && aut.get(origen).get(cima) != null && 
-			aut.get(origen).get(cima).get(destino) != null)
-				aux = aut.get(origen).get(cima).get(destino).get(salida);
-/*		HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>> aux=aut.get(origen).get(simbolos)/*.get(cima).get(salida)*/;
-/*		if (aux!=null) {
-			for (int i = 0; i < simbolos.size(); i++)
-			if (!aux.contains(simbolos.get(i))) aux.add(simbolos.get(i));
-		}
-/*		else {
-			//aux=new ArrayList<String>();
-			//aux.add(destino);
-			aut.get(origen).get(cima).get(destino).put(salida, simbolos);
-		} //revisar antes no comentado XXX
-/*		int indice = automata.indexOf(origen);
-		int x,y,fx,fy;
-		x=0; y=0; fx=0; fy=0;
-
-		
-		if (!apd){
-			apd = ( simbolos.size() >1 ) && simbolos.contains(lambda);
-		}*/
-/*		AristaAP arista = new AristaAP(/*x,y,fx,fy,*//*origen,destino);
-		arista.setCimaPila(cima);
-		arista.setSimbolos(simbolos);
-		arista.setSalida(salida);
-/*		if(indice == -1)
-			automata.add(arista);
-		else if(!automata.get(indice).equals(arista))
-			automata.add(arista);	
-		else return;*/
-		
-//	}
 	//-------------------------------------------------------------
 	/**
 	 * Método que inserta un estado nuevo en autómata de pila
@@ -573,6 +430,7 @@ HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>> hs2
         // TODO Auto-generated method stub
 		int i = 0;
 		ArrayList<String> estados = new ArrayList<String>(); 
+		@SuppressWarnings("unused")
 		AristaAP arista = automata.get(i);
 		while(i<automata.size()){
 			

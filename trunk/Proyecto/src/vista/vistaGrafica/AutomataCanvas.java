@@ -1362,7 +1362,7 @@ public class AutomataCanvas extends JScrollPane {
 		listaEstados=listaN;
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	private void modificarRelacinesEstado(Estado est) {
 		// TODO Auto-generated method stub
 	/*	ArrayList<Arista> lArist = null; ArrayList<AristaAP> lAristAP = null;
@@ -1852,10 +1852,10 @@ public class AutomataCanvas extends JScrollPane {
 		lp.add("00");*/
 	
 //		AutomataPila.compruebaPalabras(aut, aut2, lp);
-		Alfabeto_Pila alf = new AlfabetoPila_imp();
+/*		Alfabeto_Pila alf = new AlfabetoPila_imp();
 		alf.aniadirLetra("Z");
 		alf.aniadirLetra("C");
-		aut.setAlfabetoPila(alf);
+		aut.setAlfabetoPila(alf);*/
 		aut.reconocePalabra("0101"/*, true*/);
 		
 		//a.anadeAristaAP(arist);
