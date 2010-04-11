@@ -14,6 +14,7 @@ public class Greibach extends GramaticaIC{
 	private HashMap<String,ArrayList<Integer>> prodConTerminal;
 	private Mensajero mensajero;
 	private String lambda;
+	private ArrayList<Produccion> listaProdPalabras;
 	
 	public Greibach(ArrayList<String> v, ArrayList<String> s, 
 			HashMap<String,ArrayList<Produccion>> p,String vInicial){
@@ -24,6 +25,7 @@ public class Greibach extends GramaticaIC{
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		palabrasCompletadas = new ArrayList<Integer>();
+		listaProdPalabras = new ArrayList<Produccion>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -32,7 +34,7 @@ public class Greibach extends GramaticaIC{
 		
 		String variableActual = this.getVariableInicial();
 		ArrayList<Produccion> listaProd = this.getProducciones().get(variableActual);
-		ArrayList<Produccion> listaProdPalabras = new ArrayList<Produccion>();
+//		ArrayList<Produccion> listaProdPalabras = new ArrayList<Produccion>();
 		ArrayList<String> pal;
 
 		int i = 0; int tam = listaProd.size();
@@ -80,7 +82,7 @@ public class Greibach extends GramaticaIC{
 					principio.add(trozo);
 				}
 				
-				System.out.println("PRINCIPIO: " + principio);
+//				System.out.println("PRINCIPIO: " + principio);
 				ArrayList<Produccion> prodVar = null;
 				if (s == null) System.out.println("ERROR!ERROR!");
 				else{prodVar = this.getProducciones().get(s);}
@@ -90,7 +92,7 @@ public class Greibach extends GramaticaIC{
 				if (enc)
 					concat.remove(j);
 				
-				while( (k < taman) && (tam < numPalabras) ){
+				while( (k < taman) && (tam < numPalabras) && (s != null)){
 				
 
 					if (enc){
@@ -116,7 +118,7 @@ public class Greibach extends GramaticaIC{
 
 						while(m < tamConcat-1){		
 							String letrita = concat.get(m);
-							System.out.println("letrita: " + letrita);
+						//	System.out.println("letrita: " + letrita);
 							nueva2.add(letrita);
 							m++;
 						}							
@@ -132,18 +134,126 @@ public class Greibach extends GramaticaIC{
 		
 		System.out.println("vamos bien al final?" + listaProdPalabras);
 		/**************************hasta aki bien ya**************************/
-		while (!listaProdPalabras.isEmpty()){
+		while (/*!listaProdPalabras.isEmpty() ||*/ (listaPalabras.size() < numPalabras)){
 			
-			ArrayList<String> palParaCompletar = listaProdPalabras.get(0).getConcatenacion();
-			if(!tieneVariables(palParaCompletar)){
-				listaPalabras.add(construyePalabra(palParaCompletar));
+			boolean enc = false; 
+			ArrayList<String> concat = listaProdPalabras.get(0).getConcatenacion();
+			int tamConcat = concat.size();
+			if(!tieneVariables(concat)){
+				String definitiva = construyePalabra(concat);
+				if (!listaPalabras.contains(definitiva))listaPalabras.add(definitiva);
 				listaProdPalabras.remove(0);
 			}
-			
+			else{
+				int j = 0;String s = null;
+				if (tamConcat > 1){
+					//boolean enc = false; 
+					while(j < tamConcat && !enc){
+						s = concat.get(j);
+						if (!this.getVariables().contains(s)){
+							j++;						
+						}
+						else enc = true;
+					}
+				}
+				
+				ArrayList<String> principio = new ArrayList<String>();
+				for(int k = 0; k <j; k++){
+					String trozo = concat.get(k);
+					principio.add(trozo);
+				}
+				
+				if(prodConTerminal.containsKey(s)){
+					ArrayList<Integer> listaInd = prodConTerminal.get(s);
+					//en concat esta la buena
+					listaProdPalabras.remove(0);
+					for(int m = 0; m < listaInd.size(); m++){
+						int index = listaInd.get(m);
+						String terminal = this.getProducciones().get(s).get(index).getConcatenacion().get(0);
+						ArrayList<String> nuevaConcat = (ArrayList<String>) concat.clone();
+						nuevaConcat.set(j, terminal);
+						Produccion np = new Produccion();
+						np.setConcatenacion(nuevaConcat);
+						if (!esta(np,listaProdPalabras))listaProdPalabras.add(np);
+					}
+					
+				}
+				else{
+					System.out.println("concat: " + concat);
+
+					//construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
+					//ArrayList<String> principio,int tamConcat)
+					construyePosibles(s,enc,concat,j,tam,principio,tamConcat);
+					
+				}
+				//aki no se: si la variable tiene una produccion terminal, sustituimos
+				//pero y si no? hacemos lista de las posibles y las incluimos ?
+				
+			}
 		}
+		System.out.println("final1?" + listaProdPalabras);
+		System.out.println("final2?" + listaPalabras);
 
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	private void construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
+			ArrayList<String> principio,int tamConcat){
+		
+		
+//		System.out.println("PRINCIPIO: " + principio);
+		ArrayList<Produccion> prodVar = null;
+		if (s == null) System.out.println("ERROR!ERROR!");
+		else{prodVar = this.getProducciones().get(s);}
+		
+		int taman = prodVar.size(); int k = 0; ArrayList<String> nueva2 = null;
+		//aqui recorremos las producciones para la variable a sustituir
+		if (enc)
+			concat.remove(j);
+		
+		while( (k < taman) && (s != null)){
+		
+
+			if (enc){
+
+				Produccion itProdVar = prodVar.get(k);
+
+				Produccion nueva = new Produccion();					
+
+				nueva2 = (ArrayList<String>) principio.clone();
+
+				ArrayList<String> concatProd = itProdVar.getConcatenacion();
+
+			
+				int m = 0; concatProd = itProdVar.getConcatenacion();
+				int tamConcatProd = concatProd.size();
+				
+				while(m < tamConcatProd){
+					nueva2.add(concatProd.get(m));
+					m++;
+				}
+
+				m = j;
+
+				while(m < tamConcat-1){		
+					String letrita = concat.get(m);
+					System.out.println("letrita: " + letrita);
+					nueva2.add(letrita);
+					m++;
+				}							
+				nueva.setConcatenacion(nueva2);
+				if (!esta(nueva,listaProdPalabras))listaProdPalabras.add(nueva);					
+			}	
+			k++;
+			tam = listaProdPalabras.size();
+		}
+	}
+//	tam = listaProdPalabras.size();
+		
+		
+//	}
+
 	
 	private boolean esta(Produccion pnueva, ArrayList<Produccion >lprod){
 		ArrayList<String> concat = pnueva.getConcatenacion();
@@ -215,7 +325,7 @@ public class Greibach extends GramaticaIC{
 	
 	private String construyePalabra(ArrayList<String> as) {
 		
-		String salida = null;
+		String salida = "";
 		Iterator<String> itS = as.iterator();
 		while(itS.hasNext()){
 			String s = itS.next();
