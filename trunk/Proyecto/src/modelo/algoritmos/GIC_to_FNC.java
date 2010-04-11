@@ -445,6 +445,7 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
+
 		arist.anadirPila("AZ");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);

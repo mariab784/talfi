@@ -28,6 +28,22 @@ public class Greibach extends GramaticaIC{
 		listaProdPalabras = new ArrayList<Produccion>();
 	}
 	
+	private boolean todosTerminales(ArrayList<Produccion> prod){ //XXX
+		
+		for(int i = 0; i < prod.size(); i++){
+			
+			ArrayList<String> concat = prod.get(i).getConcatenacion();
+			if(concat.size() == 1){
+				if(tieneVariables(concat)) return false;
+			}
+			else return false;
+		}
+		
+		
+		return true;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public void creaListaPalabras(){
 		
@@ -54,147 +70,147 @@ public class Greibach extends GramaticaIC{
 		//aki tenemos las producciones de S que vamos a empezar a sustituir
 		buscaDondeHayTerminales();
 		//completamos la lista de palabras si es que no hemos llegado al maximo
-		tam = listaProdPalabras.size(); i = 0;
-		
-		while (tam < numPalabras){
+		if (  todosTerminales(listaProd) ){
 			
-			Produccion prod = listaProdPalabras.get(/*i*/0);	
-			listaProdPalabras.remove(/*i*/0);
-			int j = 1; 
-			ArrayList<String> concat = (ArrayList<String>) prod.getConcatenacion();
-			int tamConcat = concat.size();
-			if (tamConcat > 1){
-				boolean enc = false; String s = null;
-				while(j < tamConcat && !enc){
-					s = concat.get(j);
-					if (!this.getVariables().contains(s)){
-						j++;						
-					}
-					else enc = true;
-				}
-				//sustituimos la variable encontrada en la lista de producciones
-				/***************************************************************/
-				//copiamos la subcadena que va desde la izq hasta antes de la variable
-				
-				ArrayList<String> principio = new ArrayList<String>();
-				for(int k = 0; k <j; k++){
-					String trozo = concat.get(k);
-					principio.add(trozo);
-				}
-				
-//				System.out.println("PRINCIPIO: " + principio);
-				ArrayList<Produccion> prodVar = null;
-				if (s == null) System.out.println("ERROR!ERROR!");
-				else{prodVar = this.getProducciones().get(s);}
-				
-				int taman = prodVar.size(); int k = 0; ArrayList<String> nueva2 = null;
-				//aqui recorremos las producciones para la variable a sustituir
-				if (enc)
-					concat.remove(j);
-				
-				while( (k < taman) && (tam < numPalabras) && (s != null)){
-				
-
-					if (enc){
-
-						Produccion itProdVar = prodVar.get(k);
-
-						Produccion nueva = new Produccion();					
-
-						nueva2 = (ArrayList<String>) principio.clone();
-
-						ArrayList<String> concatProd = itProdVar.getConcatenacion();
-
-					
-						int m = 0; concatProd = itProdVar.getConcatenacion();
-						int tamConcatProd = concatProd.size();
-						
-						while(m < tamConcatProd){
-							nueva2.add(concatProd.get(m));
-							m++;
-						}
-
-						m = j;
-
-						while(m < tamConcat-1){		
-							String letrita = concat.get(m);
-						//	System.out.println("letrita: " + letrita);
-							nueva2.add(letrita);
-							m++;
-						}							
-						nueva.setConcatenacion(nueva2);
-						if (!esta(nueva,listaProdPalabras))listaProdPalabras.add(nueva);					
-					}	
-					k++;
-					tam = listaProdPalabras.size();
-				}
+			System.out.println("NO HAY PRODUCCIONES CON VARIABLES EN S. SOLO TERMINALES");
+			 
+			for(int m = 0; m < tam; m++){
+				listaPalabras.add(this.construyePalabra(listaProd.get(m).getConcatenacion()));
 			}
-			tam = listaProdPalabras.size();
+			System.out.println("LISTAPALABRAS: " + listaPalabras);
+
 		}
-		
-		System.out.println("vamos bien al final?" + listaProdPalabras);
-		/**************************hasta aki bien ya**************************/
-		while (/*!listaProdPalabras.isEmpty() ||*/ (listaPalabras.size() < numPalabras)){
+		else{
+			tam = listaProdPalabras.size(); i = 0;		
+			while (tam < numPalabras){
 			
-			boolean enc = false; 
-			ArrayList<String> concat = listaProdPalabras.get(0).getConcatenacion();
-			int tamConcat = concat.size();
-			if(!tieneVariables(concat)){
-				String definitiva = construyePalabra(concat);
-				if (!listaPalabras.contains(definitiva))listaPalabras.add(definitiva);
-				listaProdPalabras.remove(0);
-			}
-			else{
-				int j = 0;String s = null;
+				Produccion prod = listaProdPalabras.get(/*i*/0);	
+				listaProdPalabras.remove(/*i*/0);
+				int j = 1; 
+				ArrayList<String> concat = (ArrayList<String>) prod.getConcatenacion();
+				int tamConcat = concat.size();
 				if (tamConcat > 1){
-					//boolean enc = false; 
+					boolean enc = false; String s = null;
 					while(j < tamConcat && !enc){
 						s = concat.get(j);
 						if (!this.getVariables().contains(s)){
 							j++;						
 						}
-						else enc = true;
+					else enc = true;
+					}
+				//sustituimos la variable encontrada en la lista de producciones
+				/***************************************************************/
+				//copiamos la subcadena que va desde la izq hasta antes de la variable
+				
+					ArrayList<String> principio = new ArrayList<String>();
+					for(int k = 0; k <j; k++){
+						String trozo = concat.get(k);
+						principio.add(trozo);
+					}
+				
+//				System.out.println("PRINCIPIO: " + principio);
+					ArrayList<Produccion> prodVar = null;
+					if (s == null) System.out.println("ERROR!ERROR!");
+					else{prodVar = this.getProducciones().get(s);}
+				
+					int taman = prodVar.size(); int k = 0; ArrayList<String> nueva2 = null;
+				//aqui recorremos las producciones para la variable a sustituir
+					if (enc)
+						concat.remove(j);
+				
+					while( (k < taman) && (tam < numPalabras) && (s != null)){
+				
+
+						if (enc){
+
+							Produccion itProdVar = prodVar.get(k);
+							Produccion nueva = new Produccion();					
+							nueva2 = (ArrayList<String>) principio.clone();
+							ArrayList<String> concatProd = itProdVar.getConcatenacion();
+
+							int m = 0; concatProd = itProdVar.getConcatenacion();
+							int tamConcatProd = concatProd.size();
+						
+							while(m < tamConcatProd){
+								nueva2.add(concatProd.get(m));
+								m++;
+							}
+
+							m = j;
+
+							while(m < tamConcat-1){		
+								String letrita = concat.get(m);
+						//	System.out.println("letrita: " + letrita);
+								nueva2.add(letrita);
+								m++;
+							}							
+							nueva.setConcatenacion(nueva2);
+							if (!esta(nueva,listaProdPalabras))listaProdPalabras.add(nueva);					
+						}	
+						k++;
+						tam = listaProdPalabras.size();
 					}
 				}
-				
-				ArrayList<String> principio = new ArrayList<String>();
-				for(int k = 0; k <j; k++){
-					String trozo = concat.get(k);
-					principio.add(trozo);
-				}
-				
-				if(prodConTerminal.containsKey(s)){
-					ArrayList<Integer> listaInd = prodConTerminal.get(s);
-					//en concat esta la buena
+				tam = listaProdPalabras.size();
+			}
+		
+			System.out.println("vamos bien al final?" + listaProdPalabras);
+		/**************************hasta aki bien ya**************************/
+			while (/*!listaProdPalabras.isEmpty() ||*/ (listaPalabras.size() < numPalabras)){
+			
+				boolean enc = false; 
+				ArrayList<String> concat = listaProdPalabras.get(0).getConcatenacion();
+				int tamConcat = concat.size();
+				if(!tieneVariables(concat)){
+					String definitiva = construyePalabra(concat);
+					if (!listaPalabras.contains(definitiva))listaPalabras.add(definitiva);
 					listaProdPalabras.remove(0);
-					for(int m = 0; m < listaInd.size(); m++){
-						int index = listaInd.get(m);
-						String terminal = this.getProducciones().get(s).get(index).getConcatenacion().get(0);
-						ArrayList<String> nuevaConcat = (ArrayList<String>) concat.clone();
-						nuevaConcat.set(j, terminal);
-						Produccion np = new Produccion();
-						np.setConcatenacion(nuevaConcat);
-						if (!esta(np,listaProdPalabras))listaProdPalabras.add(np);
-					}
-					
 				}
 				else{
+					int j = 0;String s = null;
+					if (tamConcat > 1){
+					//boolean enc = false; 
+						while(j < tamConcat && !enc){
+							s = concat.get(j);
+							if (!this.getVariables().contains(s)){
+								j++;						
+							}
+							else enc = true;
+						}
+					}
+				
+					ArrayList<String> principio = new ArrayList<String>();
+					for(int k = 0; k <j; k++){
+						String trozo = concat.get(k);
+						principio.add(trozo);
+					}
+				
+					if(prodConTerminal.containsKey(s)){
+						ArrayList<Integer> listaInd = prodConTerminal.get(s);
+					//en concat esta la buena
+						listaProdPalabras.remove(0);
+						for(int m = 0; m < listaInd.size(); m++){
+							int index = listaInd.get(m);
+							String terminal = this.getProducciones().get(s).get(index).getConcatenacion().get(0);
+							ArrayList<String> nuevaConcat = (ArrayList<String>) concat.clone();
+							nuevaConcat.set(j, terminal);
+							Produccion np = new Produccion();
+							np.setConcatenacion(nuevaConcat);
+							if (!esta(np,listaProdPalabras))listaProdPalabras.add(np);
+						}					
+					}
+					else{
 					System.out.println("concat: " + concat);
-
+					
 					//construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
 					//ArrayList<String> principio,int tamConcat)
-					construyePosibles(s,enc,concat,j,tam,principio,tamConcat);
-					
+						construyePosibles(s,enc,concat,j,tam,principio,tamConcat);					
+					}
 				}
-				//aki no se: si la variable tiene una produccion terminal, sustituimos
-				//pero y si no? hacemos lista de las posibles y las incluimos ?
-				
 			}
+			System.out.println("final1?" + listaProdPalabras);
+			System.out.println("final2?" + listaPalabras);
 		}
-		System.out.println("final1?" + listaProdPalabras);
-		System.out.println("final2?" + listaPalabras);
-
-		
 	}
 	
 	@SuppressWarnings("unchecked")
