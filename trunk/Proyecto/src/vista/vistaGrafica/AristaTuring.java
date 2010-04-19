@@ -101,6 +101,18 @@ public class AristaTuring extends AristaGeneral implements AristaInterface{
 	
 	public String getSimboloCinta(){ return simboloCinta;}
 	
+	
+	/**
+	 * Método modificador de los simbolos de la arista
+	 * @param s ArrayList<String> simbolos de entrada
+	 */
+	
+
+	public void setSimbolos(ArrayList<String> s) {
+		this.entradaCinta = s;
+	}
+	
+	
 	/**
 	 * Método modificador de la cima de la pila
 	 * @param s cima de la pila cimaPila
@@ -260,5 +272,30 @@ public class AristaTuring extends AristaGeneral implements AristaInterface{
 	 */
 	public String toString() {
 		return "d("+origen+","+entradaCinta+","+")=("+destino+","+simboloCinta+","+direccion+")";//+"("+marcada+")";
+	}
+	
+	public boolean contieneOrigen(String estado) {
+		 if(this.origen.equals(estado))
+			 return true;
+		 else return false;
+	 }
+	public boolean contieneDestino(String estado) {
+		 if(this.destino.equals(estado))
+			 return true;
+		 else return false;
+	 }
+	/**
+	 * Método que devuelve los simbolos de entrada que se consumen en la arista en formato texto
+	 *  @return cadena con los simbolos consumidos en la arista
+	 */
+	public String toStringSimbolos() {
+		String s = "";
+		int tam = this.getEntradaCinta().size();
+		for(int i = 0; i < tam; i++){
+			s += this.getEntradaCinta().get(i);
+			if (i != tam-1)	 s+= ",";
+			
+		}
+		return s;
 	}
 }
