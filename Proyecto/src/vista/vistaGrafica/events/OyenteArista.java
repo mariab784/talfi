@@ -1,5 +1,6 @@
 package vista.vistaGrafica.events;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,6 +19,8 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -36,6 +39,10 @@ import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.CurvedArrow;
 import vista.vistaGrafica.Estado;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
 /**
  * Clase que se encarga de añadir las aristas al dibujo si la infromación
  * que se le pide al usuario es correcta 
@@ -330,6 +337,10 @@ public class OyenteArista extends MouseAdapter {
 				if (arist instanceof Arista)itemArist.addActionListener(new OyenteItemPopupArista((Arista)arist,this));
 				else if (arist instanceof AristaAP){ 
 					itemArist.addActionListener(new OyenteItemPopupAristaAP((AristaAP)arist,this));
+					
+				}
+				else if (arist instanceof AristaTuring){ 
+					itemArist.addActionListener(new OyenteItemPopupAristaTuring((AristaTuring)arist,this));
 					
 				}
 				menu.show(canvas,e.getPoint().x,e.getPoint().y);
@@ -1099,6 +1110,76 @@ public class OyenteArista extends MouseAdapter {
 	}
 	
 	
+	/**
+	 * Crea el diálogo con la infromación de la arista del automata de pila que recibe como parámetro
+	 * @param a arista de la que se extrae la infromación que se muestra
+	 */
+	protected void createDialogAristaTuring(AristaTuring a){
+		Mensajero m=Mensajero.getInstancia();
+		JOptionPane pane=new JOptionPane();
+		//mensajero=Mensajero.getInstancia();
+		dialog=pane.createDialog(null,m.devuelveMensaje("vista.arist",2));
+		JPanel panelD=new JPanel(new GridLayout(4,1));
+		//JPanel panelE=new JPanel(new GridLayout(4,1));
+		//JPanel panelF=new JPanel(new GridLayout(4,1));
+		JLabel etiqN=new JLabel(m.devuelveMensaje("vista.sym",2));
+		nomArs=new JTextField(a.toStringSimbolos()); //REVISAR
+
+		JLabel etiqC=new JLabel(/*m.devuelveMensaje("vista.sym",2)*/"CIMA");
+		nomCima=new JTextField(a.getSimboloCinta());
+		JLabel etiqT=new JLabel(/*m.devuelveMensaje(*/"vista.sym"/*,2)*/);
+		nomTrans=new JTextField(a.getDireccion());
+		nomArs.addKeyListener(new OyenteModificaAristaTuringKeyAdapter(a,this));
+		nomCima.addKeyListener(new OyenteModificaAristaTuringKeyAdapter(a,this));
+		nomTrans.addKeyListener(new OyenteModificaAristaTuringKeyAdapter(a,this));//REVISARRRRRRRR
+		Vector<String> v=new Vector<String>();
+		Iterator<Estado> iAr=canvas.getListaEstados().iterator();
+		while(iAr.hasNext()){
+			Estado es=iAr.next();
+			v.add(es.getEtiqueta());
+		}
+		JPanel panelCombo=new JPanel();
+		JLabel e1=new JLabel(m.devuelveMensaje("vista.desde",2));
+		desde=new JComboBox(v);
+		desde.setSelectedItem(a.getOrigen());
+		JLabel e2=new JLabel(m.devuelveMensaje("vista.hasta",2));
+		hasta=new JComboBox(v);
+		hasta.setSelectedItem(a.getDestino());
+		panelCombo.add(e1);
+		panelCombo.add(desde); 
+		panelCombo.add(e2);
+		panelCombo.add(hasta);
+		JPanel panelB=  new JPanel(); 
+		JButton aceptar=new JButton(m.devuelveMensaje("vista.aceptar",2));
+		aceptar.addActionListener(new OyenteModificaAristaTuringActionListener(a,this)); //REVISARRRRRRRR
+		JButton cancelar=new JButton(m.devuelveMensaje("vista.cancelar",2));
+		cancelar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				dialog.setVisible(false);
+			}
+		});
+		panelB.add(aceptar);
+		panelB.add(cancelar);
+		panelD.add(etiqN);
+		panelD.add(nomArs);
+		panelD.add(etiqC);
+		panelD.add(nomCima);
+		panelD.add(etiqT);
+		panelD.add(nomTrans);
+		panelD.add(panelCombo);
+		panelD.add(panelB);
+//		panelD.add(panelE);
+//		panelD.add(panelF);
+		dialog.setContentPane(panelD);
+		
+		dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		dialog.setSize(new Dimension(/*300*/400,/*150*/350));
+		dialog.setVisible(true);
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Crea el diálogo con la infromación del estado que recibe como parámetro
@@ -1219,7 +1300,26 @@ public class OyenteArista extends MouseAdapter {
 		return false;
 	}
 
+	public void actionPerformed(ActionEvent ae) {
+		String textButton = ae.getActionCommand();
+		String dialogTitle = "Abrir un fichero";
+		if (textButton.equals("Guardar"))
+			dialogTitle = "Guardar un fichero";
 
-	
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle(dialogTitle);
+		chooser.setMultiSelectionEnabled(false);
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		JFrame frame = new JFrame();
+		int sel = chooser.showOpenDialog(frame);
+		if (sel == JFileChooser.APPROVE_OPTION){
+			File selectedFile = chooser.getSelectedFile();
+			JOptionPane.showMessageDialog(frame,selectedFile.getAbsolutePath());
+		}
+		else
+		return;
+		
+	}
+		
 }
 

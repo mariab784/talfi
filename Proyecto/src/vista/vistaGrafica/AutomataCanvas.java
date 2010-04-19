@@ -1140,7 +1140,7 @@ public class AutomataCanvas extends JScrollPane {
 		Iterator<?> iArist  = null; //Iterator<Arista> iArist
 		if (!listaAristas.isEmpty())iArist = listaAristas.iterator();
 		else if (!listaAristasAP.isEmpty()) iArist = listaAristasAP.iterator();
-		//else if (!listaAristasTuring.isEmpty()) iArist = listaAristasTuring.iterator();
+		else if (!listaAristasTuring.isEmpty()) iArist = listaAristasTuring.iterator();
 		
 		if (iArist != null)
 		while(iArist.hasNext()){

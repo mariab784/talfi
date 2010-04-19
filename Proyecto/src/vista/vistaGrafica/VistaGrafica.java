@@ -49,6 +49,7 @@ import java.util.Iterator;
 
 import java.util.Vector;
 import modelo.AutomatasException;
+import modelo.algoritmos.AceptaTuring;
 import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.GIC_to_FNC;
 import modelo.automatas.Alfabeto;
@@ -516,6 +517,20 @@ public class VistaGrafica extends JFrame implements Vista{
 			//(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 			//ArrayList<String> est, ArrayList<AristaAP> aut)
 			AutomataCanvas c = panelCentral.getCanvas();
+			
+			//String estado,ArrayList<String> estadosF,Alfabeto alf,
+			//ArrayList<String> est, ArrayList<AristaTuring> maq//,
+			System.out.println("EST INI: " + c.getEstadoInicial());
+			System.out.println("EST FIN: " + c.getListaFinales());
+			System.out.println("ALF: " + c.getAlfabeto());
+			System.out.println("LISTA ESTADOS: " + c.getNombreEstados());
+			System.out.println("ARISTAS: " + c.getListaAristasTuring());
+			
+//			AutomataCanvas c = panelCentral.getCanvas();
+			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
+					c.getNombreEstados(),c.getListaAristasTuring());
+			System.out.println("MT CONSTRUIDO BOTON::: " + m);
+
 			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
 			/*int r = *///panelCentral.getCanvas().getAP().reconocePalabra(palabra);
@@ -565,7 +580,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				actionPerformedOpenDialog(e);
 				JOptionPane pane=new JOptionPane();
 				
 				dialog=pane.createDialog(null);
@@ -1956,5 +1971,20 @@ public class VistaGrafica extends JFrame implements Vista{
 		// TODO Auto-generated method stub
 		pegar.setEnabled(true);
 	}
-
+	public void actionPerformedOpenDialog (ActionEvent ae) {
+		JFileChooser _fileChooser = new JFileChooser();
+		int retval = _fileChooser.showOpenDialog(null); 
+        if (retval == JFileChooser.APPROVE_OPTION) { 
+        	File archivo = _fileChooser.getSelectedFile (); 
+        	archivo = _fileChooser.getSelectedFile ();
+        	String ruta = archivo.getAbsolutePath();
+        	System.out.println(ruta);
+        	//try catch XXX
+			AutomataCanvas c = panelCentral.getCanvas();
+			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
+					c.getNombreEstados(),c.getListaAristasTuring());
+			AceptaTuring aceptacion = new AceptaTuring();
+			aceptacion.acepta(ruta);
+        }
+	}    	
 }
