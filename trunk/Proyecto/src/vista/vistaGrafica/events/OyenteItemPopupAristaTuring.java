@@ -3,7 +3,6 @@ package vista.vistaGrafica.events;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaTuring;
 
 /**

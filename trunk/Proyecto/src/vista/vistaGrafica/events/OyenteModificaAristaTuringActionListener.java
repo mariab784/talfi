@@ -70,7 +70,7 @@ public class OyenteModificaAristaTuringActionListener implements ActionListener{
 					mouse.setEstadoDestino(mouse.getHasta().getSelectedItem().toString());
 					Estado o=mouse.getCanvas().buscaEstado(mouse.getEstadoOrigen());
 					Estado d=mouse.getCanvas().buscaEstado(mouse.getEstadoDestino());
-					mouse.getCanvas().getListaAristasPila().remove(arista); //int x,int y,int fx, int fy,String origen,String destino)
+					mouse.getCanvas().getListaAristasTuring().remove(arista); //int x,int y,int fx, int fy,String origen,String destino)
 
 					//System.out.println("LISTARISTAS: " + mouse.getCanvas().getListaAristas());
 					AristaTuring arist = new AristaTuring(o.getX(),o.getY(),d.getX(),d.getY(), o.getEtiqueta(),d.getEtiqueta());

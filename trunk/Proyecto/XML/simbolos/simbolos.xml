@@ -2,6 +2,7 @@
 <mensajes>
 	<simbolos>
 		<cima>Z</cima>
+		<blanco>#</blanco>
 		<lambda>\</lambda>
 		<separador>/</separador>
 	</simbolos>

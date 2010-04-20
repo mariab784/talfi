@@ -9,7 +9,7 @@ import vista.AristaInterface;
  * La clase arista define los parámetros de las aristas de Turing de la interfaz gráfica
  *  @author Rocío Barrigüete, Mario Huete, Luis San Juan
  *
- */
+ */ 
 public class AristaTuring extends AristaGeneral implements AristaInterface{
 
 //	protected java.awt.geom.Rectangle2D bounds = new java.awt.Rectangle(0, 0);

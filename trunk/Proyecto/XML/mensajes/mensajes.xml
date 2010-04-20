@@ -323,12 +323,13 @@
 		</sym>
 		<ap1>
 			Simbolos de la arista (pueden ser varios separados por comas)
-
 		</ap1>
 		<ap2>
 			Cima de pila
 		</ap2>
-		<ap3>Simbolos de pila a apilar / desapilar</ap3>
+		<ap3>
+			Simbolos de pila a apilar / desapilar
+		</ap3>
 		<sym3>
 			Simbolo de cinta
 		</sym3>
@@ -336,7 +337,7 @@
 			Nuevo simbolo de cinta
 		</sym4>
 		<sym5>
-			direccion
+			Direccion
 		</sym5>
 		<hasta>
 			Hasta: 

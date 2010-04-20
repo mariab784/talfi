@@ -793,7 +793,7 @@ public class OyenteArista extends MouseAdapter {
 
 			canvas.anadeAristaAP(aristaAP);
 
-			System.out.println("ESTADO INICIAL: " + canvas.getEstadoInicial());
+	/*		System.out.println("ESTADO INICIAL: " + canvas.getEstadoInicial());
 			
 			System.out.println("ALF: " + canvas.getAlfabeto());
 			
@@ -803,7 +803,7 @@ public class OyenteArista extends MouseAdapter {
 			
 			System.out.println("ESTADOS: " + canvas.getNombreEstados());
 			
-			System.out.println("ESTADOS FINALES: " + canvas.getListaFinales());
+			System.out.println("ESTADOS FINALES: " + canvas.getListaFinales());*/
 
 		} catch(NullPointerException ex){
 			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
@@ -1057,9 +1057,9 @@ public class OyenteArista extends MouseAdapter {
 		JLabel etiqN=new JLabel(m.devuelveMensaje("vista.sym",2));
 		nomArs=new JTextField(a.toStringSimbolos()); //REVISAR
 
-		JLabel etiqC=new JLabel(/*m.devuelveMensaje("vista.sym",2)*/"CIMA");
+		JLabel etiqC=new JLabel(m.devuelveMensaje("vista.ap2",2));
 		nomCima=new JTextField(a.getCimaPila());
-		JLabel etiqT=new JLabel(/*m.devuelveMensaje(*/"vista.sym"/*,2)*/);
+		JLabel etiqT=new JLabel(m.devuelveMensaje("vista.ap3",2));
 		nomTrans=new JTextField(a.toStringTransicion());
 		nomArs.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this));
 		nomCima.addKeyListener(new OyenteModificaAristaAPKeyAdapter(a,this));
@@ -1125,9 +1125,9 @@ public class OyenteArista extends MouseAdapter {
 		JLabel etiqN=new JLabel(m.devuelveMensaje("vista.sym",2));
 		nomArs=new JTextField(a.toStringSimbolos()); //REVISAR
 
-		JLabel etiqC=new JLabel(/*m.devuelveMensaje("vista.sym",2)*/"CIMA");
+		JLabel etiqC=new JLabel(m.devuelveMensaje("vista.sym4",2));
 		nomCima=new JTextField(a.getSimboloCinta());
-		JLabel etiqT=new JLabel(/*m.devuelveMensaje(*/"vista.sym"/*,2)*/);
+		JLabel etiqT=new JLabel(m.devuelveMensaje("vista.sym5",2));
 		nomTrans=new JTextField(a.getDireccion());
 		nomArs.addKeyListener(new OyenteModificaAristaTuringKeyAdapter(a,this));
 		nomCima.addKeyListener(new OyenteModificaAristaTuringKeyAdapter(a,this));
