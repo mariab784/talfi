@@ -1440,9 +1440,12 @@ public class AutomataCanvas extends JScrollPane {
 		Iterator<?> iA = null;
 		if (m == null) m = Mensajero.getInstancia();
 		String lambda = m.devuelveMensaje("simbolos.lambda",4);
+		String blanco = m.devuelveMensaje("simbolos.blanco",4);
 		if (!listaAristas.isEmpty()) iA=listaAristas.iterator();
 		else if (!listaAristasAP.isEmpty()) iA=listaAristasAP.iterator();
+		else if (!listaAristasTuring.isEmpty()) iA=listaAristasTuring.iterator();
 		Alfabeto alf=new Alfabeto_imp();
+		if (iA != null)
 		while(iA.hasNext()){
 			/*Arista*/Object a=iA.next();
 			
@@ -1462,6 +1465,18 @@ public class AutomataCanvas extends JScrollPane {
 					String sim = ((AristaAP) a).getEntradaSimbolos().get(i);
 					if(!alf.estaLetra(sim)&&
 							!lambda.equals(sim)){
+						alf.aniadirLetra(sim);
+					}					
+					
+				}
+
+			}
+			if (a instanceof AristaTuring) {
+				
+				for(int i = 0; i < ((AristaTuring) a).getEntradaCinta().size(); i++){
+					String sim = ((AristaTuring) a).getEntradaCinta().get(i);
+					if(!alf.estaLetra(sim)&&
+							!blanco.equals(sim)){
 						alf.aniadirLetra(sim);
 					}					
 					

@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import vista.vistaGrafica.Arista;
 import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaGeneral;
+import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.Estado;
 import accesoBD.Mensajero;
@@ -202,6 +203,10 @@ public class CanvasMouseAdapter extends MouseAdapter {
 							canvas.getListaAristas().remove((Arista)arist);
 							modificarRelacionesArista((Arista)arist);
 						}
+						if (arist instanceof AristaTuring){
+							canvas.getListaAristasTuring().remove((AristaTuring)arist);
+							modificarRelacionesArista((AristaTuring)arist);
+						}
 						canvas.repaint();
 							
 					}
@@ -211,6 +216,11 @@ public class CanvasMouseAdapter extends MouseAdapter {
 		 }
 	}
 
+	private void modificarRelacionesArista(AristaTuring arist) {
+		// TODO Auto-generated method stub
+		canvas.setAlfabeto(canvas.minimizarAlfabeto());
+		canvas.setAlfabetoPila(canvas.minimizarAlfabetoPila());
+	}
 	private void modificarRelacionesArista(AristaAP arist) {
 		// TODO Auto-generated method stub
 		canvas.setAlfabeto(canvas.minimizarAlfabeto());
