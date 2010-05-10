@@ -1100,7 +1100,19 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		}
 		return devuelve;
 	}
-	
+	public ArrayList<String> dameEstados (String estado){
+		Iterator<AristaAP> it = this.automata.iterator();
+		ArrayList<String> devuelve = null;
+		while (it.hasNext()){
+			AristaAP aux = it.next();
+			if (aux.getOrigen().equals(estado)){
+				if (devuelve == null) devuelve = new ArrayList<String>();
+				if (!devuelve.contains(aux.getDestino())) devuelve.add(aux.getDestino());
+			}
+			
+		}
+		return devuelve;
+	}
 	/**
 	 * @param estado
 	 * @param cima
@@ -1117,6 +1129,18 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			}
 			
 		}
+		return devuelve;
+	}
+	public ArrayList<String> dameEstadoLetraEstado(String estado, String letra){
+		Iterator<AristaAP> it = this.automata.iterator();
+		ArrayList<String> devuelve = null;
+		devuelve = new ArrayList<String>();
+		while (it.hasNext()){
+			AristaAP aux = it.next();
+			if (aux.getOrigen().equals(estado) && aux.getEntradaSimbolos().contains(letra))
+				devuelve.add(aux.getDestino());
+		}
+			
 		return devuelve;
 	}
 	public ArrayList<ArrayList<String>> dameFinPilaEstadoLetra(String estado, String cima, String letra){
