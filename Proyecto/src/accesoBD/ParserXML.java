@@ -16,6 +16,7 @@ import org.xml.sax.*;
 
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
+import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
@@ -70,9 +71,13 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		Document documento = parser.getDocument();
 		Alfabeto_imp alf= new Alfabeto_imp();
 		AlfabetoPila_imp alfP= new AlfabetoPila_imp();
+		AlfabetoCinta alfCinta= new AlfabetoCinta();
 		ArrayList<String> estad= new ArrayList<String>();
 		ArrayList<String> finalss= new ArrayList<String>();
 
+		//añadido
+		boolean esTuring = false;
+		
 		NodeList tipo = documento.getElementsByTagName("type");
 		
 		String var = null;
@@ -105,6 +110,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		if (var.equals("MaquinaTuring")){
 			
 			automata = new MaquinaTuring();		
+			esTuring = true;
 		}
 		/*********************************************************/
 		NodeList nodos = documento.getElementsByTagName("alphabet");
@@ -123,10 +129,12 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 			
 			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-				 alfP.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				if (!esTuring)alfP.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				if (esTuring)alfCinta.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
 				 i++;
 			}
-			((AutomataPila)automata).setAlfabetoPila(alfP);
+			if (!esTuring)((AutomataPila)automata).setAlfabetoPila(alfP);
+			if(esTuring)((MaquinaTuring)automata).setAlfabetoCinta(alfCinta);
 		}
 		
 		nodos = documento.getElementsByTagName("states");		
@@ -136,6 +144,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		}
 		
 		automata.setEstados(estad);
+		
 		
 		nodos = documento.getElementsByTagName("init");
 		automata.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
@@ -196,8 +205,59 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
 				}
 					
+
+				
+				
+				//lalalallaal
+				
+				else if (automata instanceof MaquinaTuring){
+
+					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+					
+					
+					ArrayList<String> entrada = new ArrayList<String>();
+					String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+					StringTokenizer st=new StringTokenizer(s3,",");
+					while(st.hasMoreTokens()){
+
+						entrada.add(st.nextToken());
+					}
+					
+					
+					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+					
+					
+					
+					//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+				/*	int indice = 0;
+					ArrayList<String> salida = new ArrayList<String>();
+					if (s5.compareTo("#") != 0){
+						while(/*st.hasMoreTokens()*//*indice < s5.length()){
+					/*		String ss= "" + s5.charAt(indice);//st.nextToken();
+							salida.add(ss);
+							indice++; */
+					//	System.out.println("TRANS: "+ss);
+						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+				/*		}
+					}
+					else { salida.add("#");} */
+					
+					/*System.out.println("S1: " + s1);
+					System.out.println("S2: " + s2);
+					System.out.println("S3: " + s3);
+					System.out.println("S4: " + s4);
+					System.out.println("S5: " + s5);*/
+					
+					x = x+ 10;
+					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
+					((MaquinaTuring)automata).insertaArista2(s1,s2,entrada,s4,s5);				
+				}
+					
 				else	{automata.insertaArista(nodos.item(i).getChildNodes().item(x).getTextContent(), nodos.item(i).getChildNodes().item(x+2).getTextContent(), nodos.item(i).getChildNodes().item(x+4).getTextContent());
 				x= x+6;}
+				
 			}
 		}
 		
@@ -211,7 +271,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 			automata.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 		}
-		
+		System.out.println("AUTOMATA PARSER XML: " + automata);
 		return automata;		
 	}
 

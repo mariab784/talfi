@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import accesoBD.Mensajero;
+import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaTuring;
 /**
  * Clase que implementa la funcionalidad de las Máquina de Turing.
@@ -20,7 +21,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	private ArrayList<String> estadosFin;
 	private Alfabeto alfabet;
 	private ArrayList<String> estados;
-	private Alfabeto alfabetoCinta;    //XXX Un .txt
+	private AlfabetoCinta alfabetoCinta;    //XXX Un .txt
 	private ArrayList<AristaTuring> maquina;
 	private boolean termina;
 	private String blanco;
@@ -32,10 +33,16 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	public MaquinaTuring(){
 		super();
 		setEstadoInicial(null);
-		setAlfabetoCinta(null);   //XXX Un .txt
+		//setAlfabetoCinta(null);   //XXX Un .txt
 		maquina = new ArrayList<AristaTuring>();
         Mensajero mensajero = Mensajero.getInstancia();
+        estados = new ArrayList<String>();
+        estadosFin = new ArrayList<String>();
         blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
+        //alfabetoCinta = new Alfabeto_imp();
+        alfabet = new Alfabeto_imp();
+        alfabetoCinta = new AlfabetoCinta();
+        alfabetoCinta.aniadirLetra(blanco);
 		setTermina(false);
 	}
 //----------------------------------------------------------------
@@ -43,13 +50,14 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * Constructora de la Máquina de Turing.
 	 * @param estado, estadosF, alf, est, maq, cinta.
 	 */
-	public MaquinaTuring(String estado,ArrayList<String> estadosF,Alfabeto alf,
+	public MaquinaTuring(String estado,ArrayList<String> estadosF,Alfabeto alf,AlfabetoCinta alfCinta,
 			ArrayList<String> est, ArrayList<AristaTuring> maq//,
 			/*Alfabeto cinta*/){
 		
 		setEstadoIni(estado);
 		setEstadosFin(estadosF);
-		setAlfabetoCinta(alf);
+		setAlfabetoCinta(alfCinta);
+		setAlfabeto(alf);
 		setEstados(est);
 		setMaquina(maq);
 //		setAlfabetoCinta(cinta);
@@ -61,7 +69,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * Turing.
 	 * @param alfabetoCinta.
 	 */
-	public void setAlfabetoCinta(Alfabeto alfabetoCinta) {
+	public void setAlfabetoCinta(AlfabetoCinta alfabetoCinta) {
 		this.alfabetoCinta = alfabetoCinta;
 	}
 //----------------------------------------------------------------
@@ -70,7 +78,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * Turing.
 	 * @return alfabetoCinta.
 	 */
-	public Alfabeto getAlfabetoCinta() {
+	public AlfabetoCinta getAlfabetoCinta() {
 		return alfabetoCinta;
 	}
 //----------------------------------------------------------------
@@ -112,7 +120,15 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * Método que modifica el estado inicial.
 	 * @param estadoIni.
 	 */
+	public void setEstados(ArrayList<String> estados) {
+		this.estados = estados;
+	}
+	
 	public void setEstadoIni(String estadoIni) {
+		this.estadoIni = estadoIni;
+	}
+	
+	public void setEstadoInicial(String estadoIni) {
 		this.estadoIni = estadoIni;
 	}
 //----------------------------------------------------------------
@@ -121,6 +137,14 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * @return estadosIni.
 	 */
 	public String getEstadoIni() {
+		return estadoIni;
+	}
+	
+	/**
+	 * Método que devuelve estado inicial. 
+	 * @return estadosIni.
+	 */
+	public String getEstadoInicial() {
 		return estadoIni;
 	}
 //----------------------------------------------------------------
@@ -312,12 +336,29 @@ public class MaquinaTuring extends AutomataFNDLambda{
 				if (!s.equals(blanco) && !this.getAlfabet().getListaLetras().contains(s)){
 					this.getAlfabet().getListaLetras().add(s);
 				}
-				
+				j++;
 			}
+			
+			String scinta = a.getSimboloCinta();
+			if (!scinta.equals(blanco) && !this.getAlfabet().getListaLetras().contains(scinta)){
+				this.getAlfabetoCinta().getListaLetras().add(scinta);
+			}
+			
 		}
 		
 		
-}
+	}
+	
+	public void insertaArista2(String origen,String destino,ArrayList<String> simbolos,String sCinta,String dir) {
+
+		AristaTuring arist = new AristaTuring(origen,destino);
+		arist.setSimboloCinta(sCinta);
+		arist.setDireccion(dir);
+		arist.setSimbolos(simbolos);
+		anadeArista(arist);
+		
+	}
+	
 //----------------------------------------------------------------
 	/**
 	 * Método que añade cada una de las componentes de una arista.
@@ -388,6 +429,7 @@ public ArrayList<AristaTuring> getAristasTuring(){
 }
 	
 
+	public ArrayList<String> getEstados(){ return this.estados;} 
 
 	public String toString(){
 		
@@ -395,7 +437,8 @@ public ArrayList<AristaTuring> getAristasTuring(){
 		s += "Estados: " + this.getEstados() + "\n";
 		s += "Estado Inicial: " + this.getEstadoIni() + "\n";
 		s += "Estados Finales: " + this.getEstadosFin() + "\n";
-		s += "Alfabeto: " + this.getAlfabetoCinta() + "\n";
+		s += "Alfabeto: " + this.getAlfabet() + "\n";
+		s += "Alfabeto Cinta: " + this.getAlfabetoCinta() + "\n";
 		s += "Aristas: " + this.getAristasTuring() + "\n";
 		
 		return s;
@@ -412,4 +455,16 @@ public ArrayList<AristaTuring> getAristasTuring(){
 	}
 //----------------------------------------------------------------
 //****************************************************************
+	public void anadeEstado(String s){
+		
+		if (!estados.contains(s)) estados.add(s);
+	}
+	public void anadeEstadoFinal(String s){
+		
+		if (!estadosFin.contains(s)) estadosFin.add(s);
+	}
+	
+	public char getBlancoChar(){return blanco.charAt(0);}
+
 }
+
