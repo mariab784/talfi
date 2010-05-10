@@ -144,7 +144,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 											//Para generar todas las combinaciones posibles
 											while (it3.hasNext()){
 												String estado2 = it3.next();
-												if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null ){
+												if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null){
 													ArrayList<ArrayList<String>> listaApila = this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual);
 													Iterator<ArrayList<String>> itApilas = listaApila.iterator();
 													Produccion p = null;
@@ -152,20 +152,21 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 													while (itApilas.hasNext()){
 														p = new Produccion();
 														ArrayList<String> futuras = itApilas.next();
-														p.anadeCadena(actual);
-														if (futuras.size() == 1){
-															if (!futuras.get(0).equals(lambda)){
-																p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+														if(this.automataEntrada.dameEstadoLetraEstado(estado,actual)!=null){
+															p.anadeCadena(actual);
+															if (futuras.size() == 1){
+																if (!futuras.get(0).equals(lambda)){
+																	p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+																}
 															}
-														}
-														else if (futuras.size()>0){
-															p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
-															p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
+															else if (futuras.size()>0){
+																p.anadeCadena("["+estado+futuras.get(0)+estado2+"]");
+																p.anadeCadena("["+estado2+futuras.get(1)+estadoFF+"]");
 															
-														}
-														boolean pasa = true;
-														if(gic.getProducciones().get(simbolos) != null){
-															
+															}
+															boolean pasa = true;
+															if(gic.getProducciones().get(simbolos) != null){
+															if (p.getConcatenacion().size() == 1 && !this.automataEntrada.dameEstadoLetraEstado(estado,actual).contains(estadoFF)) pasa = false;
 															ArrayList<Produccion> quita = gic.getProducciones().get(simbolos);
 															Iterator<Produccion> it19 = quita.iterator();
 															while (it19.hasNext()){
@@ -180,6 +181,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 														if(!estaEnVariables(simbolos))
 															gic.getVariables().add(simbolos); //añadido
 														}
+													}
 													}	
 												}
 											}

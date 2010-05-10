@@ -1137,7 +1137,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		devuelve = new ArrayList<String>();
 		while (it.hasNext()){
 			AristaAP aux = it.next();
-			if (aux.getOrigen().equals(estado) && aux.getEntradaSimbolos().contains(letra))
+			if (aux.getOrigen().equals(estado) && aux.getEntradaSimbolos().contains(letra) && !devuelve.contains(aux.getDestino()))
 				devuelve.add(aux.getDestino());
 		}
 			
