@@ -528,7 +528,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 //			AutomataCanvas c = panelCentral.getCanvas();
 			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
-					c.getNombreEstados(),c.getListaAristasTuring());
+					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
 			System.out.println("MT CONSTRUIDO BOTON::: " + m);
 
 			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
@@ -1274,7 +1274,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	public void setAutomata(Automata a) {
 		panelCentral.getPanel().cargarAutomataNuevo(a);
 		//consola.append(a.toString()); //XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX
-		System.out.println(a);
+		System.out.println("SET AUTOMATA: " + a);
 	}
 
 	/**
@@ -1982,9 +1982,9 @@ public class VistaGrafica extends JFrame implements Vista{
         	//try catch XXX
 			AutomataCanvas c = panelCentral.getCanvas();
 			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
-					c.getNombreEstados(),c.getListaAristasTuring());
+					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
 			AceptaTuring aceptacion = new AceptaTuring();
-			aceptacion.acepta(ruta);
+			aceptacion.acepta(ruta,m);
         }
 	}    	
 }

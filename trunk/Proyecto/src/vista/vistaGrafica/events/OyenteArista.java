@@ -30,6 +30,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import accesoBD.Mensajero;
 import modelo.AutomatasException;
+import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
 import vista.AristaInterface;
@@ -679,9 +680,11 @@ public class OyenteArista extends MouseAdapter {
 	
 		try{
 			nombreArista=nomArs.getText();
-				if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-				if(!canvas.getAlfabetoPila().estaLetra(nombreArista)){
-					canvas.getAlfabetoPila().aniadirLetra(nombreArista);
+				if(canvas.getAlfabetoCinta()==null) 
+					canvas.setAlfabetoCinta(new AlfabetoCinta());
+				
+				if(!canvas.getAlfabetoCinta().estaLetra(nombreArista)){
+					canvas.getAlfabetoCinta().aniadirLetra(nombreArista);
 				} //System.out.println(nombreArista);//XXX
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
 				aristaTuring.setSimboloCinta(nombreArista);

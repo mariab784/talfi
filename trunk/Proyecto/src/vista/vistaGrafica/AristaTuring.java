@@ -25,6 +25,11 @@ public class AristaTuring extends AristaGeneral implements AristaInterface{
 	String direccion;
 //	boolean marcada;
 	
+	public AristaTuring(String origen,String destino){
+		
+		super(origen,destino);
+	}
+	
 	/**
 	 * Establece los datos iniciales de la arista en la interfaz gráfica
 	 * @param x coordenada x del estado de inicio
@@ -297,5 +302,13 @@ public class AristaTuring extends AristaGeneral implements AristaInterface{
 			
 		}
 		return s;
+	}
+	
+	public AristaTuring clone(){
+		AristaTuring  a = new AristaTuring (getX(),getY(),getFx(),getFy(), getOrigen(),getDestino());
+		a.setSimbolos(this.getEntradaCinta());
+		a.setSimboloCinta(this.getSimboloCinta() );
+		a.setDireccion(this.getDireccion());
+		return a;
 	}
 }

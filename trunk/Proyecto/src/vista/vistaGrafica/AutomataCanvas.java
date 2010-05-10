@@ -30,12 +30,14 @@ import vista.vistaGrafica.events.OyenteArista;
 import vista.vistaGrafica.events.OyenteEditar;
 import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
+import modelo.automatas.MaquinaTuring;
 
 /**
  * Clase que almacena y trata toda la información de los automatas que salen en la interfaz
@@ -66,6 +68,7 @@ public class AutomataCanvas extends JScrollPane {
 	private ArrayList<String> listaFinales;
 	private Alfabeto alfabeto;
 	private Alfabeto_Pila alfabetoPila;
+	private AlfabetoCinta alfabetoCinta;
 	
 	
 	private boolean apd;
@@ -131,9 +134,12 @@ public class AutomataCanvas extends JScrollPane {
 	
 	public void setPila(boolean b){ VistaGrafica.setPila(b);}
 
+	public void setTuring(boolean b){ VistaGrafica.setTuring(b);}
+
+	
 	public boolean getPila(){ return VistaGrafica.getPila();}
 	
-	public static boolean getTuring(){ return VistaGrafica.getTuring();}
+	public boolean getTuring(){ return VistaGrafica.getTuring();}
 	
 	/**
 	 * Devuelve el alfabeto del automata
@@ -147,6 +153,10 @@ public class AutomataCanvas extends JScrollPane {
 		return alfabetoPila;
 	}
 
+	public AlfabetoCinta getAlfabetoCinta() {
+		return alfabetoCinta;
+	}
+	
 	/**
 	 * Devuelve la lista de estados
 	 * @return lista con los estdo del automata
@@ -242,6 +252,10 @@ public class AutomataCanvas extends JScrollPane {
 	
 	public void setAlfabetoPila(Alfabeto_Pila a){
 		alfabetoPila=a;
+	}
+	
+	public void setAlfabetoCinta(AlfabetoCinta a){
+		alfabetoCinta=a;
 	}
 	/**
 	 * Devuelve el estado inicial
@@ -661,7 +675,9 @@ public class AutomataCanvas extends JScrollPane {
 			/*else*/String fichero="<authomata>\n\t<type>\n\t\t<item>";
 			fichero+=tipoAutomata()+"</item>\n\t</type>\n";
 			Iterator<Arista> itArist = null; Iterator<AristaAP> itAristAP = null;
+			Iterator<AristaTuring> itAristTuring = null;
 			String lambda = m.devuelveMensaje("simbolos.lambda",4);
+			String blanco = m.devuelveMensaje("simbolos.blanco",4);
 			if (this.getPila()){
 				itAristAP=listaAristasAP.iterator();
 				while (itAristAP.hasNext()){
@@ -688,6 +704,26 @@ public class AutomataCanvas extends JScrollPane {
 					
 				}
 			
+			}
+			else if (this.getTuring()){
+				
+				itAristTuring = listaAristasTuring.iterator();
+				while (itAristTuring.hasNext()){
+					AristaTuring a = itAristTuring.next();
+					ArrayList<String> s = a.getEntradaCinta();
+					String letra;
+					for(int i = 0; i < s.size(); i++){
+						letra = s.get(i);
+						if(!alfabeto.dameListaLetras().contains(letra)&& !letra.equals(blanco)){
+							alfabeto.aniadirLetra(letra);						
+						}	
+					}
+					letra = a.getSimboloCinta();
+					if(!alfabetoCinta.dameListaLetras().contains(letra) && !letra.equals(blanco))
+						alfabetoCinta.aniadirLetra(letra);	
+					
+				}
+				
 			}
 			//if(this.getTuring())
 			else {
@@ -716,6 +752,19 @@ public class AutomataCanvas extends JScrollPane {
 					while(itAlfabetoP.hasNext()) {
 						String let = itAlfabetoP.next();
 						if (!let.equals(lambda))
+						fichero+="\t<item>"+let+"</item>\n\t";
+					}
+					fichero+="</alphabetP>\n\t";
+		
+				}
+				
+				else if (this.getTuring()){
+					Iterator<String> itAlfabetoP=alfabetoCinta.dameListaLetras().iterator();
+
+					fichero+="\t<alphabetP>\n\t";
+					while(itAlfabetoP.hasNext()) {
+						String let = itAlfabetoP.next();
+						if (!let.equals(blanco))  //XXX REVISAR
 						fichero+="\t<item>"+let+"</item>\n\t";
 					}
 					fichero+="</alphabetP>\n\t";
@@ -771,6 +820,36 @@ public class AutomataCanvas extends JScrollPane {
 						fichero+="\t</arrow>\n\t";
 					}
 					
+				}
+				else if (this.getTuring()){
+					
+					Iterator<AristaTuring> itAristaTuring=listaAristasTuring.iterator();
+					while(itAristaTuring.hasNext()) {
+						AristaTuring a=itAristaTuring.next();
+						fichero+="\t<arrow>\n\t";
+						fichero+="\t<state>"+a.getOrigen()+"</state>\n\t";
+						fichero+="\t<state>"+a.getDestino()+"</state>\n\t";
+						fichero+="\t<item>";
+						for(int i = 0; i < a.getEntradaCinta().size(); i++){
+							
+							fichero+=a.getEntradaCinta().get(i);
+							if(i != a.getEntradaCinta().size()-1)
+								fichero+=",";
+							
+						}
+						fichero+="</item>\n\t";
+						
+						fichero+="\t<scinta>"+a.getSimboloCinta()+"</scinta>\n\t";
+						fichero+="\t<direc>"+a.getDireccion()+"</direc>\n\t";
+						//fichero+="\t<trans>";
+						/*for(int i = 0; i < a.getSimboloCinta().size(); i++){
+							
+							fichero+=a.getSalidaPila().get(i);
+							
+						}*/
+						//fichero+="</trans>\n\t";
+						fichero+="\t</arrow>\n\t";
+					}
 				}
 				else{
 				
@@ -853,7 +932,9 @@ public class AutomataCanvas extends JScrollPane {
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
 		//if (a instanceof AutomataPila){setPila(false);}
-		if (a instanceof AutomataPila){setPila(true); this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();}
+		if (a instanceof AutomataPila){setPila(true); setTuring(false); this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();}
+		if (a instanceof MaquinaTuring){setTuring(true);setPila(false); this.alfabetoCinta = ((MaquinaTuring)a).getAlfabetoCinta();}
+
 		
 		Iterator<String> itEst=a.getEstados().iterator();
 		
@@ -917,7 +998,32 @@ public class AutomataCanvas extends JScrollPane {
 			
 			
 		}
-		if(!(a instanceof AutomataPila)){
+		else if((a instanceof MaquinaTuring)){
+			
+			Iterator<AristaTuring> iTuring = ((MaquinaTuring) a).getAristasTuring().iterator();
+			while (iTuring.hasNext()){
+				AristaTuring arAP = iTuring.next();
+				
+				Iterator<Estado> itEstNuevos=listaEstados.iterator();
+				while(itEstNuevos.hasNext()) {
+				
+					Estado aux=itEstNuevos.next();
+					
+					if (aux.getEtiqueta().equals(arAP.getOrigen())) {
+						arAP.setX(aux.getX());
+						arAP.setY(aux.getY());
+						
+					}
+					if (aux.getEtiqueta().equals(arAP.getDestino())) {
+						arAP.setFx(aux.getX());
+						arAP.setFy(aux.getY());
+						
+					}
+			}
+			this.listaAristasTuring.add(arAP.clone());
+			}
+		}
+		/*if(!(a instanceof AutomataPila))*/else{
 			
 			
 		
@@ -990,10 +1096,12 @@ public class AutomataCanvas extends JScrollPane {
     	listaAristasTuring = new ArrayList<AristaTuring>();
     	alfabeto = null;
     	alfabetoPila = null;
+    	alfabetoCinta = null;
     	estadoInicial="";
     	apd = false;
     	ap = null;
     	setPila(false);
+    	setTuring(false);
     	this.repaint();
     	vista.requestFocus();
 	}
@@ -1314,6 +1422,7 @@ public class AutomataCanvas extends JScrollPane {
 
 	private String tipoAutomata(){
 		if(this.getPila()) return "AutomataPila";
+		if(this.getTuring()) return "MaquinaTuring";
 		//if(this.getTuring()) return "Turing";
 		Automata auto=new AutomataFNDLambda();
 		if(alfabeto.dameListaLetras().contains(OyenteArista.getLambda()))
