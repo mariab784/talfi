@@ -3,13 +3,12 @@
  */
 package modelo.automatas;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import accesoBD.Mensajero;
 import vista.vistaGrafica.AristaAP;
-
 /**
  * Clase que implementa la funcionalidad de los automatas de pila
  *  @author Rocío Barrigüete, Mario Huete, Luis San Juan 
@@ -1155,6 +1154,23 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			
 		}
 		return devuelve;
+	}
+	
+	public ArrayList<String> generaPalabras(int maximo){
+		ArrayList<String> palabras = new ArrayList<String>(1);
+		int i = 0;
+		while (i < maximo){
+			String añade = new String("");
+			for (int j = 0; j < Math.pow(i,2) && j < 10; j++){
+				Random a = new Random();
+				int z = a.nextInt(this.alfabetoPila.getListaLetras().size());
+				añade+=this.alfabetoPila.getListaLetras().get(z);
+			}
+			if (!palabras.contains(añade))
+				palabras.add(añade);
+		}
+		
+		return palabras;
 	}
 
 	//-------------------------------------------------------------
