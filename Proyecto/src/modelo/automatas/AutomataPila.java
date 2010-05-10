@@ -1162,9 +1162,11 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		while (i < maximo){
 			String añade = new String("");
 			for (int j = 0; j < Math.pow(i,2) && j < 10; j++){
-				Random a = new Random();
-				int z = a.nextInt(this.alfabetoPila.getListaLetras().size());
-				añade+=this.alfabetoPila.getListaLetras().get(z);
+				for (int s = 0; s < i; s++){
+					Random a = new Random();
+					int z = a.nextInt(this.alfabetoPila.getListaLetras().size());
+					añade+=this.alfabetoPila.getListaLetras().get(z);
+				}
 			}
 			if (!palabras.contains(añade))
 				palabras.add(añade);
