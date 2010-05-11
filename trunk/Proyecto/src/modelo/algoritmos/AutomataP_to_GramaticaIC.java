@@ -144,7 +144,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 											//Para generar todas las combinaciones posibles
 											while (it3.hasNext()){
 												String estado2 = it3.next();
-												if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null){
+												//if (this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual) != null){
 													ArrayList<ArrayList<String>> listaApila = this.automataEntrada.dameFinPilaEstadoLetra(estado, estaLetra, actual);
 													Iterator<ArrayList<String>> itApilas = listaApila.iterator();
 													Produccion p = null;
@@ -181,7 +181,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 														if(!estaEnVariables(simbolos))
 															gic.getVariables().add(simbolos); //añadido
 														}
-													}
+												//	}
 													}	
 												}
 											}
