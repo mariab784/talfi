@@ -4,9 +4,7 @@
 package modelo.automatas;
 
 import java.util.*;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
+
 import accesoBD.Mensajero;
 import vista.vistaGrafica.AristaAP;
 /**
@@ -38,6 +36,7 @@ public class AutomataPila extends AutomataFND{
 //	protected HashMap<String, HashMap</*String*/ArrayList<String>,ArrayList<String>>> aut;
 //	protected HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>> aut;
 	private boolean apd;
+	private Mensajero mensajero;
 	
 	private String lambda;
 	private String fondoPila;
@@ -989,6 +988,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
 	 */
 
+	@SuppressWarnings("unchecked")
 	public AutomataPila convertirPilaVacia(){
 		//String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 		//ArrayList<String> est, ArrayList<AristaAP> aut
@@ -996,18 +996,23 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		
 		
 		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
-				this.getAlfabetoPila(),this.getEstados(),this.getAutomataPila());
+				this.getAlfabetoPila(),(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
 		int i = 0; int j = 0;
 		estadoPilaVacia = nombreAux;
 		aut.getEstados().add(estadoPilaVacia);//añadido
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
+		
+		if (!this.getEstadosFinales().isEmpty()){
 		String est = this.getEstadosFinales().get(i);
 //		System.out.println("est final: " + est);
 		int tamAlfpila = this.alfabetoPila.getListaLetras().size();
 //		System.out.println("tamAlfpila : " + tamAlfpila);
 		int tamEstFin = this.getEstadosFinales().size();
 //		System.out.println("tamEstFin : " + tamEstFin);
+		if (mensajero == null)
+			mensajero = Mensajero.getInstancia();
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		while ( (i < tamEstFin) && (j < tamAlfpila) ){
 			
 			//(int x,int y,int fx, int fy,String origen,String destino)
@@ -1027,7 +1032,9 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			a.setCimaPila(simboloPila);
 			a.setSalida(trans);
 			//this.aristasPilaVacia.add(a);
-			aut.aristasPilaVacia.add(a);
+			
+			//aut.aristasPilaVacia.add(a); quitado
+			
 			aut.getAutomataPila().add(a);
 			
 			
@@ -1046,6 +1053,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			
 		}
 		
+		}
 //		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
 		return aut;
 	}

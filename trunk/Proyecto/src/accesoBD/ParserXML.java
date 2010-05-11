@@ -271,7 +271,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 			automata.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 		}
-		System.out.println("AUTOMATA PARSER XML: " + automata);
+//		System.out.println("AUTOMATA PARSER XML: " + automata);
 		return automata;		
 	}
 

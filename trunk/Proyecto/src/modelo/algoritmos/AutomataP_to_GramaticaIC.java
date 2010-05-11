@@ -27,6 +27,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	private static final char comienzo = 'A';
 	private String xml;
+	private AutomataPila automataOriginal;
 	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
 	private Controlador controlador;
@@ -41,7 +42,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 */
 	public AutomataP_to_GramaticaIC(Automata a) {
 		// TODO Auto-generated constructor stub
-		automataEntrada=((AutomataPila) a);
+		automataOriginal = (AutomataPila) a;
+		if (a.getEstadosFinales() == null || a.getEstadosFinales().isEmpty())
+			automataEntrada=((AutomataPila) a).convertirPilaVacia();
+		else automataEntrada=((AutomataPila) a);
 //		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
@@ -71,6 +75,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		return null;
 	}
 
+	public AutomataPila getAutomataEntrada(){return automataEntrada;}
+	
+	public AutomataPila getAutomataOriginal(){return automataOriginal;} 
+	
 	/* (non-Javadoc)
 	 * @see modelo.Algoritmo#registraControlador(controlador.Controlador)
 	 */
@@ -265,7 +273,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			produc = (HashMap<String, ArrayList<Produccion>>) nProduc.clone();
 			variables = (ArrayList<String>) nuVariables.clone();
 		}
-		System.out.println("producciones sin cambiar: " + nProduc);
+		
+		System.out.println("*********************traduceVariables****************************");
+		System.out.println("producciones : " + produc);
+		System.out.println("Variables: " + variables);
+		System.out.println("producciones nProduc: " + nProduc);
+		System.out.println("nuVariables: " + nuVariables);
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nuVariables);
 
@@ -382,7 +395,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 					salida.add(ns); //XXX
 				}
 			}
-			else{System.out.println("E X P L O S I O N !!!!!"); return null;}
+			else{
+				System.out.println("S EXPLOTA: " + s); 
+				System.out.println("E X P L O S I O N !!!!!"); //return null;
+			
+			}
 			i++;
 		}		
 		return salida;
@@ -607,9 +624,31 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		al.aniadirLetra("a");
 		al.aniadirLetra("b");
 		aut.setAlfabeto(al);*/
+
+/*		System.out.println("AUT:\n" + aut);
+		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
+		System.out.println(a.AP_Gramatica().getProducciones().toString());*/
+		
 		System.out.println("AUT:\n" + aut);
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
-		System.out.println(a.AP_Gramatica().getProducciones().toString());
+		
+
+		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
+		
+		
+		
+		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic());
+		while(piticli.getTablaTieneMarcas()){
+			
+			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
+			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
+			piticli.transforma_FNG();
+		}
+		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
+		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+
+		piticli.getGramaticaSalida().creaListaPalabras();
+		
 		
 		// TODO Auto-generated method subs
 

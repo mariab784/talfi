@@ -62,7 +62,7 @@ import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
 import modelo.automatas.MaquinaTuring;
 import modelo.ejercicios.Ejercicio;
-import modelo.gramatica.GramaticaIC;
+
 /**
  *  En esta clase esta toda la gestion y ejecucion de la interfaz grafica swing de la aplicacion
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
@@ -95,6 +95,8 @@ public class VistaGrafica extends JFrame implements Vista{
 	private JToggleButton arista;
 	/****/
 	private JToggleButton estaPalabra;
+	private JToggleButton gordaLatex;
+	private JToggleButton maricaTuring;
 	/****/
 	private JToggleButton borrar;
 	private JToggleButton editar;
@@ -520,25 +522,32 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			//String estado,ArrayList<String> estadosF,Alfabeto alf,
 			//ArrayList<String> est, ArrayList<AristaTuring> maq//,
-			System.out.println("EST INI: " + c.getEstadoInicial());
+/*			System.out.println("EST INI: " + c.getEstadoInicial());
 			System.out.println("EST FIN: " + c.getListaFinales());
 			System.out.println("ALF: " + c.getAlfabeto());
 			System.out.println("LISTA ESTADOS: " + c.getNombreEstados());
-			System.out.println("ARISTAS: " + c.getListaAristasTuring());
+			System.out.println("ARISTAS: " + c.getListaAristasTuring());*/
 			
 //			AutomataCanvas c = panelCentral.getCanvas();
-			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
+/*			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
-			System.out.println("MT CONSTRUIDO BOTON::: " + m);
+			System.out.println("MT CONSTRUIDO BOTON::: " + m);*/
 
 			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
 			/*int r = *///panelCentral.getCanvas().getAP().reconocePalabra(palabra);
-			System.out.println("AP CONSTRUIDO BOTON::: " + ap);
+			System.out.println("**********************************************************");
+			System.out.println("AP CONSTRUIDO BOTON::: \n" + ap);
 			System.out.println("**********************************************************");
 			AutomataP_to_GramaticaIC g = new AutomataP_to_GramaticaIC(ap);
-			System.out.println("producciones: " + g.getGic());
+			//System.out.println("producciones: " + g.getGic());
 			g.AP_Gramatica();
+
+
+			
+			System.out.println("gramatica boton: \n" + g.getGic());
+			
+			
 			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic());
 			
 			while(piticli.getTablaTieneMarcas()){
@@ -547,7 +556,12 @@ public class VistaGrafica extends JFrame implements Vista{
 				else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 				piticli.transforma_FNG();
 			}
-			System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+		//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+			
+			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
+			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+
+//			piticli.getGramaticaSalida().creaListaPalabras(); 
 
 			//mostrarResultado(r);
 			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
@@ -569,13 +583,26 @@ public class VistaGrafica extends JFrame implements Vista{
 		tool2= new JToolBar();
 		
 		estaPalabra=new JToggleButton(new ImageIcon("imagenes/estaPalabra.jpg"));
+
 		estaPalabra.setMargin(new java.awt.Insets(0,0,0,0));
 		estaPalabra.setName("estaPalabra");
-		estaPalabra.setToolTipText("ASDJAKDFJSAHJ"); //XXX
+//		estaPalabra.setToolTipText("ASDJAKDFJSAHJ"); //XXX
+		
+		gordaLatex=new JToggleButton(new ImageIcon("imagenes/botonltx.jpg"));
+		gordaLatex.setMargin(new java.awt.Insets(0,0,0,0));
+		gordaLatex.setName("gordaLatex");
+//		estaPalabra.setToolTipText("LTX"); //XXX		
+		
+		maricaTuring=new JToggleButton(new ImageIcon("imagenes/MT.jpg"));
+		maricaTuring.setMargin(new java.awt.Insets(0,0,0,0));
+		maricaTuring.setName("gordaLatex");
+//		estaPalabra.setToolTipText("LTX"); //XXX	
 
 		tool2.add(estaPalabra); //aniadirBotton
+		tool2.add(gordaLatex); //aniadirBotton
+		tool2.add(maricaTuring); //aniadirBotton
 		
-		estaPalabra.addActionListener(new ActionListener(){
+		maricaTuring.addActionListener(new ActionListener(){
 			
 			
 			public void actionPerformed(ActionEvent e) {
@@ -621,6 +648,30 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog.setSize(new Dimension(400,150));
 				dialog.setVisible(true);
 				
+
+			}
+			
+			
+		});
+		
+		gordaLatex.addActionListener(new ActionListener(){
+			
+			
+			public void actionPerformed(ActionEvent e) {
+
+				System.out.println("GORDAA");
+
+			}
+			
+			
+		});
+		
+		estaPalabra.addActionListener(new ActionListener(){
+			
+			
+			public void actionPerformed(ActionEvent e) {
+
+				System.out.println("nanai");
 
 			}
 			
@@ -1346,6 +1397,9 @@ public class VistaGrafica extends JFrame implements Vista{
 		arista.setEnabled(true);
 		estado.setEnabled(true);
 		estaPalabra.setEnabled(true);
+		maricaTuring.setEnabled(true);
+		gordaLatex.setEnabled(true);
+		
 
 		dibujar=true;
 		panelCentral.getPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
@@ -1358,6 +1412,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		arista.setEnabled(false);
 		estado.setEnabled(false);
 		estaPalabra.setEnabled(false);
+		maricaTuring.setEnabled(false);
+		gordaLatex.setEnabled(false);
 		dibujar=false;
 		panelCentral.getPanel().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}
