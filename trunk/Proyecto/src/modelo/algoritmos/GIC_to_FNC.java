@@ -583,6 +583,7 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		}
 		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
 		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+
 		piticli.getGramaticaSalida().creaListaPalabras();
 
 //		System.out.println("con terminales: " + piticli.getGramaticaSalida().getProdConTerminal());
