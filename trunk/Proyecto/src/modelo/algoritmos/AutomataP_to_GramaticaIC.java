@@ -47,9 +47,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			automataEntrada=((AutomataPila) a);
 		else automataEntrada=((AutomataPila) a).convertirPilaVacia();
 		
-		System.out.println("***********CONTROL**************");
+/*		System.out.println("***********CONTROL**************");
 		System.out.println(automataEntrada);
-		System.out.println("***********fin CONTROL**************");
+		System.out.println("***********fin CONTROL**************");*/
 		
 //		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
@@ -57,7 +57,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		controlador=Controlador_imp.getInstancia();
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+		fondoPila = ((AutomataPila) a).getFondoPila();
 	}
 	
 
@@ -110,7 +110,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		gic.getVariables().add("S");//añadido
 		while (it.hasNext()){
 			
-
+//			System.out.println("automataEntrada.getEstadoInicial() " + automataEntrada.getEstadoInicial());
+//			System.out.println("fondoPila " + fondoPila);
 			
 			
 			Produccion p = new Produccion();
