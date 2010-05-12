@@ -101,6 +101,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@SuppressWarnings("unchecked")
 	public GramaticaIC AP_Gramatica(){
 		
+//		System.out.println("*****AP_Gramatica antes de nada****");
+//		System.out.println("AUTOMATA DE ENTRADA!\n" + automataEntrada);
 		
 		/*GramaticaIC*/ gic = new GramaticaIC();
 		gic.setSimbolos(automataEntrada.getAlfabeto().getListaLetras());//añadido
@@ -116,11 +118,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			
 			Produccion p = new Produccion();
 			p.anadeCadena("["+this.automataEntrada.getEstadoInicial()+fondoPila+it.next()+"]");
-			
+			System.out.println("P INICIAL: " + p);
 			gic.anadeProduccion("S", p);
 		}
 		/* Aquí hemos Iniciado la gramatica, con simbolo inicial S 
 		 * y añadiendo todos los estados con simbolo de pila)*/
+		
+		System.out.println("GIC ANTES : " + gic);
 		
 		//declaraciones de ArrayList Auxiliares y de iterators que comentamos despues
 		ArrayList<String> estados2 = (ArrayList<String>) this.automataEntrada.getEstados().clone();
@@ -211,7 +215,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 					}
 				}
 
-		
+		System.out.println("GIC ANTES TRADUCE VARIABLES: " + gic);
 		traduceVariables();	
 		return gic;
 		

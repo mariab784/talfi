@@ -1019,8 +1019,12 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		letrasAlfPila.add(fondoPilaAux);
 		nalfPila.setLetras(letrasAlfPila);
 		
-		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
-				nalfPila,(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
+		String autEstIni = this.getEstadoInicial();
+		Alfabeto autAlfIni = this.getAlfabeto();
+		ArrayList<String> autEstados = (ArrayList<String>) this.getEstados().clone();
+		ArrayList<AristaAP> autAristas = (ArrayList<AristaAP>) this.getAutomataPila().clone();
+		AutomataPila aut = new AutomataPila(autEstIni,/*this.getEstadosFinales()*/new ArrayList<String>(),autAlfIni,
+				nalfPila,autEstados,autAristas);
 		int i = 0; int j = 0;
 		
 		aut.setEstadoPilaVacia(nombreAux);
