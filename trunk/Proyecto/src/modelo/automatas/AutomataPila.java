@@ -24,6 +24,7 @@ import vista.vistaGrafica.AristaAP;
 public class AutomataPila extends AutomataFND{
 	
 	private final  static String nombreAux = "aux";
+	private final  static String iniNombreAux = "iniaux";
 	//Atributos////////////////////////////////////////////////////
 	private String estadoInicial;
 	private ArrayList<String> estadosFinales;
@@ -51,6 +52,7 @@ public class AutomataPila extends AutomataFND{
 	
 	private ArrayList<AristaAP> aristasPilaVacia;
 	private String estadoPilaVacia;
+	private String estadoIniPilaVacia;
 	
 	//private  ArrayList<CiclosYSoluciones> listaCiclos;
 	//como en la arte grafica se meten al final no hay problema (creo)
@@ -67,7 +69,7 @@ public class AutomataPila extends AutomataFND{
 		//alfabetoMenosL=new Alfabeto_imp();
 		automata=new ArrayList<AristaAP>();
 		apd = true; ///////REVISAR PARA MODIFICARLO
-		Mensajero mensajero = Mensajero.getInstancia();
+		mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 		alfabetoPila = new AlfabetoPila_imp();
@@ -993,12 +995,38 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		//String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
 		//ArrayList<String> est, ArrayList<AristaAP> aut
 //		System.out.println("this: " + this);
-		
-		
+		if(mensajero == null) mensajero = Mensajero.getInstancia();
+		String fondoPilaAux = mensajero.devuelveMensaje("simbolos.cimaVacia",4);
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+
 		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
 				this.getAlfabetoPila(),(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
 		int i = 0; int j = 0;
 		estadoPilaVacia = nombreAux;
+		
+		estadoIniPilaVacia = iniNombreAux;
+		aut.getEstados().add(estadoIniPilaVacia);
+		
+		String antiguoIni = aut.getEstadoInicial();
+		AristaAP aristaIni = new AristaAP(0,0,0,0,estadoIniPilaVacia,antiguoIni);
+		
+		ArrayList<String> nSimb = new ArrayList<String>();
+		nSimb.add(lambda);
+		aristaIni.setSimbolos(nSimb);
+		aristaIni.setCimaPila(fondoPilaAux);
+		nSimb = new ArrayList<String>();
+		nSimb.add(fondoPila);
+		nSimb.add(fondoPilaAux);
+				
+		aristaIni.setSalida(nSimb);
+		
+		aut.getAutomataPila().add(aristaIni);
+		
+		fondoPila = fondoPilaAux;
+		
+		aut.setEstadoInicial(estadoIniPilaVacia);
+		
 		aut.getEstados().add(estadoPilaVacia);//añadido
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
@@ -1012,7 +1040,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 //		System.out.println("tamEstFin : " + tamEstFin);
 		if (mensajero == null)
 			mensajero = Mensajero.getInstancia();
-		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+//		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		
 		
 		
@@ -1058,6 +1086,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		
 		}
 //		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
+		System.out.println("AUTOMATA ORIGINAL: \n" + this);
+		System.out.println("AUTOMATA NUEVO: \n" + aut);
 		return aut;
 	}
 	
