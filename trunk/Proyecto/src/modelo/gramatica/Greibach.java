@@ -175,9 +175,9 @@ public class Greibach extends GramaticaIC{
 			System.out.println("vamos bien al final?" + listaProdPalabras);
 		/**************************hasta aki bien ya**************************/
 			while (/*!listaProdPalabras.isEmpty() ||*/ (listaPalabras.size() < numPalabras)){
-	//			System.out.println("PRODUCCIONEEEEES: " + this.getProducciones());
-	//			System.out.println("PROD: " + listaPalabras);
-	//			System.out.println("LISTA PROD: " + listaProdPalabras); 
+				System.out.println("PRODUCCIONEEEEES: " + this.getProducciones());
+				System.out.println("PROD: " + listaPalabras);
+				System.out.println("LISTA PROD: " + listaProdPalabras); 
 				
 				boolean enc = false; 
 				ArrayList<String> concat = (ArrayList<String>) listaProdPalabras.get(0).getConcatenacion().clone();

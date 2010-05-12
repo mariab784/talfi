@@ -561,7 +561,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
 			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
 
-//			piticli.getGramaticaSalida().creaListaPalabras(); 
+			piticli.getGramaticaSalida().creaListaPalabras(); 
 
 			//mostrarResultado(r);
 			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
