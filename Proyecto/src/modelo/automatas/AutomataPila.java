@@ -996,6 +996,14 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
 	 */
 
+	public void setEstadoPilaVacia(String s){estadoPilaVacia = s;}
+	public void setEstadoIniPilaVacia(String s){estadoIniPilaVacia = s;}
+	public void setFondoPila(String s){fondoPila = s;}
+	
+	public String getEstadoPilaVacia(){return estadoPilaVacia;}
+	public String getEstadoIniPilaVacia(){return estadoIniPilaVacia;}
+//	public String getFondoPila(){return fondoPila;}
+	
 	@SuppressWarnings("unchecked")
 	public AutomataPila convertirPilaVacia(){
 		//String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
@@ -1014,13 +1022,16 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
 				nalfPila,(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
 		int i = 0; int j = 0;
-		estadoPilaVacia = nombreAux;
 		
-		estadoIniPilaVacia = iniNombreAux;
-		aut.getEstados().add(estadoIniPilaVacia);
+		aut.setEstadoPilaVacia(nombreAux);
+		aut.setEstadoIniPilaVacia(iniNombreAux);
+		
+		
+		
+		aut.getEstados().add(aut.getEstadoIniPilaVacia());
 		
 		String antiguoIni = aut.getEstadoInicial();
-		AristaAP aristaIni = new AristaAP(0,0,0,0,estadoIniPilaVacia,antiguoIni);
+		AristaAP aristaIni = new AristaAP(0,0,0,0,aut.getEstadoIniPilaVacia(),antiguoIni);
 		
 		ArrayList<String> nSimb = new ArrayList<String>();
 		nSimb.add(lambda);
@@ -1034,11 +1045,11 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		
 		aut.getAutomataPila().add(aristaIni);
 		
-		fondoPila = fondoPilaAux;
+		aut.setFondoPila(fondoPilaAux);
 		
-		aut.setEstadoInicial(estadoIniPilaVacia);
+		aut.setEstadoInicial(aut.getEstadoIniPilaVacia());
 		
-		aut.getEstados().add(estadoPilaVacia);//añadido
+		aut.getEstados().add(aut.getEstadoPilaVacia());//añadido
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		String simboloPila;// = this.alfabetoPila.getListaLetras().get(j);
 		
@@ -1058,7 +1069,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		while ( (i < tamEstFin) && (j < tamAlfpila) ){
 			
 			//(int x,int y,int fx, int fy,String origen,String destino)
-			AristaAP a = new AristaAP(0,0,0,0,est,estadoPilaVacia);
+			AristaAP a = new AristaAP(0,0,0,0,est,aut.getEstadoPilaVacia());
 			simboloPila = this.alfabetoPila.getListaLetras().get(j);
 			a.anadirSimbolo(lambda);
 			a.setCimaPila(simboloPila);
@@ -1068,8 +1079,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			aut.getAutomataPila().add(a);
 			aut.aristasPilaVacia.add(a);
 			//this.aristasPilaVacia.add(a);
-			a = new AristaAP(0,0,0,0,estadoPilaVacia,estadoPilaVacia);
-			a.setOrigen(estadoPilaVacia);
+			a = new AristaAP(0,0,0,0,aut.getEstadoPilaVacia(),aut.getEstadoPilaVacia());
+			a.setOrigen(aut.getEstadoPilaVacia());
 			a.anadirSimbolo(lambda);
 			a.setCimaPila(simboloPila);
 			a.setSalida(trans);
