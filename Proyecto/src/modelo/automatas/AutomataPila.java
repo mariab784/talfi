@@ -97,6 +97,10 @@ public class AutomataPila extends AutomataFND{
 		aristasQueDesapilan = new ArrayList<Integer>();
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		
+		mensajero = Mensajero.getInstancia();
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+		
 	}
 	//-------------------------------------------------------------
 public void anadeArista(AristaAP a){
@@ -986,6 +990,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 //		System.out.println("ARISTAS lambda: " + this.aristasLambda);
 	}*/
 	
+	public String getFondoPila(){return fondoPila;}
+	
 	/**
 	 * Método que convierte un AP que acepta por estado final en un AP que acepte por pila vacia.
 	 */
@@ -1000,8 +1006,13 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 
+		AlfabetoPila_imp nalfPila = new AlfabetoPila_imp();
+		ArrayList<String> letrasAlfPila = (ArrayList<String>) this.getAlfabetoPila().getListaLetras().clone(); 
+		letrasAlfPila.add(fondoPilaAux);
+		nalfPila.setLetras(letrasAlfPila);
+		
 		AutomataPila aut = new AutomataPila(this.getEstadoInicial(),this.getEstadosFinales(),this.getAlfabeto(),
-				this.getAlfabetoPila(),(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
+				nalfPila,(ArrayList<String>) this.getEstados().clone(),(ArrayList<AristaAP>) this.getAutomataPila().clone());
 		int i = 0; int j = 0;
 		estadoPilaVacia = nombreAux;
 		
@@ -1231,7 +1242,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	public String toString() {
 		return "Estados:"+estados.toString()+"\n"+"Estados Finales: "+estadosFinales.toString()+"\n"+
 		"Estados Inicial: "+estadoInicial.toString() + "\n"+"Alfabeto: "+alfabeto.toString()+
-		"\n"+"Alfabeto Pila: "+alfabetoPila.toString()+"\n"+"Determinista: "+apd+"\n"+automata.toString();
+		"\n"+"Alfabeto Pila: "+alfabetoPila.toString()+"\n"+"Determinista: "+apd+"\n"+automata.toString()
+		+"\n"+"FondoPila: "+fondoPila+"\n";
 	}
 }
 /******************************************************************/

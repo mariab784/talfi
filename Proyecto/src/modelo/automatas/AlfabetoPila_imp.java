@@ -37,6 +37,7 @@ public class AlfabetoPila_imp implements Alfabeto_Pila {
 		return alfabeto.contains(l);
 	}
 	
+	public void setLetras(ArrayList<String> l){this.alfabeto = l;}
 
 	public boolean equals(Alfabeto_Pila a){
 		
