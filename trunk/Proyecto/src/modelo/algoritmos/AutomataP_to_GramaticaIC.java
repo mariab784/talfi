@@ -44,8 +44,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		// TODO Auto-generated constructor stub
 		automataOriginal = (AutomataPila) a;
 		if (a.getEstadosFinales() == null || a.getEstadosFinales().isEmpty())
-			automataEntrada=((AutomataPila) a).convertirPilaVacia();
-		else automataEntrada=((AutomataPila) a);
+			automataEntrada=((AutomataPila) a);
+		else automataEntrada=((AutomataPila) a).convertirPilaVacia();
+		
+		System.out.println("***********CONTROL**************");
+		System.out.println(automataEntrada);
+		System.out.println("***********fin CONTROL**************");
+		
 //		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
 		xml=new String();
@@ -104,6 +109,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		Iterator<String> it = estados.iterator();
 		gic.getVariables().add("S");//añadido
 		while (it.hasNext()){
+			
+
+			
+			
 			Produccion p = new Produccion();
 			p.anadeCadena("["+this.automataEntrada.getEstadoInicial()+fondoPila+it.next()+"]");
 			

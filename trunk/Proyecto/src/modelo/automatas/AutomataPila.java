@@ -1013,6 +1013,9 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		if (mensajero == null)
 			mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		
+		
+		
 		while ( (i < tamEstFin) && (j < tamAlfpila) ){
 			
 			//(int x,int y,int fx, int fy,String origen,String destino)
