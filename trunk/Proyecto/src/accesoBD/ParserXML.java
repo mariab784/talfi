@@ -155,7 +155,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
 			i++;
 		}
-		automata.setEstadosFinales(finalss);		
+		if (!esTuring) automata.setEstadosFinales(finalss);	
+		if (esTuring) ((MaquinaTuring)automata).setEstadosFin(finalss);	
 
 		nodos = documento.getElementsByTagName("arrow");
 		for (int i = 0; i < nodos.getLength(); i++){

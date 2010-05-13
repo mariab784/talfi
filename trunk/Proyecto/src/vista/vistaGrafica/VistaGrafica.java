@@ -608,6 +608,32 @@ public class VistaGrafica extends JFrame implements Vista{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				actionPerformedOpenDialog(e);
+
+			}
+			
+			
+		});
+		
+		gordaLatex.addActionListener(new ActionListener(){
+			
+			
+			public void actionPerformed(ActionEvent e) {
+
+				System.out.println("GORDAA");
+
+			}
+			
+			
+		});
+		
+		estaPalabra.addActionListener(new ActionListener(){
+			
+			
+			public void actionPerformed(ActionEvent e) {
+
+//				System.out.println("nanai");
+				
+				
 				JOptionPane pane=new JOptionPane();
 				
 				dialog=pane.createDialog(null);
@@ -623,6 +649,7 @@ public class VistaGrafica extends JFrame implements Vista{
 						}
 					}
 				});
+				
 				JPanel panelB=  new JPanel();
 				JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
 				aceptar.addActionListener(new ActionListener(){
@@ -648,30 +675,6 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog.setSize(new Dimension(400,150));
 				dialog.setVisible(true);
 				
-
-			}
-			
-			
-		});
-		
-		gordaLatex.addActionListener(new ActionListener(){
-			
-			
-			public void actionPerformed(ActionEvent e) {
-
-				System.out.println("GORDAA");
-
-			}
-			
-			
-		});
-		
-		estaPalabra.addActionListener(new ActionListener(){
-			
-			
-			public void actionPerformed(ActionEvent e) {
-
-				System.out.println("nanai");
 
 			}
 			
@@ -1325,7 +1328,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	public void setAutomata(Automata a) {
 		panelCentral.getPanel().cargarAutomataNuevo(a);
 		//consola.append(a.toString()); //XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX
-//		System.out.println("SET AUTOMATA: " + a);
+		System.out.println("SET AUTOMATA: " + a);
 	}
 
 	/**
@@ -1670,16 +1673,18 @@ public class VistaGrafica extends JFrame implements Vista{
 		    		String ruta=chooser.getCurrentDirectory().getAbsolutePath()+brr+chooser.getSelectedFile().getName();
 		    		Automata a=ParserXML.getInstancia().extraerAutomata(ruta);
 		            setAutomata(a);
-		            if(a instanceof AutomataFNDLambda) panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");
-		            else
-		            	if(a instanceof AutomataFND) panelCentral.getPanel().setTipoAutomata("AutomataFND");
-		            	else
-		            		if(a instanceof AutomataFD) panelCentral.getPanel().setTipoAutomata("AutomataFD");
+		            if(a instanceof MaquinaTuring){
+		            	panelCentral.getPanel().setTipoAutomata("MaquinaTuring");}          
+		            else if(a instanceof AutomataFNDLambda) {
+		            	panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");}
+		            else if(a instanceof AutomataFND) {
+		            	panelCentral.getPanel().setTipoAutomata("AutomataFND");}
+		            else if(a instanceof AutomataFD) {
+		            	panelCentral.getPanel().setTipoAutomata("AutomataFD");}
 		            /*********************************************************/	            		
-		            		else
-		            			if(a instanceof AutomataPila)panelCentral.getPanel().setTipoAutomata("AutomataPila");
-		            			else 
-			            			if(a instanceof MaquinaTuring)panelCentral.getPanel().setTipoAutomata("MaquinaTuring");
+		            else if(a instanceof AutomataPila){
+		            	panelCentral.getPanel().setTipoAutomata("AutomataPila");}
+
 		            /*********************************************************/
 		            
 		            
@@ -2039,8 +2044,11 @@ public class VistaGrafica extends JFrame implements Vista{
 			AutomataCanvas c = panelCentral.getCanvas();
 			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
-			AceptaTuring aceptacion = new AceptaTuring();
-			aceptacion.acepta(ruta,m);
+			
+			System.out.println("ACTIONPERFORMED: " + m);
+			
+			AceptaTuring aceptacion = new AceptaTuring(ruta,m);
+			aceptacion.acepta();
         }
 	}    	
 }

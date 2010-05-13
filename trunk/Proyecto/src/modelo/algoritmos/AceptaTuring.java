@@ -17,8 +17,13 @@ public class AceptaTuring {
 	private String ruta;
 	private MaquinaTuring maquina;
 //****************************************************************	
+	public AceptaTuring(String r, MaquinaTuring m){
+		
+		ruta = r; maquina = m;
+	}
+	
 //MÉTODOS*********************************************************	
-	public void acepta(String ruta,MaquinaTuring maquina) {
+	public void acepta() {
 		File archivo = null;
 	    FileReader fr = null;
 	    BufferedReader br = null;
@@ -40,7 +45,16 @@ public class AceptaTuring {
 	        String est = maquina.getEstadoIni();//estado de cada pasada
 	        char sim = cinta.charAt(/*k*/j);//simbolo de cada pasada
 	        int numAristas = aristas.size();
-	        while((!maquina.getEstadosFin().contains(est)) && (k < numAristas)){
+	        
+	        maquina.creaAlfEntrada(cinta);
+	        
+	        if (maquina.getEstadosFinales().isEmpty()){
+	        	System.out.println("NO TIENE FINALES NO ACEPTA");
+	        }
+	        else{
+	        
+	        
+	        while((!maquina.getEstadosFinales().contains(est)) && (k < numAristas)){
 	        	
 	        	AristaTuring arist = aristas.get(k);
 	        	System.out.println("ARIST: " + arist);
@@ -77,11 +91,11 @@ public class AceptaTuring {
 	        		cinta = primero.concat(arist.getSimboloCinta()).concat(resto);
 	        		System.out.println("CINTA REPLACE: " + cinta);
 	        		
-	        		if((aristas.get(k).getDireccion() == "I")||(aristas.get(k).getDireccion() == "L")) {
+	        		if((arist.getDireccion().equals("I"))||(arist.getDireccion().equals("L"))) {
 	        			j--;
 	        			sim = cinta.charAt(/*k*/j);
 	        		}
-	        		else if((aristas.get(k).getDireccion() == "D")||(aristas.get(k).getDireccion() == "R")){
+	        		else if((aristas.get(k).getDireccion().equals("D"))||(aristas.get(k).getDireccion().equals("R"))){
 	        			j++;
 	        			if (j < cinta.length())sim = cinta.charAt(/*k*/j);
 	        			else sim = maquina.getBlancoChar();
@@ -95,6 +109,10 @@ public class AceptaTuring {
 	        	
 	        	System.out.println("EST: " + est);
 	        }
+	        
+	        
+	        }
+	        
 	        System.out.println("FIN");
 	        FileWriter fichero = null;
 	        PrintWriter pw = null;
@@ -252,8 +270,10 @@ public static void main (String[] args){
 	
 	mt.anadeArista(a);
 	
-	AceptaTuring acepta = new AceptaTuring();
-	acepta.acepta("C:\\Documents and Settings\\Ro\\Mis documentos\\turing.txt", mt);
+	String ruta = "C:\\Documents and Settings\\Ro\\Mis documentos\\turing.txt";
+	AceptaTuring acepta = new AceptaTuring(ruta,mt);
+	System.out.println("MT: \n" + mt);
+	acepta.acepta();
 }
 
 }
