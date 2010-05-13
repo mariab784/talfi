@@ -1673,9 +1673,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		    		String ruta=chooser.getCurrentDirectory().getAbsolutePath()+brr+chooser.getSelectedFile().getName();
 		    		Automata a=ParserXML.getInstancia().extraerAutomata(ruta);
 		            setAutomata(a);
-		            if(a instanceof MaquinaTuring){
-		            	panelCentral.getPanel().setTipoAutomata("MaquinaTuring");}          
-		            else if(a instanceof AutomataFNDLambda) {
+        
+		            if(a instanceof AutomataFNDLambda) {
 		            	panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");}
 		            else if(a instanceof AutomataFND) {
 		            	panelCentral.getPanel().setTipoAutomata("AutomataFND");}
@@ -1684,7 +1683,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		            /*********************************************************/	            		
 		            else if(a instanceof AutomataPila){
 		            	panelCentral.getPanel().setTipoAutomata("AutomataPila");}
-
+		            else if(a instanceof MaquinaTuring){
+		            	panelCentral.getPanel().setTipoAutomata("MaquinaTuring");}  
 		            /*********************************************************/
 		            
 		            
