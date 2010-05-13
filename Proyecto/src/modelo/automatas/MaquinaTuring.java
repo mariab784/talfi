@@ -25,6 +25,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	private ArrayList<AristaTuring> maquina;
 	private boolean termina;
 	private String blanco;
+	private Mensajero mensajero;
 //****************************************************************	
 //MÉTODOS*********************************************************	
 	/**
@@ -35,7 +36,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 		setEstadoInicial(null);
 		//setAlfabetoCinta(null);   //XXX Un .txt
 		maquina = new ArrayList<AristaTuring>();
-        Mensajero mensajero = Mensajero.getInstancia();
+        mensajero = Mensajero.getInstancia();
         estados = new ArrayList<String>();
         estadosFin = new ArrayList<String>();
         blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
@@ -160,7 +161,7 @@ public class MaquinaTuring extends AutomataFNDLambda{
 	 * Método que devuelve la lista de estados finales 
 	 * @return estados finales.
 	 */
-	public ArrayList<String> getEstadosFin() {
+	public ArrayList<String> getEstadosFinales() {
 		return estadosFin;
 	}
 //----------------------------------------------------------------
@@ -329,21 +330,43 @@ public class MaquinaTuring extends AutomataFNDLambda{
 		int i = existeTransicion(a);
 		if ( i == -1 ){ 
 			this.maquina.add(a); 
-			ArrayList<String> simbolos = a.getEntradaCinta();
-			int j = 0;
-			while (j < simbolos.size()){
+//			ArrayList<String> simbolos = a.getEntradaCinta();
+//			int j = 0;
+/*			while (j < simbolos.size()){
 				String s = simbolos.get(j);
 				if (!s.equals(blanco) && !this.getAlfabet().getListaLetras().contains(s)){
 					this.getAlfabet().getListaLetras().add(s);
 				}
 				j++;
-			}
+			}*/
 			
 			String scinta = a.getSimboloCinta();
-			if (!scinta.equals(blanco) && !this.getAlfabet().getListaLetras().contains(scinta)){
+			if (!scinta.equals(blanco) && !this.getAlfabetoCinta().getListaLetras().contains(scinta)){
 				this.getAlfabetoCinta().getListaLetras().add(scinta);
 			}
 			
+		}
+		
+		
+	}
+	
+	public void creaAlfEntrada(String c){
+		
+		if(mensajero == null)        mensajero = Mensajero.getInstancia();
+
+        blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
+		
+        /*if(this.getAlfabet() == null)*/ alfabet = new Alfabeto_imp();
+        
+		int i = 0; int tam = c.length();
+		while(i<tam){
+			
+			char letra =  c.charAt(i); String l = letra + "";
+
+			if (!blanco.equals(l) && 
+				!this.getAlfabet().getListaLetras().contains(l)) this.getAlfabet().aniadirLetra(l);
+			
+			i++;
 		}
 		
 		
@@ -436,7 +459,7 @@ public ArrayList<AristaTuring> getAristasTuring(){
 		String s = "";
 		s += "Estados: " + this.getEstados() + "\n";
 		s += "Estado Inicial: " + this.getEstadoIni() + "\n";
-		s += "Estados Finales: " + this.getEstadosFin() + "\n";
+		s += "Estados Finales: " + this.getEstadosFinales() + "\n";
 		s += "Alfabeto: " + this.getAlfabet() + "\n";
 		s += "Alfabeto Cinta: " + this.getAlfabetoCinta() + "\n";
 		s += "Aristas: " + this.getAristasTuring() + "\n";
