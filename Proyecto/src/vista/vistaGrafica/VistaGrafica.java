@@ -1681,7 +1681,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		            else if(a instanceof AutomataFD) {
 		            	panelCentral.getPanel().setTipoAutomata("AutomataFD");}
 		            /*********************************************************/	            		
-		            else if(a instanceof AutomataPila){
+		            if(a instanceof AutomataPila){
 		            	panelCentral.getPanel().setTipoAutomata("AutomataPila");}
 		            else if(a instanceof MaquinaTuring){
 		            	panelCentral.getPanel().setTipoAutomata("MaquinaTuring");}  
