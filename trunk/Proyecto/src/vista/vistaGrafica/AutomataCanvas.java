@@ -1272,7 +1272,7 @@ public class AutomataCanvas extends JScrollPane {
 				else {
 					int angulo=1;
 					if (a instanceof Arista) if (esUnica((Arista)a)) angulo=0;
-					if (a instanceof AristaAP){angulo=0; /*System.out.println("MUAHAHAHAAH");*/}
+					if ((a instanceof AristaAP) || (a instanceof AristaTuring)){angulo=0; /*System.out.println("MUAHAHAHAAH");*/}
 					if (a.getY()>a.getFy()) 
 						curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-15,a.getFy()+15, angulo);
 					else curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-15,a.getFy()-15,angulo);

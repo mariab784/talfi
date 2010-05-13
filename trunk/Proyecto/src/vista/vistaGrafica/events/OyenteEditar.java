@@ -146,11 +146,13 @@ public class OyenteEditar extends MouseAdapter {
 		int tam = 0; int tipo = 0;
 		if(!canvas.getListaAristas().isEmpty()) tam = canvas.getListaAristas().size();
 		if (!canvas.getListaAristasPila().isEmpty()){ tam = canvas.getListaAristasPila().size(); tipo = 1;}
-		//if (!canvas.getListaAristasTuring().isEmpty()){ tam = canvas.getListaAristasTuring().size(); tipo = 2;}
+		
+		if (!canvas.getListaAristasTuring().isEmpty()){ tam = canvas.getListaAristasTuring().size(); tipo = 2;}
 		for(int i=0;i</*canvas.getListaAristas().size()*/tam;i++){
 			AristaGeneral a = null;
 			if (tipo == 0) a=canvas.getListaAristas().get(i);
 			else if (tipo == 1) a=canvas.getListaAristasPila().get(i);
+			else if (tipo == 2) a=canvas.getListaAristasTuring().get(i);
 			//else a=canvas.getListaAristasTuring().get(i);
 			//Arista a=canvas.getListaAristas().get(i);
 			if(a.getOrigen().equals(origen2.getEtiqueta())){
