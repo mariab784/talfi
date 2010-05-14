@@ -54,7 +54,7 @@ public class AceptaTuring {
 	        else{
 	        
 	        
-	        while((!maquina.getEstadosFinales().contains(est)) && (k < numAristas)){
+	        while((k < numAristas)/* && (!maquina.getEstadosFinales().contains(est))*/){
 	        	
 	        	AristaTuring arist = aristas.get(k);
 	        	System.out.println("ARIST: " + arist);
@@ -77,14 +77,19 @@ public class AceptaTuring {
 	        	if( /*(arist.contieneOrigen(est))*/ b1 && 
 	        			/*(arist.getEntradaCinta().contains(cinta.charAt(j)))*/ b2 )   {
 	        		//cinta.replaceFirst(toString(cinta.charAt(j)),arist.getSimboloCinta());
-	        		String primero = cinta.substring(0, j);
+	        		String primero = "";
+	        		
+	        		if(j >= 0) primero = cinta.substring(0, j);
+	        		else primero = primero.concat(maquina.getBlancoChar()+"");
 	        		System.out.println("primero: " + primero);
 	        		
 	        		System.out.println("recambio: " + arist.getSimboloCinta());
 	        		
 	        		String resto = "";
 	        		System.out.println("j resto: " + j);
-	        		if(j < cinta.length()) resto = cinta.substring(j+1);
+	        		if(j < cinta.length()){ 
+	        			if (j < 0 ) resto = new String(cinta);
+	        			else resto = cinta.substring(j+1); }
 	        		else resto = maquina.getBlancoChar()+"";
 	        		System.out.println("resto: " + resto);
 	        		
@@ -93,7 +98,8 @@ public class AceptaTuring {
 	        		
 	        		if((arist.getDireccion().equals("I"))||(arist.getDireccion().equals("L"))) {
 	        			j--;
-	        			sim = cinta.charAt(/*k*/j);
+	        			if (j < 0 ) sim = maquina.getBlancoChar();
+	        			else sim = cinta.charAt(/*k*/j);
 	        		}
 	        		else if((aristas.get(k).getDireccion().equals("D"))||(aristas.get(k).getDireccion().equals("R"))){
 	        			j++;
@@ -114,9 +120,11 @@ public class AceptaTuring {
 	        }
 	        
 	        System.out.println("FIN");
+	        if (todoBlancos(cinta,j)) cinta = "";
+	        else cinta = salidaCinta(cinta,j);
 	        FileWriter fichero = null;
 	        PrintWriter pw = null;
-	        if(k == numAristas) {
+	        if(/*k == numAristas*/!maquina.getEstadosFinales().contains(est)) {
 	        	try
 		        {
 		            fichero = new FileWriter(ruta+"output.txt");
@@ -177,13 +185,52 @@ public class AceptaTuring {
 	    }
 	} 
 	
-private String toString(char charAt) {
+/*private String toString(char charAt) {
 	// TODO Auto-generated method stub
 	String s = "";
 	s += charAt;
 	return s;
-}
+}*/
 //****************************************************************	
+
+public String salidaCinta(String cinta,int j){
+	System.out.println("J SALIDACINTA: "+ j);
+	if (j == -1) return new String(cinta);
+	
+	else return new String(cinta.substring(j));
+	
+}
+
+public boolean todoBlancos(String cinta, int pos){
+	
+	int tam = cinta.length(); String blanco = maquina.getBlancoChar()+"";
+	if(pos < 0){
+		String principio = "";
+		int i = pos;
+		while (i < 0){
+			principio = principio.concat(blanco+"");
+			i++;
+		}
+		
+		cinta = principio.concat(cinta);
+		
+		//cinta = principio;
+		pos = 0;
+		tam = cinta.length();
+	}
+	
+	
+	
+	while(pos < tam){
+		
+		String car =cinta.charAt(pos)+"";
+		if(!blanco.equals(car))return false;
+		pos++;
+	}
+	System.out.println("TODO BLANCOS!!");
+	return true;
+	
+}
 
 
 public static void main (String[] args){
