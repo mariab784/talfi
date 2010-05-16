@@ -139,6 +139,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		
 		nodos = documento.getElementsByTagName("states");		
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				NodeList chivato = nodos.item(0).getChildNodes();
+				Node chivato2 = nodos.item(0).getChildNodes().item(1);
 				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
 				i++;
 		}
@@ -147,7 +149,9 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		
 		
 		nodos = documento.getElementsByTagName("init");
-		automata.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
+
+		if (nodos.item(0).getChildNodes().item(1) != null)
+			automata.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
 		
 		
 		nodos = documento.getElementsByTagName("finals");

@@ -152,6 +152,9 @@
 		<noinicial>
 			El automata no tiene estado inicial
 		</noinicial>
+		<nofinales>
+			El automata no tiene estados finales
+		</nofinales>
 		<noarrows>
 			El automata no tiene transiciones, no es un automata válido
 		</noarrows>

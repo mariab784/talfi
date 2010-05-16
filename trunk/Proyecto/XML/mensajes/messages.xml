@@ -155,6 +155,9 @@
 		<noarrows>
 			There are not any arrow, this is not a valid automata
 		</noarrows>
+		<nofinales>
+			No final states in the automata
+		</nofinales>
 	</canvas>
 	<parser>
 		<noarchivo>

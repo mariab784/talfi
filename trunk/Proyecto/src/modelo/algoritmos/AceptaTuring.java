@@ -58,8 +58,14 @@ public class AceptaTuring {
 	        int numVueltas = 0;
 	        cotaMax = (int) (Math.pow( (float)cinta.length(), (float)2 )  * aristas.size());
 	        
-	        if (maquina.getEstadosFinales().isEmpty()){
-	        	System.out.println("NO TIENE FINALES NO ACEPTA");
+	        if ( (maquina.getEstadoIni() == null) || 
+	        		(maquina.getEstadoIni() == "") )
+	        	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.noinicial", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+
+	        	
+	        else if (maquina.getEstadosFinales().isEmpty()){
+	        	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.nociclos", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+
 	        }
 	        else{
 	        
@@ -130,8 +136,8 @@ public class AceptaTuring {
 	        
 	        }
 	        
-	        System.out.println("FIN");
-	        System.out.println("NumVueltas: " + numVueltas);
+//	        System.out.println("FIN");
+//	        System.out.println("NumVueltas: " + numVueltas);
 	        
 //	        try{
 	        

@@ -325,6 +325,8 @@ public class AutomataFD implements Automata{
 	public void insertaEstadoNoFinal(String estado) {
 		this.estados.add(estado);
 	}
+	
+	public int dameTipo(){return 0;}
 
 }
 
