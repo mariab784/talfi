@@ -10,7 +10,7 @@ import java.util.Iterator;
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
-public class AutomataFNDLambda extends AutomataFND {
+public class AutomataFNDLambda extends AutomataFND implements Automata{
 	
 	/**
 	* Construye un automata finito determinista, posteriormente al irsele añadiendo
@@ -135,4 +135,5 @@ public class AutomataFNDLambda extends AutomataFND {
 		return alfabeto;
 	}
 
+	public int dameTipo(){return 2;}
 }

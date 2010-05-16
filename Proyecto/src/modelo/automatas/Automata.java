@@ -217,4 +217,6 @@ public interface Automata {
 
 
 		public ArrayList<String> getDestinos2(String estado);
+		
+		public int dameTipo();
 }

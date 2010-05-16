@@ -1,80 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <authomata>
 	<type>
 		<item>MaquinaTuring</item>
 	</type>
 	<alphabet>
 		<item>0</item>
+		<item>U</item>
 		<item>1</item>
 		<item>C</item>
-		<item>U</item>
-		<item>#</item>
-		<item>D</item>
-		<item>I</item>
-		<item>N</item>
+		<item>u</item>
 	</alphabet>
+		<alphabetP>
+		<item>c</item>
+		<item>C</item>
+		<item>U</item>
+		<item>0</item>
+	</alphabetP>
 	<states>
-		<state>S0</state>
-		<state>S1</state>
-		<state>S2</state>
-		<state>S3</state>
-		<state>S4</state>
+		<state>s0</state>
+		<state>s1</state>
+		<state>s2</state>
+		<state>s3</state>
+		<state>s4</state>
 	</states>
 	<init>
-		<state>S0</state>
+		<state>s0</state>
 	</init>
 	<finals>
-		<state>S4</state>
+		<state>s4</state>
 	</finals>
 	<arrows>
 		<arrow>
-			<state>S0</state>
-			<state>S1</state>
-			<item>0/C,D</item>
+		<state>s0</state>
+		<state>s1</state>
+		<item>0</item>
+		<scinta>C</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S0</state>
-			<state>S3</state>
-			<item>U/U,D</item>
+		<state>s0</state>
+		<state>s3</state>
+		<item>U</item>
+		<scinta>U</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S1</state>
-			<state>S1</state>
-			<item>(0/0,D)</item>
+		<state>s1</state>
+		<state>s1</state>
+		<item>0</item>
+		<scinta>0</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S1</state>
-			<state>S2</state>
-			<item>(1/U,I)</item>
+		<state>s1</state>
+		<state>s2</state>
+		<item>1</item>
+		<scinta>U</scinta>
+		<direc>I</direc>
 		</arrow>
 		<arrow>
-			<state>S1</state>
-			<state>S1</state>
-			<item>(U/U,D)</item>
+		<state>s1</state>
+		<state>s1</state>
+		<item>U</item>
+		<scinta>U</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S2</state>
-			<state>S2</state>
-			<item>0/0,I</item>
+		<state>s2</state>
+		<state>s2</state>
+		<item>0</item>
+		<scinta>0</scinta>
+		<direc>I</direc>
 		</arrow>
 		<arrow>
-			<state>S2</state>
-			<state>S0</state>
-			<item>C/C,D</item>
+		<state>s2</state>
+		<state>s0</state>
+		<item>C</item>
+		<scinta>C</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S2</state>
-			<state>S2</state>
-			<item>(U/U,I)</item>
+		<state>s2</state>
+		<state>s2</state>
+		<item>U</item>
+		<scinta>U</scinta>
+		<direc>I</direc>
 		</arrow>
 		<arrow>
-			<state>S3</state>
-			<state>S3</state>
-			<item>U/U,D</item>
+		<state>s3</state>
+		<state>s3</state>
+		<item>U</item>
+		<scinta>U</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S3</state>
-			<state>S4</state>
-			<item>#/#,N</item>
+		<state>s3</state>
+		<state>s4</state>
+		<item>#</item>
+		<scinta>#</scinta>
+		<direc>N</direc>
 		</arrow>
 	</arrows>
-</authomata>
+<coordenadas>
+<estadoCoord><nombre>s0</nombre><x>139</x><y>121</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>345</x><y>45</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>559</x><y>143</y></estadoCoord><estadoCoord><nombre>s3</nombre><x>337</x><y>343</y></estadoCoord><estadoCoord><nombre>s4</nombre><x>490</x><y>270</y></estadoCoord></coordenadas></authomata>

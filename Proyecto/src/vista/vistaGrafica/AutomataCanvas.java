@@ -570,7 +570,7 @@ public class AutomataCanvas extends JScrollPane {
 			if (listaFinales.contains(state.getEtiqueta()))
 				g.drawOval(point.x - radio + 3, point.y - radio + 3,
 						(radio - 3) << 1, (radio - 3) << 1);
-			if (estadoInicial.equals(state.getEtiqueta())) {
+			if ((estadoInicial != null) && (estadoInicial.equals(state.getEtiqueta()))) {
 				int[] x = { point.x - radio, point.x - (radio << 1),point.x - (radio << 1) };
 				int[] y = { point.y, point.y - radio, point.y + radio };
 				g.setColor(Color.white);
@@ -625,7 +625,7 @@ public class AutomataCanvas extends JScrollPane {
 			if (listaFinales.contains(state.getEtiqueta()))
 				g.drawOval(point.x - radio + 3, point.y - radio + 3,
 						(radio - 3) << 1, (radio - 3) << 1);
-			if (estadoInicial.equals(state.getEtiqueta())) {
+			if ( (estadoInicial != null) && (estadoInicial.equals(state.getEtiqueta()))) {
 				int[] x = { point.x - radio, point.x - (radio << 1),point.x - (radio << 1) };
 				int[] y = { point.y, point.y - radio, point.y + radio };
 				g.setColor(Color.white);
@@ -1140,7 +1140,7 @@ public class AutomataCanvas extends JScrollPane {
 			if (listaFinales.contains(state.getEtiqueta()))
 				gimg.drawOval(point.x - radio + 3, point.y - radio + 3,
 						(radio - 3) << 1, (radio - 3) << 1);
-			if (estadoInicial.equals(state.getEtiqueta())) {
+			if ((estadoInicial != null ) && (estadoInicial.equals(state.getEtiqueta()))) {
 				int[] x = { point.x - radio, point.x - (radio << 1),point.x - (radio << 1) };
 				int[] y = { point.y, point.y - radio, point.y + radio };
 				gimg.setColor(Color.white);

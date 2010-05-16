@@ -21,7 +21,7 @@ import vista.vistaGrafica.AristaAP;
  * @author anicetobacter
  *
  */
-public class AutomataPila extends AutomataFND{
+public class AutomataPila extends AutomataFND implements Automata{
 	
 	private final  static String nombreAux = "aux";
 	private final  static String iniNombreAux = "iniaux";
@@ -1260,5 +1260,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		"\n"+"Alfabeto Pila: "+alfabetoPila.toString()+"\n"+"Determinista: "+apd+"\n"+automata.toString()
 		+"\n"+"FondoPila: "+fondoPila+"\n";
 	}
+	
+	public int dameTipo(){return 3;}
 }
 /******************************************************************/

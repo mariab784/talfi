@@ -5,41 +5,49 @@
 	</type>
 	<alphabet>
 		<item>1</item>
-		<item>#</item>
-		<item>D</item>
-		<item>I</item>
-		<item>N</item>
 	</alphabet>
-	<states>	 
-		<state>S0</state>
-		<state>S1</state>
-		<state>S2</state>
+		<alphabetP>
+		<item>1</item>
+	</alphabetP>
+	<states>
+		<state>s0</state>
+		<state>s1</state>
+		<state>s2</state>
 	</states>
-	<init>   
-		<state>S0</state>
+	<init>
+		<state>s0</state>
 	</init>
 	<finals>
 	</finals>
 	<arrows>
 		<arrow>
-			<state>S0</state>	
-			<state>S0</state>
-			<item>1/1,D</item>
+		<state>s0</state>
+		<state>s0</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S0</state>	
-			<state>S1</state>
-			<item>#/1,D</item>
+		<state>s0</state>
+		<state>s1</state>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
-			<state>S1</state>	
-			<state>S2</state>
-			<item>#/1,I</item>
+		<state>s1</state>
+		<state>s2</state>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
 		</arrow>
 		<arrow>
-			<state>S2</state>	
-			<state>S2</state>
-			<item>1/1,I</item>
-		</arrow>		
+		<state>s2</state>
+		<state>s2</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
+		</arrow>
 	</arrows>
-</authomata>
+<coordenadas>
+<estadoCoord><nombre>s0</nombre><x>235</x><y>184</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>419</x><y>125</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>594</x><y>205</y></estadoCoord></coordenadas></authomata>

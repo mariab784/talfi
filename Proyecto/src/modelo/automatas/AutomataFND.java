@@ -8,7 +8,7 @@ import java.util.HashMap;
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
-public class AutomataFND extends AutomataFD {
+public class AutomataFND extends AutomataFD implements Automata{
 	
 	/**
 	* Construye un automata finito determinista, posteriormente al irsele añadiendo
@@ -29,6 +29,6 @@ public class AutomataFND extends AutomataFD {
 	}
 	
 	
-
+	public int dameTipo(){return 1;}
 
 }

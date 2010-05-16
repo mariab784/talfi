@@ -15,7 +15,7 @@ import vista.vistaGrafica.AristaTuring;
  *  @author Rocio Barrigüete, Mario Huete, Luis San Juan 
  *
  */
-public class MaquinaTuring extends AutomataFNDLambda{
+public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 //ATRIBUTOS:******************************************************	
 	private String estadoIni;
 	private ArrayList<String> estadosFin;
@@ -489,5 +489,6 @@ public ArrayList<AristaTuring> getAristasTuring(){
 	
 	public char getBlancoChar(){return blanco.charAt(0);}
 
+	public int dameTipo(){return 4;}
 }
 
