@@ -238,8 +238,11 @@ public class CanvasMouseAdapter extends MouseAdapter {
 		
 		ArrayList<Arista> lArist = null;
 		ArrayList<AristaAP> lAristAP = null;
+		ArrayList<AristaTuring> lAristT = null;
 		Iterator<Arista> iArist = null; 
 		Iterator<AristaAP> iAristAP = null; 
+		Iterator<AristaTuring> iAristT = null; 
+
 		
 		
 		if (!canvas.getListaAristas().isEmpty()){
@@ -252,7 +255,12 @@ public class CanvasMouseAdapter extends MouseAdapter {
 			iAristAP=canvas.getListaAristasPila().iterator(); 			
 		}
     
-		if(iArist != null || iAristAP != null)	{
+		if (!canvas.getListaAristasTuring().isEmpty()){
+			lAristT=new ArrayList<AristaTuring>();
+			iAristT=canvas.getListaAristasTuring().iterator(); 			
+		}
+		
+		if(iArist != null || iAristAP != null || iAristT != null)	{
 			String etiqueta = est.getEtiqueta();
 			if (iArist != null){
 				while(iArist.hasNext()){
@@ -272,12 +280,27 @@ public class CanvasMouseAdapter extends MouseAdapter {
 								lAristAP.add(obj);
 						}					
 				}
-			}	
+			}
+			
+			if (iAristT != null){
+				while(iAristT.hasNext()){
+					AristaTuring obj = iAristT.next(); 					
+						if(!(obj.getDestino().equals(etiqueta))&&
+							!(obj.getOrigen().equals(etiqueta))){
+								lAristT.add(obj);
+						}					
+				}
+			}
 
 			canvas.setAlfabeto(canvas.minimizarAlfabeto());
 			if(!canvas.getListaAristasPila().isEmpty()){
 				canvas.setListaAristasAP(lAristAP);
 				canvas.setAlfabetoPila(canvas.minimizarAlfabetoPila());
+			}
+			else if (!canvas.getListaAristasTuring().isEmpty()){
+				canvas.setListaAristasTuring(lAristT);
+				canvas.setAlfabetoCinta(canvas.minimizarAlfabetoCinta());
+				
 			}
 			else{canvas.setListaAristas(lArist);}
 		}

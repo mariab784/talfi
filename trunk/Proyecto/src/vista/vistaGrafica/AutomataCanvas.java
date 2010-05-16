@@ -1624,6 +1624,21 @@ public class AutomataCanvas extends JScrollPane {
 		return alf;
 	}
 	/************************************************************/
+	public AlfabetoCinta minimizarAlfabetoCinta(){
+		Iterator<AristaTuring> iA=listaAristasTuring.iterator();
+		AlfabetoCinta alf = new AlfabetoCinta();
+		if (m == null) m = Mensajero.getInstancia();
+		String blanco = m.devuelveMensaje("simbolos.blanco",4);
+		alf.aniadirLetra(blanco);
+		while(iA.hasNext()){
+			AristaTuring a=iA.next();
+			String letra = a.getSimboloCinta();
+			if (!alf.estaLetra(letra)&&!blanco.equals(letra)) alf.aniadirLetra(letra);
+
+		}
+		return alf;
+	}
+	/************************************************************/
 /*	private boolean contieneEntrada(AristaAP arista, AristaAP a){ 
 
 		int tamA = a.getEntradaSimbolos().size(); 		
@@ -1845,6 +1860,8 @@ public class AutomataCanvas extends JScrollPane {
 			if ( i == -1 ) listaAristas.add(a);
 
 	}
+	
+	public void setListaAristasTuring(ArrayList<AristaTuring> lista){listaAristasTuring = lista;}
  
 	public static void main(String[] args){
 		
