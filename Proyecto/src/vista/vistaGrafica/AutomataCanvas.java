@@ -703,7 +703,9 @@ public class AutomataCanvas extends JScrollPane {
 					}
 					
 				}
-			
+				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setEstaPalabra(true);
+				VistaGrafica.setMaricaTuring(false);
 			}
 			else if (this.getTuring()){
 				
@@ -723,7 +725,9 @@ public class AutomataCanvas extends JScrollPane {
 						alfabetoCinta.aniadirLetra(letra);	
 					
 				}
-				
+				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setEstaPalabra(false);
+				VistaGrafica.setMaricaTuring(true);
 			}
 			//if(this.getTuring())
 			else {
@@ -736,6 +740,10 @@ public class AutomataCanvas extends JScrollPane {
 						alfabeto.aniadirLetra(letra);
 					}
 				}
+				
+				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setEstaPalabra(false);
+				VistaGrafica.setMaricaTuring(false);
 			}
 			if(alfabeto!=null){
 				Iterator<String> itAlfabeto=alfabeto.dameListaLetras().iterator();
@@ -932,8 +940,12 @@ public class AutomataCanvas extends JScrollPane {
 		borrarPanel();
 		this.alfabeto=a.getAlfabeto();
 		//if (a instanceof AutomataPila){setPila(false);}
-		if (a instanceof AutomataPila){setPila(true); setTuring(false); this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();}
-		if (a instanceof MaquinaTuring){setTuring(true);setPila(false); this.alfabetoCinta = ((MaquinaTuring)a).getAlfabetoCinta();}
+		if (a instanceof AutomataPila){
+			setPila(true); setTuring(false); this.alfabetoPila = ((AutomataPila)a).getAlfabetoPila();
+		}
+		if (a instanceof MaquinaTuring){
+			setTuring(true);setPila(false); this.alfabetoCinta = ((MaquinaTuring)a).getAlfabetoCinta();
+		}
 
 		
 		Iterator<String> itEst=a.getEstados().iterator();

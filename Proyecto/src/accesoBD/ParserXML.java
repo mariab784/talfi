@@ -13,6 +13,8 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 
+import vista.vistaGrafica.VistaGrafica;
+
 
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
@@ -90,27 +92,43 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		Automata automata=null;
 		if (var.equals("AutomataFNDLambda")){
 			
-			automata = new AutomataFNDLambda();		
+			automata = new AutomataFNDLambda();	
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		if (var.equals("AutomataFD")){
 			
-			automata = new AutomataFD();		
+			automata = new AutomataFD();
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		if (var.equals("AutomataFND")){
 			
 			automata = new AutomataFND();		
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setMaricaTuring(false);
 		}
 
 		/*********************************************************/
 		if (var.equals("AutomataPila")){
 			
-			automata = new AutomataPila();		
+			automata = new AutomataPila();	
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setEstaPalabra(true);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		/*********************************************************/
 		if (var.equals("MaquinaTuring")){
 			
 			automata = new MaquinaTuring();		
 			esTuring = true;
+			
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setMaricaTuring(true);
 		}
 		/*********************************************************/
 		NodeList nodos = documento.getElementsByTagName("alphabet");
