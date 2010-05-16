@@ -249,6 +249,9 @@
 		<noejer>
 			This file does not have a valid exercise
 		</noejer>
+		<nocinta>
+			Invalid file
+		</nocinta>
 		<update>
 			Update data
 		</update>
@@ -356,6 +359,9 @@
 		<yaauto>
 			Is impossible paste, there is another automata in the panel
 		</yaauto>
+		<ciclos>
+			Undefined output. The Turing Machine has cycles.
+		</ciclos>
 	</vista>
 	<equivalenciajo>
 		<second>Second Automata</second>
