@@ -94,9 +94,9 @@ public class VistaGrafica extends JFrame implements Vista{
 	private JToggleButton estado;
 	private JToggleButton arista;
 	/****/
-	private JToggleButton estaPalabra;
-	private JToggleButton gordaLatex;
-	private JToggleButton maricaTuring;
+	private static JToggleButton estaPalabra;
+	private static JToggleButton gordaLatex;
+	private static JToggleButton maricaTuring;
 	/****/
 	private JToggleButton borrar;
 	private JToggleButton editar;
@@ -877,6 +877,9 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	private JPanel creaPanelNorte(){
 		Mensajero mensajero=Mensajero.getInstancia();
+		
+
+		
 		JPanel n= new JPanel();
 		n.setBackground(Color.BLUE);
 		nuevos= new JToolBar();
@@ -989,6 +992,10 @@ public class VistaGrafica extends JFrame implements Vista{
 		tool.aniadirBotton(borrar);
 
 
+		setGordaLatex(false);
+		setEstaPalabra(false);
+		setMaricaTuring(false);
+		
 		JToolBar expr=new JToolBar();
 		JPanel panelEr=new JPanel();
 		JLabel e =new JLabel(mensajero.devuelveMensaje("algoritmos.er",1));
@@ -1224,6 +1231,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.eafn",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/AFND/"+nombreEjemplo.toString()+".xml");
@@ -1234,6 +1244,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.eafnl",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/AFND_lambda/"+nombreEjemplo.toString()+".xml");
@@ -1244,6 +1257,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		
 		/*********************************************************/
@@ -1256,6 +1272,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint(); 
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			VistaGrafica.setEstaPalabra(true);
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setMaricaTuring(false);
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.emt",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/MT/"+nombreEjemplo.toString()+".xml");
@@ -1266,6 +1285,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setGordaLatex(true);
+			VistaGrafica.setMaricaTuring(true);
 		}
 		/*********************************************************/
 		
@@ -1685,6 +1707,10 @@ public class VistaGrafica extends JFrame implements Vista{
 			super.actionPerformed(e);
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(false);
+			
+			setGordaLatex(true);
+			setEstaPalabra(false);
+			setMaricaTuring(false);
 		}
 	}
 	
@@ -1706,6 +1732,10 @@ public class VistaGrafica extends JFrame implements Vista{
 			super.actionPerformed(e);
 			VistaGrafica.setPila(true);
 			VistaGrafica.setTuring(false);
+			
+			setGordaLatex(true);
+			setEstaPalabra(true);
+			setMaricaTuring(false);
 		}
 	}
 	
@@ -1727,6 +1757,10 @@ public class VistaGrafica extends JFrame implements Vista{
 			super.actionPerformed(e);
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(true);
+			
+			VistaGrafica.setMaricaTuring(true);
+			VistaGrafica.setEstaPalabra(false);
+			VistaGrafica.setGordaLatex(true);
 		}
 	}
 	
@@ -1868,15 +1902,35 @@ public class VistaGrafica extends JFrame implements Vista{
       
 		            switch(a.dameTipo()){ 
 		             
-		            case 0: panelCentral.getPanel().setTipoAutomata("AutomataFD"); break;
+		            case 0: panelCentral.getPanel().setTipoAutomata("AutomataFD");
+					setGordaLatex(true);
+					setEstaPalabra(false);
+					setMaricaTuring(false);
+		            break;
 		            	
-		            case 1: panelCentral.getPanel().setTipoAutomata("AutomataFND"); break;
+		            case 1: panelCentral.getPanel().setTipoAutomata("AutomataFND"); 
+					setGordaLatex(true);
+					setEstaPalabra(false);
+					setMaricaTuring(false);
+		            break;
 		            	
-		            case 2: panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda"); break;
+		            case 2: panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");
+					setGordaLatex(true);
+					setEstaPalabra(false);
+					setMaricaTuring(false);
+		            break;
 		            	
-		            case 3:	panelCentral.getPanel().setTipoAutomata("AutomataPila"); break;
+		            case 3:	panelCentral.getPanel().setTipoAutomata("AutomataPila"); 
+					setGordaLatex(true);
+					setEstaPalabra(true);
+					setMaricaTuring(false);
+		            break;
 		            	
-		            case 4: panelCentral.getPanel().setTipoAutomata("MaquinaTuring"); break;
+		            case 4: panelCentral.getPanel().setTipoAutomata("MaquinaTuring"); 
+					setGordaLatex(true);
+					setEstaPalabra(false);
+					setMaricaTuring(true);
+		            break;
 		            
 		            }
 		            
@@ -2256,5 +2310,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			AceptaTuring aceptacion = new AceptaTuring(ruta,m);
 			aceptacion.acepta();
         }
-	}    	
+	}
+	
+	public static void setGordaLatex(boolean b){gordaLatex.setEnabled(b);}
+	public static void setEstaPalabra(boolean b){estaPalabra.setEnabled(b);}
+	public static void setMaricaTuring(boolean b){maricaTuring.setEnabled(b);}
 }
