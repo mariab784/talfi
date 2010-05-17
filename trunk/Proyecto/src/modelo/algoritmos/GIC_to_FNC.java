@@ -138,23 +138,32 @@ public class GIC_to_FNC {
 	}
 	
 	public void pintaTabla(){
-		
+		xml="<exit>";
+		xml+="<steps>";
 		for(int i = 0; i <lon; i++){
 			if (i == 0) System.out.print("  ");
-			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+			xml+="<step>";
+			xml+=this.getGramaticaSalida().getVariables().get(i);
+			xml+="</step>";
+			//System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
 		}
 		System.out.println();
 		for(int i=0; i<lon; i++){
 			for(int j=0; j<lon; j++){
 				String s;
+				xml+="<step>";
 				if (j == 0)
-					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
-				if (tabla[i][j]) System.out.print("X ");
-				else System.out.print("- ");
+					xml+=(this.getGramaticaSalida().getVariables().get(i) + " ");
+				if (tabla[i][j]) 
+					xml+="X";//System.out.print("X ");
+				else xml+="-";//System.out.print("- ");
+				xml+="</step>";
 				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
 			System.out.println();
 		}
+		xml+="</steps>";
+		xml="</exit>";
 	}
 	
 	public void inicializarTabla() {
