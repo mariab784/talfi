@@ -1060,7 +1060,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		if (!this.getEstadosFinales().isEmpty()){
 		String est = this.getEstadosFinales().get(i);
 //		System.out.println("est final: " + est);
-		int tamAlfpila = this.alfabetoPila.getListaLetras().size();
+		int tamAlfpila = /*this*/aut.alfabetoPila.getListaLetras().size();
 //		System.out.println("tamAlfpila : " + tamAlfpila);
 		int tamEstFin = this.getEstadosFinales().size();
 //		System.out.println("tamEstFin : " + tamEstFin);
@@ -1074,7 +1074,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 			
 			//(int x,int y,int fx, int fy,String origen,String destino)
 			AristaAP a = new AristaAP(0,0,0,0,est,aut.getEstadoPilaVacia());
-			simboloPila = this.alfabetoPila.getListaLetras().get(j);
+			simboloPila = /*this*/aut.alfabetoPila.getListaLetras().get(j);
 			a.anadirSimbolo(lambda);
 			a.setCimaPila(simboloPila);
 			ArrayList<String> trans = new ArrayList<String>();
@@ -1111,12 +1111,15 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		}
 		
 		}
+		boolean b = aut.compruebaAPD();
+		aut.setDeterminista(b);
 //		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
 		System.out.println("AUTOMATA ORIGINAL: \n" + this);
 		System.out.println("AUTOMATA NUEVO: \n" + aut);
 		return aut;
 	}
 	
+	public void setDeterminista(boolean b){apd = b;}
 	
 	/**
 	 * Método que verifica si una palabra es reconocida por el autómata de pila.

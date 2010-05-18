@@ -148,7 +148,9 @@ public class Greibach extends GramaticaIC{
 							int tamConcatProd = concatProd.size();
 						
 							while(m < tamConcatProd){
-								nueva2.add(concatProd.get(m));
+								String anadir = concatProd.get(m);
+								if (!anadir.equals(lambda))
+									nueva2.add(anadir);
 								m++;
 							}
 
@@ -206,7 +208,9 @@ public class Greibach extends GramaticaIC{
 					ArrayList<String> principio = new ArrayList<String>();
 					for(int k = 0; k <j; k++){
 						String trozo = new String(concat.get(k));
-						principio.add(trozo);
+					//	System.out.println("trozo: " + trozo);
+					//	if(!trozo.equals(lambda))
+							principio.add(trozo);
 					}
 				
 			/*		if(prodConTerminal.containsKey(s)){
@@ -277,8 +281,18 @@ public class Greibach extends GramaticaIC{
 				int tamConcatProd = concatProd.size();
 				
 				while(m < tamConcatProd){
-					String saux = new String( concatProd.get(m));
-					nueva2.add(saux);
+					String saux = new String(concatProd.get(m));
+					
+
+					//System.out.println("saux:" + lambda+"fin");
+					//System.out.println("saux indexof: " + saux.indexOf(lambda));
+					if (!saux.equals(lambda)){
+						//System.out.println("saux:" + saux);
+					//	System.out.println("lambda:" + lambda+"fin");
+					//	System.out.println("distintas!");
+						nueva2.add(saux);
+					}
+					//else{ System.out.println("iguales!!"); }
 					m++;
 				}
 
@@ -286,7 +300,6 @@ public class Greibach extends GramaticaIC{
 
 				while(m < tamConcat-1){		
 					String letrita = new String(concat.get(m));
-			//		System.out.println("letrita: " + letrita);
 					nueva2.add(letrita);
 					m++;
 				}							
