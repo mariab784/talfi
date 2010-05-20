@@ -26,17 +26,16 @@ import modelo.gramatica.Produccion;
 public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	private static final char comienzo = 'A';
-	private String xml;
 	private AutomataPila automataOriginal;
 	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
-	private Controlador controlador;
 	private Mensajero mensajero;
 	private String Gramatica;
 	private String lambda;
 	private String fondoPila;
-	
+	private ArrayList<String> variablesEnProducciones;
 	private AutomataPila resultadosParciales;
+	private Controlador controlador;
 	/**
 	 * 
 	 */
@@ -53,11 +52,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 //		System.out.println("afinal: " + a);
 		mensajero=Mensajero.getInstancia();
-		xml=new String();
-		controlador=Controlador_imp.getInstancia();
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = ((AutomataPila) a).getFondoPila();
+		variablesEnProducciones = new ArrayList<String>();
+		controlador=Controlador_imp.getInstancia();
 	}
 	
 
@@ -90,7 +89,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@Override
 	public void registraControlador(Controlador controlador) {
 		// TODO Auto-generated method stub
-
+		this.controlador=controlador;
 	}
 
 	/**
@@ -250,6 +249,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private void traduceVariables(){
 		
 		HashMap<String,ArrayList<Produccion>> nProduc = null;
+		//XXX
 		int tamano = 0;// = produc.size();
 		boolean terminado = false;
 		//int i = 0;
@@ -289,11 +289,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			variables = (ArrayList<String>) nuVariables.clone();
 		}
 		
-		System.out.println("*********************traduceVariables****************************");
+/*		System.out.println("*********************traduceVariables****************************");
 		System.out.println("producciones : " + produc);
 		System.out.println("Variables: " + variables);
 		System.out.println("producciones nProduc: " + nProduc);
-		System.out.println("nuVariables: " + nuVariables);
+		System.out.println("nuVariables: " + nuVariables);*/
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nuVariables);
 
@@ -339,7 +339,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 				j++;				
 			}
-			if ((!inservible(nListaProd)) || (nnVar.equals(vIni))/*nListaProd.isEmpty()*/){nProduc.put(nnVar, nListaProd); }
+			if ((!inservible(nListaProd)) || (nnVar.equals(vIni))){nProduc.put(nnVar, nListaProd); }
 			else {noSirven.add(nnVar);}
 			
 		}
@@ -406,9 +406,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 					ns = gic.getProducciones().get(s).get(0).getConcatenacion().get(0);
 				else ns = nVariables.get(ind);
 				
-				if (!ns.equals(lambda)){
+				//if (!ns.equals(lambda)){
 					salida.add(ns); //XXX
-				}
+				//}
 			}
 			else{
 				System.out.println("S EXPLOTA: " + s); 
@@ -434,9 +434,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			
 			s = concat.get(i);
 			if (compruebaElemento(s)){
-				salida.add(s);				
+				salida.add(s);
 			}
-			else return null;
+			else{ 
+				
+				return null;
+			}
 			i++;
 	
 		}		
@@ -481,6 +484,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 		return gic;
 	}
+	
 	
 	public static void main(String[] args) {
 		AutomataPila aut = new AutomataPila();
@@ -652,12 +656,12 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		
 		
 		
-		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic());
+		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic(),false); //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
 		while(piticli.getTablaTieneMarcas()){
 			
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-			piticli.transforma_FNG();
+			piticli.transforma_FNG(false);
 		}
 		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
 		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());

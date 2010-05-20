@@ -17,7 +17,9 @@ import accesoBD.ParserXML;
 import modelo.algoritmos.AFD_to_ER;
 import modelo.algoritmos.AFNDLambda_to_AFND;
 import modelo.algoritmos.AFN_to_AFD;
+import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.Automatas_equivalentes;
+import modelo.algoritmos.GIC_to_FNC;
 import modelo.algoritmos.MinimizacionAFD;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
@@ -105,6 +107,10 @@ public class Controlador_imp implements Controlador{
 				if (opcion.equals("t3"))
 					if(args==3)
 						return 7;
+				if (opcion.equals("gr"))
+					if(args==3)
+						return 8;
+				
 				if (!opcion.equals("p")&&(!opcion.equals("h")))
 						return 0;
 		}
@@ -219,9 +225,66 @@ public class Controlador_imp implements Controlador{
 				afdtoer(a,pasos);
 				break;
 			}
+			case 8: {
+				//obtener automata en xml de la query tambien.
+				Automata a=obtenerAutomata();
+				//lanzamiento de algoritmo de minimizacion de automatas
+				//afdtoer(a,pasos);
+				System.out.println("MUAHAHAHAHAHAHHAHAH CONTROLADOR");
+				simplificacionGic(a,pasos);
+				break;
+			}
 		}
 	}
 
+	private void simplificacionGic(Automata a,boolean pasos) throws AutomatasException {
+		//OJO A LOS PASOS
+		//Automata aux2=null;
+		//aux2=a;
+		
+
+			trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
+			try {
+			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
+			agic.AP_Gramatica();
+			System.out.println("AGIC getgic: " + agic.getGic());
+			GIC_to_FNC gictofnc = new GIC_to_FNC(agic.getGic(),pasos);
+			
+			gictofnc.registraControlador(this);
+			gictofnc.simplifica(pasos);
+			
+			//salida=agic.ejecutar(pasos); //salida es un object
+			String xml=gictofnc.getXML();
+			System.out.println("TENGO EL XML!!: " + xml);
+			
+			String brr=new Character((char)92).toString();
+			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
+			System.out.println("rutaxml: " + rutaxml);
+			File fichero = new File (rutaxml);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+			bw.append(xml);
+			bw.close();
+			
+			xmlSalida=rutaxml;
+			//salida.toString();
+			
+			}
+			catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+			
+
+			//se recargarña y se llmarña a la clase de pintado en la interfaz grafica con el objeto salida
+			//eso fuera de ese metodo, serña despues del ejecuta query con la salida obtenida
+
+
+	//			mensajero=Mensajero.getInstancia();
+	//			throw new AutomatasException(mensajero.devuelveMensaje("controlador.auto",2));
+			
+
+		
+	}
 	
 	private void minimizacion(Automata a,boolean pasos) throws AutomatasException {
 		//OJO A LOS PASOS

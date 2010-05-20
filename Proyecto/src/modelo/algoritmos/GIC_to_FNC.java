@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import controlador.Controlador;
+import controlador.Controlador_imp;
+
 import vista.vistaGrafica.AristaAP;
 
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
+import modelo.automatas.Automata;
 import modelo.automatas.AutomataPila;
 import modelo.gramatica.Gramatica;
 import modelo.gramatica.GramaticaIC;
@@ -31,14 +35,21 @@ public class GIC_to_FNC {
 	private HashMap<Integer,ArrayList<Integer>> columna; // columna, filas
 	private int clave;
 	private boolean tablaTieneMarcas;
+	private Controlador controlador;
 	//************************************************************
-	public GIC_to_FNC(GramaticaIC g){
+	public GIC_to_FNC(GramaticaIC g,boolean b){
+		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
-		transforma_FNG();
+		transforma_FNG(b);
+		xml= "<exit>";
 	}
 	//MÉTODOS:****************************************************
 	//------------------------------------------------------------
+	public void registraControlador(Controlador controlador) {
+		// TODO Auto-generated method stub
+		this.controlador=controlador;
+	}
 	public void setGramaticaEntrada(GramaticaIC gramaticaEntrada) {
 		this.gramaticaEntrada = gramaticaEntrada;
 	}
@@ -71,7 +82,9 @@ public class GIC_to_FNC {
 		tablaTieneMarcas = b;
 	}
 	//------------------------------------------------------------
-	public void/*Gramatica*/ transforma_FNG(){
+	public String getXML(){return xml;}
+	//------------------------------------------------------------
+	public void/*Gramatica*/ transforma_FNG(boolean mostrarPasos){
 
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
@@ -111,7 +124,11 @@ public class GIC_to_FNC {
 				}
 			}
 		}
-		pintaTabla();
+		
+		if (mostrarPasos){
+			pintaTabla();
+		}
+		
 		calculaColumna();
 
 	}
@@ -138,7 +155,7 @@ public class GIC_to_FNC {
 	}
 	
 	public void pintaTabla(){
-		xml="<exit>";
+		//xml+="<exit>";
 		xml+="<steps>";
 		for(int i = 0; i <lon; i++){
 			if (i == 0) System.out.print("  ");
@@ -154,16 +171,16 @@ public class GIC_to_FNC {
 				xml+="<step>";
 				if (j == 0)
 					xml+=(this.getGramaticaSalida().getVariables().get(i) + " ");
-				if (tabla[i][j]) 
-					xml+="X";//System.out.print("X ");
-				else xml+="-";//System.out.print("- ");
+				if (tabla[i][j]) {
+					xml+="X";System.out.print("X ");}
+				else {xml+="-";System.out.print("- ");}
 				xml+="</step>";
 				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
 			System.out.println();
 		}
 		xml+="</steps>";
-		xml="</exit>";
+		//xml+="</exit>";
 	}
 	
 	public void inicializarTabla() {
@@ -179,6 +196,9 @@ public class GIC_to_FNC {
 		return aa.contains(clave);
 	}
 	//************************************************************	
+
+	
+	
 	@SuppressWarnings("unchecked")
 	public void sustituir(){
 		 
@@ -244,7 +264,7 @@ public class GIC_to_FNC {
 			gramaticaSalida.getProducciones().put(var, pnueva);
 		}
 		System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
-		System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
+	//	System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
 
 	}
 	//************************************************************
@@ -335,6 +355,18 @@ public class GIC_to_FNC {
 		System.out.println("GRAMATICA salida: " + gramaticaSalida.getProducciones());
 	}
 	
+	public void simplifica(boolean b){
+		
+		while(getTablaTieneMarcas()){
+			
+			if (!diagonalMarcada()){ System.out.println("DIAGONAL NO "); sustituir();}
+			else{ System.out.println("DIAGONAL SI "); sustituirDiagonal();}
+			transforma_FNG(b);
+			
+		}
+		xml+="</exit>";
+	}
+	
 	//************************************************************
 	public static void main(String[] args){
 		
@@ -405,16 +437,16 @@ public class GIC_to_FNC {
 
 		System.out.println("veamos: " + prueba);*/
 		
-	/*	System.out.println("GRAMATICA: " + g);
-		GIC_to_FNC piticli = new GIC_to_FNC(g);
+		System.out.println("GRAMATICA: " + g);
+		GIC_to_FNC piticli = new GIC_to_FNC(g,false);
 		while(piticli.getTablaTieneMarcas()){
 			
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-			piticli.transforma_FNG();
+			piticli.transforma_FNG(false);
 			
 		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());*/
+		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
 		
 		
 	
@@ -505,7 +537,7 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		
 		
 		
-		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic());
+/*		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic());
 		while(piticli.getTablaTieneMarcas()){
 			
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
@@ -513,7 +545,7 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 			piticli.transforma_FNG();
 		}
 		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
-		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());*/
 
 		piticli.getGramaticaSalida().creaListaPalabras();
 

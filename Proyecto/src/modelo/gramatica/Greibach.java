@@ -174,12 +174,10 @@ public class Greibach extends GramaticaIC{
 				tam = listaProdPalabras.size();
 			}
 		
-			System.out.println("vamos bien al final?" + listaProdPalabras);
+//			System.out.println("vamos bien al final?" + listaProdPalabras);
 		/**************************hasta aki bien ya**************************/
-			while (/*!listaProdPalabras.isEmpty() ||*/ (listaPalabras.size() < numPalabras)){
-	/*			System.out.println("PRODUCCIONEEEEES: " + this.getProducciones());
-				System.out.println("PROD: " + listaPalabras);
-				System.out.println("LISTA PROD: " + listaProdPalabras); */
+			while ((listaPalabras.size() < numPalabras)){
+
 				
 				boolean enc = false; 
 				ArrayList<String> concat = (ArrayList<String>) listaProdPalabras.get(0).getConcatenacion().clone();
@@ -208,39 +206,13 @@ public class Greibach extends GramaticaIC{
 					ArrayList<String> principio = new ArrayList<String>();
 					for(int k = 0; k <j; k++){
 						String trozo = new String(concat.get(k));
-					//	System.out.println("trozo: " + trozo);
-					//	if(!trozo.equals(lambda))
 							principio.add(trozo);
 					}
-				
-			/*		if(prodConTerminal.containsKey(s)){
-						ArrayList<Integer> listaInd = prodConTerminal.get(s);
-					//en concat esta la buena
-						System.out.println("ENTRA DONDE DEBE");
-				//		System.out.println("LISTAPRODPALABRAS ANTES: " + listaProdPalabras);
-					//	listaProdPalabras.remove(0);  AÑADIDO
-				//		System.out.println("LISTAPRODPALABRAS DESPUES: " + listaProdPalabras);
-						for(int m = 0; m < listaInd.size(); m++){
-							int index = listaInd.get(m);
-							String terminal = new String(this.getProducciones().get(s).get(index).getConcatenacion().get(0));
-							ArrayList<String> nuevaConcat = (ArrayList<String>) concat.clone();
-							nuevaConcat.set(j, terminal);
-							Produccion np = new Produccion();
-							np.setConcatenacion(nuevaConcat);
-							if (!esta(np,listaProdPalabras))listaProdPalabras.add(np);
-						}					
-					}*/
-		//			else{
-	//				System.out.println("concat: " + concat);
-					
-					//construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
-					//ArrayList<String> principio,int tamConcat)
+
 						construyePosibles(s,enc,concat,j,tam,principio,tamConcat);					
-			//		}
 				}
 			}
-			System.out.println("final1?" + listaProdPalabras);
-			System.out.println("final2?" + listaPalabras);
+			System.out.println("Lista: " + listaPalabras);
 		}
 	}
 	
@@ -388,10 +360,17 @@ public class Greibach extends GramaticaIC{
 		
 		String salida = "";
 		Iterator<String> itS = as.iterator();
-		while(itS.hasNext()){
-			String s = itS.next();
-			salida+=s;
+		String s;
+		if(as.size() == 1) salida+=itS.next();
+		else{
+		
+			while(itS.hasNext()){
+				s = itS.next();
 			
+				if (!s.equals(lambda) )
+					salida+=s;
+			
+			}
 		}
 		return salida;
 		

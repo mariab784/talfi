@@ -37,6 +37,7 @@ import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
+import modelo.automatas.AutomataPila;
 import modelo.ejercicios.Ejercicio;
 import modelo.expresion_regular.ArbolER;
 import modelo.expresion_regular.ExpresionRegular;
@@ -54,6 +55,7 @@ private static TraductorHTML traductor;
 //variables para generacion de imagenes jpg
 private ArrayList<Estado> listaEstados;
 private ArrayList<Arista> listaAristas;
+private ArrayList<Arista> listaAristasPila;
 private ArrayList<String> listaFinales;
 private String estadoInicial;
 private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
@@ -272,6 +274,72 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		
 	}
 	
+	/**
+	 * Traduce a html los pasos y resultado del algoritmo de simplificacion de gics
+	 * @param ruta xml con los pasos y  resultado del algortimo
+	 * @return codigo html de la pñgina a crear
+	 * @throws AutomatasException  lanza la excepciñn si hay algñn problema al
+	 * abrir o encontrar el fichero xml o al parsear
+	 */
+	
+	public String traducirPasosSimplificacion(String ruta)throws AutomatasException  {
+		
+		Mensajero mensajero=Mensajero.getInstancia();
+		DOMParser parser = new DOMParser(); 
+		String brr=new Character((char)92).toString();
+		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacion.html";
+		File fichero = new File (rutaHTML);
+		BufferedWriter bw;
+		try{
+			
+			parser.parse(new InputSource(new FileInputStream(ruta)));
+			Document documento = parser.getDocument();
+			
+			bw = new BufferedWriter(new FileWriter(fichero));
+			
+			
+			bw.append("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
+			bw.append("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en'>");
+			bw.append("<head><meta http-equiv='content-type' content='text/html; charset=UTF-8'><link rel='stylesheet' type='text/css' href='style.css' media='screen'>");
+			
+			bw.append("<title>"+mensajero.devuelveMensaje("simplificacion.title",3)+"</title></head><body>");
+			bw.append("<div id='cabecera'><img src='logo3.gif'></div>");
+			
+			
+			bw.append("<div id='resultado'>");
+			NodeList tipo = documento.getElementsByTagName("type");
+			
+			String var = null;
+			for (int i = 1; i <tipo.item(0).getChildNodes().getLength(); i++) {
+				 var = tipo.item(0).getChildNodes().item(i).getTextContent();
+				 i++;	 
+			}
+			Alfabeto_imp alf= new Alfabeto_imp();		
+			ArrayList<String> estad= new ArrayList<String>();
+			ArrayList<String> finalss= new ArrayList<String>();
+			Automata automata=new AutomataPila();
+			
+
+				
+						
+
+			
+		
+		} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
+		} catch (SAXException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
+		} catch (IOException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
+		}
+	
+	
+	return rutaHTML;
+		
+	}
 	
 /**
  * Traduce a html los pasos y resultado del algoritmo de minimizacion
