@@ -67,7 +67,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	public Automata ejecutar(boolean muestraPasos) {
 		// TODO Auto-generated method stub
 		
-		return null;
+		return automataOriginal;
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +76,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@Override
 	public String getXML() {
 		// TODO Auto-generated method stub
-		return null;
+		return "donde esta el xml matarilerilerile";
 	}
 
 	public AutomataPila getAutomataEntrada(){return automataEntrada;}

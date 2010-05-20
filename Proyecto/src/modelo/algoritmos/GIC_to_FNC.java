@@ -41,8 +41,9 @@ public class GIC_to_FNC {
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
-		transforma_FNG(b);
 		xml= "<exit>";
+		transforma_FNG(b);
+
 	}
 	//MÉTODOS:****************************************************
 	//------------------------------------------------------------
@@ -181,6 +182,8 @@ public class GIC_to_FNC {
 		}
 		xml+="</steps>";
 		//xml+="</exit>";
+		
+		System.out.println("XML PINTATABLA: " + xml);
 	}
 	
 	public void inicializarTabla() {

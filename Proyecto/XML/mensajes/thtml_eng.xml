@@ -5,6 +5,12 @@
 		<output>Output</output>
 		<steps>Steps-Minimization table</steps>
 	</minimizacion>
+	<simplificacion>
+		<title>Simplification algorithm result</title>
+		<input>Input</input>
+		<output>Output</output>
+		<steps>Steps-Simplification table</steps>
+	</simplificacion>
 	<equivalencia>
 		<title>Equivanlency result and steps</title>
 		<no>They are not equivalent</no>

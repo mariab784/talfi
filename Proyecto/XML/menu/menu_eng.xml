@@ -40,6 +40,7 @@
 		<equivalentes>Equivalency of automatas</equivalentes>
 		<afd_to_er>AFD to ER</afd_to_er>
 		<er>Regular Expression</er>
+		<gramatica>Simplification CFG</gramatica>
 	</algoritmos>
 	<usuarios>
 		<texto>Users</texto>
@@ -83,6 +84,7 @@
 		<minimizacion>Minimization of deterministic automata algorithm</minimizacion>
 		<equivalencia>Algorithm of automatas equivalence</equivalencia>
 		<afd_to_er>Algorithm of transformation from automata to regular expression</afd_to_er>
+		<gramatica>Algorithm of transformation of a context free grammar</gramatica>
 		<estado>Draw states</estado>
 		<arista>Draw arrows</arista>
 		<borrar>Delete elements</borrar>

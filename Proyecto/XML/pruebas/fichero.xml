@@ -7,65 +7,87 @@
 		<item>b</item>
 	</alphabet>
 	<states>
-		<state>Q1</state>
-		<state>Q2</state>
-		<state>Q3</state>
-		<state>Q4</state>
-		<state>Q5</state>
+		<state>S2</state>
+		<state>S3</state>
+		<state>S4</state>
+		<state>S5</state>
+		<state>S6</state>
+		<state>S7</state>
+		<state>S1</state>
 	</states>
 	<init>
-		<state>Q1</state>
+		<state>S1</state>
 	</init>
 	<finals>
-		<state>Q2</state>
-		<state>Q5</state>
+		<state>S6</state>
+		<state>S7</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>Q1</state>
-		<state>Q2</state>
+		<state>S2</state>
+		<state>S4</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>Q1</state>
-		<state>Q3</state>
+		<state>S2</state>
+		<state>S1</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>Q2</state>
-		<state>Q3</state>
+		<state>S3</state>
+		<state>S5</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>Q2</state>
-		<state>Q1</state>
+		<state>S3</state>
+		<state>S3</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>Q3</state>
-		<state>Q4</state>
+		<state>S4</state>
+		<state>S4</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>Q3</state>
-		<state>Q3</state>
+		<state>S4</state>
+		<state>S6</state>
 		<item>a</item>
 	</arrow>
 		<arrow>
-		<state>Q4</state>
-		<state>Q5</state>
+		<state>S5</state>
+		<state>S5</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>Q5</state>
-		<state>Q3</state>
+		<state>S5</state>
+		<state>S7</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S6</state>
+		<state>S5</state>
 		<item>b</item>
 	</arrow>
 		<arrow>
-		<state>Q5</state>
-		<state>Q4</state>
+		<state>S6</state>
+		<state>S7</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S7</state>
+		<state>S6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S3</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S2</state>
 		<item>a</item>
 	</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>Q1</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>Q2</nombre><x>612</x><y>299</y></estadoCoord><estadoCoord><nombre>Q3</nombre><x>554</x><y>121</y></estadoCoord><estadoCoord><nombre>Q4</nombre><x>366</x><y>121</y></estadoCoord><estadoCoord><nombre>Q5</nombre><x>308</x><y>299</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>S2</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>585</x><y>349</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>615</x><y>215</y></estadoCoord><estadoCoord><nombre>S5</nombre><x>529</x><y>106</y></estadoCoord><estadoCoord><nombre>S6</nombre><x>391</x><y>106</y></estadoCoord><estadoCoord><nombre>S7</nombre><x>305</x><y>215</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>335</x><y>349</y></estadoCoord></coordenadas></authomata>

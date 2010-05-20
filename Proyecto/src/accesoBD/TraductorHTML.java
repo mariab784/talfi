@@ -138,6 +138,10 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 			automata = new AutomataFNDLambda();		
 		}
+		if (var.equals("AutomataPila")){
+			
+			automata = new AutomataPila();		
+		}
 		bw.append("<br><p>Type:"+var+"</p>");
 		
 		NodeList nodos = documento.getElementsByTagName("alphabet");

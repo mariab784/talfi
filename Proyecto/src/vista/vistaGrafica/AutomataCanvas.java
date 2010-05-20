@@ -1126,7 +1126,10 @@ public class AutomataCanvas extends JScrollPane {
 	 */ 
 	public String generarImagenJPg(String ruta) {
 		
-		desmarcarAristas(listaAristas);
+		if (getTuring()) desmarcarAristas/*Turing*/(listaAristasTuring);
+		else if(getPila())desmarcarAristas/*AP*/(listaAristasAP);
+		else desmarcarAristas(listaAristas);
+		//desmarcarAristas(listaAristas);cvc
         // Le asignamos un tamaño a la imagen
         int width = 768, height = 512;
 
