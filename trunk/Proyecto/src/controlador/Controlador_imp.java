@@ -230,7 +230,7 @@ public class Controlador_imp implements Controlador{
 				Automata a=obtenerAutomata();
 				//lanzamiento de algoritmo de minimizacion de automatas
 				//afdtoer(a,pasos);
-				System.out.println("MUAHAHAHAHAHAHHAHAH CONTROLADOR");
+				
 				simplificacionGic(a,pasos);
 				break;
 			}
@@ -255,7 +255,8 @@ public class Controlador_imp implements Controlador{
 			
 			salida=agic.ejecutar(pasos); //salida es un object
 			String xml=gictofnc.getXML();
-			System.out.println("TENGO EL XML!!: " + xml);
+			System.out.println("XML SIMPLIFICACION:\n" + xml);
+						
 			
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
@@ -306,6 +307,7 @@ public class Controlador_imp implements Controlador{
 			 * Obtencion del xml de salida del algoritmo
 			 */
 			String xml=algMinimizacion.getXML();
+			System.out.println("XML MINIMIZACION:\n" + xml);
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionMinimizacion"+brr+"prueba.xml";
 			File fichero = new File (rutaxml);

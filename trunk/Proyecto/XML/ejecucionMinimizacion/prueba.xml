@@ -1,17 +1,41 @@
-<exit><steps><step><table><column><key>t10</key><fila><state>t10</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>t10</key><fila><state>t10</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>t10</key><fila><state>t10</state><compatible>null</compatible></fila></column></table></step></steps><result><authomata>
+<exit><steps><step><table><column><key>E2</key><fila><state>E2</state><compatible>null</compatible></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column><column><key>C0</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila></column><column><key>D1</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>E2</key><fila><state>E2</state><compatible>null</compatible></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column><column><key>C0</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila></column><column><key>D1</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column></table></step><step><table><column><key>E2</key><fila><state>E2</state><compatible>null</compatible></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column><column><key>C0</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>true</compatible><paso>0</paso><estado>no marcado</estado></fila></column><column><key>D1</key><fila><state>E2</state><compatible>false</compatible><paso>1</paso><estado>Final-NoFinal</estado></fila><fila><state>C0</state><compatible>null</compatible></fila><fila><state>D1</state><compatible>null</compatible></fila></column></table></step></steps><result><authomata>
 	<type>
 		<item>AutomataFD</item>
 	</type>
 	<alphabet>
+		<item>0</item>
+		<item>1</item>
 	</alphabet>
 	<states>
-		<state>t1</state>
+		<state>E</state>
+		<state>Q0</state>
 	</states>
 	<init>
-		<state>t1</state>
+		<state>Q0</state>
 	</init>
 	<finals>
+		<state>Q0</state>
 	</finals>
 	<arrows>
+		<arrow>
+		<state>E</state>
+		<state>E</state>
+		<item>1</item>
+	</arrow>
+		<arrow>
+		<state>E</state>
+		<state>Q0</state>
+		<item>0</item>
+	</arrow>
+		<arrow>
+		<state>Q0</state>
+		<state>E</state>
+		<item>1</item>
+	</arrow>
+		<arrow>
+		<state>Q0</state>
+		<state>Q0</state>
+		<item>0</item>
+	</arrow>
 	</arrows>
 </authomata></result></exit>

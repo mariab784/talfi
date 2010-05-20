@@ -1,8 +1,18 @@
 package modelo.algoritmos;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+
+import accesoBD.Mensajero;
 
 import controlador.Controlador;
 import controlador.Controlador_imp;
@@ -36,8 +46,10 @@ public class GIC_to_FNC {
 	private int clave;
 	private boolean tablaTieneMarcas;
 	private Controlador controlador;
+	private Mensajero mensajero;
 	//************************************************************
 	public GIC_to_FNC(GramaticaIC g,boolean b){
+		if (mensajero == null) mensajero=Mensajero.getInstancia();
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
@@ -367,7 +379,43 @@ public class GIC_to_FNC {
 			transforma_FNG(b);
 			
 		}
-		xml+="</exit>";
+		
+		//File fichero = new File (rutaxmlconaut);
+		//BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+		//bw.append(panelCentral.getPanel().traducirXML());
+		//bw.close();
+		
+		String rutaxmlconaut="XML/pruebas/ficheroG.xml";
+		File archivo = null;
+	    FileReader fr = null;
+	    BufferedReader br = null;
+	    String cinta = "";
+	    try {
+	    	// Apertura del fichero y creacion de BufferedReader para poder
+	        // hacer una lectura comoda (disponer del metodo readLine()).
+	        archivo = new File(rutaxmlconaut);
+	        fr = new FileReader (archivo);
+	        br = new BufferedReader(fr);
+	        // Lectura del fichero
+	        String linea;
+	        while((linea=br.readLine())!=null)
+	        	cinta += linea;
+	        
+	        br.close();
+			fr.close();
+			xml+="<result>"+cinta+"</result></exit>";
+			//xml+="</exit>";
+	    }
+		catch(FileNotFoundException e){
+			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+			
+			
+		}
+    	catch(Exception e){
+    		System.out.println("TROCOTRO");
+    		e.printStackTrace();
+    	}
+
 	}
 	
 	//************************************************************
