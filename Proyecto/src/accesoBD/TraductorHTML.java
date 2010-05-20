@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.StringTokenizer;
+
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.w3c.dom.*;
@@ -32,6 +34,8 @@ import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
 import modelo.algoritmos.Registro;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.AlfabetoPila_imp;
+import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
@@ -318,14 +322,160 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				 var = tipo.item(0).getChildNodes().item(i).getTextContent();
 				 i++;	 
 			}
-			Alfabeto_imp alf= new Alfabeto_imp();		
+			Alfabeto_imp alf= new Alfabeto_imp();
+			
 			ArrayList<String> estad= new ArrayList<String>();
 			ArrayList<String> finalss= new ArrayList<String>();
+			Alfabeto_Pila alfabetoPila = new AlfabetoPila_imp();
 			Automata automata=new AutomataPila();
 			
 
+			bw.append("<br><p>Type:"+var+"</p>");
+			
+			NodeList nodos = documento.getElementsByTagName("alphabet");
+			
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.alfabeto",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			bw.append(alf.getListaLetras().toString()+"</p>");
+			
+			nodos = documento.getElementsByTagName("alphabetP");
+			
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.alfabeto",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				alfabetoPila.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
 				
+			bw.append(alfabetoPila.getListaLetras().toString()+"</p>");
+			
+			nodos = documento.getElementsByTagName("states");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.estados",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			bw.append(estad.toString()+"</p>");
+			automata.setEstados(estad);
+			
+			nodos = documento.getElementsByTagName("init");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.inicial",3)+nodos.item(0).getChildNodes().item(1).getTextContent()+"</p>");
+			automata.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
+			
+			nodos = documento.getElementsByTagName("finals");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.finales",3));
+			for (int i = 1; i < nodos.item(0).getChildNodes().getLength(); i++) {
+				finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			bw.append(finalss.toString()+"</p>");
+			automata.setEstadosFinales(finalss);
+			bw.append("<br><h2>AutomataPila</h2><table><tr><th>"+new Character((char)95).toString()+"</th>");
+
+			nodos = documento.getElementsByTagName("arrow");
+			for (int i = 0; i < nodos.getLength(); i++){
+				for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
+					
+
+						String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+						String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
 						
+						
+						ArrayList<String> entrada = new ArrayList<String>();
+						String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+						StringTokenizer st=new StringTokenizer(s3,",");
+						while(st.hasMoreTokens()){
+
+							entrada.add(st.nextToken());
+						}
+						
+						
+						String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+						String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+						
+						
+						
+						//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+						int indice = 0;
+						ArrayList<String> salida = new ArrayList<String>();
+						if (s5.compareTo("\\") != 0){
+							while(/*st.hasMoreTokens()*/indice < s5.length()){
+								String ss= "" + s5.charAt(indice);//st.nextToken();
+								salida.add(ss);
+								indice++;
+						//	System.out.println("TRANS: "+ss);
+							//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+							}
+						}
+						else { salida.add("\\");}
+						
+						/*System.out.println("S1: " + s1);
+						System.out.println("S2: " + s2);
+						System.out.println("S3: " + s3);
+						System.out.println("S4: " + s4);
+						System.out.println("S5: " + s5);*/
+						
+						x = x+ 10;
+						//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
+						((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
+					}
+
+					
+					
+				}
+			
+			
+			Iterator<String> it1=alf.dameListaLetras().iterator();
+			while(it1.hasNext()) {
+				bw.append("<th>"+it1.next()+"</th>");
+			}
+			bw.append("</tr>");
+			Iterator<String> it2=estad.iterator();
+			while(it2.hasNext()) {
+				String estado=it2.next();
+				bw.append("<tr><td>"+estado+"</td>");
+				it1=alf.dameListaLetras().iterator();
+	/*			while(it1.hasNext()) {
+					String letra=it1.next();
+					if (!automata.deltaExtendida(estado, letra).contains(null))
+						bw.append("<td>"+automata.deltaExtendida(estado, letra).toString()+"</td>");
+					else bw.append("<td></td>");
+				}*/
+				bw.append("</tr>");
+			}
+			//////////////
+			Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
+			while(itP1.hasNext()) {
+				bw.append("<th>"+itP1.next()+"</th>");
+			}
+			bw.append("</tr>");
+			Iterator<String> itP2=estad.iterator();
+			while(itP2.hasNext()) {
+				String estado=itP2.next();
+				bw.append("<tr><td>"+estado+"</td>");
+				itP1=alf.dameListaLetras().iterator();
+	/*			while(itP1.hasNext()) {
+					String letra=itP1.next();
+					if (!automata.deltaExtendida(estado, letra).contains(null))
+						bw.append("<td>"+automata.deltaExtendida(estado, letra).toString()+"</td>");
+					else bw.append("<td></td>");
+				}*/
+				bw.append("</tr>");
+			}
+			
+
+			
+			bw.append("</table></div>");
+			bw.append("<div id='authomata'>");
+			
+			//GENERACIñN DE LOS PASOS DE SIMPLIFICACION
+			
+			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.input",3)+"</p><img src='imagenEntrada.jpg' alt='Input'></p>");
+			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
+			bw.append("</body></html>");
+			bw.close();
 
 			
 		
