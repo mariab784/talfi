@@ -53,7 +53,7 @@ public class GIC_to_FNC {
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
-		xml= "<exit>";
+		xml= "<exit><steps>\n";
 		transforma_FNG(b);
 
 	}
@@ -83,7 +83,7 @@ public class GIC_to_FNC {
 		this.xml = xml;
 	}
 	//------------------------------------------------------------
-	public String getXml() {
+	public String getXML() {
 		return xml;
 	}
 	//------------------------------------------------------------
@@ -95,7 +95,6 @@ public class GIC_to_FNC {
 		tablaTieneMarcas = b;
 	}
 	//------------------------------------------------------------
-	public String getXML(){return xml;}
 	//------------------------------------------------------------
 	public void/*Gramatica*/ transforma_FNG(boolean mostrarPasos){
 
@@ -166,33 +165,39 @@ public class GIC_to_FNC {
 		}
 		if (columna != null )columna.put(clave, f);
 	}
-	
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 	public void pintaTabla(){
 		//xml+="<exit>";
-		xml+="<steps>";
+		//xml+="<steps>\n";
+		xml+="<step><table>";
+		xml+="<column>";
 		for(int i = 0; i <lon; i++){
-			if (i == 0) System.out.print("  ");
-			xml+="<step>";
-			xml+=this.getGramaticaSalida().getVariables().get(i);
-			xml+="</step>";
-			//System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+			xml+="<fila>";
+			if (i == 0) {xml+="  "; System.out.print("  ");}
+			//xml+="<step>";
+			xml+=this.getGramaticaSalida().getVariables().get(i) + " ";
+			//xml+="</step>";
+			xml+="</fila>";
+			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
 		}
+		xml+="</column>";
 		System.out.println();
 		for(int i=0; i<lon; i++){
 			for(int j=0; j<lon; j++){
 				String s;
-				xml+="<step>";
-				if (j == 0)
+	//			xml+="<step>";
+				if (j == 0){
 					xml+=(this.getGramaticaSalida().getVariables().get(i) + " ");
-				if (tabla[i][j]) {
-					xml+="X";System.out.print("X ");}
-				else {xml+="-";System.out.print("- ");}
-				xml+="</step>";
+					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+				}if (tabla[i][j]) {
+					xml+="X ";System.out.print("X ");}
+				else {xml+="- ";System.out.print("- ");}
+				//xml+="</step>";
 				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
 			System.out.println();
 		}
-		xml+="</steps>";
+		xml+="</table></step>\n";
 		//xml+="</exit>";
 		
 		System.out.println("XML PINTATABLA: " + xml);
@@ -399,11 +404,11 @@ public class GIC_to_FNC {
 	        // Lectura del fichero
 	        String linea;
 	        while((linea=br.readLine())!=null)
-	        	cinta += linea;
+	        	cinta += linea+"\n";
 	        
 	        br.close();
 			fr.close();
-			xml+="<result>"+cinta+"</result></exit>";
+			xml+="\n<result>"+cinta+"</result></steps></exit>";
 			//xml+="</exit>";
 	    }
 		catch(FileNotFoundException e){
@@ -489,15 +494,17 @@ public class GIC_to_FNC {
 		System.out.println("veamos: " + prueba);*/
 		
 		System.out.println("GRAMATICA: " + g);
-		GIC_to_FNC piticli = new GIC_to_FNC(g,false);
-		while(piticli.getTablaTieneMarcas()){
+		GIC_to_FNC piticli = new GIC_to_FNC(g,true);
+		piticli.simplifica(true);
+		System.out.println("XML MAIN: \n" + piticli.getXML());
+/*		while(piticli.getTablaTieneMarcas()){
 			
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 			piticli.transforma_FNG(false);
 			
-		}
-		System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+		}*/
+	//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
 		
 		
 	
@@ -586,23 +593,10 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		System.out.println("aut :\n" + aut);
 		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		
-		
-		
-/*		GIC_to_FNC piticli = new GIC_to_FNC(a.getGic());
-		while(piticli.getTablaTieneMarcas()){
-			
-			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
-			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-			piticli.transforma_FNG();
-		}
-		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
-		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());*/
 
-		piticli.getGramaticaSalida().creaListaPalabras();
 
-//		System.out.println("con terminales: " + piticli.getGramaticaSalida().getProdConTerminal());
+//		piticli.getGramaticaSalida().creaListaPalabras();
 
-//		System.out.println("gram.getProducciones() " + piticli.getGramaticaSalida().getProducciones());
 
 	}
 }

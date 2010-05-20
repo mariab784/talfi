@@ -255,12 +255,12 @@ public class Controlador_imp implements Controlador{
 			
 			salida=agic.ejecutar(pasos); //salida es un object
 			String xml=gictofnc.getXML();
-			System.out.println("XML SIMPLIFICACION:\n" + xml);
+		//	System.out.println("XML SIMPLIFICACION:\n" + xml);
 						
 			
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
-			System.out.println("rutaxml: " + rutaxml);
+			//System.out.println("rutaxml: " + rutaxml);
 			File fichero = new File (rutaxml);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 			bw.append(xml);
