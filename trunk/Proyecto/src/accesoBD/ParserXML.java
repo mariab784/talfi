@@ -92,33 +92,30 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		Automata automata=null;
 		if (var.equals("AutomataFNDLambda")){
 			
-			automata = new AutomataFNDLambda();	
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setMaricaTuring(false);
+			automata = new AutomataFNDLambda();
+			
+			VistaGrafica.setOpcionesAF();
+
 		}
 		if (var.equals("AutomataFD")){
 			
 			automata = new AutomataFD();
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAF();
+
 		}
 		if (var.equals("AutomataFND")){
 			
 			automata = new AutomataFND();		
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAF();
+
 		}
 
 		/*********************************************************/
 		if (var.equals("AutomataPila")){
 			
 			automata = new AutomataPila();	
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setEstaPalabra(true);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAP();
+
 		}
 		/*********************************************************/
 		if (var.equals("MaquinaTuring")){
@@ -126,9 +123,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			automata = new MaquinaTuring();		
 			esTuring = true;
 			
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setMaricaTuring(true);
+			VistaGrafica.setOpcionesMT();
+
 		}
 		/*********************************************************/
 		NodeList nodos = documento.getElementsByTagName("alphabet");

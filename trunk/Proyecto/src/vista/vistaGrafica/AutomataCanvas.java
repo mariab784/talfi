@@ -984,7 +984,7 @@ public class AutomataCanvas extends JScrollPane {
 		//aristas
 		if((a instanceof AutomataPila)){
 			
-			
+			vista.setEnabledMenuAlgAP();
 			Iterator<AristaAP> iAP = ((AutomataPila) a).getAutomataPila().iterator();
 			while (iAP.hasNext()){
 				AristaAP arAP = iAP.next();
@@ -1012,6 +1012,7 @@ public class AutomataCanvas extends JScrollPane {
 		}
 		else if((a instanceof MaquinaTuring)){
 			
+			vista.setEnabledMenuAlgMT();
 			Iterator<AristaTuring> iTuring = ((MaquinaTuring) a).getAristasTuring().iterator();
 			while (iTuring.hasNext()){
 				AristaTuring arAP = iTuring.next();
@@ -1038,7 +1039,7 @@ public class AutomataCanvas extends JScrollPane {
 		/*if(!(a instanceof AutomataPila))*/else{
 			
 			
-		
+			vista.setEnabledMenuAlgAF();
 		Iterator<String> itEst2=a.getEstados().iterator();
 		while(itEst2.hasNext()) {
 			String est=itEst2.next();
@@ -1092,6 +1093,7 @@ public class AutomataCanvas extends JScrollPane {
 		generarImagenJPg(ruta);
 		this.repaint();
 		vista.requestFocus();
+		
 	}
 	/**
 	 * Borra el automata contenido en el panel

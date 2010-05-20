@@ -78,6 +78,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	private final int EQUIVALENCIA=13;
 	private final int AFNDLAMBDATOAFND=14;
 	private final int AFDTOER=15;
+	private final int GRAMATICA=16;
 	
 	private JTextField expresion;
 	private String rutaxml;
@@ -129,7 +130,15 @@ public class VistaGrafica extends JFrame implements Vista{
 	private static boolean pila;
 	private static boolean turing;
 	private JTextField nomArs;
-	
+	/********************************/
+	private JMenuItem grama;
+	private JMenuItem AFNDLambda_to_AFND;
+	private JMenuItem AFN_to_AFD;
+	private JMenuItem MinimizacionAFD;
+	private JMenuItem equivalentes;
+	private JMenuItem afd_to_er;	
+	private JMenu algoritmos;
+	/*********************************/
 	
 	/**
 	 * Constructor de la ventana de la aplicaciñn, vista grñfica
@@ -222,6 +231,14 @@ public class VistaGrafica extends JFrame implements Vista{
 	public boolean isFocusable(){
 		return true;
 	}
+	
+	public void setEnabledgramatica(boolean b){grama.setEnabled(b);}
+	public void setEnabledAFNDLambda_to_AFND(boolean b){AFNDLambda_to_AFND.setEnabled(b);}
+	public void setEnabledAFN_to_AFD(boolean b){AFN_to_AFD.setEnabled(b);}
+	public void setEnabledMinimizacionAFD(boolean b){MinimizacionAFD.setEnabled(b);}
+	public void setEnabledEquivalentes(boolean b){equivalentes.setEnabled(b);}
+	public void setEnabledAfd_to_er(boolean b){afd_to_er.setEnabled(b);}
+	
 	
 
 	/**
@@ -384,40 +401,53 @@ public class VistaGrafica extends JFrame implements Vista{
 		});
 		ayuda.add(manual);
 		//---------------------menu algoritmos
-		JMenu algoritmos= new JMenu(mensajero.devuelveMensaje("algoritmos.texto",1));
+		/*JMenu*/ algoritmos= new JMenu(mensajero.devuelveMensaje("algoritmos.texto",1));
 		algoritmos.setToolTipText(mensajero.devuelveMensaje("tooltip.algoritmos",1));
 		algoritmos.setMnemonic(javax.swing.event.MenuKeyEvent.VK_L);
 		
-		JMenuItem AFNDLambda_to_AFND=new JMenuItem(mensajero.devuelveMensaje("algoritmos.AFNDLambda_to_AFND",1));
+		/*JMenuItem*/ AFNDLambda_to_AFND=new JMenuItem(mensajero.devuelveMensaje("algoritmos.AFNDLambda_to_AFND",1));
 		AFNDLambda_to_AFND.setToolTipText(mensajero.devuelveMensaje("tooltip.AFNDLtoAFND",1));
 		AFNDLambda_to_AFND.setMnemonic(javax.swing.event.MenuKeyEvent.VK_N);
 		AFNDLambda_to_AFND.addActionListener(new OyenteMenuItem(AFNDLAMBDATOAFND));
 		
-		JMenuItem AFN_to_AFD=new JMenuItem(mensajero.devuelveMensaje("algoritmos.AFN_to_AFD",1));
+		/*JMenuItem*/ AFN_to_AFD=new JMenuItem(mensajero.devuelveMensaje("algoritmos.AFN_to_AFD",1));
 		AFN_to_AFD.setToolTipText(mensajero.devuelveMensaje("tooltip.AFNDtoAFD",1));
 		AFN_to_AFD.setMnemonic(javax.swing.event.MenuKeyEvent.VK_F);
 		AFN_to_AFD.addActionListener(new OyenteMenuItem(AFNDTOAFD));
 		
-		JMenuItem MinimizacionAFD=new JMenuItem(mensajero.devuelveMensaje("algoritmos.MinimizacionAFD",1));
+		/*JMenuItem*/ MinimizacionAFD=new JMenuItem(mensajero.devuelveMensaje("algoritmos.MinimizacionAFD",1));
 		MinimizacionAFD.setToolTipText(mensajero.devuelveMensaje("tooltip.minimizacion",1));
 		MinimizacionAFD.setMnemonic(javax.swing.event.MenuKeyEvent.VK_M);
 		MinimizacionAFD.addActionListener(new OyenteMenuItem(MINIMIZACION));
 		
-		JMenuItem equivalentes=new JMenuItem(mensajero.devuelveMensaje("algoritmos.equivalentes",1));
+		/*JMenuItem*/ equivalentes=new JMenuItem(mensajero.devuelveMensaje("algoritmos.equivalentes",1));
 		equivalentes.setToolTipText(mensajero.devuelveMensaje("tooltip.equivalencia",1));
 		equivalentes.setMnemonic(javax.swing.event.MenuKeyEvent.VK_E);
 		equivalentes.addActionListener(new OyenteMenuItem(EQUIVALENCIA));
 		
-		JMenuItem afd_to_er=new JMenuItem(mensajero.devuelveMensaje("algoritmos.afd_to_er",1));
+		/*JMenuItem*/ afd_to_er=new JMenuItem(mensajero.devuelveMensaje("algoritmos.afd_to_er",1));
 		afd_to_er.setToolTipText(mensajero.devuelveMensaje("tooltip.equivalencia",1));
 		afd_to_er.setMnemonic(javax.swing.event.MenuKeyEvent.VK_T);
 		afd_to_er.addActionListener(new OyenteMenuItem(AFDTOER));
+		
+		//XXX
+		/*JMenuItem*/ grama=new JMenuItem(mensajero.devuelveMensaje("algoritmos.gramatica",1)); 
+		grama.setToolTipText(mensajero.devuelveMensaje("tooltip.gramatica",1));
+		grama.setMnemonic(javax.swing.event.MenuKeyEvent.VK_G);
+		grama.addActionListener(new OyenteMenuItem(GRAMATICA));
+		
+		//XXX
 		
 		algoritmos.add(AFNDLambda_to_AFND);
 		algoritmos.add(AFN_to_AFD);
 		algoritmos.add(MinimizacionAFD);
 		algoritmos.add(equivalentes);
 		algoritmos.add(afd_to_er);
+		//XXX
+		algoritmos.add(grama);
+		
+		setEnabledMenuAlgMT();
+		//XXX
 		
 		JMenu usuarios=new JMenu(mensajero.devuelveMensaje("usuarios.texto",1));
 		usuarios.setToolTipText(mensajero.devuelveMensaje("tooltip.usu",1));
@@ -473,6 +503,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		return m;
 	}
 	/*********************/
+	
 /*	private void mostrarResultado(int r){
 		
 		String msg = "";
@@ -510,51 +541,32 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 	}*/
 	
-	private void actionAceptar(){
+	private void construir(boolean b){
 		
-		String palabra = nomArs.getText();
-		
-		dialog.setVisible(false);
 		try{
-			//(String estadoI,ArrayList<String> estadosF,Alfabeto alf, Alfabeto_Pila alfPila, 
-			//ArrayList<String> est, ArrayList<AristaAP> aut)
+
 			AutomataCanvas c = panelCentral.getCanvas();
 			
-			//String estado,ArrayList<String> estadosF,Alfabeto alf,
-			//ArrayList<String> est, ArrayList<AristaTuring> maq//,
-/*			System.out.println("EST INI: " + c.getEstadoInicial());
-			System.out.println("EST FIN: " + c.getListaFinales());
-			System.out.println("ALF: " + c.getAlfabeto());
-			System.out.println("LISTA ESTADOS: " + c.getNombreEstados());
-			System.out.println("ARISTAS: " + c.getListaAristasTuring());*/
-			
-//			AutomataCanvas c = panelCentral.getCanvas();
-/*			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
-					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
-			System.out.println("MT CONSTRUIDO BOTON::: " + m);*/
-
 			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
-			/*int r = *///panelCentral.getCanvas().getAP().reconocePalabra(palabra);
+
 			System.out.println("**********************************************************");
 			System.out.println("AP CONSTRUIDO BOTON::: \n" + ap);
 			System.out.println("**********************************************************");
 			AutomataP_to_GramaticaIC g = new AutomataP_to_GramaticaIC(ap);
 			//System.out.println("producciones: " + g.getGic());
 			g.AP_Gramatica();
-
-
 			
 			System.out.println("gramatica boton: \n" + g.getGic());
 			
 			
-			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic());
+			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic(),b);
 			
 			while(piticli.getTablaTieneMarcas()){
 				
 				if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 				else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-				piticli.transforma_FNG();
+				piticli.transforma_FNG(false);
 			}
 		//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
 			
@@ -822,8 +834,6 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			
 			public void actionPerformed(ActionEvent e) {
-
-//				System.out.println("nanai");
 				
 				
 				JOptionPane pane=new JOptionPane();
@@ -831,35 +841,40 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog=pane.createDialog(null);
 				JPanel panelD=new JPanel(new GridLayout(4,1));
 				JPanel panelC=new JPanel(new GridLayout(1,4));
-				JLabel etiqN=new JLabel("JLABEL"); //XXX
-				nomArs=new JTextField();
+				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXX XXX
+				JLabel etiqN=new JLabel(/*mensajero.devuelveMensaje("pasos.preguntaG", 2)*/"LISTAPALABRAS AKI"); //XXX
+			//	nomArs=new JTextField();
 				
-				nomArs.addKeyListener(new KeyAdapter(){
+				/*nomArs.addKeyListener(new KeyAdapter(){
 					public void keyPressed(KeyEvent e){
 						if(e.getKeyCode()==KeyEvent.VK_ENTER){
 							actionAceptar();
+						
 						}
 					}
-				});
+				});*/
 				
 				JPanel panelB=  new JPanel();
 				JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
 				aceptar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						actionAceptar();
+						//actionAceptar();
+						construir(true);
+						dialog.setVisible(false);
 					}
 				});
 				JButton cancelar=new JButton(mensajero.devuelveMensaje("vista.cancelar",2));
 				
 				cancelar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
+						construir(false);
 						dialog.setVisible(false);
 					}
 				});
 				panelB.add(aceptar);
 				panelB.add(cancelar);
 				panelD.add(etiqN);
-				panelD.add(nomArs);
+				//panelD.add(nomArs);
 				panelD.add(panelC);
 				panelD.add(panelB);
 				dialog.setContentPane(panelD);
@@ -1231,9 +1246,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAF();
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.eafn",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/AFND/"+nombreEjemplo.toString()+".xml");
@@ -1244,9 +1257,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAF();
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.eafnl",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/AFND_lambda/"+nombreEjemplo.toString()+".xml");
@@ -1257,9 +1268,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			this.repaint();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		/*********************************************************/
@@ -1296,6 +1305,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.minim",1))) {
@@ -1303,6 +1313,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.afn",1))) {
@@ -1310,6 +1321,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.afnl",1))) {
@@ -1318,6 +1330,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.afdtoer",1))) {
@@ -1325,6 +1338,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.taps",1))) {
@@ -1332,6 +1346,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesAF();
 		}
 		
 		requestFocus();
@@ -1342,7 +1357,15 @@ public class VistaGrafica extends JFrame implements Vista{
 		String rutahtml=new String();
 		Mensajero m=Mensajero.getInstancia();
 		try{
-			if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
+			if (algoritmo==GRAMATICA){
+				rutaxml="XML/pruebas/ficheroG.xml";
+				File fichero = new File (rutaxml);
+				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+				bw.append(panelCentral.getPanel().traducirXML());
+				bw.close();
+				
+			}
+			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
 				rutaxml="XML/pruebas/fichero.xml";
 				File fichero = new File (rutaxml);
 				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
@@ -1359,6 +1382,26 @@ public class VistaGrafica extends JFrame implements Vista{
 				TraductorHTML.getInstancia().generarImagenJPG(img1,ParserXML.getInstancia().extraerAutomata(rutaxml2));
 			}
 			switch(algoritmo){
+			case GRAMATICA:{
+				//preparadoEquivalencia=false;
+				if (pasos){
+					String ruta="HTML/imagenEntrada.jpg";
+					panelCentral.getPanel().generarImagenJPg(ruta);
+					controlador.ejecutaQuery("TALF -gr-p "+rutaxml);						
+					TraductorHTML trhtml=TraductorHTML.getInstancia();
+					String xmlSalida=controlador.salidaXML();
+					rutahtml=trhtml.traducirPasosSimplificacion(xmlSalida);
+				}
+				else controlador.ejecutaQuery("TALF -gr "+rutaxml);
+				Automata a=(AutomataPila)controlador.getSalida();
+
+				panelCentral.getPanel().cargarAutomataNuevo(a);
+				panelCentral.getPanel().setTipoAutomata("AutomataPila");
+				activaToogleButtons();
+				deleteExpresion();
+				rutaVista=null;
+				break;
+			}
 				case MINIMIZACION:{
 					preparadoEquivalencia=false;
 					if (pasos){
@@ -1568,7 +1611,44 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
+			
+			if  (algoritmo == GRAMATICA){
+				JOptionPane pane=new JOptionPane();
+				Mensajero m=Mensajero.getInstancia();
+				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.pregunta",2));
+				JPanel panel=new JPanel(new GridLayout(2,1));
+				JPanel botones=new JPanel();
+				JLabel pasosE=new JLabel(m.devuelveMensaje("pasos.preguntaG",2));
+				JButton aceptar=new JButton(m.devuelveMensaje("pasos.con",2));
+				aceptar.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						pasos=true;
+						dialog.setVisible(false);
+						ejecuta(algoritmo,pasos); //XXX
+						rutaVista=null;
+					}
+				});
+				JButton cancelar=new JButton(m.devuelveMensaje("pasos.sin",2));
+				cancelar.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						pasos=false;
+						dialog.setVisible(false);
+						ejecuta(algoritmo,pasos);
+						rutaVista=null;
+					}
+				});
+				panel.add(pasosE);
+				botones.add(aceptar);
+				botones.add(cancelar);
+				panel.add(botones);
+				dialog.setContentPane(panel);
+				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+				dialog.setSize(new Dimension(300,150));
+				dialog.setVisible(true);
+				
+				
+			}
+			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
 				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.pregunta",2));
@@ -1601,7 +1681,9 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 				dialog.setSize(new Dimension(300,150));
 				dialog.setVisible(true);
+				
 			} else {
+				
 				ejecuta(algoritmo,pasos);
 			}
 		}
@@ -1613,9 +1695,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		borrar.setEnabled(true);
 		arista.setEnabled(true);
 		estado.setEnabled(true);
-		estaPalabra.setEnabled(true);
-		maricaTuring.setEnabled(true);
-		gordaLatex.setEnabled(true);
 		
 
 		dibujar=true;
@@ -1690,6 +1769,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			panelCentral.getPanel().borrarPanel();
 			activaToogleButtons();
 			rutaVista=null;
+			
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			requestFocus();
 		}
@@ -1708,9 +1788,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(false);
 			
-			setGordaLatex(true);
-			setEstaPalabra(false);
-			setMaricaTuring(false);
+			
+			VistaGrafica.setOpcionesAF();
+			setEnabledMenuAlgAF();
 		}
 	}
 	
@@ -1733,9 +1813,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			VistaGrafica.setPila(true);
 			VistaGrafica.setTuring(false);
 			
-			setGordaLatex(true);
-			setEstaPalabra(true);
-			setMaricaTuring(false);
+
+			VistaGrafica.setOpcionesAP();
+			setEnabledMenuAlgAP();
 		}
 	}
 	
@@ -1758,9 +1838,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(true);
 			
-			VistaGrafica.setMaricaTuring(true);
-			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setGordaLatex(true);
+
+			VistaGrafica.setOpcionesMT();
+			setEnabledMenuAlgMT();
 		}
 	}
 	
@@ -1847,6 +1927,8 @@ public class VistaGrafica extends JFrame implements Vista{
 							break;
 						}
 					}
+					VistaGrafica.setOpcionesAF();
+					setEnabledMenuAlgAF();
 				} catch(AutomatasException ex){
 					JOptionPane.showMessageDialog(null,ex.getMensaje(),m.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 					panelCentral.getPanel().borrarPanel();
@@ -1903,21 +1985,15 @@ public class VistaGrafica extends JFrame implements Vista{
 		            switch(a.dameTipo()){ 
 		             
 		            case 0: panelCentral.getPanel().setTipoAutomata("AutomataFD");
-					setGordaLatex(true);
-					setEstaPalabra(false);
-					setMaricaTuring(false);
+		            setOpcionesAF();
 		            break;
 		            	
 		            case 1: panelCentral.getPanel().setTipoAutomata("AutomataFND"); 
-					setGordaLatex(true);
-					setEstaPalabra(false);
-					setMaricaTuring(false);
+		            setOpcionesAF();
 		            break;
 		            	
 		            case 2: panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");
-					setGordaLatex(true);
-					setEstaPalabra(false);
-					setMaricaTuring(false);
+		            setOpcionesAF();
 		            break;
 		            	
 		            case 3:	panelCentral.getPanel().setTipoAutomata("AutomataPila"); 
@@ -1957,6 +2033,49 @@ public class VistaGrafica extends JFrame implements Vista{
 		    	}
 		    }
 		}
+	}
+	
+	public static void setOpcionesAF(){
+		setGordaLatex(true);
+		setEstaPalabra(false);
+		setMaricaTuring(false);
+	}
+	
+	public static void setOpcionesAP(){
+		setGordaLatex(true);
+		setEstaPalabra(true);
+		setMaricaTuring(false);
+	}
+	
+	public static void setOpcionesMT(){
+		setGordaLatex(true);
+		setEstaPalabra(false);
+		setMaricaTuring(true);
+	}
+	
+	public void setEnabledMenuAlgAF(){
+		this.setEnabledAfd_to_er(true);
+		this.setEnabledAFN_to_AFD(true);
+		this.setEnabledAFNDLambda_to_AFND(true);
+		setEnabledMinimizacionAFD(true);
+		this.setEnabledEquivalentes(true);
+		this.setEnabledgramatica(false);
+	}
+	public void setEnabledMenuAlgAP(){		
+	this.setEnabledAfd_to_er(false);
+	this.setEnabledAFN_to_AFD(false);
+	this.setEnabledAFNDLambda_to_AFND(false);
+	setEnabledMinimizacionAFD(false);
+	this.setEnabledEquivalentes(false);
+	this.setEnabledgramatica(true);
+	}
+	public void setEnabledMenuAlgMT(){
+		this.setEnabledAfd_to_er(false);
+		this.setEnabledAFN_to_AFD(false);
+		this.setEnabledAFNDLambda_to_AFND(false);
+		setEnabledMinimizacionAFD(false);
+		this.setEnabledEquivalentes(false);
+		this.setEnabledgramatica(false);
 	}
 	
 	/**
