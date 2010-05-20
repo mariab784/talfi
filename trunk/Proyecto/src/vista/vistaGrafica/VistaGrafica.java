@@ -1393,8 +1393,10 @@ public class VistaGrafica extends JFrame implements Vista{
 					rutahtml=trhtml.traducirPasosSimplificacion(xmlSalida);
 				}
 				else controlador.ejecutaQuery("TALF -gr "+rutaxml);
+				
 				Automata a=(AutomataPila)controlador.getSalida();
-
+				setTuring(false);
+				setPila(true);
 				panelCentral.getPanel().cargarAutomataNuevo(a);
 				panelCentral.getPanel().setTipoAutomata("AutomataPila");
 				activaToogleButtons();
@@ -1415,6 +1417,8 @@ public class VistaGrafica extends JFrame implements Vista{
 					else controlador.ejecutaQuery("TALF -m "+rutaxml);
 					Automata a=(AutomataFD)controlador.getSalida();
 
+					setTuring(false);
+					setPila(false);
 					panelCentral.getPanel().cargarAutomataNuevo(a);
 					panelCentral.getPanel().setTipoAutomata("AutomataFD");
 					activaToogleButtons();
@@ -1432,6 +1436,8 @@ public class VistaGrafica extends JFrame implements Vista{
 							rutaVista=null;
 						}
 						else controlador.ejecutaQuery("TALF -e "+rutaxml+" "+rutaxml2);
+						setTuring(false);
+						setPila(false);
 						boolean a=(Boolean)controlador.getSalida();
 						if(a)
 							JOptionPane.showMessageDialog(this,m.devuelveMensaje("equivalenciajo.si", 2),m.devuelveMensaje("equivalenciajo.equiv",2),JOptionPane.INFORMATION_MESSAGE);
@@ -1455,6 +1461,9 @@ public class VistaGrafica extends JFrame implements Vista{
 						rutahtml=trhtml.traducirPasosER_AFNDL(xmlSalida);
 					}
 					else controlador.ejecutaQuery("TALF -r "+rutaxml);
+					
+					setTuring(false);
+					setPila(false);
 					Automata a=(AutomataFNDLambda)controlador.getSalida();
 					panelCentral.getPanel().cargarAutomataNuevo(a);
 					panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");
@@ -1474,6 +1483,9 @@ public class VistaGrafica extends JFrame implements Vista{
 						rutahtml=trhtml.traducirPasosAFND_AFD(xmlSalida);
 					}
 					else controlador.ejecutaQuery("TALF -t2 "+rutaxml);
+					
+					setTuring(false);
+					setPila(false);
 					Automata a=(AutomataFD)controlador.getSalida();
 					panelCentral.getPanel().cargarAutomataNuevo(a);
 					panelCentral.getPanel().setTipoAutomata("AutomataFD");
@@ -1493,6 +1505,9 @@ public class VistaGrafica extends JFrame implements Vista{
 						rutahtml=trhtml.traducirPasosAFNDL_AFND(xmlSalida);
 					}
 					else controlador.ejecutaQuery("TALF -t1 "+rutaxml);
+					
+					setTuring(false);
+					setPila(false);
 					Automata a=(AutomataFND)controlador.getSalida();
 					panelCentral.getPanel().cargarAutomataNuevo(a);
 					panelCentral.getPanel().setTipoAutomata("AutomataFND");
@@ -1512,6 +1527,9 @@ public class VistaGrafica extends JFrame implements Vista{
 						rutahtml=trhtml.traducirPasosAFDTOER(xmlSalida);
 					}
 					else controlador.ejecutaQuery("TALF -t3 "+rutaxml);
+					
+					setTuring(false);
+					setPila(false);
 					String a=(String)controlador.getSalida();
 					setExpresion(a);
 					JOptionPane.showMessageDialog(this,a,"AFD to ER",JOptionPane.INFORMATION_MESSAGE);
@@ -1986,27 +2004,38 @@ public class VistaGrafica extends JFrame implements Vista{
 		             
 		            case 0: panelCentral.getPanel().setTipoAutomata("AutomataFD");
 		            setOpcionesAF();
+		            setPila(false);
+		            setTuring(false);
 		            break;
 		            	
 		            case 1: panelCentral.getPanel().setTipoAutomata("AutomataFND"); 
 		            setOpcionesAF();
+		            setPila(false);
+		            setTuring(false);
 		            break;
 		            	
 		            case 2: panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");
 		            setOpcionesAF();
+		            setPila(false);
+		            setTuring(false);
 		            break;
 		            	
 		            case 3:	panelCentral.getPanel().setTipoAutomata("AutomataPila"); 
 					setGordaLatex(true);
 					setEstaPalabra(true);
 					setMaricaTuring(false);
+		            setPila(true);
+		            setTuring(false);
 		            break;
 		            	
 		            case 4: panelCentral.getPanel().setTipoAutomata("MaquinaTuring"); 
 					setGordaLatex(true);
 					setEstaPalabra(false);
 					setMaricaTuring(true);
+					setPila(false);
+		            setTuring(true);
 		            break;
+		            
 		            
 		            }
 		            

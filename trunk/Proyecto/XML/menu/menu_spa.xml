@@ -40,6 +40,7 @@
 		<equivalentes>Equivalencia de autómatas</equivalentes>
 		<afd_to_er>AFD a ER</afd_to_er>
 		<er>Expresión Regular</er>
+		<gramatica>Simplificación GIC</gramatica>
 	</algoritmos>
 	<usuarios>
 		<texto>Usuarios</texto>
@@ -83,6 +84,7 @@
 		<minimizacion>Algoritmo de minimización de autómtas finitos</minimizacion>
 		<equivalencia>Algoritmo de equivalencia de autómatas</equivalencia>
 		<afd_to_er>Algoritmo de transformación de autómata a expresion regular</afd_to_er>
+		<gramatica>Algoritmo de simplificación de una gramática independiente del contexto</gramatica>
 		<estado>Dibujar estados</estado>
 		<arista>Dibujar aristas</arista>
 		<borrar>Borrar elementos</borrar>

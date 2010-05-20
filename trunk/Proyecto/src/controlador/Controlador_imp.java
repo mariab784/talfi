@@ -253,7 +253,7 @@ public class Controlador_imp implements Controlador{
 			gictofnc.registraControlador(this);
 			gictofnc.simplifica(pasos);
 			
-			//salida=agic.ejecutar(pasos); //salida es un object
+			salida=agic.ejecutar(pasos); //salida es un object
 			String xml=gictofnc.getXML();
 			System.out.println("TENGO EL XML!!: " + xml);
 			

@@ -30,6 +30,35 @@
 			Automata transformado correctamente
 		</finalizado>
 	</AFNDLambdatoAFND>	
+		<simplificacionGIC>
+		<iniciar>
+			ALGORITMO DE SIMPLIFICACION
+		</iniciar>
+		<error1>
+			error, El automata no está bien formado
+		</error1>
+		<estNuevos>
+			Lista de estados nuevos:
+		</estNuevos>
+		<estInicialNuevo>
+			Estado inicial nuevo:
+		</estInicialNuevo>
+		<ListaFinNuevos>
+			Lista de estados finales nuevos:
+		</ListaFinNuevos>
+		<minimizado>
+			Automata minimizado:
+		</minimizado>
+		<tablaPasos>
+			Tabla tras pasos:
+		</tablaPasos>
+		<noAgrupa>
+			No hay cambios de agrupamiento
+		</noAgrupa>
+		<agrupa>
+			Hay cambios de agrupamiento
+		</agrupa>
+	</simplificacionGIC>
 	<minimizacion>
 		<iniciar>
 			ALGORITMO DE MINIMIZACION
