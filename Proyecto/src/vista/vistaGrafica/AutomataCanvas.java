@@ -453,7 +453,7 @@ public class AutomataCanvas extends JScrollPane {
 	/*******************************************************************/
 	
 	/**
-	 * Pinta la arista de un AP en la interfaz grafica
+	 * Pinta la arista de una MT en la interfaz grafica
 	 * @param g clase graphics para pintar sobre el panel
 	 */
 	
@@ -1166,7 +1166,18 @@ public class AutomataCanvas extends JScrollPane {
 				gimg.drawPolygon(x, y, 3);
 			}
 		}
+        
+
+		boolean esPila = getPila();
+		boolean esTuring = getTuring();
+		
+		if (esPila) pintaAristaPilaJPG(imagen);
+		else if (esTuring) pintaAristaTuringJPG(imagen);
+		else pintaAristaJPG(imagen);
+
 		Iterator<Arista> itArist=listaAristas.iterator();
+		
+		
 		while(itArist.hasNext()) {
 			Arista a=itArist.next();
 			java.awt.Graphics2D gimg2=(java.awt.Graphics2D)gimg; 
@@ -1247,6 +1258,244 @@ public class AutomataCanvas extends JScrollPane {
 	}
 	
 
+	public void pintaAristaJPG(BufferedImage imagen){
+		
+		Iterator<Arista> itArist=listaAristas.iterator();
+		Graphics gimg = imagen.getGraphics();
+		
+		while(itArist.hasNext()) {
+			Arista a=itArist.next();
+			java.awt.Graphics2D gimg2=(java.awt.Graphics2D)gimg; 
+			Stroke s=gimg2.getStroke();
+			gimg2.setStroke(STROKE);
+			gimg2.setColor(Color.black);
+			boolean noPintar=false;
+			String etiqueta=a.getEtiqueta();
+			String repetida=seRepite(listaAristas,a);
+			if (repetida!=null) {
+				if (repetida.equals("yaesta")) {
+					noPintar=true;
+				}
+				etiqueta=repetida;
+			}
+			if (a.getX()>a.getFx()) {
+				CurvedArrow curva=null;
+				if(a.getOrigen().equals(a.getDestino()))curva=new CurvedArrow(a.getX()+20,a.getY()+8,a.getFx()-20,a.getFy()+8, 3);
+				else {
+					int angulo=2;
+					if (esUnica(a)) angulo=0;
+					if (a.getY()>a.getFy())
+						curva=new CurvedArrow(a.getX()-15,a.getY()-15,a.getFx()+12,a.getFy()+19, angulo);
+					else curva=new CurvedArrow(a.getX()-15,a.getY()+15,a.getFx()+12,a.getFy()-19, angulo);
+				}
+				curva.draw((Graphics2D) gimg2);
+				if (noPintar!=true) {
+					curva.setLabel(etiqueta);
+					curva.drawText(gimg2);
+				}
+			}
+			else {
+				CurvedArrow curva=null;
+				if(a.getOrigen().equals(a.getDestino()))curva=new CurvedArrow(a.getX()+20,a.getY()+8,a.getFx()-20,a.getFy()+8, 3);
+				else {
+					int angulo=1;
+					if (esUnica(a)) angulo=0;
+					if (a.getY()>a.getFy()) 
+						curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-12,a.getFy()+19, angulo);
+					else curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-12,a.getFy()-19,angulo);
+				}
+				curva.draw((Graphics2D) gimg2);
+				curva.setLabel(etiqueta);
+				if (noPintar!=true) {
+					curva.setLabel(etiqueta);
+					curva.drawText(gimg2);
+				}
+			}
+			noPintar=false;
+			gimg2.setStroke(s);
+		}
+
+        // Ejecutamos el metodo Dispose para finalizar
+        gimg.dispose();
+
+        // Se crea un flujo de datos, en este caso será FileOutPutStream, aunque
+        // podés utilizar cualquier otro.
+
+   //     FileOutputStream out;
+		
+	}
+	
+	public void pintaAristaTuringJPG(BufferedImage imagen){
+		if (!listaAristasTuring.isEmpty()){	
+			Graphics gimg = imagen.getGraphics();
+			int numAristas = listaAristasTuring.size();
+			int j = 0;
+			int i = 0;
+			String etiquetaAux = "";// String etiqueta = "";
+			AristaTuring aristaT = listaAristasTuring.get(i);
+			while (i < numAristas){
+
+				java.awt.Graphics2D g2=(java.awt.Graphics2D)gimg; 
+				Stroke s=g2.getStroke();
+				g2.setStroke(STROKE);
+				g2.setColor(Color.black);
+			
+				if ( !aristaT.getMarcada() ){ 
+					//Mensajero m=Mensajero.getInstancia();	
+					String separador = m.devuelveMensaje("simbolos.separador",4);
+					if (etiquetaAux.equals("")){ 
+						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta(),0) + separador + aristaT.getSimboloCinta() + separador + /*dameEtiqueta(*/aristaT.getDireccion()/*)*/;
+						j = i+1;
+					}
+				
+					if (j < numAristas){ // falta llave
+				
+						AristaTuring aux = listaAristasTuring.get(j);
+						boolean origen,destinos;		
+						destinos = aristaT.getDestino().equals( aux.getDestino());
+						origen = aristaT.getOrigen().equals( aux.getOrigen());
+
+						if (destinos && origen && !aux.getMarcada() ) {
+							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaCinta(),0) + separador + aux.getSimboloCinta() + separador + /*dameEtiqueta(*/aux.getDireccion()/*SalidaPila())*/;
+							aux.setMarcada(true);
+						//j++;
+						}
+					
+					}
+							
+					if	(j >= numAristas){
+		
+						if (aristaT.getX()>aristaT.getFx()) {
+							CurvedArrow curva=null;
+							if(aristaT.getOrigen().equals(aristaT.getDestino()))curva=new CurvedArrow(aristaT.getX()+20,aristaT.getY()+8,aristaT.getFx()-20,aristaT.getFy()+8, 3);
+							else {
+								int angulo=0;//2;
+							//if (esUnicaAP(aristaAP)) angulo=0;
+								if (aristaT.getY()>aristaT.getFy())
+									curva=new CurvedArrow(aristaT.getX()-15,aristaT.getY()-15,aristaT.getFx()+12,aristaT.getFy()+19, angulo);
+								else curva=new CurvedArrow(aristaT.getX()-15,aristaT.getY()+15,aristaT.getFx()+12,aristaT.getFy()-19, angulo);
+							}
+							curva.draw((Graphics2D) gimg);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.drawText(gimg);
+						}
+						else {
+							CurvedArrow curva=null;
+							if(aristaT.getOrigen().equals(aristaT.getDestino()))curva=new CurvedArrow(aristaT.getX()+20,aristaT.getY()+8,aristaT.getFx()-20,aristaT.getFy()+8, 3);
+							else {
+								int angulo=0;
+								if (aristaT.getY()>aristaT.getFy()) 
+									curva=new CurvedArrow(aristaT.getX()+15,aristaT.getY()-15,aristaT.getFx()-12,aristaT.getFy()+19, angulo);
+								else curva=new CurvedArrow(aristaT.getX()+15,aristaT.getY()+15,aristaT.getFx()-12,aristaT.getFy()-19,angulo);
+							}
+							curva.draw((Graphics2D) gimg);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.drawText(gimg);
+						}
+						g2.setStroke(s);
+					}
+				}
+			
+				if (j >= numAristas){ 
+					i++; 
+					j = i+1;  
+					etiquetaAux = "";
+					if (i < listaAristasTuring.size()) 	aristaT = listaAristasTuring.get(i);
+				}
+				else j++; 
+			}
+		}//llave if ArrayList vacio}
+	}
+	
+	public void pintaAristaPilaJPG(BufferedImage imagen){
+		
+
+		
+		if (!listaAristasAP.isEmpty()){	
+			int numAristas = listaAristasAP.size();
+			int j = 0;
+			int i = 0;
+			String etiquetaAux = "";// String etiqueta = "";
+			AristaAP aristaAP = listaAristasAP.get(i);
+			Graphics gimg = imagen.getGraphics();
+			while (i < numAristas){
+
+				java.awt.Graphics2D g2=(java.awt.Graphics2D)gimg; 
+				Stroke s=g2.getStroke();
+				g2.setStroke(STROKE);
+				g2.setColor(Color.black);
+			
+				if ( !aristaAP.getMarcada() ){ 
+					//Mensajero m=Mensajero.getInstancia();	
+					String separador = m.devuelveMensaje("simbolos.separador",4);
+					if (etiquetaAux.equals("")){ 
+						etiquetaAux = dameEtiqueta(aristaAP.getEntradaSimbolos(),0) + separador + aristaAP.getCimaPila() + separador + dameEtiqueta(aristaAP.getSalidaPila(),1);
+						j = i+1;
+					}
+				
+					if (j < numAristas){ // falta llave
+				
+						AristaAP aux = listaAristasAP.get(j);
+						boolean origen,destinos;		
+						destinos = aristaAP.getDestino().equals( aux.getDestino());
+						origen = aristaAP.getOrigen().equals( aux.getOrigen());
+
+						if (destinos && origen && !aux.getMarcada() ) {
+							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaSimbolos(),0) + separador + aux.getCimaPila() + separador + dameEtiqueta(aux.getSalidaPila(),1);
+							aux.setMarcada(true);
+						//j++;
+						}
+					
+					}
+							
+					if	(j >= numAristas){
+		
+						if (aristaAP.getX()>aristaAP.getFx()) {
+							CurvedArrow curva=null;
+							if(aristaAP.getOrigen().equals(aristaAP.getDestino()))curva=new CurvedArrow(aristaAP.getX()+20,aristaAP.getY()+8,aristaAP.getFx()-20,aristaAP.getFy()+8, 3);
+							else {
+								int angulo=0;//2;
+							//if (esUnicaAP(aristaAP)) angulo=0;
+								if (aristaAP.getY()>aristaAP.getFy())
+									curva=new CurvedArrow(aristaAP.getX()-15,aristaAP.getY()-15,aristaAP.getFx()+12,aristaAP.getFy()+19, angulo);
+								else curva=new CurvedArrow(aristaAP.getX()-15,aristaAP.getY()+15,aristaAP.getFx()+12,aristaAP.getFy()-19, angulo);
+							}
+							curva.draw((Graphics2D) gimg);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.drawText(gimg);
+						}
+						else {
+							CurvedArrow curva=null;
+							//System.out.println("ARISTA A PINTAR: " + aristaAP);
+							if(aristaAP.getOrigen().equals(aristaAP.getDestino()))curva=new CurvedArrow(aristaAP.getX()+20,aristaAP.getY()+8,aristaAP.getFx()-20,aristaAP.getFy()+8, 3);
+							else {
+								int angulo=0;
+								if (aristaAP.getY()>aristaAP.getFy()) 
+									curva=new CurvedArrow(aristaAP.getX()+15,aristaAP.getY()-15,aristaAP.getFx()-12,aristaAP.getFy()+19, angulo);
+								else curva=new CurvedArrow(aristaAP.getX()+15,aristaAP.getY()+15,aristaAP.getFx()-12,aristaAP.getFy()-19,angulo);
+							}
+							curva.draw((Graphics2D) gimg);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.setLabel(/*etiqueta*/ etiquetaAux);
+							curva.drawText(gimg);
+						}
+						g2.setStroke(s);
+					}
+				}
+			
+				if (j >= numAristas){ 
+					i++; 
+					j = i+1;  
+					etiquetaAux = "";
+					if (i < listaAristasAP.size()) 	aristaAP = listaAristasAP.get(i);
+				}
+				else j++; 
+			}
+		}//llave if ArrayList vacio
+		
+	}
+	
 	/**
 	 * Repinta el panel(si tiene automata) llama a repaint(graphics)
 	 */

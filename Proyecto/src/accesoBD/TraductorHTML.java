@@ -372,7 +372,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			}
 			bw.append(finalss.toString()+"</p>");
 			automata.setEstadosFinales(finalss);
-			bw.append("<br><h2>AutomataPila</h2><table><tr><th>"+new Character((char)95).toString()+"</th>");
+			bw.append("<br><h2>Automata Pila</h2><table><tr><th>"+new Character((char)95).toString()+"</th>");
 
 			nodos = documento.getElementsByTagName("arrow");
 			for (int i = 0; i < nodos.getLength(); i++){
@@ -405,18 +405,10 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 								String ss= "" + s5.charAt(indice);//st.nextToken();
 								salida.add(ss);
 								indice++;
-						//	System.out.println("TRANS: "+ss);
-							//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
 							}
 						}
 						else { salida.add("\\");}
-						
-						/*System.out.println("S1: " + s1);
-						System.out.println("S2: " + s2);
-						System.out.println("S3: " + s3);
-						System.out.println("S4: " + s4);
-						System.out.println("S5: " + s5);*/
-						
+
 						x = x+ 10;
 						//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
 						((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
@@ -427,7 +419,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				}
 			
 			
-			Iterator<String> it1=alf.dameListaLetras().iterator();
+/*			Iterator<String> it1=alf.dameListaLetras().iterator();
 			while(it1.hasNext()) {
 				bw.append("<th>"+it1.next()+"</th>");
 			}
@@ -437,17 +429,12 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				String estado=it2.next();
 				bw.append("<tr><td>"+estado+"</td>");
 				it1=alf.dameListaLetras().iterator();
-	/*			while(it1.hasNext()) {
-					String letra=it1.next();
-					if (!automata.deltaExtendida(estado, letra).contains(null))
-						bw.append("<td>"+automata.deltaExtendida(estado, letra).toString()+"</td>");
-					else bw.append("<td></td>");
-				}*/
+
 				bw.append("</tr>");
-			}
+			}*/
 			//////////////
 			Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
-			while(itP1.hasNext()) {
+	/*		while(itP1.hasNext()) {
 				bw.append("<th>"+itP1.next()+"</th>");
 			}
 			bw.append("</tr>");
@@ -462,8 +449,8 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 						bw.append("<td>"+automata.deltaExtendida(estado, letra).toString()+"</td>");
 					else bw.append("<td></td>");
 				}*/
-				bw.append("</tr>");
-			}
+	/*			bw.append("</tr>");
+			}*/
 			
 
 			
@@ -473,7 +460,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			//GENERACIñN DE LOS PASOS DE SIMPLIFICACION
 			
 			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.input",3)+"</p><img src='imagenEntrada.jpg' alt='Input'></p>");
-			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
+//			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
 			bw.append("</body></html>");
 			bw.close();
 
