@@ -433,7 +433,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				bw.append("</tr>");
 			}*/
 			//////////////
-			Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
+//			Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
 	/*		while(itP1.hasNext()) {
 				bw.append("<th>"+itP1.next()+"</th>");
 			}
