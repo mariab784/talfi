@@ -1,6 +1,5 @@
 package latexCode;
 
-import java.awt.Graphics2D;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
@@ -14,7 +13,6 @@ import accesoBD.Mensajero;
 import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
-import vista.vistaGrafica.CurvedArrow;
 import vista.vistaGrafica.PanelCentral;
 
 public class LatexCodeConverter {
@@ -111,20 +109,67 @@ public class LatexCodeConverter {
             }
         }
         if(tipoAuto.equals("AutomataPila")){
-        	numAristas = c.getListaAristasPila().size();
-        	for(int j = 0; j < numAristas; j++){
-                if(c.getListaAristasPila().get(j).getOrigen().equals(c.getListaAristasPila().get(j).getDestino()))
-                    k = 2;
-                else
-                    k = 1;
-                xOrigen = (Math.abs(c.getListaAristasPila().get(j).getX())*160)/842;
-                yOrigen = (c.getListaAristasPila().get(j).getY()*160)/783;
-                xDestino = (Math.abs(c.getListaAristasPila().get(j).getFx())*160)/842;
-                yDestino = (c.getListaAristasPila().get(j).getFy()*160)/783;
-      //          etiqueta = c.getListaAristasPila().get(j).getEtiqueta();
-       /*         latex = latex + "\\ar@/^"+k+"pc/^{"+etiqueta+"}("+xOrigen+
-                        ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n";*/
-            }
+
+			numAristas = c.getListaAristasPila().size();
+			int j = 0;
+			int i = 0;
+			String etiquetaAux = "";// String etiqueta = "";
+			AristaAP aristaT = c.getListaAristasPila().get(i);
+			while (i < numAristas){
+				
+				if ( !aristaT.getMarcada() ){ 
+					//Mensajero m=Mensajero.getInstancia();	
+					String separador = "$\backslash$";//mensajero.devuelveMensaje("simbolos.separador",4);
+					if (etiquetaAux.equals("")){ 
+						etiquetaAux = dameEtiqueta(aristaT.getEntradaSimbolos(),0) + separador + aristaT.getCimaPila() + separador + dameEtiqueta(aristaT.getSalidaPila(),1);
+						j = i+1;
+					}
+				
+					if (j < numAristas){ // falta llave
+				
+						AristaAP aux = c.getListaAristasPila().get(j);
+						boolean origen,destinos;		
+						destinos = aristaT.getDestino().equals( aux.getDestino());
+						origen = aristaT.getOrigen().equals( aux.getOrigen());
+
+						if (destinos && origen && !aux.getMarcada() ) {
+							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaSimbolos(),0) + separador + aux.getCimaPila() + separador + dameEtiqueta(aux.getSalidaPila(),1);
+							aux.setMarcada(true);
+						//j++;
+						}
+					
+					}
+							
+					if	(j >= numAristas){
+		
+						
+						//if(c.getListaAristasTuring().get(j).getOrigen().equals(c.getListaAristasTuring().get(j).getDestino()))
+							
+							if(aristaT.getOrigen().equals(aristaT.getDestino()))
+		                    k = 2;
+			                else
+			                    k = 1;
+							
+			                xOrigen = (Math.abs(aristaT.getX())*160)/842;
+			                yOrigen = (aristaT.getY()*160)/783;
+			                xDestino = (Math.abs(aristaT.getFx())*160)/842;
+			                yDestino = (aristaT.getFy()*160)/783;
+			               // etiqueta = construyeEtiqueta(c.getListaAristasTuring());
+			                latex = latex + "\\ar@/^"+k+"pc/^{"+etiquetaAux+"}("+xOrigen+
+			                        ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n";
+						
+					}
+				}
+				
+				if (j >= numAristas){ 
+					i++; 
+					j = i+1;  
+					etiquetaAux = "";
+					if (i < numAristas) 	aristaT = c.getListaAristasPila().get(i);
+				}
+				else j++; 
+			}
+        	
         }
         if(tipoAuto.equals("MaquinaTuring")){
         	
@@ -138,7 +183,7 @@ public class LatexCodeConverter {
 				
 				if ( !aristaT.getMarcada() ){ 
 					//Mensajero m=Mensajero.getInstancia();	
-					String separador = mensajero.devuelveMensaje("simbolos.separador",4);
+					String separador = "$\backslash$";//mensajero.devuelveMensaje("simbolos.separador",4);
 					if (etiquetaAux.equals("")){ 
 						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta(),0) + separador + aristaT.getSimboloCinta() + separador + /*dameEtiqueta(*/aristaT.getDireccion()/*)*/;
 						j = i+1;
@@ -169,10 +214,10 @@ public class LatexCodeConverter {
 			                else
 			                    k = 1;
 							
-			                xOrigen = (Math.abs(c.getListaAristasTuring().get(j).getX())*160)/842;
-			                yOrigen = (c.getListaAristasTuring().get(j).getY()*160)/783;
-			                xDestino = (Math.abs(c.getListaAristasTuring().get(j).getFx())*160)/842;
-			                yDestino = (c.getListaAristasTuring().get(j).getFy()*160)/783;
+			                xOrigen = (Math.abs(aristaT.getX())*160)/842;
+			                yOrigen = (aristaT.getY()*160)/783;
+			                xDestino = (Math.abs(aristaT.getFx())*160)/842;
+			                yDestino = (aristaT.getFy()*160)/783;
 			               // etiqueta = construyeEtiqueta(c.getListaAristasTuring());
 			                latex = latex + "\\ar@/^"+k+"pc/^{"+etiquetaAux+"}("+xOrigen+
 			                        ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n";
@@ -203,14 +248,18 @@ public class LatexCodeConverter {
 	private String dameEtiqueta(ArrayList<String> a, int tipo){
 	
 		Iterator<String> it = a.iterator();
+		String blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
+		String s = "";
 		String r = it.next();
 		while (it.hasNext()){
+			if (r.equals(blanco)) s += "\\" + blanco;
+			else s += r;
 			if (tipo == 0)
-				r+=",";
+				s+=",";
 			//else r+=
-			r += it.next();
+			r = it.next();
 		}
-		return r;
+		return s;
 	}
 	
 	
