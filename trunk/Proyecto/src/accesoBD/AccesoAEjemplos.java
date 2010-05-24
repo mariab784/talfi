@@ -278,6 +278,17 @@ public class AccesoAEjemplos {
 			 j++;
 		}	
 		arbol.put("TransformacionPila",ejerciciosAP);
+		//MT
+/*		ArrayList<String> ejerciciosTuring=new ArrayList<String>();
+		tipo=documento.getElementsByTagName("maquinaTuring");
+		
+		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
+			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
+			 ejerciciosTuring.add(var);
+			 j++;
+		}	
+		arbol.put("MaquinasDeTuring",ejerciciosTuring);*/
+		
 		
 		return arbol;
 	}
