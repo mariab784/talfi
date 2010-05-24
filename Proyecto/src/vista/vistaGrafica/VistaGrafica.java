@@ -634,7 +634,7 @@ public class VistaGrafica extends JFrame implements Vista{
             
 			public void actionPerformed(ActionEvent e) {
 				
-				codLatex = new LatexCodeConverter(panelCentral);
+				codLatex = LatexCodeConverter.getInstancia(panelCentral);
 				codLatex.convertir();
             }
 
