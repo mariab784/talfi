@@ -294,7 +294,7 @@ public class AristaAP extends AristaGeneral implements /*AristaInterface,*/ Comp
 	 * @return cadena con la información de la arista
 	 */
 	public String toString() {
-		return "d("+origen+","+entradaSimbolos+","+cimaPila+")=("+destino+","+salidaPila+")";//+"("+marcada+")";
+		return "d("+origen+","+entradaSimbolos.toString()+","+cimaPila+")={("+destino+","+salidaPila.toString()+")}";//+"("+marcada+")";
 	}
 	/**
 	 * Método que devuelve los simbolos de entrada que se consumen en la arista en formato texto

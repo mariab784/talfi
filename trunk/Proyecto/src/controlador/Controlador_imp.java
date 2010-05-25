@@ -251,7 +251,7 @@ public class Controlador_imp implements Controlador{
 			GIC_to_FNC gictofnc = new GIC_to_FNC(agic.getGic(),pasos);
 			
 			gictofnc.registraControlador(this);
-			gictofnc.simplifica(pasos);
+			gictofnc.simplifica(pasos,true);
 			
 			salida=agic.ejecutar(pasos); //salida es un object
 			String xml=gictofnc.getXML();

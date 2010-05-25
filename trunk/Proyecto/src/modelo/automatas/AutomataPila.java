@@ -438,7 +438,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		AristaAP arista = automata.get(i);
 		while(i<automata.size()){
 			
-			if(automata.get(i).contieneOrigen(estado)){
+			if(automata.get(i).contieneOrigen(estado) && !estados.contains(estado)){
 				estados.add(estado);
 			}
 			arista = automata.get(i);

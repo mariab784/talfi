@@ -25,6 +25,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 import vista.vistaGrafica.Arista;
+import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.CurvedArrow;
 import vista.vistaGrafica.Estado;
 import com.sun.image.codec.jpeg.ImageFormatException;
@@ -32,6 +33,8 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
+import modelo.algoritmos.AutomataP_to_GramaticaIC;
+import modelo.algoritmos.GIC_to_FNC;
 import modelo.algoritmos.Registro;
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
@@ -327,7 +330,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			ArrayList<String> estad= new ArrayList<String>();
 			ArrayList<String> finalss= new ArrayList<String>();
 			Alfabeto_Pila alfabetoPila = new AlfabetoPila_imp();
-			Automata automata=new AutomataPila();
+			AutomataPila automata=new AutomataPila();
 			
 
 			bw.append("<br><p>Type:"+var+"</p>");
@@ -372,7 +375,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			}
 			bw.append(finalss.toString()+"</p>");
 			automata.setEstadosFinales(finalss);
-			bw.append("<br><h2>Automata Pila</h2><table><tr><th>"+new Character((char)95).toString()+"</th>");
+			bw.append("<br><h2>Aristas</h2><table><tr>"/*<th>"+new Character((char)95).toString()+"</th>"*/);
 
 			nodos = documento.getElementsByTagName("arrow");
 			for (int i = 0; i < nodos.getLength(); i++){
@@ -424,8 +427,8 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				bw.append("<th>"+it1.next()+"</th>");
 			}
 			bw.append("</tr>");
-			Iterator<String> it2=estad.iterator();
-			while(it2.hasNext()) {
+	//		Iterator<String> it2=estad.iterator();
+	/*		while(it2.hasNext()) {
 				String estado=it2.next();
 				bw.append("<tr><td>"+estado+"</td>");
 				it1=alf.dameListaLetras().iterator();
@@ -433,26 +436,33 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				bw.append("</tr>");
 			}*/
 			//////////////
-//			Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
+	//		Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
 	/*		while(itP1.hasNext()) {
 				bw.append("<th>"+itP1.next()+"</th>");
-			}
-			bw.append("</tr>");
+			}*/
+/*			bw.append("</tr>");
 			Iterator<String> itP2=estad.iterator();
 			while(itP2.hasNext()) {
 				String estado=itP2.next();
 				bw.append("<tr><td>"+estado+"</td>");
 				itP1=alf.dameListaLetras().iterator();
-	/*			while(itP1.hasNext()) {
+				while(itP1.hasNext()) {
 					String letra=itP1.next();
-					if (!automata.deltaExtendida(estado, letra).contains(null))
-						bw.append("<td>"+automata.deltaExtendida(estado, letra).toString()+"</td>");
-					else bw.append("<td></td>");
-				}*/
-	/*			bw.append("</tr>");
+					ArrayList<String> delta = automata.getAristasLetra(estado,letra);
+					if (delta != null)//automata.existeArista(estado,letra))//.deltaExtendida(estado, letra).contains(null))
+						bw.append("<td>"+/*((AutomataPila)automata) .deltaExtendida(estado, letra)*//*delta.toString()+"</td>");
+/*					else bw.append("<td></td>");
+				}
+				bw.append("</tr>");
 			}*/
-			
-
+			Iterator<AristaAP> itArsAP = automata.getAutomataPila().iterator();
+	//		bw.append("<tr>");
+			while(itArsAP.hasNext()){
+				
+				AristaAP aris = itArsAP.next();
+				bw.append("<tr><td>" + aris.toString() + "</td></tr>");
+			}
+	//		bw.append("</tr>");
 			
 			bw.append("</table></div>");
 			bw.append("<div id='authomata'>");
@@ -461,6 +471,20 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.input",3)+"</p><img src='imagenEntrada.jpg' alt='Input'></p>");
 //			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
+	
+			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
+			
+			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
+			agic.AP_Gramatica();
+			System.out.println("AGIC getgic: " + agic.getGic());
+			GIC_to_FNC gictofnc = new GIC_to_FNC(agic.getGic(),true);
+			
+		//	gictofnc.registraControlador(this);
+			gictofnc.simplifica(true,false);
+			
+
+			System.out.println("dame html: " + gictofnc.getHTML());
+			bw.append(gictofnc.getHTML());
 			bw.append("</body></html>");
 			bw.close();
 
