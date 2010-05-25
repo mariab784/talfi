@@ -107,7 +107,7 @@ public class GIC_to_FNC {
 		inicializarTabla();
 		tablaTieneMarcas=false;
 
-		html+=  gramaticaSalida.toHTML() + "<br><br><br>";
+		html+= "<br><h2>Gramatica</h2>" + gramaticaSalida.toHTML() + "<br>";
 		
 		
 		for(int i=0; i<lon; i++){ //recorre variables fila
@@ -404,6 +404,7 @@ public class GIC_to_FNC {
 			transforma_FNG(b);
 			
 		}
+		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
 		
 		if (pasarXml){
 			
