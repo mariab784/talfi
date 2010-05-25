@@ -462,7 +462,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 				AristaAP aris = itArsAP.next();
 				bw.append("<tr><td>" + aris.toString() + "</td></tr>");
 			}
-	//		bw.append("</tr>");
+			//bw.append("</tr>");
 			
 			bw.append("</table></div>");
 			bw.append("<div id='authomata'>");
