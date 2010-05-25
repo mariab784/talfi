@@ -1,6 +1,8 @@
 package latexCode;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
@@ -11,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import accesoBD.Mensajero;
 
+import vista.vistaGrafica.Arista;
 import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
@@ -29,6 +32,7 @@ public class LatexCodeConverter {
 	private char upDown;
 	private int contador;
 	private String blanco;
+	private String lambda;
 	
 	public LatexCodeConverter(PanelCentral panel){
 		
@@ -37,6 +41,7 @@ public class LatexCodeConverter {
 		upDown = '^';
 		mensajero = Mensajero.getInstancia();
 		blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		contador = 0;
 
 	}
@@ -110,9 +115,11 @@ public class LatexCodeConverter {
         /*\ar@/^1pc/^{a}(5,0)*{};(15,0)*{}
         \ar@/^2pc/^{a}(-3,4)*{};(4,3)*{}   %//XXX para loop ^o _ en 2pc*/
         tipoAuto  = p.getPanel().getTipoAutomata();
+        desmarcarAristas(tipoAuto);
+        
         if((tipoAuto.equals("AutomataFD"))||(tipoAuto.equals("AutomataFND"))||(tipoAuto.equals("AutomataFNDLambda"))){
         	numAristas = c.getListaAristas().size();
-        	for(int j = 0; j < numAristas; j++){
+/*        	for(int j = 0; j < numAristas; j++){
                 if(c.getListaAristas().get(j).getOrigen().equals(c.getListaAristas().get(j).getDestino())){
                     k = 2;
                     upDown = '_';
@@ -148,7 +155,94 @@ public class LatexCodeConverter {
                 }
                 latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
                         ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n";
-            }
+            }*/
+        	
+        	ArrayList<Arista> listaAristas = c.getListaAristas();
+    		Iterator<Arista> itArist= listaAristas.iterator();
+    		int j = 0;  //recordar actualizar
+    		while(itArist.hasNext()) {
+    			Arista a=itArist.next();
+
+    			boolean noPintar=false;
+    			etiqueta=a.getEtiqueta();
+    			
+    			String repetida=seRepite(listaAristas,a); //aqui compara con el resto por si van al mismo est
+    			if (repetida!=null) {
+    				if (repetida.equals("yaesta")) {
+    					noPintar=true;
+    				}
+    				etiqueta=repetida;
+    			}
+    			
+   				if(c.getListaAristas().get(j).getOrigen().equals(c.getListaAristas().get(j).getDestino())){
+                        k = 2;
+                        upDown = '_';
+                    }
+                    else {
+                        k = 1;
+                        upDown = '^';
+                    }
+    				
+    				//else {
+    					
+    		               xOrigen = (Math.abs(c.getListaAristas().get(j).getX())*160)/842;
+    		                yOrigen = (c.getListaAristas().get(j).getY()*160)/783;
+    		                xDestino = (Math.abs(c.getListaAristas().get(j).getFx())*160)/842;
+    		                yDestino = (c.getListaAristas().get(j).getFy()*160)/783;
+    		           //     etiqueta = c.getListaAristas().get(j).getEtiqueta();
+    					
+    		                if(Math.abs(yOrigen-yDestino) > 30){
+    		                	if(yOrigen > yDestino){
+    		                		yOrigen = yOrigen - 5;
+    		                		yDestino = yDestino + 5;
+    		                	}
+    		                	else {
+    		                		yOrigen = yOrigen + 5;
+    		                		yDestino = yDestino - 5;
+    		                	}
+    		                }
+    		                else {
+    		                	if(xOrigen < xDestino){
+    		                		xOrigen = xOrigen + 5;
+    		                		xDestino = xDestino - 5;
+    		                	}
+    		                	else {
+    		                		xOrigen = xOrigen - 5;
+    		                		xDestino = xDestino + 5;
+    		                	}
+    		                }
+    		                
+    		             /*   latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
+                            ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; */       
+    				//	int angulo=1;
+    				//	if (esUnica(a)) angulo=0;
+    				//	if (a.getY()>a.getFy()) 
+    					//	curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-12,a.getFy()+19, angulo);
+    					/*else*/// curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-12,a.getFy()-19,angulo);
+    			//	} kiza volver a ponerlo
+    		//		curva.draw((Graphics2D) g);
+    				//curva.setLabel(etiqueta);
+    				// etiqueta = c.getListaAristas().get(j).getEtiqueta();
+    						if (noPintar!=true) {
+    						//	curva.setLabel(etiqueta);
+    						//	curva.drawText(g);
+    							 latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
+    			                    ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; 
+    						}        
+    		                
+    		                
+    	/*			if (noPintar!=true) {
+    					 etiqueta = c.getListaAristas().get(j).getEtiqueta();
+    					//curva.setLabel(etiqueta);
+
+    				}*/
+    	//		}
+//	                latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
+//                    ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; 
+    			noPintar=false;  			
+    			j++;
+    		}
+    		
         }
         if(tipoAuto.equals("AutomataPila")){
 			numAristas = c.getListaAristasPila().size();
@@ -182,7 +276,7 @@ public class LatexCodeConverter {
 							/*String r = aux.getSimboloCinta();
 							if (r.equals(blanco)) r = "\\"+r;*/
 							etiquetaAux += " , " + dameEtiqueta(aux.getEntradaSimbolos(),0) + separador + aux.getCimaPila() + separador + dameEtiqueta(aux.getSalidaPila(),1);
-
+							//System.out.println("ETIKETA AUX = " + etiquetaAux);
 							aux.setMarcada(true);
 						//j++;
 						}
@@ -351,23 +445,55 @@ public class LatexCodeConverter {
 	   creaArchivo();	
 	}
 	
+	private boolean esUnica(Arista a) {
+		// TODO Auto-generated method stub
+		Iterator<Arista> itArist=p.getCanvas().getListaAristas().iterator();
+		while(itArist.hasNext()) {
+			Arista b=itArist.next();
+			if (!a.equals(b)) {
+				if (a.getX()==b.getFx()&&(a.getY()==b.getFy())&&(a.getFx()==b.getX())&&(a.getFy()==b.getY())) return false;
+			}
+		}
+		return true;
+	}
+	
+	private String seRepite(ArrayList<Arista> la, Arista a) {
+		//Iterator<Arista> it=la.iterator();
+		String repetida=a.getEtiqueta();
+		int i=0;
+		while(i<la.size()) {
+			Arista aux=la.get(i);
+			if ((a.getDestino().equals(aux.getDestino()))&&(a.getOrigen().equals(aux.getOrigen()))&&(!a.getEtiqueta().equals(aux.getEtiqueta()))) {
+				if (aux.getMarcada()) return "yaesta";
+				repetida+=","+aux.getEtiqueta();
+			}
+			i++;
+		}
+		if (repetida.contains(",")) {
+			a.setMarcada(true);
+			return repetida;
+		}
+		a.setMarcada(false);
+		return null;
+	}
 	
 	// 0 para simbolos, 1 para transicion de pila
 	private String dameEtiqueta(ArrayList<String> a, int tipo){
 	
-		String s = "";
+		String s = " ";
 		Iterator<String> it = a.iterator();
 		
 		
 		while (it.hasNext()){
 			String r = it.next();
 			if (r.equals(blanco)) r = "\\"+r;
+			if (r.equals(lambda)) r = "\\lambda";
 			if (tipo == 0 && it.hasNext())
 				r+=",";
 			//else r+=
 			s += r;
 		}
-
+		s += " ";
 		return s;
 	}
 	
@@ -393,6 +519,22 @@ public class LatexCodeConverter {
     		e.printStackTrace();
     	}
 	}
+	
+	private void desmarcarAristas(String tipo){
+		
+		ArrayList<?> la = null;
+		if(tipo.equals("AutomataPila")){la = p.getCanvas().getListaAristasPila();}
+		else if(tipo.equals("MaquinaTuring")){la = p.getCanvas().getListaAristasTuring();}
+		else{la = p.getCanvas().getListaAristas();}
+		Iterator<?>/*<AristaObject>*/ it=la.iterator();
+		while(it.hasNext()) {
+			/*Arista*/Object aux=it.next();
+			if (aux instanceof Arista)((Arista)aux).setMarcada(false);
+			else if (aux instanceof AristaAP)((AristaAP)aux).setMarcada(false);
+			if (aux instanceof AristaTuring)((AristaTuring)aux).setMarcada(false);
+		}
+	}
+	
 	
 	public void muestraTex(String ruta){
 		
