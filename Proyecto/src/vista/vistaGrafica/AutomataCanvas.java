@@ -347,7 +347,7 @@ public class AutomataCanvas extends JScrollPane {
 					else curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-12,a.getFy()-19,angulo);
 				}
 				curva.draw((Graphics2D) g);
-				curva.setLabel(etiqueta);
+				//curva.setLabel(etiqueta);
 				if (noPintar!=true) {
 					curva.setLabel(etiqueta);
 					curva.drawText(g);

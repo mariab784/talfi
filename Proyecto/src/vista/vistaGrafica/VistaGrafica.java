@@ -1444,7 +1444,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			// TODO Auto-generated method stub
 			
 			if  (algoritmo == GRAMATICA){
-				JOptionPane pane=new JOptionPane();
+	/*			JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
 				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.pregunta",2));
 				JPanel panel=new JPanel(new GridLayout(2,1));
@@ -1452,12 +1452,12 @@ public class VistaGrafica extends JFrame implements Vista{
 				JLabel pasosE=new JLabel(m.devuelveMensaje("pasos.preguntaG",2));
 				JButton aceptar=new JButton(m.devuelveMensaje("pasos.con",2));
 				aceptar.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
+					public void actionPerformed(ActionEvent e){*/
 						pasos=true;
-						dialog.setVisible(false);
+					//	dialog.setVisible(false);
 						ejecuta(algoritmo,pasos); //XXX
 						rutaVista=null;
-					}
+			/*		}
 				});
 				JButton cancelar=new JButton(m.devuelveMensaje("pasos.sin",2));
 				cancelar.addActionListener(new ActionListener(){
@@ -1475,7 +1475,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog.setContentPane(panel);
 				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 				dialog.setSize(new Dimension(300,150));
-				dialog.setVisible(true);
+				dialog.setVisible(true);*/
 				
 				
 			}

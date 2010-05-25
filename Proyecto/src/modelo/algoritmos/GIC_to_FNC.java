@@ -40,6 +40,7 @@ public class GIC_to_FNC {
 	private GramaticaIC gramaticaEntrada;
 	private Greibach gramaticaSalida;
 	private String xml;
+	private String html;
 	private boolean tabla[][];
 	private int lon;
 	private HashMap<Integer,ArrayList<Integer>> columna; // columna, filas
@@ -54,6 +55,7 @@ public class GIC_to_FNC {
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
 		xml= "<exit><steps>\n";
+		html="";
 		transforma_FNG(b);
 
 	}
@@ -105,6 +107,9 @@ public class GIC_to_FNC {
 		inicializarTabla();
 		tablaTieneMarcas=false;
 
+		html+=  gramaticaSalida.toHTML() + "<br><br><br>";
+		
+		
 		for(int i=0; i<lon; i++){ //recorre variables fila
 			String simboloFila = variables.get(i);
 			String simboloColumna = null;
@@ -167,40 +172,55 @@ public class GIC_to_FNC {
 	}
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 	public void pintaTabla(){
+		
+		
+		html +="<table>";
 		//xml+="<exit>";
 		//xml+="<steps>\n";
 		xml+="<step><table>";
 		xml+="<column>";
+		html +="<tr>";
 		for(int i = 0; i <lon; i++){
-			xml+="<fila>";
-			if (i == 0) {xml+="  "; System.out.print("  ");}
+			xml+="<fila>"; //html +="<td>";
+			if (i == 0) {xml+="  "; html +="<td> - </td>"; System.out.print("  ");}
 			//xml+="<step>";
 			xml+=this.getGramaticaSalida().getVariables().get(i) + " ";
+			html +="<td>" + this.getGramaticaSalida().getVariables().get(i) + " </td>";
 			//xml+="</step>";
-			xml+="</fila>";
+			xml+="</fila>"; //html +="</td>";
 			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
 		}
 		xml+="</column>";
+		html +="</tr><br>";
 		System.out.println();
 		for(int i=0; i<lon; i++){
+			html+="<tr>";
 			for(int j=0; j<lon; j++){
-				String s;
+			//	String s;
 	//			xml+="<step>";
 				if (j == 0){
 					xml+=(this.getGramaticaSalida().getVariables().get(i) + " ");
+					html+="<td>"+this.getGramaticaSalida().getVariables().get(i) + " " + "</td>";
 					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
-				}if (tabla[i][j]) {
-					xml+="X ";System.out.print("X ");}
-				else {xml+="- ";System.out.print("- ");}
+				}
+				if (tabla[i][j]) {
+					xml+="X ";System.out.print("X ");
+					html+="<td> X </td>";
+				}
+				else {
+					xml+="- ";System.out.print("- ");
+					html+="<td> - </td>";
+				
+				}
 				//xml+="</step>";
 				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
-			System.out.println();
+			System.out.println();html+="</tr>";
 		}
 		xml+="</table></step>\n";
 		//xml+="</exit>";
-		
-		System.out.println("XML PINTATABLA: " + xml);
+		html +="</table>";
+		//System.out.println("XML PINTATABLA: " + xml);
 	}
 	
 	public void inicializarTabla() {
@@ -375,7 +395,7 @@ public class GIC_to_FNC {
 		System.out.println("GRAMATICA salida: " + gramaticaSalida.getProducciones());
 	}
 	
-	public void simplifica(boolean b){
+	public void simplifica(boolean b,boolean pasarXml){
 		
 		while(getTablaTieneMarcas()){
 			
@@ -385,42 +405,46 @@ public class GIC_to_FNC {
 			
 		}
 		
-		//File fichero = new File (rutaxmlconaut);
-		//BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
-		//bw.append(panelCentral.getPanel().traducirXML());
-		//bw.close();
-		
-		String rutaxmlconaut="XML/pruebas/ficheroG.xml";
-		File archivo = null;
-	    FileReader fr = null;
-	    BufferedReader br = null;
-	    String cinta = "";
-	    try {
-	    	// Apertura del fichero y creacion de BufferedReader para poder
-	        // hacer una lectura comoda (disponer del metodo readLine()).
-	        archivo = new File(rutaxmlconaut);
-	        fr = new FileReader (archivo);
-	        br = new BufferedReader(fr);
+		if (pasarXml){
+			
+			String rutaxmlconaut="XML/pruebas/ficheroG.xml";
+			File archivo = null;
+			FileReader fr = null;
+			BufferedReader br = null;
+			String cinta = "";
+			try {
+				// Apertura del fichero y creacion de BufferedReader para poder
+				// hacer una lectura comoda (disponer del metodo readLine()).
+				archivo = new File(rutaxmlconaut);
+				fr = new FileReader (archivo);
+				br = new BufferedReader(fr);
 	        // Lectura del fichero
-	        String linea;
-	        while((linea=br.readLine())!=null)
-	        	cinta += linea+"\n";
+				String linea;
+				while((linea=br.readLine())!=null)
+					cinta += linea+"\n";
 	        
-	        br.close();
-			fr.close();
-			xml+="\n<result>"+cinta+"</result></steps></exit>";
+				br.close();
+				fr.close();
+				xml+="\n<result>"+cinta+"</result></steps></exit>";
+			}
 			//xml+="</exit>";
+			catch(FileNotFoundException e){
+				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+				
+				
+			}
+	    	catch(Exception e){
+	    		System.out.println("TROCOTRO");
+	    		e.printStackTrace();
+	    	}
 	    }
-		catch(FileNotFoundException e){
-			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
-			
-			
-		}
-    	catch(Exception e){
-    		System.out.println("TROCOTRO");
-    		e.printStackTrace();
-    	}
+		
 
+	}
+	
+	public String getHTML(){
+		
+		return html;
 	}
 	
 	//************************************************************
@@ -495,7 +519,7 @@ public class GIC_to_FNC {
 		
 		System.out.println("GRAMATICA: " + g);
 		GIC_to_FNC piticli = new GIC_to_FNC(g,true);
-		piticli.simplifica(true);
+		piticli.simplifica(true,false);
 		System.out.println("XML MAIN: \n" + piticli.getXML());
 /*		while(piticli.getTablaTieneMarcas()){
 			

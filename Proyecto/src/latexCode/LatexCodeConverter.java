@@ -159,14 +159,14 @@ public class LatexCodeConverter {
         	
         	ArrayList<Arista> listaAristas = c.getListaAristas();
     		Iterator<Arista> itArist= listaAristas.iterator();
-    		int j = 0;  //recordar actualizar
+    		int j = 0;
     		while(itArist.hasNext()) {
     			Arista a=itArist.next();
 
     			boolean noPintar=false;
     			etiqueta=a.getEtiqueta();
     			
-    			String repetida=seRepite(listaAristas,a); //aqui compara con el resto por si van al mismo est
+    			String repetida=seRepite(listaAristas,a);
     			if (repetida!=null) {
     				if (repetida.equals("yaesta")) {
     					noPintar=true;
@@ -175,75 +175,52 @@ public class LatexCodeConverter {
     			}
     			
    				if(c.getListaAristas().get(j).getOrigen().equals(c.getListaAristas().get(j).getDestino())){
-                        k = 2;
-                        upDown = '_';
-                    }
-                    else {
-                        k = 1;
-                        upDown = '^';
-                    }
-    				
-    				//else {
+   					k = 2;
+                    upDown = '_';
+                }
+                else {
+                    k = 1;
+                    upDown = '^';
+                }
+    				  					
+    		    xOrigen = (Math.abs(c.getListaAristas().get(j).getX())*160)/842;
+    		    yOrigen = (c.getListaAristas().get(j).getY()*160)/783;
+    		    xDestino = (Math.abs(c.getListaAristas().get(j).getFx())*160)/842;
+    		    yDestino = (c.getListaAristas().get(j).getFy()*160)/783;
     					
-    		               xOrigen = (Math.abs(c.getListaAristas().get(j).getX())*160)/842;
-    		                yOrigen = (c.getListaAristas().get(j).getY()*160)/783;
-    		                xDestino = (Math.abs(c.getListaAristas().get(j).getFx())*160)/842;
-    		                yDestino = (c.getListaAristas().get(j).getFy()*160)/783;
-    		           //     etiqueta = c.getListaAristas().get(j).getEtiqueta();
-    					
-    		                if(Math.abs(yOrigen-yDestino) > 30){
-    		                	if(yOrigen > yDestino){
-    		                		yOrigen = yOrigen - 5;
-    		                		yDestino = yDestino + 5;
-    		                	}
-    		                	else {
-    		                		yOrigen = yOrigen + 5;
-    		                		yDestino = yDestino - 5;
-    		                	}
-    		                }
-    		                else {
-    		                	if(xOrigen < xDestino){
-    		                		xOrigen = xOrigen + 5;
-    		                		xDestino = xDestino - 5;
-    		                	}
-    		                	else {
-    		                		xOrigen = xOrigen - 5;
-    		                		xDestino = xDestino + 5;
-    		                	}
-    		                }
-    		                
-    		             /*   latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
-                            ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; */       
-    				//	int angulo=1;
-    				//	if (esUnica(a)) angulo=0;
-    				//	if (a.getY()>a.getFy()) 
-    					//	curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-12,a.getFy()+19, angulo);
-    					/*else*/// curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-12,a.getFy()-19,angulo);
-    			//	} kiza volver a ponerlo
-    		//		curva.draw((Graphics2D) g);
-    				//curva.setLabel(etiqueta);
-    				// etiqueta = c.getListaAristas().get(j).getEtiqueta();
-    						if (noPintar!=true) {
-    						//	curva.setLabel(etiqueta);
-    						//	curva.drawText(g);
-    							 latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
-    			                    ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; 
-    						}        
-    		                
-    		                
-    	/*			if (noPintar!=true) {
-    					 etiqueta = c.getListaAristas().get(j).getEtiqueta();
-    					//curva.setLabel(etiqueta);
+    		    if(Math.abs(yOrigen-yDestino) > 30){
+    		       	if(yOrigen > yDestino){
+    		       		yOrigen = yOrigen - 5;
+    		       		yDestino = yDestino + 5;
+    		       	}
+    		       	else {
+    		       		yOrigen = yOrigen + 5;
+    		       		yDestino = yDestino - 5;
+    		       	}
+    		    }
+    		    else {
+    		      	if(xOrigen < xDestino){
+    		       		xOrigen = xOrigen + 5;
+    		       		xDestino = xDestino - 5;
+    		      	}
+    		        else {
+    		        	xOrigen = xOrigen - 5;
+    		            xDestino = xDestino + 5;
+    		        }
+    		    }          
+    		            
+    			if (noPintar!=true) {
 
-    				}*/
-    	//		}
-//	                latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
-//                    ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; 
+    				latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiqueta+"}("+xOrigen+
+    			                    ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n"; 
+    			}        
+
     			noPintar=false;  			
     			j++;
     		}
     		
         }
+        
         if(tipoAuto.equals("AutomataPila")){
 			numAristas = c.getListaAristasPila().size();
 			int j = 0;
@@ -284,48 +261,42 @@ public class LatexCodeConverter {
 					}
 							
 					if	(j >= numAristas){
-		
-						
-						//if(c.getListaAristasTuring().get(j).getOrigen().equals(c.getListaAristasTuring().get(j).getDestino()))
+						if(aristaT.getOrigen().equals(aristaT.getDestino())){
+		                    k = 2;
+		                    upDown = '_';
+						}
+						else {
+							k = 1;
+							upDown = '^';
+						}
 							
-							if(aristaT.getOrigen().equals(aristaT.getDestino())){
-			                    k = 2;
-			                    upDown = '_';
-							}
-							else {
-								k = 1;
-								upDown = '^';
-							}
-							
-			                xOrigen = (Math.abs(c.getListaAristasPila().get(i).getX())*160)/842;
-			                yOrigen = (c.getListaAristasPila().get(i).getY()*160)/783;
-			                xDestino = (Math.abs(c.getListaAristasPila().get(i).getFx())*160)/842;
-			                yDestino = (c.getListaAristasPila().get(i).getFy()*160)/783;
-			               // etiqueta = construyeEtiqueta(c.getListaAristasTuring());
-
-						
-			                if(Math.abs(yOrigen-yDestino) > 30){
-			                	if(yOrigen > yDestino){
-			                		yOrigen = yOrigen - 5;
-			                		yDestino = yDestino + 5;
-			                	}
-			                	else {
-			                		yOrigen = yOrigen + 5;
-			                		yDestino = yDestino - 5;
-			                	}
-			                }
-			                else {
-			                	if(xOrigen < xDestino){
-			                		xOrigen = xOrigen + 5;
-			                		xDestino = xDestino - 5;
-			                	}
-			                	else {
-			                		xOrigen = xOrigen - 5;
-			                		xDestino = xDestino + 5;
-			                	}
-			                }
+		                xOrigen = (Math.abs(c.getListaAristasPila().get(i).getX())*160)/842;
+		                yOrigen = (c.getListaAristasPila().get(i).getY()*160)/783;
+		                xDestino = (Math.abs(c.getListaAristasPila().get(i).getFx())*160)/842;
+		                yDestino = (c.getListaAristasPila().get(i).getFy()*160)/783;
+					
+		                if(Math.abs(yOrigen-yDestino) > 30){
+		                	if(yOrigen > yDestino){
+		                		yOrigen = yOrigen - 5;
+		                		yDestino = yDestino + 5;
+		                	}
+		                	else {
+		                		yOrigen = yOrigen + 5;
+		                		yDestino = yDestino - 5;
+		                	}
+		                }
+		                else {
+		                	if(xOrigen < xDestino){
+		                		xOrigen = xOrigen + 5;
+		                		xDestino = xDestino - 5;
+		                	}
+		                	else {
+		                		xOrigen = xOrigen - 5;
+		                		xDestino = xDestino + 5;
+		                	}
+		                }
 			                
-			                latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiquetaAux+"}("+xOrigen+
+		                latex = latex + "\\ar@/"+upDown+k+"pc/"+upDown+"{"+etiquetaAux+"}("+xOrigen+
 	                        ","+yOrigen+")*{};("+xDestino+","+yDestino+")*{}\n";
 					}
 				}
@@ -345,23 +316,22 @@ public class LatexCodeConverter {
 			numAristas = c.getListaAristasTuring().size();
 			int j = 0;
 			int i = 0;
-			String etiquetaAux = "";// String etiqueta = "";
+			String etiquetaAux = "";
 			AristaTuring aristaT = c.getListaAristasTuring().get(i);
 			while (i < numAristas){
 				
 				if ( !aristaT.getMarcada() ){ 
-					//Mensajero m=Mensajero.getInstancia();	
 					String separador = mensajero.devuelveMensaje("simbolos.separador",4);
 					if (etiquetaAux.equals("")){ 
 						
 						String r = aristaT.getSimboloCinta();
 						if (r.equals(blanco)) r = "\\"+r;
 						
-						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta(),0) + separador + r + separador + /*dameEtiqueta(*/aristaT.getDireccion()/*)*/;
+						etiquetaAux = dameEtiqueta(aristaT.getEntradaCinta(),0) + separador + r + separador + aristaT.getDireccion();
 						j = i+1;
 					}
 				
-					if (j < numAristas){ // falta llave
+					if (j < numAristas){ 
 				
 						AristaTuring aux = c.getListaAristasTuring().get(j);
 						boolean origen,destinos;		

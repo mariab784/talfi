@@ -389,5 +389,19 @@ public class Greibach extends GramaticaIC{
 		
 		return false;
 	}
+	
+	public String toHTML(){
+		//0" cellspacing="10"
+		String s = "<br><h2>Gramatica</h2><br><br>";
+		s +="<table border=\"0\" cellspacing=\"10\" align=\"left\">";
+		s += "<tr><td border=\"0\">Variables: " + super.getVariables().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Variable Inicial: " + super.getVariableInicial().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Simbolos Terminales: " + super.getSimbolos().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Producciones: " + super.getProducciones() +  "</td></tr></table>";
+
+		
+		
+		return s;
+	}
 
 }
