@@ -32,6 +32,8 @@ public class Ejercicio_imp implements Ejercicio{
 	private String tipo;
 	private String ruta;
 	private Alfabeto_Pila alfPila;
+	private String pintar;
+	private Object solucion;
 
 	/**
 	 * Constructor que crea un ejercicio con los parñmetros que se le pasan
@@ -51,6 +53,12 @@ public class Ejercicio_imp implements Ejercicio{
 		this.ruta=ruta;
 		alfPila = null;
 	}
+	
+/*	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,String tipo,String ruta,String pintar) {
+		
+		this(enunciado,entrada,resultado,alf,tipo,ruta);
+		this.pintar = pintar;
+	}*/
 	/**
 	 * Constructor que crea un ejercicio con los parñmetros que se le pasan
 	 * @param enunciado enunciado del ejrcicio
@@ -61,11 +69,18 @@ public class Ejercicio_imp implements Ejercicio{
 	 * @param tipo identificador de cadena de texto con el tipo del ejercicio:
 	 * "Lenguaje" o "Automatas"
 	 */
-	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,Alfabeto_Pila alfPila, String tipo,String ruta) {
+/*	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,Alfabeto_Pila alfPila, 
+			String tipo, String ruta) {
 		this(enunciado, entrada, resultado,alf, tipo,ruta);
 		this.alfPila = alfPila;
+	}*/
+
+	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,Alfabeto_Pila alfPila, 
+			String tipo, String ruta,String pintar) {
+		this(enunciado, entrada, resultado,alf, tipo,ruta);
+		this.alfPila = alfPila;
+		this.pintar = pintar;
 	}
-	
 	
 	public String getEnunciado() {
 		// TODO Auto-generated method stub

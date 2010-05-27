@@ -365,6 +365,9 @@
 		<ciclos>
 			Undefined output. The Turing Machine has cycles.
 		</ciclos>
+		<listaPalabras>
+			Some accepted words :
+		</listaPalabras>
 	</vista>
 	<equivalenciajo>
 		<second>Second Automata</second>

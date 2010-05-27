@@ -131,7 +131,8 @@ public class ParserEjercicio {
 		DOMParser parser = new DOMParser();
 		
 		String enunciado=null;
-		String output=null;//lo que habrñ que comparar en un futuro
+		//String output=null;//lo que habrñ que comparar en un futuro
+		AutomataPila output =null;
 		AutomataPila input=null;
 		Alfabeto alf=null;
 		AlfabetoPila_imp alfPila=null;
@@ -154,6 +155,7 @@ public class ParserEjercicio {
 		}
 		
 		Document documento = parser.getDocument();
+		String pintar = null;
 		
 		NodeList tipoEnun=documento.getElementsByTagName("enunciado");
 		enunciado=tipoEnun.item(0).getTextContent();
@@ -166,11 +168,20 @@ public class ParserEjercicio {
 			 
 		}
 
-			if (var.equals("AutomataPila")){
+	/*		if (var.equals("AutomataPila")){
 				
 				input = new AutomataPila();	
-			}	
+			}	*/
 			
+			nodos = documento.getElementsByTagName("input");
+			
+			if(nodos.item(0) != null){
+				
+			//	if (var.equals("AutomataPila")){
+					
+					input = new AutomataPila();	
+			//	}
+				
 			alf=new Alfabeto_imp();
 			nodos = documento.getElementsByTagName("alphabet");
 			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
@@ -250,6 +261,7 @@ public class ParserEjercicio {
 				}
 			}	
 			
+			pintar = nodos.item(0).getChildNodes().item(2).getTextContent();
 
 			nodos=documento.getElementsByTagName("estadoCoord");
 
@@ -261,9 +273,117 @@ public class ParserEjercicio {
 				input.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 			}
 		
-		return new Ejercicio_imp(enunciado,input,output,alf,alfPila,"TRANSFORMACIONPILA",ruta);
-
 		
+//		return new Ejercicio_imp(enunciado,input,output,alf,alfPila,"TRANSFORMACIONPILA",ruta,pintar);
+		
+		}
+		
+			
+			nodos = documento.getElementsByTagName("output");
+			
+			if(nodos.item(0) != null){
+				
+				//if (var.equals("AutomataPila")){
+					
+					output = new AutomataPila();	
+				//}
+				
+			alf=new Alfabeto_imp();
+			nodos = documento.getElementsByTagName("alphabet");
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				if(!nodos.item(0).getChildNodes().item(i).getTextContent().equals("\\"))
+					alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			output.setAlfabeto(alf);			
+			
+			
+			alfPila=new AlfabetoPila_imp();
+			nodos = documento.getElementsByTagName("alphabetP");
+				
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				 alfPila.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			
+			output.setAlfabetoPila(alfPila);
+			
+			ArrayList<String> estad=new ArrayList<String>();
+			nodos = documento.getElementsByTagName("states");		
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+		}
+			output.setEstados(estad);
+				
+			nodos = documento.getElementsByTagName("init");
+			output.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
+			
+			ArrayList<String> finalss=new ArrayList<String>();
+			nodos = documento.getElementsByTagName("finals");
+			for (int i = 1; i < nodos.item(0).getChildNodes().getLength(); i++) {
+				finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			output.setEstadosFinales(finalss);		
+
+			
+			nodos = documento.getElementsByTagName("arrow");
+			for (int i = 0; i < nodos.getLength(); i++){
+				for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
+					
+					
+					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+					
+					
+					ArrayList<String> entrada = new ArrayList<String>();
+					String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+					StringTokenizer st=new StringTokenizer(s3,",");
+					while(st.hasMoreTokens()){
+
+						entrada.add(st.nextToken());
+					}
+					
+					
+					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+		
+					int indice = 0;
+					ArrayList<String> salida = new ArrayList<String>();
+					if (s5.compareTo("\\") != 0){
+						while(/*st.hasMoreTokens()*/indice < s5.length()){
+							String ss= "" + s5.charAt(indice);//st.nextToken();
+							salida.add(ss);
+							indice++;
+											}
+					}
+					else { salida.add("\\");}
+					
+			
+					x = x+ 10;
+					((AutomataPila)output).insertaArista2(s1,s2,entrada,s4,salida);
+					
+				}
+			}	
+			
+			pintar = nodos.item(0).getChildNodes().item(2).getTextContent();
+
+			nodos=documento.getElementsByTagName("estadoCoord");
+
+			//if (nodos.getLength()==0) return automata;
+			//if (nodos==null) return automata;
+			for(int i=0;i< nodos.getLength();i++) {
+				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
+						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
+				output.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
+			}
+		
+		
+		
+		
+		}
+			return new Ejercicio_imp(enunciado,input,output,alf,alfPila,"TRANSFORMACIONPILA",ruta,pintar);
 	}
 	
 	

@@ -85,6 +85,32 @@ public class PanelCentral extends JPanel {
 			public void actionPerformed(ActionEvent e){
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
+				if(ejercicio.getTipo().equals("TRANSFORMACIONPILA")){
+					
+					panel.borrarPanel();
+					boton=new JButton(m.devuelveMensaje("ejercicio.html",2));
+					boton.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							try{
+								String ruta=TraductorHTML.getInstancia().traducirEjercicio(ejercicio.getRuta());
+								vista.muestraHtml(true, ruta);
+							} catch(AutomatasException ex)   {
+								JOptionPane.showMessageDialog(null,ex.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					});
+					p=new JPanel();
+					p.add(boton);
+					panelB.add(p, BorderLayout.SOUTH);
+					panelB.setVisible(false);
+					panelB.setVisible(true);
+					mandar.setEnabled(true);
+					corregir.setEnabled(false);
+					vista.activaToogleButtons();
+					
+					
+				}
+				
 				if(ejercicio.getTipo().equals("Lenguaje")||ejercicio.getTipo().equals("EquivERs")||
 						ejercicio.getTipo().equals("EquivAutoER")){
 					dialog=pane.createDialog(m.devuelveMensaje("vista.expresion",2));
@@ -409,8 +435,9 @@ public class PanelCentral extends JPanel {
 	    		}
 	    		if (rutaXml.contains("Transformacion_Pila")) {
 	    			setEjercicio(parser.extraerEjercicioPila(rutaXml));
-	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
-	    			panel.cargarAutomataNuevo((AutomataPila)ejercicio.getEntrada());
+//	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
+	    			if (ejercicio.getEntrada() != null)
+	    				panel.cargarAutomataNuevo((AutomataPila)ejercicio.getEntrada());
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();

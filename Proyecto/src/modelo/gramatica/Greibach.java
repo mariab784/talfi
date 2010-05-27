@@ -10,9 +10,7 @@ public class Greibach extends GramaticaIC{
 	
 	private final int numPalabras = 10;
 	private ArrayList<String> listaPalabras;
-	private ArrayList<Integer> palabrasCompletadas;
 	private HashMap<String,ArrayList<Integer>> prodConTerminal;
-	private Mensajero mensajero;
 	private String lambda;
 	private ArrayList<Produccion> listaProdPalabras;
 	
@@ -24,7 +22,7 @@ public class Greibach extends GramaticaIC{
 		prodConTerminal = new HashMap<String,ArrayList<Integer>>();
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-		palabrasCompletadas = new ArrayList<Integer>();
+//		palabrasCompletadas = new ArrayList<Integer>();
 		listaProdPalabras = new ArrayList<Produccion>();
 	}
 	
@@ -51,7 +49,7 @@ public class Greibach extends GramaticaIC{
 		String variableActual = this.getVariableInicial();
 		ArrayList<Produccion> listaProd = this.getProducciones().get(variableActual);
 //		ArrayList<Produccion> listaProdPalabras = new ArrayList<Produccion>();
-		ArrayList<String> pal;
+//		ArrayList<String> pal;
 
 		int i = 0; int tam = listaProd.size();
 			//idea: coger las producciones de S. Coger la primera produccion, y sustituir la variable.
@@ -68,6 +66,7 @@ public class Greibach extends GramaticaIC{
 			i++;
 		}
 		//aki tenemos las producciones de S que vamos a empezar a sustituir
+		
 		buscaDondeHayTerminales();
 		//completamos la lista de palabras si es que no hemos llegado al maximo
 		if (  todosTerminales(listaProd) ){
@@ -83,7 +82,7 @@ public class Greibach extends GramaticaIC{
 		else{
 			tam = listaProdPalabras.size(); i = 0;		
 			while (tam < numPalabras){
-			
+				System.out.println("LISTAPRODPALABRAS: " + listaProdPalabras);
 				Produccion prod = listaProdPalabras.get(/*i*/0);	
 				listaProdPalabras.remove(/*i*/0);
 				int j = 1; 
@@ -215,6 +214,8 @@ public class Greibach extends GramaticaIC{
 			System.out.println("Lista: " + listaPalabras);
 		}
 	}
+	
+	public ArrayList<String> dameListaPalabras(){return listaPalabras;}
 	
 	@SuppressWarnings("unchecked")
 	private void construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
