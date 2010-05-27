@@ -62,7 +62,7 @@ private static TraductorHTML traductor;
 //variables para generacion de imagenes jpg
 private ArrayList<Estado> listaEstados;
 private ArrayList<Arista> listaAristas;
-private ArrayList<Arista> listaAristasPila;
+//private ArrayList<Arista> listaAristasPila;
 private ArrayList<String> listaFinales;
 private String estadoInicial;
 private static Stroke STROKE = new java.awt.BasicStroke(2.4f);

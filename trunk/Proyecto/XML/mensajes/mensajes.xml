@@ -404,6 +404,9 @@
 		<ciclos>
 			Salida indefinida. La Maquina de Turing cicla.
 		</ciclos>
+		<listaPalabras>
+			Algunas palabras reconocidas: 
+		</listaPalabras>
 	</vista>
 	<equivalenciajo>
 		<second>Segundo automata</second>

@@ -1,63 +1,39 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
-		<item>0</item>
-		<item>1</item>
+		<item>a</item>
+		<item>b</item>
 	</alphabet>
-	<alphabetP>
-		<item>0</item>
-		<item>1</item>
+		<alphabetP>
 		<item>Z</item>
 	</alphabetP>
-	<states>	 
-		<state>S0</state>
-		<state>S1</state>
+	<states>
+		<state>s0</state>
+		<state>s1</state>
 	</states>
-	<init>   
-		<state>S0</state>
+	<init>
+		<state>s0</state>
 	</init>
 	<finals>
-		<state>S1</state>
+		<state>s0</state>
 	</finals>
 	<arrows>
 		<arrow>
-			<state>S0</state>	
-			<state>S0</state>
-			<item>a,b</item>
-			<cima>Z</cima>
-			<trans>Z</trans>
+		<state>s0</state>
+		<state>s1</state>
+		<item>a</item>
+		<cima>Z</cima>
+		<trans>Z</trans>
 		</arrow>
 		<arrow>
-			<state>S0</state>	
-			<state>S1</state>
-			<item>c</item>
-			<cima>C</cima>
-			<trans>CZ</trans>
+		<state>s1</state>
+		<state>s0</state>
+		<item>b</item>
+		<cima>Z</cima>
+		<trans>Z</trans>
 		</arrow>
-		<arrow>
-			<state>S0</state>	
-			<state>S0</state>
-			<item>0</item>
-			<cima>Z</cima>
-			<trans>Z</trans>
-		</arrow>
-		<arrow>
-			<state>S0</state>	
-			<state>S0</state>
-			<item>1</item>
-			<cima>1</cima>
-			<trans>Z</trans>
-		</arrow>
-		<arrow>
-			<state>S1</state>	
-			<state>S1</state>
-			<item>\</item>
-			<cima>Z</cima>
-			<trans>\</trans>
-		</arrow>		
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>S0</nombre><x>292</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>492</x><y>169</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>

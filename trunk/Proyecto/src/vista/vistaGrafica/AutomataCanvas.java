@@ -902,10 +902,10 @@ public class AutomataCanvas extends JScrollPane {
 	 * Carga un automata contenido en un xml
 	 * @param rutaXml que contiene el automata a cargar en el panel
 	 */
-	public void cargarAutomata(String rutaXml) {
+	public void cargarAutomata(String rutaXml/*,String pintar*/) {
 		ParserXML parser=new ParserXML();		
 	    try{
-	    	cargarAutomataNuevo(parser.extraerAutomata(rutaXml));
+	    	cargarAutomataNuevo(parser.extraerAutomata(rutaXml)/*,pintar*/);
 	    	vista.requestFocus();
 	    } catch(AutomatasException e){
 	    	JOptionPane.showMessageDialog(null,e.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
@@ -1091,10 +1091,15 @@ public class AutomataCanvas extends JScrollPane {
 		String brr=new Character((char)92).toString();
 		String ruta=System.getProperty("user.dir")+brr+"HTML"+brr+"imagen.jpg";
 		generarImagenJPg(ruta);
-		this.repaint();
+		//if (!(a instanceof AutomataPila) || !(a instanceof MaquinaTuring))
+			this.repaint();
+		
 		vista.requestFocus();
 		
 	}
+	
+	public void cargarAutomataNuevoPila(Automata a){}
+	
 	/**
 	 * Borra el automata contenido en el panel
 	 */

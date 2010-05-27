@@ -43,6 +43,11 @@ public abstract class Gramatica {
 		creaVariables(est, alfPila);
 	}
 	
+	public void anadeVariable(String v){
+		
+		if (!this.variables.contains(v)) variables.add(v);
+	}
+	
 	private HashMap<String, ArrayList<Produccion>> clonar(HashMap<String, ArrayList<Produccion>> p){
 		
 		HashMap<String, ArrayList<Produccion>> nuevo = new HashMap<String, ArrayList<Produccion>>();

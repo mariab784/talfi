@@ -1,11 +1,11 @@
 package modelo.algoritmos;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,13 +17,10 @@ import accesoBD.Mensajero;
 import controlador.Controlador;
 import controlador.Controlador_imp;
 
+
 import vista.vistaGrafica.AristaAP;
 
-import modelo.automatas.Alfabeto;
-import modelo.automatas.AlfabetoPila_imp;
-import modelo.automatas.Alfabeto_Pila;
-import modelo.automatas.Alfabeto_imp;
-import modelo.automatas.Automata;
+
 import modelo.automatas.AutomataPila;
 import modelo.gramatica.Gramatica;
 import modelo.gramatica.GramaticaIC;
@@ -43,9 +40,10 @@ public class GIC_to_FNC {
 	private String html;
 	private boolean tabla[][];
 	private int lon;
-	private HashMap<Integer,ArrayList<Integer>> columna; // columna, filas
+	private HashMap<Integer,ArrayList<Integer>> columna;
 	private int clave;
 	private boolean tablaTieneMarcas;
+	@SuppressWarnings("unused")
 	private Controlador controlador;
 	private Mensajero mensajero;
 	//************************************************************
@@ -98,7 +96,7 @@ public class GIC_to_FNC {
 	}
 	//------------------------------------------------------------
 	//------------------------------------------------------------
-	public void/*Gramatica*/ transforma_FNG(boolean mostrarPasos){
+	public void transforma_FNG(boolean mostrarPasos){
 
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();

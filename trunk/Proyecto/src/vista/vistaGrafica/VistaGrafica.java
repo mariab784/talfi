@@ -56,7 +56,7 @@ import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.GIC_to_FNC;
 import modelo.automatas.Alfabeto;
 
-import modelo.automatas.Alfabeto_Pila;
+//import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
@@ -131,7 +131,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	private Mensajero mensajero;
 	private static boolean pila;
 	private static boolean turing;
-	private JTextField nomArs;
+//	private JTextField nomArs;
 	/********************************/
 	private JMenuItem grama;
 	private JMenuItem AFNDLambda_to_AFND;
@@ -544,7 +544,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 	}*/
 	
-	private void construir(boolean b){
+	private ArrayList<String> construir(boolean b){
 		
 		try{
 
@@ -565,30 +565,31 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic(),b);
 			
-			while(piticli.getTablaTieneMarcas()){
+/*			while(piticli.getTablaTieneMarcas()){
 				
 				if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
 				else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
 				piticli.transforma_FNG(false);
-			}
+			}*/
 		//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+			piticli.simplifica(true,false);
 			
 			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
 			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
 
 			piticli.getGramaticaSalida().creaListaPalabras(); 
 
-			//mostrarResultado(r);
-			/*if (panelCentral.getCanvas().getAP().reconocePalabra(palabra))
-				mostrarResultado("BIEEEN!");			 		
-			else
-				mostrarResultado("CASI! PERO NO");*/
+			ArrayList<String> pg = null;
+			pg = piticli.getGramaticaSalida().dameListaPalabras();
+			return pg;
 	 	
 		}
 		catch(Exception ex){
 			if ( panelCentral.getCanvas().getListaEstados().isEmpty() ) //XXX
 				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
 		}
+		return null; //para ke no pete
 		
 	}
 	
@@ -655,8 +656,9 @@ public class VistaGrafica extends JFrame implements Vista{
 				JPanel panelD=new JPanel(new GridLayout(4,1));
 				JPanel panelC=new JPanel(new GridLayout(1,4));
 				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXX XXX
-				JLabel etiqN=new JLabel(/*mensajero.devuelveMensaje("pasos.preguntaG", 2)*/"LISTAPALABRAS AKI"); //XXX
-			//	nomArs=new JTextField();
+				JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.listaPalabras",2) + construir(false).toString()); //XXX
+				
+				//	nomArs=new JTextField();
 				
 				/*nomArs.addKeyListener(new KeyAdapter(){
 					public void keyPressed(KeyEvent e){
@@ -672,20 +674,20 @@ public class VistaGrafica extends JFrame implements Vista{
 				aceptar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						//actionAceptar();
-						construir(true);
+			//			construir(/*true*/false);
 						dialog.setVisible(false);
 					}
 				});
-				JButton cancelar=new JButton(mensajero.devuelveMensaje("vista.cancelar",2));
+				//JButton cancelar=new JButton(mensajero.devuelveMensaje("vista.cancelar",2));
 				
-				cancelar.addActionListener(new ActionListener(){
+		/*		cancelar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						construir(false);
 						dialog.setVisible(false);
 					}
-				});
+				});*/
 				panelB.add(aceptar);
-				panelB.add(cancelar);
+				//panelB.add(cancelar);
 				panelD.add(etiqN);
 				//panelD.add(nomArs);
 				panelD.add(panelC);
@@ -2103,6 +2105,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			v.add("EquivAutoER");
 			v.add("EquivERAuto");
 			v.add("EquivERs");
+			v.add("AutomatasDePila");
 			combo=new JComboBox(v);
 			JPanel panelB= new JPanel();
 			JButton aceptar= new JButton(m.devuelveMensaje("vista.aceptar",2));
