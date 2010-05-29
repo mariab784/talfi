@@ -284,6 +284,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				String nVar = "[" +origen+cima+est+ "]";
 				gic.anadeVariable(nVar);
 				gic.anadeProduccion(nVar, p);
+				
 			}
 		}
 				
@@ -532,16 +533,16 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		ArrayList<String> nVariables = new ArrayList<String>();
 		nVariables.add(gic.getVariableInicial());
 		int tam = gic.getVariables().size();
-		//char ultima = comienzo; char nVar = comienzo;
-		int ultima = 0; int nVar = 0;
+		char ultima = comienzo; char nVar = comienzo;
+	//	int ultima = 0; int nVar = 0;
 		int ii = 1;
 		while(ii < tam){
 			
-			nVar = /*new Character (*/ultima;//) ;
-			ultima = /*(char)(*/nVar + 1/*)*/;
+			nVar = new Character (ultima);
+			ultima = (char)(nVar + 1);
 //			System.out.println("nVar :" + nVar );
 			if (nVar != 'S'){
-				String s = "["+nVar+"]";
+				String s = /*"["+*/nVar+""/*+"]"*/;
 				nVariables.add(s);
 				ii++;
 			}
@@ -816,7 +817,7 @@ aut.setEstadoFinal("s0");
 		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
 		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
 
-//	piticli.getGramaticaSalida().creaListaPalabras();
+	piticli.getGramaticaSalida().creaListaPalabras();
 		
 		
 		// TODO Auto-generated method subs

@@ -1,60 +1,43 @@
 <exit><steps>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila></column>S - X X A - - - B - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila></column>S - - X A - - - B - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila></column>S - - - A - - - B - - - </table></step>
+<step><table><column><fila>  S </fila><fila>[0] </fila><fila>[1] </fila><fila>[2] </fila><fila>[3] </fila><fila>[4] </fila><fila>[5] </fila><fila>[6] </fila><fila>[7] </fila></column>S - - - - - - - - - [0] - - - - - - - - - [1] - - - - - - - - - [2] - - - - - - - - - [3] - - - - - - - - - [4] - - - - - - - - - [5] - - - - - - - - - [6] - - - - - - - - - [7] - - - - - - - - - </table></step>
 
 <result><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
-		<item>0</item>
-		<item>1</item>
+		<item>a</item>
+		<item>b</item>
 	</alphabet>
 		<alphabetP>
 		<item>Z</item>
-		<item>0</item>
 	</alphabetP>
 	<states>
+		<state>s0</state>
 		<state>s1</state>
-		<state>s2</state>
-		<state>s3</state>
 	</states>
 	<init>
-		<state>s1</state>
+		<state>s0</state>
 	</init>
 	<finals>
+		<state>s0</state>
 	</finals>
 	<arrows>
 		<arrow>
+		<state>s0</state>
 		<state>s1</state>
-		<state>s1</state>
-		<item>0</item>
+		<item>a</item>
 		<cima>Z</cima>
-		<trans>0Z</trans>
+		<trans>Z</trans>
 		</arrow>
 		<arrow>
 		<state>s1</state>
-		<state>s2</state>
-		<item>1</item>
-		<cima>0</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>s2</state>
-		<state>s2</state>
-		<item>1</item>
-		<cima>0</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>s2</state>
-		<state>s3</state>
-		<item>\</item>
+		<state>s0</state>
+		<item>b</item>
 		<cima>Z</cima>
-		<trans>\</trans>
+		<trans>Z</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>271</x><y>262</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>390</x><y>266</y></estadoCoord><estadoCoord><nombre>s3</nombre><x>519</x><y>250</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>
 </result></steps></exit>
