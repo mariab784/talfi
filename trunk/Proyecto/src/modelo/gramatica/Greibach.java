@@ -65,6 +65,7 @@ public class Greibach extends GramaticaIC{
 
 			i++;
 		}
+		System.out.println("LISTAprodPALABRAS: " + listaProdPalabras);
 		//aki tenemos las producciones de S que vamos a empezar a sustituir
 		
 		buscaDondeHayTerminales();
@@ -88,7 +89,7 @@ public class Greibach extends GramaticaIC{
 				int j = 1; 
 				ArrayList<String> concat = (ArrayList<String>) prod.getConcatenacion();
 				int tamConcat = concat.size();
-				if (tamConcat > 1){
+		//		if (tamConcat > 1){			CUIDADO!!!!!!!!
 					boolean enc = false; String s = null;
 					while(j < tamConcat && !enc){
 						s = concat.get(j);
@@ -121,6 +122,7 @@ public class Greibach extends GramaticaIC{
 					if (prodVar == null){
 						
 						//this.listaPalabras.add(prod.getConcatenacion().toString());
+						System.out.println("prod? : " + prod);
 						this.listaProdPalabras.add(prod);
 					}
 					else{
@@ -162,18 +164,22 @@ public class Greibach extends GramaticaIC{
 								m++;
 							}							
 							nueva.setConcatenacion(nueva2);
-							if (!esta(nueva,listaProdPalabras))listaProdPalabras.add(nueva);					
+							if (!esta(nueva,listaProdPalabras)){
+								System.out.println("nueva : " + nueva);
+								listaProdPalabras.add(nueva);
+							}					
 						}	
 						k++;
 						tam = listaProdPalabras.size();
 					}
 				}
 					
-				} //llave else creo	
+		//		} //llave else creo	
 				tam = listaProdPalabras.size();
+				System.out.println("listaProdPalabras FINAL BUCLE ANTES DE SUBIR : " + listaProdPalabras);
 			}
 		
-//			System.out.println("vamos bien al final?" + listaProdPalabras);
+			System.out.println("vamos bien al final?" + listaProdPalabras);
 		/**************************hasta aki bien ya**************************/
 			while ((listaPalabras.size() < numPalabras)){
 

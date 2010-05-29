@@ -564,18 +564,11 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			
 			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic(),b);
-			
-/*			while(piticli.getTablaTieneMarcas()){
-				
-				if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
-				else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-				piticli.transforma_FNG(false);
-			}*/
-		//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
+
 			piticli.simplifica(true,false);
 			
-			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada().getProducciones());
-			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida().getProducciones());
+			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
+			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
 
 			piticli.getGramaticaSalida().creaListaPalabras(); 
 
@@ -656,7 +649,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				JPanel panelD=new JPanel(new GridLayout(4,1));
 				JPanel panelC=new JPanel(new GridLayout(1,4));
 				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXX XXX
-				JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.listaPalabras",2) + construir(false).toString()); //XXX
+				JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.listaPalabras",2) + construir(true).toString()); //XXX
 				
 				//	nomArs=new JTextField();
 				

@@ -141,6 +141,7 @@ public class GIC_to_FNC {
 		}
 		
 		if (mostrarPasos){
+
 			pintaTabla();
 		}
 		

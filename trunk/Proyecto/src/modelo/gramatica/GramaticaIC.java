@@ -5,7 +5,6 @@ package modelo.gramatica;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import vista.vistaGrafica.Estado;
 
 import modelo.automatas.Alfabeto;
@@ -20,7 +19,11 @@ public class GramaticaIC extends Gramatica {
 	/**
 	 * 
 	 */
-	public GramaticaIC(){}
+
+	
+	public GramaticaIC(){
+		super();
+	}
 	
 	public GramaticaIC(ArrayList<String> v, ArrayList<String> s, 
 			HashMap<String,ArrayList<Produccion>> p,String vInicial){
@@ -40,5 +43,6 @@ public class GramaticaIC extends Gramatica {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }

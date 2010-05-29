@@ -1114,8 +1114,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		boolean b = aut.compruebaAPD();
 		aut.setDeterminista(b);
 //		System.out.println("ARISTAS AUXILIARES: " + this.aristasPilaVacia);
-		System.out.println("AUTOMATA ORIGINAL: \n" + this);
-		System.out.println("AUTOMATA NUEVO: \n" + aut);
+	//	System.out.println("AUTOMATA ORIGINAL: \n" + this);
+	//	System.out.println("AUTOMATA NUEVO: \n" + aut);
 		return aut;
 	}
 	
