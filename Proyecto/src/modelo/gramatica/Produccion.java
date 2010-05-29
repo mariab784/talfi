@@ -35,6 +35,15 @@ public class Produccion {
 		this.concatenacion = concatenacion;
 	}
 	
+	public void anadeConcatenacion(ArrayList<String> c){
+		
+		int tam = c.size();
+		for(int i = 0; i < tam; i++){
+			anadeCadena(c.get(i));
+			
+		}
+	}
+	
 	public void anadeCadena (String cadena){
 		this.concatenacion.add(cadena);
 	}
