@@ -126,7 +126,7 @@ public class GIC_to_FNC {
 					int k = 0;
 
 							//	System.out.println("aux.getConcatenacion(): " + aux.getConcatenacion());
-								String primerSimbolo = aux.getConcatenacion().get(0).charAt(0) + "";
+								String primerSimbolo = aux.getConcatenacion().get(0)/*.toString();*//*.charAt(0) + ""*/;
 							//	System.out.println("simboloColumna: " + simboloColumna);
 							//	System.out.println("primerSimbolo: " + primerSimbolo);
 								if (simboloColumna.equals(primerSimbolo)){
@@ -261,7 +261,7 @@ public class GIC_to_FNC {
 			
 				ArrayList<String> ayay = ((ArrayList<String>)aux2.getConcatenacion().clone());
 				String p = ayay.get(0);
-				String pp = "" +  p.charAt(0);
+				String pp = p/*"" +  p.charAt(0)*/;
 //				System.out.println("p " + p);
 				Produccion nueva = null;
 				if (pp.equals(gramaticaSalida.getVariables().get(clave))){
@@ -331,6 +331,19 @@ public class GIC_to_FNC {
 		return true;
 	}
 	
+	private String dameEntreCorchetes(String ultVar){
+		
+		String s = "";
+		int i = 0; int tam = ultVar.length();
+		while(i < tam){
+			String aux = ultVar.charAt(i)+"";
+			if(!aux.equals("[") && !aux.equals("]"))
+				s +=aux;
+			i++;
+		}
+		System.out.println("ke devuelve entrecorchetes?" + s);
+		return new String(s);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void sustituirDiagonal(){
@@ -340,13 +353,21 @@ public class GIC_to_FNC {
 		produccionesDiagonal = producciones.get(gramaticaSalida.getVariables().get(clave));
 //		System.out.println("produccionesDiagonal" + produccionesDiagonal);
 		String var = gramaticaSalida.getVariables().get(clave);
+		System.out.println("ke es var? " + var);
 		String nVar = null;
 		int tam = gramaticaSalida.getVariables().size()-1;
 		String ultVar = gramaticaSalida.getVariables().get(tam);
+		System.out.println("ke es ultvar? " + ultVar);
+		
 		char nVarAux = new Character ((char)(ultVar.charAt(0)+1) ) ;
+		System.out.println("ke es nVarAux? " + nVarAux);
+//		nVar =  "["+/*nVarAux*/(dameEntreCorchetes(ultVar)/*ultVar.charAt(0)*/+1)+"]";//nVarAux + "";
+//		nVar =  ultVar.charAt(0)*/+1)+"]";//nVarAux + "";
 		nVar =  nVarAux + "";
+
+		System.out.println("ke es nVar? " + nVar);
 		//System.out.println("nVar.charValue()" + nVar);
-				gramaticaSalida.getVariables().add(nVar);
+	//			gramaticaSalida.getVariables().add(nVar);
 		/**************************************************************************************/
 		/**nueva variable creada,ahora hay ke crear las producciones de la nueva variable**/
 		ArrayList<Produccion> p = new ArrayList<Produccion>();		
@@ -359,12 +380,18 @@ public class GIC_to_FNC {
 			ArrayList<String> a = paux.getConcatenacion();
 			if(!var.equals(a.get(0))){
 				
-				p.add(paux);
+				ArrayList<String> copiaConcat = (ArrayList<String>) paux.getConcatenacion().clone();
+				Produccion ppaux = new Produccion();
+				ppaux.setConcatenacion(copiaConcat);
+				p.add(/*paux*/ppaux);
 				concat = (ArrayList<String>)a.clone();
 				concat.add(nVar);
 				pod = new Produccion();
+
 				pod.setConcatenacion(concat);
+		//		System.out.println("ke es pod?1" + pod);
 				p.add(pod);
+		//		System.out.println("ke es p?1" + p);
 //				System.out.println("p " + p);
 			}
 			else{
@@ -372,7 +399,8 @@ public class GIC_to_FNC {
 				concat.remove(0);
 				pod = new Produccion();
 				pod.setConcatenacion(concat);
-				produccionesNuevas.add(pod);
+				System.out.println("ke es pod? 1" + pod);
+				if (!concat.isEmpty())produccionesNuevas.add(pod);
 //				System.out.println("pod1 " + pod);
 				//pod = new Produccion();
 				pod = new Produccion();
@@ -381,17 +409,48 @@ public class GIC_to_FNC {
 				pod.setConcatenacion(concat);
 				pod.anadeCadena(nVar);
 //				System.out.println("pod2 " + pod);
+				System.out.println("ke es pod? 2" + pod);
 				produccionesNuevas.add(pod);
-//				System.out.println("produccionesNuevas " + produccionesNuevas);
+				System.out.println("produccionesNuevas " + produccionesNuevas);
 			}
 		}
 		
-
-		gramaticaSalida.getProducciones().remove(var);
-		gramaticaSalida.getProducciones().put(var, p);
-		gramaticaSalida.getProducciones().put(nVar, produccionesNuevas);
+		if(produccionesNuevas.size() == 1){
+			System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
+			System.out.println("NO ME AÑADAS!!");
+			gramaticaSalida.getProducciones().remove(var);
+			ArrayList<Produccion> pajus = quitaProdRecursiva(p,var);
+			gramaticaSalida.getProducciones().put(var, pajus);		
+		}
+		else{
+			gramaticaSalida.getProducciones().remove(var);
+			
+			gramaticaSalida.getProducciones().put(var, p);
+			gramaticaSalida.getProducciones().put(nVar, produccionesNuevas);
+			gramaticaSalida.getVariables().add(nVar);
+		}
 		
-		System.out.println("GRAMATICA salida: " + gramaticaSalida.getProducciones());
+
+
+		
+		System.out.println("GRAMATICA salida diagonal: " + gramaticaSalida.getProducciones());
+	}
+	
+	private ArrayList<Produccion> quitaProdRecursiva(ArrayList<Produccion> p,String var){
+		
+		ArrayList<Produccion> pp = new ArrayList<Produccion>();
+		int i = 0; int tam = p.size();
+		while(i < tam){
+			Produccion ap = p.get(i);
+			ArrayList<String> con= ap.getConcatenacion();
+			if(con.size() == 1 && con.get(0).equals(var)){}
+			else	pp.add(ap);
+			
+			i++;
+			
+		}
+		System.out.println("KE DEVUELVE QUITAPRODREC?"+ pp);
+		return pp;
 	}
 	
 	public void simplifica(boolean b,boolean pasarXml){
@@ -456,7 +515,7 @@ public class GIC_to_FNC {
 		s.add("S");s.add("T");s.add("U");
 		g.setVariables(s);
 		s = new ArrayList<String>();
-		s.add("\\");s.add("a");s.add("b");
+		/*s.add("\\");*/s.add("a");s.add("b");
 		g.setSimbolos(s);
 
 		ArrayList<Produccion> p = new ArrayList<Produccion>();
@@ -520,7 +579,12 @@ public class GIC_to_FNC {
 		System.out.println("GRAMATICA: " + g);
 		GIC_to_FNC piticli = new GIC_to_FNC(g,true);
 		piticli.simplifica(true,false);
-		System.out.println("XML MAIN: \n" + piticli.getXML());
+//		System.out.println("XML MAIN: \n" + piticli.getXML());
+		System.out.println("ENTRADA!" + piticli.gramaticaEntrada);
+		System.out.println("salida!" + piticli.gramaticaSalida);
+		
+		//piticli.getGramaticaSalida().creaListaPalabras();
+		
 /*		while(piticli.getTablaTieneMarcas()){
 			
 			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
@@ -612,10 +676,10 @@ aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
 		aut.anadeArista(arist);		
 
 
-		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
+//		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		
-		System.out.println("aut :\n" + aut);
-		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
+//		System.out.println("aut :\n" + aut);
+//		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
 		
 
 
