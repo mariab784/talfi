@@ -38,7 +38,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 //	protected HashMap<String,HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>> aut;
 	private boolean apd;
 	private Mensajero mensajero;
-	
+	private boolean aceptaLambda;
 	private String lambda;
 	private String fondoPila;
 	
@@ -78,6 +78,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 //		aristasLambda = new ArrayList<Integer>();
 		aristasPilaVacia = null;
 		estadoPilaVacia = null;
+	//	aceptaLambda = false;
 //		aut=new HashMap<String, HashMap<String,HashMap<String,HashMap<ArrayList<String>,ArrayList<String>>>>>();	
 	}
 	//-------------------------------------------------------------
@@ -94,6 +95,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 		automata = aut;
 		
 		apd = compruebaAPD();
+//		aceptaLambda = compruebaAceptaLambda();
 		aristasQueDesapilan = new ArrayList<Integer>();
 		aristasPilaVacia = new ArrayList<AristaAP>();
 		
@@ -102,7 +104,25 @@ public class AutomataPila extends AutomataFND implements Automata{
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 		
 	}
+	
 	//-------------------------------------------------------------
+	public boolean getAceptaLambda(){return aceptaLambda;}
+	public void setAceptaLambda(boolean b){aceptaLambda = b;}
+	
+	public boolean compruebaAceptaLambda(){
+		
+		if(!aristasPilaVacia.isEmpty()) return true;
+		
+		Iterator<AristaAP> itArist = automata.iterator();
+		while(itArist.hasNext()){
+			AristaAP a = itArist.next();
+			String cima = a.getCimaPila();
+			//ArrayList<String> transPila = a.g
+			return true;
+		}
+		return false;
+	}
+	
 public void anadeArista(AristaAP a){
 		
 
