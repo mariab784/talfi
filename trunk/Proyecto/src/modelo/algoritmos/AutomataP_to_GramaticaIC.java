@@ -144,8 +144,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 		
-		System.out.println("GIC ANTES TRADUCE VARIABLES: " + gic);
-
+		System.out.println("GIC ANTES TRADUCE VARIABLES:\n " + gic);
+		System.out.println("*************************************************************************");
 		traduceVariables();	
 		return gic;
 		
@@ -346,30 +346,56 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		HashMap<String,ArrayList<Produccion>> listaProducciones = gic.getProducciones();
 		ArrayList<String> listaVariables = gic.getVariables();
 		
-		int tamLP = listaProducciones.size();
-		int i = 0;
+//		int tamLP = listaProducciones.size();
+//		int i = 0;
 		//1: eliminar las variables que aparezcan en producciones,y no tengan producciones.
-		while(i < tamLP){
+/*		while(i < tamLP){
 			
 			String var = listaVariables.get(i);
 			
 			ArrayList<Produccion> nuevaProduccion = gic.creaProducciones(var);
 			if (!nuevaProduccion.isEmpty()) gicSalida.getProducciones().put(var, nuevaProduccion);
 			i++;
-		}
+		}*/
 	//	System.out.println("GIC SALIDA tienes multi?: " + gicSalida.getProdConLambdaMulti());
 	//	System.out.println("GIC aux tienes multi?: " + gicAux.getProdConLambdaMulti());
 	//	System.out.println("GIC this tienes multi?: " + gic.getProdConLambdaMulti());
-		gicSalida.setProdConLambdaUnit(gic.getProdConLambdaUnit());
-		gicSalida.setProdConLambdaMulti(gic.getProdConLambdaMulti());
-		gicSalida.setProdConTerminales(gic.getProdConTerminales());
+//		gicSalida.setProdConLambdaUnit(gic.getProdConLambdaUnit());
+		//		gicSalida.setProdConLambdaMulti(gic.getProdConLambdaMulti());
+		//		gicSalida.setProdConTerminales(gic.getProdConTerminales());
 	//	gicAux = null;
-		System.out.println("GIC SALIDA: TRADUCE VARIABLES" + gicSalida);
+		//		System.out.println("GIC SALIDA: TRADUCE VARIABLES" + gicSalida);
 //		System.out.println("prodConLambda" + gicSalida.getProdConLambdaUnit());
-		this.setGIC(gicSalida);
+		//		this.setGIC(gicSalida);
 		System.gc();
 	/***********************hasta aki OK******************************************/
+		//quitamos variables que no existen//
+		boolean daVueltas = true;
+		boolean b = this.gic.quitaVariablesQueNoExisten();
+		while(daVueltas){
+		
+		System.out.println("QUITAMOS VARIABLES QUE NO EXISTEN");
+		System.out.println("antes: \n" +gic);
+		/*boolean*/ //b = this.gic.quitaVariablesQueNoExisten();
+		//si es verdad, es ke hemos kitado
+		while(b){
+			System.out.println("SEGUIMOS QUITANDO VARIABLES QUE NO EXISTEN");
+			System.out.println("dentro bucle: \n" +gic);
+			b = this.gic.quitaVariablesQueNoExisten();
+		}
+		System.out.println("despues: \n" +gic);
+		System.out.println("YA HEMOS TERMINADO DE QUITAR VARIABLES QUE NO EXISTEN");
+		
 		boolean hayLambdaUnitarias = this.gic.dimeSiHayProdUnitarias();
+		System.out.println("ANTES BUCLE");
+		if (hayLambdaUnitarias){ 
+			quitaLambdasUnitarias();
+			hayLambdaUnitarias = this.gic.dimeSiHayProdUnitarias();
+		}
+		b = this.gic.quitaVariablesQueNoExisten();
+		daVueltas = b || hayLambdaUnitarias;
+			
+/*		boolean hayLambdaUnitarias = this.gic.dimeSiHayProdUnitarias();
 		System.out.println("ANTES BUCLE");
 		System.out.println("this.gic.dimeSiHayProdUnitarias(): " + this.gic.getProdConLambdaUnit());
 		System.out.println("hayLambdaUnitarias: " + hayLambdaUnitarias);
@@ -394,15 +420,16 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			System.out.println("*************FIN BUCLE MULTI*******************");
 			System.gc();
 		}*/
-		quitaLambdasNoUnitarias();
+//		quitaLambdasNoUnitarias();
+		
+		}//llaveDaVueltas
 		System.out.println("DESCANSO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 //		quitaLambdasNoUnitarias();
 		System.out.println("YA NO HAY nah de NA");
 		
 	//	quitaLambdasNoUnitarias();
-//		cambiaNombreVariables();
-
 		cambiaNombreVariables();
+
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -439,6 +466,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				//si es null es ke tiene tamaño 1 y tiene o lambda o a si mismo
 				if ((nuevaProduccion != null) && (!nuevaProduccion.isEmpty())){ 
 					//if (gicSalida.getProducciones().containsKey(var)) gicSalida.getProducciones().remove(var);
+					System.out.println("METEMOS!VAR " + var + "nuevaProduccion" + nuevaProduccion);
+					
 					gicSalida.getProducciones().put(var, nuevaProduccion);
 	//				System.out.println("ke tiene produccion? DENTRO IF: " + gic.getProducciones());
 				}
@@ -480,7 +509,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void quitaLambdasNoUnitarias(){
+	public void quitaLambdasNoeeeeUnitarias(){
 		System.out.println("principio gic(this)" + gic);
 				GramaticaIC gicSalida = new GramaticaIC();
 		gicSalida.setProducciones(clonarProducciones(gic.getProducciones()));
@@ -543,7 +572,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 
 		
-	/*	Set<String> setClaves = gic.getProdConLambdaMulti().keySet();
+		Set<String> setClaves = gic.getProdConLambdaMulti().keySet();
 		System.out.println("gicAux.getProdConLambda()HOLA?:\n" + gic.getProdConLambdaMulti());
 		Iterator<String> itClaves = setClaves.iterator();
 		while(itClaves.hasNext()){
@@ -553,7 +582,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				//gicSalida.getProdConLambda().remove((String)s);
 				gicSalida.getProducciones().remove(s);
 				gicSalida.getVariables().remove((s));			
-		}*/
+		}
 		
 		System.out.println("MULTI LAMBDA");
 		System.out.println("GIC SALIDA despues de limpiar:\n" + gicSalida);
@@ -564,7 +593,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 //		System.out.println("FINAL GIC solo lambdas: " + gic.getProdConLambdaUnit());
 		
 		System.gc();
-//		cambiaNombreVariables();
+
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -835,24 +864,71 @@ aut.getEstados().add("s1");
 
 
 aut.setEstadoInicial("s0");
-aut.setEstadoFinal("s0");
+aut.setEstadoFinal("s1");
 
 		AristaAP arist;
 		
-		arist = new AristaAP(0,0,0,0,"s0","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
-		arist.anadirPila("Z");
+		arist.anadirPila("AZ");
 		
 		aut.anadeArista(arist);
 		
 		/*******/
 
-		
-		arist = new AristaAP(0,0,0,0,"s1","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");
 		arist.anadirSimbolo("b");
 		arist.setCimaPila("Z");
-		arist.anadirPila("Z");//		arist.anadirPila("Z");
+		arist.anadirPila("BZ");
+		
+		aut.anadeArista(arist);
+		
+		/*******/
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("A");
+		arist.anadirPila("AA");
+		
+		aut.anadeArista(arist);
+		
+		/*******/		
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("B");
+		arist.anadirPila("BB");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("B");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("A");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		
+		
+		
+		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("\\");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 	/******/	
