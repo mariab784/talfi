@@ -515,8 +515,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			//nlps es null si el arrayList solo tiene una produccion y a su vez la long concat de esa prod
 			//es 1, y es recursivo a si mismo.
 			System.out.println("ke es nlps?gicSalida.compruebaMulti(lps,v)" + nlps);
-			
-			if (!nlps.isEmpty()){ 
+			if (nlps == null){
+				System.out.println("no sirvo");
+				gicSalida.getProducciones().remove(v);
+				gicSalida.getVariables().remove(v);
+			}
+			else if (!nlps.isEmpty()){ 
 				/*if (!gicSalida.getProducciones().containsKey(v)){ 
 					gicSalida.getProducciones().remove(v);
 				}*/
