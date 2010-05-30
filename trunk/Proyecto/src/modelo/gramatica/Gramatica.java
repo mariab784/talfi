@@ -281,6 +281,8 @@ public abstract class Gramatica {
 	}
 	
 	private boolean esta(Produccion pnueva, ArrayList<Produccion >lprod){
+		System.out.println("KEREMOS VER SI ESTA: " + pnueva);
+		System.out.println("EN: " + lprod);
 		ArrayList<String> concat = pnueva.getConcatenacion();
 		Iterator<Produccion> itProd = lprod.iterator();
 		while(itProd.hasNext()){
@@ -472,11 +474,22 @@ public abstract class Gramatica {
 		System.out.println("***2 concatDeProdMulti***" + concatDeProdMulti);
 		System.out.println("***3 concatPp***" + concatPp);
 		System.out.println("***I SIG**" + i);
+		//SI HAY ALGO EN NCONCATPARAP OCONCATPP NO PONER LAMBDAS!
+		
 		
 		Produccion p = new Produccion();
 		if (nconcatParaP != null){
 			for(int j = 0; j < nconcatParaP.size(); j++){
-				p.anadeCadena(new String(nconcatParaP.get(j)));			
+				String ns = new String(nconcatParaP.get(j));
+				if (!ns.equals(lambda)){
+					if(!this.getVariables().contains(ns)){
+						
+						System.out.println("INSERVIBLE"); return null;
+					} 
+					p.anadeCadena(ns);
+				
+				
+				}			
 			}
 		}
 		System.out.println("***p despues de concatenar nconcatParaP**" + p);
@@ -493,7 +506,11 @@ public abstract class Gramatica {
 			//	System.out.println("aki tb ENTRA!");
 				String ss = new String(concatDeProdMulti.get(j));
 				//if(!ss.equals(lambda))
-					p.anadeCadena(ss);
+				if(!this.getVariables().contains(ss)){
+					
+					System.out.println("INSERVIBLE"); return null;
+				} 
+				p.anadeCadena(ss);
 		//	}
 		}
 		
@@ -502,7 +519,16 @@ public abstract class Gramatica {
 		if(concatPp != null){
 	//		if (tamc !=i){
 				for(int j = i; j < concatPp.size(); j++){
-					/*if (tamc !=i)*/p.anadeCadena(new String(concatPp.get(j)));			
+					String ns = new String(concatPp.get(j));//new String(nconcatParaP.get(j));
+					if (!ns.equals(lambda)){
+						if(!this.getVariables().contains(ns)){
+							
+							System.out.println("INSERVIBLE"); return null;
+						} 
+						p.anadeCadena(new String(concatPp.get(j)));
+					}//p.anadeCadena(ns);
+					
+					/*if (tamc !=i)*///p.anadeCadena(new String(concatPp.get(j)));			
 				}
 			
 			//}
@@ -530,6 +556,7 @@ public abstract class Gramatica {
 			ArrayList<String> s = lps.get(0).getConcatenacion();
 			
 			System.out.println("hola soy  su produccion y soy " + s);
+			System.out.println("Y MI TAMAÑO ES: " +s.size());
 			if(s.size() == 1){
 				String ss = s.get(0);
 				if(ss.equals(v)){						
@@ -552,7 +579,7 @@ public abstract class Gramatica {
 						//no hay nada antes ni despues ke concatenar.
 						Produccion nnp = mezcla(null,concatDeProdMulti,null,-2);
 						System.out.println("***MEZCLA NOS HA DEVUELTO: ***" + nnp);
-						if (!esta(nnp,p)) {p.add(nnp);}
+						if (nnp!= null && !esta(nnp,p)) {p.add(nnp);}
 		//				System.out.println("nnp ke es?mezcla(null,concatDeProdMulti,null,-2); " + nnp);
 		//				System.out.println("p ke es? p.add(nnp);" + p);
 						k++;
@@ -570,6 +597,64 @@ public abstract class Gramatica {
 				pp.anadeCadena(new String(ss));
 				return p;
 				}
+			}
+			else{
+				//System.out.println("NO ME TRATAS DONDE DEBES! soy" +v);
+				//puede ser ke contenga a si mismo y nunca lleguemos a ningun lado!
+				////////////////////////////////////////////////////////////////
+				//tam de la concat de la prod >1
+				//recorremos la concatenacion, para buscar alguna variable de Multi
+				//en s esta el la concat = arrayList<String>
+				if (s.contains(v)){System.out.println("NO VOY A LLEGAR A NINGUN PUTO LADO");
+				
+				return null;
+				}
+				int j = 0;
+				p = new ArrayList<Produccion>();
+				Produccion npp = new Produccion();
+				//recorremos la concatenacion de la produccion
+				int tamConcatPp = s.size();
+				ArrayList<String> nconcatParaP = new ArrayList<String>();
+				while(j < tamConcatPp){
+					
+					String sss = /*concatPp*/s.get(j);
+				//	ArrayList<String> nconcatParaP = new ArrayList<String>();
+					
+					if (!this.getProdConLambdaMulti().containsKey(s)){
+						//no pertenece, dejarlo tal cual
+						nconcatParaP.add(new String(sss));
+						npp.setConcatenacion(nconcatParaP);
+						if (j == tamConcatPp-1){
+							System.out.println("nnnp ke es? " + npp);
+							if (npp!= null && !esta(npp,p)) p.add(npp);
+							//System.out.println("p ke es? " + p); //OJO
+						}
+					}
+					else{ 
+						//S ESTA EN LAMBDAMULTI
+						// tenemos que: 1. lo ke habia hasta el momento en concar guardarlo, y crear producciones
+						//a partir de el
+						//cogemos las producciones asociadas a la variable contenida en Multi
+						ArrayList<Produccion> lprodMulti = this.getProducciones().get(s);
+						int tamLProdMulti = lprodMulti.size();
+						int k = 0;
+						while(k <tamLProdMulti){
+							ArrayList<String> concatDeProdMulti = lprodMulti.get(k).getConcatenacion();
+							System.out.println("npp.getConcatenacion()" + npp.getConcatenacion());
+							System.out.println("concatDeProdMulti" + concatDeProdMulti);
+							System.out.println("concatPp" + /*concatPp*/s); 
+							Produccion nnnp = mezcla(/*nconcatParaP*/npp.getConcatenacion(),concatDeProdMulti,/*concatPp*/s,/*i*/j+1);
+							System.out.println("nnnp ke es? mezcla con arralist<prod> > 1 y tam concat > 1" + nnnp);
+							if (nnnp!= null && !esta(nnnp,p)) p.add(nnnp);
+							System.out.println("p ke es? " + p);
+							k++;
+						}
+						
+					}
+					
+					j++;
+					
+				}//llave while de recorrer la concat
 			}
 			
 		} //llave size =1
@@ -662,9 +747,9 @@ public abstract class Gramatica {
 						System.out.println("npp.getConcatenacion()" + npp.getConcatenacion());
 						System.out.println("concatDeProdMulti" + concatDeProdMulti);
 						System.out.println("concatPp" + concatPp); 
-						Produccion nnnp = mezcla(/*nconcatParaP*/npp.getConcatenacion(),concatDeProdMulti,concatPp,i+1);
+						Produccion nnnp = mezcla(/*nconcatParaP*/npp.getConcatenacion(),concatDeProdMulti,concatPp,/*i*/j+1);
 						System.out.println("nnnp ke es? mezcla con arralist<prod> > 1 y tam concat > 1" + nnnp);
-						if (!esta(nnnp,p)) p.add(nnnp);
+						if (nnnp!= null &&!esta(nnnp,p)) p.add(nnnp);
 						System.out.println("p ke es? " + p);
 						k++;
 					}
