@@ -613,11 +613,11 @@ public class OyenteArista extends MouseAdapter {
 		try{
 			nombreArista=nomArs.getText();
 				if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-				if(!canvas.getAlfabetoPila().estaLetra(nombreArista) && !nombreArista.equals(lambda)){
-					canvas.getAlfabetoPila().aniadirLetra(nombreArista);
+				if(!canvas.getAlfabetoPila().estaLetra(nombreArista.toUpperCase()) && !nombreArista.equals(lambda)){
+					canvas.getAlfabetoPila().aniadirLetra(nombreArista.toUpperCase());
 				} //System.out.println(nombreArista);//XXX
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
-				aristaAP.setCimaPila(nombreArista);
+				aristaAP.setCimaPila(nombreArista.toUpperCase());
 			dialog.setVisible(false);
 			dialogTransicionPila();
 		} catch(NullPointerException ex){ //METER ERROR NUEVO
@@ -785,11 +785,11 @@ public class OyenteArista extends MouseAdapter {
 			while(i < s.length()){
 				String ss= "" + s.charAt(i);
 				if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-				if(!canvas.getAlfabetoPila().estaLetra(ss)&& !ss.equals(lambda)){
-					canvas.getAlfabetoPila().aniadirLetra(ss);
+				if(!canvas.getAlfabetoPila().estaLetra(ss.toUpperCase())&& !ss.equals(lambda)){
+					canvas.getAlfabetoPila().aniadirLetra(ss.toUpperCase());
 				}
 
-				aristaAP.anadirPila(ss);
+				aristaAP.anadirPila(ss.toUpperCase());
 				i++;
 			}
 			dialog.setVisible(false);
