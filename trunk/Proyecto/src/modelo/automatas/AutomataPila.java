@@ -92,7 +92,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 		alfabetoPila = alfPila;
 		
 		estados = est;
-		automata = aut;
+		automata = convierte(aut);
 		
 		apd = compruebaAPD();
 //		aceptaLambda = compruebaAceptaLambda();
@@ -106,10 +106,29 @@ public class AutomataPila extends AutomataFND implements Automata{
 	}
 	
 	//-------------------------------------------------------------
+	private ArrayList<AristaAP> convierte(ArrayList<AristaAP> aut){
+		
+		if(aut == null || aut.isEmpty()) return aut;
+		
+		ArrayList<AristaAP> naut = new ArrayList<AristaAP>();
+		int tam = aut.size(); int i = 0;
+		while(i < tam){
+			AristaAP a = aut.get(i);
+			//	public AristaAP(int x,int y,int fx, int fy,String origen,String destino) {
+
+			AristaAP na = new AristaAP(a.getX(),a.getY(),a.getFx(),a.getY(),a.getOrigen(),a.getDestino());
+			na.setSimbolos(a.getEntradaSimbolos());
+			na.setCimaPila(a.getCimaPila().toUpperCase());
+			na.setSalida(transforma(a.getSalidaPila()));
+			naut.add(na);
+			i++;
+		}
+		return naut;
+	}
 	public boolean getAceptaLambda(){return aceptaLambda;}
 	public void setAceptaLambda(boolean b){aceptaLambda = b;}
 	
-	public boolean compruebaAceptaLambda(){
+/*	public boolean compruebaAceptaLambda(){
 		
 		if(!aristasPilaVacia.isEmpty()) return true;
 		
@@ -121,7 +140,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
 public void anadeArista(AristaAP a){
 		
@@ -129,10 +148,23 @@ public void anadeArista(AristaAP a){
 			int i = existeTransicion(a);
 			if ( i == -1 ) this.automata.add(a);
 			anadeSimbolosAlf(a.getEntradaSimbolos());
-			anadeSimbolosAlfPila(a.getCimaPila(),a.getSalidaPila());
+			anadeSimbolosAlfPila(a.getCimaPila().toUpperCase(),transforma(a.getSalidaPila()));
 	}
 	
 /******************************************************************************/
+private ArrayList<String> transforma(ArrayList<String> as){
+	
+	if(as.toString().equals(lambda)) return as;
+	int i = 0;
+	int tam = as.size();
+	ArrayList<String> ns = new ArrayList<String>();
+	while(i < tam){
+		ns.add(as.get(i).toUpperCase());
+		i++;
+	}
+	return ns;
+}
+
 public void anadeSimbolosAlf(ArrayList<String> a){
 	
 	Iterator<String> itA = a.iterator();
@@ -340,8 +372,8 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 	public void insertaArista2(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida) {
 
 		AristaAP arist = new AristaAP(origen,destino);
-		arist.setCimaPila(cima);
-		arist.setSalida(salida);
+		arist.setCimaPila(cima.toUpperCase());
+		arist.setSalida(transforma(salida));
 		arist.setSimbolos(simbolos);
 		anadeArista(arist);
 		
@@ -1035,8 +1067,9 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
 
 		AlfabetoPila_imp nalfPila = new AlfabetoPila_imp();
-		ArrayList<String> letrasAlfPila = (ArrayList<String>) this.getAlfabetoPila().getListaLetras().clone(); 
-		letrasAlfPila.add(fondoPilaAux);
+		ArrayList<String> letrasAlfPila = 
+			(ArrayList<String>) transforma(this.getAlfabetoPila().getListaLetras()).clone();
+		letrasAlfPila.add(fondoPilaAux.toUpperCase());
 		nalfPila.setLetras(letrasAlfPila);
 		
 		String autEstIni = this.getEstadoInicial();
