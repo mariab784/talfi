@@ -203,7 +203,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 						
 
 					p.anadeCadena(new String(cadProd));
-					gic.anadeVariable(cadProd);
+					//gic.anadeVariable(cadProd);
 				}
 				
 			//	System.out.println("dime ke es nVar!!: " + nVar);
@@ -306,6 +306,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private void anadeProduccionesTerminales(String origen,String cima,ArrayList<String> estados,
 			ArrayList<String> simbolos){
 		
+
+		
 		Iterator<String> itEst = estados.iterator();
 		while(itEst.hasNext()){
 					
@@ -314,12 +316,14 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			Iterator<String> itSimbolos = simbolos.iterator();
 			while(itSimbolos.hasNext()){
 				String sim = new String(itSimbolos.next());
-				Produccion p = new Produccion();
-				p.anadeCadena(sim);
-				String nVar = "[" +origen+cima+est+ "]";
-				gic.anadeVariable(nVar);
-				gic.anadeProdConTerminales(nVar);
-				gic.anadeProduccion(nVar, p);
+
+					Produccion p = new Produccion();
+					p.anadeCadena(sim);
+					String nVar = "[" +origen+cima+est+ "]";
+					gic.anadeVariable(nVar);
+					gic.anadeProdConTerminales(nVar);
+					gic.anadeProduccion(nVar, p);
+
 				
 			}
 		}
@@ -405,16 +409,54 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		if(c) System.out.println("dime ke prod son unit: " + gic.getProdUnit());
 		while(c){
 			this.getGic().quitaProdUnitarias();
-			
-//			System.out.println("GIC CLONADA PARA COMPARAR: " + gicSalida);
 			limpia();
 			c = this.getGic().dimeSiHayProdUnitarias();
 		}
 
+
+		
+		limpia(); //quita lasVariablesQueNoExisten
+		
+		 c = this.getGic().dimeSiHayProdUnitarias();
+		if(c) System.out.println("dime ke prod son unit: " + gic.getProdUnit());
+		while(c){
+			this.getGic().quitaProdUnitarias();
 			limpia();
+			c = this.getGic().dimeSiHayProdUnitarias();
+		}
+		
+		limpia();
+		
+		 c = this.getGic().dimeSiHayProdUnitarias();
+			if(c) System.out.println("dime ke prod son unit: " + gic.getProdUnit());
+			while(c){
+				this.getGic().quitaProdUnitarias();
+				limpia();
+				c = this.getGic().dimeSiHayProdUnitarias();
+			}
+			
+			limpia();
+		
+/*		c = this.getGic().dimeSiHayProdRecursivas();
+		if (c) {
+			System.out.println("VENDIMIA!!!!!!!");
+			this.getGic().quitaProdRecursivas();
+		}
+	//	System.out.println("GOLA?" + this.getGic());
+		limpia(); //y mas cosas
+		
+	/*	c = this.getGic().dimeSiHayProdConLambdaMulti();	
+		if (c){ 
+			System.out.println("VENDIMIA 2.0!!!!!!!");
+			System.out.println("veamos si es cierto: " + this.gic);*/
+//			this.getGic().quitaProdConLambdaMulti();
+//		}
+			
+
+		//limpia();
+			
 			System.out.println("keda kitar las lambdas sueltas por ahi");
-
-
+		
 //		}//llaveDaVueltas
 		System.out.println("DESCANSO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 //		quitaLambdasNoUnitarias();
@@ -538,8 +580,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 
-		System.out.println("tam antiwas: " + variables);
-		System.out.println("tam nuevas: "+nVariables);
+//		System.out.println("tam antiwas: " + variables);
+//		System.out.println("tam nuevas: "+nVariables);
 //DESPUES DE AKI HAY UNA EXPLOSION 
 		
 		HashMap<String,ArrayList<Produccion>> nProduc = new HashMap<String,ArrayList<Produccion>>();
@@ -552,8 +594,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 //			System.out.println("algo falla en nProduc : " + nProduc + "\n i :" + i);
 			String var = variables.get(i);
 			String nnVar = nVariables.get(i);
-			System.out.println("var: " + var);
-			System.out.println("nnVar: "+nnVar);
+			//		System.out.println("var: " + var);
+			//		System.out.println("nnVar: "+nnVar);
 			ArrayList<Produccion> nListaProd = new  ArrayList<Produccion>();
 			ArrayList<Produccion> listaProd = produc.get(var);
 			int j = 0;
@@ -563,7 +605,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				nProd = new Produccion();
 				Produccion prod = listaProd.get(j);
 				ArrayList<String> nConcat= nuevaContatenacion(prod,variables,nVariables);
-				System.out.println("algo falla en nConcat ?: " + nConcat /*+ "\n j :" + j*/);
+				//			System.out.println("algo falla en nConcat ?: " + nConcat /*+ "\n j :" + j*/);
 				
 					if (nConcat != null/* && !RecInservible(nConcat,nnVar)*/)nProd.setConcatenacion(nConcat); //CUIDADO CON ESTO KIZA EXPLOTE SOMEWHERE
 					if (!esta(nProd,nListaProd)&& ((nConcat != null))) nListaProd.add(nProd);
@@ -655,15 +697,15 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private ArrayList<String> nuevaContatenacion(Produccion prod,ArrayList<String> variables,
 			ArrayList<String> nVariables ){
 		
-		System.out.println("ke es variables: "+ variables);
-		System.out.println("ke es nVariables: "+ nVariables);
+//		System.out.println("ke es variables: "+ variables);
+//		System.out.println("ke es nVariables: "+ nVariables);
 		ArrayList<String> salida = new ArrayList<String>();
 		ArrayList<String> concat = prod.getConcatenacion();
 		int tam = concat.size(); int i = 0;
 		String s;
 		while(i<tam){
 			s = new String(concat.get(i));
-			System.out.println("ke es s: "+ s);
+	//		System.out.println("ke es s: "+ s);
 		//	System.out.println("nVAR: "+ nVariables);
 			/*		if (gic.getSimbolos().contains(cadena) || lambda.equals(cadena))
 			return 0;
@@ -673,12 +715,12 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			return 2;//System.out.println("SHIT");*/ //tomamos como imposible el 2
 			int dt = dimeTipo(s,variables);
 			if (/*comprueba*/ dt == 0){
-				System.out.println("ke es s1: "+ s);
+	//			System.out.println("ke es s1: "+ s);
 				salida.add(s);				
 			}
 			else if(dt == 1){
 				int ind = variables.indexOf(s);
-				System.out.println("ke es s2: "+ s);
+	//			System.out.println("ke es s2: "+ s);
 				//System.out.println("IND: " + ind);
 				String ns = null;//nVariables.get(ind);
 				/*if (inservible(gic.getProducciones().get(s)) ){
@@ -703,7 +745,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 			i++;
 		}
-		System.out.println("ke devuelves en salida?: " + salida);
+//		System.out.println("ke devuelves en salida?: " + salida);
 		return salida;
 	}
 	
@@ -846,7 +888,7 @@ aut.setEstadoFinal("s1");
 		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
 		arist.anadirSimbolo("\\");
 		arist.setCimaPila("Z");
-		arist.anadirPila("\\");//		arist.anadirPila("Z");
+		arist.anadirPila("Z");//		arist.anadirPila("Z");
 		
 		aut.anadeArista(arist);
 	/******/	
@@ -855,9 +897,7 @@ aut.setEstadoFinal("s1");
 		
 
 		a.AP_Gramatica();
-//		System.out.println("main apgramatica: " + a.getGic());
-		
-		
+
 		
 			GIC_to_FNC piticli = new GIC_to_FNC(a.getGic(),true); 
 		piticli.simplifica(true,false);
