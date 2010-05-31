@@ -340,32 +340,32 @@ public class Greibach extends GramaticaIC{
 	
 	
 	private void buscaDondeHayTerminales(){
-		System.out.println("Ke hay en variables?: " + this.getVariables());
-		System.out.println("Ke hay en terminales?: " + this.getSimbolos());
+//		System.out.println("Ke hay en variables?: " + this.getVariables());
+//		System.out.println("Ke hay en terminales?: " + this.getSimbolos());
 		Iterator<String> itLetras = this.getVariables().iterator();
 
 		while (itLetras.hasNext()){
 			
 			String variableActual = itLetras.next();
-			System.out.println("Ke hay en variableActual?: " + variableActual);
+		//	System.out.println("Ke hay en variableActual?: " + variableActual);
 			ArrayList<Produccion> prod = this.getProducciones().get(variableActual);
-			System.out.println("Ke hay en rrayList<Produccion> prod?: " + prod);
+		//	System.out.println("Ke hay en rrayList<Produccion> prod?: " + prod);
 			int i = 0; int tam = prod.size();
 			while(i < tam){
 				Produccion produc = prod.get(i);
-				System.out.println("Ke hay en produc?: " + produc);
+		//		System.out.println("Ke hay en produc?: " + produc);
 				ArrayList<String> concat = produc.getConcatenacion();
-				System.out.println("Ke hay en concat?: " + produc);
+		//		System.out.println("Ke hay en concat?: " + produc);
 				if (concat.size() == 1 && !this.getVariables().contains(concat.get(0))){
-					System.out.println("TERMINAL!");
+		//			System.out.println("TERMINAL!");
 					if (!prodConTerminal.containsKey(variableActual)){
-						System.out.println("NO ESTOY!");
+		//				System.out.println("NO ESTOY!");
 						ArrayList<Integer> aInt = new ArrayList<Integer>();
 						aInt.add(i);
 						prodConTerminal.put(variableActual, aInt);							
 					}
 					else{
-						System.out.println("YA ESTOY!");
+		//				System.out.println("YA ESTOY!");
 						ArrayList<Integer> aInt = prodConTerminal.get(variableActual);
 						prodConTerminal.remove(variableActual);
 						aInt.add(i);
