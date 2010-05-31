@@ -149,6 +149,7 @@ public void anadeArista(AristaAP a){
 			if ( i == -1 ) this.automata.add(a);
 			anadeSimbolosAlf(a.getEntradaSimbolos());
 			anadeSimbolosAlfPila(a.getCimaPila().toUpperCase(),transforma(a.getSalidaPila()));
+			apd = compruebaAPD();
 	}
 	
 /******************************************************************************/
@@ -376,6 +377,7 @@ private static boolean iguales(ArrayList<String> a, ArrayList<String> b){
 		arist.setSalida(transforma(salida));
 		arist.setSimbolos(simbolos);
 		anadeArista(arist);
+		apd = compruebaAPD();
 		
 	}
 	//-------------------------------------------------------------

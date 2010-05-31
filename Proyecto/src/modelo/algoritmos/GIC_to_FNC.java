@@ -46,6 +46,7 @@ public class GIC_to_FNC {
 	@SuppressWarnings("unused")
 	private Controlador controlador;
 	private Mensajero mensajero;
+	private String lambda;
 	//************************************************************
 	public GIC_to_FNC(GramaticaIC g,boolean b){
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
@@ -54,6 +55,7 @@ public class GIC_to_FNC {
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
 		xml= "<exit><steps>\n";
 		html="";
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		transforma_FNG(b);
 
 	}
@@ -95,9 +97,42 @@ public class GIC_to_FNC {
 		tablaTieneMarcas = b;
 	}
 	//------------------------------------------------------------
+	
+	private void limpia(){
+
+		Greibach gramsal = this.gramaticaSalida;
+		ArrayList<String> vargram = gramsal.getVariables();
+		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
+		HashMap<String,ArrayList<Produccion>> ngramsalprod = new HashMap<String,ArrayList<Produccion>>();
+		int i = 0; int tam = vargram.size();
+		while(i < tam){
+			String s = vargram.get(i);
+			ArrayList<Produccion> aprod = gramsalprod.get(s);
+			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
+			int j = 0; int tamProd = aprod.size();
+			while(j < tamProd){
+				Produccion pr = aprod.get(j);
+				ArrayList<String> concat = pr.getConcatenacion();
+				Produccion npr = new Produccion();
+				ArrayList<String> nconcat = arreglaConcatenacion(concat);
+				npr.setConcatenacion(nconcat);
+				
+				j++;
+				if(!esta(npr,naprod)) naprod.add(npr);
+			}
+			ngramsalprod.put(s, naprod);
+			i++;
+		}
+		this.gramaticaSalida.setProducciones(ngramsalprod);
+
+		
+	}
 	//------------------------------------------------------------
 	public void transforma_FNG(boolean mostrarPasos){
 
+		//vamos a limpiar a ver si consigo ke funcione de una puta vez
+		limpia();
+		
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
 		lon = variables.size(); 
@@ -285,9 +320,9 @@ public class GIC_to_FNC {
 							nueva2.add(aux2.getConcatenacion().get(k));
 							
 						}
-						nueva.setConcatenacion(nueva2);
+						nueva.setConcatenacion(/*arreglaConcatenacion(*/nueva2/*)*/); //XXX CAMBIADO CMBIADOOOOOOOOOO
 //						System.out.println("nueva: "+ nueva);
-
+						
 						if (!esta(nueva,pnueva))pnueva.add(nueva);
 						//System.out.println("produccionesDeFilasfinal: "+ produccionesDeFilas);
 						//System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
@@ -302,7 +337,11 @@ public class GIC_to_FNC {
 			gramaticaSalida.getProducciones().remove(var);
 			gramaticaSalida.getProducciones().put(var, pnueva);
 		}
-		System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
+		
+		//AÑADIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		limpia();
+		
+		System.out.println("GRAMATICA eres tu?: " + gramaticaSalida.getProducciones());
 	//	System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
 
 	}
@@ -388,7 +427,7 @@ public class GIC_to_FNC {
 				concat.add(nVar);
 				pod = new Produccion();
 
-				pod.setConcatenacion(concat);
+				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 		//		System.out.println("ke es pod?1" + pod);
 				p.add(pod);
 		//		System.out.println("ke es p?1" + p);
@@ -398,7 +437,7 @@ public class GIC_to_FNC {
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
 				pod = new Produccion();
-				pod.setConcatenacion(concat);
+				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 				System.out.println("ke es pod? 1" + pod);
 				if (!concat.isEmpty())produccionesNuevas.add(pod);
 //				System.out.println("pod1 " + pod);
@@ -406,7 +445,7 @@ public class GIC_to_FNC {
 				pod = new Produccion();
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
-				pod.setConcatenacion(concat);
+				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 				pod.anadeCadena(nVar);
 //				System.out.println("pod2 " + pod);
 				System.out.println("ke es pod? 2" + pod);
@@ -504,6 +543,39 @@ public class GIC_to_FNC {
 	public String getHTML(){
 		
 		return html;
+	}
+	
+	private ArrayList<String> arreglaConcatenacion(ArrayList<String> nconcat){
+		//nconcat no sera ni null ni vacio nunca
+
+		if (todosLambda(nconcat)){ //tambien lambda solo incluido
+			ArrayList<String> ss = new ArrayList<String>();
+			ss.add(lambda);
+			return ss;
+		}
+		
+		ArrayList<String> s = new ArrayList<String>();
+		int tam = nconcat.size();
+		int i = 0;
+		while(i < tam){
+			String ss = nconcat.get(i);
+			if(!ss.equals(lambda)){s.add(
+					new String(ss));
+			}
+			i++;
+		}
+		return s;
+	}
+	
+	private boolean todosLambda(ArrayList<String> nconcat){
+		
+		int i = 0; int tam = nconcat.size();
+		while(i < tam){
+			String s = nconcat.get(i);
+			if (!s.equals(lambda)) return false;
+			i++;
+		}
+		return true;
 	}
 	
 	//************************************************************
