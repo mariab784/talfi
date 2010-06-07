@@ -2,11 +2,13 @@ accesoBD
 accesoBD.usuariosBD
 controlador
 lanzador
+latexCode
 modelo
 modelo.algoritmos
 modelo.automatas
 modelo.ejercicios
 modelo.expresion_regular
+modelo.gramatica
 vista
 vista.vistaGrafica
 vista.vistaGrafica.events
