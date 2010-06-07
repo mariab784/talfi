@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="modelo.gramaticaClassDiagram" id="{UMLID=_pxbTsHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica}" metadata="uml2-1.0" initialized="true" tag="10" key="32303037303632392050726F796563746F">
+  <children xsi:type="editmodel:ClassEditModel" name="Produccion" location="355,2897" size="163,206" timstampe="299" stereotype="" id="{UMLID=_pxlEqnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion}" runTimeClassModel="main([Ljava.lang.String;),setConcatenacion(Ljava.lang.String;),getConcatenacion(),anadeConcatenacion(Ljava.lang.String;),concatenacion,anadeCadena(Ljava.lang.String;),Produccion(),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:AttributeEditModel" name="concatenacion" size="106,21" id="{UMLID=_vY3dQHJSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="142,136">
+      <children xsi:type="editmodel:MethodEditModel" name="Produccion" size="94,16" id="{UMLID=_vY3dQnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#Produccion()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getConcatenacion" size="133,21" id="{UMLID=_vY3dTHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#getConcatenacion()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setConcatenacion" size="133,21" id="{UMLID=_vZBOQXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#setConcatenacion(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeConcatenacion" size="142,16" id="{UMLID=_vY3dQ3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#anadeConcatenacion(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeCadena" size="107,16" id="{UMLID=_vY3dRnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#anadeCadena(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" size="62,16" id="{UMLID=_vY3dSXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#main([Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" size="77,16" id="{UMLID=_vY3dT3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Produccion#toString()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_vXOehHJSEd-BWtPPeGzhpQ}" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="producciones" location="0,10" id="{UMLID=_vQF7wnJSEd-BWtPPeGzhpQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="342,2886" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- producciones" location="275,2914" size="73,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="233,1206" id="{UMLID=_vXOehXJSEd-BWtPPeGzhpQ}" multiplicityLabel="//@children.0/@sourceConnections.0/@children.2/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="270,1282" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:QualifierAttributeEditModel" name="key" location="263,1254" size="30,21" id="{UMLID=_vQF7xHJSEd-BWtPPeGzhpQ}"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_g1qnonJUEd-BWtPPeGzhpQ}" source="//@children.0" target="//@children.9" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="listaProdPalabras" location="81,0" id="{UMLID=_gxM-YnJUEd-BWtPPeGzhpQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" roleLabel="//@children.0/@sourceConnections.1/@children.1/@children.1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="443,2876" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- listaProdPalabras" location="339,2876" size="90,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="90,386" id="{UMLID=_g1qno3JUEd-BWtPPeGzhpQ}" multiplicityLabel="//@children.0/@sourceConnections.1/@children.2/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="495,2234" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="Gramatica" location="50,50" size="243,1206" timstampe="795" stereotype="" id="{UMLID=_qdw1MnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica}" runTimeClassModel="prodConTerminales,producciones,variableInicial,setProdConLambdaMulti(Ljava.lang.String;),setVariableInicial(Ljava.lang.String;),anadeVariable(Ljava.lang.String;),creaProduccion(Lmodelo.gramatica.Produccion;),setSimbolos(Ljava.lang.String;),lambda,variablesSinProd,dimeSiHayProdRecursivas(),setVariables(Ljava.lang.String;),anadeProdConTerminales(Ljava.lang.String;),esLambda(Ljava.lang.String;),getSimbolos(),arreglaConcatenacion(Ljava.lang.String;),prodUnit,prodConLambdaMulti,contieneVarConProdUnit(Lmodelo.gramatica.Produccion;),setProdConTerminales(Ljava.lang.String;),Gramatica(Lmodelo.automatas.Alfabeto;Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;),getProdUnit(),quitaProdConLambdaMulti(),variables,Gramatica(),clonar(Lmodelo.gramatica.Produccion;),mezcla(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I),anadeProduccion(Ljava.lang.String;Lmodelo.gramatica.Produccion;),Gramatica(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;),quitaProdRecursivas(),quitaVariablesQueNoExisten(),compruebaMulti(Lmodelo.gramatica.Produccion;Ljava.lang.String;),setProdUnit(Ljava.lang.String;),toString(),esta(Ljava.lang.String;Ljava.lang.String;),mensajero,getVariables(),getProducciones(),actualizaProducciones(Ljava.lang.String;),dimeSiHayProdConLambdaMulti(),dimeSiHayVariablesQueNoTienenProd(),iguales(Ljava.lang.String;Ljava.lang.String;),dimeSiHayProdUnitarias(),creaVariables(Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;),setVariablesSinProd(Ljava.lang.String;),nuevaProduccion(Lmodelo.gramatica.Produccion;Ljava.lang.String;),getProdConTerminales(),esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;),quitaProdUnitarias(),creaNuevaProduccion(Lmodelo.gramatica.Produccion;Ljava.lang.Integer;),todosLambda(Ljava.lang.String;),setProducciones(Lmodelo.gramatica.Produccion;),dimeSiHayProdMulti(),prodRecursivas,simbolos,getVariableInicial(),getVariablesSinProd(),getProdConLambdaMulti()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="93,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="variables" size="79,21" id="{UMLID=_vQPFunJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="simbolos" size="77,21" id="{UMLID=_vQPFsnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="producciones" size="101,21" id="{UMLID=_vQF7wnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="variableInicial" size="93,16" id="{UMLID=_vQPFuHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mensajero" size="85,21" id="{UMLID=_vQF7x3JSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lambda" size="63,16" id="{UMLID=_vQF7xXJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="prodUnit" size="75,21" id="{UMLID=_vQPFtHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="prodConLambdaMulti" size="135,21" id="{UMLID=_vQPFtnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="prodConTerminales" size="127,21" id="{UMLID=_vQF7wHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="prodRecursivas" size="112,21" id="{UMLID=_vQPFsHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="variablesSinProd" size="116,21" id="{UMLID=_vQF7yXJSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="222,916">
+      <children xsi:type="editmodel:MethodEditModel" name="Gramatica" size="89,16" id="{UMLID=_vRuTdHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#Gramatica()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Gramatica" size="89,16" id="{UMLID=_vQiAp3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#Gramatica(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Gramatica" size="89,16" id="{UMLID=_vRIdnHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#Gramatica(Lmodelo.automatas.Alfabeto;Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeProdConTerminales" size="162,16" id="{UMLID=_vRRnhnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#anadeProdConTerminales(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getProdConTerminales" size="153,21" id="{UMLID=_vQY2unJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getProdConTerminales()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProdConTerminales" size="153,21" id="{UMLID=_vQiAtHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setProdConTerminales(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setVariablesSinProd" size="143,21" id="{UMLID=_vRlJiHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setVariablesSinProd(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getVariablesSinProd" size="143,21" id="{UMLID=_vQ1ipnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getVariablesSinProd()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeVariable" size="109,16" id="{UMLID=_vRRnj3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#anadeVariable(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clonar" size="70,16" id="{UMLID=_vRRniXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#clonar(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="creaVariables" size="107,16" id="{UMLID=_vQ-sonJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#creaVariables(Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getVariables" size="106,21" id="{UMLID=_vQiAqnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getVariables()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setVariables" size="106,21" id="{UMLID=_vQ-snHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setVariables(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSimbolos" size="104,21" id="{UMLID=_vRbYhHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getSimbolos()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setSimbolos" size="104,21" id="{UMLID=_vQrxr3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setSimbolos(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getProducciones" size="127,21" id="{UMLID=_vRuTfHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getProducciones()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProducciones" size="127,21" id="{UMLID=_vQPFwXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setProducciones(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getVariableInicial" size="120,16" id="{UMLID=_vRbYh3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getVariableInicial()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setVariableInicial" size="120,16" id="{UMLID=_vRRnjHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setVariableInicial(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeProduccion" size="124,16" id="{UMLID=_vRbYj3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#anadeProduccion(Ljava.lang.String;Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" size="77,16" id="{UMLID=_vRuTdXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#toString()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getProdConLambdaMulti" size="161,21" id="{UMLID=_vRuTeHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getProdConLambdaMulti()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProdConLambdaMulti" size="161,21" id="{UMLID=_vQrxsnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setProdConLambdaMulti(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getProdUnit" size="101,21" id="{UMLID=_vRIdn3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#getProdUnit()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProdUnit" size="101,21" id="{UMLID=_vRlJgXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#setProdUnit(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esta" size="61,16" id="{UMLID=_vQY2wHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#esta(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esLambda" size="90,16" id="{UMLID=_vRIdl3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#esLambda(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="iguales" size="74,16" id="{UMLID=_vRRngXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#iguales(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esta" size="61,16" id="{UMLID=_vQ1iqXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="creaProduccion" size="116,16" id="{UMLID=_vRbYinJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#creaProduccion(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="actualizaProducciones" size="149,16" id="{UMLID=_vQ-slHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#actualizaProducciones(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="nuevaProduccion" size="124,16" id="{UMLID=_vRlJkHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#nuevaProduccion(Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="contieneVarConProdUnit" size="157,16" id="{UMLID=_vQ1isHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#contieneVarConProdUnit(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="creaNuevaProduccion" size="147,16" id="{UMLID=_vQY2vXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#creaNuevaProduccion(Lmodelo.gramatica.Produccion;Ljava.lang.Integer;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaProdUnitarias" size="127,16" id="{UMLID=_vQiAsHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#quitaProdUnitarias()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaProdRecursivas" size="140,16" id="{UMLID=_vRuTe3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#quitaProdRecursivas()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaProdConLambdaMulti" size="163,16" id="{UMLID=_vRlJj3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#quitaProdConLambdaMulti()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="mezcla" size="74,16" id="{UMLID=_vRRnknJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#mezcla(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compruebaMulti" size="115,16" id="{UMLID=_vRIdlHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#compruebaMulti(Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeSiHayProdConLambdaMulti" size="190,16" id="{UMLID=_vQiAsXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#dimeSiHayProdConLambdaMulti()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeSiHayProdUnitarias" size="154,16" id="{UMLID=_vQ-sn3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#dimeSiHayProdUnitarias()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeSiHayProdMulti" size="133,16" id="{UMLID=_vQiArXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#dimeSiHayProdMulti()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeSiHayVariablesQueNoTienenProd" size="222,16" id="{UMLID=_vQ-smXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#dimeSiHayVariablesQueNoTienenProd()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaVariablesQueNoExisten" size="176,16" id="{UMLID=_vQiAo3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#quitaVariablesQueNoExisten()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeSiHayProdRecursivas" size="167,16" id="{UMLID=_vQiApHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#dimeSiHayProdRecursivas()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="arreglaConcatenacion" size="146,16" id="{UMLID=_vQrxpnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#arreglaConcatenacion(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="todosLambda" size="105,16" id="{UMLID=_vQPFvHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Gramatica#todosLambda(Ljava.lang.String;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Alfabeto" location="50,2588" size="223,259" timstampe="10" id="{UMLID=_QTncg3JSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto}" runTimeClassModel="eliminaPos(I),dameLetraPos(I),aniadirLetra(Ljava.lang.String;),cuentaLetras(),dameListaLetras(),estaLetra(Ljava.lang.String;),equals(Lmodelo.automatas.Alfabeto;),dameListaLetrasmenosL(),dameAlfabetoMenosL(),getListaLetras(),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="158,198">
+      <children xsi:type="editmodel:MethodEditModel" name="aniadirLetra" size="97,16" id="{UMLID=__JvVAHJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#aniadirLetra(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="cuentaLetras" size="104,16" id="{UMLID=__J5GB3JSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#cuentaLetras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameAlfabetoMenosL" size="145,16" id="{UMLID=__J5GEnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#dameAlfabetoMenosL()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameLetraPos" size="109,16" id="{UMLID=__J5GAnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#dameLetraPos(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameListaLetras" size="120,16" id="{UMLID=__JvVDHJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#dameListaLetras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameListaLetrasmenosL" size="158,16" id="{UMLID=__JvVBnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#dameListaLetrasmenosL()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="eliminaPos" size="90,16" id="{UMLID=__JvVA3JSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#eliminaPos(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" size="72,16" id="{UMLID=__J5GDXJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#equals(Lmodelo.automatas.Alfabeto;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="estaLetra" size="86,16" id="{UMLID=__KCP8HJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#estaLetra(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getListaLetras" size="109,16" id="{UMLID=__J5GCnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#getListaLetras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" size="77,16" id="{UMLID=__JvVCXJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto#toString()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Estado" location="323,2588" size="202,245" timstampe="6" stereotype="" id="{UMLID=_Qb85LHJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado}" runTimeClassModel="getX(),setPoint(Ljava.awt.Point;),setSelected(Z),Estado(IILjava.lang.String;),getEtiqueta(),getY(),isSelected(),etiqueta,seleccionado,y,x">
+    <children xsi:type="editmodel:CompartmentEditModel" size="93,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="x" size="35,16" id="{UMLID=__hZABnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="y" size="35,16" id="{UMLID=__hZABHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="etiqueta" size="67,16" id="{UMLID=__hZAAHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="seleccionado" size="93,16" id="{UMLID=__hZAAnJSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="97,126">
+      <children xsi:type="editmodel:MethodEditModel" name="Estado" size="73,16" id="{UMLID=__hixCXJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#Estado(IILjava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getX" size="62,16" id="{UMLID=__hixAHJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#getX()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getY" size="63,16" id="{UMLID=__hixBnJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#getY()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setPoint" size="78,16" id="{UMLID=__hZADnJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#setPoint(Ljava.awt.Point;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getEtiqueta" size="93,16" id="{UMLID=__hixA3JSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#getEtiqueta()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setSelected" size="97,16" id="{UMLID=__hZAC3JSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#setSelected(Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isSelected" size="90,16" id="{UMLID=__hZACHJSEd-BWtPPeGzhpQ,JavaID=vista.vistaGrafica/Estado#isSelected()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Mensajero" location="50,3130" size="176,160" timstampe="7" stereotype="" id="{UMLID=_QAuVsHJSEd-BWtPPeGzhpQ,JavaID=accesoBD/Mensajero}" runTimeClassModel="mensajero,setIdioma(Z),getInstancia(),language,Mensajero(),devuelveMensaje(Ljava.lang.String;I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="73,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="mensajero" size="85,21" id="{UMLID=_QB6ogHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="language" size="73,16" id="{UMLID=_QCNjcXJSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="124,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getInstancia" size="98,16" id="{UMLID=_QCqPZHJSEd-BWtPPeGzhpQ,JavaID=accesoBD/Mensajero#getInstancia()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Mensajero" size="90,16" id="{UMLID=_QCqPZ3JSEd-BWtPPeGzhpQ,JavaID=accesoBD/Mensajero#Mensajero()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="devuelveMensaje" size="124,16" id="{UMLID=_QCgeYHJSEd-BWtPPeGzhpQ,JavaID=accesoBD/Mensajero#devuelveMensaje(Ljava.lang.String;I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setIdioma" size="85,16" id="{UMLID=_QCWtYXJSEd-BWtPPeGzhpQ,JavaID=accesoBD/Mensajero#setIdioma(Z)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Alfabeto_Pila" location="50,2897" size="255,169" timstampe="10" id="{UMLID=_QdcG5XJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila}" runTimeClassModel="aniadirLetra(Ljava.lang.String;),dameListaLetras(),equals(Lmodelo.automatas.Alfabeto_Pila;),estaLetra(Ljava.lang.String;),toString(),getListaLetras()">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,108">
+      <children xsi:type="editmodel:MethodEditModel" name="aniadirLetra" size="97,16" id="{UMLID=_veqjUnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#aniadirLetra(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameListaLetras" size="120,16" id="{UMLID=_veqjRHJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#dameListaLetras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" size="72,16" id="{UMLID=_veqjTXJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#equals(Lmodelo.automatas.Alfabeto_Pila;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="estaLetra" size="86,16" id="{UMLID=_vehZUHJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#estaLetra(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getListaLetras" size="109,16" id="{UMLID=_veqjR3JSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#getListaLetras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" size="77,16" id="{UMLID=_veqjSnJSEd-BWtPPeGzhpQ,JavaID=modelo.automatas/Alfabeto_Pila#toString()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GramaticaIC" location="276,3130" size="119,119" timstampe="114" stereotype="" id="{UMLID=_pxlEoHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/GramaticaIC}" runTimeClassModel="GramaticaIC(),main([Ljava.lang.String;),GramaticaIC(Lmodelo.automatas.Alfabeto;Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;),GramaticaIC(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,72">
+      <children xsi:type="editmodel:MethodEditModel" name="GramaticaIC" size="98,16" id="{UMLID=_vXrKcnJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/GramaticaIC#GramaticaIC()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GramaticaIC" size="98,16" id="{UMLID=_vXrKc3JSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/GramaticaIC#GramaticaIC(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GramaticaIC" size="98,16" id="{UMLID=_vXiAiHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/GramaticaIC#GramaticaIC(Lmodelo.automatas.Alfabeto;Lvista.vistaGrafica.Estado;Lmodelo.automatas.Alfabeto_Pila;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" size="62,16" id="{UMLID=_vXYPgXJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/GramaticaIC#main([Ljava.lang.String;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="AutomataP_to_GramaticaIC" location="50,1099" size="346,853" timstampe="6189" stereotype="" id="{UMLID=_QdcG4nJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC}" runTimeClassModel="ejecutar(Z),main([Ljava.lang.String;),clonarProducciones(Lmodelo.gramatica.Produccion;),quitaLambdasNoeeeeUnitarias(),iguales(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;),resultadosParciales,comienzo,controlador,getAutomataOriginal(),mensajero,lambda,getGic(),registraControlador(Lcontrolador.Controlador;),traduceVariables(),clonarArrayProduc(Lmodelo.gramatica.Produccion;),getAutomataEntrada(),estaEnVariables(Ljava.lang.String;),Gramatica,setGIC(Lmodelo.gramatica.GramaticaIC;),dimeTipo(Ljava.lang.String;Ljava.lang.String;),iguales(Ljava.lang.String;Ljava.lang.String;),automataOriginal,cambiaNombreVariables(),construyeListasEstados(Ljava.lang.String;I),anadeProduccionesConLista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),nuevaContatenacion(Lmodelo.gramatica.Produccion;Ljava.lang.String;Ljava.lang.String;),esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;),automataEntrada,AP_Gramatica(),AutomataP_to_GramaticaIC(Lmodelo.automatas.Automata;),compruebaContatenacion(Lmodelo.gramatica.Produccion;Ljava.lang.String;),desapila(Ljava.lang.String;),inservible(Lmodelo.gramatica.Produccion;),getXML(),fondoPila,gic,compruebaElemento(Ljava.lang.String;Ljava.lang.String;),clonar(Lmodelo.gramatica.Produccion;),anadeProduccionConUnaLista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),variablesEnProducciones,anadeProduccionesTerminales(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),limpia()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="78,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="comienzo" size="75,16" id="{UMLID=_pxlEpXJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="automataOriginal" size="115,21" id="{UMLID=_pxbTpHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="automataEntrada" size="116,21" id="{UMLID=_pxbTrHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="gic" size="49,21" id="{UMLID=_pxbTrnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mensajero" size="85,21" id="{UMLID=_pxbTonJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="Gramatica" size="78,16" id="{UMLID=_pxbTqnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lambda" size="63,16" id="{UMLID=_pxbToHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="fondoPila" size="73,16" id="{UMLID=_pxbTqHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="variablesEnProducciones" size="157,21" id="{UMLID=_pxlEo3JSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="resultadosParciales" size="130,21" id="{UMLID=_pxbTpnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="controlador" size="90,21" id="{UMLID=_pxlEp3JSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="187,573">
+      <children xsi:type="editmodel:MethodEditModel" name="AutomataP_to_GramaticaIC" size="170,16" id="{UMLID=_pyxXhHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#AutomataP_to_GramaticaIC(Lmodelo.automatas.Automata;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ejecutar" size="79,16" id="{UMLID=_pxu1pnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#ejecutar(Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getXML" size="76,16" id="{UMLID=_pxu1snJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#getXML()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAutomataEntrada" size="144,21" id="{UMLID=_pyxXcnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#getAutomataEntrada()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAutomataOriginal" size="143,21" id="{UMLID=_py6hYHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#getAutomataOriginal()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="registraControlador" size="133,16" id="{UMLID=_px3_oXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#registraControlador(Lcontrolador.Controlador;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="AP_Gramatica" size="108,16" id="{UMLID=_pxu1onJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#AP_Gramatica()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeProduccionConUnaLista" size="185,16" id="{UMLID=_pyK6hHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#anadeProduccionConUnaLista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeProduccionesConLista" size="178,16" id="{UMLID=_pxu1tXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#anadeProduccionesConLista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="construyeListasEstados" size="157,16" id="{UMLID=_pynmfXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#construyeListasEstados(Ljava.lang.String;I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="anadeProduccionesTerminales" size="187,16" id="{UMLID=_pyBwnHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#anadeProduccionesTerminales(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="desapila" size="80,16" id="{UMLID=_pyecgHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#desapila(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clonar" size="70,16" id="{UMLID=_pyUrgnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#clonar(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clonarArrayProduc" size="132,16" id="{UMLID=_pynmdnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#clonarArrayProduc(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clonarProducciones" size="136,16" id="{UMLID=_pxlEqXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#clonarProducciones(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="limpia" size="66,16" id="{UMLID=_py6hZHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#limpia()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traduceVariables" size="122,16" id="{UMLID=_pyUrgXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#traduceVariables()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaLambdasNoeeeeUnitarias" size="186,16" id="{UMLID=_pxu1pXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#quitaLambdasNoeeeeUnitarias()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="cambiaNombreVariables" size="156,16" id="{UMLID=_py6hY3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#cambiaNombreVariables()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="iguales" size="74,16" id="{UMLID=_pxlEsHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#iguales(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esta" size="61,16" id="{UMLID=_pyxXeHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGIC" size="72,16" id="{UMLID=_pyxXdXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#setGIC(Lmodelo.gramatica.GramaticaIC;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="inservible" size="86,16" id="{UMLID=_px3_mnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#inservible(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="nuevaContatenacion" size="139,16" id="{UMLID=_pyK6iXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#nuevaContatenacion(Lmodelo.gramatica.Produccion;Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compruebaContatenacion" size="163,16" id="{UMLID=_pyecknJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#compruebaContatenacion(Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compruebaElemento" size="137,16" id="{UMLID=_pyBwkHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#compruebaElemento(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dimeTipo" size="82,16" id="{UMLID=_px3_lnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#dimeTipo(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="estaEnVariables" size="118,16" id="{UMLID=_pyecjXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#estaEnVariables(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGic" size="77,21" id="{UMLID=_pyBwmXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#getGic()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" size="62,16" id="{UMLID=_pxu1q3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#main([Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="iguales" size="74,16" id="{UMLID=_pyxXf3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/AutomataP_to_GramaticaIC#iguales(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GIC_to_FNC" location="50,1841" size="246,789" timstampe="84" stereotype="" id="{UMLID=_QdlQ13JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC}" runTimeClassModel="sustituirDiagonal(),main([Ljava.lang.String;),setGramaticaEntrada(Lmodelo.gramatica.GramaticaIC;),gramaticaEntrada,setTablaTieneMarcas(Z),GIC_to_FNC(Lmodelo.gramatica.GramaticaIC;Z),getHTML(),controlador,tablaTieneMarcas,mensajero,lambda,registraControlador(Lcontrolador.Controlador;),simplifica(ZZ),transforma_FNG(Z),quitaProdRecursiva(Lmodelo.gramatica.Produccion;Ljava.lang.String;),clave,iguales(Ljava.lang.String;Ljava.lang.String;),dameEntreCorchetes(Ljava.lang.String;),columna,inicializarTabla(),arreglaConcatenacion(Ljava.lang.String;),lon,setGramaticaSalida(Lmodelo.gramatica.Greibach;),sustituir(),gramaticaSalida,calculaColumna(),pintaTabla(),getTablaTieneMarcas(),esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;),xml,getGramaticaEntrada(),todosLambda(Ljava.lang.String;),tabla,setXml(Ljava.lang.String;),getXML(),diagonalMarcada(),html,getGramaticaSalida(),limpia()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="114,144">
+      <children xsi:type="editmodel:AttributeEditModel" name="gramaticaEntrada" size="119,21" id="{UMLID=_qdUJRnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="gramaticaSalida" size="111,21" id="{UMLID=_qdUJRHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="xml" size="45,16" id="{UMLID=_qdUJSnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="html" size="48,16" id="{UMLID=_qdUJSHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tabla" size="52,16" id="{UMLID=_qdUJUnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lon" size="43,16" id="{UMLID=_qdUJQnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="columna" size="69,16" id="{UMLID=_qdUJUHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="clave" size="55,16" id="{UMLID=_qdUJTHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tablaTieneMarcas" size="114,16" id="{UMLID=_qdK_UHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="controlador" size="90,21" id="{UMLID=_qdUJTnJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mensajero" size="85,21" id="{UMLID=_qdUJQHJSEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lambda" size="63,16" id="{UMLID=_qdK_UnJSEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,506">
+      <children xsi:type="editmodel:MethodEditModel" name="GIC_to_FNC" size="98,16" id="{UMLID=_qd6mOnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#GIC_to_FNC(Lmodelo.gramatica.GramaticaIC;Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="registraControlador" size="133,16" id="{UMLID=_qeDwLHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#registraControlador(Lcontrolador.Controlador;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGramaticaEntrada" size="147,21" id="{UMLID=_qdnrTXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#setGramaticaEntrada(Lmodelo.gramatica.GramaticaIC;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGramaticaEntrada" size="147,21" id="{UMLID=_qdw1MXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#getGramaticaEntrada()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGramaticaSalida" size="139,21" id="{UMLID=_qeDwL3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#setGramaticaSalida(Lmodelo.gramatica.Greibach;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGramaticaSalida" size="139,21" id="{UMLID=_qeDwIHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#getGramaticaSalida()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setXml" size="72,16" id="{UMLID=_qeDwJHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#setXml(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getXML" size="76,16" id="{UMLID=_qdnrR3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#getXML()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getTablaTieneMarcas" size="142,16" id="{UMLID=_qdd6THJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#getTablaTieneMarcas()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setTablaTieneMarcas" size="142,16" id="{UMLID=_qdd6SHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#setTablaTieneMarcas(Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="limpia" size="66,16" id="{UMLID=_qeDwI3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#limpia()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="transforma_FNG" size="120,16" id="{UMLID=_qdnrSnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#transforma_FNG(Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calculaColumna" size="115,16" id="{UMLID=_qdd6RnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#calculaColumna()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="pintaTabla" size="88,16" id="{UMLID=_qdnrRnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#pintaTabla()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="inicializarTabla" size="109,16" id="{UMLID=_qdd6R3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#inicializarTabla()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="diagonalMarcada" size="122,16" id="{UMLID=_qdw1NnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#diagonalMarcada()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="sustituir" size="78,16" id="{UMLID=_qdd6S3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#sustituir()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esta" size="61,16" id="{UMLID=_qd6mP3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="iguales" size="74,16" id="{UMLID=_qdw1OXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#iguales(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameEntreCorchetes" size="141,16" id="{UMLID=_qd6mMHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#dameEntreCorchetes(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="sustituirDiagonal" size="119,16" id="{UMLID=_qeDwK3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#sustituirDiagonal()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="quitaProdRecursiva" size="134,16" id="{UMLID=_qdw1PnJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#quitaProdRecursiva(Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="simplifica" size="84,16" id="{UMLID=_qd6mNXJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#simplifica(ZZ)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getHTML" size="82,16" id="{UMLID=_qdd6Q3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#getHTML()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="arreglaConcatenacion" size="146,16" id="{UMLID=_qdd6VHJSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#arreglaConcatenacion(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="todosLambda" size="105,16" id="{UMLID=_qdd6T3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#todosLambda(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" size="62,16" id="{UMLID=_qeDwJ3JSEd-BWtPPeGzhpQ,JavaID=modelo.algoritmos/GIC_to_FNC#main([Ljava.lang.String;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1" name="Greibach" location="346,1841" size="192,386" timstampe="13" stereotype="" id="{UMLID=_pzODYHJSEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach}" runTimeClassModel="numPalabras,toHTML(),listaPalabras,esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;),todosTerminales(Lmodelo.gramatica.Produccion;),listaProdPalabras,construyePalabra(Ljava.lang.String;),creaListaPalabras(),lambda,dameListaPalabras(),prodConTerminal,buscaDondeHayTerminales(),Greibach(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;),getListaPalabras(),construyePosibles(Ljava.lang.String;ZLjava.lang.String;IILjava.lang.String;I),getProdConTerminal(),tieneVariables(Ljava.lang.String;),iguales(Ljava.lang.String;Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="109,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="numPalabras" size="91,16" id="{UMLID=_gxDNYnJUEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="listaPalabras" size="96,21" id="{UMLID=_gxM-YHJUEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="prodConTerminal" size="109,16" id="{UMLID=_gxDNZHJUEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lambda" size="63,16" id="{UMLID=_gxDNYHJUEd-BWtPPeGzhpQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="listaProdPalabras" size="118,21" id="{UMLID=_gxM-YnJUEd-BWtPPeGzhpQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="171,239">
+      <children xsi:type="editmodel:MethodEditModel" name="Greibach" size="84,16" id="{UMLID=_gxWIXnJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#Greibach(Ljava.lang.String;Ljava.lang.String;Lmodelo.gramatica.Produccion;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="todosTerminales" size="118,16" id="{UMLID=_gxy0R3JUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#todosTerminales(Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="creaListaPalabras" size="127,16" id="{UMLID=_gxy0RnJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#creaListaPalabras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dameListaPalabras" size="131,16" id="{UMLID=_gxWIW3JUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#dameListaPalabras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="construyePosibles" size="129,16" id="{UMLID=_gxf5V3JUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#construyePosibles(Ljava.lang.String;ZLjava.lang.String;IILjava.lang.String;I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="esta" size="61,16" id="{UMLID=_gxWIVHJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#esta(Lmodelo.gramatica.Produccion;Lmodelo.gramatica.Produccion;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="iguales" size="74,16" id="{UMLID=_gxpDR3JUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#iguales(Ljava.lang.String;Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getProdConTerminal" size="135,16" id="{UMLID=_gxpDTnJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#getProdConTerminal()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getListaPalabras" size="126,21" id="{UMLID=_gxy0QnJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#getListaPalabras()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="buscaDondeHayTerminales" size="171,16" id="{UMLID=_gxy0RXJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#buscaDondeHayTerminales()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="construyePalabra" size="125,16" id="{UMLID=_gxM-ZHJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#construyePalabra(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="tieneVariables" size="108,16" id="{UMLID=_gxM-aXJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#tieneVariables(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toHTML" size="76,16" id="{UMLID=_gxpDRHJUEd-BWtPPeGzhpQ,JavaID=modelo.gramatica/Greibach#toHTML()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=7" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="0,0" rulerUnit="cm" gridShow="true">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true"/>
+</editmodel:ClassDiagramEditModel>
