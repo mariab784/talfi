@@ -100,7 +100,7 @@ public class GIC_to_FNC {
 	
 	private void limpia(){
 
-		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
+//		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
 		Greibach gramsal = this.gramaticaSalida;
 		ArrayList<String> vargram = gramsal.getVariables();
 		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
@@ -108,8 +108,8 @@ public class GIC_to_FNC {
 		int i = 0; int tam = vargram.size();
 		while(i < tam){
 			String s = vargram.get(i);
-			System.out.println("SE KE PETA " + s);
-			System.out.println("vars " + gramsal.getVariables());
+			//System.out.println("SE KE PETA " + s);
+			//System.out.println("vars " + gramsal.getVariables());
 			ArrayList<Produccion> aprod = gramsalprod.get(s);
 			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
 			int j = 0; int tamProd = aprod.size();
@@ -127,7 +127,7 @@ public class GIC_to_FNC {
 			i++;
 		}
 		this.gramaticaSalida.setProducciones(ngramsalprod);
-		System.out.println("GRAMATICASALIDA LIMPITA ES: " + gramaticaSalida);
+//		System.out.println("GRAMATICASALIDA LIMPITA ES: " + gramaticaSalida);
 		
 	}
 	//------------------------------------------------------------
@@ -137,7 +137,7 @@ public class GIC_to_FNC {
 		limpia();
 //		this.gramaticaSalida.dimeSiHayProdRecursivas();
 		//this.gramaticaSalida.quitaProdRecursivas();
-	//	System.out.println("E!!!!!!!!!!!!!!!!!!!!!A:\n");
+
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
 		lon = variables.size(); 
@@ -280,7 +280,7 @@ public class GIC_to_FNC {
 	
 	@SuppressWarnings("unchecked")
 	public void sustituir(){
-		 
+		limpia();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();		
 		ArrayList<Produccion> produccionesDeColumna = producciones.get(gramaticaSalida.getVariables().get(clave));
 
@@ -300,7 +300,7 @@ public class GIC_to_FNC {
 				Produccion aux2 = produccionesDeFilas.get(i);
 			
 				ArrayList<String> ayay = ((ArrayList<String>)aux2.getConcatenacion().clone());
-				String p = ayay.get(0);
+				String p = new String(ayay.get(0));
 				String pp = p/*"" +  p.charAt(0)*/;
 //				System.out.println("p " + p);
 				Produccion nueva = null;
@@ -344,7 +344,7 @@ public class GIC_to_FNC {
 		}
 		
 		//AÑADIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-//		limpia();
+		limpia();
 		
 		System.out.println("GRAMATICA eres tu?: " + gramaticaSalida.getProducciones());
 	//	System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
@@ -392,26 +392,21 @@ public class GIC_to_FNC {
 	@SuppressWarnings("unchecked")
 	public void sustituirDiagonal(){
 		
+		limpia();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
 		ArrayList<Produccion> produccionesDiagonal;
 		produccionesDiagonal = producciones.get(gramaticaSalida.getVariables().get(clave));
-//		System.out.println("produccionesDiagonal" + produccionesDiagonal);
+
 		String var = gramaticaSalida.getVariables().get(clave);
-		//		System.out.println("ke es var? " + var);
+
 		String nVar = null;
 		int tam = gramaticaSalida.getVariables().size()-1;
 		String ultVar = gramaticaSalida.getVariables().get(tam);
-		//		System.out.println("ke es ultvar? " + ultVar);
 		
 		char nVarAux = new Character ((char)(ultVar.charAt(0)+1) ) ;
-		//		System.out.println("ke es nVarAux? " + nVarAux);
-//		nVar =  "["+/*nVarAux*/(dameEntreCorchetes(ultVar)/*ultVar.charAt(0)*/+1)+"]";//nVarAux + "";
-//		nVar =  ultVar.charAt(0)*/+1)+"]";//nVarAux + "";
+
 		nVar =  nVarAux + "";
 
-		//		System.out.println("ke es nVar? " + nVar);
-		//System.out.println("nVar.charValue()" + nVar);
-//				gramaticaSalida.getVariables().add(nVar);
 		/**************************************************************************************/
 		/**nueva variable creada,ahora hay ke crear las producciones de la nueva variable**/
 		ArrayList<Produccion> p = new ArrayList<Produccion>();		
@@ -462,8 +457,8 @@ public class GIC_to_FNC {
 		if(produccionesNuevas.size() == 1 || produccionesNuevas.isEmpty()){
 						System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
 			//			System.out.println("NO ME AÑADAS!!");
-			gramaticaSalida.getProducciones().remove(var);
-			ArrayList<Produccion> pajus = quitaProdRecursiva(p,var);
+			gramaticaSalida.getProducciones().remove(var); //CAMBIADO
+			ArrayList<Produccion> pajus = quitaProdRecursiva(produccionesDiagonal,var);
 			gramaticaSalida.getProducciones().put(var, pajus);		
 		}
 		else{

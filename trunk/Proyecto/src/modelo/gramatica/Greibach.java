@@ -93,7 +93,7 @@ public class Greibach extends GramaticaIC{
 				System.out.println("LISTAPRODPALABRAS: " + listaProdPalabras);
 				Produccion prod = listaProdPalabras.get(0);	
 				listaProdPalabras.remove(0);
-				int j = 1; 
+				int j = 1; //CAMBIADO!! XXX XXX
 				ArrayList<String> concat = (ArrayList<String>) prod.getConcatenacion();
 				int tamConcat = concat.size();
 		//		if (tamConcat > 1){			CUIDADO!!!!!!!!
@@ -189,7 +189,8 @@ public class Greibach extends GramaticaIC{
 			System.out.println("vamos bien al final?" + listaProdPalabras);
 		//----------------------------hasta aki bien ya------------------------------/
 			while ((listaPalabras.size() < numPalabras)){
-
+				System.out.println("Lista en cada vuelta!: " + listaPalabras);
+				System.out.println("Listaprodpalabras en cada vuelta!: " + listaProdPalabras);
 				
 				boolean enc = false; 
 				ArrayList<String> concat = (ArrayList<String>) listaProdPalabras.get(0).getConcatenacion().clone();
@@ -204,17 +205,20 @@ public class Greibach extends GramaticaIC{
 					listaProdPalabras.remove(0);
 					
 					int j = 0;String s = null;
-					if (tamConcat > 1){
+		//			if (tamConcat > 1){
 					//boolean enc = false; 
 						while(j < tamConcat && !enc){
+							
 							s = concat.get(j);
+				//			System.out.println("S del bucle!!!!!!" + s);
 							if (!this.getVariables().contains(s)){
 								j++;						
 							}
 							else enc = true;
 						}
-					}
+		//			}
 				
+				//		System.out.println("S FUERA del bucle!!!!!!" + s);
 					ArrayList<String> principio = new ArrayList<String>();
 					for(int k = 0; k <j; k++){
 						String trozo = new String(concat.get(k));
@@ -237,7 +241,7 @@ public class Greibach extends GramaticaIC{
 			ArrayList<String> principio,int tamConcat){
 		
 	//	ArrayList<String> concat= (ArrayList<String>) concat2.clone();
-//		System.out.println("PRINCIPIO: " + principio);
+		//System.out.println("PRINCIPIO: " + principio);
 		Produccion repetir = new Produccion(); //AÑADIDO
 		repetir.setConcatenacion((ArrayList<String>) concat.clone());
 		listaProdPalabras.add(repetir);

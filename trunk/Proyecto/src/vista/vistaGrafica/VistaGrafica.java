@@ -560,12 +560,12 @@ public class VistaGrafica extends JFrame implements Vista{
 			//System.out.println("producciones: " + g.getGic());
 			g.AP_Gramatica();
 			
-			System.out.println("gramatica boton: \n" + g.getGic());
+//		System.out.println("gramatica boton: \n" + g.getGic());
 			
 			
 			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic(),b);
 
-			piticli.simplifica(true,false);
+							piticli.simplifica(true,false);
 			
 			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
 			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
