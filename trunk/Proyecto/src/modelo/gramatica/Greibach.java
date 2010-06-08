@@ -8,7 +8,7 @@ import accesoBD.Mensajero;
 
 public class Greibach extends GramaticaIC{
 	
-	private final int numPalabras = 10;
+	private final int numPalabras = 5;
 	private ArrayList<String> listaPalabras;
 	private HashMap<String,ArrayList<Integer>> prodConTerminal;
 	private String lambda;
