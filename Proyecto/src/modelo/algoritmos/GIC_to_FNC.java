@@ -657,7 +657,7 @@ public class GIC_to_FNC {
 		System.out.println("ENTRADA!" + piticli.gramaticaEntrada);
 		System.out.println("salida!" + piticli.gramaticaSalida);
 		
-		//piticli.getGramaticaSalida().creaListaPalabras();
+		piticli.getGramaticaSalida().creaListaPalabras();
 		
 /*		while(piticli.getTablaTieneMarcas()){
 			

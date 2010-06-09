@@ -110,6 +110,11 @@ public class Controlador_imp implements Controlador{
 				if (opcion.equals("gr"))
 					if(args==3)
 						return 8;
+/*					if(args==5)
+						return 9;*/
+				if (opcion.equals("ejap"))
+					if(args==3)
+						return 9;
 				
 				if (!opcion.equals("p")&&(!opcion.equals("h")))
 						return 0;
@@ -233,6 +238,11 @@ public class Controlador_imp implements Controlador{
 				
 				simplificacionGic(a,pasos);
 				break;
+			}
+			case 9: {
+				Automata a=obtenerAutomata();
+				salida = a;
+				System.out.println("AUTOMATA: " + a + "y ahora ke??");
 			}
 		}
 	}

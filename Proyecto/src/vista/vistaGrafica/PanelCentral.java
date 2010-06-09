@@ -595,6 +595,17 @@ public class PanelCentral extends JPanel {
 		panel.borrarPanel();
 		mandar.setVisible(false);
 		guardar=new JButton(m.devuelveMensaje("ejercicio.guardar",2));
+		
+
+		if(tipo.equals("AutomatasDePila")){
+			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
+			p=new JPanel();
+			guardar.addActionListener(new OyenteGuardarEjercicio("AutomatasDePila",vista));
+			p.add(guardar);
+			panelB.add(p,BorderLayout.SOUTH);
+			vista.activaToogleButtons();
+			VistaGrafica.setPila(true); VistaGrafica.setTuring(false);
+		}
 		if(tipo.equals("Lenguaje")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirER",2));
 			tex= new JTextField(25);
@@ -608,6 +619,7 @@ public class PanelCentral extends JPanel {
 			guardar.addActionListener(new OyenteGuardarEjercicio("Lenguaje",vista));
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if (tipo.equals("Minimizacion")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -616,6 +628,7 @@ public class PanelCentral extends JPanel {
 			p.add(guardar);
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if (tipo.equals("AFNTOAFD")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -624,6 +637,7 @@ public class PanelCentral extends JPanel {
 			p.add(guardar);
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if (tipo.equals("AFNLTOAFN")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -632,6 +646,7 @@ public class PanelCentral extends JPanel {
 			p.add(guardar);
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if(tipo.equals("RE")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirER",2));
@@ -643,6 +658,7 @@ public class PanelCentral extends JPanel {
 			guardar.addActionListener(new OyenteGuardarEjercicio("RE",vista));
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if(tipo.equals("EquivAutos")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -651,6 +667,7 @@ public class PanelCentral extends JPanel {
 			p.add(guardar);
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if(tipo.equals("EquivAutoER")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -659,6 +676,7 @@ public class PanelCentral extends JPanel {
 			guardar.addActionListener(new OyenteGuardarEjercicio("EquivAutoER",vista));
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if(tipo.equals("EquivERAuto")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -673,6 +691,7 @@ public class PanelCentral extends JPanel {
 			guardar.addActionListener(new OyenteGuardarEjercicio("EquivERAuto",vista));
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		if(tipo.equals("EquivERs")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -687,6 +706,7 @@ public class PanelCentral extends JPanel {
 			guardar.addActionListener(new OyenteGuardarEjercicio("EquivERs",vista));
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
 		}
 		vista.requestFocus();
 	}
@@ -720,6 +740,27 @@ public class PanelCentral extends JPanel {
 				}
 			}
 			fich+="\n\t\t</alphabet>\n\t</input>\n\t\t<output>\n\t\t\t<RExpr>\n\t\t\t\t<item>"+tex.getText()+"</item>\n\t\t\t</RExpr>\n\t\t";
+		}
+		if(tipo.equals("AutomatasDePila")){
+			fich+="TransformacionAPs</tipo><enunciado>"+enunciado.getText()+"</enunciado><output>";//"</enunciado><input>";
+			String input=panel.traducirXML();
+			String brr=new Character((char)92).toString();
+			fich+=input+"</output>";//"</input></output>";
+			fich+="\n</ejercicio>"; //añadidio
+			String rutaxml=/*System.getProperty("user.dir")+brr+*/"XML"/*+brr*/+"/pruebas/ejercicios"/*+brr*/+"/ficheroEj.xml";
+			File fichero = new File (rutaxml);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+			bw.append(/*input*/fich);
+			bw.close();
+			Controlador controlador=vista.getControlador();
+			controlador.ejecutaQuery("TALF -ejap "+rutaxml);	
+			Automata a=(AutomataPila)controlador.getSalida();
+			System.out.println("AUTOMATA GUARDA EJ:" + (AutomataPila)a);
+			panel.cargarAutomataNuevo(a);
+			panel.setTipoAutomata("AutomataPila");
+			//fich+=panel.traducirXML();
+			//fich+="\n</ejercicio>";//"</output>\n</ejercicio>";
+			return fich;
 		}
 		if(tipo.equals("Minimizacion")){
 			fich+="Minimizacion</tipo><enunciado>"+enunciado.getText()+"</enunciado><input>";
