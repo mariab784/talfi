@@ -72,7 +72,7 @@ public class Greibach extends GramaticaIC{
 			i++;
 		}
 		
-		System.out.println("LISTAprodPALABRAS: " + listaProdPalabras);
+//		System.out.println("LISTAprodPALABRAS: " + listaProdPalabras);
 		//aki tenemos las producciones de S que vamos a empezar a sustituir
 		
 		
@@ -90,7 +90,7 @@ public class Greibach extends GramaticaIC{
 		else{
 			tam = listaProdPalabras.size(); i = 0;		
 			while (tam < numPalabras){
-				System.out.println("LISTAPRODPALABRAS: " + listaProdPalabras);
+		//		System.out.println("LISTAPRODPALABRAS: " + listaProdPalabras);
 				Produccion prod = listaProdPalabras.get(0);	
 				listaProdPalabras.remove(0);
 				int j = 1; //CAMBIADO!! XXX XXX
@@ -120,16 +120,16 @@ public class Greibach extends GramaticaIC{
 					if (s == null) System.out.println("ERROR!ERROR!");
 					else{
 						prodVar = this.getProducciones().get(s);
-						System.out.println("NO HAY ERROR!");	
-						System.out.println("prodVar : " + prodVar);
-						System.out.println("s : " + s);
+			//			System.out.println("NO HAY ERROR!");	
+			//			System.out.println("prodVar : " + prodVar);
+			//			System.out.println("s : " + s);
 					}
 				//si prodvar == null cadena terminada
 					
 					if (prodVar == null){
 						
 						//this.listaPalabras.add(prod.getConcatenacion().toString());
-						System.out.println("prod? : " + prod);
+					//	System.out.println("prod? : " + prod);
 						this.listaProdPalabras.add(prod);
 					}
 					else{
@@ -172,7 +172,7 @@ public class Greibach extends GramaticaIC{
 							}							
 							nueva.setConcatenacion(nueva2);
 							if (!esta(nueva,listaProdPalabras)){
-								System.out.println("nueva : " + nueva);
+						//		System.out.println("nueva : " + nueva);
 								listaProdPalabras.add(nueva);
 							}					
 						}	
@@ -183,14 +183,14 @@ public class Greibach extends GramaticaIC{
 					
 		//		} //llave else creo	
 				tam = listaProdPalabras.size();
-				System.out.println("listaProdPalabras FINAL BUCLE ANTES DE SUBIR : " + listaProdPalabras);
+	//			System.out.println("listaProdPalabras FINAL BUCLE ANTES DE SUBIR : " + listaProdPalabras);
 			}
 		
-			System.out.println("vamos bien al final?" + listaProdPalabras);
+//			System.out.println("vamos bien al final?" + listaProdPalabras);
 		//----------------------------hasta aki bien ya------------------------------/
 			while ((listaPalabras.size() < numPalabras)){
-				System.out.println("Lista en cada vuelta!: " + listaPalabras);
-				System.out.println("Listaprodpalabras en cada vuelta!: " + listaProdPalabras);
+	//			System.out.println("Lista en cada vuelta!: " + listaPalabras);
+	//			System.out.println("Listaprodpalabras en cada vuelta!: " + listaProdPalabras);
 				
 				boolean enc = false; 
 				ArrayList<String> concat = (ArrayList<String>) listaProdPalabras.get(0).getConcatenacion().clone();
@@ -379,8 +379,8 @@ public class Greibach extends GramaticaIC{
 				i++;
 			}
 		}
-		System.out.println("KE HAY EN prodConTerminal?" + prodConTerminal);
-		System.out.println("FIN BUSCAR TERMINALES");
+//		System.out.println("KE HAY EN prodConTerminal?" + prodConTerminal);
+//		System.out.println("FIN BUSCAR TERMINALES");
 	}
 	
 	

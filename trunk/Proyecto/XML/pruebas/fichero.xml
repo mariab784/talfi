@@ -1,0 +1,25 @@
+<authomata>
+	<type>
+		<item>AutomataFD</item>
+	</type>
+	<alphabet>
+		<item>a</item>
+	</alphabet>
+	<states>
+		<state>s1</state>
+		<state>s2</state>
+	</states>
+	<init>
+		<state>s2</state>
+	</init>
+	<finals>
+	</finals>
+	<arrows>
+		<arrow>
+		<state>s2</state>
+		<state>s1</state>
+		<item>a</item>
+	</arrow>
+	</arrows>
+<coordenadas>
+<estadoCoord><nombre>s1</nombre><x>340</x><y>163</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>442</x><y>120</y></estadoCoord></coordenadas></authomata>

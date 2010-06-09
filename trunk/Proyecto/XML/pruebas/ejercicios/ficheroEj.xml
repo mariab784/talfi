@@ -1,0 +1,30 @@
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>boyboy</enunciado><output><authomata>
+	<type>
+		<item>AutomataPila</item>
+	</type>
+	<alphabet>
+		<item>a</item>
+	</alphabet>
+		<alphabetP>
+		<item>Z</item>
+	</alphabetP>
+	<states>
+		<state>s1</state>
+	</states>
+	<init>
+		<state>s1</state>
+	</init>
+	<finals>
+	</finals>
+	<arrows>
+		<arrow>
+		<state>s1</state>
+		<state>s1</state>
+		<item>a</item>
+		<cima>Z</cima>
+		<trans>Z</trans>
+		</arrow>
+	</arrows>
+<coordenadas>
+<estadoCoord><nombre>s1</nombre><x>351</x><y>126</y></estadoCoord></coordenadas></authomata></output>
+</ejercicio>
