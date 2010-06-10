@@ -241,7 +241,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	public void setEnabledMinimizacionAFD(boolean b){MinimizacionAFD.setEnabled(b);}
 	public void setEnabledEquivalentes(boolean b){equivalentes.setEnabled(b);}
 	public void setEnabledAfd_to_er(boolean b){afd_to_er.setEnabled(b);}
-	
+	public PanelCentral getPanelCentral(){return panelCentral;}
 	
 
 	/**
@@ -1638,7 +1638,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			super.actionPerformed(e);
 			VistaGrafica.setPila(true);
 			VistaGrafica.setTuring(false);
-			
+			getPanelCentral().getPanel().setTipoAutomata("AutomataPila");
 
 			VistaGrafica.setOpcionesAP();
 			setEnabledMenuAlgAP();
@@ -1663,7 +1663,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			super.actionPerformed(e);
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(true);
-			
+			getPanelCentral().getPanel().setTipoAutomata("MaquinaTuring");
 
 			VistaGrafica.setOpcionesMT();
 			setEnabledMenuAlgMT();
