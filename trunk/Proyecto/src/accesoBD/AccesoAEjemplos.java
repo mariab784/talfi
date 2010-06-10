@@ -308,6 +308,8 @@ public class AccesoAEjemplos {
 		DOMParser parser = new DOMParser();
 		String fich=new String();
 		
+
+		
 		String ruta="XML/arbolEjemplos/arbol.xml";
 		try {
 			parser.parse(new InputSource(new FileInputStream(ruta)));
@@ -603,6 +605,7 @@ public class AccesoAEjemplos {
 		try {
 		
 			HashMap<String,ArrayList<String>> xml=devolverListadoEjemplos();
+			System.out.println("XML EJEMPLOS: " + xml);
 			ArrayList<String> array=xml.get("AFD");
 			Iterator<String> it=array.iterator();
 			int i=1;
@@ -641,7 +644,7 @@ public class AccesoAEjemplos {
 			fich+="\t\t</afnlambda>\n\t\t<autompila>\n";
 			
 			/*********************************************************/
-			array=xml.get("AP");
+			array=xml.get("APila");
 			it=array.iterator();
 			i=1;
 			
@@ -653,7 +656,7 @@ public class AccesoAEjemplos {
 			
 			fich+="\t\t</autompila>\n\t<maqturing>\n";
 			
-			array=xml.get("MT");
+			array=xml.get("MTuring");
 			it=array.iterator();
 			i=1;
 			
@@ -870,10 +873,10 @@ public class AccesoAEjemplos {
 				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
 				i++;
 			}
-			
-			if(tipo.equals("TransformacionPila")){
+			System.out.println("TIPO EJS: " + tipo);
+			if(tipo.equals(/*"TransformacionPila"*/"AutomatasDePila")){
 				String nombre="Ejercicio"+i;
-				String rutaFichero="XML/ejercicios/AutomataPila/"+nombre+".xml";
+				String rutaFichero="XML/ejercicios/Transformacion_Pila/"+nombre+".xml";
 				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));
 				bw.append(texto);
 				bw.close();

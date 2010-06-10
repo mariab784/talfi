@@ -1,4 +1,4 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado></enunciado><output><authomata>
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>aaaaaaa</enunciado><output><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
@@ -9,22 +9,22 @@
 		<item>A</item>
 	</alphabetP>
 	<states>
-		<state>s1</state>
+		<state>s2</state>
 	</states>
 	<init>
-		<state>s1</state>
+		<state>s2</state>
 	</init>
 	<finals>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>s1</state>
-		<state>s1</state>
+		<state>s2</state>
+		<state>s2</state>
 		<item>a</item>
 		<cima>A</cima>
 		<trans>A</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>361</x><y>66</y></estadoCoord></coordenadas></authomata></output>
+<estadoCoord><nombre>s2</nombre><x>418</x><y>197</y></estadoCoord></coordenadas></authomata></output>
 </ejercicio>

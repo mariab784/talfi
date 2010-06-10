@@ -605,6 +605,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(true); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("AutomataPila");
 		}
 		if(tipo.equals("Lenguaje")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirER",2));
@@ -620,6 +621,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("Lenguaje");
 		}
 		if (tipo.equals("Minimizacion")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -629,6 +631,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("Minimizacion");
 		}
 		if (tipo.equals("AFNTOAFD")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -638,6 +641,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("AFNTOAFD");
 		}
 		if (tipo.equals("AFNLTOAFN")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -647,6 +651,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("AFNLTOAFN");
 		}
 		if(tipo.equals("RE")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirER",2));
@@ -659,6 +664,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("RE");
 		}
 		if(tipo.equals("EquivAutos")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -668,6 +674,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("EquivAutos");
 		}
 		if(tipo.equals("EquivAutoER")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -677,6 +684,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("EquivAutoER");
 		}
 		if(tipo.equals("EquivERAuto")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -692,6 +700,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("EquivERAuto");
 		}
 		if(tipo.equals("EquivERs")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
@@ -707,6 +716,7 @@ public class PanelCentral extends JPanel {
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.desactivaToogleButtons();
 			VistaGrafica.setPila(false); VistaGrafica.setTuring(false);
+			this.getCanvas().setTipoAutomata("EquivERs");
 		}
 		vista.requestFocus();
 	}
