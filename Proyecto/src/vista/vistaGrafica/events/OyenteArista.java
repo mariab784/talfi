@@ -282,7 +282,7 @@ public class OyenteArista extends MouseAdapter {
 			if(origen==null)return;
 			destino=canvas.estadoEn(e.getPoint());
 			if(destino!=null){
-					if(canvas.getPila()){dialog=createDialogAristaAP();}
+					if(canvas.getPila()){/*System.out.println("OK!!!!");*/dialog=createDialogAristaAP();}
 					else if(canvas.getTuring() ){dialog=createDialogAristaTuring();}
 					else {dialog=createDialogArista();}
 				dialog.setSize(new Dimension(400,150));

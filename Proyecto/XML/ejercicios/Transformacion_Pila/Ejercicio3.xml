@@ -1,4 +1,4 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado></enunciado><output><authomata>
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>mamamamama</enunciado><output><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
@@ -6,7 +6,7 @@
 		<item>a</item>
 	</alphabet>
 		<alphabetP>
-		<item>A</item>
+		<item>Z</item>
 	</alphabetP>
 	<states>
 		<state>s1</state>
@@ -21,10 +21,10 @@
 		<state>s1</state>
 		<state>s1</state>
 		<item>a</item>
-		<cima>A</cima>
-		<trans>A</trans>
+		<cima>Z</cima>
+		<trans>\</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>361</x><y>66</y></estadoCoord></coordenadas></authomata></output>
+<estadoCoord><nombre>s1</nombre><x>369</x><y>223</y></estadoCoord></coordenadas></authomata></output>
 </ejercicio>

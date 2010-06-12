@@ -119,6 +119,7 @@
 		<eautoer>Expression Automata Equivalence</eautoer>
 		<eers>Expressions Equivalence</eers>
 		<taps>Pushdown Authomata Conversion</taps>   
+		<mturings>Turing Machines</mturings> 
 	</jtree>
 	<popup>
 		<estado>Change state properties</estado>

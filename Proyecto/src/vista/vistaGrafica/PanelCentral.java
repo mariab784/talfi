@@ -15,11 +15,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import vista.Vista;
 import controlador.Controlador;
@@ -36,6 +38,7 @@ import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
+import modelo.automatas.MaquinaTuring;
 import modelo.ejercicios.Ejercicio;
 
 /**
@@ -63,6 +66,7 @@ public class PanelCentral extends JPanel {
 	private JButton guardar;
 	private JPanel p;
 	private JButton boton;
+	private JTextField cajitaPalabras;
 	
 	/**
 	 * Constructor del panel que recibe la vista sobre la que se aÃ±ade
@@ -79,6 +83,11 @@ public class PanelCentral extends JPanel {
 		enunciado=new JTextArea(5,90);
 		enunciado.setText("");
 		enunciado.setEditable(false);
+		
+
+		
+		
+		
 		corregir=new JButton(m.devuelveMensaje("vista.solucion",2));
 		corregir.setEnabled(false);
 		corregir.addActionListener(new ActionListener(){
@@ -86,8 +95,10 @@ public class PanelCentral extends JPanel {
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
 				if(ejercicio.getTipo().equals("TRANSFORMACIONPILA")){
-					
+
 					panel.borrarPanel();
+					VistaGrafica.setPila(true);
+					VistaGrafica.setTuring(false);
 					boton=new JButton(m.devuelveMensaje("ejercicio.html",2));
 					boton.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e){
@@ -172,6 +183,8 @@ public class PanelCentral extends JPanel {
 								vista.setExpresion(exp);
 								mandar.setEnabled(true);
 								corregir.setEnabled(false);
+								VistaGrafica.setPila(false);
+								VistaGrafica.setTuring(false);
 								break;
 							}
 						}
@@ -247,6 +260,8 @@ public class PanelCentral extends JPanel {
 						JOptionPane.showMessageDialog(null,ex.getMensaje(),m.devuelveMensaje("ejercicio.error",2),JOptionPane.ERROR_MESSAGE);
 						panel.borrarPanel();
 					}
+					VistaGrafica.setPila(false);
+					VistaGrafica.setTuring(false);
 				}
 				if(ejercicio.getTipo().equals("AFNLTOAFN")||ejercicio.getTipo().equals("AFNTOAFD")||
 						ejercicio.getTipo().equals("Minimizacion")||ejercicio.getTipo().equals("EquivAutos")){
@@ -270,12 +285,16 @@ public class PanelCentral extends JPanel {
 					mandar.setEnabled(true);
 					corregir.setEnabled(false);
 					vista.activaToogleButtons();
+					VistaGrafica.setPila(false);
+					VistaGrafica.setTuring(false);
 				}
 				if(ejercicio.getTipo().equals("EquivERAuto")){
 					panel.borrarPanel();
 					mandar.setEnabled(true);
 					corregir.setEnabled(false);
 					vista.activaToogleButtons();
+					VistaGrafica.setPila(false);
+					VistaGrafica.setTuring(false);
 				}
 			}
 		});
@@ -332,6 +351,8 @@ public class PanelCentral extends JPanel {
 		});
 		panelB.add(corregir);
 		panelB.add(mandar);
+//		panelB.add(expr);//XXX
+		
 		center.add(new JScrollPane(enunciado));
 		aux.add(center,BorderLayout.CENTER);
 		aux.add(panelB,BorderLayout.SOUTH);
@@ -347,6 +368,7 @@ public class PanelCentral extends JPanel {
 	 * Carga un ejercicio en el panel
 	 * @param rutaXml del archivo que contiene el ejercicio
 	 */
+	@SuppressWarnings("static-access")
 	public void cargarEjercicio(String rutaXml) {
 		this.remove(panel);
 		this.removeAll();
@@ -371,6 +393,8 @@ public class PanelCentral extends JPanel {
 	    try{
 	    	Mensajero m=Mensajero.getInstancia();
 	    	if (expresionR) {
+    			this.vista.getPanelCentral().getCanvas().setPila(false);
+    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		Ejercicio ej=null;
 	    		if(rutaXml.contains("Lenguaje"))
 	    			ej=parser.extraerEjercicioLenguaje(rutaXml);
@@ -389,6 +413,8 @@ public class PanelCentral extends JPanel {
 	    			setEjercicio(parser.extraerEjercicioAutomatas(rutaXml));
 	    			panel.cargarAutomataNuevo((Automata)ejercicio.getEntrada());
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    			vista.activaToogleButtons();
 	    			vista.requestFocus();
 	    		}
@@ -398,6 +424,8 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.escribir",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		}
 	    		if (rutaXml.contains("TransformacionAFNAFD")) {
 	    			setEjercicio(parser.extraerEjercicioAFNAFD(rutaXml));
@@ -405,6 +433,8 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.activaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		}
 	    		if (rutaXml.contains("TransformacionAFNLambda_AFN")) {
 	    			setEjercicio(parser.extraerEjercicioAFNLAFN(rutaXml));
@@ -412,6 +442,8 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.activaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		}
 	    		if (rutaXml.contains("Equivalencia_Automatas")) {
 	    			setEjercicio(parser.extraerEjercicioEquivAutos(rutaXml));
@@ -419,6 +451,9 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
+	    			System.out.println("EKIVALENCIA");
 	    		}
 	    		if (rutaXml.contains("Equivalencia_Automata_Expresion")) {
 	    			setEjercicio(parser.extraerEjercicioEquivAutoER(rutaXml));
@@ -426,21 +461,39 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.escribir",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		}
 	    		if (rutaXml.contains("Equivalencia_Expresion_Automata")) {
 	    			setEjercicio(parser.extraerEjercicioEquivERAuto(rutaXml));
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
 	    		}
 	    		if (rutaXml.contains("Transformacion_Pila")) {
 	    			setEjercicio(parser.extraerEjercicioPila(rutaXml));
-//	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
+	 //   			System.out.println("getentradaess: " + ejercicio.getEntrada());
 	    			if (ejercicio.getEntrada() != null)
 	    				panel.cargarAutomataNuevo((AutomataPila)ejercicio.getEntrada());
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
+	    			System.out.println("cambiate!!");
+	    			this.vista.setPila(true);
+	    			this.vista.setTuring(false);
+	    		}
+	    		if (rutaXml.contains("Maquina_Turing")) {
+	    			setEjercicio(parser.extraerEjercicioTuring(rutaXml));
+	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
+	    			if (ejercicio.getEntrada() != null)
+	    				panel.cargarAutomataNuevo((MaquinaTuring)ejercicio.getEntrada());
+	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
+	    			vista.desactivaToogleButtons();
+	    			vista.requestFocus();
+	    			this.vista.getPanelCentral().getCanvas().setPila(false);
+	    			this.vista.getPanelCentral().getCanvas().setTuring(true);
 	    		}
 	    	} 
 
@@ -597,11 +650,38 @@ public class PanelCentral extends JPanel {
 		guardar=new JButton(m.devuelveMensaje("ejercicio.guardar",2));
 		
 
+		
+		
+		
+		if(tipo.equals("MaquinaTuring")){
+			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
+			p=new JPanel();
+			guardar.addActionListener(new OyenteGuardarEjercicio("MaquinaTuring",vista));
+			p.add(guardar);
+			panelB.add(p,BorderLayout.SOUTH);
+			vista.activaToogleButtons();
+			VistaGrafica.setPila(false); VistaGrafica.setTuring(true);
+			this.getCanvas().setTipoAutomata("MaquinaTuring");
+		}
 		if(tipo.equals("AutomatasDePila")){
 			corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
 			p=new JPanel();
 			guardar.addActionListener(new OyenteGuardarEjercicio("AutomatasDePila",vista));
 			p.add(guardar);
+			
+			
+			JToolBar expr=new JToolBar();
+			JPanel panelPalabras=new JPanel();
+			JLabel e =new JLabel(m.devuelveMensaje("ejercicio.palabra",2));
+			cajitaPalabras= new JTextField(30);
+			cajitaPalabras.setEditable(true);
+			cajitaPalabras.setEnabled(true);
+			cajitaPalabras.setVisible(true);
+			panelPalabras.add(e);
+			panelPalabras.add(cajitaPalabras);
+			expr.add(panelPalabras);
+			p.add(expr,BorderLayout.SOUTH);
+			
 			panelB.add(p,BorderLayout.SOUTH);
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(true); VistaGrafica.setTuring(false);
@@ -751,6 +831,28 @@ public class PanelCentral extends JPanel {
 			}
 			fich+="\n\t\t</alphabet>\n\t</input>\n\t\t<output>\n\t\t\t<RExpr>\n\t\t\t\t<item>"+tex.getText()+"</item>\n\t\t\t</RExpr>\n\t\t";
 		}
+		if(tipo.equals("MaquinaTuring")){
+			fich+="EjMT</tipo><enunciado>"+enunciado.getText()+"</enunciado><output>";//"</enunciado><input>";
+			String input=panel.traducirXML();
+			String brr=new Character((char)92).toString();
+			fich+=input+"</output>";//"</input></output>";
+			fich+="\n</ejercicio>"; //añadidio
+			String rutaxml=/*System.getProperty("user.dir")+brr+*/"XML"/*+brr*/+"/pruebas/ejercicios"/*+brr*/+"/ficheroEj.xml";
+			File fichero = new File (rutaxml);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+			bw.append(/*input*/fich);
+			bw.close();
+			Controlador controlador=vista.getControlador();
+			controlador.ejecutaQuery("TALF -ejmt "+rutaxml);	
+			Automata a=(MaquinaTuring)controlador.getSalida();
+			System.out.println("AUTOMATA GUARDA EJ:" + (MaquinaTuring)a);
+			panel.cargarAutomataNuevo(a);
+			panel.setTipoAutomata("MaquinaTuring");
+			//fich+=panel.traducirXML();
+			//fich+="\n</ejercicio>";//"</output>\n</ejercicio>";
+			return fich;
+		}
+		
 		if(tipo.equals("AutomatasDePila")){
 			fich+="TransformacionAPs</tipo><enunciado>"+enunciado.getText()+"</enunciado><output>";//"</enunciado><input>";
 			String input=panel.traducirXML();

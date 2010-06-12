@@ -438,6 +438,7 @@
 		<escribirER>Escribe el enunciado arriba y escribe la expresión regular resultado</escribirER>
 		<alf>Alfabeto</alf>
 		<escribirAut>Escribe el enunciado arriba y pinta el autómata resultante debajo</escribirAut>
+		<palabra>Palabras</palabra>
 	</ejercicio>
 	<controlador>
 		<param>Error in parameters</param>
