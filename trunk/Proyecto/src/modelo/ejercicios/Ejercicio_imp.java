@@ -8,11 +8,14 @@ import modelo.algoritmos.AFN_to_AFD;
 import modelo.algoritmos.Automatas_equivalentes;
 import modelo.algoritmos.ERToAFNDLambda;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
 import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
+import modelo.automatas.AutomataPila;
+import modelo.automatas.MaquinaTuring;
 import modelo.expresion_regular.ArbolER;
 import modelo.expresion_regular.ExpresionRegular;
 import modelo.expresion_regular.ExpresionRegularImpl;
@@ -32,6 +35,7 @@ public class Ejercicio_imp implements Ejercicio{
 	private String tipo;
 	private String ruta;
 	private Alfabeto_Pila alfPila;
+	private AlfabetoCinta alfCinta;
 	private String pintar;
 	private Object solucion;
 
@@ -82,6 +86,13 @@ public class Ejercicio_imp implements Ejercicio{
 		this.pintar = pintar;
 	}
 	
+	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,AlfabetoCinta alfCinta, 
+			String tipo, String ruta,String pintar) {
+		this(enunciado, entrada, resultado,alf,tipo,ruta);
+		this.alfCinta = alfCinta;
+		this.pintar = pintar;
+	}
+	
 	public String getEnunciado() {
 		// TODO Auto-generated method stub
 		return enunciado;
@@ -102,6 +113,11 @@ public class Ejercicio_imp implements Ejercicio{
 	
 	public boolean corregir(Object respuesta) throws AutomatasException {
 		// TODO Auto-generated method stub
+		boolean dePila = false;
+		boolean deTuring = false;
+		System.out.println("imprimeme respuesta a ver..." + respuesta);
+		System.out.println("imprimeme entrada a ver..." + entrada);
+		System.out.println("imprimeme resultado a ver..." + resultado);
 		if (respuesta instanceof String) {//ES UNA EXPRESION REGULAR!!!!
 			ExpresionRegular er=null;
 			try {
@@ -116,6 +132,10 @@ public class Ejercicio_imp implements Ejercicio{
 				//
 				Algoritmo algAFN_AFD=new AFN_to_AFD(a2);
 				Automata a3=algAFN_AFD.ejecutar(false);
+				AutomataPila ap1 = null;
+				AutomataPila ap2 = null;
+				MaquinaTuring mt1 = null;
+				MaquinaTuring mt2 = null;
 				//(YA TENEMOS EL AUTOMATA QUE VAMOS A COMPARAR PARA LA RESPUESTA QUE NOS DAN)
 				////(ahora vamos a calcular el automata para el resultado que tenemos almacenado
 				//que deberña ser un string! para poder compararlos despuñs
@@ -137,6 +157,17 @@ public class Ejercicio_imp implements Ejercicio{
 					algEquivalencia.ejecutar(false);
 					return algEquivalencia.getResultado();//devuelve el resultado de la correcion
 				}
+				if(resultado instanceof MaquinaTuring){
+					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
+					deTuring = true;
+				}
+				if(resultado instanceof AutomataPila){
+					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
+					dePila = true;
+					
+				}
+				
+				
 				if(resultado instanceof AutomataFNDLambda){
 					algAFNDlambda=new AFNDLambda_to_AFND((Automata)resultado);
 					Automata a2Res=algAFNDlambda.ejecutar(false);
@@ -206,7 +237,7 @@ public class Ejercicio_imp implements Ejercicio{
 					}
 				}
 			}
-			
+			//AKI TENDREMOS KE HACER COSAS
 			//
 			//(YA TENEMOS EL AUTOMATA QUE VAMOS A COMPARAR PARA LA RESPUESTA QUE NOS DAN)
 			////(ahora vamos a calcular el automata para la respuesta que nos han dado
@@ -227,7 +258,16 @@ public class Ejercicio_imp implements Ejercicio{
 					}
 				
 				}
+			
+			if(dePila){
 				
+				
+			}
+			if(deTuring){
+				
+				
+			}
+			if(!dePila && !deTuring){
 			Automatas_equivalentes algEquivalencia=new Automatas_equivalentes();
 			algEquivalencia.registraAutomata1((Automata)respuesta);
 			if (a==null) 
@@ -236,6 +276,7 @@ public class Ejercicio_imp implements Ejercicio{
 				algEquivalencia.registraAutomata2(a);
 			algEquivalencia.ejecutar(false);
 			return algEquivalencia.getResultado();//devuelve el resultado de la correcciñn
+			}
 		}
 		return false;
 	}

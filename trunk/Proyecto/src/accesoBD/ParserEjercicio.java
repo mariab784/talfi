@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import modelo.AutomatasException;
 import modelo.automatas.Alfabeto;
+import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
@@ -24,6 +25,7 @@ import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
 import modelo.automatas.Coordenadas;
+import modelo.automatas.MaquinaTuring;
 import modelo.ejercicios.Ejercicio;
 import modelo.ejercicios.Ejercicio_imp;
 
@@ -55,14 +57,14 @@ public class ParserEjercicio {
 			tipo= tipoEnun.item(1).getChildNodes().item(0).getTextContent();*///tipoEnun.item(0).getTextContent();
 //			NodeList tipo = documento.getElementsByTagName("type");
 
-			NodeList tipoE = documento.getElementsByTagName("type");
+			NodeList tipoE = documento.getElementsByTagName(/*"type"*/"tipo");
 			 
 			String tipo = null;
-			for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
-				 tipo = tipoE.item(0).getChildNodes().item(i).getTextContent();
-				 i++;
+//			for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
+				 tipo = tipoE.item(0).getChildNodes().item(/*i*/0).getTextContent();
+//				 i++;
 				 
-			}			
+//			}			
 			
 			System.out.println("TIPO: " + tipo);
 			
@@ -93,12 +95,12 @@ public class ParserEjercicio {
 			if(tipo.equals("EquivERs")){
 				return extraerEjercicioEquivERs(ruta);
 			}
-			if(tipo.equals("TransformacionPila")){
+			if(tipo.equals("TransformacionAPs")){
 				return extraerEjercicioPila(ruta);
 			}
-/*			if(tipo.equals("Turing")){
+			if(tipo.equals("Turing")){
 				return extraerEjercicioTuring(ruta);
-			}*/
+			}
 			return null;
 			
 		} catch (FileNotFoundException e) {
@@ -505,7 +507,181 @@ public class ParserEjercicio {
 		return new Ejercicio_imp(enunciado,input,output,alf,"AFDTOER",ruta);
 
 	}
+/*********************************************************************************************/
+	
+	/**
+	 * Extrae un ejercicio de tipo Maquina Turing
+	 * @param ruta ruta xml donde se realizarñ la extracciñn 
+	 * @return Ejercicio resultado de la extracciñn, de tipo Turing
+	 * @throws AutomatasException se lanza si hay error al abrir o encontrar el archivo
+	 */
+	public Ejercicio extraerEjercicioTuring(String ruta)  throws AutomatasException {
+		
+		
+		Mensajero mensajero=Mensajero.getInstancia();
+		DOMParser parser = new DOMParser();
+		
+		String enunciado=null;
+		//String output=null;//lo que habrñ que comparar en un futuro
+		MaquinaTuring output =null;
+		MaquinaTuring input=null;
+		Alfabeto alf=null;
+		AlfabetoCinta alfCinta=null;
+		try {
+			parser.parse(new InputSource(new FileInputStream(ruta)));
 
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
+		}
+		
+		Document documento = parser.getDocument();
+		String pintar = null;
+		
+		NodeList tipoEnun=documento.getElementsByTagName("enunciado");
+		enunciado=tipoEnun.item(0).getTextContent();
+		
+		NodeList nodos = documento.getElementsByTagName("type");
+		String var = null;
+		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+			 var = nodos.item(0).getChildNodes().item(i).getTextContent();
+			 i++;
+			 
+		}
+
+
+
+		
+			
+			nodos = documento.getElementsByTagName("output");
+			
+			//if(nodos.item(0) != null){
+				
+				//if (var.equals("AutomataPila")){
+					
+					output = new MaquinaTuring();	
+				//}
+				
+			alf=new Alfabeto_imp();
+			nodos = documento.getElementsByTagName("alphabet");
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				if(!nodos.item(0).getChildNodes().item(i).getTextContent().equals("\\"))
+					alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			output.setAlfabeto(alf);			
+			
+			
+			alfCinta=new AlfabetoCinta();
+			nodos = documento.getElementsByTagName("alphabetP");
+				
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				 alfCinta.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			
+			output.setAlfabetoCinta(alfCinta);
+			
+			ArrayList<String> estad=new ArrayList<String>();
+			nodos = documento.getElementsByTagName("states");		
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+		}
+			output.setEstados(estad);
+				
+			nodos = documento.getElementsByTagName("init");
+			output.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
+			
+			ArrayList<String> finalss=new ArrayList<String>();
+			nodos = documento.getElementsByTagName("finals");
+			for (int i = 1; i < nodos.item(0).getChildNodes().getLength(); i++) {
+				finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			output.setEstadosFinales(finalss);		
+
+			
+			nodos = documento.getElementsByTagName("arrow");
+			for (int i = 0; i < nodos.getLength(); i++){
+				for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
+					
+					
+					String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+					String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+					
+					
+					ArrayList<String> entrada = new ArrayList<String>();
+					String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+					StringTokenizer st=new StringTokenizer(s3,",");
+					while(st.hasMoreTokens()){
+
+						entrada.add(st.nextToken());
+					}
+					
+					
+					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+					
+					
+					
+					//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+				/*	int indice = 0;
+					ArrayList<String> salida = new ArrayList<String>();
+					if (s5.compareTo("#") != 0){
+						while(/*st.hasMoreTokens()*//*indice < s5.length()){
+					/*		String ss= "" + s5.charAt(indice);//st.nextToken();
+							salida.add(ss);
+							indice++; */
+					//	System.out.println("TRANS: "+ss);
+						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+				/*		}
+					}
+					else { salida.add("#");} */
+					
+					/*System.out.println("S1: " + s1);
+					System.out.println("S2: " + s2);
+					System.out.println("S3: " + s3);
+					System.out.println("S4: " + s4);
+					System.out.println("S5: " + s5);*/
+					
+					x = x+ 10;
+					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
+					((MaquinaTuring)output).insertaArista2(s1,s2,entrada,s4,s5);									
+				}
+			}	
+			
+			pintar = nodos.item(0).getChildNodes().item(2).getTextContent();
+
+			nodos=documento.getElementsByTagName("estadoCoord");
+
+			//if (nodos.getLength()==0) return automata;
+			//if (nodos==null) return automata;
+			for(int i=0;i< nodos.getLength();i++) {
+				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
+						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
+				output.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
+			}
+		
+		
+		
+		
+//		}
+			System.out.println("TURING alf: " + alf);
+			System.out.println("TURING: " + output);
+			return new Ejercicio_imp(enunciado,input,output,alf,alfCinta,"TURING",ruta,pintar); //XXX
+
+	}
 
 	/**
 	 * Extrae un ejercicio de tipo Lenguaje-Expresion regular

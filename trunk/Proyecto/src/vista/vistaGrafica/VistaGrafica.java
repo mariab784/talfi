@@ -227,6 +227,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	public static void setPila(boolean valor){pila = valor;}
 	public static void setTuring(boolean valor){turing = valor;}
 
+
 	/**
 	 * Metodo que permite que el panel pueda tener eventos de teclado
 	 */	
@@ -507,42 +508,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 	/*********************/
 	
-/*	private void mostrarResultado(int r){
-		
-		String msg = "";
-		switch (r){
-		
-		case 0: msg += "NO Acepta por estado final \n NO Acepta por pila vacia"; break;
-		case 1: msg += "NO Acepta por estado final \n Acepta por pila vacia"; break;
-		case 2: msg += "Acepta por estado final \n NO Acepta por pila vacia"; break;
-		case 3: msg += "Acepta por estado final \n Acepta por pila vacia"; break;
-		}
-		
-		JOptionPane pane=new JOptionPane();
-		d=pane.createDialog(null);
-		JPanel panelD= new JPanel(new GridLayout(10,10));
-		JPanel panelC=new JPanel(new GridLayout(10,10));
-		JLabel etiqN=new JLabel(msg); //XXX
-		
-		JPanel panelB=  new JPanel();
-		JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
-		
-		aceptar.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				d.setVisible(false);
-			}
-		});
-	
-		panelB.add(aceptar);
-		panelD.add(etiqN);
-		panelD.add(panelC);
-		panelD.add(panelB);
-		d.setContentPane(panelD);
-		d.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-		d.setSize(new Dimension(250,300));
-		d.setVisible(true);
-		
-	}*/
+
 	
 	private ArrayList<String> construir(boolean b){
 		
@@ -956,6 +922,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		Vector<String> ejsTransformacionPila=new Vector<String>();
 		ejsTransformacionPila.addAll(datosEjercicios.get("TransformacionPila"));
 		
+		Vector<String> ejsMaquinaTuring=new Vector<String>();
+		ejsMaquinaTuring.addAll(datosEjercicios.get("MaquinasDeTuring"));
 		
 		
 		hsEjercicios.put(m.devuelveMensaje("jtree.lenguaje",1), ejerciciosLenguaje);
@@ -968,6 +936,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		hsEjercicios.put(m.devuelveMensaje("jtree.eerauto",1), ejerciciosEquivERAuto);
 		hsEjercicios.put(m.devuelveMensaje("jtree.eers",1), ejerciciosEquivERs);
 		hsEjercicios.put(m.devuelveMensaje("jtree.taps",1), ejsTransformacionPila);
+		hsEjercicios.put(m.devuelveMensaje("jtree.mturings",1), ejsMaquinaTuring);
 		
 		Hashtable<String,Hashtable<String,Vector<String>>> hs=new Hashtable<String,Hashtable<String,Vector<String>>>();
 		hs.put(m.devuelveMensaje("jtree.ejemplos",1), hsEjemplos);
@@ -1154,7 +1123,17 @@ public class VistaGrafica extends JFrame implements Vista{
 			deleteExpresion();
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			VistaGrafica.setOpcionesAF();
+			VistaGrafica.setOpcionesAP();
+		}
+		
+		requestFocus();
+		
+		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.mturings",1))) {
+			panelCentral.cargarEjercicio("XML/ejercicios/Maquina_Turing/"+nombreEjemplo.toString()+".xml");
+			deleteExpresion();
+			rutaVista=null;
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			VistaGrafica.setOpcionesMT();
 		}
 		
 		requestFocus();
@@ -2099,6 +2078,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			v.add("EquivERAuto");
 			v.add("EquivERs");
 			v.add("AutomatasDePila");
+			v.add("MaquinaTuring");
 			combo=new JComboBox(v);
 			JPanel panelB= new JPanel();
 			JButton aceptar= new JButton(m.devuelveMensaje("vista.aceptar",2));

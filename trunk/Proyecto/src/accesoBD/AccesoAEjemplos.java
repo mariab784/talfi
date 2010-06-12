@@ -279,7 +279,7 @@ public class AccesoAEjemplos {
 		}	
 		arbol.put("TransformacionPila",ejerciciosAP);
 		//MT
-/*		ArrayList<String> ejerciciosTuring=new ArrayList<String>();
+		ArrayList<String> ejerciciosTuring=new ArrayList<String>();
 		tipo=documento.getElementsByTagName("maquinaTuring");
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
@@ -287,7 +287,7 @@ public class AccesoAEjemplos {
 			 ejerciciosTuring.add(var);
 			 j++;
 		}	
-		arbol.put("MaquinasDeTuring",ejerciciosTuring);*/
+		arbol.put("MaquinasDeTuring",ejerciciosTuring);
 		
 		
 		return arbol;
@@ -605,7 +605,7 @@ public class AccesoAEjemplos {
 		try {
 		
 			HashMap<String,ArrayList<String>> xml=devolverListadoEjemplos();
-			System.out.println("XML EJEMPLOS: " + xml);
+			
 			ArrayList<String> array=xml.get("AFD");
 			Iterator<String> it=array.iterator();
 			int i=1;
@@ -670,6 +670,7 @@ public class AccesoAEjemplos {
 			/*********************************************************/
 			
 			xml=devolverListadoEjercicios();
+			System.out.println("XML EJERCICIOS: " + xml);
 			array=xml.get("Lenguaje");
 			it=array.iterator();
 			i=1;
@@ -883,7 +884,29 @@ public class AccesoAEjemplos {
 				fich+="\t\t\t<ejemplo>"+nombre+"</ejemplo>\n";
 			}
 			
-			fich+="\t\t</transformacionPila>\n\t</ejercicios>\n</jtree>";
+			fich+="\t\t</transformacionPila>\n\t\t<maquinaTuring>\n";//\t</ejercicios>\n</jtree>";
+			
+			array=xml.get("MaquinasDeTuring");
+			
+			it=array.iterator();
+			i=1;
+			
+			while(it.hasNext()){
+				String s=it.next();
+				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
+				i++;
+			}
+			//System.out.println("TIPO EJS: " + tipo);
+			if(tipo.equals(/*"TransformacionPila"*/"MaquinaTuring")){
+				String nombre="Ejercicio"+i;
+				String rutaFichero="XML/ejercicios/Maquina_Turing/"+nombre+".xml";
+				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));
+				bw.append(texto);
+				bw.close();
+				fich+="\t\t\t<ejemplo>"+nombre+"</ejemplo>\n";
+			}
+			
+			fich+="</maquinaTuring>\t</ejercicios>\n</jtree>";
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
 			bw.append(fich);

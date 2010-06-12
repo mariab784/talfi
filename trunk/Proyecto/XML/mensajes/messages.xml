@@ -399,6 +399,7 @@
 		<escribirER>Write the exercise on the top and write the regular expression</escribirER>
 		<alf>Alfabeto</alf>
 		<escribirAut>Write the exercise on the top and draw the automata</escribirAut>
+		<palabra>Words</palabra>
 	</ejercicio>
 	<controlador>
 		<param>Param error</param>

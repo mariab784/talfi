@@ -118,7 +118,8 @@
 		<eerauto>Equivalencia Expresión Autómata</eerauto>
 		<eautoer>Equivalencia Autómata Expresión</eautoer>
 		<eers>Equivalencia Expresiones</eers>
-		<taps>Transformación APs</taps>                           
+		<taps>Transformación APs</taps>                  
+		<mturings>Maquinas de Turing</mturings>          
 	</jtree>
 	<popup>
 		<estado>Cambiar propiedades del estado</estado>

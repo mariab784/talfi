@@ -1483,6 +1483,7 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 	public void generarImagenJPG(String ruta, Automata automata) {
 	
 		int radio=20;
+
 		cargarAutomataNuevo(automata);
 	
         // Le asignamos un tamaño a la imagen
@@ -1889,11 +1890,11 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 			bw.append("<p>"+e.getEnunciado()+"</p>");
 			
 			bw.append("</div><div id='fotoAutomata'>");
+			Automata aut = (Automata)e.getEntrada();
+			if(aut != null) generarImagenJPG("HTML/imgEjercicio.jpg", aut);
 			
-			generarImagenJPG("HTML/imgEjercicio.jpg", (Automata)e.getEntrada());
-			
-			bw.append("<h4>"+mensajero.devuelveMensaje("ejercicio.entrada",3)+"'</h4>");
-			bw.append("<p><img src='imgEjercicio.jpg' alt='"+mensajero.devuelveMensaje("ejercicio.entrada",3)+"'></p>");
+			if (aut != null) bw.append("<h4>"+mensajero.devuelveMensaje("ejercicio.entrada",3)+"'</h4>");
+			if (aut != null) bw.append("<p><img src='imgEjercicio.jpg' alt='"+mensajero.devuelveMensaje("ejercicio.entrada",3)+"'></p>");
 			bw.append("</div></body></html>");
 			bw.close();
 			

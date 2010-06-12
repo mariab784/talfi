@@ -115,6 +115,9 @@ public class Controlador_imp implements Controlador{
 				if (opcion.equals("ejap"))
 					if(args==3)
 						return 9;
+				if (opcion.equals("ejmt"))
+					if(args==3)
+						return 10;
 				
 				if (!opcion.equals("p")&&(!opcion.equals("h")))
 						return 0;
@@ -242,7 +245,13 @@ public class Controlador_imp implements Controlador{
 			case 9: {
 				Automata a=obtenerAutomata();
 				salida = a;
-				System.out.println("AUTOMATA: " + a + "y ahora ke??");
+				break;
+				//System.out.println("AUTOMATA: " + a + "y ahora ke??");
+			}
+			case 10: {
+				Automata a=obtenerAutomata();
+				salida = a;
+				System.out.println("M D TURING: " + a + "y ahora ke??");
 			}
 		}
 	}
