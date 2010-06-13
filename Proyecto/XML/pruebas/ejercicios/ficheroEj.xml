@@ -1,4 +1,4 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado>mamamamama</enunciado><output><authomata>
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>uhaah</enunciado><output><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
@@ -26,5 +26,9 @@
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>369</x><y>223</y></estadoCoord></coordenadas></authomata></output>
+<estadoCoord><nombre>s1</nombre><x>349</x><y>194</y></estadoCoord></coordenadas></authomata>
+<listaPalabras>
+			<item>papapapa</item>
+			<item>ma</item>
+			<item>mi</item></listaPalabras></output>
 </ejercicio>

@@ -26,5 +26,12 @@
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>369</x><y>223</y></estadoCoord></coordenadas></authomata></output>
+<estadoCoord><nombre>s1</nombre><x>369</x><y>223</y></estadoCoord></coordenadas></authomata>
+<listaPalabras>
+	<item>aaa</item>
+	<item>aannnnna</item>
+	<item>annnnaa</item>
+	<item>aauuuea</item>
+</listaPalabras>
+</output>
 </ejercicio>

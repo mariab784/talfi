@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -854,11 +855,27 @@ public class PanelCentral extends JPanel {
 		}
 		
 		if(tipo.equals("AutomatasDePila")){
+			
 			fich+="TransformacionAPs</tipo><enunciado>"+enunciado.getText()+"</enunciado><output>";//"</enunciado><input>";
+			panel.creaListaPalabras(cajitaPalabras.getText());
+		//	System.out.println("AÑADIR LISTAPALABRAS bien?" + panel.getListaPalabras());
 			String input=panel.traducirXML();
 			String brr=new Character((char)92).toString();
-			fich+=input+"</output>";//"</input></output>";
-			fich+="\n</ejercicio>"; //añadidio
+			String lp = "<listaPalabras>";
+			if(!panel.getListaPalabras().isEmpty()){
+				//ArrayList<String> llp = 
+				Iterator<String> itLp = panel.getListaPalabras().iterator();
+				while(itLp.hasNext()){
+					lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
+					//if(itLp.hasNext()) lp+=",";
+				}
+				//fich+="\n\t\t\t<item>"+ss+"</item>";
+			}
+			lp += "</listaPalabras>";
+			//String anade ="";
+			//if(!panel.getListaPalabras().isEmpty()) anade="+lp+"</listaPalabras>";
+			fich+=input+"\n"+lp+"</output>";//"</input></output>";
+			fich+="\n"+"</ejercicio>"; //añadidio
 			String rutaxml=/*System.getProperty("user.dir")+brr+*/"XML"/*+brr*/+"/pruebas/ejercicios"/*+brr*/+"/ficheroEj.xml";
 			File fichero = new File (rutaxml);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));

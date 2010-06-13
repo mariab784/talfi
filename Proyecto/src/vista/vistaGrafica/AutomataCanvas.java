@@ -69,6 +69,7 @@ public class AutomataCanvas extends JScrollPane {
 	private Alfabeto alfabeto;
 	private Alfabeto_Pila alfabetoPila;
 	private AlfabetoCinta alfabetoCinta;
+	private ArrayList<String> listaPalabras;
 	
 	
 	private boolean apd;
@@ -297,8 +298,21 @@ public class AutomataCanvas extends JScrollPane {
 		return tipoAutomatas;
 	}
 
-	
+	public void creaListaPalabras(String l){
+		
+		System.out.println("DIMEKETIENE EL LISTAPALABRAS A RECONOCER: " + l);
+		this.listaPalabras = new ArrayList<String>();
 
+		StringTokenizer st=new StringTokenizer(l,",");
+		while(st.hasMoreTokens()){
+			String ss=st.nextToken();
+			if(!listaPalabras.contains(ss))listaPalabras.add(ss);
+		}
+		System.out.println("DIMEKE HAS GUARDADO EN LISTAPALABRAS: " + listaPalabras);
+	}
+
+	public ArrayList<String> getListaPalabras(){return listaPalabras;}
+	
 	/**
 	 * Pinta la arista de un AF en la interfaz grafica
 	 * @param g clase graphics para pintar sobre el panel
