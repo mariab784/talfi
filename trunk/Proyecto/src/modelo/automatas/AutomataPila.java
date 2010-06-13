@@ -41,6 +41,7 @@ public class AutomataPila extends AutomataFND implements Automata{
 	private boolean aceptaLambda;
 	private String lambda;
 	private String fondoPila;
+	private ArrayList<String> listaPalabrasEj;
 	
 
 
@@ -177,6 +178,10 @@ public void anadeSimbolosAlf(ArrayList<String> a){
 	}
 	
 }
+
+public void setListaPalabrasEj(ArrayList<String> l){ listaPalabrasEj = l;}
+public ArrayList<String> getListaPalabrasEj(){ return listaPalabrasEj;}
+
 /******************************************************************************/
 public void anadeSimbolosAlfPila(String c,ArrayList<String> a){
 	

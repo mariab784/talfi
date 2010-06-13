@@ -138,6 +138,7 @@ public class ParserEjercicio {
 		AutomataPila input=null;
 		Alfabeto alf=null;
 		AlfabetoPila_imp alfPila=null;
+		ArrayList<String> listaPalabras=null;
 		try {
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 
@@ -381,6 +382,16 @@ public class ParserEjercicio {
 				output.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 			}
 		
+			listaPalabras= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaPalabras");
+				
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			
+			output.setListaPalabrasEj(listaPalabras);
+			System.out.println("has guardado bien eh?" + ((AutomataPila)output).getListaPalabrasEj());
 		
 		
 		

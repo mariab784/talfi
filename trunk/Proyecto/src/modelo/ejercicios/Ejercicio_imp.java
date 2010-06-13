@@ -116,8 +116,19 @@ public class Ejercicio_imp implements Ejercicio{
 		boolean dePila = false;
 		boolean deTuring = false;
 		System.out.println("imprimeme respuesta a ver..." + respuesta);
+		if(respuesta instanceof AutomataPila){System.out.println("SIIIIIIIIIIIIIIPILA cambiarlo ke no cmprueba nada");
+		return false;
+		}
+		else if(respuesta instanceof MaquinaTuring){System.out.println("SIIIIIIIIIIIIIITURING");
+		return false;
+		}
+		else{
+		
+		
 		System.out.println("imprimeme entrada a ver..." + entrada);
 		System.out.println("imprimeme resultado a ver..." + resultado);
+		
+		
 		if (respuesta instanceof String) {//ES UNA EXPRESION REGULAR!!!!
 			ExpresionRegular er=null;
 			try {
@@ -157,7 +168,7 @@ public class Ejercicio_imp implements Ejercicio{
 					algEquivalencia.ejecutar(false);
 					return algEquivalencia.getResultado();//devuelve el resultado de la correcion
 				}
-				if(resultado instanceof MaquinaTuring){
+				/*if(resultado instanceof MaquinaTuring){
 					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
 					deTuring = true;
 				}
@@ -165,7 +176,7 @@ public class Ejercicio_imp implements Ejercicio{
 					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
 					dePila = true;
 					
-				}
+				}*/
 				
 				
 				if(resultado instanceof AutomataFNDLambda){
@@ -259,15 +270,15 @@ public class Ejercicio_imp implements Ejercicio{
 				
 				}
 			
-			if(dePila){
+	/*		if(dePila){
 				
 				
 			}
 			if(deTuring){
 				
 				
-			}
-			if(!dePila && !deTuring){
+			}*/
+			//if(!dePila && !deTuring){
 			Automatas_equivalentes algEquivalencia=new Automatas_equivalentes();
 			algEquivalencia.registraAutomata1((Automata)respuesta);
 			if (a==null) 
@@ -276,9 +287,13 @@ public class Ejercicio_imp implements Ejercicio{
 				algEquivalencia.registraAutomata2(a);
 			algEquivalencia.ejecutar(false);
 			return algEquivalencia.getResultado();//devuelve el resultado de la correcciñn
-			}
+			//}
 		}
 		return false;
+		}//llave else arriba por si no pila o turing
+		
+
+		
 	}
 	
 	public boolean corregirEquivalencia(boolean resultado) {

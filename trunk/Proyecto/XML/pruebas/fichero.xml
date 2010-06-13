@@ -9,10 +9,10 @@
 		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>q1</state>
+		<state>s1</state>
 	</states>
 	<init>
-		<state>q1</state>
+		<state>s1</state>
 	</init>
 	<finals>
 	</finals>
@@ -26,4 +26,4 @@
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>q1</nombre><x>299</x><y>107</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s1</nombre><x>394</x><y>122</y></estadoCoord></coordenadas></authomata>
