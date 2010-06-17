@@ -384,12 +384,12 @@ public class ParserEjercicio {
 		
 			listaPalabras= new ArrayList<String>();
 			nodos = documento.getElementsByTagName("listaPalabras");
-				
+			if(nodos.item(0) != null){
 			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
 				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
 				 i++;
 			}
-			
+			}
 			output.setListaPalabrasEj(listaPalabras);
 			System.out.println("has guardado bien eh?" + ((AutomataPila)output).getListaPalabrasEj());
 		
