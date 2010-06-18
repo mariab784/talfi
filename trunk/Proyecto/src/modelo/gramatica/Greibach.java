@@ -103,7 +103,7 @@ public class Greibach extends GramaticaIC{
 						if (!this.getVariables().contains(s)){
 							j++;						
 						}
-					else enc = true;
+						else enc = true;
 					}
 				//sustituimos la variable encontrada en la lista de producciones
 				//-------------------------------------------------------------------/
@@ -129,7 +129,7 @@ public class Greibach extends GramaticaIC{
 					if (prodVar == null){
 						
 						//this.listaPalabras.add(prod.getConcatenacion().toString());
-					//	System.out.println("prod? : " + prod);
+						System.out.println("prod? : " + prod);
 						this.listaProdPalabras.add(prod);
 					}
 					else{
@@ -432,4 +432,104 @@ public class Greibach extends GramaticaIC{
 		return s;
 	}
 
+	//**********************
+	/*XXX XXX*/
+	public String toLat(){
+		String s = "";//añadir lo que sale en las lineas horizontales
+		HashMap<String, ArrayList<Produccion>> proc = super.getProducciones();
+		String p = proc.toString();
+		String fin = "";
+		int lon = p.length();
+		for(int i=0; i< lon; i++){
+			if(p.charAt(i) == '\\'){
+				fin+="/";
+			}	
+			else{
+				fin+=p.charAt(i);
+			}
+		}
+		s+="\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Variables: " + super.getVariables().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Variable Inicial: " + super.getVariableInicial().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "S\\'{i}mbolos Terminales: " + super.getSimbolos().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Producciones: " + /*super.getProducciones() +*/fin + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n";
+		return s;
+	}
+	//**********************
+	
+/*	public boolean dimeSiHayProdMulti(){
+
+	this.prodMulti = new ArrayList<String>();
+	int tamProducciones = variables.size();
+	int i = 0;
+	while (i < tamProducciones){
+		String v = variables.get(i);
+
+		ArrayList<Produccion> prodParaV = producciones.get(v);
+		int tamListaProducciones = prodParaV.size();
+		if (tamListaProducciones != 1){
+			
+			int k = 0; boolean enc = false;
+			while(k < tamListaProducciones && !enc){
+				Produccion p = prodParaV.get(k);
+				ArrayList<String> concat = p.getConcatenacion();
+					
+				if(concat.size() == 1){
+					
+					if(concat.get(0).equals(lambda) || this.getSimbolos().contains(concat.get(0))){
+						if (v.equals(this.getVariableInicial())){
+							enc = true;
+						}
+					}
+					
+					else{enc = true;}
+				}
+				
+				k++;
+			}
+			if(!enc){
+				prodMulti.add(new String(v));
+			}
+
+		}
+		
+		i++;
+	}
+	return (!prodMulti.isEmpty());
+}*/
 }
