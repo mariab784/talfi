@@ -828,37 +828,31 @@ public abstract class Gramatica {
 		int i = 0;
 		while (i < tamProducciones){
 			String v = variables.get(i);
-
 			ArrayList<Produccion> prodParaV = producciones.get(v);
 			int tamListaProducciones = prodParaV.size();
-			if (tamListaProducciones != 1){
-				
+			if (tamListaProducciones != 1){				
 				int k = 0; boolean enc = false;
 				while(k < tamListaProducciones && !enc){
 					Produccion p = prodParaV.get(k);
-					ArrayList<String> concat = p.getConcatenacion();
-						
-					if(concat.size() == 1){
-						
-						if(concat.get(0).equals(lambda) || this.getSimbolos().contains(concat.get(0))){
-							if (v.equals(this.getVariableInicial())){
+					ArrayList<String> concat = p.getConcatenacion();				
+					if(concat.size() == 1){					
+						if(concat.get(0).equals(lambda)){
+							if (!v.equals(this.getVariableInicial())){
 								enc = true;
 							}
-						}
-						
-						else{enc = true;}
+						}						
+						//else{enc = true;}
 					}
 					
 					k++;
 				}
-				if(!enc){
+				if(enc){
 					prodMulti.add(new String(v));
 				}
-
-			}
-			
+			}			
 			i++;
 		}
+		System.out.println("KE TIENE PRODMULTI?" + prodMulti);
 		return (!prodMulti.isEmpty());
 	}
 

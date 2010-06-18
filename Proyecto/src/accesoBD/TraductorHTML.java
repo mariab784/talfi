@@ -484,6 +484,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 
 			System.out.println("dame html: " + gictofnc.getHTML());
+			System.out.println("dame latex:" + gictofnc.getLatex());
 			bw.append(gictofnc.getHTML());
 			bw.append("</body></html>");
 			bw.close();

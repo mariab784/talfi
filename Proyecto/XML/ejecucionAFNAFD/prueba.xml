@@ -1,17 +1,103 @@
-<exit><steps><table><flecha><estado>t1=[S0]</estado></flecha></table></steps><result><authomata>
+<exit><steps><table><flecha><estado>t1=[S0]</estado><letra>a</letra><destino>[S3, S0]</destino><letra>b</letra><destino>[S1, S3]</destino></flecha><flecha><estado>t2=[S1, S3]</estado><letra>a</letra><destino>[S4, S3]</destino><letra>b</letra><destino>[S2]</destino></flecha><flecha><estado>t3=[S3, S0]</estado><letra>a</letra><destino>[S4, S3, S0]</destino><letra>b</letra><destino>[S1, S3]</destino></flecha><flecha><estado>t4=[S4, S3]</estado><letra>a</letra><destino>[S4, S3]</destino><letra>b</letra><destino>[S4, S3, S0]</destino></flecha><flecha><estado>t5=[S2]</estado><letra>a</letra><destino>null</destino><letra>b</letra><destino>[S2]</destino></flecha><flecha><estado>t6=[S4, S3, S0]</estado><letra>a</letra><destino>[S4, S3, S0]</destino><letra>b</letra><destino>[S4, S0, S1, S3]</destino></flecha><flecha><estado>t7=[S4, S0, S1, S3]</estado><letra>a</letra><destino>[S4, S3, S0]</destino><letra>b</letra><destino>[S4, S0, S1, S3, S2]</destino></flecha><flecha><estado>t8=[S4, S0, S1, S3, S2]</estado><letra>a</letra><destino>[S4, S3, S0]</destino><letra>b</letra><destino>[S4, S0, S1, S3, S2]</destino></flecha></table></steps><result><authomata>
 	<type>
 		<item>AutomataFD</item>
 	</type>
 	<alphabet>
+		<item>a</item>
+		<item>b</item>
 	</alphabet>
 	<states>
 		<state>t1</state>
+		<state>t2</state>
+		<state>t3</state>
+		<state>t4</state>
+		<state>t5</state>
+		<state>t6</state>
+		<state>t7</state>
+		<state>t8</state>
 	</states>
 	<init>
 		<state>t1</state>
 	</init>
 	<finals>
+		<state>t5</state>
+		<state>t8</state>
 	</finals>
 	<arrows>
+		<arrow>
+		<state>t1</state>
+		<state>t2</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t1</state>
+		<state>t3</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t2</state>
+		<state>t5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t2</state>
+		<state>t4</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t3</state>
+		<state>t2</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t3</state>
+		<state>t6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t4</state>
+		<state>t6</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t4</state>
+		<state>t4</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t5</state>
+		<state>t5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t6</state>
+		<state>t7</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t6</state>
+		<state>t6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t7</state>
+		<state>t8</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t7</state>
+		<state>t6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>t8</state>
+		<state>t8</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>t8</state>
+		<state>t6</state>
+		<item>a</item>
+	</arrow>
 	</arrows>
 </authomata></result></exit>

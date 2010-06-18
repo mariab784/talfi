@@ -47,6 +47,7 @@ public class GIC_to_FNC {
 	private Controlador controlador;
 	private Mensajero mensajero;
 	private String lambda;
+	private String lat;
 	//************************************************************
 	public GIC_to_FNC(GramaticaIC g,boolean b){
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
@@ -55,6 +56,40 @@ public class GIC_to_FNC {
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
 		xml= "<exit><steps>\n";
 		html="";
+		lat="";
+		lat+="\\documentclass[a4paper,11pt]{article}\n" + 
+		     "\\usepackage[latin1]{inputenc}\n" +
+		     "\\usepackage{ulem}\n" +
+		     "\\usepackage{a4wide}\n" + 
+		     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
+		     "\\usepackage[pdftex]{graphicx}\n" + 
+		     "\\usepackage{hyperref}\n" +
+             "\n" +
+		     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
+		     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
+			 "\n" +
+			 "\\begin{document}\n" +
+			 "\n" +
+		     "\\MYp{\n"+    
+		     "\\includegraphics{fdi.jpg}}\n"+
+		     "\n" +
+		     "\\begin{center}\n" +
+		     "\\MYp{\\Large Entrada}\n" +
+		     "\\includegraphics{}}\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\n" +
+		 //autómata a pila dibujo
+		 //String rutaimagen="HTML/imagen"+i+".jpg";
+		 //generarImagenJPG(rutaimagen, automata);
+		     "\\MYp{\\Huge Gram\\'{a}tica}\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\n" +
+		     gramaticaSalida.toLat() + "\n";
+
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		transforma_FNG(b);
 
@@ -212,7 +247,42 @@ public class GIC_to_FNC {
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 	public void pintaTabla(){
 		
-		
+		lat += "\\begin{tabular}{||";
+		for(int i = 0; i <lon; i++){
+			lat += "c||";
+		}
+		lat += "}\n" +
+			"\\hline\n" + 
+		       "\\hline\n" +
+		       "-";
+		for(int i = 1; i <lon; i++){
+				lat += " & "+this.getGramaticaSalida().getVariables().get(i);
+		}
+		lat += " \\\\"+
+			   "\n"+
+			   "\\hline\n" + 
+	           "\\hline\n";
+		for(int i=0; i<lon; i++){
+			for(int j=0; j<lon-1; j++){
+				if (j == 0){
+					lat += this.getGramaticaSalida().getVariables().get(i);
+				}
+				if (tabla[i][j]) {
+					lat += " & X";
+				}
+				else {
+					lat += " & -";
+				}
+			}
+			lat += " \\\\"+
+			   "\n"+
+			   "\\hline\n" + 
+	           "\\hline\n";
+		}
+		lat += "\\end{tabular}\n" + 
+		       "\\\\" +
+		       "\n";
+
 		html +="<table>";
 		//xml+="<exit>";
 		//xml+="<steps>\n";
@@ -501,7 +571,12 @@ public class GIC_to_FNC {
 			transforma_FNG(b);
 			
 		}
+		//quitamos las lambdas que no esten en S
+		gramaticaSalida.dimeSiHayProdMulti();
+		
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
+		lat += "\\MYp{\\Huge Gram\\'{a}tica final simplificada}\n"+
+	       gramaticaSalida.toLat();
 		
 		if (pasarXml){
 			
@@ -538,6 +613,26 @@ public class GIC_to_FNC {
 	    }
 		
 
+	}
+	
+	//************************************************************
+	public String getLatex(){
+		lat+="\\end{center}\n"+
+        "\n" +
+        "\\end{document}";
+		lat.replace("[\\,","[/,");
+		/*lat.replaceAll("[ \\,","[/,");
+		lat.replaceAll("[\\ ,","[/,");
+		lat.replaceAll("[ \\ ,","[/,");
+		lat.replaceAll(",\\,",",/,");
+		lat.replaceAll(", \\,",",/,");
+		lat.replaceAll(",\\ ,",",/,");
+		lat.replaceAll(", \\ ,",",/,");
+		lat.replaceAll(",\\]",",/]");
+		lat.replaceAll(", \\]",",/]");
+		lat.replaceAll(",\\ ]",",/]");
+		lat.replaceAll(", \\ ]",",/]");*/
+		return lat;
 	}
 	
 	public String getHTML(){

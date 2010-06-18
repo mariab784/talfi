@@ -113,5 +113,11 @@ lenguaje {a^nb^mc^p| n > m + p ≥ 0}.</enunciado>
 
 <coordenadas>
 <estadoCoord><nombre>q0</nombre><x>175</x><y>114</y></estadoCoord><estadoCoord><nombre>q2</nombre><x>413</x><y>45</y></estadoCoord><estadoCoord><nombre>q3</nombre><x>577</x><y>90</y></estadoCoord><estadoCoord><nombre>q4</nombre><x>682</x><y>247</y></estadoCoord><estadoCoord><nombre>q1</nombre><x>281</x><y>239</y></estadoCoord></coordenadas></authomata>
+<listaPalabras>
+	<item>aaa</item>
+	<item>aab</item>
+	<item>aaac</item>
+	<item>aaaabcc</item>
+</listaPalabras>
 	</output>
 </ejercicio>
