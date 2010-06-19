@@ -1,44 +1,117 @@
 <exit><steps>
-<step><table><column><fila>  S </fila><fila>A </fila></column>S - X A - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila></column>S - - A - - </table></step>
+<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - X - - - - - - - - - - - - A - - - - X - - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
+<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - - X - - - - - - - - - A - - - - X - - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
+<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - - - - - - - - - - - - A - - - - - - - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
 
 <result><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
-		<item>a</item>
-		<item>b</item>
+		<item>0</item>
+		<item>1</item>
 	</alphabet>
 		<alphabetP>
+		<item>0</item>
+		<item>1</item>
 		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>s0</state>
-		<state>s1</state>
+		<state>S0</state>
+		<state>S1</state>
 	</states>
 	<init>
-		<state>s0</state>
+		<state>S0</state>
 	</init>
 	<finals>
-		<state>s0</state>
+		<state>S1</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>s0</state>
-		<state>s1</state>
-		<item>a</item>
+		<state>S0</state>
+		<state>S0</state>
+		<item>0</item>
 		<cima>Z</cima>
-		<trans>Z</trans>
+		<trans>0Z</trans>
 		</arrow>
 		<arrow>
-		<state>s1</state>
-		<state>s0</state>
-		<item>b</item>
+		<state>S0</state>
+		<state>S0</state>
+		<item>0</item>
+		<cima>1</cima>
+		<trans>01</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>1</item>
 		<cima>Z</cima>
-		<trans>Z</trans>
+		<trans>1Z</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>1</item>
+		<cima>0</cima>
+		<trans>10</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>0</item>
+		<cima>0</cima>
+		<trans>00</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>1</item>
+		<cima>1</cima>
+		<trans>11</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S1</state>
+		<item>0</item>
+		<cima>0</cima>
+		<trans>\</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S1</state>
+		<item>1</item>
+		<cima>1</cima>
+		<trans>\</trans>
+		</arrow>
+		<arrow>
+		<state>S0</state>
+		<state>S0</state>
+		<item>\</item>
+		<cima>Z</cima>
+		<trans>\</trans>
+		</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S1</state>
+		<item>0</item>
+		<cima>0</cima>
+		<trans>\</trans>
+		</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S1</state>
+		<item>1</item>
+		<cima>1</cima>
+		<trans>\</trans>
+		</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S1</state>
+		<item>\</item>
+		<cima>Z</cima>
+		<trans>\</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>S0</nombre><x>192</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>592</x><y>169</y></estadoCoord></coordenadas></authomata>
 </result></steps></exit>

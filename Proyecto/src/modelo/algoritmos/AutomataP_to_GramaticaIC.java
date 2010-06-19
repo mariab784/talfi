@@ -30,11 +30,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private AutomataPila automataEntrada;
 	private GramaticaIC gic;
 	private Mensajero mensajero;
-	private String Gramatica;
+
 	private String lambda;
 	private String fondoPila;
-	private ArrayList<String> variablesEnProducciones;
-	private AutomataPila resultadosParciales;
+
 	private Controlador controlador;
 	/**
 	 * 
@@ -53,7 +52,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		mensajero=Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = ((AutomataPila) automataEntrada).getFondoPila();
-		variablesEnProducciones = new ArrayList<String>();
+
 		controlador=Controlador_imp.getInstancia();
 	}
 	
@@ -339,13 +338,37 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 	
 	private void limpia(){
-		boolean b = this.getGic().dimeSiHayVariablesQueNoTienenProd();
-		while(b){
-			if(b) System.out.println("dime ke variables no tienen prod pobres!: " + gic.getVariablesSinProd());
-			this.getGic().quitaVariablesQueNoExisten();
-			b = this.getGic().dimeSiHayVariablesQueNoTienenProd();
-			if(b) System.out.println("dime ke variables no tienen prod pobres2!: " + gic.getVariablesSinProd());
+		
+		
+		boolean b = this.getGic().dimeSiHayProdUnitarias();
+		boolean c = this.getGic().dimeSiHayProdRecursivas();	
+		boolean d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+		boolean e = this.getGic().dimeSiHayProdConProdUnitarias();
+		
+		boolean a = b || c || d || e;
+		while(a){
 
+			while(d){
+				this.getGic().quitaVariablesQueNoExisten();
+				d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+			}
+			 
+			if(b) this.getGic().quitaProdUnitarias();
+			else if(c) this.getGic().quitaProdRecursivas();
+			else if (e) this.getGic().quitaProdConProdUnitarias();
+			
+
+			d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+			if(!d){
+				b = this.getGic().dimeSiHayProdUnitarias();
+				c = this.getGic().dimeSiHayProdRecursivas();	
+
+				e = this.getGic().dimeSiHayProdConProdUnitarias();
+			}
+				a = b || c || d || e;
+
+
+			
 		}
 		
 	}
@@ -353,15 +376,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private void traduceVariables(){
 			
 		limpia();
-		
-		boolean c = this.getGic().dimeSiHayProdUnitarias();
-		if(c) System.out.println("dime ke prod son unit: " + gic.getProdUnit());
-		while(c){
-			this.getGic().quitaProdUnitarias();
-			limpia();
-			c = this.getGic().dimeSiHayProdUnitarias();
-			limpia();
-		}
+
 		
 /*		c = this.getGic().dimeSiHayProdMulti();
 		if(c) System.out.println("dime ke prod son multi: " + gic.getProdMulti());
@@ -370,10 +385,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			limpia();
 			c = this.getGic().dimeSiHayProdMulti();
 		}*/
-		
-		
-		System.out.println("DESCANSO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println("YA NO HAY nah de NA");
 
 		cambiaNombreVariables();
 
@@ -411,11 +422,10 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 //DESPUES DE AKI HAY UNA EXPLOSION 
 		
 		HashMap<String,ArrayList<Produccion>> nProduc = new HashMap<String,ArrayList<Produccion>>();
-		String vIni = gic.getVariableInicial();
+
 		/*ArrayList<String>*/ variables = (ArrayList<String>) /*gic.getV*/variables/*()*/.clone();
 		int tamano = nVariables.size();
-		
-		ArrayList<String> noSirven = new ArrayList<String>();
+
 		for(int i = 0; i < tamano; i++){ //recorremos todas las producciones ke hay con las variables
 //			System.out.println("algo falla en nProduc : " + nProduc + "\n i :" + i);
 			String var = variables.get(i);
@@ -486,39 +496,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	
 	public void setGIC(GramaticaIC g){gic = g;}
 	
-	
-/*	private boolean RecInservible(ArrayList<String> nConcat,String nnVar){
-		
-		if ((nConcat.size()==1) && (nnVar.equals(nConcat.get(0))) ){
-			System.out.println("FUERA RECURSIVAS TONTAS!!!");
-			return true;
-		}
-		else return false;
-	}*/
-	
-	/*****************************************************************************************************/
-	private boolean inservible(ArrayList<Produccion> nListaProd){
-			
-		return (nListaProd.size() == 1) && (nListaProd.get(0).getConcatenacion().size() == 1);
-	}
-	/*****************************************************************************************************/
-	private boolean iguales(HashMap<String,ArrayList<Produccion>> ant,
-			HashMap<String,ArrayList<Produccion>> nuevo){
-		
-		Set<String> clavesAnt = ant.keySet();
-		Set<String> clavesNuevas = nuevo.keySet();
-		
-		if (clavesAnt.size() != clavesNuevas.size()) return false;
-		
-		Iterator<String> itAnt = clavesAnt.iterator();
-		while (itAnt.hasNext()){
-			
-			String s = itAnt.next();
-			if (!clavesNuevas.contains(s)) return false;
-		}
-		return true;
-	}
-	
 
 	private ArrayList<String> nuevaContatenacion(Produccion prod,ArrayList<String> variables,
 			ArrayList<String> nVariables ){
@@ -578,35 +555,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	
 	
 	
-	private ArrayList<String> compruebaContatenacion(Produccion prod,ArrayList<String> v){
-		
-		ArrayList<String> salida = new ArrayList<String>();
-		ArrayList<String> concat = prod.getConcatenacion();
-		int tam = concat.size(); int i = 0;
-		String s;
-		while(i<tam){
 
-			
-			s = concat.get(i);
-			if (compruebaElemento(s,v)){
-				salida.add(new String(s));
-			}
-			else{ 
-				
-				return null;
-			}
-			i++;
 	
-		}		
-		return salida;
-	}
-	
-	private boolean compruebaElemento(String s,ArrayList<String> v){
-		
-		if(dimeTipo(s,v) == 2)	return false;
-		else	return true;
 
-	}
 	
 	private int dimeTipo(String cadena,ArrayList<String> v){
 		
@@ -621,10 +572,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 	}
 	
-	private boolean estaEnVariables(String s){
-		
-		return gic.getVariables().contains(s);
-	}
 
 	/**
 	 * @param args

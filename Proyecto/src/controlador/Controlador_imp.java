@@ -19,7 +19,7 @@ import modelo.algoritmos.AFNDLambda_to_AFND;
 import modelo.algoritmos.AFN_to_AFD;
 import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.Automatas_equivalentes;
-import modelo.algoritmos.GIC_to_FNC;
+import modelo.algoritmos.GIC_to_FNG;
 import modelo.algoritmos.MinimizacionAFD;
 import modelo.automatas.Automata;
 import modelo.automatas.AutomataFD;
@@ -118,6 +118,9 @@ public class Controlador_imp implements Controlador{
 				if (opcion.equals("ejmt"))
 					if(args==3)
 						return 10;
+				if (opcion.equals("grfnc"))
+					//if(args==3)
+						return 11;
 				
 				if (!opcion.equals("p")&&(!opcion.equals("h")))
 						return 0;
@@ -253,6 +256,15 @@ public class Controlador_imp implements Controlador{
 				salida = a;
 				System.out.println("M D TURING: " + a + "y ahora ke??");
 			}
+			case 11: {
+				//obtener automata en xml de la query tambien.
+				Automata a=obtenerAutomata();
+				//lanzamiento de algoritmo de minimizacion de automatas
+				//afdtoer(a,pasos);
+				
+				simplificacionGic(a,pasos);
+				break;
+			}
 		}
 	}
 
@@ -267,7 +279,7 @@ public class Controlador_imp implements Controlador{
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
 			agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNC gictofnc = new GIC_to_FNC(agic.getGic(),pasos);
+			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),pasos);
 			
 			gictofnc.registraControlador(this);
 			gictofnc.simplifica(pasos,true);
@@ -305,6 +317,8 @@ public class Controlador_imp implements Controlador{
 
 		
 	}
+	
+
 	
 	private void minimizacion(Automata a,boolean pasos) throws AutomatasException {
 		//OJO A LOS PASOS

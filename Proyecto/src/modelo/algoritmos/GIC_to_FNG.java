@@ -32,7 +32,7 @@ import modelo.gramatica.Produccion;
  * en forma normal de Greinbach.
  *  @author Rocio Barrigüete, Mario Huete, Luis San Juan
  */
-public class GIC_to_FNC {
+public class GIC_to_FNG {
 	//ATRIBUTOS:**************************************************
 	private GramaticaIC gramaticaEntrada;
 	private Greibach gramaticaSalida;
@@ -49,7 +49,7 @@ public class GIC_to_FNC {
 	private String lambda;
 	private String lat;
 	//************************************************************
-	public GIC_to_FNC(GramaticaIC g,boolean b){
+	public GIC_to_FNG(GramaticaIC g,boolean b){
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
@@ -755,7 +755,7 @@ public class GIC_to_FNC {
 		System.out.println("veamos: " + prueba);*/
 		
 		System.out.println("GRAMATICA: " + g);
-		GIC_to_FNC piticli = new GIC_to_FNC(g,true);
+		GIC_to_FNG piticli = new GIC_to_FNG(g,true);
 		piticli.simplifica(true,false);
 //		System.out.println("XML MAIN: \n" + piticli.getXML());
 		System.out.println("ENTRADA!" + piticli.gramaticaEntrada);

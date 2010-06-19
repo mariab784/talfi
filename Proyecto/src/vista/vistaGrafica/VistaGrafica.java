@@ -53,7 +53,7 @@ import latexCode.LatexCodeConverter;
 import modelo.AutomatasException;
 import modelo.algoritmos.AceptaTuring;
 import modelo.algoritmos.AutomataP_to_GramaticaIC;
-import modelo.algoritmos.GIC_to_FNC;
+import modelo.algoritmos.GIC_to_FNG;
 import modelo.automatas.Alfabeto;
 
 //import modelo.automatas.Alfabeto_Pila;
@@ -81,6 +81,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	private final int AFNDLAMBDATOAFND=14;
 	private final int AFDTOER=15;
 	private final int GRAMATICA=16;
+	private final int FNC=17;
 	
 	private JTextField expresion;
 	private String rutaxml;
@@ -134,6 +135,7 @@ public class VistaGrafica extends JFrame implements Vista{
 //	private JTextField nomArs;
 	/********************************/
 	private JMenuItem grama;
+	//private JMenuItem gramaC;
 	private JMenuItem AFNDLambda_to_AFND;
 	private JMenuItem AFN_to_AFD;
 	private JMenuItem MinimizacionAFD;
@@ -439,7 +441,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		grama.setToolTipText(mensajero.devuelveMensaje("tooltip.gramatica",1));
 		grama.setMnemonic(javax.swing.event.MenuKeyEvent.VK_G);
 		grama.addActionListener(new OyenteMenuItem(GRAMATICA));
-		
+	
+
 		//XXX
 		
 		algoritmos.add(AFNDLambda_to_AFND);
@@ -449,6 +452,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		algoritmos.add(afd_to_er);
 		//XXX
 		algoritmos.add(grama);
+		//algoritmos.add(gramaC);
 		
 		setEnabledMenuAlgMT();
 		//XXX
@@ -529,7 +533,7 @@ public class VistaGrafica extends JFrame implements Vista{
 //		System.out.println("gramatica boton: \n" + g.getGic());
 			
 			
-			GIC_to_FNC piticli = new GIC_to_FNC(g.getGic(),b);
+			GIC_to_FNG piticli = new GIC_to_FNG(g.getGic(),b);
 
 							piticli.simplifica(true,false);
 			
@@ -1152,6 +1156,14 @@ public class VistaGrafica extends JFrame implements Vista{
 				bw.close();
 				
 			}
+			else if (algoritmo==FNC){
+				rutaxml="XML/pruebas/ficheroC.xml";
+				File fichero = new File (rutaxml);
+				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
+				bw.append(panelCentral.getPanel().traducirXML());
+				bw.close();
+				
+			}
 			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
 				rutaxml="XML/pruebas/fichero.xml";
 				File fichero = new File (rutaxml);
@@ -1180,6 +1192,28 @@ public class VistaGrafica extends JFrame implements Vista{
 					rutahtml=trhtml.traducirPasosSimplificacion(xmlSalida);
 				}
 				else controlador.ejecutaQuery("TALF -gr "+rutaxml);
+				
+				Automata a=(AutomataPila)controlador.getSalida();
+				setTuring(false);
+				setPila(true);
+				panelCentral.getPanel().cargarAutomataNuevo(a);
+				panelCentral.getPanel().setTipoAutomata("AutomataPila");
+				activaToogleButtons();
+				deleteExpresion();
+				rutaVista=null;
+				break;
+			}
+			case FNC:{
+				//preparadoEquivalencia=false;
+				if (pasos){
+					String ruta="HTML/imagenEntrada.jpg";
+					panelCentral.getPanel().generarImagenJPg(ruta);
+					controlador.ejecutaQuery("TALF -grfnc-p "+rutaxml);						
+					TraductorHTML trhtml=TraductorHTML.getInstancia();
+					String xmlSalida=controlador.salidaXML();
+					rutahtml=trhtml.traducirPasosSimplificacionFNC(xmlSalida);
+				}
+				else controlador.ejecutaQuery("TALF -grfnc "+rutaxml);
 				
 				Automata a=(AutomataPila)controlador.getSalida();
 				setTuring(false);
@@ -1418,27 +1452,27 @@ public class VistaGrafica extends JFrame implements Vista{
 			// TODO Auto-generated method stub
 			
 			if  (algoritmo == GRAMATICA){
-	/*			JOptionPane pane=new JOptionPane();
+				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
 				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.pregunta",2));
 				JPanel panel=new JPanel(new GridLayout(2,1));
 				JPanel botones=new JPanel();
 				JLabel pasosE=new JLabel(m.devuelveMensaje("pasos.preguntaG",2));
-				JButton aceptar=new JButton(m.devuelveMensaje("pasos.con",2));
+				JButton aceptar=new JButton(/*m.devuelveMensaje("pasos.con",2)*/"FNG");
 				aceptar.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){*/
+					public void actionPerformed(ActionEvent e){
 						pasos=true;
-					//	dialog.setVisible(false);
+						dialog.setVisible(false);
 						ejecuta(algoritmo,pasos); //XXX
 						rutaVista=null;
-			/*		}
+					}
 				});
-				JButton cancelar=new JButton(m.devuelveMensaje("pasos.sin",2));
+				JButton cancelar=new JButton(/*m.devuelveMensaje("pasos.sin",2)*/"FNC");
 				cancelar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						pasos=false;
+						pasos=true;
 						dialog.setVisible(false);
-						ejecuta(algoritmo,pasos);
+						ejecuta(FNC,pasos);
 						rutaVista=null;
 					}
 				});
@@ -1449,7 +1483,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog.setContentPane(panel);
 				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 				dialog.setSize(new Dimension(300,150));
-				dialog.setVisible(true);*/
+				dialog.setVisible(true);
 				
 				
 			}
