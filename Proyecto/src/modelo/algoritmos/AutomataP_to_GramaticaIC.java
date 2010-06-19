@@ -265,11 +265,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			ArrayList<String> simbolos,String destino){
 		
 
-			System.out.println("ORIGEN: " + origen);
-		System.out.println("DESTINO: " + destino);
-		System.out.println("CIMA: " + cima);
+		//			System.out.println("ORIGEN: " + origen);
+			//		System.out.println("DESTINO: " + destino);
+		//		System.out.println("CIMA: " + cima);
 		//System.out.println("LISTA: " + lista);
-		System.out.println("SIMBOLOS: " + simbolos);
+//		System.out.println("SIMBOLOS: " + simbolos);
 		//System.out.println("SALIDAPILA: " + salidaPila);
 		
 //		Iterator<String> itEst = estados.iterator();

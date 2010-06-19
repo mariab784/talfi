@@ -511,84 +511,84 @@ public abstract class Gramatica {
 	
 	public void quitaProdMulti(){
 
-		ArrayList<String> vars = this.getVariables();
-		int i = 0; int tam = vars.size();
-		HashMap<String,ArrayList<Produccion>> np = new HashMap<String,ArrayList<Produccion>>();
-		//recorremos las producciones
-		while(i < tam){
-			String v = new String(this.getVariables().get(i));
-			ArrayList<Produccion> ap = this.getProducciones().get(v);
-			ArrayList<Produccion> nap = new ArrayList<Produccion>();
-
-			int tamAProd = ap.size();
-			//recorremos el arrayList de producciones
-			//si el arrayList es 1, es ke es unitario! XXX
-			if(this.prodMulti.contains(v)/*(tamAProd != 1) && (ap.get(0).getConcatenacion().size() == 1) 
-					&& !v.equals(this.getVariableInicial())*/){
-				//unitaria
-				//System.out.println("UNITARIA PERO NO KITAR S!");
-			}
-			else{
-				int j = 0;
-				while(j < tamAProd){ //recorremos las producciones del arrayList
-					Produccion p = ap.get(j); //Produccion nprod = null;
-					Produccion nnp = null;
-
-					if(p.getConcatenacion().size() != 1){
-					//para no coger las ke ya son unitarias
-					//si es null es ke ningun string esta en prodUnit
-						ArrayList<Integer> indices = contieneVarConProdUnit(p);
-						if (indices != null){
-						//tenemos ke cambiar la produccion = cambiar la concatenacion
-							//tendriamos ke coger un bucle con el tamaño de la produccion de la v de indices
-							
-							for(int k = 0; k < indices.size();k++){
-								String s = p.getConcatenacion().get(indices.get(k));
-								ArrayList<Produccion> prrrods = this.getProducciones().get(s);
-								int tamPrrrods = prrrods.size();
-								
-								nnp = creaNuevaProduccion(p,indices);
-							}
-					//	b = true;
-						}
-						else{/*System.out.println("indices NULL");*/ nnp = p;}//no hacemos nada
-					}//si la concatenacion tiene tamaño > 1 tb keremos ke este!
-					//LA CONCATENACION VALE 1, PUEDE SER VARIABLE CONTENIDA EN PRODUNIT O NO
-					else{
-						//if(this.getProdUnit().contains(p.getConcatenacion().get(0))){
-							ArrayList<Integer> indices = contieneVarConProdUnit(p);
-							if (indices != null){
-								nnp = creaNuevaProduccion(p,indices);
-							}
-							else{/*System.out.println("indices NULL");*/ nnp = p;}
-						
-					}
-				
-					if (nnp != null ){
-						//System.out.println("nnp" + nnp);
-						nap.add(nnp);
-						//System.out.println("nap" + nap);
-					}
-					j++;
+		//Primero: Quitar el lambda de las prod que lo tienen.
+		Iterator<String> itMulti = prodMulti.iterator();
+		System.out.println("producciones antes de kitar lambdas: " + producciones);
+		while(itMulti.hasNext()){
+			String s = itMulti.next();
+			ArrayList<Produccion> np = new ArrayList<Produccion>();
+			Iterator<Produccion> itantp = producciones.get(s).iterator();
+			while(itantp.hasNext()){
+				Produccion prod = itantp.next();
+				ArrayList<String> concat = prod.getConcatenacion();
+				if(!(s.equals(this.getVariableInicial())) && (concat.size() == 1) 
+						&& concat.get(0).equals(lambda)){
+					System.out.println("veamos si la prod es lambda?: " + concat);
+				}
+				else{
+					System.out.println("veamos si la prod NO es lambda?estara bien?: " + concat);
+					np.add(prod);
 				}
 			}
-
-			//this.getProducciones().remove(v);
-			
-			/*this.getProducciones()*/
-//			System.out.println("np.put(v, nap)" + v +"," + nap);
-			if(!nap.isEmpty())np.put(v, nap);
-			i++;
-		
+			//borramos lo que habia, y las metemos sin el lambda
+			producciones.remove(s);
+			producciones.put(s, np);
 		}
-		this.setProducciones(np);
-
-/*		for(int j = 0; j < varsParaBorrar.size();j++){
-			this.getVariables().remove(varsParaBorrar.get(j));
-		}*/
-	//	return b;
+		//hasta aki en principio bien
+		System.out.println("producciones despues de kitar lambdas: " + producciones);
+		//vamos ahora a sustituir por lambdas todas las apariciones de la variable
+		Iterator<String> itvariables = this.getVariables().iterator();
+		while(itvariables.hasNext()){
+			String v = itvariables.next();
+			ArrayList<Produccion> lp = producciones.get(v);
+			ArrayList<Produccion> nlp = null;
+			Iterator<Produccion> itlp = lp.iterator();
+			while(itlp.hasNext()){
+				Produccion p = itlp.next();
+				Produccion nprod = comprueba(p); //XXX
+				//si es null es ke no la hemos cambiado
+				if(nprod != null){
+					//es ke hemos sustituido algun lambda
+					System.out.println("ANTES!:" + lp);
+					if (nlp == null){ nlp = new ArrayList<Produccion>();}
+					if(!esta(nprod,nlp)){System.out.println("SIIII!SISISSI"); nlp.add(nprod);}
+				//	System.out.println("despues!:" + lp);
+				//	System.out.println("despues 2.0!:" + producciones);
+				}
+			}
+			if(nlp != null){
+				
+				for(int j = 0; j < nlp.size(); j++){
+					Produccion pp = nlp.get(j);
+					if(!esta(pp,lp)){System.out.println("SIIII!SISISSI"); lp.add(pp);}
+				}
+				
+			}
+		}
+		System.out.println("lo hemos hecho bien?: " + producciones);
 	}
 	
+	@SuppressWarnings("unchecked")
+	private Produccion comprueba(Produccion p){
+		
+		Produccion np = null;
+		ArrayList<String> concat = (ArrayList<String>) p.getConcatenacion().clone();
+		int i = 0; int tam = concat.size();
+		boolean cambiado = false;
+		while(i < tam){
+			String s = concat.get(i);
+			if(this.getProdMulti().contains(s)){
+				concat.set(i, lambda);
+				if(!cambiado)cambiado = true;
+			}
+			i++;
+		}
+		if(cambiado){
+			np = new Produccion();
+			np.setConcatenacion(concat);
+		}
+		return np;
+	}
 /*	public void quitaProdRecursivas(){
 		//las tenemos guardadas en prodRecursivas
 
