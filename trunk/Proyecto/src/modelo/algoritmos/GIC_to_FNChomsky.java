@@ -1,0 +1,441 @@
+package modelo.algoritmos;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import vista.vistaGrafica.AristaAP;
+
+import modelo.automatas.AutomataPila;
+import modelo.gramatica.Chomsky;
+import modelo.gramatica.GramaticaIC;
+
+import modelo.gramatica.Produccion;
+import accesoBD.Mensajero;
+import controlador.Controlador;
+import controlador.Controlador_imp;
+
+public class GIC_to_FNChomsky {
+
+	//ATRIBUTOS:**************************************************
+	public static String constantVar = "C";
+	public static String constantVar2 = "D";
+	private int contador;
+	private GramaticaIC gramaticaEntrada;
+	private Chomsky gramaticaSalida;
+	private String xml;
+	private String html;
+	private int lon;
+	@SuppressWarnings("unused")
+	private Controlador controlador;
+	private Mensajero mensajero;
+	private String lambda;
+	private String lat;
+	private HashMap<String,String> relacionados;
+	//************************************************************
+	public GIC_to_FNChomsky(GramaticaIC g,boolean b){
+		if (mensajero == null) mensajero=Mensajero.getInstancia();
+		controlador=Controlador_imp.getInstancia();
+		gramaticaEntrada = g; 
+		gramaticaSalida = new Chomsky(g.getVariables(),g.getSimbolos(),g.getVariableInicial());
+		xml= "<exit><steps>\n";
+		html="";
+/*		lat="";
+		lat+="\\documentclass[a4paper,11pt]{article}\n" + 
+		     "\\usepackage[latin1]{inputenc}\n" +
+		     "\\usepackage{ulem}\n" +
+		     "\\usepackage{a4wide}\n" + 
+		     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
+		     "\\usepackage[pdftex]{graphicx}\n" + 
+		     "\\usepackage{hyperref}\n" +
+             "\n" +
+		     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
+		     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
+			 "\n" +
+			 "\\begin{document}\n" +
+			 "\n" +
+		     "\\MYp{\n"+    
+		     "\\includegraphics{fdi.jpg}}\n"+
+		     "\n" +
+		     "\\begin{center}\n" +
+		     "\\MYp{\\Large Entrada}\n" +
+		     "\\includegraphics{}}\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\n" +
+		 //autómata a pila dibujo
+		 //String rutaimagen="HTML/imagen"+i+".jpg";
+		 //generarImagenJPG(rutaimagen, automata);
+		     "\\MYp{\\Huge Gram\\'{a}tica}\n" +
+		     "\\newline\n" +
+		     "\\newline\n" +
+		     "\n" +
+		     gramaticaSalida.toLat() + "\n";*/
+
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+		relacionados = new HashMap<String,String>();
+		contador = 0;
+		transforma_FNChomsky(b);
+
+	}
+	
+	public GramaticaIC getGramaticaEntrada(){return gramaticaEntrada;}
+	public Chomsky getGramaticaSalida(){return gramaticaSalida;}
+	public String getHTML(){return html;}
+	@SuppressWarnings("unchecked")
+	public void transforma_FNChomsky(boolean mostrarPasos){
+		
+		Chomsky g1 = new Chomsky(gramaticaEntrada.getVariables(),gramaticaEntrada.getSimbolos(),
+				gramaticaEntrada.getVariableInicial());
+		
+		System.out.println("****************************FASE 1****************************");
+		html+="****************************FASE 1****************************";
+		for(int i = 0; i < g1.getSimbolos().size();i++){
+			
+			String simb = g1.getSimbolos().get(i);
+			String nvar = "["+constantVar+simb+"]";
+			Produccion np = new Produccion();
+			np.anadeCadena(simb);
+			g1.anadeProduccion(nvar, np);
+			relacionados.put(simb, nvar);
+		}
+		
+		Iterator<String> itvar = gramaticaEntrada.getVariables().iterator();
+		while(itvar.hasNext()){
+			
+			String v = itvar.next();
+			Iterator<Produccion> itprod = gramaticaEntrada.getProducciones().get(v).iterator();
+			ArrayList<Produccion> nprod = new ArrayList<Produccion>();
+			Produccion np = null;
+			while(itprod.hasNext()){
+				Produccion p = itprod.next();
+				if(p.getConcatenacion().size() > 1){
+					np = comprueba(p);
+					
+				}
+				else{
+					np = new Produccion();
+					np.setConcatenacion((ArrayList<String>) p.getConcatenacion().clone());		
+				}
+				
+				if(!esta(np,nprod)) nprod.add(np);
+			}
+			g1.getProducciones().remove(v);
+			g1.getProducciones().put(v, nprod);
+		}
+		html+="<br><h2>Gramatica</h2>" + g1.toHTML() + "<br>";
+		System.out.println("****************************FASE 2****************************");
+		html+="****************************FASE 2****************************";
+		
+		boolean acabado = false;
+		Chomsky g2 = null;
+		while(!acabado){
+			 g2 = new Chomsky(g1.getVariables(),g1.getSimbolos(),g1.getProducciones(),
+					g1.getVariableInicial());
+			
+			 relacionados = new HashMap<String,String>();
+			 
+			Iterator<String> its = g1.getVariables().iterator();
+			while(its.hasNext()){
+				ArrayList<Produccion> nlp = new ArrayList<Produccion>();
+				String s = its.next();
+				Iterator<Produccion> itp = g1.getProducciones().get(s).iterator();
+				while(itp.hasNext()){
+					Produccion p = itp.next();
+					Produccion np = null;
+					if(p.getConcatenacion().size() >= 3){
+						
+						np = creaProducciones(g2,p);
+						if(!acabado) acabado = true;
+					}
+					else{
+						np = p;
+					}
+					if(!esta(np,nlp)) nlp.add(np);
+				}
+				g2.getProducciones().remove(s);
+				g2.getProducciones().put(s, nlp);
+			}
+			
+			g1 = g2;
+			html+="<br><h2>Gramatica</h2>" + g1.toHTML() + "<br>";
+		}
+		
+		
+		gramaticaSalida = g2;
+		System.out.println("ANTES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
+		//quitamos las lambdas que no esten en S
+		boolean bol = gramaticaSalida.dimeSiHayProdMulti();
+		int i = 0;
+		while(bol){
+			gramaticaSalida.quitaProdMulti();
+			bol = gramaticaSalida.dimeSiHayProdMulti();
+			i++;
+			System.out.println("VUELTAS kita lambda: " + i);
+			this.limpia();
+		}
+		System.out.println("DESPUES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
+		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
+	}
+	
+	private void limpia(){
+
+//		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
+		/*Greibach*/Chomsky gramsal = this.gramaticaSalida;
+		ArrayList<String> vargram = gramsal.getVariables();
+		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
+		HashMap<String,ArrayList<Produccion>> ngramsalprod = new HashMap<String,ArrayList<Produccion>>();
+		int i = 0; int tam = vargram.size();
+		while(i < tam){
+			String s = vargram.get(i);
+			//System.out.println("SE KE PETA " + s);
+			//System.out.println("vars " + gramsal.getVariables());
+			ArrayList<Produccion> aprod = gramsalprod.get(s);
+			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
+			int j = 0; int tamProd = aprod.size();
+			while(j < tamProd){
+				Produccion pr = aprod.get(j);
+				ArrayList<String> concat = pr.getConcatenacion();
+				Produccion npr = new Produccion();
+				ArrayList<String> nconcat = arreglaConcatenacion(concat);
+				if(!nconcat.isEmpty())npr.setConcatenacion(nconcat);
+				
+				j++;
+				if(!nconcat.isEmpty() && !esta(npr,naprod)) naprod.add(npr);
+			}
+			ngramsalprod.put(s, naprod);
+			i++;
+		}
+		this.gramaticaSalida.setProducciones(ngramsalprod);
+//		System.out.println("GRAMATICASALIDA LIMPITA ES: " + gramaticaSalida);
+		
+	}
+	
+	private ArrayList<String> arreglaConcatenacion(ArrayList<String> nconcat){
+		//nconcat no sera ni null ni vacio nunca
+
+		if (todosLambda(nconcat)){ //tambien lambda solo incluido
+			ArrayList<String> ss = new ArrayList<String>();
+			ss.add(lambda);
+			return ss;
+		}
+		
+		ArrayList<String> s = new ArrayList<String>();
+		int tam = nconcat.size();
+		int i = 0;
+		while(i < tam){
+			String ss = nconcat.get(i);
+			if(!ss.equals(lambda) && 
+					(this.gramaticaSalida.getVariables().contains(ss)
+							|| this.gramaticaSalida.getSimbolos().contains(ss))){s.add(
+					new String(ss));
+			}
+			i++;
+		}
+		return s;
+	}
+	
+	private boolean todosLambda(ArrayList<String> nconcat){
+		
+		int i = 0; int tam = nconcat.size();
+		while(i < tam){
+			String s = nconcat.get(i);
+			if (!s.equals(lambda)) return false;
+			i++;
+		}
+		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Produccion creaProducciones(Chomsky g2,Produccion p){
+		Produccion np = new Produccion();
+		ArrayList<String> nconcat = new ArrayList<String>();
+		nconcat.add(new String(p.getConcatenacion().get(0)));
+
+		String nvar = null;
+		System.out.println("p: " + p);
+		ArrayList<String> ss = copiaSubconcat(p.getConcatenacion());
+		String s = ss.toString();
+		System.out.println("relacionados: " + relacionados);
+		System.out.println("s: " + s);
+		if(relacionados.containsKey(s)){
+			System.out.println("AHA");
+			nvar = relacionados.get(s);
+			
+		}
+		else{
+			System.out.println("nuuuuuuuuuuuuu");
+			nvar = "["+constantVar2+contador+"]";
+			contador++;
+			relacionados.put(s, nvar);
+		}		
+		ArrayList<Produccion> nnp = convertir(ss);
+
+		g2.getProducciones().put(nvar,nnp );
+		System.out.println("g2.getProducciones().put(nvar,nnp ) " + g2.getProducciones());
+		nconcat.add(nvar);
+		np.setConcatenacion(nconcat);
+		System.out.println("np???: " + np);
+		return np;
+	}
+	
+	private ArrayList<Produccion> convertir(ArrayList<String> s){
+		ArrayList<Produccion> lp = new ArrayList<Produccion>();
+		Produccion p = new Produccion();
+		p.setConcatenacion(/*copiaSubconcat(s)*/s);
+		lp.add(p);
+		return lp;
+	}
+	
+	private ArrayList<String> copiaSubconcat(ArrayList<String> as){
+		ArrayList<String> nas = new ArrayList<String>();
+		int i = 1; int tam = as.size();
+		while(i < tam){
+			nas.add(as.get(i));
+			i++;
+		}
+		return nas;
+	}
+	@SuppressWarnings("unchecked")
+	private Produccion comprueba(Produccion p){
+		
+		Produccion np = new Produccion();
+		ArrayList<String> nconcat = (ArrayList<String>) p.getConcatenacion().clone();
+		np.setConcatenacion(nconcat);
+		int i = 0; int tam = nconcat.size();
+		while(i < tam){
+			String s = nconcat.get(i);
+			if(/*gramaticaEntrada.getSimbolos().contains(s)*/relacionados.containsKey(s)){
+				nconcat.set(i,/*"["+constantVar+s+"]"*/relacionados.get(s));
+			}
+			i++;			
+		}
+//		System.out.println("funcionas jodio?" + np);
+		return np;
+		
+	}
+	
+	private boolean esta(Produccion pnueva, ArrayList<Produccion >lprod){
+		ArrayList<String> concat = pnueva.getConcatenacion();
+		Iterator<Produccion> itProd = lprod.iterator();
+		while(itProd.hasNext()){
+			Produccion p = itProd.next();
+			ArrayList<String> pConcat = p.getConcatenacion(); 
+			if (iguales(concat,pConcat)) return true;
+		}
+		return false;
+	}
+	
+	private boolean iguales(ArrayList<String> a1, ArrayList<String> a2){
+		
+		if (a1.size() != a2.size()) return false;
+		int i = 0; int tam = a1.size();
+		while(i < tam){
+			String ss1 = a1.get(i); String ss2 = a2.get(i);
+			if (!ss1.equals(ss2)) return false;
+			
+			i++;
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		AutomataPila aut = new AutomataPila();
+
+aut.getEstados().add("s0");
+aut.getEstados().add("s1");
+
+
+
+aut.setEstadoInicial("s0");
+aut.setEstadoFinal("s1");
+
+		AristaAP arist;
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("Z");
+		arist.anadirPila("AZ");
+		
+		aut.anadeArista(arist);
+		
+		/*******/
+
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z");
+		arist.anadirPila("BZ");
+		
+		aut.anadeArista(arist);
+		
+		/*******/
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("A");
+		arist.anadirPila("AA");
+		
+		aut.anadeArista(arist);
+		
+		/*******/		
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("B");
+		arist.anadirPila("BB");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("a");
+		arist.setCimaPila("B");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		arist = new AristaAP(0,0,0,0,"s0","s0");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("A");
+		arist.anadirPila("\\");
+		
+		aut.anadeArista(arist);
+		
+		/*******/	
+		
+		
+		
+		
+		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("\\");
+		arist.setCimaPila("Z");
+		arist.anadirPila("Z");//		arist.anadirPila("Z");
+		
+		aut.anadeArista(arist);
+	/******/	
+	
+		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
+		
+
+		a.AP_Gramatica();
+
+		
+			GIC_to_FNChomsky piticli = new GIC_to_FNChomsky(a.getGic(),true); 
+		//piticli.simplifica(true,false);
+		
+		
+		System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
+		System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
+
+//	piticli.getGramaticaSalida().creaListaPalabras();
+		
+		
+		// TODO Auto-generated method subs
+
+	}
+}

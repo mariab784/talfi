@@ -490,46 +490,5 @@ public class Greibach extends GramaticaIC{
            "\n";
 		return s;
 	}
-	//**********************
-	
-/*	public boolean dimeSiHayProdMulti(){
 
-	this.prodMulti = new ArrayList<String>();
-	int tamProducciones = variables.size();
-	int i = 0;
-	while (i < tamProducciones){
-		String v = variables.get(i);
-
-		ArrayList<Produccion> prodParaV = producciones.get(v);
-		int tamListaProducciones = prodParaV.size();
-		if (tamListaProducciones != 1){
-			
-			int k = 0; boolean enc = false;
-			while(k < tamListaProducciones && !enc){
-				Produccion p = prodParaV.get(k);
-				ArrayList<String> concat = p.getConcatenacion();
-					
-				if(concat.size() == 1){
-					
-					if(concat.get(0).equals(lambda) || this.getSimbolos().contains(concat.get(0))){
-						if (v.equals(this.getVariableInicial())){
-							enc = true;
-						}
-					}
-					
-					else{enc = true;}
-				}
-				
-				k++;
-			}
-			if(!enc){
-				prodMulti.add(new String(v));
-			}
-
-		}
-		
-		i++;
-	}
-	return (!prodMulti.isEmpty());
-}*/
 }

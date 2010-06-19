@@ -34,7 +34,8 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
 import modelo.algoritmos.AutomataP_to_GramaticaIC;
-import modelo.algoritmos.GIC_to_FNC;
+import modelo.algoritmos.GIC_to_FNChomsky;
+import modelo.algoritmos.GIC_to_FNG;
 import modelo.algoritmos.Registro;
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
@@ -477,7 +478,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
 			agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNC gictofnc = new GIC_to_FNC(agic.getGic(),true);
+			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),true);
 			
 		//	gictofnc.registraControlador(this);
 			gictofnc.simplifica(true,false);
@@ -507,6 +508,220 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		
 	}
 	
+	
+	public String traducirPasosSimplificacionFNC(String ruta)throws AutomatasException  {
+		
+		Mensajero mensajero=Mensajero.getInstancia();
+		DOMParser parser = new DOMParser(); 
+		String brr=new Character((char)92).toString();
+		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacionFNC.html";
+		File fichero = new File (rutaHTML);
+		BufferedWriter bw;
+		try{
+			
+			parser.parse(new InputSource(new FileInputStream(ruta)));
+			Document documento = parser.getDocument();
+			
+			bw = new BufferedWriter(new FileWriter(fichero));
+			
+			
+			bw.append("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
+			bw.append("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en'>");
+			bw.append("<head><meta http-equiv='content-type' content='text/html; charset=UTF-8'><link rel='stylesheet' type='text/css' href='style.css' media='screen'>");
+			
+			bw.append("<title>"+mensajero.devuelveMensaje("simplificacion.title",3)+"</title></head><body>");
+			bw.append("<div id='cabecera'><img src='logo3.gif'></div>");
+			
+			
+			bw.append("<div id='resultado'>");
+			NodeList tipo = documento.getElementsByTagName("type");
+			
+			String var = null;
+			for (int i = 1; i <tipo.item(0).getChildNodes().getLength(); i++) {
+				 var = tipo.item(0).getChildNodes().item(i).getTextContent();
+				 i++;	 
+			}
+			Alfabeto_imp alf= new Alfabeto_imp();
+			
+			ArrayList<String> estad= new ArrayList<String>();
+			ArrayList<String> finalss= new ArrayList<String>();
+			Alfabeto_Pila alfabetoPila = new AlfabetoPila_imp();
+			AutomataPila automata=new AutomataPila();
+			
+
+			bw.append("<br><p>Type:"+var+"</p>");
+			
+			NodeList nodos = documento.getElementsByTagName("alphabet");
+			
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.alfabeto",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			bw.append(alf.getListaLetras().toString()+"</p>");
+			
+			nodos = documento.getElementsByTagName("alphabetP");
+			
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.alfabeto",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				alfabetoPila.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+				
+			bw.append(alfabetoPila.getListaLetras().toString()+"</p>");
+			
+			nodos = documento.getElementsByTagName("states");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.estados",3));
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			bw.append(estad.toString()+"</p>");
+			automata.setEstados(estad);
+			
+			nodos = documento.getElementsByTagName("init");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.inicial",3)+nodos.item(0).getChildNodes().item(1).getTextContent()+"</p>");
+			automata.setEstadoInicial(nodos.item(0).getChildNodes().item(1).getTextContent());
+			
+			nodos = documento.getElementsByTagName("finals");
+			bw.append("<br><p>"+mensajero.devuelveMensaje("automata.finales",3));
+			for (int i = 1; i < nodos.item(0).getChildNodes().getLength(); i++) {
+				finalss.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				i++;
+			}
+			bw.append(finalss.toString()+"</p>");
+			automata.setEstadosFinales(finalss);
+			bw.append("<br><h2>Aristas</h2><table><tr>"/*<th>"+new Character((char)95).toString()+"</th>"*/);
+
+			nodos = documento.getElementsByTagName("arrow");
+			for (int i = 0; i < nodos.getLength(); i++){
+				for (int x = 1; x < nodos.item(i).getChildNodes().getLength(); x++) {
+					
+
+						String s1 = nodos.item(i).getChildNodes().item(x).getTextContent();
+						String s2 = nodos.item(i).getChildNodes().item(x+2).getTextContent();
+						
+						
+						ArrayList<String> entrada = new ArrayList<String>();
+						String s3 = nodos.item(i).getChildNodes().item(x+4).getTextContent();
+						StringTokenizer st=new StringTokenizer(s3,",");
+						while(st.hasMoreTokens()){
+
+							entrada.add(st.nextToken());
+						}
+						
+						
+						String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
+						String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
+						
+						
+						
+						//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
+						int indice = 0;
+						ArrayList<String> salida = new ArrayList<String>();
+						if (s5.compareTo("\\") != 0){
+							while(/*st.hasMoreTokens()*/indice < s5.length()){
+								String ss= "" + s5.charAt(indice);//st.nextToken();
+								salida.add(ss);
+								indice++;
+							}
+						}
+						else { salida.add("\\");}
+
+						x = x+ 10;
+						//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
+						((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
+					}
+
+					
+					
+				}
+			
+			
+/*			Iterator<String> it1=alf.dameListaLetras().iterator();
+			while(it1.hasNext()) {
+				bw.append("<th>"+it1.next()+"</th>");
+			}
+			bw.append("</tr>");
+	//		Iterator<String> it2=estad.iterator();
+	/*		while(it2.hasNext()) {
+				String estado=it2.next();
+				bw.append("<tr><td>"+estado+"</td>");
+				it1=alf.dameListaLetras().iterator();
+
+				bw.append("</tr>");
+			}*/
+			//////////////
+	//		Iterator<String> itP1=alfabetoPila.dameListaLetras().iterator();
+	/*		while(itP1.hasNext()) {
+				bw.append("<th>"+itP1.next()+"</th>");
+			}*/
+/*			bw.append("</tr>");
+			Iterator<String> itP2=estad.iterator();
+			while(itP2.hasNext()) {
+				String estado=itP2.next();
+				bw.append("<tr><td>"+estado+"</td>");
+				itP1=alf.dameListaLetras().iterator();
+				while(itP1.hasNext()) {
+					String letra=itP1.next();
+					ArrayList<String> delta = automata.getAristasLetra(estado,letra);
+					if (delta != null)//automata.existeArista(estado,letra))//.deltaExtendida(estado, letra).contains(null))
+						bw.append("<td>"+/*((AutomataPila)automata) .deltaExtendida(estado, letra)*//*delta.toString()+"</td>");
+/*					else bw.append("<td></td>");
+				}
+				bw.append("</tr>");
+			}*/
+			Iterator<AristaAP> itArsAP = automata.getAutomataPila().iterator();
+	//		bw.append("<tr>");
+			while(itArsAP.hasNext()){
+				
+				AristaAP aris = itArsAP.next();
+				bw.append("<tr><td>" + aris.toString() + "</td></tr>");
+			}
+			//bw.append("</tr>");
+			
+			bw.append("</table></div>");
+			bw.append("<div id='authomata'>");
+			
+			//GENERACIñN DE LOS PASOS DE SIMPLIFICACION
+			
+			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.input",3)+"</p><img src='imagenEntrada.jpg' alt='Input'></p>");
+//			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
+	
+			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
+			
+			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
+			agic.AP_Gramatica();
+			System.out.println("AGIC getgic: " + agic.getGic());
+			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),true);
+			
+		//	gictofnc.registraControlador(this);
+		//	gictofnc.simplifica(true,false);
+			
+
+			System.out.println("dame html: " + gictofnc.getHTML());
+			//System.out.println("dame latex:" + gictofnc.getLatex());
+			bw.append(gictofnc.getHTML());
+			bw.append("</body></html>");
+			bw.close();
+
+			
+		
+		} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
+		} catch (SAXException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
+		} catch (IOException e) {
+		// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
+		}
+	
+	
+	return rutaHTML;
+		
+	}
 /**
  * Traduce a html los pasos y resultado del algoritmo de minimizacion
  * @param ruta xml con los pasos y  resultado del algortimo

@@ -28,6 +28,9 @@ public abstract class Gramatica {
 	private ArrayList<String> prodConTerminales;
 	private ArrayList<String> prodRecursivas;
 	private ArrayList<String> variablesSinProd;
+	private ArrayList<String> prodConProdUnit;
+	private ArrayList<String> prodParaAnadirEnProdUnit;
+	
 	
 	public Gramatica(){
 		this.producciones = new HashMap<String,ArrayList<Produccion>>();
@@ -39,6 +42,8 @@ public abstract class Gramatica {
 		prodConTerminales = new ArrayList<String>();
 		variablesSinProd = new ArrayList<String> ();
 		prodRecursivas = new ArrayList<String> ();
+		prodConProdUnit= new ArrayList<String> ();
+		prodParaAnadirEnProdUnit =  new ArrayList<String> ();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -55,6 +60,8 @@ public abstract class Gramatica {
 		prodMulti = new ArrayList<String>();
 		variablesSinProd = new ArrayList<String> ();
 		prodRecursivas = new ArrayList<String> ();
+		prodConProdUnit= new ArrayList<String> ();
+		prodParaAnadirEnProdUnit =  new ArrayList<String> ();
 	}
 	
 	public Gramatica(Alfabeto alf, ArrayList<Estado> est,Alfabeto_Pila alfPila){
@@ -69,6 +76,8 @@ public abstract class Gramatica {
 		prodMulti = new ArrayList<String>();
 		variablesSinProd = new ArrayList<String> ();
 		prodRecursivas = new ArrayList<String> ();
+		prodConProdUnit= new ArrayList<String> ();
+		prodParaAnadirEnProdUnit =  new ArrayList<String> ();
 	}
 	
 	public void anadeProdConTerminales(String v){prodConTerminales.add(v);}
@@ -569,6 +578,53 @@ public abstract class Gramatica {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public void quitaProdConProdUnitarias(){
+
+		Iterator<String> itpcp = this.prodConProdUnit.iterator();
+
+		while(itpcp.hasNext()){
+			String s = itpcp.next();
+			ArrayList<Produccion> np = new ArrayList<Produccion>();
+			Iterator<Produccion> itantp = producciones.get(s).iterator();
+			while(itantp.hasNext()){
+				Produccion prod = itantp.next();
+				ArrayList<String> concat = prod.getConcatenacion();
+				if(!(s.equals(this.getVariableInicial())) && (concat.size() == 1) 
+						&& !(concat.get(0).equals(s)) && (this.getVariables().contains(concat.get(0))) ){
+					System.out.println("veamos si la prod es var?: " + concat);
+				}
+				else{
+					System.out.println("veamos si la prod NO es var?estara bien?: " + concat);
+					np.add(prod);
+				}
+			}
+			//borramos lo que habia, y las metemos sin el lambda
+			producciones.remove(s);
+			producciones.put(s, np);
+		}
+		
+		
+		Iterator<String> itvar = this.prodConProdUnit.iterator();
+		Iterator<String> itanadir = this.prodParaAnadirEnProdUnit.iterator();
+		while(itvar.hasNext()){
+			String v = itvar.next();
+			String av = itanadir.next();
+			ArrayList<Produccion> lp = producciones.get(v);
+			ArrayList<Produccion> nlp = producciones.get(av);
+			Iterator<Produccion> itnlp = nlp.iterator();
+			while(itnlp.hasNext()){
+				Produccion nprod = new Produccion();
+				nprod.setConcatenacion((ArrayList<String>) itnlp.next().getConcatenacion().clone()); //XXX
+				if(!esta(nprod,lp)) lp.add(nprod);
+				
+			}
+
+		}
+		System.out.println("lo hemos hecho bien?: " + producciones);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	private Produccion comprueba(Produccion p){
 		
 		Produccion np = null;
@@ -586,240 +642,36 @@ public abstract class Gramatica {
 		if(cambiado){
 			np = new Produccion();
 			np.setConcatenacion(concat);
+			System.out.println("CAMBIADO NUEVA PRODUCCION: " + np);
 		}
 		return np;
 	}
-/*	public void quitaProdRecursivas(){
-		//las tenemos guardadas en prodRecursivas
+	public void quitaProdRecursivas(){
 
-		//boolean b = false;
-		ArrayList<String> vars = this.getVariables();
-//		ArrayList<String> varsParaBorrar = new ArrayList<String>();
-		int i = 0; int tam = vars.size();
+		Iterator<String> its = this.getVariables().iterator();
 		HashMap<String,ArrayList<Produccion>> np = new HashMap<String,ArrayList<Produccion>>();
-		//recorremos las producciones
-		while(i < tam){
-			String v = new String(this.getVariables().get(i));
-			ArrayList<Produccion> ap = this.getProducciones().get(v);
-			ArrayList<Produccion> nap = null;
-			if(this.prodRecursivas.contains(v)){ //tiene produccion recursiva!!
-												//tenemos que quitarla
-				int tamAp = ap.size();
-				if(tamAp == 1){
-					System.out.println("produccion unitaria.luego la borramos!");
-				}//produccion unitaria.
-				else{
-					int k = 0;
-					ArrayList<String> centinela = new ArrayList<String>(); 
-					centinela.add(v);
-					while(k < tamAp){
-						Produccion p = ap.get(k);
-						if (nap == null) nap = new ArrayList<Produccion>();
-						
-						if(!this.iguales(centinela, p.getConcatenacion())) nap.add(p);
-						k++;
+		while(its.hasNext()){
+			
+			String v = its.next();
+			ArrayList<Produccion> lp = this.getProducciones().get(v);
+			if(this.prodRecursivas.contains(v)){
+				Iterator<Produccion> itlp = lp.iterator();
+				Produccion centinela = new Produccion();
+				ArrayList<Produccion> nlp = new ArrayList<Produccion>();
+				centinela.anadeCadena(v);
+				while(itlp.hasNext()){
+					Produccion p = itlp.next();
+					if(!this.iguales(centinela.getConcatenacion(),p.getConcatenacion() )){
+						nlp.add(p);
 					}
-					np.put(v, ap);
 				}
+				np.put(v, nlp);
 			}
-			else{
-				np.put(v, ap);
-			}
-			
-		}
-		
-		boolean b = true;
-		
-		while(b){
-			boolean c = this.dimeSiHayVariablesQueNoTienenProd();
-			if (c) this.quitaVariablesQueNoExisten();
-			c = this.dimeSiHayVariablesQueNoTienenProd();
-		
-			boolean d = this.dimeSiHayProdUnitarias();
-			if(d) this.quitaProdUnitarias();
-			d = this.dimeSiHayProdUnitarias();
-			
-			b = c || d;
+			else{np.put(v, lp);}
 		}
 		
 		
 	}
-	
-	
-/*	public void quitaProdConLambdaMulti(){
-		//las tenemos guardadas en prodLambdaMulti
-		System.out.println("DAME LAS PRODUCCIONES\n" + this.getProducciones());
-		System.out.println("DAME LAS variables\n" + this.getVariables());
-		System.out.println("tam producciones: \n" + this.getProducciones().size());	
-		System.out.println("tam variables: \n" + this.getVariables().size());	
-		ArrayList<String> vars = this.getVariables();
-		int i = 0; int tam = vars.size();
-		HashMap<String,ArrayList<Produccion>> np = new HashMap<String,ArrayList<Produccion>>();
-		//recorremos las producciones
-		while(i < tam){
-			String v = new String(this.getVariables().get(i));
-			ArrayList<Produccion> ap = this.getProducciones().get(v);
-			ArrayList<Produccion> nap = new ArrayList<Produccion>();
-
-			int k = 0; int tamAp = ap.size();
-			while(k < tamAp){
-				Produccion p = ap.get(k);
-				ArrayList<String> concat = p.getConcatenacion();
-				int tamConcat = concat.size();
-				//si la concatenacion tiene tamaño uno, miramos si esta dentro de prodMulti
-				if(tamConcat == 1){
-						
-					String c = concat.get(0);
-					if (this.prodConLambdaMulti.contains(c)){
-						for(int m = 0; m < this.getProducciones().get(c).size(); m++){
-							Produccion aux = this.getProducciones().get(c).get(m);
-							if (!esta(aux,nap))nap.add(aux );
-							
-						}
-						//np.put(v, nap);
-					}
-					else{
-							//si no, lo dejamos como esta
-						//np.put(v, ap);
-						if(!esta(p,nap))nap.add(p);
-					}
-				}
-				else{
-						//puede haber cosas delante, detras o ambos, vamos recorriendo
-						//tenemos el tamaño de la concatenacion en tamConcat
-					int q = 0;
-					ArrayList<String> ns = new ArrayList<String>();
-					while(q < tamConcat){
-						String s = concat.get(q);
-						if(!this.prodConLambdaMulti.contains(s)){
-							ns.add(s);								
-						}
-						else{
-							//crear una produccion nueva por cada produccion ke tenga la prodConLambdaMulti
-							for(int u = 0; u < this.getProducciones().get(s).size(); u++){
-								
-								Produccion nnp = new Produccion();
-								if(!ns.isEmpty()) nnp.setConcatenacion(ns);
-								Produccion pdeLambdaMulti = this.getProducciones().get(s).get(u);
-								ArrayList<String> concatpdeLambdaMulti = pdeLambdaMulti.getConcatenacion();
-								for(int w = 0; w < concatpdeLambdaMulti.size(); w++){
-									nnp.anadeCadena(concatpdeLambdaMulti.get(w));
-								}
-								for(int w = q+1; w < tamConcat; w++){
-									nnp.anadeCadena(concat.get(w));
-								}
-								if(!esta(nnp,nap))nap.add(nnp);
-								
-							}
-						}
-							
-						q++;
-					}
-						
-				}
-				k++;	
-			}
-			i++;
-
-			np.put(v, ap);
-		}
-		
-		for(int q = 0; q < this.prodConLambdaMulti.size(); q++){
-			this.getProducciones().remove(prodConLambdaMulti.get(q));
-		}
-		
-		
-		boolean b = true;
-		
-		while(b){
-			boolean c = this.dimeSiHayVariablesQueNoTienenProd();
-			while(c){if (c) this.quitaVariablesQueNoExisten();
-			c = this.dimeSiHayVariablesQueNoTienenProd();
-			}
-			boolean d = this.dimeSiHayProdUnitarias();
-			if(d) this.quitaProdUnitarias();
-			d = this.dimeSiHayProdUnitarias();
-			
-			b = c || d;
-		}
-		
-		
-	}
-	
-	
-	
-	
-/*	public Produccion mezcla(ArrayList<String> nconcatParaP, ArrayList<String>concatDeProdMulti, 
-			ArrayList<String> concatPp,int i){
-		System.out.println("***ENTRAMOS EN MEZCLA***");
-		System.out.println("***1 nconcatParaP***" + nconcatParaP);
-		System.out.println("***2 concatDeProdMulti***" + concatDeProdMulti);
-		System.out.println("***3 concatPp***" + concatPp);
-		System.out.println("***I SIG**" + i);
-		//SI HAY ALGO EN NCONCATPARAP OCONCATPP NO PONER LAMBDAS!
-		
-		
-		Produccion p = new Produccion();
-		if (nconcatParaP != null){
-			for(int j = 0; j < nconcatParaP.size(); j++){
-				String ns = new String(nconcatParaP.get(j));
-				if (!ns.equals(lambda)){
-					if(!this.getVariables().contains(ns)){
-						
-						System.out.println("INSERVIBLE"); return null;
-					} 
-					p.anadeCadena(ns);
-				
-				
-				}			
-			}
-		}
-		System.out.println("***p despues de concatenar nconcatParaP**" + p);
-		
-//		int tamc = -1;
-		
-	//	if (concatPp != null )tamc = concatPp.size();
-		
-		System.out.println("kien eres concatDeProdMulti?" + concatDeProdMulti);
-		for(int j = 0; j < concatDeProdMulti.size(); j++){
-			System.out.println("ENTRA!");
-			//System.out.println("tamc! " + tamc); System.out.println("i!" + i);
-		//	if (tamc !=i){ //y esto xk es?
-			//	System.out.println("aki tb ENTRA!");
-				String ss = new String(concatDeProdMulti.get(j));
-				//if(!ss.equals(lambda))
-				if(!this.getVariables().contains(ss)){
-					
-					System.out.println("INSERVIBLE"); return null;
-				} 
-				p.anadeCadena(ss);
-		//	}
-		}
-		
-		System.out.println("***p despues de concatenar concatDeProdMulti**" + p);
-		
-		if(concatPp != null){
-	//		if (tamc !=i){
-				for(int j = i; j < concatPp.size(); j++){
-					String ns = new String(concatPp.get(j));//new String(nconcatParaP.get(j));
-					if (!ns.equals(lambda)){
-						if(!this.getVariables().contains(ns)){
-							
-							System.out.println("INSERVIBLE"); return null;
-						} 
-						p.anadeCadena(new String(concatPp.get(j)));
-					}//p.anadeCadena(ns);
-					
-					/*if (tamc !=i)*///p.anadeCadena(new String(concatPp.get(j)));			
-/*				}
-			
-			//}
-		}
-		System.out.println("ke me devuelves mezcla?" + p);
-		return p;
-		
-		
-	}*/
 
 	public boolean dimeSiHayProdMulti(){
 
@@ -1042,10 +894,7 @@ public abstract class Gramatica {
 	}
 	
 	public boolean dimeSiHayProdRecursivas(){
-		
-
-
-
+			
 			prodRecursivas = new ArrayList<String>();
 			ArrayList<String> vargram = getVariables();
 			HashMap<String,ArrayList<Produccion>> gramsalprod = getProducciones();
@@ -1065,6 +914,35 @@ public abstract class Gramatica {
 			return !this.prodRecursivas.isEmpty();
 		}
 
+	public boolean dimeSiHayProdConProdUnitarias(){
+		
+		prodConProdUnit = new ArrayList<String>();
+		prodParaAnadirEnProdUnit = new ArrayList<String>();
+		ArrayList<String> vargram = getVariables();
+		HashMap<String,ArrayList<Produccion>> gramsalprod = getProducciones();
+
+		int i = 0; int tam = vargram.size();
+		while(i < tam){
+			String s = vargram.get(i);
+			ArrayList<Produccion> aprod = gramsalprod.get(s);
+			Iterator<Produccion> itprod = aprod.iterator();
+			while(itprod.hasNext()){
+				Produccion p = itprod.next();
+				if((p.getConcatenacion().size() == 1)&& !s.equals(this.getVariableInicial())){
+					if(this.getVariables().contains(p.getConcatenacion().get(0)) &&
+							!p.getConcatenacion().get(0).equals(s)	){
+						prodConProdUnit.add(s);
+						prodParaAnadirEnProdUnit.add(p.getConcatenacion().get(0));
+					}
+				}
+			}
+			
+
+			i++;
+		}
+
+		return !this.prodConProdUnit.isEmpty();
+	}
 	
 	
 	
