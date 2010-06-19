@@ -572,7 +572,16 @@ public class GIC_to_FNC {
 			
 		}
 		//quitamos las lambdas que no esten en S
-		gramaticaSalida.dimeSiHayProdMulti();
+		boolean bol = gramaticaSalida.dimeSiHayProdMulti();
+		int i = 0;
+		while(bol){
+			gramaticaSalida.quitaProdMulti();
+			bol = gramaticaSalida.dimeSiHayProdMulti();
+			i++;
+			System.out.println("VUELTAS kita lambda: " + i);
+			this.limpia();
+		}
+		
 		
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
 		lat += "\\MYp{\\Huge Gram\\'{a}tica final simplificada}\n"+

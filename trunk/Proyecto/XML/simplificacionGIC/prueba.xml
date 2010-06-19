@@ -1,119 +1,44 @@
 <exit><steps>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - X - - - - - - - - - - - - A - - - X X X - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - X X X - - - - - - - - A - - - X X X - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - - X X - - - - - - - - A - - - - X X - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - - - X - - - - - - - - A - - - - - X - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
-<step><table><column><fila>  S </fila><fila>A </fila><fila>B </fila><fila>C </fila><fila>D </fila><fila>E </fila><fila>F </fila><fila>G </fila><fila>H </fila><fila>I </fila><fila>J </fila><fila>K </fila><fila>L </fila><fila>M </fila></column>S - - - - - - - - - - - - - - A - - - - - - - - - - - - - - B - - - - - - - - - - - - - - C - - - - - - - - - - - - - - D - - - - - - - - - - - - - - E - - - - - - - - - - - - - - F - - - - - - - - - - - - - - G - - - - - - - - - - - - - - H - - - - - - - - - - - - - - I - - - - - - - - - - - - - - J - - - - - - - - - - - - - - K - - - - - - - - - - - - - - L - - - - - - - - - - - - - - M - - - - - - - - - - - - - - </table></step>
+<step><table><column><fila>  S </fila><fila>A </fila></column>S - X A - - </table></step>
+<step><table><column><fila>  S </fila><fila>A </fila></column>S - - A - - </table></step>
 
 <result><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
-		<item>0</item>
-		<item>1</item>
+		<item>a</item>
+		<item>b</item>
 	</alphabet>
 		<alphabetP>
-		<item>0</item>
-		<item>1</item>
 		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>S0</state>
-		<state>S1</state>
+		<state>s0</state>
+		<state>s1</state>
 	</states>
 	<init>
-		<state>S0</state>
+		<state>s0</state>
 	</init>
 	<finals>
-		<state>S1</state>
+		<state>s0</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>0</item>
+		<state>s0</state>
+		<state>s1</state>
+		<item>a</item>
 		<cima>Z</cima>
-		<trans>0Z</trans>
+		<trans>Z</trans>
 		</arrow>
 		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>0</item>
-		<cima>1</cima>
-		<trans>01</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>1</item>
+		<state>s1</state>
+		<state>s0</state>
+		<item>b</item>
 		<cima>Z</cima>
-		<trans>1Z</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>1</item>
-		<cima>0</cima>
-		<trans>10</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>0</item>
-		<cima>0</cima>
-		<trans>00</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>1</item>
-		<cima>1</cima>
-		<trans>11</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S1</state>
-		<item>0</item>
-		<cima>0</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S1</state>
-		<item>1</item>
-		<cima>1</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>\</item>
-		<cima>Z</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S1</state>
-		<state>S1</state>
-		<item>0</item>
-		<cima>0</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S1</state>
-		<state>S1</state>
-		<item>1</item>
-		<cima>1</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S1</state>
-		<state>S1</state>
-		<item>\</item>
-		<cima>Z</cima>
-		<trans>\</trans>
+		<trans>Z</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>S0</nombre><x>192</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>592</x><y>169</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>
 </result></steps></exit>
