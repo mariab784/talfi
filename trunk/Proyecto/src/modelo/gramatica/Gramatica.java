@@ -978,4 +978,18 @@ public abstract class Gramatica {
 		}
 		return true;
 	}
+	
+	public String toHTML(){
+		//0" cellspacing="10"
+		String s = "";
+		s +="<table border=\"0\" cellspacing=\"10\" align=\"left\">";
+		s += "<tr><td border=\"0\">Variables: " + getVariables().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Variable Inicial: " + getVariableInicial().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Simbolos Terminales: " + getSimbolos().toString() + "</td></tr>";
+		s += "<tr><td border=\"0\">Producciones: " + getProducciones() +  "</td></tr></table>";
+
+		
+		
+		return s;
+	}
 }

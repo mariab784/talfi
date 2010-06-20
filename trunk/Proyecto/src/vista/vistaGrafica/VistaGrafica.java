@@ -1162,6 +1162,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 				bw.append(panelCentral.getPanel().traducirXML());
 				bw.close();
+				System.out.println("xmlfnc: " + panelCentral.getPanel().traducirXML());
 				
 			}
 			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
@@ -1207,10 +1208,12 @@ public class VistaGrafica extends JFrame implements Vista{
 				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
+					System.out.println("rutaxmlfnc" + rutaxml);
 					panelCentral.getPanel().generarImagenJPg(ruta);
 					controlador.ejecutaQuery("TALF -grfnc-p "+rutaxml);						
 					TraductorHTML trhtml=TraductorHTML.getInstancia();
 					String xmlSalida=controlador.salidaXML();
+					System.out.println("xmlsalidaes: " + xmlSalida);
 					rutahtml=trhtml.traducirPasosSimplificacionFNC(xmlSalida);
 				}
 				else controlador.ejecutaQuery("TALF -grfnc "+rutaxml);
@@ -1454,11 +1457,11 @@ public class VistaGrafica extends JFrame implements Vista{
 			if  (algoritmo == GRAMATICA){
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
-				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.pregunta",2));
+				dialog=pane.createDialog(null,m.devuelveMensaje("pasos.preguntat",2));
 				JPanel panel=new JPanel(new GridLayout(2,1));
 				JPanel botones=new JPanel();
-				JLabel pasosE=new JLabel(m.devuelveMensaje("pasos.preguntaG",2));
-				JButton aceptar=new JButton(/*m.devuelveMensaje("pasos.con",2)*/"FNG");
+				JLabel pasosE=new JLabel(m.devuelveMensaje("pasos.tipos",2));
+				JButton aceptar=new JButton(m.devuelveMensaje("pasos.fng",2));
 				aceptar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						pasos=true;
@@ -1467,7 +1470,7 @@ public class VistaGrafica extends JFrame implements Vista{
 						rutaVista=null;
 					}
 				});
-				JButton cancelar=new JButton(/*m.devuelveMensaje("pasos.sin",2)*/"FNC");
+				JButton cancelar=new JButton(m.devuelveMensaje("pasos.fnc",2));
 				cancelar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						pasos=true;

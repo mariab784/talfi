@@ -511,6 +511,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 	
 	public String traducirPasosSimplificacionFNC(String ruta)throws AutomatasException  {
 		
+		System.out.println("RUTA PASOSFNC: " + ruta);
 		Mensajero mensajero=Mensajero.getInstancia();
 		DOMParser parser = new DOMParser(); 
 		String brr=new Character((char)92).toString();

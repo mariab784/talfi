@@ -379,9 +379,13 @@
 	</equivalenciajo>
 	<pasos>
 		<pregunta>Steps?</pregunta>
+		<preguntat>Type of normal form?</preguntat>
 		<preguntaG>Do you want to see all the steps?</preguntaG>
 		<con>With steps</con>
 		<sin>Without steps</sin>
+		<tipos>Which simplification do you want?</tipos>
+		<fng>GreibachNF</fng>
+		<fnc>ChomskyNF</fnc>
 	</pasos>
 	<ejercicio>
 		<er>Regular expression</er>

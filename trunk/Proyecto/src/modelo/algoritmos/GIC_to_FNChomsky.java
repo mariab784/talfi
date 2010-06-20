@@ -1,8 +1,14 @@
 package modelo.algoritmos;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.swing.JOptionPane;
 
 import vista.vistaGrafica.AristaAP;
 
@@ -37,7 +43,7 @@ public class GIC_to_FNChomsky {
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
-		gramaticaSalida = new Chomsky(g.getVariables(),g.getSimbolos(),g.getVariableInicial());
+		//gramaticaSalida = new Chomsky(g.getVariables(),g.getSimbolos(),g.getVariableInicial());
 		xml= "<exit><steps>\n";
 		html="";
 /*		lat="";
@@ -77,6 +83,7 @@ public class GIC_to_FNChomsky {
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		relacionados = new HashMap<String,String>();
 		contador = 0;
+		html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
 		transforma_FNChomsky(b);
 
 	}
@@ -84,6 +91,11 @@ public class GIC_to_FNChomsky {
 	public GramaticaIC getGramaticaEntrada(){return gramaticaEntrada;}
 	public Chomsky getGramaticaSalida(){return gramaticaSalida;}
 	public String getHTML(){return html;}
+	public String getXML(){return xml;}
+	public void registraControlador(Controlador controlador) {
+		// TODO Auto-generated method stub
+		this.controlador=controlador;
+	}
 	@SuppressWarnings("unchecked")
 	public void transforma_FNChomsky(boolean mostrarPasos){
 		
@@ -91,7 +103,8 @@ public class GIC_to_FNChomsky {
 				gramaticaEntrada.getVariableInicial());
 		
 		System.out.println("****************************FASE 1****************************");
-		html+="****************************FASE 1****************************";
+		//xml+="<step><br>****************************FASE 1****************************<br>";
+		html+="<center>**************FASE 1**************</center>";
 		for(int i = 0; i < g1.getSimbolos().size();i++){
 			
 			String simb = g1.getSimbolos().get(i);
@@ -125,16 +138,19 @@ public class GIC_to_FNChomsky {
 			g1.getProducciones().remove(v);
 			g1.getProducciones().put(v, nprod);
 		}
+
 		html+="<br><h2>Gramatica</h2>" + g1.toHTML() + "<br>";
+		System.out.println("g1:\n" + g1);
 		System.out.println("****************************FASE 2****************************");
-		html+="****************************FASE 2****************************";
+		html+="<center>**************FASE 2**************</center>";
 		
 		boolean acabado = false;
 		Chomsky g2 = null;
 		while(!acabado){
-			 g2 = new Chomsky(g1.getVariables(),g1.getSimbolos(),g1.getProducciones(),
+			gramaticaSalida = new Chomsky(g1.getVariables(),g1.getSimbolos(),g1.getProducciones(),
 					g1.getVariableInicial());
-			
+			 g2 = gramaticaSalida;
+				System.out.println("g2:\n" + g2);
 			 relacionados = new HashMap<String,String>();
 			 
 			Iterator<String> its = g1.getVariables().iterator();
@@ -159,30 +175,70 @@ public class GIC_to_FNChomsky {
 				g2.getProducciones().put(s, nlp);
 			}
 			
-			g1 = g2;
-			html+="<br><h2>Gramatica</h2>" + g1.toHTML() + "<br>";
+			g1 = new Chomsky(g2.getVariables(),g2.getSimbolos(),g2.getProducciones(),
+					g2.getVariableInicial());
+			html+="<br><h2>Gramatica</h2>" + g2.toHTML() + "<br>";
 		}
 		
 		
-		gramaticaSalida = g2;
+		gramaticaSalida = new Chomsky(g2.getVariables(),g2.getSimbolos(),g2.getProducciones(),
+				g2.getVariableInicial());
 		System.out.println("ANTES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
 		//quitamos las lambdas que no esten en S
 		boolean bol = gramaticaSalida.dimeSiHayProdMulti();
 		int i = 0;
+		this.limpia();
 		while(bol){
 			gramaticaSalida.quitaProdMulti();
 			bol = gramaticaSalida.dimeSiHayProdMulti();
 			i++;
 			System.out.println("VUELTAS kita lambda: " + i);
+			System.out.println("GRAMATICA SALIDA EN VUELTAAS: " + gramaticaSalida);
 			this.limpia();
 		}
 		System.out.println("DESPUES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
+		
+		
+		if (mostrarPasos){
+			
+			String rutaxmlconaut="XML/pruebas/ficheroC.xml";
+			File archivo = null;
+			FileReader fr = null;
+			BufferedReader br = null;
+			String cinta = "";
+			try {
+				// Apertura del fichero y creacion de BufferedReader para poder
+				// hacer una lectura comoda (disponer del metodo readLine()).
+				archivo = new File(rutaxmlconaut);
+				fr = new FileReader (archivo);
+				br = new BufferedReader(fr);
+	        // Lectura del fichero
+				String linea;
+				while((linea=br.readLine())!=null)
+					cinta += linea+"\n";
+	        
+				br.close();
+				fr.close();
+				xml+="\n<result>"+cinta+"</result></steps></exit>";
+			}
+			//xml+="</exit>";
+			catch(FileNotFoundException e){
+				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+				
+				
+			}
+	    	catch(Exception e){
+	    		System.out.println("TROCOTRO");
+	    		e.printStackTrace();
+	    	}
+	    }
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void limpia(){
 
-//		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
+		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
 		/*Greibach*/Chomsky gramsal = this.gramaticaSalida;
 		ArrayList<String> vargram = gramsal.getVariables();
 		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
@@ -194,6 +250,7 @@ public class GIC_to_FNChomsky {
 			//System.out.println("vars " + gramsal.getVariables());
 			ArrayList<Produccion> aprod = gramsalprod.get(s);
 			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
+			System.out.println("var: " + s +"\ny sus producciones: " + aprod);
 			int j = 0; int tamProd = aprod.size();
 			while(j < tamProd){
 				Produccion pr = aprod.get(j);
@@ -203,7 +260,33 @@ public class GIC_to_FNChomsky {
 				if(!nconcat.isEmpty())npr.setConcatenacion(nconcat);
 				
 				j++;
-				if(!nconcat.isEmpty() && !esta(npr,naprod)) naprod.add(npr);
+				if(!nconcat.isEmpty() && !esta(npr,naprod)){
+					System.out.println("LIMPIANDO\n");
+					System.out.println("nconcat?:\n" + nconcat);
+					if (npr.getConcatenacion().size()==1){
+						System.out.println("Long1!!\n");
+						String cc= npr.getConcatenacion().get(0);
+						if(gramsal.getVariables().contains(cc)){
+							System.out.println("GOTCHA!!\n");
+							ArrayList<Produccion> recambio = gramsal.getProducciones().get(cc);
+							System.out.println("RECAMBIO!!: " + recambio);
+							for(int k = 0; k < recambio.size();k++){
+								Produccion nproduccion = new Produccion();
+								nproduccion.setConcatenacion(arreglaConcatenacion(
+										(ArrayList<String>) recambio.get(k).getConcatenacion().clone()));
+								if(!esta(nproduccion,naprod)){
+									naprod.add(nproduccion);
+								}
+																
+							}
+							System.out.println("naprod RECAMBIO!!: " + naprod);
+						}
+						else{naprod.add(npr);}
+					}
+					else{
+						naprod.add(npr);
+					}
+				}
 			}
 			ngramsalprod.put(s, naprod);
 			i++;
@@ -227,6 +310,7 @@ public class GIC_to_FNChomsky {
 		int i = 0;
 		while(i < tam){
 			String ss = nconcat.get(i);
+			//System.out.println("ss?" + ss);
 			if(!ss.equals(lambda) && 
 					(this.gramaticaSalida.getVariables().contains(ss)
 							|| this.gramaticaSalida.getSimbolos().contains(ss))){s.add(
@@ -248,7 +332,6 @@ public class GIC_to_FNChomsky {
 		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private Produccion creaProducciones(Chomsky g2,Produccion p){
 		Produccion np = new Produccion();
 		ArrayList<String> nconcat = new ArrayList<String>();
@@ -256,7 +339,7 @@ public class GIC_to_FNChomsky {
 
 		String nvar = null;
 		System.out.println("p: " + p);
-		ArrayList<String> ss = copiaSubconcat(p.getConcatenacion());
+		ArrayList<String> ss = copiaSubconcat(arreglaConcatenacion(p.getConcatenacion()));
 		String s = ss.toString();
 		System.out.println("relacionados: " + relacionados);
 		System.out.println("s: " + s);
@@ -270,6 +353,7 @@ public class GIC_to_FNChomsky {
 			nvar = "["+constantVar2+contador+"]";
 			contador++;
 			relacionados.put(s, nvar);
+			g2.anadeVariable(nvar);
 		}		
 		ArrayList<Produccion> nnp = convertir(ss);
 
