@@ -404,6 +404,8 @@
 		<alf>Alfabeto</alf>
 		<escribirAut>Write the exercise on the top and draw the automata</escribirAut>
 		<palabra>Words</palabra>
+		<rec> accepted</rec>
+		<nrec> not accepted</nrec>
 	</ejercicio>
 	<controlador>
 		<param>Param error</param>

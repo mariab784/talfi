@@ -67,7 +67,8 @@ public class PanelCentral extends JPanel {
 	private JButton guardar;
 	private JPanel p;
 	private JButton boton;
-	private JTextField cajitaPalabras;
+	private JTextField cajitaPalabrasSi;
+	private JTextField cajitaPalabrasNo;
 	
 	/**
 	 * Constructor del panel que recibe la vista sobre la que se a√±ade
@@ -673,17 +674,39 @@ public class PanelCentral extends JPanel {
 			
 			JToolBar expr=new JToolBar();
 			JPanel panelPalabras=new JPanel();
-			JLabel e =new JLabel(m.devuelveMensaje("ejercicio.palabra",2));
-			cajitaPalabras= new JTextField(30);
-			cajitaPalabras.setEditable(true);
-			cajitaPalabras.setEnabled(true);
-			cajitaPalabras.setVisible(true);
+			JPanel panelPalabrasNo=new JPanel();
+			JLabel e =new JLabel(/*m.devuelveMensaje("ejercicio.palabra",2)+"<html><br> a reconocer</html>"*/
+					"<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+					"<"+"br"+">"+m.devuelveMensaje("ejercicio.rec",2)+"<!--"+"html"+"-->");
+			//e.setText(m.devuelveMensaje("ejercicio.palabra",2)+"<html><br> a reconocer</html>");
+			JLabel e1 =new JLabel(/*m.devuelveMensaje("ejercicio.palabra",2)+"<html><br> a reconocer</html>"*/
+					"<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+					"<"+"br"+">"+m.devuelveMensaje("ejercicio.nrec",2)+"<!--"+"html"+"-->");
+			cajitaPalabrasSi= new JTextField(12);
+			cajitaPalabrasSi.setEditable(true);
+			cajitaPalabrasSi.setEnabled(true);
+			cajitaPalabrasSi.setVisible(true);
+			cajitaPalabrasNo= new JTextField(12);
+			cajitaPalabrasNo.setEditable(true);
+			cajitaPalabrasNo.setEnabled(true);
+			cajitaPalabrasNo.setVisible(true);
 			panelPalabras.add(e);
-			panelPalabras.add(cajitaPalabras);
-			expr.add(panelPalabras);
-			p.add(expr,BorderLayout.SOUTH);
+			panelPalabras.add(cajitaPalabrasSi);
+			
+			panelPalabras.add(e1);
+			panelPalabras.add(cajitaPalabrasNo);
+			JPanel panelPalabrasTotal=new JPanel();
+			panelPalabrasTotal.add(panelPalabras);
+			//panelPalabrasTotal.add(panelPalabrasNo);
+			expr.add(panelPalabrasTotal,BorderLayout.SOUTH);
+
+			//p.add(expr,BorderLayout.SOUTH);
 			
 			panelB.add(p,BorderLayout.SOUTH);
+			//panelB.add(panelPalabrasNo,BorderLayout.SOUTH);
+			
+			panelB.add(expr,BorderLayout.SOUTH);
+			
 			vista.activaToogleButtons();
 			VistaGrafica.setPila(true); VistaGrafica.setTuring(false);
 			this.getCanvas().setTipoAutomata("AutomataPila");
@@ -857,7 +880,7 @@ public class PanelCentral extends JPanel {
 		if(tipo.equals("AutomatasDePila")){
 			
 			fich+="TransformacionAPs</tipo><enunciado>"+enunciado.getText()+"</enunciado><output>";//"</enunciado><input>";
-			panel.creaListaPalabras(cajitaPalabras.getText());
+			panel.creaListaPalabras(cajitaPalabrasSi.getText());
 		//	System.out.println("A—ADIR LISTAPALABRAS bien?" + panel.getListaPalabras());
 			String input=panel.traducirXML();
 			String brr=new Character((char)92).toString();
