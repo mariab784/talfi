@@ -19,6 +19,7 @@ import modelo.algoritmos.AFNDLambda_to_AFND;
 import modelo.algoritmos.AFN_to_AFD;
 import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.Automatas_equivalentes;
+import modelo.algoritmos.GIC_to_FNChomsky;
 import modelo.algoritmos.GIC_to_FNG;
 import modelo.algoritmos.MinimizacionAFD;
 import modelo.automatas.Automata;
@@ -242,7 +243,7 @@ public class Controlador_imp implements Controlador{
 				//lanzamiento de algoritmo de minimizacion de automatas
 				//afdtoer(a,pasos);
 				
-				simplificacionGic(a,pasos);
+				simplificacionGic(a,pasos,0);
 				break;
 			}
 			case 9: {
@@ -262,13 +263,13 @@ public class Controlador_imp implements Controlador{
 				//lanzamiento de algoritmo de minimizacion de automatas
 				//afdtoer(a,pasos);
 				
-				simplificacionGic(a,pasos);
+				simplificacionGic(a,pasos,1);
 				break;
 			}
 		}
 	}
 
-	private void simplificacionGic(Automata a,boolean pasos) throws AutomatasException {
+	private void simplificacionGic(Automata a,boolean pasos,int tipo) throws AutomatasException {
 		//OJO A LOS PASOS
 		//Automata aux2=null;
 		//aux2=a;
@@ -279,18 +280,37 @@ public class Controlador_imp implements Controlador{
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
 			agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),pasos);
 			
-			gictofnc.registraControlador(this);
-			gictofnc.simplifica(pasos,true);
+			String xml = null;
+			if (tipo == 0){
+			GIC_to_FNG gictofng = new GIC_to_FNG(agic.getGic(),pasos);
+			
+			gictofng.registraControlador(this);
+			gictofng.simplifica(pasos,true);
 			
 			salida=agic.ejecutar(pasos); //salida es un object
-			String xml=gictofnc.getXML();
+			xml=gictofng.getXML();
+			}
+			else if(tipo == 1){
+				GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),pasos);
+				
+				gictofnc.registraControlador(this);
+				//gictofnc.simplifica(pasos,true);
+				
+				salida=agic.ejecutar(pasos); //salida es un object
+				xml=gictofnc.getXML();
+			}
 		//	System.out.println("XML SIMPLIFICACION:\n" + xml);
 						
 			
 			String brr=new Character((char)92).toString();
-			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
+			String rutaxml=null;
+			if(tipo == 0){
+				rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
+			}
+			else if (tipo ==1){
+				rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"pruebaFNC.xml";
+			}
 			//System.out.println("rutaxml: " + rutaxml);
 			File fichero = new File (rutaxml);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));

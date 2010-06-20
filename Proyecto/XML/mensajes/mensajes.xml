@@ -418,9 +418,14 @@
 	</equivalenciajo>
 	<pasos>
 		<pregunta>¿pasos?</pregunta>
-		<preguntaG>¿Quieres ver todos los pasos</preguntaG>
+		<preguntat>¿tipo de forma normal?</preguntat>		
+		<preguntaG>¿Quieres ver todos los pasos?</preguntaG>
 		<con>Con pasos</con>
 		<sin>Sin Pasos</sin>
+		<tipos>¿Que simplificación quiere?</tipos>
+		<fng>FNGreibach</fng>
+		<fnc>FNChomsky</fnc>
+		
 	</pasos>
 	<ejercicio>
 		<er>Expresion regular</er>
