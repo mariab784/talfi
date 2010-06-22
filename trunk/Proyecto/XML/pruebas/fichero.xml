@@ -5,8 +5,18 @@
 	<alphabet>
 		<item>b</item>
 		<item>a</item>
+		<item>b</item>
 	</alphabet>
 	<states>
+<<<<<<< .mine
+		<state>S2</state>
+		<state>S3</state>
+		<state>S4</state>
+		<state>S5</state>
+		<state>S6</state>
+		<state>S7</state>
+		<state>S1</state>
+=======
 		<state>t1</state>
 		<state>t2</state>
 		<state>t3</state>
@@ -14,17 +24,36 @@
 		<state>t5</state>
 		<state>t6</state>
 		<state>t7</state>
+>>>>>>> .r282
 	</states>
 	<init>
+<<<<<<< .mine
+		<state>S1</state>
+=======
 		<state>t1</state>
+>>>>>>> .r282
 	</init>
 	<finals>
+<<<<<<< .mine
+		<state>S6</state>
+		<state>S7</state>
+=======
 		<state>t3</state>
 		<state>t5</state>
 		<state>t7</state>
+>>>>>>> .r282
 	</finals>
 	<arrows>
 		<arrow>
+<<<<<<< .mine
+		<state>S2</state>
+		<state>S4</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S2</state>
+		<state>S1</state>
+=======
 		<state>t1</state>
 		<state>t2</state>
 		<item>b</item>
@@ -32,7 +61,66 @@
 		<arrow>
 		<state>t1</state>
 		<state>t3</state>
+>>>>>>> .r282
 		<item>a</item>
+<<<<<<< .mine
+	</arrow>
+		<arrow>
+		<state>S3</state>
+		<state>S5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S3</state>
+		<state>S3</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S4</state>
+		<state>S4</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S4</state>
+		<state>S6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S5</state>
+		<state>S5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S5</state>
+		<state>S7</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S6</state>
+		<state>S5</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S6</state>
+		<state>S7</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S7</state>
+		<state>S6</state>
+		<item>a</item>
+	</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S3</state>
+		<item>b</item>
+	</arrow>
+		<arrow>
+		<state>S1</state>
+		<state>S2</state>
+		<item>a</item>
+	</arrow>
+=======
 	</arrow>
 		<arrow>
 		<state>t2</state>
@@ -69,6 +157,9 @@
 		<state>t7</state>
 		<item>a</item>
 	</arrow>
+>>>>>>> .r282
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>t1</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>t2</nombre><x>585</x><y>349</y></estadoCoord><estadoCoord><nombre>t3</nombre><x>615</x><y>215</y></estadoCoord><estadoCoord><nombre>t4</nombre><x>529</x><y>106</y></estadoCoord><estadoCoord><nombre>t5</nombre><x>391</x><y>106</y></estadoCoord><estadoCoord><nombre>t6</nombre><x>305</x><y>215</y></estadoCoord><estadoCoord><nombre>t7</nombre><x>335</x><y>349</y></estadoCoord></coordenadas></authomata>
+<<<<<<< .mine
+<estadoCoord><nombre>S2</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>S3</nombre><x>585</x><y>349</y></estadoCoord><estadoCoord><nombre>S4</nombre><x>615</x><y>215</y></estadoCoord><estadoCoord><nombre>S5</nombre><x>529</x><y>106</y></estadoCoord><estadoCoord><nombre>S6</nombre><x>391</x><y>106</y></estadoCoord><estadoCoord><nombre>S7</nombre><x>305</x><y>215</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>335</x><y>349</y></estadoCoord></coordenadas></authomata>=======
+<estadoCoord><nombre>t1</nombre><x>460</x><y>410</y></estadoCoord><estadoCoord><nombre>t2</nombre><x>585</x><y>349</y></estadoCoord><estadoCoord><nombre>t3</nombre><x>615</x><y>215</y></estadoCoord><estadoCoord><nombre>t4</nombre><x>529</x><y>106</y></estadoCoord><estadoCoord><nombre>t5</nombre><x>391</x><y>106</y></estadoCoord><estadoCoord><nombre>t6</nombre><x>305</x><y>215</y></estadoCoord><estadoCoord><nombre>t7</nombre><x>335</x><y>349</y></estadoCoord></coordenadas></authomata>>>>>>>> .r282
