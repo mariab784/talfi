@@ -15,7 +15,7 @@ import java.util.*;
  *
  */
 public class CYK implements Algoritmo {
-	private GramaticaIC g;
+	private Chomsky g;
 	ArrayList<String> palabras;
 	
 	/**
@@ -39,7 +39,7 @@ public class CYK implements Algoritmo {
 		return null;
 	}
 
-	private boolean cYK(GramaticaIC g2, char[] palabra) {
+	private boolean cYK(Chomsky g2, char[] palabra) {
 		// TODO Auto-generated method stub
 		Set<String> prod = g2.getProducciones().keySet();
 		HashMap<String,Integer> aux1 = new HashMap<String, Integer>();
