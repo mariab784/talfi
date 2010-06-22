@@ -21,8 +21,10 @@ public class CYK implements Algoritmo {
 	/**
 	 * 
 	 */
-	public CYK() {
+	public CYK(Chomsky gramatica, ArrayList<String> pals) {
 		// TODO Auto-generated constructor stub
+		g = gramatica;
+		palabras = pals;
 	}
 
 	/* (non-Javadoc)
