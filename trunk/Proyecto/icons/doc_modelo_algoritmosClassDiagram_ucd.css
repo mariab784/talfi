@@ -1,0 +1,102 @@
+#doc_modelo_algoritmosClassDiagram_ucd{
+width: 726;
+height: 1756;
+overflow: hidden;
+background: url(doc_modelo_algoritmosClassDiagram_ucd.png) top left no-repeat;
+}
+#modelo_algoritmos_MinimizacionAFD{
+position: absolute;
+float: left;
+width: 183;
+height: 751;
+margin-left: 533;
+margin-top: 50;
+}
+#modelo_algoritmos_MinimizacionAFD$Pareja{
+position: absolute;
+float: left;
+width: 82;
+height: 47;
+margin-left: 0;
+margin-top: 0;
+}
+#modelo_algoritmos_Registro{
+position: absolute;
+float: left;
+width: 118;
+height: 227;
+margin-left: 515;
+margin-top: 1146;
+}
+#modelo_algoritmos_AFNDLambda_to_AFND{
+position: absolute;
+float: left;
+width: 188;
+height: 283;
+margin-left: 277;
+margin-top: 1146;
+}
+#modelo_algoritmos_ERToAFNDLambda{
+position: absolute;
+float: left;
+width: 159;
+height: 378;
+margin-left: 499;
+margin-top: 797;
+}
+#modelo_algoritmos_AFD_to_ER{
+position: absolute;
+float: left;
+width: 154;
+height: 399;
+margin-left: 295;
+margin-top: 797;
+}
+#modelo_algoritmos_AFD_to_ER$EstadoString{
+position: absolute;
+float: left;
+width: 120;
+height: 27;
+margin-left: 0;
+margin-top: 0;
+}
+#modelo_algoritmos_AutomataP_to_GramaticaIC{
+position: absolute;
+float: left;
+width: 215;
+height: 853;
+margin-left: 50;
+margin-top: 50;
+}
+#modelo_algoritmos_AFN_to_AFD{
+position: absolute;
+float: left;
+width: 177;
+height: 342;
+margin-left: 50;
+margin-top: 1146;
+}
+#modelo_algoritmos_AceptaTuring{
+position: absolute;
+float: left;
+width: 125;
+height: 219;
+margin-left: 50;
+margin-top: 1423;
+}
+#modelo_algoritmos_Automatas_equivalentes{
+position: absolute;
+float: left;
+width: 195;
+height: 368;
+margin-left: 50;
+margin-top: 797;
+}
+#modelo_algoritmos_GIC_to_FNC{
+position: absolute;
+float: left;
+width: 168;
+height: 789;
+margin-left: 315;
+margin-top: 50;
+}
