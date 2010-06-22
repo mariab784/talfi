@@ -1,0 +1,22 @@
+#doc_modeloClassDiagram_ucd{
+width: 434;
+height: 179;
+overflow: hidden;
+background: url(doc_modeloClassDiagram_ucd.png) top left no-repeat;
+}
+#modelo_AutomatasException{
+position: absolute;
+float: left;
+width: 170;
+height: 119;
+margin-left: 50;
+margin-top: 50;
+}
+#modelo_Algoritmo{
+position: absolute;
+float: left;
+width: 154;
+height: 115;
+margin-left: 270;
+margin-top: 50;
+}
