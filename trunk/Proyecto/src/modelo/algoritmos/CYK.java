@@ -19,6 +19,7 @@ public class CYK implements Algoritmo {
 	private ArrayList<String> palabras;
 	private Controlador controlador;
 	private String xml;
+	private ArrayList<Boolean> listaResultados;
 	
 	/**
 	 * 
@@ -38,6 +39,7 @@ public class CYK implements Algoritmo {
 		Iterator<String> pals = palabras.iterator();
 		while (pals.hasNext()){
 			char[] palabra = pals.next().toCharArray();
+			listaResultados.add(cYK(g, palabra));
 			System.out.println(cYK(g, palabra));
 			
 		}
