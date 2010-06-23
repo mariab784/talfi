@@ -68,4 +68,9 @@ public class Produccion {
 		
 	}
 
+	public boolean contains(String string) {
+		// TODO Auto-generated method stub
+		return this.concatenacion.contains(string);
+	}
+
 }
