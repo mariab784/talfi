@@ -9,6 +9,7 @@ import accesoBD.Mensajero;
 
 public class Chomsky extends GramaticaIC{
 	
+	private HashMap<String,ArrayList<String>> relacionados;
 	private String lambda;
 
 	@SuppressWarnings("unchecked")
@@ -43,9 +44,15 @@ public class Chomsky extends GramaticaIC{
 			ArrayList<Produccion> nproduc = clonarArrayProduc(original.get(c));
 			np.put(c, nproduc);
 		}
-		
+		 
 		return np;
 	}
+	
+
+	public void setRelacionados(HashMap<String,ArrayList<String>> r){relacionados = r;}
+
+
+	public HashMap<String,ArrayList<String>> getRelacionados(){return relacionados;}
 	
 private ArrayList<Produccion> clonarArrayProduc(ArrayList<Produccion> original){
 		
