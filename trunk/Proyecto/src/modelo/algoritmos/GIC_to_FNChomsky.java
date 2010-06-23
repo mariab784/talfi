@@ -38,6 +38,7 @@ public class GIC_to_FNChomsky {
 	private String lambda;
 	private String lat;
 	private HashMap<String,String> relacionados;
+	private HashMap<String,ArrayList<String>> relacionadosCYK;
 	//************************************************************
 	public GIC_to_FNChomsky(GramaticaIC g,boolean b){
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
@@ -85,6 +86,7 @@ public class GIC_to_FNChomsky {
 		contador = 0;
 		html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
 		transforma_FNChomsky(b);
+
 
 	}
 	
@@ -147,6 +149,7 @@ public class GIC_to_FNChomsky {
 		boolean acabado = false;
 		Chomsky g2 = null;
 		while(!acabado){
+			acabado = true;
 			gramaticaSalida = new Chomsky(g1.getVariables(),g1.getSimbolos(),g1.getProducciones(),
 					g1.getVariableInicial());
 			 g2 = gramaticaSalida;
@@ -200,6 +203,11 @@ public class GIC_to_FNChomsky {
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
 		
 		
+
+		calculaRelacionadosCYK();
+		gramaticaSalida.setRelacionados(relacionadosCYK);
+		System.out.println("RELACIONADOS: " + gramaticaSalida.getRelacionados());
+		
 		if (mostrarPasos){
 			
 			String rutaxmlconaut="XML/pruebas/ficheroC.xml";
@@ -234,6 +242,50 @@ public class GIC_to_FNChomsky {
 	    	}
 	    }
 	}
+	
+	private String dameCadena(ArrayList<String> c){
+		
+		String s = "";
+		Iterator<String> itc = c.iterator();
+		while(itc.hasNext()){
+			s+=itc.next();
+		}
+		return s;
+	}
+	
+	
+	public void calculaRelacionadosCYK(){
+		
+		relacionadosCYK = new HashMap<String,ArrayList<String>>();
+		Iterator<String> variables = this.gramaticaSalida.getVariables().iterator();
+		while(variables.hasNext()){
+			
+			String var = new String(variables.next());
+			Iterator<Produccion> itp = this.gramaticaSalida.getProducciones().get(var).iterator();
+			while(itp.hasNext()){
+				ArrayList<String> concat = itp.next().getConcatenacion();
+				if(concat.size() == 1 && concat.get(0).equals(lambda)){}
+				else{
+					String ss = new String(dameCadena(concat)); //XXX
+					if (!relacionadosCYK.containsKey(ss)){
+						ArrayList<String> nv = new ArrayList<String>();
+						nv.add(var);
+						relacionadosCYK.put(ss, nv);						
+					}
+					else{
+						ArrayList<String> nv = relacionadosCYK.get(ss);
+						nv.add(var);
+						relacionadosCYK.remove(ss);
+						relacionadosCYK.put(ss, nv);						
+					}
+					
+				}
+				
+			}
+			
+		}
+	}
+
 	
 	@SuppressWarnings("unchecked")
 	private void limpia(){

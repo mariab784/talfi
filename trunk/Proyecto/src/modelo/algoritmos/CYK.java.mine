@@ -1,7 +1,6 @@
-
 package modelo.algoritmos;
 
-
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +10,7 @@ import modelo.gramatica.Gramatica;
 import modelo.gramatica.GramaticaIC;
 import modelo.gramatica.Produccion;
 
-public class C_Y_K {
+public class CYK {
 	
 	private Chomsky g;
 	private ArrayList<String> listaPalabras;
@@ -20,7 +19,7 @@ public class C_Y_K {
 	
 	
 	@SuppressWarnings("unchecked")
-	public C_Y_K(ArrayList<String> lista, Chomsky gc){
+	public CYK(ArrayList<String> lista, Chomsky gc){
 		g = gc;
 		listaPalabras= (ArrayList<String>) lista.clone();
 		for(int i = 0; i < listaPalabras.size();i++){
@@ -28,61 +27,47 @@ public class C_Y_K {
 		}
 	}
 	
-	private String dameCadena(ArrayList<String> c){
-		
-		String s = "";
-		Iterator<String> itc = c.iterator();
-		while(itc.hasNext()){
-			s+=itc.next();
-		}
-		return s;
-	}
-	
 	public boolean construyeTabla(String palabra){
 		
 		int tam = palabra.length();
-		Produccion[][] tabla = new Produccion[tam+1][tam+1];
+		Produccion[][] tabla = new Produccion[tam][tam];
 
 
 		 for(int i =1;i<=tam;i++){
 		 	Produccion p = new Produccion();
-		 	String s = /*"["+*/palabra.charAt(i-1)/*+""+"]"*/+"";
-		 	//System.out.println("estas? " + s);
-		 	//System.out.println("en esto: " + g.getRelacionados());
+		 	String s = "["+palabra.charAt(i-1)+""+"]";
+		// 	System.out.println("estas? " + s);
+		// 	System.out.println("en esto: " + g.getRelacionados());
 		 		if(!g.getRelacionados().containsKey(s)){return false;}
 		 		else{
 		 			p.setConcatenacion(g.getRelacionados().get(s));
-		 			tabla[i][1] = p;		 			
+		 			tabla[i-1][0] = p;		 			
 		 		}
 		 }
 		 
 		 for(int j=2;j<=tam;j++){
-			 Produccion p = new Produccion();
 			 for(int i=1;i<=tam-j+1;i++){
-				 
-				 tabla[i][j] = p;
-				 for(int k = 1; k<=j-1; k++){
-					 ArrayList<String> vik = tabla[i][k].getConcatenacion();
+				 Produccion p = new Produccion();
+				 tabla[i-1][j-1] = p;
+				 for(int k = 1; k<= j-1; k++){
+					 ArrayList<String> vik = tabla[i-1][k-1].getConcatenacion();
 					 System.out.println("V"+i+k+": " + vik);
-					 ArrayList<String> vimaskjmenosk = tabla[i+k][j-k].getConcatenacion();
+					 ArrayList<String> vimaskjmenosk = tabla[i+k-1][j-k-1].getConcatenacion();
 					 System.out.println("V"+(i+k)+","+(j-k)+": " + vimaskjmenosk);
 					 for(int m = 0; m < vimaskjmenosk.size(); m++){
 						 for(int s = 0; s < vik.size(); s++){
 							 ArrayList<String> acentinel = new ArrayList<String>();
 							 acentinel.add(vik.get(s)); acentinel.add(vimaskjmenosk.get(m));
-							 String centinel = dameCadena(acentinel);
-							 System.out.println("centinel: " + centinel/*acentinel.toString()*/);
+							 System.out.println("centinel: " + acentinel.toString());
 							 System.out.println("relacionados: " + g.getRelacionados());
-							 ArrayList<String> existe = g.getRelacionados().get(centinel/*acentinel.toString()*/);
-							 System.out.println("existe: " + existe);
+							 ArrayList<String> existe = g.getRelacionados().get(acentinel.toString());
 							 if(existe == null){
 								 
 							 }
 							 else{
 								 System.out.println("EXISTE!: ");
 								 for(int mm = 0; mm < existe.size(); mm++){
-									 if(!p.getConcatenacion().contains(existe.get(mm)/*existe.toString()*/))
-										 p.anadeCadena(/*existe.toString()*/existe.get(mm));
+									 p.anadeCadena(existe.toString());
 								 }
 								 
 							 }
@@ -92,13 +77,13 @@ public class C_Y_K {
 					 }
 					 
 				 }
-				 System.out.println("tabla " + i + "," + j +": " + p);
-				 tabla[i][j] = p;
+				 
+				 tabla[i-1][j-1] = p;
 			 }	 
 			 
 		 }
 		 pintaTabla(tam,tabla);
-		 return (tabla[1][tam].getConcatenacion().contains(g.getVariableInicial()));
+		 return (tabla[0][tam-1].getConcatenacion().contains(g.getVariableInicial()));
 	}
 	
 	
@@ -117,9 +102,9 @@ public class C_Y_K {
 		}*/
 
 		System.out.println();
-		for(int i=1; i<=lon; i++){
+		for(int i=0; i<lon; i++){
 			System.out.print("i=" + i);
-			for(int j=1; j<=lon; j++){
+			for(int j=0; j<lon; j++){
 				System.out.print(" j=" + j +" ");
 
 				System.out.print(tabla[j][i]);
@@ -180,7 +165,7 @@ public class C_Y_K {
 		GIC_to_FNChomsky c = new GIC_to_FNChomsky(g,true);
 		c.calculaRelacionadosCYK();
 		System.out.println("RELACIONADOS EN ESTE Ej!: " + c.getGramaticaSalida().getRelacionados());
-		C_Y_K cyk = new C_Y_K(listaPalabras,c.getGramaticaSalida());
+		CYK cyk = new CYK(listaPalabras,c.getGramaticaSalida());
 		
 		
 	}
