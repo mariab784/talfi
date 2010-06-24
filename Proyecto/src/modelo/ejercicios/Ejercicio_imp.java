@@ -5,8 +5,11 @@ package modelo.ejercicios;
 import modelo.*;
 import modelo.algoritmos.AFNDLambda_to_AFND;
 import modelo.algoritmos.AFN_to_AFD;
+import modelo.algoritmos.AutomataP_to_GramaticaIC;
 import modelo.algoritmos.Automatas_equivalentes;
+import modelo.algoritmos.C_Y_K;
 import modelo.algoritmos.ERToAFNDLambda;
+import modelo.algoritmos.GIC_to_FNChomsky;
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.Alfabeto_Pila;
@@ -115,9 +118,20 @@ public class Ejercicio_imp implements Ejercicio{
 		// TODO Auto-generated method stub
 		boolean dePila = false;
 		boolean deTuring = false;
-		System.out.println("imprimeme respuesta a ver..." + respuesta);
-		if(respuesta instanceof AutomataPila){System.out.println("SIIIIIIIIIIIIIIPILA cambiarlo ke no cmprueba nada");
-		return false;
+		//System.out.println("imprimeme respuesta a ver..." + respuesta);
+		if(respuesta instanceof AutomataPila){
+			//System.out.println("imprimeme resultado a ver..." + resultado);
+
+			System.out.println("imprimeme respuesta a ver..." + respuesta);
+			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
+			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
+			AutomataP_to_GramaticaIC algapgic = new AutomataP_to_GramaticaIC((Automata)respuesta);
+			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(algapgic.getGic(),true);
+			C_Y_K cyk = new C_Y_K(((AutomataPila)resultado).getListaPalabrasEj(),
+					((AutomataPila)resultado).getListaPalabrasEjNo(),gictofnc.getGramaticaSalida());
+			
+			System.out.println(cyk.getAceptadas()&& cyk.getNoAceptadas());
+			return cyk.getAceptadas()&& cyk.getNoAceptadas();
 		}
 		else if(respuesta instanceof MaquinaTuring){System.out.println("SIIIIIIIIIIIIIITURING");
 		return false;
