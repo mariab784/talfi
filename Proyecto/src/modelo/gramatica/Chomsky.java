@@ -5,22 +5,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import accesoBD.Mensajero;
 
 public class Chomsky extends GramaticaIC{
 	
 	private HashMap<String,ArrayList<String>> relacionados;
-	private String lambda;
 
 	@SuppressWarnings("unchecked")
 	public Chomsky(ArrayList<String> v, ArrayList<String> s,String vInicial){
 	
-		super((ArrayList<String>) v.clone(),(ArrayList<String>) s.clone(),new HashMap<String,ArrayList<Produccion>>(),vInicial);
-
-
-		Mensajero mensajero = Mensajero.getInstancia();
-		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-
+		super((ArrayList<String>) v.clone(),(ArrayList<String>) s.clone(),
+				new HashMap<String,ArrayList<Produccion>>(),vInicial);
 	}
 
 	public Chomsky(ArrayList<String> v, ArrayList<String> s,
@@ -48,13 +42,11 @@ public class Chomsky extends GramaticaIC{
 		return np;
 	}
 	
-
 	public void setRelacionados(HashMap<String,ArrayList<String>> r){relacionados = r;}
-
 
 	public HashMap<String,ArrayList<String>> getRelacionados(){return relacionados;}
 	
-private ArrayList<Produccion> clonarArrayProduc(ArrayList<Produccion> original){
+	private ArrayList<Produccion> clonarArrayProduc(ArrayList<Produccion> original){
 		
 		ArrayList<Produccion> np = new ArrayList<Produccion>();
 		Iterator<Produccion> itNp = original.iterator();
@@ -65,13 +57,14 @@ private ArrayList<Produccion> clonarArrayProduc(ArrayList<Produccion> original){
 		return np;
 	}
 
-private Produccion clonar(Produccion original){
+	@SuppressWarnings("unchecked")
+	private Produccion clonar(Produccion original){
 	
-	Produccion p = new Produccion();
-	ArrayList<String> temporal = (ArrayList<String>) original.getConcatenacion().clone();
-	p.setConcatenacion(temporal);
+		Produccion p = new Produccion();
+		ArrayList<String> temporal = (ArrayList<String>) original.getConcatenacion().clone();
+		p.setConcatenacion(temporal);
 	
-	return p;
-}
+		return p;
+	}
 
 }

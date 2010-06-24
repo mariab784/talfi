@@ -70,6 +70,7 @@ public class AutomataCanvas extends JScrollPane {
 	private Alfabeto_Pila alfabetoPila;
 	private AlfabetoCinta alfabetoCinta;
 	private ArrayList<String> listaPalabras;
+	private ArrayList<String> listaPalabrasNo;
 	
 	
 	private boolean apd;
@@ -197,7 +198,7 @@ public class AutomataCanvas extends JScrollPane {
 	 * Establece la lista de aristas
 	 * @param listaAristas nueva lista de aristas el automata
 	 */
-	@SuppressWarnings("unchecked")
+
 	public void setListaAristas(ArrayList<Arista> lista) {
 
 			this.listaAristas = lista;
@@ -297,21 +298,30 @@ public class AutomataCanvas extends JScrollPane {
 	public String getTipoAutomata(){
 		return tipoAutomatas;
 	}
+	
 
-	public void creaListaPalabras(String l){
+
+	public void creaListaPalabras(String l,int ind){
 		
 		System.out.println("DIMEKETIENE EL LISTAPALABRAS A RECONOCER: " + l);
-		this.listaPalabras = new ArrayList<String>();
-
+		if(ind == 0)this.listaPalabras = new ArrayList<String>();
+		else if(ind == 1)this.listaPalabrasNo = new ArrayList<String>();
 		StringTokenizer st=new StringTokenizer(l,",");
 		while(st.hasMoreTokens()){
 			String ss=st.nextToken();
-			if(!listaPalabras.contains(ss))listaPalabras.add(ss);
+			if(ind == 0){
+				if(!listaPalabras.contains(ss))listaPalabras.add(ss);
+			}
+			else if (ind == 1){
+				if(!listaPalabrasNo.contains(ss))listaPalabras.add(ss);
+			}
 		}
 		System.out.println("DIMEKE HAS GUARDADO EN LISTAPALABRAS: " + listaPalabras);
 	}
 
 	public ArrayList<String> getListaPalabras(){return listaPalabras;}
+	
+	public ArrayList<String> getListaPalabrasNo(){return listaPalabrasNo;}
 	
 	/**
 	 * Pinta la arista de un AF en la interfaz grafica
@@ -681,12 +691,10 @@ public class AutomataCanvas extends JScrollPane {
 	 * @throws AutomatasException lanza la excepción si el qutomata no tiene estado inicial
 	 */
 	public String traducirXML()throws AutomatasException {
-		//Mensajero m=Mensajero.getInstancia();
+
 		if(!this.estadoInicial.equals("")&&!(this.estadoInicial==null)){
-			//String fichero = null;
-			//if (this.getPila()) fichero="<authomataP>\n\t<type>\n\t\t<item>";
-			//else if (this.getTuring())
-			/*else*/String fichero="<authomata>\n\t<type>\n\t\t<item>";
+
+			String fichero="<authomata>\n\t<type>\n\t\t<item>";
 			fichero+=tipoAutomata()+"</item>\n\t</type>\n";
 			Iterator<Arista> itArist = null; Iterator<AristaAP> itAristAP = null;
 			Iterator<AristaTuring> itAristTuring = null;
@@ -743,11 +751,9 @@ public class AutomataCanvas extends JScrollPane {
 				VistaGrafica.setEstaPalabra(false);
 				VistaGrafica.setMaricaTuring(true);
 			}
-			//if(this.getTuring())
+
 			else {
 				itArist=listaAristas.iterator();
-			//Iterator<Arista> itArist=listaAristas.iterator();
-			//se genera el alfabeto para el xml
 				while(itArist.hasNext()) {
 					String letra=itArist.next().getEtiqueta();
 					if (!alfabeto.dameListaLetras().contains(letra)) {
@@ -793,7 +799,6 @@ public class AutomataCanvas extends JScrollPane {
 		
 				}
 				
-				//se genera la lista de estados y se guarda en el xml
 				Iterator<Estado> itEst=listaEstados.iterator();
 				fichero+="<states>\n\t";
 				while(itEst.hasNext()) {
@@ -863,13 +868,6 @@ public class AutomataCanvas extends JScrollPane {
 						
 						fichero+="\t<scinta>"+a.getSimboloCinta()+"</scinta>\n\t";
 						fichero+="\t<direc>"+a.getDireccion()+"</direc>\n\t";
-						//fichero+="\t<trans>";
-						/*for(int i = 0; i < a.getSimboloCinta().size(); i++){
-							
-							fichero+=a.getSalidaPila().get(i);
-							
-						}*/
-						//fichero+="</trans>\n\t";
 						fichero+="\t</arrow>\n\t";
 					}
 				}
@@ -883,8 +881,6 @@ public class AutomataCanvas extends JScrollPane {
 						fichero+="\t<state>"+a.getDestino()+"</state>\n\t";
 						fichero+="\t<item>"+a.getEtiqueta()+"</item>\n\t</arrow>\n\t";
 					}
-					
-					////////////////////////////////////////////////////////////////////
 				}
 				fichero+="</arrows>\n";
 				
@@ -898,11 +894,8 @@ public class AutomataCanvas extends JScrollPane {
 					fichero+="</estadoCoord>";
 				}
 				fichero+="</coordenadas>";
-				////////////////////////////////////////////////////////////////////
-				//if (this.getPila())fichero+="</authomataP>";
-				//if (this.getTuring())
-				/*else*/ fichero+="</authomata>";
-				//fuera hay que decidir donde se guarda el fichero
+
+				fichero+="</authomata>";
 				return fichero;
 			} else {
 				throw new AutomatasException(m.devuelveMensaje("canvas.noarrows",2));

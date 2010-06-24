@@ -31,7 +31,6 @@ public class GIC_to_FNChomsky {
 	private Chomsky gramaticaSalida;
 	private String xml;
 	private String html;
-	private int lon;
 	@SuppressWarnings("unused")
 	private Controlador controlador;
 	private Mensajero mensajero;
