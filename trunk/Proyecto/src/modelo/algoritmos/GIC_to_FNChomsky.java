@@ -84,6 +84,7 @@ public class GIC_to_FNChomsky {
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		relacionados = new HashMap<String,String>();
 		contador = 0;
+		System.out.println("GRAMATICAENTRADAPETACONNULL: " + gramaticaEntrada);
 		html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
 		transforma_FNChomsky(b);
 
@@ -107,7 +108,7 @@ public class GIC_to_FNChomsky {
 		System.out.println("****************************FASE 1****************************");
 		//xml+="<step><br>****************************FASE 1****************************<br>";
 		html+="<center>**************FASE 1**************</center>";
-		for(int i = 0; i < g1.getSimbolos().size();i++){
+/*		for(int i = 0; i < g1.getSimbolos().size();i++){
 			
 			String simb = g1.getSimbolos().get(i);
 			String nvar = "["+constantVar+simb+"]";
@@ -115,7 +116,7 @@ public class GIC_to_FNChomsky {
 			np.anadeCadena(simb);
 			g1.anadeProduccion(nvar, np);
 			relacionados.put(simb, nvar);
-		}
+		}*/
 		
 		Iterator<String> itvar = gramaticaEntrada.getVariables().iterator();
 		while(itvar.hasNext()){
@@ -127,7 +128,7 @@ public class GIC_to_FNChomsky {
 			while(itprod.hasNext()){
 				Produccion p = itprod.next();
 				if(p.getConcatenacion().size() > 1){
-					np = comprueba(p);
+					np = comprueba(p,g1);
 					
 				}
 				else{
@@ -435,7 +436,7 @@ public class GIC_to_FNChomsky {
 		return nas;
 	}
 	@SuppressWarnings("unchecked")
-	private Produccion comprueba(Produccion p){
+	private Produccion comprueba(Produccion p, Chomsky g){
 		
 		Produccion np = new Produccion();
 		ArrayList<String> nconcat = (ArrayList<String>) p.getConcatenacion().clone();
@@ -443,8 +444,16 @@ public class GIC_to_FNChomsky {
 		int i = 0; int tam = nconcat.size();
 		while(i < tam){
 			String s = nconcat.get(i);
-			if(/*gramaticaEntrada.getSimbolos().contains(s)*/relacionados.containsKey(s)){
-				nconcat.set(i,/*"["+constantVar+s+"]"*/relacionados.get(s));
+			if(g.getSimbolos().contains(s)){
+				String var = "["+constantVar+s+"]";
+				nconcat.set(i,var);
+				if(!gramaticaEntrada.getVariables().contains(var)){
+					g.anadeVariable(var);
+					Produccion pp = new Produccion();
+					pp.anadeCadena(s);
+					g.anadeProduccion(var, pp);
+					
+				}
 			}
 			i++;			
 		}
@@ -558,7 +567,7 @@ aut.setEstadoFinal("s1");
 		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
 		
 
-		a.AP_Gramatica();
+		//a.AP_Gramatica();
 
 		
 			GIC_to_FNChomsky piticli = new GIC_to_FNChomsky(a.getGic(),true); 
