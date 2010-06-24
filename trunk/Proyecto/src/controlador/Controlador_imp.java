@@ -278,7 +278,7 @@ public class Controlador_imp implements Controlador{
 			trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			try {
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
-			agic.AP_Gramatica();
+			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
 			
 			String xml = null;
