@@ -54,6 +54,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		fondoPila = ((AutomataPila) automataEntrada).getFondoPila();
 
 		controlador=Controlador_imp.getInstancia();
+		AP_Gramatica();
 	}
 	
 
@@ -95,7 +96,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	 * a partir de un automata de pila dado.
 	 */
 	@SuppressWarnings("unchecked")
-	public GramaticaIC/*void*/ AP_Gramatica(){
+	private /*GramaticaIC*/ void AP_Gramatica(){
 		
 /*		System.out.println("********************************************");
 		System.out.println("AUTOMATA DE ENTRADA!\n" + automataEntrada);
@@ -153,7 +154,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		System.out.println("GIC ANTES TRADUCE VARIABLES:\n " + gic);
 		System.out.println("*************************************************************************");
 		traduceVariables();	
-		return gic;
+		//return gic;
 		
 	}
 	private void anadeProduccionConUnaLista(String origen,String destino,String cima, ArrayList<String> lista,
