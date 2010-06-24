@@ -407,6 +407,14 @@
 		<listaPalabras>
 			Algunas palabras reconocidas: 
 		</listaPalabras>
+		<turingsi>
+			Correcto
+		</turingsi>
+		<turingno>
+			Incorrecto
+		</turingno>
+
+
 	</vista>
 	<equivalenciajo>
 		<second>Segundo automata</second>
