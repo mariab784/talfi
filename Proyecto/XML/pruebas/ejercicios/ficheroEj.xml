@@ -1,34 +1,43 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado>uhaah</enunciado><output><authomata>
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>automata que genere por estado de aceptacion ab^n.</enunciado><output><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
 	<alphabet>
 		<item>a</item>
+		<item>b</item>
 	</alphabet>
 		<alphabetP>
 		<item>Z</item>
 	</alphabetP>
 	<states>
+		<state>s2</state>
 		<state>s1</state>
 	</states>
 	<init>
 		<state>s1</state>
 	</init>
 	<finals>
+		<state>s1</state>
 	</finals>
 	<arrows>
 		<arrow>
 		<state>s1</state>
-		<state>s1</state>
+		<state>s2</state>
 		<item>a</item>
 		<cima>Z</cima>
-		<trans>\</trans>
+		<trans>Z</trans>
+		</arrow>
+		<arrow>
+		<state>s2</state>
+		<state>s1</state>
+		<item>b</item>
+		<cima>Z</cima>
+		<trans>Z</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>349</x><y>194</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s2</nombre><x>505</x><y>104</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>304</x><y>139</y></estadoCoord></coordenadas></authomata>
 <listaPalabras>
-			<item>papapapa</item>
-			<item>ma</item>
-			<item>mi</item></listaPalabras></output>
+			<item>ab</item>
+			<item>abab</item></listaPalabras></output>
 </ejercicio>

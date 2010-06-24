@@ -9,71 +9,34 @@
 		<item>b</item>
 	</alphabet>
 		<alphabetP>
-		<item>A</item>
-		<item>B</item>
 		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>S0</state>
-		<state>S1</state>
+		<state>s0</state>
+		<state>s1</state>
 	</states>
 	<init>
-		<state>S0</state>
+		<state>s0</state>
 	</init>
 	<finals>
-		<state>S1</state>
+		<state>s0</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>S0</state>
-		<state>S0</state>
+		<state>s0</state>
+		<state>s1</state>
 		<item>a</item>
 		<cima>Z</cima>
-		<trans>AZ</trans>
+		<trans>Z</trans>
 		</arrow>
 		<arrow>
-		<state>S0</state>
-		<state>S0</state>
+		<state>s1</state>
+		<state>s0</state>
 		<item>b</item>
 		<cima>Z</cima>
-		<trans>BZ</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>a</item>
-		<cima>A</cima>
-		<trans>AA</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>b</item>
-		<cima>B</cima>
-		<trans>BB</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>a</item>
-		<cima>B</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S0</state>
-		<item>b</item>
-		<cima>A</cima>
-		<trans>\</trans>
-		</arrow>
-		<arrow>
-		<state>S0</state>
-		<state>S1</state>
-		<item>\</item>
-		<cima>Z</cima>
-		<trans>\</trans>
+		<trans>Z</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>S0</nombre><x>192</x><y>169</y></estadoCoord><estadoCoord><nombre>S1</nombre><x>592</x><y>169</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>
 </result></steps></exit>
