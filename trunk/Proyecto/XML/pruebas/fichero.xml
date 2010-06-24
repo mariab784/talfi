@@ -10,30 +10,30 @@
 		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>q0</state>
-		<state>q1</state>
+		<state>s1</state>
+		<state>s3</state>
 	</states>
 	<init>
-		<state>q0</state>
+		<state>s1</state>
 	</init>
 	<finals>
-		<state>q0</state>
+		<state>s1</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>q0</state>
-		<state>q1</state>
+		<state>s1</state>
+		<state>s3</state>
 		<item>a</item>
 		<cima>Z</cima>
 		<trans>Z</trans>
 		</arrow>
 		<arrow>
-		<state>q1</state>
-		<state>q0</state>
+		<state>s3</state>
+		<state>s1</state>
 		<item>b</item>
 		<cima>Z</cima>
 		<trans>Z</trans>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>q0</nombre><x>273</x><y>119</y></estadoCoord><estadoCoord><nombre>q1</nombre><x>532</x><y>125</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s1</nombre><x>285</x><y>103</y></estadoCoord><estadoCoord><nombre>s3</nombre><x>511</x><y>101</y></estadoCoord></coordenadas></authomata>

@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import accesoBD.Mensajero;
+
 import modelo.gramatica.Chomsky;
-import modelo.gramatica.Gramatica;
 import modelo.gramatica.GramaticaIC;
 import modelo.gramatica.Produccion;
 
@@ -18,27 +19,64 @@ public class C_Y_K {
 	private ArrayList<String> listaPalabrasNo;
 	private boolean aceptadas;
 	private boolean noAceptadas;
-	private ArrayList<Boolean> listaResultados;
+	private ArrayList<Boolean> listaResultadosSi;
+	private ArrayList<Boolean> listaResultadosNo;
 	private HashMap<String,Produccion[][]> tablas;
+	private Mensajero mensajero;
+	private String lambda;
 	
 	
 	@SuppressWarnings("unchecked")
 	public C_Y_K(ArrayList<String> lista,ArrayList<String> listaNo, Chomsky gc){
+		mensajero = Mensajero.getInstancia();
+		tablas = new HashMap<String,Produccion[][]>();
+		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		g = gc;
 		aceptadas = true;
 		noAceptadas = true;
 		listaPalabrasSi= (ArrayList<String>) lista.clone();
 		listaPalabrasNo= (ArrayList<String>) listaNo.clone();
+		String pal = null;
+		boolean b;
 		for(int i = 0; i < listaPalabrasSi.size();i++){
-			boolean b = construyeTabla(listaPalabrasSi.get(i));
-			System.out.println(b);
+			pal = listaPalabrasSi.get(i);
+			if(pal.equals(lambda)){
+				
+				b = compruebaLambda();
+			}
+			else{
+				b = construyeTabla(pal);
+				//System.out.println(b);
+			}
+			listaResultadosSi.add(b);
 			aceptadas =  b && aceptadas ;
+			
 		}
 		for(int i = 0; i < listaPalabrasNo.size();i++){
-			boolean b = construyeTabla(listaPalabrasNo.get(i));
-			System.out.println(b);
+			
+			pal = listaPalabrasNo.get(i);
+			if(pal.equals(lambda)){
+				
+				b = compruebaLambda();
+			}
+			else{
+				b = construyeTabla(pal);
+				//System.out.println(b);
+			}
+			
+			
+			//b = construyeTabla(listaPalabrasNo.get(i));
+			//System.out.println(b);
+			listaResultadosNo.add(b);
 			noAceptadas = (!b) && noAceptadas;
 		}
+	}
+
+	private boolean compruebaLambda(){
+		Produccion p = new Produccion();
+		p.anadeCadena(lambda);
+		return( g.compruebaSiEsta(p, g.getProducciones().get(g.getVariableInicial())) );
+		
 	}
 	
 	public boolean getAceptadas(){return aceptadas;}
@@ -106,7 +144,7 @@ public class C_Y_K {
 						 }
 						 
 					 }
-					 System.out.println("tabla " + i + "," + j +": " + p);
+					 //System.out.println("tabla " + i + "," + j +": " + p);
 					 tabla[i][j] = p;
 				 }
 
@@ -114,6 +152,7 @@ public class C_Y_K {
 			 
 		 }
 		 pintaTabla(tam,tabla);
+		 tablas.put(palabra, tabla);
 		 return (tabla[1][tam].getConcatenacion().contains(g.getVariableInicial()));
 	}
 	
@@ -151,7 +190,6 @@ public class C_Y_K {
 		HashMap<String,ArrayList<Produccion>> prod = new HashMap<String,ArrayList<Produccion>>();
 		ArrayList<Produccion> lp = new ArrayList<Produccion>();
 		Produccion p = new Produccion();
-		ArrayList<String> cad = new ArrayList();
 		p.anadeCadena("A"); p.anadeCadena("B"); lp.add(p);
 		p = new Produccion();
 		p.anadeCadena("B"); p.anadeCadena("C"); lp.add(p);

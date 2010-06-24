@@ -313,6 +313,10 @@ public abstract class Gramatica {
 		}
 		return false;
 	}
+	
+	public boolean compruebaSiEsta(Produccion pnueva, ArrayList<Produccion >lprod){
+		return esta(pnueva,lprod);
+	}
 
 	
 	public ArrayList<Produccion> actualizaProducciones(String v){

@@ -2,13 +2,11 @@
  * 
  */
 package modelo.automatas;
-import java.io.*;  //necesario para añadir el .txt
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import accesoBD.Mensajero;
-import vista.vistaGrafica.AristaAP;
 import vista.vistaGrafica.AristaTuring;
 /**
  * Clase que implementa la funcionalidad de las Máquina de Turing.
@@ -16,31 +14,31 @@ import vista.vistaGrafica.AristaTuring;
  *
  */
 public class MaquinaTuring extends AutomataFNDLambda implements Automata{
-//ATRIBUTOS:******************************************************	
+
 	private String estadoIni;
 	private ArrayList<String> estadosFin;
 	private Alfabeto alfabet;
 	private ArrayList<String> estados;
-	private AlfabetoCinta alfabetoCinta;    //XXX Un .txt
+	private AlfabetoCinta alfabetoCinta;
 	private ArrayList<AristaTuring> maquina;
 	private boolean termina;
 	private String blanco;
 	private Mensajero mensajero;
+	private ArrayList<String> listaPalabrasEj;
+	private ArrayList<String> listaPalabrasEjNo;
 //****************************************************************	
-//MÉTODOS*********************************************************	
+
 	/**
 	 * Constructora por defecto de la Máquina de Turing.
 	 */
 	public MaquinaTuring(){
 		super();
 		setEstadoInicial(null);
-		//setAlfabetoCinta(null);   //XXX Un .txt
 		maquina = new ArrayList<AristaTuring>();
         mensajero = Mensajero.getInstancia();
         estados = new ArrayList<String>();
         estadosFin = new ArrayList<String>();
         blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
-        //alfabetoCinta = new Alfabeto_imp();
         alfabet = new Alfabeto_imp();
         alfabetoCinta = new AlfabetoCinta();
         alfabetoCinta.aniadirLetra(blanco);
@@ -52,8 +50,7 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 	 * @param estado, estadosF, alf, est, maq, cinta.
 	 */
 	public MaquinaTuring(String estado,ArrayList<String> estadosF,Alfabeto alf,AlfabetoCinta alfCinta,
-			ArrayList<String> est, ArrayList<AristaTuring> maq//,
-			/*Alfabeto cinta*/){
+			ArrayList<String> est, ArrayList<AristaTuring> maq){
 		
 		setEstadoIni(estado);
 		setEstadosFin(estadosF);
@@ -61,7 +58,6 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 		setAlfabeto(alf);
 		setEstados(est);
 		setMaquina(maq);
-//		setAlfabetoCinta(cinta);
 		setTermina(false);
 	}
 //----------------------------------------------------------------	
@@ -140,7 +136,7 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 	public String getEstadoIni() {
 		return estadoIni;
 	}
-	
+//----------------------------------------------------------------	
 	/**
 	 * Método que devuelve estado inicial. 
 	 * @return estadosIni.
@@ -264,7 +260,6 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 		}
 		return null;
 	}
-	
 //----------------------------------------------------------------
 	/**
 	 * Método que devuelve el símbolo de cinta de la transición 
@@ -346,42 +341,32 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 			}
 			
 		}
-		
-		
 	}
-	
+//----------------------------------------------------------------	
 	public void creaAlfEntrada(String c){
 		
-		if(mensajero == null)        mensajero = Mensajero.getInstancia();
+		if(mensajero == null)       
+			mensajero = Mensajero.getInstancia();
 
-        blanco = mensajero.devuelveMensaje("simbolos.blanco",4);
-		
-        /*if(this.getAlfabet() == null)*/ alfabet = new Alfabeto_imp();
-        
+        blanco = mensajero.devuelveMensaje("simbolos.blanco",4);		
+        alfabet = new Alfabeto_imp();      
 		int i = 0; int tam = c.length();
-		while(i<tam){
-			
+		while(i<tam){			
 			char letra =  c.charAt(i); String l = letra + "";
-
 			if (!blanco.equals(l) && 
-				!this.getAlfabet().getListaLetras().contains(l)) this.getAlfabet().aniadirLetra(l);
-			
+				!this.getAlfabet().getListaLetras().contains(l)) this.getAlfabet().aniadirLetra(l);			
 			i++;
 		}
-		
-		
 	}
-	
+//----------------------------------------------------------------	
 	public void insertaArista2(String origen,String destino,ArrayList<String> simbolos,String sCinta,String dir) {
 
 		AristaTuring arist = new AristaTuring(origen,destino);
 		arist.setSimboloCinta(sCinta);
 		arist.setDireccion(dir);
 		arist.setSimbolos(simbolos);
-		anadeArista(arist);
-		
-	}
-	
+		anadeArista(arist);		
+	}	
 //----------------------------------------------------------------
 	/**
 	 * Método que añade cada una de las componentes de una arista.
@@ -391,7 +376,6 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 			String origen,String destino,ArrayList<String> simb,
 			String cint,String dir) {
 		AristaTuring arist = new AristaTuring(x1,y1,x2,y2,origen,destino);
-		//arist.setEntradaCinta(simb);
 		arist.setSimboloCinta(cint);
 		arist.setDireccion(dir);
 		anadeArista(arist);		
@@ -446,14 +430,13 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 		}	
 	}
 //----------------------------------------------------------------
-public ArrayList<AristaTuring> getAristasTuring(){
+	public ArrayList<AristaTuring> getAristasTuring(){
 	
-	return maquina;
-}
-	
-
+		return maquina;
+	}
+//----------------------------------------------------------------
 	public ArrayList<String> getEstados(){ return this.estados;} 
-
+//----------------------------------------------------------------
 	public String toString(){
 		
 		String s = "";
@@ -466,7 +449,7 @@ public ArrayList<AristaTuring> getAristasTuring(){
 		
 		return s;
 	}
-	
+//----------------------------------------------------------------	
 	/**
 	 * Método que verifica si una palabra es reconocida por la 
 	 * máquina de Turing.
@@ -477,18 +460,25 @@ public ArrayList<AristaTuring> getAristasTuring(){
 		return true;
 	}
 //----------------------------------------------------------------
-//****************************************************************
 	public void anadeEstado(String s){
 		
 		if (!estados.contains(s)) estados.add(s);
 	}
+//----------------------------------------------------------------
 	public void anadeEstadoFinal(String s){
 		
 		if (!estadosFin.contains(s)) estadosFin.add(s);
 	}
-	
+	//----------------------------------------------------------------	
 	public char getBlancoChar(){return blanco.charAt(0);}
-
+	//----------------------------------------------------------------
 	public int dameTipo(){return 4;}
+	//----------------------------------------------------------------	
+	public void setListaPalabrasEj(ArrayList<String> l){ listaPalabrasEj = l;}
+	//----------------------------------------------------------------
+	public void setListaPalabrasEjNo(ArrayList<String> l){ listaPalabrasEjNo = l;}
+	//----------------------------------------------------------------
+	public ArrayList<String> getListaPalabrasEj(){ return listaPalabrasEj;}
+	//----------------------------------------------------------------
+	public ArrayList<String> getListaPalabrasEjNo(){ return listaPalabrasEjNo;}
 }
-

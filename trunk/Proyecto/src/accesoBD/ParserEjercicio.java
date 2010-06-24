@@ -170,20 +170,12 @@ public class ParserEjercicio {
 			 i++;
 			 
 		}
-
-	/*		if (var.equals("AutomataPila")){
-				
-				input = new AutomataPila();	
-			}	*/
-			
+		
 			nodos = documento.getElementsByTagName("input");
 			
 			if(nodos.item(0) != null){
-				
-			//	if (var.equals("AutomataPila")){
 					
-					input = new AutomataPila();	
-			//	}
+				input = new AutomataPila();	
 				
 			alf=new Alfabeto_imp();
 			nodos = documento.getElementsByTagName("alphabet");
@@ -249,8 +241,8 @@ public class ParserEjercicio {
 					int indice = 0;
 					ArrayList<String> salida = new ArrayList<String>();
 					if (s5.compareTo("\\") != 0){
-						while(/*st.hasMoreTokens()*/indice < s5.length()){
-							String ss= "" + s5.charAt(indice);//st.nextToken();
+						while(indice < s5.length()){
+							String ss= "" + s5.charAt(indice);
 							salida.add(ss);
 							indice++;
 											}
@@ -268,28 +260,20 @@ public class ParserEjercicio {
 
 			nodos=documento.getElementsByTagName("estadoCoord");
 
-			//if (nodos.getLength()==0) return automata;
-			//if (nodos==null) return automata;
 			for(int i=0;i< nodos.getLength();i++) {
 				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
 						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 				input.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 			}
-		
-		
-//		return new Ejercicio_imp(enunciado,input,output,alf,alfPila,"TRANSFORMACIONPILA",ruta,pintar);
-		
+				
 		}
 		
 			
 			nodos = documento.getElementsByTagName("output");
 			
 			if(nodos.item(0) != null){
-				
-				//if (var.equals("AutomataPila")){
 					
 					output = new AutomataPila();	
-				//}
 				
 			alf=new Alfabeto_imp();
 			nodos = documento.getElementsByTagName("alphabet");
@@ -355,8 +339,8 @@ public class ParserEjercicio {
 					int indice = 0;
 					ArrayList<String> salida = new ArrayList<String>();
 					if (s5.compareTo("\\") != 0){
-						while(/*st.hasMoreTokens()*/indice < s5.length()){
-							String ss= "" + s5.charAt(indice);//st.nextToken();
+						while(indice < s5.length()){
+							String ss= "" + s5.charAt(indice);
 							salida.add(ss);
 							indice++;
 											}
@@ -374,8 +358,6 @@ public class ParserEjercicio {
 
 			nodos=documento.getElementsByTagName("estadoCoord");
 
-			//if (nodos.getLength()==0) return automata;
-			//if (nodos==null) return automata;
 			for(int i=0;i< nodos.getLength();i++) {
 				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
 						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
@@ -385,21 +367,20 @@ public class ParserEjercicio {
 			listaPalabras= new ArrayList<String>();
 			nodos = documento.getElementsByTagName("listaPalabras");
 			if(nodos.item(0) != null){
-			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
-				 i++;
-			}
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
 			}
 			output.setListaPalabrasEj(listaPalabras);
-			//System.out.println("has guardado bien eh?" + ((AutomataPila)output).getListaPalabrasEj());
 			
 			listaPalabras= new ArrayList<String>();
 			nodos = documento.getElementsByTagName("listaPalabrasNo");
 			if(nodos.item(0) != null){
-			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
-				 i++;
-			}
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
 			}
 			output.setListaPalabrasEjNo(listaPalabras);
 			System.out.println("has guardado bien las ke no eh?" + ((AutomataPila)output).getListaPalabrasEjNo());
@@ -581,18 +562,9 @@ public class ParserEjercicio {
 			 
 		}
 
-
-
-		
-			
 			nodos = documento.getElementsByTagName("output");
-			
-			//if(nodos.item(0) != null){
-				
-				//if (var.equals("AutomataPila")){
 					
-					output = new MaquinaTuring();	
-				//}
+			output = new MaquinaTuring();	
 				
 			alf=new Alfabeto_imp();
 			nodos = documento.getElementsByTagName("alphabet");
@@ -656,29 +628,7 @@ public class ParserEjercicio {
 					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
 					
 					
-					
-					//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
-				/*	int indice = 0;
-					ArrayList<String> salida = new ArrayList<String>();
-					if (s5.compareTo("#") != 0){
-						while(/*st.hasMoreTokens()*//*indice < s5.length()){
-					/*		String ss= "" + s5.charAt(indice);//st.nextToken();
-							salida.add(ss);
-							indice++; */
-					//	System.out.println("TRANS: "+ss);
-						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
-				/*		}
-					}
-					else { salida.add("#");} */
-					
-					/*System.out.println("S1: " + s1);
-					System.out.println("S2: " + s2);
-					System.out.println("S3: " + s3);
-					System.out.println("S4: " + s4);
-					System.out.println("S5: " + s5);*/
-					
 					x = x+ 10;
-					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
 					((MaquinaTuring)output).insertaArista2(s1,s2,entrada,s4,s5);									
 				}
 			}	
@@ -687,20 +637,38 @@ public class ParserEjercicio {
 
 			nodos=documento.getElementsByTagName("estadoCoord");
 
-			//if (nodos.getLength()==0) return automata;
-			//if (nodos==null) return automata;
 			for(int i=0;i< nodos.getLength();i++) {
 				Coordenadas coord=new Coordenadas((Integer.parseInt(nodos.item(i).getChildNodes().item(1).getTextContent())),
 						(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 				output.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 			}
 		
+			ArrayList<String> listaPalabras= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaPalabras");
+			if(nodos.item(0) != null){
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+			}
+			output.setListaPalabrasEj(listaPalabras);
+			
+			listaPalabras= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaPalabrasNo");
+			if(nodos.item(0) != null){
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+			}
+			output.setListaPalabrasEjNo(listaPalabras);
 		
 		
-		
-//		}
+
 			System.out.println("TURING alf: " + alf);
 			System.out.println("TURING: " + output);
+			System.out.println("cinta ke si: " + ((MaquinaTuring)output).getListaPalabrasEj());
+			System.out.println("cinta ke no: " + ((MaquinaTuring)output).getListaPalabrasEjNo());
 			return new Ejercicio_imp(enunciado,input,output,alf,alfCinta,"TURING",ruta,pintar); //XXX
 
 	}

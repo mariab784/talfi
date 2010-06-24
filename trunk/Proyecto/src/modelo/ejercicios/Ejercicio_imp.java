@@ -116,12 +116,8 @@ public class Ejercicio_imp implements Ejercicio{
 	
 	public boolean corregir(Object respuesta) throws AutomatasException {
 		// TODO Auto-generated method stub
-		boolean dePila = false;
-		boolean deTuring = false;
-		//System.out.println("imprimeme respuesta a ver..." + respuesta);
-		if(respuesta instanceof AutomataPila){
-			//System.out.println("imprimeme resultado a ver..." + resultado);
 
+		if(respuesta instanceof AutomataPila){
 			System.out.println("imprimeme respuesta a ver..." + respuesta);
 			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
 			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
@@ -133,15 +129,14 @@ public class Ejercicio_imp implements Ejercicio{
 			System.out.println(cyk.getAceptadas()&& cyk.getNoAceptadas());
 			return cyk.getAceptadas()&& cyk.getNoAceptadas();
 		}
-		else if(respuesta instanceof MaquinaTuring){System.out.println("SIIIIIIIIIIIIIITURING");
+		else if(respuesta instanceof MaquinaTuring){
+			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
+			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
+			
+			System.out.println("SIIIIIIIIIIIIIITURING");
 		return false;
 		}
 		else{
-		
-		
-		System.out.println("imprimeme entrada a ver..." + entrada);
-		System.out.println("imprimeme resultado a ver..." + resultado);
-		
 		
 		if (respuesta instanceof String) {//ES UNA EXPRESION REGULAR!!!!
 			ExpresionRegular er=null;

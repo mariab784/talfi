@@ -120,7 +120,6 @@ public class Controlador_imp implements Controlador{
 					if(args==3)
 						return 10;
 				if (opcion.equals("grfnc"))
-					//if(args==3)
 						return 11;
 				
 				if (!opcion.equals("p")&&(!opcion.equals("h")))
@@ -145,11 +144,9 @@ public class Controlador_imp implements Controlador{
 		return ParserXML.getInstancia().extraerER(query.get(2));
 	}
 
-	
 	public void registraVista(Vista v){
 		vistas.add(v);
 	}
-	
 	
 	public void ejecutaQuery(String query) throws AutomatasException{
 		int caso=analizaQuery(query);
@@ -250,7 +247,6 @@ public class Controlador_imp implements Controlador{
 				Automata a=obtenerAutomata();
 				salida = a;
 				break;
-				//System.out.println("AUTOMATA: " + a + "y ahora ke??");
 			}
 			case 10: {
 				Automata a=obtenerAutomata();
@@ -258,11 +254,7 @@ public class Controlador_imp implements Controlador{
 				System.out.println("M D TURING: " + a + "y ahora ke??");
 			}
 			case 11: {
-				//obtener automata en xml de la query tambien.
-				Automata a=obtenerAutomata();
-				//lanzamiento de algoritmo de minimizacion de automatas
-				//afdtoer(a,pasos);
-				
+				Automata a=obtenerAutomata();				
 				simplificacionGic(a,pasos,1);
 				break;
 			}
@@ -270,39 +262,27 @@ public class Controlador_imp implements Controlador{
 	}
 
 	private void simplificacionGic(Automata a,boolean pasos,int tipo) throws AutomatasException {
-		//OJO A LOS PASOS
-		//Automata aux2=null;
-		//aux2=a;
-		
 
-			trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
-			try {
+		trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
+		try {
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
-			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
 			
 			String xml = null;
 			if (tipo == 0){
-			GIC_to_FNG gictofng = new GIC_to_FNG(agic.getGic(),pasos);
-			
-			gictofng.registraControlador(this);
-			gictofng.simplifica(pasos,true);
-			
-			salida=agic.ejecutar(pasos); //salida es un object
-			xml=gictofng.getXML();
+				GIC_to_FNG gictofng = new GIC_to_FNG(agic.getGic(),pasos);
+				gictofng.registraControlador(this);
+				gictofng.simplifica(pasos,true);
+				salida=agic.ejecutar(pasos);
+				xml=gictofng.getXML();
 			}
 			else if(tipo == 1){
-				GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),pasos);
-				
-				gictofnc.registraControlador(this);
-				//gictofnc.simplifica(pasos,true);
-				
-				salida=agic.ejecutar(pasos); //salida es un object
+				GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),pasos);			
+				gictofnc.registraControlador(this);			
+				salida=agic.ejecutar(pasos); 
 				xml=gictofnc.getXML();
 			}
-		//	System.out.println("XML SIMPLIFICACION:\n" + xml);
-						
-			
+
 			String brr=new Character((char)92).toString();
 			String rutaxml=null;
 			if(tipo == 0){
@@ -311,34 +291,19 @@ public class Controlador_imp implements Controlador{
 			else if (tipo ==1){
 				rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"pruebaFNC.xml";
 			}
-			//System.out.println("rutaxml: " + rutaxml);
+
 			File fichero = new File (rutaxml);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 			bw.append(xml);
 			bw.close();
 			
 			xmlSalida=rutaxml;
-			//salida.toString();
-			
 			}
 			catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			}
-			
-
-			//se recargarña y se llmarña a la clase de pintado en la interfaz grafica con el objeto salida
-			//eso fuera de ese metodo, serña despues del ejecuta query con la salida obtenida
-
-
-	//			mensajero=Mensajero.getInstancia();
-	//			throw new AutomatasException(mensajero.devuelveMensaje("controlador.auto",2));
-			
-
-		
+		}		
 	}
-	
-
 	
 	private void minimizacion(Automata a,boolean pasos) throws AutomatasException {
 		//OJO A LOS PASOS
@@ -507,7 +472,6 @@ public class Controlador_imp implements Controlador{
 	
 	private void ayuda() {
 	}
-
 	
 	public void trataMensaje(String mensaje) {
 		// TODO Auto-generated method stub
@@ -517,8 +481,7 @@ public class Controlador_imp implements Controlador{
 		}
 		
 	}
-	
-	
+		
 	public void setIdioma(boolean idioma) {
 		Mensajero.getInstancia().setIdioma(idioma);
 	}
@@ -527,18 +490,8 @@ public class Controlador_imp implements Controlador{
 	public Object getSalida(){
 		return salida;
 	}
-	
-	
+
 	public String salidaXML() {
 		return xmlSalida;
 	}
-	
-
 }
-
-
-
-
-
-
-
