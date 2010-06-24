@@ -316,6 +316,7 @@ public class PanelCentral extends JPanel {
 						BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 						bw.append(panel.traducirXML());
 						bw.close();
+						System.out.println("KE LE PASA A RUTAXML: " + rutaxml);
 						res=ejercicio.corregir(ParserXML.getInstancia().extraerAutomata(rutaxml));
 					}
 					if (res) {
