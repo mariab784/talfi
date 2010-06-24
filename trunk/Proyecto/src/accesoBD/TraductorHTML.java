@@ -476,7 +476,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
-			agic.AP_Gramatica();
+			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
 			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),true);
 			
@@ -692,7 +692,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
-			agic.AP_Gramatica();
+			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
 			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),true);
 			

@@ -391,7 +391,18 @@ public class ParserEjercicio {
 			}
 			}
 			output.setListaPalabrasEj(listaPalabras);
-			System.out.println("has guardado bien eh?" + ((AutomataPila)output).getListaPalabrasEj());
+			//System.out.println("has guardado bien eh?" + ((AutomataPila)output).getListaPalabrasEj());
+			
+			listaPalabras= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaPalabrasNo");
+			if(nodos.item(0) != null){
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+				 i++;
+			}
+			}
+			output.setListaPalabrasEjNo(listaPalabras);
+			System.out.println("has guardado bien las ke no eh?" + ((AutomataPila)output).getListaPalabrasEjNo());
 		
 		
 		
