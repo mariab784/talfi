@@ -219,6 +219,9 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					System.out.println("S4: " + s4);
 					System.out.println("S5: " + s5);*/
 					
+
+					
+					
 					x = x+ 10;
 					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
 					((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
@@ -291,6 +294,20 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			automata.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 		}
 //		System.out.println("AUTOMATA PARSER XML: " + automata);
+		
+		
+		nodos = documento.getElementsByTagName("listaPalabras");
+		if(nodos.item(0) != null){
+			ArrayList<String> listaPalabras= new ArrayList<String>();
+			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+			 i++;
+			}
+			((AutomataPila)automata).setListaPalabrasEj(listaPalabras);
+		}
+		
+		
+		
 		return automata;		
 	}
 
