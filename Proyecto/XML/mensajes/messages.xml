@@ -368,6 +368,12 @@
 		<listaPalabras>
 			Some accepted words :
 		</listaPalabras>
+		<turingsi>
+			Correct
+		</turingsi>
+		<turingno>
+			Incorrect
+		</turingno>
 	</vista>
 	<equivalenciajo>
 		<second>Second Automata</second>
