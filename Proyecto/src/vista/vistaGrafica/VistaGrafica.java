@@ -528,7 +528,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			System.out.println("**********************************************************");
 			AutomataP_to_GramaticaIC g = new AutomataP_to_GramaticaIC(ap);
 			//System.out.println("producciones: " + g.getGic());
-			g.AP_Gramatica();
+			//g.AP_Gramatica();
 			
 //		System.out.println("gramatica boton: \n" + g.getGic());
 			
