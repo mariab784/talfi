@@ -34,6 +34,8 @@ public class C_Y_K {
 		g = gc;
 		aceptadas = true;
 		noAceptadas = true;
+		listaResultadosSi = new ArrayList<Boolean>();
+		listaResultadosNo = new ArrayList<Boolean>();
 		listaPalabrasSi= (ArrayList<String>) lista.clone();
 		listaPalabrasNo= (ArrayList<String>) listaNo.clone();
 		String pal = null;
@@ -69,7 +71,11 @@ public class C_Y_K {
 			//System.out.println(b);
 			listaResultadosNo.add(b);
 			noAceptadas = (!b) && noAceptadas;
+
 		}
+		
+		System.out.println("LISTAACEPTADAS: " + listaResultadosSi);
+		System.out.println("LISTAACEPTADASNO: " + listaResultadosNo);
 	}
 
 	private boolean compruebaLambda(){
