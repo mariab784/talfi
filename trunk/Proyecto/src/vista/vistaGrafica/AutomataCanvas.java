@@ -308,8 +308,9 @@ public class AutomataCanvas extends JScrollPane {
 		else if(ind == 1)this.listaPalabrasNo = new ArrayList<String>();
 		StringTokenizer st=new StringTokenizer(l,",");
 		while(st.hasMoreTokens()){
-			String ss=st.nextToken();
+			String ss=st.nextToken().trim();
 			if(ind == 0){
+				System.out.println("dimepalabra:"+ss+"uo");
 				if(!listaPalabras.contains(ss))listaPalabras.add(ss);
 			}
 			else if (ind == 1){
