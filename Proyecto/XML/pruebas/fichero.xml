@@ -1,42 +1,39 @@
 <authomata>
 	<type>
-		<item>AutomataFD</item>
+		<item>AutomataPila</item>
 	</type>
 	<alphabet>
 		<item>a</item>
 		<item>b</item>
 	</alphabet>
+		<alphabetP>
+		<item>Z</item>
+	</alphabetP>
 	<states>
 		<state>s1</state>
 		<state>s2</state>
 	</states>
 	<init>
-		<state>s2</state>
+		<state>s1</state>
 	</init>
 	<finals>
-		<state>s2</state>
+		<state>s1</state>
 	</finals>
 	<arrows>
 		<arrow>
 		<state>s1</state>
-		<state>s1</state>
+		<state>s2</state>
 		<item>a</item>
-	</arrow>
+		<cima>Z</cima>
+		<trans>Z</trans>
+		</arrow>
 		<arrow>
 		<state>s2</state>
 		<state>s1</state>
 		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>s1</state>
-		<state>s2</state>
-		<item>b</item>
-	</arrow>
-		<arrow>
-		<state>s2</state>
-		<state>s2</state>
-		<item>a</item>
-	</arrow>
+		<cima>Z</cima>
+		<trans>Z</trans>
+		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s1</nombre><x>274</x><y>107</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>130</x><y>125</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s1</nombre><x>248</x><y>106</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>510</x><y>86</y></estadoCoord></coordenadas></authomata>

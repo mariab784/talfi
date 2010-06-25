@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import vista.Vista;
 import controlador.Controlador;
@@ -704,14 +703,12 @@ public class PanelCentral extends JPanel {
 				JLabel e2 =new JLabel("holaketal");
 				JLabel e3 =new JLabel("holaketal");
 				JLabel e4 =new JLabel("holaketal");
-				JLabel e5 =new JLabel("holaketal");
 				
 				cajitaPalabrasSi= new JTextField(12);
 				cajitaCintaPalabrasSi= new JTextField(12);
 				cajitaPalabrasNo= new JTextField(12);
 				cajitaCintaPalabrasNo= new JTextField(12);
 				cajitaPalabrasBucle= new JTextField(12);
-				cajitaCintaPalabrasBucle= new JTextField(12);
 
 				panelPalabras.add(e);
 				panelPalabras.add(cajitaPalabrasSi);
@@ -727,9 +724,6 @@ public class PanelCentral extends JPanel {
 				
 				panelPalabras.add(e4);
 				panelPalabras.add(cajitaPalabrasBucle);
-
-				panelPalabras.add(e5);
-				panelPalabras.add(cajitaCintaPalabrasBucle);
 				
 			}
 			JPanel panelPalabrasTotal=new JPanel();

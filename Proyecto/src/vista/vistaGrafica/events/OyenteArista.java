@@ -530,16 +530,14 @@ public class OyenteArista extends MouseAdapter {
 		
 		try{
 			aristaTuring = new AristaTuring(origen.getX(),origen.getY(),destino.getX(),destino.getY(),origen.getEtiqueta(),destino.getEtiqueta());
-
+			
 			nombreArista=nomArs.getText();
+			if(nombreArista.isEmpty()) throw new NullPointerException();
 			StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
 			//aristaAP = new AristaAP(origen.getX(),origen.getY(),destino.getX(),destino.getY(),origen.getEtiqueta(),destino.getEtiqueta());
 			while(st.hasMoreTokens()){
-				String ss=st.nextToken();
-				if(canvas.getAlfabeto()==null) canvas.setAlfabeto(new Alfabeto_imp()); //alfabeto maquina (sin #)
-				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals("#")){
-					canvas.getAlfabeto().aniadirLetra(ss);
-				} 
+				String ss=st.nextToken().trim();
+
 
 				aristaTuring.anadirSimboloCintaEntrada(ss);
 			}
@@ -565,14 +563,11 @@ public class OyenteArista extends MouseAdapter {
 
 		try{
 			nombreArista=nomArs.getText();
+			if(nombreArista.isEmpty()) throw new NullPointerException();
 			StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
 			aristaAP = new AristaAP(origen.getX(),origen.getY(),destino.getX(),destino.getY(),origen.getEtiqueta(),destino.getEtiqueta());
 			while(st.hasMoreTokens()){
-				String ss=st.nextToken();
-				if(canvas.getAlfabeto()==null) canvas.setAlfabeto(new Alfabeto_imp());
-				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals(lambda)){
-					canvas.getAlfabeto().aniadirLetra(ss);
-				} 
+				String ss=st.nextToken().trim();
 
 				aristaAP.anadirSimbolo(ss);
 			}
@@ -593,7 +588,8 @@ public class OyenteArista extends MouseAdapter {
 	private void actionDireccionTuring(){ 
 		
 		try{
-			nombreArista=nomArs.getText();
+			nombreArista=nomArs.getText().trim();
+			if(nombreArista.isEmpty()) throw new NullPointerException();
 				/*if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
 				if(!canvas.getAlfabetoPila().estaLetra(nombreArista)){
 					canvas.getAlfabetoPila().aniadirLetra(nombreArista);
@@ -601,7 +597,25 @@ public class OyenteArista extends MouseAdapter {
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
 				aristaTuring.setDireccion(nombreArista);
 				canvas.anadeAristaTuring(aristaTuring); //REVISAR
+				
+				Iterator<String> its = aristaTuring.getEntradaCinta().iterator();
+				while(its.hasNext()){
+					String ss = its.next();
+				if(canvas.getAlfabeto()==null) canvas.setAlfabeto(new Alfabeto_imp()); //alfabeto maquina (sin #)
+				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals("#")){
+					canvas.getAlfabeto().aniadirLetra(ss);
+				} 
+				}
+				if(canvas.getAlfabetoCinta()==null) 
+					canvas.setAlfabetoCinta(new AlfabetoCinta());
+				
+				if(!canvas.getAlfabetoCinta().estaLetra(aristaTuring.getSimboloCinta())){
+					canvas.getAlfabetoCinta().aniadirLetra(aristaTuring.getSimboloCinta());
+				}
+				
 				dialog.setVisible(false);
+				
+				
 			//dialogTransicionPila();
 		} catch(NullPointerException ex){ //METER ERROR NUEVO
 			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
@@ -612,10 +626,8 @@ public class OyenteArista extends MouseAdapter {
 		
 		try{
 			nombreArista=nomArs.getText();
-				if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-				if(!canvas.getAlfabetoPila().estaLetra(nombreArista.toUpperCase()) && !nombreArista.equals(lambda)){
-					canvas.getAlfabetoPila().aniadirLetra(nombreArista.toUpperCase());
-				} //System.out.println(nombreArista);//XXX
+			if(nombreArista.isEmpty()) throw new NullPointerException();
+				 //System.out.println(nombreArista);//XXX
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
 				aristaAP.setCimaPila(nombreArista.toUpperCase());
 			dialog.setVisible(false);
@@ -680,12 +692,8 @@ public class OyenteArista extends MouseAdapter {
 	
 		try{
 			nombreArista=nomArs.getText();
-				if(canvas.getAlfabetoCinta()==null) 
-					canvas.setAlfabetoCinta(new AlfabetoCinta());
-				
-				if(!canvas.getAlfabetoCinta().estaLetra(nombreArista)){
-					canvas.getAlfabetoCinta().aniadirLetra(nombreArista);
-				} //System.out.println(nombreArista);//XXX
+			if(nombreArista.isEmpty()) throw new NullPointerException();
+ //System.out.println(nombreArista);//XXX
 				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
 				aristaTuring.setSimboloCinta(nombreArista);
 			dialog.setVisible(false);
@@ -780,7 +788,8 @@ public class OyenteArista extends MouseAdapter {
 		  
 		try{
 			nombreArista=nomArs.getText();
-			String s = nomArs.getText();
+			if(nombreArista.isEmpty()) throw new NullPointerException();
+			String s = nomArs.getText().trim();
 			int i = 0;
 			while(i < s.length()){
 				String ss= "" + s.charAt(i);
@@ -793,6 +802,22 @@ public class OyenteArista extends MouseAdapter {
 				i++;
 			}
 			dialog.setVisible(false);
+			
+			
+			if(canvas.getAlfabeto()==null) canvas.setAlfabeto(new Alfabeto_imp());
+			Iterator<String> its = aristaAP.getEntradaSimbolos().iterator();
+			while(its.hasNext()){
+				String ss = its.next();
+				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals(lambda)){
+					canvas.getAlfabeto().aniadirLetra(ss);
+				} 
+			}
+			
+			if(!canvas.getAlfabetoPila().estaLetra(aristaAP.getCimaPila().toUpperCase()) 
+					&& !nombreArista.equals(lambda)){
+				canvas.getAlfabetoPila().aniadirLetra(aristaAP.getCimaPila().toUpperCase());
+			}
+			
 
 			canvas.anadeAristaAP(aristaAP);
 
