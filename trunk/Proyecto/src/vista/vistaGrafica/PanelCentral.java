@@ -357,7 +357,8 @@ public class PanelCentral extends JPanel {
 //		panelB.add(expr);//XXX
 		
 		center.add(new JScrollPane(enunciado));
-		aux.add(center,BorderLayout.CENTER);
+		aux.add(center,BorderLayout./*CENTER*/NORTH);
+		System.out.println("buscame por si lo revientas");
 		aux.add(panelB,BorderLayout.SOUTH);
 		add(aux,BorderLayout.NORTH);
 		panel=new AutomataCanvas(vista);
@@ -635,9 +636,13 @@ public class PanelCentral extends JPanel {
 			setVisible(true);
 		}
 		panelB.removeAll();
-		panelB.add(corregir);
-		panelB.add(mandar);
-		aux.add(center,BorderLayout.CENTER);
+		JPanel pbotones = new JPanel();
+		pbotones.add(corregir);
+		pbotones.add(mandar);
+		//panelB.add(corregir);
+		//panelB.add(mandar);
+		panelB.add(pbotones,BorderLayout.SOUTH);
+		aux.add(center,BorderLayout./*CENTER*/NORTH);
 		aux.add(panelB,BorderLayout.SOUTH);
 		add(aux,BorderLayout.NORTH);
 		add(panel,BorderLayout.CENTER);
@@ -662,10 +667,10 @@ public class PanelCentral extends JPanel {
 				corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
 				guardar.addActionListener(new OyenteGuardarEjercicio("AutomatasDePila",vista));
 			}
-			p=new JPanel();			
-			p.add(guardar);
+			//p=new JPanel();			
+			/*p*//*panelB*/pbotones.add(guardar);
 						
-			JToolBar expr=new JToolBar();
+			/*JToolBar*/JPanel expr=new JPanel();//JToolBar();
 			JPanel panelPalabras=new JPanel();
 			JLabel e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 					"<"+"br"+">"+m.devuelveMensaje("ejercicio.rec",2)+"<!--"+"html"+"-->");
@@ -684,13 +689,33 @@ public class PanelCentral extends JPanel {
 			
 			panelPalabras.add(e1);
 			panelPalabras.add(cajitaPalabrasNo);
+			if(tipo.equals("MaquinaTuring")){
+				//panelPalabras.add(e);
+				JTextField cj1 = new JTextField(15);
+				panelPalabras.add(cj1);
+				
+				//panelPalabras.add(e1);
+				
+				JTextField cj2 = new JTextField(15);
+				panelPalabras.add(cj2);
+				//panelPalabras.add(e);
+				JTextField cj3 = new JTextField(15);
+				panelPalabras.add(cj3);
+				
+				//panelPalabras.add(e1);
+				JTextField cj4 = new JTextField(15);
+				panelPalabras.add(cj4);
+				
+			}
 			JPanel panelPalabrasTotal=new JPanel();
 			panelPalabrasTotal.add(panelPalabras);
 
-			expr.add(panelPalabrasTotal,BorderLayout.SOUTH);
-			panelB.add(expr,BorderLayout.SOUTH);
+			//expr.add(panelPalabrasTotal,BorderLayout/*.SOUTH*/.WEST);
+		//	panelB.add(p,BorderLayout.SOUTH); //p es var de clase
+			aux.add(panelPalabrasTotal,BorderLayout.CENTER);
+			panelB/*aux*/.add(expr,BorderLayout.CENTER);
 			
-			panelB.add(p,BorderLayout.SOUTH);
+			
 			vista.activaToogleButtons();
 			
 			if(tipo.equals("AutomatasDePila")){
