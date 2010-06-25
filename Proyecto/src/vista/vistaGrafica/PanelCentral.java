@@ -69,7 +69,10 @@ public class PanelCentral extends JPanel {
 	private JButton boton;
 	private JTextField cajitaPalabrasSi;
 	private JTextField cajitaPalabrasNo;
-	
+	private JTextField cajitaPalabrasBucle;
+	private JTextField cajitaCintaPalabrasSi;
+	private JTextField cajitaCintaPalabrasNo;
+	private JTextField cajitaCintaPalabrasBucle;
 	/**
 	 * Constructor del panel que recibe la vista sobre la que se añade
 	 * @param v vista grñfica que contiene el panel
@@ -383,6 +386,7 @@ public class PanelCentral extends JPanel {
 		}
 		panelB.add(corregir);
 		panelB.add(mandar);
+		aux.removeAll(); //XXX
 		aux.add(center,BorderLayout.CENTER);
 		aux.add(panelB,BorderLayout.SOUTH);
 		add(aux,BorderLayout.NORTH);
@@ -671,40 +675,61 @@ public class PanelCentral extends JPanel {
 			/*p*//*panelB*/pbotones.add(guardar);
 						
 			/*JToolBar*/JPanel expr=new JPanel();//JToolBar();
-			JPanel panelPalabras=new JPanel();
-			JLabel e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+			JPanel panelPalabras=new JPanel();JLabel e;JLabel e1;
+			if (tipo.equals("AutomatasDePila")){
+			e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 					"<"+"br"+">"+m.devuelveMensaje("ejercicio.rec",2)+"<!--"+"html"+"-->");
-			JLabel e1 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+			e1 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 					"<"+"br"+">"+m.devuelveMensaje("ejercicio.nrec",2)+"<!--"+"html"+"-->");
-			cajitaPalabrasSi= new JTextField(12);
-			cajitaPalabrasSi.setEditable(true);
-			cajitaPalabrasSi.setEnabled(true);
-			cajitaPalabrasSi.setVisible(true);
-			cajitaPalabrasNo= new JTextField(12);
-			cajitaPalabrasNo.setEditable(true);
-			cajitaPalabrasNo.setEnabled(true);
-			cajitaPalabrasNo.setVisible(true);
+			cajitaPalabrasSi= new JTextField(20);
+//			cajitaPalabrasSi.setEditable(true);
+//			cajitaPalabrasSi.setEnabled(true);
+//			cajitaPalabrasSi.setVisible(true);
+			cajitaPalabrasNo= new JTextField(20);
+//			cajitaPalabrasNo.setEditable(true);
+//			cajitaPalabrasNo.setEnabled(true);
+//			cajitaPalabrasNo.setVisible(true);
 			panelPalabras.add(e);
 			panelPalabras.add(cajitaPalabrasSi);
 			
 			panelPalabras.add(e1);
 			panelPalabras.add(cajitaPalabrasNo);
+			}
 			if(tipo.equals("MaquinaTuring")){
-				//panelPalabras.add(e);
-				JTextField cj1 = new JTextField(15);
-				panelPalabras.add(cj1);
+				e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+						"<"+"br"+">"+m.devuelveMensaje("ejercicio.rec",2)+"<!--"+"html"+"-->");
+				e1 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+						"<"+"br"+">"+m.devuelveMensaje("ejercicio.nrec",2)+"<!--"+"html"+"-->");
 				
-				//panelPalabras.add(e1);
+				JLabel e2 =new JLabel("holaketal");
+				JLabel e3 =new JLabel("holaketal");
+				JLabel e4 =new JLabel("holaketal");
+				JLabel e5 =new JLabel("holaketal");
 				
-				JTextField cj2 = new JTextField(15);
-				panelPalabras.add(cj2);
-				//panelPalabras.add(e);
-				JTextField cj3 = new JTextField(15);
-				panelPalabras.add(cj3);
+				cajitaPalabrasSi= new JTextField(12);
+				cajitaCintaPalabrasSi= new JTextField(12);
+				cajitaPalabrasNo= new JTextField(12);
+				cajitaCintaPalabrasNo= new JTextField(12);
+				cajitaPalabrasBucle= new JTextField(12);
+				cajitaCintaPalabrasBucle= new JTextField(12);
+
+				panelPalabras.add(e);
+				panelPalabras.add(cajitaPalabrasSi);
 				
-				//panelPalabras.add(e1);
-				JTextField cj4 = new JTextField(15);
-				panelPalabras.add(cj4);
+				panelPalabras.add(e1);
+				panelPalabras.add(cajitaCintaPalabrasSi);
+				
+				panelPalabras.add(e2);
+				panelPalabras.add(cajitaPalabrasNo);
+
+				panelPalabras.add(e3);
+				panelPalabras.add(cajitaCintaPalabrasNo);
+				
+				panelPalabras.add(e4);
+				panelPalabras.add(cajitaPalabrasBucle);
+
+				panelPalabras.add(e5);
+				panelPalabras.add(cajitaCintaPalabrasBucle);
 				
 			}
 			JPanel panelPalabrasTotal=new JPanel();
@@ -927,17 +952,18 @@ public class PanelCentral extends JPanel {
 					lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
 				}
 			}
-			lp += "</listaPalabras>";
+			lp += "</listaPalabras>\n";
 			
 			panel.creaListaPalabras(cajitaPalabrasNo.getText(),1);
 			lp += "<listaPalabrasNo>";
+			System.out.println();
 			if(!panel.getListaPalabrasNo().isEmpty()){
 				Iterator<String> itLp = panel.getListaPalabrasNo().iterator();
 				while(itLp.hasNext()){
 					lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
 				}
 			}
-			lp += "</listaPalabrasNo>";
+			lp += "</listaPalabrasNo>\n";
 			
 			
 			fich+=input+"\n"+lp+"</output>";
@@ -1095,6 +1121,22 @@ public class PanelCentral extends JPanel {
 		public void actionPerformed(ActionEvent e){
 			Mensajero m=Mensajero.getInstancia();
 			try {
+				
+				if(tipo.equals("MaquinaTuring")){
+					
+					System.out.println("cajitaPalabrasSi: " + cajitaPalabrasSi.getText());
+					System.out.println("cajitaCintaPalabrasSi: " + cajitaCintaPalabrasSi.getText());
+					
+					if((cajitaPalabrasSi.getText().length() == cajitaCintaPalabrasSi.getText().length())
+						&&(cajitaPalabrasNo.getText().length() == cajitaCintaPalabrasNo.getText().length())
+						&&(cajitaPalabrasBucle.getText().length() == cajitaCintaPalabrasBucle.getText().length())){
+						System.out.println("oooooook");
+					}
+					else{
+						System.out.println("NOOOOOOOOOOOOOOOOOOOOOOO");
+					}
+				}
+				
 				String texto=traducirXMLEjercicio(tipo);
 				JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(

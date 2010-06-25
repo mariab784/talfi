@@ -313,7 +313,7 @@ public class AutomataCanvas extends JScrollPane {
 				if(!listaPalabras.contains(ss))listaPalabras.add(ss);
 			}
 			else if (ind == 1){
-				if(!listaPalabrasNo.contains(ss))listaPalabras.add(ss);
+				if(!listaPalabrasNo.contains(ss))listaPalabrasNo.add(ss);
 			}
 		}
 		System.out.println("DIMEKE HAS GUARDADO EN LISTAPALABRAS: " + listaPalabras);
