@@ -49,6 +49,10 @@ public class TuringResultado {
 		boolean b = true;
 		System.out.println("tieneFinales: " + tieneFinales);
 		System.out.println("listaPal: " + listaPal);
+		System.out.println("listaCintaPal: " + listaCintaPal);
+		System.out.println("listaPalNo: " + listaPalNo);
+		System.out.println("listaCintaPalNo: " + listaCintaPalNo);
+		System.out.println("listaBucle: " + listaBucle);
 		
 		if(listaPal != null){
 		tam = listaPal.size();
@@ -61,10 +65,10 @@ public class TuringResultado {
 				b =  (aceptaTuring.simulaEjecucion(s,null) == 1);
 			}
 			else{
-
+				System.out.println("sin finales 1 ");
 				b =  (aceptaTuring.simulaEjecucion(s,listaCintaPal.get(i)) == 1);
 			}
-
+			System.out.println("sin finales 1 b: " + b);
 			resultPal.add(b);
 			
 			r1 = b&&r1;
@@ -84,8 +88,11 @@ public class TuringResultado {
 			else{
 				b =  (aceptaTuring.simulaEjecucion(s,listaCintaPalNo.get(i)) == 2);
 			}
+			System.out.println("sin finales 2 b: " + b);
 			resultPalNo.add(b);
+			
 			r2 = b&&r2;
+			System.out.println("r2 me trae de cabeza : " + r2);
 		}
 		}
 		
@@ -101,7 +108,11 @@ public class TuringResultado {
 		}
 		}
 
+		System.out.println("r1 me trae de cabeza : " + r1);
+		System.out.println("r2 me trae de cabeza : " + r2);
+		System.out.println("r3 me trae de cabeza : " + r3);
 		result = r1&&r2&&r3;
+		System.out.println("result : " + result);
 
 	}
 }

@@ -659,6 +659,16 @@ public class ParserEjercicio {
 			}
 			output.setListaPalabrasEj(listaPalabras);
 			
+			ArrayList<String> listaCintaPalabras= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaCintaPalabras");
+			if(nodos.item(0) != null){
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaCintaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+			}
+			output.setListaCintaPalabrasEj(listaCintaPalabras);
+			
 			listaPalabras= new ArrayList<String>();
 			nodos = documento.getElementsByTagName("listaPalabrasNo");
 			if(nodos.item(0) != null){
@@ -669,8 +679,26 @@ public class ParserEjercicio {
 			}
 			output.setListaPalabrasEjNo(listaPalabras);
 		
+			ArrayList<String> listaCintaPalabrasNo= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaCintaPalabrasNo");
+			if(nodos.item(0) != null){
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaCintaPalabrasNo.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+			}
+			output.setListaCintaPalabrasEjNo(listaCintaPalabrasNo);
 		
-
+			ArrayList<String> listaPalabrasBucle= new ArrayList<String>();
+			nodos = documento.getElementsByTagName("listaPalabrasBucle");
+			if(nodos.item(0) != null){
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabrasBucle.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+			}
+			output.setListaPalabrasBucleEj(listaPalabrasBucle);
+			
 			System.out.println("TURING alf: " + alf);
 			System.out.println("TURING: " + output);
 			System.out.println("cinta ke si: " + ((MaquinaTuring)output).getListaPalabrasEj());
