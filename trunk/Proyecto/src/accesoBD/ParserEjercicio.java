@@ -164,6 +164,7 @@ public class ParserEjercicio {
 		enunciado=tipoEnun.item(0).getTextContent();
 		
 		NodeList nodos = documento.getElementsByTagName("type");
+		@SuppressWarnings("unused")
 		String var = null;
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
 			 var = nodos.item(0).getChildNodes().item(i).getTextContent();
@@ -531,10 +532,10 @@ public class ParserEjercicio {
 		Alfabeto alf=null;
 		AlfabetoCinta alfCinta=null;
 		try {
+
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 
-			
-			
+
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -547,7 +548,7 @@ public class ParserEjercicio {
 			e.printStackTrace();
 			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
 		}
-		
+		System.out.println("marronazo");
 		Document documento = parser.getDocument();
 		String pintar = null;
 		
@@ -555,6 +556,7 @@ public class ParserEjercicio {
 		enunciado=tipoEnun.item(0).getTextContent();
 		
 		NodeList nodos = documento.getElementsByTagName("type");
+		@SuppressWarnings("unused")
 		String var = null;
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
 			 var = nodos.item(0).getChildNodes().item(i).getTextContent();

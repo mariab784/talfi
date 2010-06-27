@@ -1,6 +1,6 @@
 package vista.vistaGrafica.events;
 
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -40,10 +40,8 @@ import vista.vistaGrafica.AristaTuring;
 import vista.vistaGrafica.AutomataCanvas;
 import vista.vistaGrafica.CurvedArrow;
 import vista.vistaGrafica.Estado;
-import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
-import javax.swing.*;
+
 /**
  * Clase que se encarga de añadir las aristas al dibujo si la infromación
  * que se le pide al usuario es correcta 
@@ -269,7 +267,7 @@ public class OyenteArista extends MouseAdapter {
 	 * letras que llevará la arista
 	 * @param e evento de soltado de tecla 
 	 */
-	@SuppressWarnings("static-access")
+
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -602,7 +600,7 @@ public class OyenteArista extends MouseAdapter {
 				while(its.hasNext()){
 					String ss = its.next();
 				if(canvas.getAlfabeto()==null) canvas.setAlfabeto(new Alfabeto_imp()); //alfabeto maquina (sin #)
-				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals("#")){
+				if(!canvas.getAlfabeto().estaLetra(ss) && !ss.equals(blanco)){
 					canvas.getAlfabeto().aniadirLetra(ss);
 				} 
 				}

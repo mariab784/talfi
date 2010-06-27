@@ -26,6 +26,9 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 	private Mensajero mensajero;
 	private ArrayList<String> listaPalabrasEj;
 	private ArrayList<String> listaPalabrasEjNo;
+	private ArrayList<String> listaCintaPalabrasEj;
+	private ArrayList<String> listaCintaPalabrasEjNo;
+	private ArrayList<String> listaPalabrasBucleEj;
 //****************************************************************	
 
 	/**
@@ -478,7 +481,21 @@ public class MaquinaTuring extends AutomataFNDLambda implements Automata{
 	//----------------------------------------------------------------
 	public void setListaPalabrasEjNo(ArrayList<String> l){ listaPalabrasEjNo = l;}
 	//----------------------------------------------------------------
+	public void setListaCintaPalabrasEj(ArrayList<String> l){ listaCintaPalabrasEj = l;}
+	//----------------------------------------------------------------
+	public void setListaCintaPalabrasEjNo(ArrayList<String> l){ listaCintaPalabrasEjNo = l;}
+	//----------------------------------------------------------------
+	public void setListaPalabrasBucleEj(ArrayList<String> l){ listaPalabrasBucleEj = l;}
+	//----------------------------------------------------------------
+	public ArrayList<String> getListaCintaPalabrasEj(){ return listaCintaPalabrasEj;}
+	//----------------------------------------------------------------
+	public ArrayList<String> getListaCintaPalabrasEjNo(){ return listaCintaPalabrasEjNo;}
+	//----------------------------------------------------------------
 	public ArrayList<String> getListaPalabrasEj(){ return listaPalabrasEj;}
 	//----------------------------------------------------------------
 	public ArrayList<String> getListaPalabrasEjNo(){ return listaPalabrasEjNo;}
+	//----------------------------------------------------------------
+	public ArrayList<String> getListaPalabrasBucleEj(){ return listaPalabrasBucleEj;}
+	//----------------------------------------------------------------
+
 }

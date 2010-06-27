@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import accesoBD.Mensajero;
 
 import vista.vistaGrafica.AristaTuring;
 
+import modelo.AutomatasException;
 import modelo.automatas.MaquinaTuring;
  
 
@@ -24,14 +26,224 @@ public class AceptaTuring {
 	private int cotaMax;
 	private Mensajero mensajero;
 //****************************************************************	
-	public AceptaTuring(String r, MaquinaTuring m){
+	public AceptaTuring(MaquinaTuring m){
+		maquina = m; mensajero=Mensajero.getInstancia();
 		
-		ruta = r; maquina = m; mensajero=Mensajero.getInstancia();
+	}
+	public AceptaTuring(String r, MaquinaTuring m){
+		this(m);
+		ruta = r; 
 	}
 	
-//MÉTODOS*********************************************************	
-	public void acepta() {
+	private void cargaArchivo(){
+		
 		File archivo = null;
+	    FileReader fr = null;
+	    BufferedReader br = null;
+	    String cinta = "";
+	    try {
+	    	// Apertura del fichero y creacion de BufferedReader para poder
+	        // hacer una lectura comoda (disponer del metodo readLine()).
+	        archivo = new File(ruta);
+	        fr = new FileReader (archivo);
+	        br = new BufferedReader(fr);
+	        // Lectura del fichero
+	        String linea;
+	        while((linea=br.readLine())!=null)
+	        	cinta += linea;
+	        System.out.println("Hola cinta: " + cinta);//cinta inicial
+	        ejecuta(cinta,null,false);
+	    }
+	    catch(FileNotFoundException e){
+	    	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+	    }
+	    catch(Exception e){
+	       	System.out.println("TROCOTRO");
+	       	e.printStackTrace();
+	    }
+	}
+	
+	public int simulaEjecucion(String c,String cf){
+		
+		return ejecuta(c,cf,true);
+	}
+	
+	private int ejecuta(String c,String cf, boolean corregir){
+	
+		String cinta = c;
+
+		try {
+		ArrayList<AristaTuring> aristas = maquina.getAristasTuring();
+        int k = 0;
+        int j = 0;
+        String est = maquina.getEstadoIni();//estado de cada pasada
+        char sim = cinta.charAt(/*k*/j);//simbolo de cada pasada
+        int numAristas = aristas.size();
+        
+        maquina.creaAlfEntrada(cinta);
+        
+        int numVueltas = 0;
+        cotaMax = (int) (Math.pow( (float)cinta.length(), (float)2 )  * aristas.size());
+        if(cotaMax == 1){cotaMax = 10;}//caso extremo
+        
+        if ( (maquina.getEstadoIni() == null) || 
+        		(maquina.getEstadoIni() == "") )
+        	throw new AutomatasException(mensajero.devuelveMensaje("canvas.noinicial",2));
+        else{
+        	        
+        	while((k < numAristas) && numVueltas < cotaMax){
+        	
+        		AristaTuring arist = aristas.get(k);
+    
+        		boolean b1 = arist.contieneOrigen(est);
+        		ArrayList<String> entradaCinta = arist.getEntradaCinta();
+     
+        		String sims = sim+"";
+        		boolean b2 = entradaCinta.contains(/*(sim+"")*/sims);
+
+        		if(b1 && b2 )   {
+        			String primero = "";	        		
+        			if(j >= 0) primero = cinta.substring(0, j);
+        			else primero = primero.concat(maquina.getBlancoChar()+"");
+      
+        			String resto = "";
+        			if(j < cinta.length()){ 
+        				if (j < 0 ) resto = new String(cinta);
+        				else resto = cinta.substring(j+1); 
+        			}
+        			else resto = maquina.getBlancoChar()+"";
+        		
+        			cinta = primero.concat(arist.getSimboloCinta()).concat(resto);
+        		
+        			if((arist.getDireccion().equals("I"))||(arist.getDireccion().equals("L"))) {
+        				j--;
+        				if (j < 0 ) sim = maquina.getBlancoChar();
+        				else sim = cinta.charAt(j);
+        			}
+        			else if((aristas.get(k).getDireccion().equals("D"))||
+        				(aristas.get(k).getDireccion().equals("R"))){
+        				j++;
+        				if (j < cinta.length())sim = cinta.charAt(j);
+        				else sim = maquina.getBlancoChar();
+        			}	
+        			est = aristas.get(k).getDestino();
+        			k = 0;
+        		}
+        		else 
+        			k++;
+
+        		numVueltas++;
+        	}
+        }
+
+        if (numVueltas == cotaMax){	        	
+       		if(!corregir)JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.ciclos", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+   //    		System.out.println("devuelvo -1 xk me he ido");
+       		return -1;
+        }
+    	else{      		
+    		if (todoBlancos(cinta,j)) {
+    			if(corregir)cinta = mensajero.devuelveMensaje("simbolos.blanco",4);
+    			else cinta = " ";
+    			}
+    		else cinta = salidaCinta(cinta,j);
+    		
+    		ArrayList<String> fin = this.maquina.getEstadosFinales();
+    		if(fin.isEmpty() || fin == null){
+    			FileWriter fichero = new FileWriter(ruta+"output.txt");
+        		PrintWriter pw = new PrintWriter(fichero);
+         //   	System.out.println("FIN cinta dentro if: " + cinta);
+            	pw.println(cinta);
+            	pw.close();
+            	
+            	if(cf != null){
+            		if(cf.equals(cinta)){System.out.println("devuelvo 1 sin finales"); return 1;}
+            		else{/*System.out.println("devuelvo 2 sin finales");*/ return 2;}
+            	}
+            	else{
+            		//System.out.println("devuelvo 0 sin finales");
+            		return 0;
+            	}
+            }
+    		else{
+    			if(!maquina.getEstadosFinales().contains(est)){
+    				System.out.println("La cinta de entrada no es reconocida por la Maquina de Turing.");
+    				if(!corregir) JOptionPane.showMessageDialog(
+                    		null,mensajero.devuelveMensaje("vista.turingno", 2),mensajero.devuelveMensaje("vista.ejecucion", 2)
+                    		,JOptionPane.PLAIN_MESSAGE);
+    			//	System.out.println("devuelvo 2 con finales");
+    				return 2;
+    			}
+    			else{
+    				System.out.println("La cinta de entrada es reconocida por la Maquina de Turing.");
+    				if(!corregir) JOptionPane.showMessageDialog(
+                    		null,mensajero.devuelveMensaje("vista.turingsi", 2),mensajero.devuelveMensaje("vista.ejecucion", 2)
+                    		,JOptionPane.PLAIN_MESSAGE);
+    	//			System.out.println("devuelvo 1 con finales");
+    				return 1;
+    			}
+    			
+    		}
+    		
+ /*   		FileWriter fichero = null;
+    		PrintWriter pw = null;        		
+    		if(!maquina.getEstadosFinales().contains(est)){
+        		fichero = new FileWriter(ruta+"output.txt");
+        		pw = new PrintWriter(fichero);
+    			ArrayList<String> fin = this.maquina.getEstadosFinales();
+                if(fin.isEmpty() || fin == null){
+                	System.out.println("FIN cinta dentro if: " + cinta);
+                	pw.println(
+                		cinta);
+                }
+                else{
+        			fichero = new FileWriter(ruta+"output.txt");
+        			pw = new PrintWriter(fichero);
+	        		
+        			System.out.println("finales mt: " + fin); 
+        			pw.close();
+                	System.out.println("La cinta de entrada no es reconocida por la Maquina de Turing.");	                	
+                }
+                JOptionPane.showMessageDialog(
+                		null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2)
+                		,JOptionPane.PLAIN_MESSAGE);
+
+    		}
+    		else{
+
+        		System.out.println("FIN cinta: " + cinta);
+        		System.out.println("Hola cinta final: " + cinta);//cinta inicial
+        		System.out.println("La cinta de entrada SI es reconocida por la Maquina de Turing.");
+                pw.println(cinta);
+                pw.close();
+    		}*/
+   		}	        	
+		}
+	    catch(FileNotFoundException e){
+	    	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+	    }
+	    catch(AutomatasException e){
+	    	JOptionPane.showMessageDialog(null,/*mensajero.devuelveMensaje("canvas.noinicial", 2)*/e.getMensaje(),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+	    }
+	    catch (IOException e) {
+			// TODO Auto-generated catch block
+	    	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("parser.noarchivo", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+		}
+
+	    return-2;//para que no pete
+	}
+	
+//MÉTODOS*********************************************************
+	/*public int aceptaPalabra(String palabra){
+		
+		return ejecuta(palabra);
+	}*/
+	
+	public void acepta() {
+		
+		cargaArchivo();
+		
+/*		File archivo = null;
 	    FileReader fr = null;
 	    BufferedReader br = null;
 	    String cinta = "";
@@ -50,7 +262,7 @@ public class AceptaTuring {
 	        int k = 0;
 	        int j = 0;
 	        String est = maquina.getEstadoIni();//estado de cada pasada
-	        char sim = cinta.charAt(/*k*/j);//simbolo de cada pasada
+	        char sim = cinta.charAt(j);//simbolo de cada pasada
 	        int numAristas = aristas.size();
 	        
 	        maquina.creaAlfEntrada(cinta);
@@ -120,7 +332,7 @@ public class AceptaTuring {
         			ArrayList<String> fin = this.maquina.getEstadosFinales();
 	                if(fin.isEmpty() || fin == null){
 	                	System.out.println("FIN cinta dentro if: " + cinta);
-	                	pw.println(/*"La cinta de entrada no es reconocida por la Maquina de Turing."*/
+	                	pw.println(
 	                		cinta);
 	                }
 	                else{
@@ -152,7 +364,7 @@ public class AceptaTuring {
 	    catch(Exception e){
 	       	System.out.println("TROCOTRO");
 	       	e.printStackTrace();
-	    }
+	    }*/
     
 	} 
 

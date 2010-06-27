@@ -2,6 +2,8 @@
  * 
  */
 package modelo.ejercicios;
+
+
 import modelo.*;
 import modelo.algoritmos.AFNDLambda_to_AFND;
 import modelo.algoritmos.AFN_to_AFD;
@@ -10,6 +12,7 @@ import modelo.algoritmos.Automatas_equivalentes;
 import modelo.algoritmos.C_Y_K;
 import modelo.algoritmos.ERToAFNDLambda;
 import modelo.algoritmos.GIC_to_FNChomsky;
+import modelo.algoritmos.TuringResultado;
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoCinta;
 import modelo.automatas.Alfabeto_Pila;
@@ -37,10 +40,10 @@ public class Ejercicio_imp implements Ejercicio{
 	private Alfabeto alf;
 	private String tipo;
 	private String ruta;
-	private Alfabeto_Pila alfPila;
-	private AlfabetoCinta alfCinta;
-	private String pintar;
-	private Object solucion;
+//	private Alfabeto_Pila alfPila;
+//	private AlfabetoCinta alfCinta;
+//	private String pintar;
+//	private Object solucion;
 
 	/**
 	 * Constructor que crea un ejercicio con los parñmetros que se le pasan
@@ -58,7 +61,7 @@ public class Ejercicio_imp implements Ejercicio{
 		this.alf=alf;
 		this.tipo=tipo;
 		this.ruta=ruta;
-		alfPila = null;
+//		alfPila = null;
 	}
 	
 /*	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,String tipo,String ruta,String pintar) {
@@ -85,15 +88,15 @@ public class Ejercicio_imp implements Ejercicio{
 	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,Alfabeto_Pila alfPila, 
 			String tipo, String ruta,String pintar) {
 		this(enunciado, entrada, resultado,alf, tipo,ruta);
-		this.alfPila = alfPila;
-		this.pintar = pintar;
+//		this.alfPila = alfPila;
+//		this.pintar = pintar;
 	}
 	
 	public Ejercicio_imp(String enunciado, Object entrada, Object resultado, Alfabeto alf,AlfabetoCinta alfCinta, 
 			String tipo, String ruta,String pintar) {
 		this(enunciado, entrada, resultado,alf,tipo,ruta);
-		this.alfCinta = alfCinta;
-		this.pintar = pintar;
+//		this.alfCinta = alfCinta;
+//		this.pintar = pintar;
 	}
 	
 	public String getEnunciado() {
@@ -130,11 +133,20 @@ public class Ejercicio_imp implements Ejercicio{
 			return cyk.getAceptadas()&& cyk.getNoAceptadas();
 		}
 		else if(respuesta instanceof MaquinaTuring){
-			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
-			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
+			MaquinaTuring mt = (MaquinaTuring)resultado;
+//			System.out.println("imprimeme respuesta a ver..." + respuesta);
+//			System.out.println("imprimeme resultado a ver..." + resultado);
+	//		System.out.println("listaPalabraskesi: " + ((MaquinaTuring)resultado).getListaPalabrasEj());
+	//		System.out.println("listaPalabraskeno: " + ((MaquinaTuring)resultado).getListaPalabrasEjNo());
+			/*ArrayList<String> listaPal,ArrayList<String> listaCintaPal,
+			ArrayList<String> listaPalNo,ArrayList<String> listaCintaPalNo,ArrayList<String> listaBucle,
+			MaquinaTuring mt*/
+			TuringResultado tr = new TuringResultado(mt.getListaPalabrasEj(),mt.getListaCintaPalabrasEj(),
+					mt.getListaPalabrasEjNo(), mt.getListaCintaPalabrasEjNo(),mt.getListaPalabrasBucleEj(),
+					(MaquinaTuring)respuesta);
 			
-			System.out.println("SIIIIIIIIIIIIIITURING");
-		return false;
+	//		System.out.println("SIIIIIIIIIIIIIITURING buscameke estoy sin comprobar");
+		return tr.getResult();
 		}
 		else{
 		
@@ -152,10 +164,7 @@ public class Ejercicio_imp implements Ejercicio{
 				//
 				Algoritmo algAFN_AFD=new AFN_to_AFD(a2);
 				Automata a3=algAFN_AFD.ejecutar(false);
-				AutomataPila ap1 = null;
-				AutomataPila ap2 = null;
-				MaquinaTuring mt1 = null;
-				MaquinaTuring mt2 = null;
+
 				//(YA TENEMOS EL AUTOMATA QUE VAMOS A COMPARAR PARA LA RESPUESTA QUE NOS DAN)
 				////(ahora vamos a calcular el automata para el resultado que tenemos almacenado
 				//que deberña ser un string! para poder compararlos despuñs

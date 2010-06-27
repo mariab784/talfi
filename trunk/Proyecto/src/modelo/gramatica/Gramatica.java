@@ -84,6 +84,7 @@ public abstract class Gramatica {
 	public ArrayList<String> getProdConTerminales(){return prodConTerminales;}
 	@SuppressWarnings("unchecked")
 	public void setProdConTerminales(ArrayList<String> p){prodConTerminales = (ArrayList<String>) p.clone();}
+	@SuppressWarnings("unchecked")
 	public void setVariablesSinProd(ArrayList<String> p){variablesSinProd = (ArrayList<String>) p.clone();}
 	public ArrayList<String> getVariablesSinProd(){return variablesSinProd;}
 	
@@ -340,6 +341,7 @@ public abstract class Gramatica {
 				if(this.getProdUnit().contains/*Key*/(v)) return null;
 				
 				p = new ArrayList<Produccion>();
+				@SuppressWarnings("unused")
 				Produccion pp = nuevaProduccion(lp.get(0),v);
 
 				return p;
@@ -748,6 +750,7 @@ public abstract class Gramatica {
 		ArrayList<String> vars = this.getVariables();
 		//	System.out.println("variables: " + var);
 		variablesSinProd = new ArrayList<String>();
+		@SuppressWarnings("unused")
 		int tam = vars.size();
 		//Set<String> setProducs = proDucs.keySet();
 		Iterator<String> itVars = /*setP*/vars.iterator();
