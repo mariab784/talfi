@@ -14,6 +14,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 
 import vista.vistaGrafica.VistaGrafica;
+import vista.vistaGrafica.events.AutomataException;
 
 
 import com.sun.org.apache.xerces.internal.parsers.*;
@@ -81,6 +82,15 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		boolean esTuring = false;
 		
 		NodeList tipo = documento.getElementsByTagName("type");
+		
+		NodeList tipoE = documento.getElementsByTagName(/*"type"*/"enunciado");
+		 
+		String tipo2 = null;
+//		for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
+			 tipo2 = tipoE.item(0).getChildNodes().item(/*i*/0).getTextContent();
+		
+			 
+			 if (tipoE != null){ throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));}
 		
 		String var = null;
 		for (int i = 1; i <tipo.item(0).getChildNodes().getLength(); i++) {
@@ -361,7 +371,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 		}
 		
-		return automata;		
+		return automata;
+	
 	}
 
 	
