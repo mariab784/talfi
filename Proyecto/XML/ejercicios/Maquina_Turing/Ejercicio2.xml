@@ -51,13 +51,12 @@
 <coordenadas>
 <estadoCoord><nombre>s0</nombre><x>217</x><y>110</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>401</x><y>51</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>576</x><y>131</y></estadoCoord></coordenadas></authomata>
 <listaPalabras>
-			<item>11</item></listaPalabras>
+			<item>111</item></listaPalabras>
 <listaCintaPalabras>
-			<item>1111</item></listaCintaPalabras>
+			<item>11111</item></listaCintaPalabras>
 <listaPalabrasNo>
 			<item>1121</item></listaPalabrasNo>
 <listaCintaPalabrasNo>
-
 			<item>21</item></listaCintaPalabrasNo>
 <listaPalabrasBucle>
 </listaPalabrasBucle>

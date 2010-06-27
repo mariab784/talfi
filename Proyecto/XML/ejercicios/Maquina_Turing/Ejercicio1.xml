@@ -1,30 +1,38 @@
-<ejercicio><tipo>EjMT</tipo><enunciado>babucha</enunciado><output><authomata>
+<ejercicio><tipo>EjMT</tipo><enunciado></enunciado><output><authomata>
 	<type>
 		<item>MaquinaTuring</item>
 	</type>
 	<alphabet>
-		<item>e</item>
+		<item>a</item>
 	</alphabet>
 		<alphabetP>
-		<item>D</item>
+		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>s2</state>
+		<state>s1</state>
 	</states>
 	<init>
-		<state>s2</state>
+		<state>s1</state>
 	</init>
 	<finals>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>s2</state>
-		<state>s2</state>
-		<item>e</item>
-		<scinta>D</scinta>
-		<direc>D</direc>
+		<state>s1</state>
+		<state>s1</state>
+		<item>a</item>
+		<scinta>Z</scinta>
+		<direc>Z</direc>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s2</nombre><x>444</x><y>170</y></estadoCoord></coordenadas></authomata></output>
+<estadoCoord><nombre>s1</nombre><x>340</x><y>99</y></estadoCoord></coordenadas></authomata>
+<listaPalabras></listaPalabras>
+<listaCintaPalabras></listaCintaPalabras>
+<listaPalabrasNo></listaPalabrasNo>
+<listaCintaPalabrasNo>
+</listaCintaPalabrasNo>
+<listaPalabrasBucle>
+</listaPalabrasBucle>
+</output>
 </ejercicio>
