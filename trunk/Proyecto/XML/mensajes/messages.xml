@@ -252,6 +252,9 @@
 		<noejer>
 			This file does not have a valid exercise
 		</noejer>
+		<noejem>
+			This file does not have a valid example
+		</noejem>
 		<nocinta>
 			Invalid file
 		</nocinta>
