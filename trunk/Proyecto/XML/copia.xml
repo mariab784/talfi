@@ -1,39 +1,52 @@
 <authomata>
 	<type>
-		<item>AutomataPila</item>
+		<item>MaquinaTuring</item>
 	</type>
 	<alphabet>
-		<item>a</item>
-		<item>b</item>
+		<item>1</item>
 	</alphabet>
 		<alphabetP>
-		<item>Z</item>
+		<item>1</item>
 	</alphabetP>
 	<states>
 		<state>s0</state>
 		<state>s1</state>
+		<state>s2</state>
 	</states>
 	<init>
 		<state>s0</state>
 	</init>
 	<finals>
-		<state>s0</state>
 	</finals>
 	<arrows>
 		<arrow>
 		<state>s0</state>
+		<state>s0</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
+		</arrow>
+		<arrow>
+		<state>s0</state>
 		<state>s1</state>
-		<item>a</item>
-		<cima>Z</cima>
-		<trans>Z</trans>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
 		</arrow>
 		<arrow>
 		<state>s1</state>
-		<state>s0</state>
-		<item>b</item>
-		<cima>Z</cima>
-		<trans>Z</trans>
+		<state>s2</state>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
+		</arrow>
+		<arrow>
+		<state>s2</state>
+		<state>s2</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s0</nombre><x>241</x><y>198</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>572</x><y>209</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s0</nombre><x>235</x><y>184</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>419</x><y>125</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>594</x><y>205</y></estadoCoord></coordenadas></authomata>
