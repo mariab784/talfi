@@ -1,0 +1,65 @@
+<ejercicio><tipo>EjMT</tipo><enunciado>prueba 1.0</enunciado><output><authomata>
+	<type>
+		<item>MaquinaTuring</item>
+	</type>
+	<alphabet>
+		<item>1</item>
+	</alphabet>
+		<alphabetP>
+		<item>1</item>
+	</alphabetP>
+	<states>
+		<state>s0</state>
+		<state>s1</state>
+		<state>s2</state>
+	</states>
+	<init>
+		<state>s0</state>
+	</init>
+	<finals>
+	</finals>
+	<arrows>
+		<arrow>
+		<state>s0</state>
+		<state>s0</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
+		</arrow>
+		<arrow>
+		<state>s0</state>
+		<state>s1</state>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>D</direc>
+		</arrow>
+		<arrow>
+		<state>s1</state>
+		<state>s2</state>
+		<item>#</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
+		</arrow>
+		<arrow>
+		<state>s2</state>
+		<state>s2</state>
+		<item>1</item>
+		<scinta>1</scinta>
+		<direc>I</direc>
+		</arrow>
+	</arrows>
+<coordenadas>
+<estadoCoord><nombre>s0</nombre><x>217</x><y>110</y></estadoCoord><estadoCoord><nombre>s1</nombre><x>401</x><y>51</y></estadoCoord><estadoCoord><nombre>s2</nombre><x>576</x><y>131</y></estadoCoord></coordenadas></authomata>
+<listaPalabras>
+			<item>11</item></listaPalabras>
+<listaCintaPalabras>
+			<item>1111</item></listaCintaPalabras>
+<listaPalabrasNo>
+			<item>1121</item></listaPalabrasNo>
+<listaCintaPalabrasNo>
+
+			<item>21</item></listaCintaPalabrasNo>
+<listaPalabrasBucle>
+</listaPalabrasBucle>
+</output>
+</ejercicio>

@@ -1,0 +1,39 @@
+<ejercicio><tipo>EjMT</tipo><enunciado>prueba 2.0</enunciado><output><authomata>
+	<type>
+		<item>MaquinaTuring</item>
+	</type>
+	<alphabet>
+	</alphabet>
+		<alphabetP>
+	</alphabetP>
+	<states>
+		<state>s1</state>
+	</states>
+	<init>
+		<state>s1</state>
+	</init>
+	<finals>
+		<state>s1</state>
+	</finals>
+	<arrows>
+		<arrow>
+		<state>s1</state>
+		<state>s1</state>
+		<item>#</item>
+		<scinta>#</scinta>
+		<direc>I</direc>
+		</arrow>
+	</arrows>
+<coordenadas>
+<estadoCoord><nombre>s1</nombre><x>341</x><y>83</y></estadoCoord></coordenadas></authomata>
+<listaPalabras>
+			<item>#</item>
+</listaPalabras>
+<listaCintaPalabras></listaCintaPalabras>
+<listaPalabrasNo></listaPalabrasNo>
+<listaCintaPalabrasNo>
+</listaCintaPalabrasNo>
+<listaPalabrasBucle>
+</listaPalabrasBucle>
+</output>
+</ejercicio>
