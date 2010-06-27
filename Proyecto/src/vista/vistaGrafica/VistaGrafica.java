@@ -1821,6 +1821,9 @@ public class VistaGrafica extends JFrame implements Vista{
 		    		rutaPredef=chooser.getCurrentDirectory().getAbsolutePath();
 		    		String ruta=chooser.getCurrentDirectory().getAbsolutePath()+brr+chooser.getSelectedFile().getName();
 		    		Automata a=ParserXML.getInstancia().extraerAutomata(ruta);
+		    		if(ParserXML.getInstancia().getEsEjercicio()){
+		    			throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));
+		    		}
 		            setAutomata(a);
       
 		            switch(a.dameTipo()){ 
