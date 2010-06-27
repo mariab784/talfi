@@ -252,6 +252,7 @@ public class Controlador_imp implements Controlador{
 				Automata a=obtenerAutomata();
 				salida = a;
 				System.out.println("M D TURING: " + a + "y ahora ke??");
+				break;
 			}
 			case 11: {
 				Automata a=obtenerAutomata();				

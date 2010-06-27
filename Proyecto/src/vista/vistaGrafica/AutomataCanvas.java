@@ -70,7 +70,10 @@ public class AutomataCanvas extends JScrollPane {
 	private Alfabeto_Pila alfabetoPila;
 	private AlfabetoCinta alfabetoCinta;
 	private ArrayList<String> listaPalabras;
+	private ArrayList<String> listaCintaPalabras;
 	private ArrayList<String> listaPalabrasNo;
+	private ArrayList<String> listaCintaPalabrasNo;
+	private ArrayList<String> listaPalabrasBucle;
 	
 	
 	private boolean apd;
@@ -306,9 +309,14 @@ public class AutomataCanvas extends JScrollPane {
 		System.out.println("DIMEKETIENE EL LISTAPALABRAS A RECONOCER: " + l);
 		if(ind == 0)this.listaPalabras = new ArrayList<String>();
 		else if(ind == 1)this.listaPalabrasNo = new ArrayList<String>();
+		else if(ind == 2)this.listaCintaPalabras = new ArrayList<String>();
+		else if(ind == 3)this.listaCintaPalabrasNo = new ArrayList<String>();
+		else if(ind == 4)this.listaPalabrasBucle = new ArrayList<String>();
+		
 		StringTokenizer st=new StringTokenizer(l,",");
 		while(st.hasMoreTokens()){
 			String ss=st.nextToken().trim();
+			//if (ss.equals(m.devuelveMensaje("simbolos.blanco",4))) ss = " ";
 			if(ind == 0){
 				System.out.println("dimepalabra:"+ss+"uo");
 				if(!listaPalabras.contains(ss))listaPalabras.add(ss);
@@ -316,13 +324,27 @@ public class AutomataCanvas extends JScrollPane {
 			else if (ind == 1){
 				if(!listaPalabrasNo.contains(ss))listaPalabrasNo.add(ss);
 			}
+			else if (ind == 2){
+				if(!listaCintaPalabras.contains(ss))listaCintaPalabras.add(ss);
+			}
+			else if (ind == 3){
+				if(!listaCintaPalabrasNo.contains(ss))listaCintaPalabrasNo.add(ss);
+			}
+			else if (ind == 4){
+				if(!listaPalabrasBucle.contains(ss))listaPalabrasBucle.add(ss);
+			}
 		}
-		System.out.println("DIMEKE HAS GUARDADO EN LISTAPALABRAS: " + listaPalabras);
 	}
 
 	public ArrayList<String> getListaPalabras(){return listaPalabras;}
 	
 	public ArrayList<String> getListaPalabrasNo(){return listaPalabrasNo;}
+	
+	public ArrayList<String> getCintaListaPalabras(){return listaCintaPalabras;}
+	
+	public ArrayList<String> getCintaListaPalabrasNo(){return listaCintaPalabrasNo;}
+	
+	public ArrayList<String> getListaPalabrasBucle(){return listaPalabrasBucle;}
 	
 	/**
 	 * Pinta la arista de un AF en la interfaz grafica

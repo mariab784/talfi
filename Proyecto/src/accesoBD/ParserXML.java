@@ -122,7 +122,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 			automata = new MaquinaTuring();		
 			esTuring = true;
-			
+			System.out.println("SOY UN TURING!!");
 			VistaGrafica.setOpcionesMT();
 
 		}
@@ -153,8 +153,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		
 		nodos = documento.getElementsByTagName("states");		
 		for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-				NodeList chivato = nodos.item(0).getChildNodes();
-				Node chivato2 = nodos.item(0).getChildNodes().item(1);
+//				NodeList chivato = nodos.item(0).getChildNodes();
+//				Node chivato2 = nodos.item(0).getChildNodes().item(1);
 				estad.add(nodos.item(0).getChildNodes().item(i).getTextContent());
 				i++;
 		}
@@ -295,18 +295,71 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		}
 //		System.out.println("AUTOMATA PARSER XML: " + automata);
 		
-		
-		nodos = documento.getElementsByTagName("listaPalabras");
-		if(nodos.item(0) != null){
-			ArrayList<String> listaPalabras= new ArrayList<String>();
-			for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
-				listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
-			 i++;
+		if ((automata instanceof MaquinaTuring) || (automata instanceof AutomataPila)){
+			nodos = documento.getElementsByTagName("listaPalabras");
+			if(nodos.item(0) != null){
+				ArrayList<String> listaPalabras= new ArrayList<String>();
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+				if(automata instanceof AutomataPila)((AutomataPila)automata).setListaPalabrasEj(listaPalabras);
+				else if(automata instanceof MaquinaTuring){((MaquinaTuring)automata).setListaPalabrasEj(listaPalabras);
+				System.out.println("listapalabras XML: "+ listaPalabras);
+				
+				}
 			}
-			((AutomataPila)automata).setListaPalabrasEj(listaPalabras);
+		
+			if((automata instanceof MaquinaTuring) && 
+					(((MaquinaTuring)automata).getEstadosFinales().isEmpty())){
+				
+				nodos = documento.getElementsByTagName("listaCintaPalabras");
+				if(nodos.item(0) != null){
+					ArrayList<String> listaCintaPalabras= new ArrayList<String>();
+					for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+						listaCintaPalabras.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+						i++;
+					}
+					((MaquinaTuring)automata).setListaCintaPalabrasEj(listaCintaPalabras);
+				}
+				
+				nodos = documento.getElementsByTagName("listaCintaPalabrasNo");
+				if(nodos.item(0) != null){
+					ArrayList<String> listaCintaPalabrasNo= new ArrayList<String>();
+					for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+						listaCintaPalabrasNo.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+						i++;
+					}
+					((MaquinaTuring)automata).setListaCintaPalabrasEjNo(listaCintaPalabrasNo);
+				}
+				
+			}
+			
+			nodos = documento.getElementsByTagName("listaPalabrasNo");
+			if(nodos.item(0) != null){
+				ArrayList<String> listaPalabrasNo= new ArrayList<String>();
+				for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+					listaPalabrasNo.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+					i++;
+				}
+				if(automata instanceof AutomataPila)((AutomataPila)automata).setListaPalabrasEjNo(listaPalabrasNo);
+				else if(automata instanceof MaquinaTuring)((MaquinaTuring)automata).setListaPalabrasEjNo(listaPalabrasNo);
+			}
+			
+			if(automata instanceof MaquinaTuring){
+				
+				nodos = documento.getElementsByTagName("listaPalabrasBucle");
+				if(nodos.item(0) != null){
+					ArrayList<String> listaPalabrasBucle= new ArrayList<String>();
+					for (int i = 1; i <nodos.item(0).getChildNodes().getLength(); i++) {
+						listaPalabrasBucle.add(nodos.item(0).getChildNodes().item(i).getTextContent());
+						i++;
+					}
+					((MaquinaTuring)automata).setListaPalabrasBucleEj(listaPalabrasBucle);
+				}
+			}
+			
 		}
-		
-		
 		
 		return automata;		
 	}

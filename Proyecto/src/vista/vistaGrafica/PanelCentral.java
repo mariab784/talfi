@@ -71,7 +71,6 @@ public class PanelCentral extends JPanel {
 	private JTextField cajitaPalabrasBucle;
 	private JTextField cajitaCintaPalabrasSi;
 	private JTextField cajitaCintaPalabrasNo;
-	private JTextField cajitaCintaPalabrasBucle;
 	/**
 	 * Constructor del panel que recibe la vista sobre la que se añade
 	 * @param v vista grñfica que contiene el panel
@@ -98,6 +97,33 @@ public class PanelCentral extends JPanel {
 			public void actionPerformed(ActionEvent e){
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
+				System.out.println("tipo para corregirte: " + ejercicio.getTipo());
+				if(ejercicio.getTipo().equals("TURING")){
+					panel.borrarPanel();
+					VistaGrafica.setPila(false);
+					VistaGrafica.setTuring(true);					
+					
+					boton=new JButton(m.devuelveMensaje("ejercicio.html",2));
+					boton.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							try{
+								String ruta=TraductorHTML.getInstancia().traducirEjercicio(ejercicio.getRuta());
+								vista.muestraHtml(true, ruta);
+							} catch(AutomatasException ex)   {
+								JOptionPane.showMessageDialog(null,ex.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					});
+					p=new JPanel();
+					p.add(boton);
+					panelB.add(p, BorderLayout.SOUTH);
+					panelB.setVisible(false);
+					panelB.setVisible(true);
+					mandar.setEnabled(true);
+					corregir.setEnabled(false);
+					vista.activaToogleButtons();
+					
+				}
 				if(ejercicio.getTipo().equals("TRANSFORMACIONPILA")){
 
 					panel.borrarPanel();
@@ -492,6 +518,7 @@ public class PanelCentral extends JPanel {
 	    			this.vista.setTuring(false);
 	    		}
 	    		if (rutaXml.contains("Maquina_Turing")) {
+
 	    			setEjercicio(parser.extraerEjercicioTuring(rutaXml));
 	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
 	    			if (ejercicio.getEntrada() != null)
@@ -697,12 +724,19 @@ public class PanelCentral extends JPanel {
 			if(tipo.equals("MaquinaTuring")){
 				e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 						"<"+"br"+">"+m.devuelveMensaje("ejercicio.rec",2)+"<!--"+"html"+"-->");
-				e1 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+				
+				e1 = new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.cinta1",2)+
+						"<"+"br"+">"+m.devuelveMensaje("ejercicio.cinta2",2)+"<!--"+"html"+"-->");
+				
+				JLabel e2 = new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 						"<"+"br"+">"+m.devuelveMensaje("ejercicio.nrec",2)+"<!--"+"html"+"-->");
 				
-				JLabel e2 =new JLabel("holaketal");
-				JLabel e3 =new JLabel("holaketal");
-				JLabel e4 =new JLabel("holaketal");
+				JLabel e3 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.cinta1",2)+
+						"<"+"br"+">"+m.devuelveMensaje("ejercicio.cinta2",2)+"<!--"+"html"+"-->");
+
+				JLabel e4 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
+						"<"+"br"+">"+m.devuelveMensaje("ejercicio.ciclo1",2)+"<"+"br"+">"+
+						m.devuelveMensaje("ejercicio.ciclo2",2)+"<!--"+"html"+"-->");
 				
 				cajitaPalabrasSi= new JTextField(12);
 				cajitaCintaPalabrasSi= new JTextField(12);
@@ -898,13 +932,27 @@ public class PanelCentral extends JPanel {
 			String input=panel.traducirXML();
 			
 			String lp = "<listaPalabras>";
+			panel.creaListaPalabras(cajitaPalabrasSi.getText(),0);
 			if(!panel.getListaPalabras().isEmpty()){
 				Iterator<String> itLp = panel.getListaPalabras().iterator();
 				while(itLp.hasNext()){
 					lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
 				}
 			}
-			lp += "</listaPalabras>";
+			lp += "</listaPalabras>\n";
+			
+			lp += "<listaCintaPalabras>";
+			if(panel.getListaFinales().isEmpty()){
+				panel.creaListaPalabras(cajitaCintaPalabrasSi.getText(),2);
+				
+				if(!panel.getCintaListaPalabras().isEmpty()){
+					Iterator<String> itLp = panel.getCintaListaPalabras().iterator();
+					while(itLp.hasNext()){
+						lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
+					}
+				}
+			}
+			lp += "</listaCintaPalabras>\n";
 			
 			panel.creaListaPalabras(cajitaPalabrasNo.getText(),1);
 			lp += "<listaPalabrasNo>";
@@ -914,11 +962,38 @@ public class PanelCentral extends JPanel {
 					lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
 				}
 			}
-			lp += "</listaPalabrasNo>";
+			lp += "</listaPalabrasNo>\n";
+			
+			lp += "<listaCintaPalabrasNo>\n";
+			if(panel.getListaFinales().isEmpty()){
+				panel.creaListaPalabras(cajitaCintaPalabrasNo.getText(),3);
+				
+				if(!panel.getCintaListaPalabrasNo().isEmpty()){
+					Iterator<String> itLp = panel.getCintaListaPalabrasNo().iterator();
+					while(itLp.hasNext()){
+						lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
+					}
+				}
+			}
+			lp += "</listaCintaPalabrasNo>\n";
+			
+	
+			lp += "<listaPalabrasBucle>\n";
+
+				panel.creaListaPalabras(cajitaPalabrasBucle.getText(),4);
+				
+				if(!panel.getListaPalabrasBucle().isEmpty()){
+					Iterator<String> itLp = panel.getListaPalabrasBucle().iterator();
+					while(itLp.hasNext()){
+						lp+="\n\t\t\t<item>"+ itLp.next()+"</item>";
+					}
+				}
+
+			lp += "</listaPalabrasBucle>\n";
 			
 			
 
-			fich+=input+"</output>";
+			fich+=input+"\n"+lp+"</output>";
 			fich+="\n</ejercicio>";
 			String rutaxml="XML"+"/pruebas/ejercicios"+"/ficheroEj.xml";
 			File fichero = new File (rutaxml);
@@ -1108,6 +1183,16 @@ public class PanelCentral extends JPanel {
 		 vista=v;
 		}
 		 
+		private int numPalabras(String ss){
+			int i = 0;
+			StringTokenizer st=new StringTokenizer(ss,",");
+			while(st.hasMoreTokens()){
+				@SuppressWarnings("unused")
+				String s=st.nextToken();
+				i++;
+			}
+			return i;
+		}
 		/**
 		 * Guarda el ejercicio al pulsar el boton de guardar
 		 * @param e evento de pulsaciñn de raton sobre el boton
@@ -1117,18 +1202,29 @@ public class PanelCentral extends JPanel {
 			try {
 				
 				if(tipo.equals("MaquinaTuring")){
-					
-					System.out.println("cajitaPalabrasSi: " + cajitaPalabrasSi.getText());
-					System.out.println("cajitaCintaPalabrasSi: " + cajitaCintaPalabrasSi.getText());
-					
-					if((cajitaPalabrasSi.getText().length() == cajitaCintaPalabrasSi.getText().length())
-						&&(cajitaPalabrasNo.getText().length() == cajitaCintaPalabrasNo.getText().length())
-						&&(cajitaPalabrasBucle.getText().length() == cajitaCintaPalabrasBucle.getText().length())){
-						System.out.println("oooooook");
+					System.out.println("palabrasSi: " +  cajitaPalabrasSi.getText());
+					System.out.println("palabrasCintaSi: " +  cajitaCintaPalabrasSi.getText());
+					System.out.println("palabrasNo: " +  cajitaPalabrasNo.getText());
+					System.out.println("palabrasCintaNo: " +  cajitaCintaPalabrasNo.getText());
+					System.out.println("palabrasBucle: " +  cajitaPalabrasBucle.getText());
+
+					if(panel.getListaFinales().isEmpty()){
+						
+						if(numPalabras(cajitaPalabrasSi.getText())/*.length()*/ != 
+							numPalabras(cajitaCintaPalabrasSi.getText())/*.length()*/){
+							throw new AutomatasException(m.devuelveMensaje("excep.palabrasSi",2));
+						}
+						else if(numPalabras(cajitaPalabrasNo.getText())/*.length()*/ != 
+							numPalabras(cajitaCintaPalabrasNo.getText())/*.length()*/
+							){
+							throw new AutomatasException(m.devuelveMensaje("excep.palabrasNo",2));
+						}
+						else{
+
+							System.out.println("oooooook");
+						}
 					}
-					else{
-						System.out.println("NOOOOOOOOOOOOOOOOOOOOOOO");
-					}
+
 				}
 				
 				String texto=traducirXMLEjercicio(tipo);
