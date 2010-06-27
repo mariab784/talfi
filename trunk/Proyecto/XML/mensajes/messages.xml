@@ -412,9 +412,17 @@
 		<palabra>Words</palabra>
 		<rec> accepted</rec>
 		<nrec> not accepted</nrec>
+		<cinta1>Output</cinta1>
+		<cinta2>tape</cinta2>
+		<ciclo1>which create</ciclo1>
+		<ciclo2>loops</ciclo2>
 	</ejercicio>
 	<controlador>
 		<param>Param error</param>
 		<auto>Incorrect automata</auto>
 	</controlador>
+	<excep>
+		<palabrasSi>Check the tape and the accepted words</palabrasSi>
+		<palabrasNo>Check the tape and the non-accepted words</palabrasNo>
+	</excep>
 </mensajes>

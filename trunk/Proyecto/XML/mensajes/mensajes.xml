@@ -452,11 +452,20 @@
 		<alf>Alfabeto</alf>
 		<escribirAut>Escribe el enunciado arriba y pinta el autómata resultante debajo</escribirAut>
 		<palabra>Palabras</palabra>
+		<palabra2>Palabras que</palabra2>
 		<rec> reconocidas</rec>
 		<nrec> no reconocidas</nrec>
+		<cinta1>Salida</cinta1>
+		<cinta2>cinta</cinta2>
+		<ciclo1>generan</ciclo1>
+		<ciclo2>ciclos</ciclo2>
 	</ejercicio>
 	<controlador>
 		<param>Error in parameters</param>
 		<auto>Incorrect automata</auto>
 	</controlador>
+	<excep>
+		<palabrasSi>Revise la cinta y las palabras que se aceptan</palabrasSi>
+		<palabrasNo>Revise la cinta y las palabras que no se aceptan</palabrasNo>
+	</excep>
 </mensajes>
