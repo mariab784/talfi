@@ -85,7 +85,7 @@ public class AceptaTuring {
         int numVueltas = 0;
         cotaMax = (int) (Math.pow( (float)cinta.length(), (float)2 )  * aristas.size());
         if(cotaMax == 1){cotaMax = 10;}//caso extremo
-        
+        System.out.println("cotaMax: " + cotaMax);
         if ( (maquina.getEstadoIni() == null) || 
         		(maquina.getEstadoIni() == "") )
         	throw new AutomatasException(mensajero.devuelveMensaje("canvas.noinicial",2));
@@ -138,7 +138,7 @@ public class AceptaTuring {
 
         if (numVueltas == cotaMax){	        	
        		if(!corregir)JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.ciclos", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
-   //    		System.out.println("devuelvo -1 xk me he ido");
+       		System.out.println("devuelvo -1 xk me he ido");
        		return -1;
         }
     	else{      		
@@ -157,6 +157,8 @@ public class AceptaTuring {
             	pw.close();
             	
             	if(cf != null){
+            		System.out.println("cf: " + cf);
+            		System.out.println("cinta: " + cinta);
             		if(cf.equals(cinta)){System.out.println("devuelvo 1 sin finales"); return 1;}
             		else{/*System.out.println("devuelvo 2 sin finales");*/ return 2;}
             	}
