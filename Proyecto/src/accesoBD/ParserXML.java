@@ -122,7 +122,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 			automata = new MaquinaTuring();		
 			esTuring = true;
-			System.out.println("SOY UN TURING!!");
+			//System.out.println("SOY UN TURING!!");
 			VistaGrafica.setOpcionesMT();
 
 		}
