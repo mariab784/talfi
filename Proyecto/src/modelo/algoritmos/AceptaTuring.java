@@ -83,15 +83,15 @@ public class AceptaTuring {
         maquina.creaAlfEntrada(cinta);
         
         int numVueltas = 0;
-        cotaMax = (int) (Math.pow( (float)cinta.length(), (float)2 )  * aristas.size());
-        if(cotaMax == 1){cotaMax = 10;}//caso extremo
-        System.out.println("cotaMax: " + cotaMax);
+        cotaMax = 500;//(int) (Math.pow( (float)cinta.length(), (float)2 )  * aristas.size());
+       // if(cotaMax == 1){cotaMax = 10;}//caso extremo
+      //  System.out.println("cotaMax: " + cotaMax);
         if ( (maquina.getEstadoIni() == null) || 
         		(maquina.getEstadoIni() == "") )
         	throw new AutomatasException(mensajero.devuelveMensaje("canvas.noinicial",2));
         else{
         	        
-        	while((k < numAristas) && numVueltas < cotaMax){
+        	while((k < numAristas) && (numVueltas < cotaMax)){
         	
         		AristaTuring arist = aristas.get(k);
     
