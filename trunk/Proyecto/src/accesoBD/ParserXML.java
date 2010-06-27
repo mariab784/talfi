@@ -40,6 +40,7 @@ import modelo.expresion_regular.ExpresionRegularImpl;
 public class ParserXML implements Parser{ 
 	
 	private static ParserXML parser;
+	private boolean esEjercicio;
 	
 	/**
 	 * Mñtodo singleton que permite obtener la instancia ñnica
@@ -51,11 +52,12 @@ public class ParserXML implements Parser{
 		return parser;
 	}
 	
+	public boolean getEsEjercicio(){return esEjercicio;}
 	
 public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		Mensajero mensajero=Mensajero.getInstancia();
 		DOMParser parser = new DOMParser();
-
+		esEjercicio =false;
 		try {
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			
@@ -84,13 +86,11 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		NodeList tipo = documento.getElementsByTagName("type");
 		
 		NodeList tipoE = documento.getElementsByTagName(/*"type"*/"enunciado");
-		 
-		String tipo2 = null;
-//		for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
-			 tipo2 = tipoE.item(0).getChildNodes().item(/*i*/0).getTextContent();
 		
 			 
-			 if (tipoE != null){ throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));}
+			 if (tipoE != null){ /*throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));*/
+				 esEjercicio = true;
+			 }
 		
 		String var = null;
 		for (int i = 1; i <tipo.item(0).getChildNodes().getLength(); i++) {
