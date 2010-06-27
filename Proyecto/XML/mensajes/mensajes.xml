@@ -281,6 +281,9 @@
 		<noejer>
 			El archivo no contiene un ejercicio valido
 		</noejer>
+		<noejem>
+			El archivo no contiene un ejemplo valido
+		</noejem>
 		<nocinta>
 			El archivo no es valido
 		</nocinta>
