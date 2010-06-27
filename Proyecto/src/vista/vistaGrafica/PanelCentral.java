@@ -386,7 +386,6 @@ public class PanelCentral extends JPanel {
 		
 		center.add(new JScrollPane(enunciado));
 		aux.add(center,BorderLayout./*CENTER*/NORTH);
-		System.out.println("buscame por si lo revientas");
 		aux.add(panelB,BorderLayout.SOUTH);
 		add(aux,BorderLayout.NORTH);
 		panel=new AutomataCanvas(vista);
