@@ -264,7 +264,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		panelNorte=creaPanelNorte();
 		panelIzquierda=creaPanelIzquierda();
 		panel.add(panelNorte,BorderLayout.NORTH);
-		panel.add(sur,BorderLayout.SOUTH); //antes comentado
 		panel.add(panelIzquierda,BorderLayout.WEST);
 		this.setContentPane(panel);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
