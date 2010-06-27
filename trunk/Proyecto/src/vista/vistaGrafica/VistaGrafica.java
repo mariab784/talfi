@@ -1426,7 +1426,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	public void setAutomata(Automata a) {
 		panelCentral.getPanel().cargarAutomataNuevo(a);
 		//consola.append(a.toString()); //XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX
-		System.out.println("SET AUTOMATA: " + a);
+		//System.out.println("SET AUTOMATA: " + a);
 	}
 
 	/**
