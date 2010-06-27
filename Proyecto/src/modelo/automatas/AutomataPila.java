@@ -737,4 +737,5 @@ public class AutomataPila extends AutomataFND implements Automata{
 		+"\n"+"FondoPila: "+fondoPila+"\n";
 	}
 
+	public int dameTipo(){return 3;}
 }
