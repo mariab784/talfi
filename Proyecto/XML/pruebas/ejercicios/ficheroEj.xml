@@ -1,36 +1,38 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado>uh</enunciado><output><authomata>
+<ejercicio><tipo>EjMT</tipo><enunciado>prueba 2.0</enunciado><output><authomata>
 	<type>
-		<item>AutomataPila</item>
+		<item>MaquinaTuring</item>
 	</type>
 	<alphabet>
-		<item>a</item>
 	</alphabet>
 		<alphabetP>
-		<item>Z</item>
 	</alphabetP>
 	<states>
-		<state>s3</state>
+		<state>s1</state>
 	</states>
 	<init>
-		<state>s3</state>
+		<state>s1</state>
 	</init>
 	<finals>
+		<state>s1</state>
 	</finals>
 	<arrows>
 		<arrow>
-		<state>s3</state>
-		<state>s3</state>
-		<item>a</item>
-		<cima>Z</cima>
-		<trans>Z</trans>
+		<state>s1</state>
+		<state>s1</state>
+		<item>#</item>
+		<scinta>#</scinta>
+		<direc>I</direc>
 		</arrow>
 	</arrows>
 <coordenadas>
-<estadoCoord><nombre>s3</nombre><x>347</x><y>111</y></estadoCoord></coordenadas></authomata>
+<estadoCoord><nombre>s1</nombre><x>341</x><y>83</y></estadoCoord></coordenadas></authomata>
 <listaPalabras>
-			<item>a</item>
-			<item>b</item>
-			<item> </item></listaPalabras>
+			<item></item></listaPalabras>
+<listaCintaPalabras></listaCintaPalabras>
 <listaPalabrasNo></listaPalabrasNo>
+<listaCintaPalabrasNo>
+</listaCintaPalabrasNo>
+<listaPalabrasBucle>
+</listaPalabrasBucle>
 </output>
 </ejercicio>
