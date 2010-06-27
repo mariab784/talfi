@@ -116,6 +116,10 @@ public class ParserEjercicio {
 		} catch(AutomatasException e){
 			throw e;
 		}
+		catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			throw new AutomatasException(mensajero.devuelveMensaje("vista.noejer",2));
+		}
 	}
 	
 	
