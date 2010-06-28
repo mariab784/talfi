@@ -84,7 +84,7 @@ public class GIC_to_FNChomsky {
 		relacionados = new HashMap<String,String>();
 		contador = 0;
 		System.out.println("GRAMATICAENTRADAPETACONNULL: " + gramaticaEntrada);
-		html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
+		//html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
 		transforma_FNChomsky(b);
 
 
@@ -202,8 +202,9 @@ public class GIC_to_FNChomsky {
 		System.out.println("DESPUES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
 		
+		gramaticaSalida.calculaAlcanzables();
+		System.out.println("ALCANZABLES: " + gramaticaSalida.getAlcanzables());
 		
-
 		calculaRelacionadosCYK();
 		gramaticaSalida.setRelacionados(relacionadosCYK);
 		System.out.println("RELACIONADOS: " + gramaticaSalida.getRelacionados());
@@ -290,7 +291,7 @@ public class GIC_to_FNChomsky {
 	@SuppressWarnings("unchecked")
 	private void limpia(){
 
-		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
+		//System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
 		/*Greibach*/Chomsky gramsal = this.gramaticaSalida;
 		ArrayList<String> vargram = gramsal.getVariables();
 		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
@@ -302,7 +303,7 @@ public class GIC_to_FNChomsky {
 			//System.out.println("vars " + gramsal.getVariables());
 			ArrayList<Produccion> aprod = gramsalprod.get(s);
 			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
-			System.out.println("var: " + s +"\ny sus producciones: " + aprod);
+			//System.out.println("var: " + s +"\ny sus producciones: " + aprod);
 			int j = 0; int tamProd = aprod.size();
 			while(j < tamProd){
 				Produccion pr = aprod.get(j);
@@ -313,15 +314,15 @@ public class GIC_to_FNChomsky {
 				
 				j++;
 				if(!nconcat.isEmpty() && !esta(npr,naprod)){
-					System.out.println("LIMPIANDO\n");
-					System.out.println("nconcat?:\n" + nconcat);
+					//System.out.println("LIMPIANDO\n");
+					//System.out.println("nconcat?:\n" + nconcat);
 					if (npr.getConcatenacion().size()==1){
-						System.out.println("Long1!!\n");
+						//System.out.println("Long1!!\n");
 						String cc= npr.getConcatenacion().get(0);
 						if(gramsal.getVariables().contains(cc)){
-							System.out.println("GOTCHA!!\n");
+							//System.out.println("GOTCHA!!\n");
 							ArrayList<Produccion> recambio = gramsal.getProducciones().get(cc);
-							System.out.println("RECAMBIO!!: " + recambio);
+							//System.out.println("RECAMBIO!!: " + recambio);
 							for(int k = 0; k < recambio.size();k++){
 								Produccion nproduccion = new Produccion();
 								nproduccion.setConcatenacion(arreglaConcatenacion(
@@ -331,7 +332,7 @@ public class GIC_to_FNChomsky {
 								}
 																
 							}
-							System.out.println("naprod RECAMBIO!!: " + naprod);
+							//System.out.println("naprod RECAMBIO!!: " + naprod);
 						}
 						else{naprod.add(npr);}
 					}

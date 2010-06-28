@@ -32,6 +32,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private Mensajero mensajero;
 	private String lambda;
 	private String fondoPila;
+	private String xml;
+	private String html;
 	@SuppressWarnings("unused")
 	private Controlador controlador;
 	/**
@@ -56,7 +58,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		AP_Gramatica();
 	}
 	
-
+	public String getHTML(){return html;}
+	
 	/* (non-Javadoc)
 	 * @see modelo.Algoritmo#ejecutar(boolean)
 	 */
@@ -73,7 +76,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	@Override
 	public String getXML() {
 		// TODO Auto-generated method stub
-		return "donde esta el xml matarilerilerile";
+		return xml;
 	}
 
 	public AutomataPila getAutomataEntrada(){return automataEntrada;}
@@ -139,6 +142,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 		
+		xml = "GIC ANTES TRADUCE VARIABLES:\n" + gic.toString();
+		html="";
+		html+="<br><h2>Gramatica Obtenida del Automata de Pila</h2><center><table>" + gic.toHTML() + "</table></center><br>";
 		System.out.println("GIC ANTES TRADUCE VARIABLES:\n " + gic);
 		System.out.println("*************************************************************************");
 		traduceVariables();	
@@ -288,24 +294,47 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		return np;
 	}
 	
-	private void limpia(){
-
+	private void limpiaAConciencia(boolean simp){
+		
 		boolean b = this.getGic().dimeSiHayProdUnitarias();
 		boolean c = this.getGic().dimeSiHayProdRecursivas();	
-		boolean d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+		boolean d;
+		if(simp)d= this.getGic().dimeSiHayVariablesQueNoTienenProd();
+		else{ d = this.getGic().calculaAlcanzables();
+			System.out.println("***********D*************: " + d);
+			if(d) this.getGic().setVariablesSinProd(this.getGic().dameNoAlcanzables());
+		}
 		boolean e = this.getGic().dimeSiHayProdConProdUnitarias();
 		
 		boolean a = b || c || d || e;
+		if(simp && a) html+="<center>**************SIMPLIFICACION**************</center>";
 		while(a){
+			boolean escribe = d;
+			if(escribe && simp)html+="<br><h2>Quitamos variables sin producciones</h2>";
+			if(escribe && !simp)html+="<br><h2>Quitamos variables no alcanzables</h2>";
 
 			while(d){
 				this.getGic().quitaVariablesQueNoExisten();
 				d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
 			}
-			 
-			if(b) this.getGic().quitaProdUnitarias();
-			else if(c) this.getGic().quitaProdRecursivas();
-			else if (e) this.getGic().quitaProdConProdUnitarias();
+			if(escribe)html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+
+			
+			if(b){
+				html+="<br><h2>Quitamos variables con producciones lambda unitarias</h2>";
+				this.getGic().quitaProdUnitarias();
+				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				}
+			else if(c) {
+				html+="<br><h2>Quitamos producciones recursivas</h2>";
+				this.getGic().quitaProdRecursivas();
+				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				}
+			else if (e){ 
+				html+="<br><h2>Quitamos variables con producciones lambda no unitarias</h2>";
+				this.getGic().quitaProdConProdUnitarias();
+				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+			}
 			
 
 			d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
@@ -317,6 +346,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 				a = b || c || d || e;
 		}
+	}
+	
+	private void limpia(){
+
+		limpiaAConciencia(true);
+		limpiaAConciencia(false);
+
 		
 	}
 
@@ -374,6 +410,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nVariables);
+		
+		html+="<br><h2>Gramatica de entrada simplificada totalmente</h2>";
+		html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
 		System.out.println("GIC SIMPLIFICADA: " + gic);
 	}
 	
