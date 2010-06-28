@@ -484,11 +484,13 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			System.out.println("AGIC getgic: " + agic.getGic());
 			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),true);
 			
+			
+			
 		//	gictofnc.registraControlador(this);
 			gictofnc.simplifica(true,false);
 			
 
-			System.out.println("dame html: " + gictofnc.getHTML());
+			//System.out.println("dame html: " + gictofnc.getHTML());
 			System.out.println("dame latex:" + gictofnc.getLatex());
 			bw.append(gictofnc.getHTML());
 			bw.append("</body></html>");
@@ -703,7 +705,7 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		//	gictofnc.registraControlador(this);
 		//	gictofnc.simplifica(true,false);
 			
-
+			bw.append(agic.getHTML());
 			System.out.println("dame html: " + gictofnc.getHTML());
 			//System.out.println("dame latex:" + gictofnc.getLatex());
 			bw.append(gictofnc.getHTML());

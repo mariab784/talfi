@@ -30,6 +30,8 @@ public abstract class Gramatica {
 	private ArrayList<String> variablesSinProd;
 	private ArrayList<String> prodConProdUnit;
 	private ArrayList<String> prodParaAnadirEnProdUnit;
+	private ArrayList<String> alcanzables;
+	private ArrayList<String> noAlcanzables;
 	
 	
 	public Gramatica(){
@@ -79,7 +81,7 @@ public abstract class Gramatica {
 		prodConProdUnit= new ArrayList<String> ();
 		prodParaAnadirEnProdUnit =  new ArrayList<String> ();
 	}
-	
+	public ArrayList<String> getAlcanzables(){return alcanzables;}
 	public void anadeProdConTerminales(String v){prodConTerminales.add(v);}
 	public ArrayList<String> getProdConTerminales(){return prodConTerminales;}
 	@SuppressWarnings("unchecked")
@@ -88,6 +90,83 @@ public abstract class Gramatica {
 	public void setVariablesSinProd(ArrayList<String> p){variablesSinProd = (ArrayList<String>) p.clone();}
 	public ArrayList<String> getVariablesSinProd(){return variablesSinProd;}
 	
+	public ArrayList<String> dameNoAlcanzables(){
+		
+		noAlcanzables = new ArrayList<String>();
+		Iterator<String> it = variables.iterator();
+		while(it.hasNext()){
+			
+			String s = it.next();
+			if(!alcanzables.contains(s)){
+				if(noAlcanzables.contains(s)) noAlcanzables.add(s);
+			}
+		}
+		
+		System.out.println("alcanzables: " + alcanzables);
+		System.out.println("no alcanzables: " + noAlcanzables);
+		System.out.println("variables: " + variables);
+		return noAlcanzables;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean calculaAlcanzables(){
+		
+		alcanzables = new ArrayList<String>();
+		alcanzables.add(variableInicial);
+		
+		Iterator<Produccion> itProd = producciones.get(variableInicial).iterator();
+		while(itProd.hasNext()){
+			Produccion p = itProd.next();
+			//ArrayList<String> as = p.getConcatenacion();
+			//if(p.getConcatenacion().size() != 1){
+				for(int i = 0; i < p.getConcatenacion().size(); i++){
+					String s = p.getConcatenacion().get(i);
+					if(variables.contains(s)){
+						if(!alcanzables.contains(s))alcanzables.add(s);
+					}
+				}
+			//}
+			
+		}
+		
+		
+		ArrayList<String> copia = (ArrayList<String>) alcanzables.clone();
+		Iterator<String> it = copia.iterator();
+		boolean acabado = false;
+		while(!acabado && it.hasNext()){
+			String v = it.next();
+			if(!v.equals(variableInicial)){
+				if(producciones.get(v) != null){
+				itProd = producciones.get(v).iterator();
+				
+				while(itProd.hasNext()){
+					Produccion p = itProd.next();
+					if(p.getConcatenacion().size() != 1){
+						for(int i = 0; i < p.getConcatenacion().size(); i++){
+							String s = p.getConcatenacion().get(i);
+							if(variables.contains(s)){
+								if(!alcanzables.contains(s)){
+									alcanzables.add(s);
+								}
+							}
+						}
+					}
+					
+				}
+			}//llave if != null
+			}
+			if(!it.hasNext()){
+			if(copia.size() == alcanzables.size()){ acabado = true; }
+			else{copia = (ArrayList<String>) alcanzables.clone(); it = copia.iterator();}
+			}
+		}
+		
+		System.out.println("alcanzables: " + alcanzables);
+		System.out.println("no alcanzables: " + noAlcanzables);
+		System.out.println("variables: " + variables);
+		
+		return (alcanzables.size() != variables.size());
+	}
 	
 	public void anadeVariable(String v){
 		

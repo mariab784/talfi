@@ -1161,7 +1161,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 				bw.append(panelCentral.getPanel().traducirXML());
 				bw.close();
-				System.out.println("xmlfnc: " + panelCentral.getPanel().traducirXML());
+				//System.out.println("xmlfnc: " + panelCentral.getPanel().traducirXML());
 				
 			}
 			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){
