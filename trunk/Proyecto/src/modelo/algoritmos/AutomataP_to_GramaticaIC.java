@@ -150,6 +150,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		traduceVariables();	
 	}
 	
+	
 	private void anadeProduccionConUnaLista(String origen,String destino,String cima, ArrayList<String> lista,
 			ArrayList<String> simbolos, ArrayList<String>salidaPila){
 
@@ -308,36 +309,60 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		boolean a = b || c || d || e;
 		if(simp && a) html+="<center>**************SIMPLIFICACION**************</center>";
+		
+		boolean hecho = false;
 		while(a){
+			
 			boolean escribe = d;
-			if(escribe && simp)html+="<br><h2>Quitamos variables sin producciones</h2>";
-			if(escribe && !simp)html+="<br><h2>Quitamos variables no alcanzables</h2>";
+			if(escribe && simp){
+				html+="<br><h2>Quitamos variables sin producciones: </h2><h3>"+
+			this.getGic().getVariablesSinProd().toString()+"</h3>";
+
+			}
+			if(escribe && !simp){
+				//if(!this.getGic().dameNoAlcanzables().isEmpty()){
+				html+="<br><h2>Quitamos variables no alcanzables: </h2><h3>" +
+			this.getGic().dameNoAlcanzables().toString()+"</h3>";
+				//}
+				
+			}
 
 			while(d){
 				this.getGic().quitaVariablesQueNoExisten();
 				d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+				if(!hecho)hecho = true;
 			}
 			if(escribe)html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
 
-			
-			if(b){
-				html+="<br><h2>Quitamos variables con producciones lambda unitarias</h2>";
+			if(!hecho){
+				if(b){
+				html+="<br><h2>Quitamos variables con una unica produccion: </h2><h3>"+
+				this.getGic().getProdUnit().toString()+"</h3>";
 				this.getGic().quitaProdUnitarias();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				if(!hecho)hecho = true;
 				}
-			else if(c) {
-				html+="<br><h2>Quitamos producciones recursivas</h2>";
+				else if(!hecho && c) {
+				html+="<br><h2>Quitamos producciones recursivas: </h2><h3>"+
+				this.getGic().getProdRecursivas().toString()+"</h3>";
 				this.getGic().quitaProdRecursivas();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				if(!hecho)hecho = true;
 				}
-			else if (e){ 
-				html+="<br><h2>Quitamos variables con producciones lambda no unitarias</h2>";
+				else if (!hecho && e){ 
+				if(!this.getGic().getProdConProdUnit().isEmpty()){
+				html+="<br><h2>Quitamos variables con producciones unitarias: </h2><h3>"+
+				this.getGic().getProdConProdUnit()+"</h3>";
 				this.getGic().quitaProdConProdUnitarias();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				if(!hecho)hecho = true;
+				}
+				}
 			}
-			
 
-			d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+			//d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
+			if(simp)d= this.getGic().dimeSiHayVariablesQueNoTienenProd();
+			else{ d = this.getGic().calculaAlcanzables();}
 			if(!d){
 				b = this.getGic().dimeSiHayProdUnitarias();
 				c = this.getGic().dimeSiHayProdRecursivas();	
@@ -345,6 +370,8 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				e = this.getGic().dimeSiHayProdConProdUnitarias();
 			}
 				a = b || c || d || e;
+				
+				hecho = false;
 		}
 	}
 	

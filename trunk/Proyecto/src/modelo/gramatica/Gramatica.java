@@ -84,6 +84,7 @@ public abstract class Gramatica {
 	public ArrayList<String> getAlcanzables(){return alcanzables;}
 	public void anadeProdConTerminales(String v){prodConTerminales.add(v);}
 	public ArrayList<String> getProdConTerminales(){return prodConTerminales;}
+	public ArrayList<String> getProdRecursivas(){return prodRecursivas;}
 	@SuppressWarnings("unchecked")
 	public void setProdConTerminales(ArrayList<String> p){prodConTerminales = (ArrayList<String>) p.clone();}
 	@SuppressWarnings("unchecked")
@@ -98,7 +99,7 @@ public abstract class Gramatica {
 			
 			String s = it.next();
 			if(!alcanzables.contains(s)){
-				if(noAlcanzables.contains(s)) noAlcanzables.add(s);
+				if(!noAlcanzables.contains(s)) noAlcanzables.add(s);
 			}
 		}
 		
@@ -429,9 +430,9 @@ public abstract class Gramatica {
 				//para las concatenaciones de las producciones de long > 1
 				Produccion pp = lp.get(i);
 				Produccion np = nuevaProduccion(pp,v);
-				System.out.println("v ke eres? " + v);
-				System.out.println("pp ke eres? " + pp);
-				System.out.println("np ke eres? " + np);
+				//System.out.println("v ke eres? " + v);
+				//System.out.println("pp ke eres? " + pp);
+				//System.out.println("np ke eres? " + np);
 				if (( np != null) && (!np.getConcatenacion().isEmpty())){
 					p = new ArrayList<Produccion>();
 					p.add(np);
@@ -790,7 +791,7 @@ public abstract class Gramatica {
 			i++;
 		}
 		System.out.println("KE TIENE PRODMULTI?" + prodMulti);
-		return (!prodMulti.isEmpty());
+		return ( (!prodMulti.isEmpty()) );
 	}
 
 	
@@ -1029,6 +1030,8 @@ public abstract class Gramatica {
 
 		return !this.prodConProdUnit.isEmpty();
 	}
+	
+	public ArrayList<String> getProdConProdUnit(){return prodConProdUnit;}
 	
 	
 	

@@ -493,7 +493,13 @@ public class LatexCodeConverter {
 	private void desmarcarAristas(String tipo){
 		
 		ArrayList<?> la = null;
-		if(tipo.equals("AutomataPila")){la = p.getCanvas().getListaAristasPila();}
+		
+		
+		if(tipo.equals("AutomataPila")){
+
+				la = p.getCanvas().getListaAristasPila();
+			
+		}
 		else if(tipo.equals("MaquinaTuring")){la = p.getCanvas().getListaAristasTuring();}
 		else{la = p.getCanvas().getListaAristas();}
 		Iterator<?>/*<AristaObject>*/ it=la.iterator();
@@ -503,6 +509,7 @@ public class LatexCodeConverter {
 			else if (aux instanceof AristaAP)((AristaAP)aux).setMarcada(false);
 			if (aux instanceof AristaTuring)((AristaTuring)aux).setMarcada(false);
 		}
+		
 	}
 	
 	

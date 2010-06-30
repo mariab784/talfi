@@ -435,7 +435,14 @@ public class Greibach extends GramaticaIC{
 				fin+=p.charAt(i);
 			}
 		}
-		s+="\\begin{tabular}{||c||}\n"+
+		s+="\\begin{center}"+"\\begin{tabular}{ | l |p{10cm}}\n\n"+
+		"\\hline\n"+
+		"Variables: " + super.getVariables().toString() + " \\\\" + "\\hline\n"+
+		"Variable Inicial: " + super.getVariableInicial().toString() + " \\\\" + "\\hline\n"+
+		" S\'{i}mbolos Terminales: " + super.getSimbolos().toString() + " \\\\" + "\\hline\n"+
+		"Producciones: " + fin + " \\\\" + "\\hline\n" + "\\end{tabular}\n"+"\\end{center}\n";
+		
+		/*s+="\\begin{tabular}{||c||}\n"+
            "\\hline\n" +
            "\\hline\n" +
            "Variables: " + super.getVariables().toString() + " \\\\" +
@@ -468,13 +475,13 @@ public class Greibach extends GramaticaIC{
            "\\begin{tabular}{||c||}\n"+
            "\\hline\n" +
            "\\hline\n" +
-           "Producciones: " + /*super.getProducciones() +*/fin + " \\\\" +
+           "Producciones: " + /*super.getProducciones() +*//*fin + " \\\\" +
            "\n" +
            "\\hline\n" +
            "\\hline\n" +
            "\\end{tabular}\n" +
            "\\\\" +
-           "\n";
+           "\n";*/
 		return s;
 	}
 
