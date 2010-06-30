@@ -12,6 +12,7 @@
 %\textheight=20cm
 %\parskip=4mm
 %\headheight=2cm
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
 
 \begin{document}
 \title{\huge{\bf{TALFi 2.0}}\\
@@ -28,8 +29,8 @@ Director: Alberto De La Encina \\
 \\
 }
 
-\date{\em{Facultad de Inform\'atica. \\ 
-Universidad Complutense de Madrid. \\ 
+\date{\em{Facultad de Inform\'atica. \\
+Universidad Complutense de Madrid. \\
 Curso 2009-2010 \\
 Junio 2010 \\}}
 
@@ -43,7 +44,7 @@ Junio 2010 \\}}
 TALFi naci\'o en el curso acad\'emico 2008-2009 como una aplicaci\'on de apoyo y consulta sobre teor\'ia de aut\'omatas y lenguajes formales.
 Su primera versi\'on conten\'ia funcionalidad acerca de aut\'omatas finitos(deterministas, no deterministas y con transiciones vac\'ias), y expresiones regulares, as\'i como su equivalencia, simplificaci\'on y dem\'as aspectos relacionados.
 Para TALFi 2.0 se han creado muchas m\'as caracter\'isticas adicionales, as\'i como la mejora de ciertos aspectos de la primera versi\'on, que no resultaban del todo intuitivos para el usuario y claros en la comprensi\'on.
-Con esta nueva ampliaci\'on, TALFi se convierte en una herramienta de gran expresividad dentro del entorno de los aut\'omatas y la generaci\'on de lenguajes, a la altura de otras tecnolog\'ias ya conocidas como JFLAP, etc. 
+Con esta nueva ampliaci\'on, TALFi se convierte en una herramienta de gran expresividad dentro del entorno de los aut\'omatas y la generaci\'on de lenguajes, a la altura de otras tecnolog\'ias ya conocidas como JFLAP, etc.
 
 \section{TALFi (English version)}
 TALFi was created in the academic course of 2008-2009 as a student support program for automaton theories and formal lenguages.
@@ -51,14 +52,15 @@ Its first version contained finited-state automaton (deterministic, non-determin
 For TALFi 2.0 has been created a lot more of addicional options, as the improvement of some parts of the first version, which was not completely intuitive for the user and clear in its comprehension.
 With this new ampliation, TALFi turns into a great tool into the automaton world and the language generations, in the same leves as JFLAP, etc.
 
-
+\clearemptydoublepage
 %%%%%%%%%%%%%%%%%%%%CAPITULO 2%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Objetivos}
 En esta segunda versi\'on de TALFi, como se ha mencionado antes, se ha buscado la ampliaci\'on de la herramienta inicial a\~nadi\'endole funcionalidad extra para el tratamiento de gram\'aticas independientes del contexto (GIC), aut\'omatas de pila (AP) y m\'aquinas de Turing (MT), parte muy importante de la teor\'ia de aut\'omatas y lenguajes formales, as\'i como ciertos algoritmos necesarios para su simplificaci\'on, correcci\'on y tratamiento.
 Adem\'as TALFi incorpora la posibilidad de obtener ciertos aspectos (visualizaci\'on de minimizaciones, aut\'omatas, \ldots) en formatos web como html o en formatos de texto como el m\'as usado a nivel cient\'ifico, \LaTeX{}.
 
-Tambi\'en se nos pidi\'o que mejor\'asemos la minimizaci\'on de aut\'omatas finitos que nuestros compa\~neros hab\'ian implementado en TALFi 1.0, describiendo de forma m\'as detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se iban siguiendo. 
+Tambi\'en se nos pidi\'o que mejor\'asemos la minimizaci\'on de aut\'omatas finitos que nuestros compa\~neros hab\'ian implementado en TALFi 1.0, describiendo de forma m\'as detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se iban siguiendo.
 
+\clearemptydoublepage
 %%%%%%%%%%%%%%%%%%%%CAPITULO 3%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Informaci\'on}
 \section{Antecedentes}
@@ -279,7 +281,7 @@ Existe un teorema que prueba que cualquier GIC, cuyo lenguaje no contiene a la p
 \newline
 Una gram\'atica formal est\'a en Forma normal de Chomsky si todas sus reglas de producci\'on son de alguna de las siguientes formas:
 \begin{center}
-A $\rightarrow$ BC \'o\\ 
+A $\rightarrow$ BC \'o\\
 A $\rightarrow$ a\\
 \end{center}
 donde A, B y C son s\'imbolos no terminales (o variables) y a es un s\'imbolo terminal.
@@ -315,7 +317,7 @@ De hecho, se puede probar matem\'aticamente que para cualquier programa de compu
 La idea subyacente es el concepto de que una m\'aquina de Turing es una persona ejecutando un procedimiento efectivo definido formalmente, donde el espacio de memoria de trabajo es ilimitado, pero en un momento determinado s\'olo una parte finita es accesible. La memoria se divide en espacios de trabajo denominados celdas, donde se pueden escribir y leer s\'imbolos. Inicialmente todas las celdas contienen un s\'imbolo especial denominado ``blanco''. Las instrucciones que determinan el funcionamiento de la m\'aquina tienen la forma, ``si estamos en el estado x leyendo la posici\'on y, donde hay escrito el s\'imbolo z, entonces este s\'imbolo debe ser reemplazado por este otro s\'imbolo, y pasar a leer la celda siguiente, bien a la izquierda o bien a la derecha''. La m\'aquina de Turing puede considerarse como un aut\'omata capaz de reconocer lenguajes formales. En ese sentido es capaz de reconocer los lenguajes recursivamente enumerables, de acuerdo a la jerarqu\'ia de Chomsky. Su potencia es, por tanto, superior a otros tipos de aut\'omatas, como el aut\'omata finito, o el aut\'omata con pila, o igual a otros modelos con la misma potencia computacional.\\
 \item Definici\'on Formal:\\
 \newline
-Una m\'aquina de Turing con una sola cinta puede ser definida como una 7-tupla\\ 
+Una m\'aquina de Turing con una sola cinta puede ser definida como una 7-tupla\\
 \begin{center}
 M=(Q, $\Sigma$, $\Gamma$, s, b, F, $\delta$), donde
 \end{center}
@@ -363,7 +365,7 @@ $s_{5}$ & 0 & 1 & D & $s_{1}$ \\
 \hline
 \end{tabular}
 \end{center}
-\newpage 
+\newpage
 El funcionamiento de una computaci\'on de esta m\'aquina se puede mostrar con el siguiente ejemplo (en negrita se resalta la posici\'on de la cabeza lectora/escritora):\\
 \begin{center}
 \begin{tabular}{||c|c|c||}
@@ -440,8 +442,8 @@ a\~nadimos la producci\'on [pZq] $\rightarrow$ a. Esta a puede ser tambi\'en $\e
 Una vez que tenemos la gram\'atica, la simplificamos, pues en muchos casos ayuda a reducir los s\'imbolos de variable. Sustituimos todas las variables con producciones unitarias excepto con la variable inicial, y eliminamos las producciones que sean vac\'ias siempre y cuando no aparezcan en S. Para hacer m\'as f\'acil al usuario el entender la gram\'atica, cambiamos los s\'imbolos de producci\'on, que hasta el momento eran del tipo [qZp], por letras may\'usculas del abecedario. Creemos que es bastante grande y que no es probable que ninguna gram\'atica rebase ese n\'umero de variables.
 \newpage
 \subsection{Algoritmo de simplificaci\'on Gram\'atica tipo 2 a Gram\'atica de Greibach}
-Cuando ya tenemos la gram\'atica simplificada podemos dedicarnos a convertirla en una gram\'atica de Greibach. Se caracteriza porque las producciones empiezan por un s\'imbolo terminal, como ya sabemos.\\ 
-Para poder localizar que variables tienen producciones que comiencen por otra variable, construimos una tabla cuyas filas y columnas son las variables de la gram\'atica. Si alguna producci\'on de las variables de las filas comienza con alguna de las variables de las columnas, marcamos la casilla correspondiente.\\ 
+Cuando ya tenemos la gram\'atica simplificada podemos dedicarnos a convertirla en una gram\'atica de Greibach. Se caracteriza porque las producciones empiezan por un s\'imbolo terminal, como ya sabemos.\\
+Para poder localizar que variables tienen producciones que comiencen por otra variable, construimos una tabla cuyas filas y columnas son las variables de la gram\'atica. Si alguna producci\'on de las variables de las filas comienza con alguna de las variables de las columnas, marcamos la casilla correspondiente.\\
 Ve\'amoslo paso por paso, para el ejemplo de la \'ultima imagen:\\
 
 La gram\'atica que nos genera este aut\'omata, es la siguiente:\\
@@ -478,7 +480,7 @@ Momento en el que ya hemos terminado y devolvemos la gram\'atica final:\\
 \includegraphics{gram5.jpg}
 \end{center}
 
-A esta gram\'atica que devolvemos como final, le aplicamos otro algoritmo de simplificaci\'on, el de eliminar las producciones vac\'ias siempre que no sean producciones de la variable inicial. 
+A esta gram\'atica que devolvemos como final, le aplicamos otro algoritmo de simplificaci\'on, el de eliminar las producciones vac\'ias siempre que no sean producciones de la variable inicial.
 Este algoritmo consiste en lo siguiente:
 \begin{enumerate}
 \item Localizamos que variables, siempre que no sea la inicial, tiene una producci\'on vac\'ia. Eliminamos la producci\'on vac\'ia de sus producciones para cada una de las variables que cumplan esta caracter\'istica.
@@ -499,7 +501,7 @@ Siendo A, E variables de la gram\'atica. Si eliminamos las producciones vac\'ias
 \end{center}
 \item Volver\'iamos a estar en la misma situaci\'on, pues seguimos teniendo una variable con una producci\'on vac\'ia.
 \end{enumerate}
-Este problema no lo tenemos si la gram\'atica tiene la Forma Normal de Greibach, pues nos aseguramos que el primer s\'imbolo de la producci\'on es un terminal, y nunca ocurrir\'a el caso anterior. 
+Este problema no lo tenemos si la gram\'atica tiene la Forma Normal de Greibach, pues nos aseguramos que el primer s\'imbolo de la producci\'on es un terminal, y nunca ocurrir\'a el caso anterior.
 
 Por otro lado, puede ocurrir que se marque una casilla que est\'e en la diagonal de la tabla. En ese caso el proceso es algo m\'as delicado, pues hemos de incluir una nueva variable, ya que existe recursividad y por mucho que se sustituya una y otra vez no podr\'iamos eliminarla.
 %Pong\'amonos en esta situaci\'on. Tenemos esta gram\'atica:
@@ -575,7 +577,7 @@ Despu\'es de tener esta informaci\'on, cogemos las producciones de la variable i
 Mientras que la lista de palabras construidas no llegue a cinco, haremos lo siguiente:
 \begin{itemize}
 \item Cogemos la primera derivaci\'on de la producci\'on y la eliminamos de la lista.
-\item Si est\'a formada solamente por s\'imbolos terminales, la eliminamos de la lista y la metemos en la lista de palabras reconocidas por el aut\'omata. 
+\item Si est\'a formada solamente por s\'imbolos terminales, la eliminamos de la lista y la metemos en la lista de palabras reconocidas por el aut\'omata.
 \item Si no, buscamos el primer s\'imbolo de variable que aparezca por la izquierda. En caso de que esa variable pertenezca a la lista que calculamos antes de variables con producciones que son un terminal, la sustituimos por todas las producciones que tenga de ese tipo, y se a\~naden las diferentes derivaciones resultantes para cada sustituci\'on.
 \end{itemize}
 La longitud de la lista es un par\'ametro f\'acilmente modificable para futuras mejoras de la aplicaci\'on, pues est\'a definida como una constante. Consideramos no dejarla a la elecci\'on del usuario, porque la idea de mostrar esta lista es que el usuario tenga una ligera intuici\'on del lenguaje generado por el aut\'omata, animando a que sea \'el mismo el que profundice en las cadenas que pertenecen al lenguaje y tambi\'en en las que no.
@@ -646,7 +648,7 @@ Dado que en un principio este problema no fue contemplado, era necesario a\~nadi
 \section{Ejercicios}
 Ahora tambi\'en es posible crear ejercicios de aut\'omatas de pila y m\'aquinas de Turing. Hemos incluido una peque\~na colecci\'on, pero el administrador puede ampliarla creando sus propios ejercicios y a\~nadi\'endolos a la base de datos de los mismos. A continuaci\'on detallaremos como crearlos, que informaci\'on interna generan, y la forma de corregirlos que hemos implementado.\\
 \subsection{Cambios en la interfaz gr\'afica e implementaci\'on interna para ejercicios de Aut\'omatas de Pila y M\'aquinas de Turing}
-Hasta el momento, el administrador solamente ten\'ia que escribir el aut\'omata o la expresi\'on regular que fuera soluci\'on, y el enunciado del ejercicio.\\ 
+Hasta el momento, el administrador solamente ten\'ia que escribir el aut\'omata o la expresi\'on regular que fuera soluci\'on, y el enunciado del ejercicio.\\
 \newline
 Para los nuevos ejercicios necesitamos m\'as informaci\'on para poder asegurar que la soluci\'on que proporcione el usuario es la suministrada por el administrador de la aplicaci\'on. Por este motivo, ahora se pueden suministrar dos listas de palabras, en el caso de aut\'omatas de pila, y una en el caso de Turing.\\
 \newline
@@ -692,7 +694,7 @@ El modo en que \LaTeX{} interpreta la ``forma'' que debe tener el documento es m
 Una de las ventajas de \LaTeX{} es que la salida que ofrece es siempre la misma, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos tales como Postscript, PDF, SGML, HTML, RTF, etc. Existen distribuciones e IDEs de LaTeX para todos los sistemas operativos m\'as extendidos, que incluyen todo lo necesario para trabajar. Hay, por ejemplo, programas para Windows como TeXnicCenter, \htmladdnormallink{MikTeX}{http://miktex.org/} o \htmladdnormallink{WinEdt}{http://www.winedt.com/}, para Linux como Kile, o para MacOS como TeXShop, todos liberados bajo la Licencia GPL. Existe adem\'as un editor multiplataforma (para MacOS, Windows y Unix) llamado Texmaker, que tambi\'en tiene licencia \htmladdnormallink{GPL}{http://es.wikipedia.org/wiki/Licencia_publica_general_de_GNU}.
 
 \subsection{Uso de \LaTeX en la herramienta TALFi}
-Aunque \LaTeX es primordialmente un sistema de composici\'on de textos para la creaci\'on de documentos que contengan f\'ormulas matem\'aticas, en TALFi lo usaremos para poder colocar en nuestros textos aut\'omatas o simplificaciones paso a paso de gram\'aticas. 
+Aunque \LaTeX es primordialmente un sistema de composici\'on de textos para la creaci\'on de documentos que contengan f\'ormulas matem\'aticas, en TALFi lo usaremos para poder colocar en nuestros textos aut\'omatas o simplificaciones paso a paso de gram\'aticas.
 
 Esto es posible debido a una gran cantidad y diversidad de bibliotecas/paquetes que podemos a\~nadir a nuestro editor de \LaTeX{}.
 Gracias a esta amplitud de posibilidades para crear gr\'aficos complejos en \LaTeX{}, el trabajo inicial de poder imprimir los aut\'omatas o las simplificaciones acab\'o dando como resultado 3 posibles representaciones en \LaTeX{}. De esta manera y debido a las diferencias entre las representaciones, el usuario podr\'a elegir entre un dise\~no sobrio y con formas claras, un dise\~no colorido o un dise\~no en forma matricial para poder modificarlo de manera m\'as intuitiva.
@@ -728,7 +730,7 @@ Esta es la representaci\'on m\'as fiable y visualmente m\'as clara, puesto que s
 Esta biblioteca es visualmente muy atractiva, pero tiene el incoveniente de que el modo en el que los estados se colocan en el lienzo, se realiza especificando donde se encuentran cada uno de ellos, en relaci\'on a un estado dado.
 Como vemos en el c\'odigo, partimos del estado A ($q_{a}$ en el dibujo), para luego indicar que el estado B se encuentra arriba y a la derecha del estado A. Lo mismo ocurre con el estado C, que se indica que est\'a abajo y a la derecha del estado B,etc.\\
 \newline
-Aunque visualmente gane muchos enteros este tipo de representaci\'on, debido a que el algoritmo construye el dibujo de manera de autom\'atica, puede llevar a muchos problemas de superposici\'on de estados cuando los aut\'omatas contienen un n\'umero de estados elevado (inlcuso pord\'ia no poder visualizarse).\\ 
+Aunque visualmente gane muchos enteros este tipo de representaci\'on, debido a que el algoritmo construye el dibujo de manera de autom\'atica, puede llevar a muchos problemas de superposici\'on de estados cuando los aut\'omatas contienen un n\'umero de estados elevado (inlcuso pord\'ia no poder visualizarse).\\
 Conllevar\'ia una trabajo dificultoso de grafos para llevar a cabo una representaci\'on de aut\'omatas totalmente libre de errores para esta representaci\'n.
 No obstante, si se quieren incluir aut\'omatas en un texto \LaTeX{} de manera manual, este es el mejor m\'etodo posible.\\
 \newline
@@ -748,7 +750,7 @@ En este caso el problema, ser\'a visual. Puesto que al haber tal cantidad de est
 \includegraphics{late.jpg}
 \end{center}
 \end{enumerate}
-\end{itemize} 
+\end{itemize}
 \newpage
 
 \subsection{TraductorHTML}
@@ -789,7 +791,7 @@ Caracter\'isticas:
 \begin{center}
 \includegraphics{prog2.jpg}
 \end{center}
-WinEdt es un editor de textos de gran alcance y versatilidad para Windows, con una fuerte predisposici\'on hacia la creaci\'on de documentos \LaTeX{}. 
+WinEdt es un editor de textos de gran alcance y versatilidad para Windows, con una fuerte predisposici\'on hacia la creaci\'on de documentos \LaTeX{}.
 La \htmladdnormallink{p\'agina de descargas}{http://www.winedt.com/index.html} del sitio web  tiene m\'as informaci\'on sobre WinEdt, \TeX{}, y enlaces a otros programas necesarios para hacer operativo WinEdt en la plataforma Windows.
 \end{itemize}
 
@@ -799,7 +801,7 @@ Antes de que cualquier persona, administrador o no, quiera usar TALFi 2.0, debe 
 \begin{itemize}
 \item Si quiere incluir $\epsilon$ en las transiciones, tendr\'a que hacerlo de la misma forma que en TALFi 1.0, con el car\'acter /.
 \item Para especificar un blanco en m\'aquinas de Turing, tendr\'a que escribir $\#$.
-\item Las direcciones posibles de movimiento en m\'aquinas de Turing son I, D, N para espa\~nol, y L,R,N para ingl\'es. Ambas siempre en may\'usculas. 
+\item Las direcciones posibles de movimiento en m\'aquinas de Turing son I, D, N para espa\~nol, y L,R,N para ingl\'es. Ambas siempre en may\'usculas.
 \item Necesariamente el contenido de la cinta para simular una m\'aquina de Turing debe cargarse en un archivo con extensi\'on ``txt''.
 \end{itemize}
 Al igual que en la primera versi\'on de TALFi, cuando se pide introducir los s\'imbolos, ya sean de cinta o de alfabeto, en ning\'un caso deben contener espacios y tienen que ir separados por comas.
@@ -882,7 +884,7 @@ Muestra de los botones activos en un ejemplo de m\'aquina de Turing:\\
 \newpage
 \item Aristas:\\
 
-Ahora las aristas contendr\'an tres campos separados por el car\'acter / :\\ 
+Ahora las aristas contendr\'an tres campos separados por el car\'acter / :\\
 s\'imbolos de entrada o s\'imbolos de cinta, cima de pila actual o s\'imbolo que reemplazar\'a al que actualmente est\'a en la cinta, y la transici\'on de la pila o la direcci\'on hacia la que se desplazar\'a la cabeza lectora de la cinta de Turing, ya se trate de aut\'omatas de pila o m\'aquinas de Turing.\\ En consecuencia, necesitaremos tres campos distintos a modificar cuando necesitemos modificar una arista ya dibujada en el canvas.\\
 
 Cuadro de di\'alogo que aparece al modificar una arista de un aut\'omata de pila:\\
@@ -916,4 +918,4 @@ Prentice Hall, 1997.
 \bibitem{}\htmladdnormallink{http://es.wikipedia.org}{http://es.wikipedia.org}
 \end{thebibliography}
 
-\end{document}
+\end{document} 
