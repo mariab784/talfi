@@ -748,9 +748,9 @@ public class AutomataCanvas extends JScrollPane {
 					}
 					
 				}
-				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setBotonLatex(true);
 				VistaGrafica.setEstaPalabra(true);
-				VistaGrafica.setMaricaTuring(false);
+				VistaGrafica.setBotonTuring(false);
 			}
 			else if (this.getTuring()){
 				
@@ -770,9 +770,9 @@ public class AutomataCanvas extends JScrollPane {
 						alfabetoCinta.aniadirLetra(letra);	
 					
 				}
-				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setBotonLatex(true);
 				VistaGrafica.setEstaPalabra(false);
-				VistaGrafica.setMaricaTuring(true);
+				VistaGrafica.setBotonTuring(true);
 			}
 
 			else {
@@ -784,9 +784,9 @@ public class AutomataCanvas extends JScrollPane {
 					}
 				}
 				
-				VistaGrafica.setGordaLatex(true);
+				VistaGrafica.setBotonLatex(true);
 				VistaGrafica.setEstaPalabra(false);
-				VistaGrafica.setMaricaTuring(false);
+				VistaGrafica.setBotonTuring(false);
 			}
 			if(alfabeto!=null){
 				Iterator<String> itAlfabeto=alfabeto.dameListaLetras().iterator();
@@ -1167,6 +1167,7 @@ public class AutomataCanvas extends JScrollPane {
 		//desmarcarAristas(listaAristas);cvc
         // Le asignamos un tamaño a la imagen
         int width = 768, height = 512;
+  
 
         // Creamos una imagen con ese tamaño y con su correspondiente formato de
         // color
@@ -1721,12 +1722,14 @@ public class AutomataCanvas extends JScrollPane {
 		}
 	}
 
+	public String creaTipoAutomata(){return tipoAutomata();}
+	
 	private String tipoAutomata(){
 		if(this.getPila()) return "AutomataPila";
 		if(this.getTuring()) return "MaquinaTuring";
 		//if(this.getTuring()) return "Turing";
 		Automata auto=new AutomataFNDLambda();
-		if(alfabeto.dameListaLetras().contains(OyenteArista.getLambda()))
+		if((alfabeto!=null)&&(alfabeto.dameListaLetras().contains(OyenteArista.getLambda())))
 			return "AutomataFNDLambda";
 		auto.setAlfabeto(alfabeto);
 		Iterator<Estado> iAut=listaEstados.iterator();

@@ -83,7 +83,7 @@ public class GIC_to_FNChomsky {
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		relacionados = new HashMap<String,String>();
 		contador = 0;
-		System.out.println("GRAMATICAENTRADAPETACONNULL: " + gramaticaEntrada);
+		//System.out.println("GRAMATICAENTRADAPETACONNULL: " + gramaticaEntrada);
 		//html+="<br><h2>Gramatica</h2><center><table>" + gramaticaEntrada.toHTML() + "</table></center><br>";
 		transforma_FNChomsky(b);
 

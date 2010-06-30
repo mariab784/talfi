@@ -99,8 +99,8 @@ public class VistaGrafica extends JFrame implements Vista{
 	private JToggleButton arista;
 	/****/
 	private static JToggleButton estaPalabra;
-	private static JToggleButton gordaLatex;
-	private static JToggleButton maricaTuring;
+	private static JToggleButton botonLatex;
+	private static JToggleButton botonTuring;
 	/****/
 	private JToggleButton borrar;
 	private JToggleButton editar;
@@ -566,21 +566,21 @@ public class VistaGrafica extends JFrame implements Vista{
 		estaPalabra.setName("estaPalabra");
 //		estaPalabra.setToolTipText("ASDJAKDFJSAHJ"); //XXX
 		
-		gordaLatex=new JToggleButton(new ImageIcon("imagenes/botonltx.jpg"));
-		gordaLatex.setMargin(new java.awt.Insets(0,0,0,0));
-		gordaLatex.setName("gordaLatex");
+		botonLatex=new JToggleButton(new ImageIcon("imagenes/botonltx.jpg"));
+		botonLatex.setMargin(new java.awt.Insets(0,0,0,0));
+		botonLatex.setName("gordaLatex");
 //		estaPalabra.setToolTipText("LTX"); //XXX		
 		
-		maricaTuring=new JToggleButton(new ImageIcon("imagenes/MT.jpg"));
-		maricaTuring.setMargin(new java.awt.Insets(0,0,0,0));
-		maricaTuring.setName("gordaLatex");
+		botonTuring=new JToggleButton(new ImageIcon("imagenes/MT.jpg"));
+		botonTuring.setMargin(new java.awt.Insets(0,0,0,0));
+		botonTuring.setName("gordaLatex");
 //		estaPalabra.setToolTipText("LTX"); //XXX	
 
 		tool2.add(estaPalabra); //aniadirBotton
-		tool2.add(gordaLatex); //aniadirBotton
-		tool2.add(maricaTuring); //aniadirBotton
+		tool2.add(botonLatex); //aniadirBotton
+		tool2.add(botonTuring); //aniadirBotton
 		
-		maricaTuring.addActionListener(new ActionListener(){
+		botonTuring.addActionListener(new ActionListener(){
 			
 			
 			public void actionPerformed(ActionEvent e) {
@@ -592,7 +592,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 		});
 		
-		gordaLatex.addActionListener(new ActionListener(){
+		botonLatex.addActionListener(new ActionListener(){
             
             
 			public void actionPerformed(ActionEvent e) {
@@ -784,9 +784,9 @@ public class VistaGrafica extends JFrame implements Vista{
 		tool.aniadirBotton(borrar);
 
 
-		setGordaLatex(false);
+		setBotonLatex(false);
 		setEstaPalabra(false);
-		setMaricaTuring(false);
+		setBotonTuring(false);
 		
 		JToolBar expr=new JToolBar();
 		JPanel panelEr=new JPanel();
@@ -1062,8 +1062,8 @@ public class VistaGrafica extends JFrame implements Vista{
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			VistaGrafica.setEstaPalabra(true);
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setMaricaTuring(false);
+			VistaGrafica.setBotonLatex(true);
+			VistaGrafica.setBotonTuring(false);
 		}
 		if(tipoEjemplo.toString().equals(m.devuelveMensaje("jtree.emt",1))) {
 			panelCentral.getPanel().cargarAutomata("XML/ejemplos/MT/"+nombreEjemplo.toString()+".xml");
@@ -1075,8 +1075,8 @@ public class VistaGrafica extends JFrame implements Vista{
 			rutaVista=null;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			VistaGrafica.setEstaPalabra(false);
-			VistaGrafica.setGordaLatex(true);
-			VistaGrafica.setMaricaTuring(true);
+			VistaGrafica.setBotonLatex(true);
+			VistaGrafica.setBotonTuring(true);
 		}
 		/*********************************************************/
 		
@@ -1185,7 +1185,9 @@ public class VistaGrafica extends JFrame implements Vista{
 				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
+					String ruta2="LaTeX/imagenEntrada.jpg";
 					panelCentral.getPanel().generarImagenJPg(ruta);
+					panelCentral.getPanel().generarImagenJPg(ruta2);
 					controlador.ejecutaQuery("TALF -gr-p "+rutaxml);						
 					TraductorHTML trhtml=TraductorHTML.getInstancia();
 					String xmlSalida=controlador.salidaXML();
@@ -1549,8 +1551,8 @@ public class VistaGrafica extends JFrame implements Vista{
 		arista.setEnabled(false);
 		estado.setEnabled(false);
 		estaPalabra.setEnabled(false);
-		maricaTuring.setEnabled(false);
-		gordaLatex.setEnabled(false);
+		botonTuring.setEnabled(false);
+		botonLatex.setEnabled(false);
 		dibujar=false;
 		panelCentral.getPanel().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}
@@ -1608,6 +1610,7 @@ public class VistaGrafica extends JFrame implements Vista{
 		public void actionPerformed(ActionEvent e){
 
 			panelCentral.getPanel().borrarPanel();
+			panelCentral.desactivarEjercicio(); //añadido
 			activaToogleButtons();
 			rutaVista=null;
 			
@@ -1632,6 +1635,9 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			VistaGrafica.setOpcionesAF();
 			setEnabledMenuAlgAF();
+			
+			String s = getPanelCentral().getPanel().creaTipoAutomata();
+			getPanelCentral().getPanel().setTipoAutomata(s);
 		}
 	}
 	
@@ -1847,17 +1853,17 @@ public class VistaGrafica extends JFrame implements Vista{
 		            break;
 		            	
 		            case 3:	panelCentral.getPanel().setTipoAutomata("AutomataPila"); 
-					setGordaLatex(true);
+					setBotonLatex(true);
 					setEstaPalabra(true);
-					setMaricaTuring(false);
+					setBotonTuring(false);
 		            setPila(true);
 		            setTuring(false);
 		            break;
 		            	
 		            case 4: panelCentral.getPanel().setTipoAutomata("MaquinaTuring"); 
-					setGordaLatex(true);
+					setBotonLatex(true);
 					setEstaPalabra(false);
-					setMaricaTuring(true);
+					setBotonTuring(true);
 					setPila(false);
 		            setTuring(true);
 		            break;
@@ -1891,21 +1897,21 @@ public class VistaGrafica extends JFrame implements Vista{
 	}
 	
 	public static void setOpcionesAF(){
-		setGordaLatex(true);
+		setBotonLatex(true);
 		setEstaPalabra(false);
-		setMaricaTuring(false);
+		setBotonTuring(false);
 	}
 	
 	public static void setOpcionesAP(){
-		setGordaLatex(true);
+		setBotonLatex(true);
 		setEstaPalabra(true);
-		setMaricaTuring(false);
+		setBotonTuring(false);
 	}
 	
 	public static void setOpcionesMT(){
-		setGordaLatex(true);
+		setBotonLatex(true);
 		setEstaPalabra(false);
-		setMaricaTuring(true);
+		setBotonTuring(true);
 	}
 	
 	public void setEnabledMenuAlgAF(){
@@ -2288,7 +2294,7 @@ public class VistaGrafica extends JFrame implements Vista{
         }
 	}
 	
-	public static void setGordaLatex(boolean b){gordaLatex.setEnabled(b);}
+	public static void setBotonLatex(boolean b){botonLatex.setEnabled(b);}
 	public static void setEstaPalabra(boolean b){estaPalabra.setEnabled(b);}
-	public static void setMaricaTuring(boolean b){maricaTuring.setEnabled(b);}
+	public static void setBotonTuring(boolean b){botonTuring.setEnabled(b);}
 }

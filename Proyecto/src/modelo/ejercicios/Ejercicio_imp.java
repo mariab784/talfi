@@ -121,7 +121,7 @@ public class Ejercicio_imp implements Ejercicio{
 		// TODO Auto-generated method stub
 
 		if(respuesta instanceof AutomataPila){
-			System.out.println("imprimeme respuesta a ver..." + respuesta);
+//			System.out.println("imprimeme respuesta a ver..." + respuesta);
 			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
 			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
 			AutomataP_to_GramaticaIC algapgic = new AutomataP_to_GramaticaIC((Automata)respuesta);

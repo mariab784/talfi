@@ -74,8 +74,8 @@ public class GIC_to_FNG {
 		     "\\includegraphics{fdi.jpg}}\n"+
 		     "\n" +
 		     "\\begin{center}\n" +
-		     "\\MYp{\\Large Entrada}\n" +
-		     "\\includegraphics{}}\n" +
+		     "\\MYp{\n" +
+		     "\\includegraphics[scale=0.7]{imagenEntrada.jpg}}\n" +
 		     "\\newline\n" +
 		     "\\newline\n" +
 		     "\\newline\n" +

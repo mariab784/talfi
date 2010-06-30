@@ -25,7 +25,8 @@ public class AceptaTuring {
 	private MaquinaTuring maquina;
 	private int cotaMax;
 	private Mensajero mensajero;
-//****************************************************************	
+//****************************************************************
+	
 	public AceptaTuring(MaquinaTuring m){
 		maquina = m; mensajero=Mensajero.getInstancia();
 		

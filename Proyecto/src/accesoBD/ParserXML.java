@@ -71,6 +71,7 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
+	
 		}
 		
 		Document documento = parser.getDocument();
