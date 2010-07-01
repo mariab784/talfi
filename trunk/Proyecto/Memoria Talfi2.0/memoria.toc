@@ -1,39 +1,44 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Resumen}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}TALFi (Versi\'on en castellano)}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}TALFi (English version)}{1}{section.1.2}
-\contentsline {chapter}{\numberline {2}Objetivos}{3}{chapter.2}
-\contentsline {chapter}{\numberline {3}Informaci\'on}{5}{chapter.3}
-\contentsline {section}{\numberline {3.1}Antecedentes}{5}{section.3.1}
-\contentsline {section}{\numberline {3.2}Problemas encontrados y resueltos en TALFi 1.0}{6}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Minimizaci\'on}{6}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Palabras reconocidas por un aut\'omata de pila}{10}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Introducci\'on a la ampliaci\'on de la aplicaci\'on}{12}{section.3.3}
-\contentsline {section}{\numberline {3.4}Conceptos te\'oricos de la ampliaci\'on}{13}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Lenguaje Independiente de Contexto}{13}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Aut\'omata de Pila}{13}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Gram\'atica Libre de Contexto}{15}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}M\'aquina de Turing}{18}{subsection.3.4.4}
-\contentsline {section}{\numberline {3.5}Lenguaje generado por un AP}{24}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Algoritmo de paso de AP $\rightarrow $ Gram\'atica}{24}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Algoritmo de simplificaci\'on Gram\'atica tipo 2 a Gram\'atica de Greibach}{27}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Algoritmo de simplificaci\'on de gram\'atica de tipo 2 a gram\'atica de Chomsky}{33}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Generaci\'on aleatoria de palabras}{37}{subsection.3.5.4}
-\contentsline {section}{\numberline {3.6}M\'aquinas de Turing}{38}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Nociones preliminares}{38}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Algoritmo de reconocimiento}{39}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Ampliaciones y problemas}{40}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}Ejercicios}{41}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Cambios en la interfaz gr\'afica e implementaci\'on interna para ejercicios de Aut\'omatas de Pila y M\'aquinas de Turing}{41}{subsection.3.7.1}
-\contentsline {chapter}{\numberline {4}Anexos}{43}{chapter.4}
-\contentsline {section}{\numberline {4.1}\textlatin {\LaTeX }{}}{43}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Introducc\'on a \textlatin {\LaTeX }{}}{43}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Descripci\'on:}{44}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Uso}{45}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Uso de \textlatin {\LaTeX }en la herramienta TALFi}{46}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}LatexCodeConverter}{47}{subsection.4.1.5}
-\contentsline {subsection}{\numberline {4.1.6}TraductorHTML}{52}{subsection.4.1.6}
-\contentsline {subsection}{\numberline {4.1.7}Entornos \textlatin {\LaTeX }{} utilizados}{54}{subsection.4.1.7}
-\contentsline {section}{\numberline {4.2}Ampliaci\'on del Manual de Usuario}{58}{section.4.2}
-\contentsline {section}{\numberline {4.3}Cambios en la implementaci\'on}{59}{section.4.3}
-\contentsline {section}{\numberline {4.4}Cambios en la interfaz gr\'afica}{62}{section.4.4}
+\contentsline {chapter}{\numberline {1}Resumen}{5}{chapter.1}
+\contentsline {chapter}{\numberline {2}Objetivos}{7}{chapter.2}
+\contentsline {chapter}{\numberline {3}Informaci\'on}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Antecedentes}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Problemas encontrados y resueltos en TALFi}{10}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Minimizaci\'on}{10}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Intento de reconocimiento de palabras simulando la ejecuci\'on de un Aut\'omata de Pila}{16}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Introducci\'on a la ampliaci\'on de la aplicaci\'on}{19}{section.3.3}
+\contentsline {section}{\numberline {3.4}Conceptos te\'oricos de la ampliaci\'on}{21}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Aut\'omata de Pila}{21}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Gram\'atica Independiente de Contexto}{25}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Lenguaje Independiente de Contexto}{28}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}M\'aquina de Turing}{29}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo CYK}{34}{subsection.3.4.5}
+\contentsline {section}{\numberline {3.5}Lenguaje generado por un AP}{35}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Pasos de simplificac\'ion antes y despu\'es de realizar transformaciones FNC o FNG}{35}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Algoritmo de paso de AP $\rightarrow $ Gram\'atica}{38}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Algoritmo de simplificaci\'on Gram\'atica Independiente del Contexto a Gram\'atica de Greibach}{42}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Algoritmo de simplificaci\'on Gram\'atica Independiente de Contexto a Gram\'atica de Chomsky}{48}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}Generaci\'on aleatoria de palabras}{52}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.6}Palabras reconocidas por un aut\'omata de pila}{53}{subsection.3.5.6}
+\contentsline {section}{\numberline {3.6}M\'aquinas de Turing}{54}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Nociones preliminares}{54}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Algoritmo de reconocimiento}{55}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Ampliaciones y problemas}{56}{subsection.3.6.3}
+\contentsline {section}{\numberline {3.7}Ejercicios}{58}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Cambios en la interfaz gr\'afica e implementaci\'on interna para ejercicios de Aut\'omatas de Pila y M\'aquinas de Turing}{58}{subsection.3.7.1}
+\contentsline {section}{\numberline {3.8}Cambios destacables en TALFi 2.0}{60}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Interfaz gr\'afica}{60}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Implementaci\'on}{61}{subsection.3.8.2}
+\contentsline {chapter}{\numberline {4}Entorno \textlatin {\LaTeX }{}}{63}{chapter.4}
+\contentsline {section}{\numberline {4.1}\textlatin {\LaTeX }{}}{63}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Introducc\'on a \textlatin {\LaTeX }{}}{63}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Descripci\'on:}{64}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Uso}{65}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Uso de \textlatin {\LaTeX }en la herramienta TALFi}{66}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.3}LatexCodeConverter}{67}{section.4.3}
+\contentsline {section}{\numberline {4.4}TraductorHTML}{72}{section.4.4}
+\contentsline {section}{\numberline {4.5}Entornos \textlatin {\LaTeX }{} utilizados}{74}{section.4.5}
+\contentsline {chapter}{\numberline {5}Anexos}{79}{chapter.5}
+\contentsline {section}{\numberline {5.1}Ampliaci\'on del Manual de Usuario}{79}{section.5.1}
+\contentsline {section}{\numberline {5.2}Cambios en la implementaci\'on}{80}{section.5.2}
+\contentsline {section}{\numberline {5.3}Cambios en la interfaz gr\'afica}{83}{section.5.3}
