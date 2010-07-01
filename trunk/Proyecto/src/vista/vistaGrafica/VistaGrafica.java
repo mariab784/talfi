@@ -613,7 +613,7 @@ public class VistaGrafica extends JFrame implements Vista{
 				
 				
 				JOptionPane pane=new JOptionPane();
-				
+				mensajero = Mensajero.getInstancia();
 				dialog=pane.createDialog(null);
 				JPanel panelD=new JPanel(new GridLayout(4,1));
 				JPanel panelC=new JPanel(new GridLayout(1,4));
@@ -1831,7 +1831,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		    			throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));
 		    		}
 		            setAutomata(a);
-      
 		            switch(a.dameTipo()){ 
 		             
 		            case 0: panelCentral.getPanel().setTipoAutomata("AutomataFD");
