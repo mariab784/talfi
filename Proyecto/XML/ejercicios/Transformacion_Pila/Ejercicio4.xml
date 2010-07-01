@@ -1,4 +1,4 @@
-<ejercicio><tipo>TransformacionAPs</tipo><enunciado>automata que genere por estado de aceptacion ab^n.</enunciado><output><authomata>
+<ejercicio><tipo>TransformacionAPs</tipo><enunciado>Dibuje un automata que genere por estado de aceptacion el lenguaje {ab^n|n>=0}.</enunciado><output><authomata>
 	<type>
 		<item>AutomataPila</item>
 	</type>
