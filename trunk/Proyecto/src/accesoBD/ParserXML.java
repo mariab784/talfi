@@ -86,10 +86,9 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 		
 		NodeList tipo = documento.getElementsByTagName("type");
 		
-		NodeList tipoE = documento.getElementsByTagName(/*"type"*/"enunciado");
+		NodeList tipoE = documento.getElementsByTagName(/*"type"*/"ejercicio");
 		
-			 
-			 if (tipoE != null){ /*throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));*/
+			 if (tipoE.item(0) != null){ /*throw new AutomatasException(mensajero.devuelveMensaje("vista.noejem",2));*/
 				 esEjercicio = true;
 			 }
 		
@@ -371,7 +370,6 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			}
 			
 		}
-		
 		return automata;
 	
 	}
