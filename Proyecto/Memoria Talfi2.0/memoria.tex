@@ -4,7 +4,8 @@
 \usepackage[latin1]{inputenc}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\hyphenation{nues-tros modi-ficar determi-nista diferen-tes ha-biendo cons-truir se-leccionamos pro-ducciones conside-ramos corres-pondiente do-cumento ele-vado pro-blema admi-nistrador Automa-taP vi-sualizamos}
+\hyphenation{nues-tros modi-ficar determi-nista diferen-tes ha-biendo cons-truir se-leccionamos pro-ducciones conside-ramos corres-pondiente do-cumento ele-vado pro-blema admi-nistrador Automa-taP vi-sualizamos TALFi docu-mentaci
+repre-sentaci ante-riormente vi-sualizaci mini-mizaci corres-ponden des-cubrimos}
 
 %\oddsidemargin -1.0cm
 \headsep 2cm
@@ -12,7 +13,9 @@
 %\textheight=20cm
 %\parskip=4mm
 %\headheight=2cm
-\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}
+\cleardoublepage}}
+
 
 \begin{document}
 \title{\huge{\bf{TALFi 2.0}}\\
@@ -25,43 +28,73 @@ Roc\'io Barrig\"{u}ete \\
 Mario Huete \\
 Luis San Juan \\
 \\
-Director: Alberto De La Encina \\
+Director: Alberto de la Encina \\
 \\
 }
 
-\date{\em{Facultad de Inform\'atica. \\
-Universidad Complutense de Madrid. \\
+\date{\em{Facultad de Inform\'atica \\ 
+Universidad Complutense de Madrid \\ 
 Curso 2009-2010 \\
 Junio 2010 \\}}
 
+
 % Generamos titulo e indice de contenidos
 \maketitle
-\clearemptydoublepage
-\frontmatter
-  \tableofcontents
+\newpage
+\begin{center}
+\includegraphics[scale=0.4]{escudo.jpg}\\
+\end{center}
 
-\mainmatter
+Se autoriza a la Universidad Complutense de Madrid a difundir y utilizar con fines acad\'emicos, no comerciales y mencionando expresamente a sus autores abajo firmantes, tanto la propia memoria, como el c\'odigo, la documentaci\'on y / o el prototipo desarrollado.\\
+\newline
+\newline
+Fdo.:\\
+\newline
+Luis San Juan Germ\'an:\\
+\newline
+\newline
+\newline
+\newline
+Mario Jose Huete Jim\'enez:\\
+\newline
+\newline
+\newline
+\newline
+Rocio Barrig\"{u}ete Ib\'a\~nez:\\
+\tableofcontents
+
+
 %%%%%%%%%%%%%%%%%%%%CAPITULO 1%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Resumen}
-\section{TALFi (Versi\'on en castellano)}
 TALFi naci\'o en el curso acad\'emico 2008-2009 como una aplicaci\'on de apoyo y consulta sobre teor\'ia de aut\'omatas y lenguajes formales.
-Su primera versi\'on conten\'ia funcionalidad acerca de aut\'omatas finitos(deterministas, no deterministas y con transiciones vac\'ias), y expresiones regulares, as\'i como su equivalencia, simplificaci\'on y dem\'as aspectos relacionados.
-Para TALFi 2.0 se han creado muchas m\'as caracter\'isticas adicionales, as\'i como la mejora de ciertos aspectos de la primera versi\'on, que no resultaban del todo intuitivos para el usuario y claros en la comprensi\'on.
-Con esta nueva ampliaci\'on, TALFi se convierte en una herramienta de gran expresividad dentro del entorno de los aut\'omatas y la generaci\'on de lenguajes, a la altura de otras tecnolog\'ias ya conocidas como JFLAP, etc.
+Su primera versi\'on conten\'ia funcionalidad acerca de aut\'omatas finitos (deterministas, no deterministas y con transiciones vac\'ias), y expresiones regulares, as\'i como su equivalencia, simplificaci\'on y dem\'as aspectos relacionados.
+Para TALFi 2.0 se han creado muchas m\'as caracter\'isticas adicionales, as\'i como la mejora de ciertos aspectos de la primera versi\'on, que no resultaban del todo intuitivos para el usuario y claros en la comprensi\'on.\\
+Como nueva funcionalidad podemos encontrar el tratamiento de aut\'omatas de pila, m\'aquinas de Turing y gram\'aticas independientes del contexto. Para ello, se han a\~nadido componentes gr\'aficos para poder manipular la representaci\'on de dichos aut\'omatas, as\'i como nuevas implementaciones para definir sus comportamientos, sus transiciones m\'as complejas, as\'i como m\'etodos para minimizar, conocer equivalencias o pertenencia de palabras.\\
+En cuanto a las mejoras, se ha ampliado la minimizaci\'on de aut\'omatas finitos (que en un principio s\'olo era aplicable a aquellos que fueran deterministas) a aut\'omatas no deterministas y a aut\'omatas no deterministas con transiciones vac\'ias. Por otra parte se ha diferenciado entre la apertura de un ejercicio y un ejemplo. Esto ya lo hac\'ia la antigua versi\'on de TALFi, pero cab\'ia la posibilidad de abrir un ejercicio como un ejemplo y poder ver su soluci\'on (opci\'on no recomendable para el aprendizaje).
+Con esta nueva ampliaci\'on, TALFi se convierte en una herramienta de gran expresividad dentro del entorno de los aut\'omatas y la generaci\'on de lenguajes, a la altura de otras tecnolog\'ias ya conocidas como JFLAP, etc. 
 
-\section{TALFi (English version)}
-TALFi was created in the academic course of 2008-2009 as a student support program for automaton theories and formal lenguages.
-Its first version contained finited-state automaton (deterministic, non-deterministic and generalized nondeterministic inite automaton) and regular expressions, so as their equivalence, simplificated and more related aspects.
-For TALFi 2.0 has been created a lot more of addicional options, as the improvement of some parts of the first version, which was not completely intuitive for the user and clear in its comprehension.
-With this new ampliation, TALFi turns into a great tool into the automaton world and the language generations, in the same leves as JFLAP, etc.
 
 \clearemptydoublepage
 %%%%%%%%%%%%%%%%%%%%CAPITULO 2%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Objetivos}
-En esta segunda versi\'on de TALFi, como se ha mencionado antes, se ha buscado la ampliaci\'on de la herramienta inicial a\~nadi\'endole funcionalidad extra para el tratamiento de gram\'aticas independientes del contexto (GIC), aut\'omatas de pila (AP) y m\'aquinas de Turing (MT), parte muy importante de la teor\'ia de aut\'omatas y lenguajes formales, as\'i como ciertos algoritmos necesarios para su simplificaci\'on, correcci\'on y tratamiento.
-Adem\'as TALFi incorpora la posibilidad de obtener ciertos aspectos (visualizaci\'on de minimizaciones, aut\'omatas, \ldots) en formatos web como html o en formatos de texto como el m\'as usado a nivel cient\'ifico, \LaTeX{}.
-
-Tambi\'en se nos pidi\'o que mejor\'asemos la minimizaci\'on de aut\'omatas finitos que nuestros compa\~neros hab\'ian implementado en TALFi 1.0, describiendo de forma m\'as detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se iban siguiendo.
+En esta segunda versi\'on de TALFi, como se ha mencionado antes, se ha buscado la ampliaci\'on de la herramienta inicial a\~nadi\'endole funcionalidad extra para el tratamiento de gram\'aticas independientes del contexto (GIC), aut\'omatas de pila (AP) y m\'aquinas de Turing (MT), parte muy importante de la teor\'ia de aut\'omatas y lenguajes formales, as\'i como ciertos algoritmos necesarios para su simplificaci\'on, correcci\'on y tratamiento:
+\begin{itemize}
+\item La inclusi\'on de aut\'omatas de pila y m\'aquinas de Turing requiri\'o nuevas clases para implementar su comportamiento, as\'i como nuevos elementos gr\'aficos para su tratamiento por parte del usuario (botones para introducir la cinta de una m\'aquina de Turing, nuevos ejemplos de las nuevas representaciones \ldots).
+\item Posteriormente fue necesario diferenciar en cierta manera un aut\'omata de pila de un aut\'omata de pila determinista. Aunque TALFi no ofrece la posibilidad al usuario de decidir si el aut\'omata de pila que introduce es o no determinista, internamente TALFi si distingue este caso, ya que es una caracter\'istica importante de estos aut\'omatas dado que por naturaleza son no deterministas.
+\item De forma secundaria y sin formar parte de los objetivos, tuvieron que incluirse gram\'aticas independientes del contexto, en sus formas normales de Chomsky y Greibach.
+Esto era necesario porque, parte muy importante de TALFi (el algoritmo de reconocimiento de una palabra por un aut\'omata de pila) requer\'ia poder pasar de gram\'atica a aut\'omata de pila y viceversa.
+\newpage
+\item Como parte importante de los objetivos, podemos mencionar las mejoras y arreglos realizados en TALFi 1.0:
+\begin{itemize}
+\item Minimizaci\'on: la minimizaci\'on en TALFi 1.0 tuvo que ser corregida, s\'olo se pod\'ia aplicar a aquellos aut\'omatas que fueran finitos y deterministas. Gracias a TALFi 2.0 la minimizaci\'on es posible adem\'as para aut\'omatas finitos no deterministas y aut\'omatas finitos no deterministas con transiciones vac\'ias, gracias al previo paso de transformaci\'on de estos dos \'ultimos tipos de aut\'omatas en un aut\'omata finito determinista.
+Para cerrar de manera final la minimizaci\'on se imprime en un archivo html de forma detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se van realizando.
+\item TALFi 1.0 diferenciaba entre ejercicios y ejemplos, pero era posible ver la soluci\'on de un ejercicio propuesto por el profesor, si lo abr\'iamos como ejemplo. Este comportamiento no nos pareci\'o muy adecuado debido al car\'acter docente y de aprendizaje de TALFi. Dicho comportamiento fue subsanado, adem\'as de incluir mayor n\'umero de ejemplos y ejercicios.
+\item Inclusi\'on de un modo \LaTeX{} con el que podemos obtener en dicho formato, tanto los aut\'omatas que se creen en TALFi, como los ejemplos, as\'i como la simplificaci\'on de las gram\'aticas anteriormente mencionadas.\\
+\end{itemize}
+\item Como posible mejora futura, proponemos incluir TALFi 2.0 como una aplicaci\'on web dentro de un entorno como, por ejemplo, el \htmladdnormallink{Campus Virtual UCM}{https://www.ucm.es/campusvirtual/CVUCM/index.php}. Evidentemente la herramienta segur\'ia teniendo las mismas aplicaciones, pero la identificaci\'on de usuario ya no ser\'ia necesaria dentro de la aplicaci\'on: estar\'ia ligada al tipo de login que se realizase en la web.
+No ser\'ia la \'unica adaptaci\'on necesaria, pues el env\'io de ejercicios propuestos tambi\'en requiere hacer uso de los medios de comunicaci\'on con tutor del Campus Virtual UCM, para poder llegar al administrador de la aplicaci\'on la soluci\'on realizada por el alumno y terminar la correcci\'on.
+En TALFi 1.0 ya se diferenci\'o los tipos de usuarios que tendr\'ia la aplicaci\'on, simulando el comportamiento y garantizando su eficiencia.
+\end{itemize}
 
 \clearemptydoublepage
 %%%%%%%%%%%%%%%%%%%%CAPITULO 3%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,68 +103,118 @@ Tambi\'en se nos pidi\'o que mejor\'asemos la minimizaci\'on de aut\'omatas fini
 Existen muchas y diversas aplicaciones que operan con aut\'omatas de manera similar a como lo hace TALFi, pero la mayor\'ia de estas est\'an enfocadas a un tipo de problema en concreto.
 Algunas tratan aut\'omatas finitos, otras se centran en operaciones de traducci\'on de lenguajes, algunas incorporan simulaci\'on de m\'aquinas de Turing, pero ninguna cuenta con la expresividad y riqueza de TALFi 2.0.
 Para m\'as detalle de estas aplicaciones conviene visitar los siguientes enlaces:
+\newline
 
-\url{http://www.versiontracker.com/dyn/moreinfo/win/35508} \\
-\url{http://www.cs.duke.edu/csed/jflap/} \\
-\url{http://www.ucse.edu.ar/fma/sepa/} \\
-\url{http://www.brics.dk/automaton/} \\
+\begin{itemize}
+\item{ \noindent\url{http://www.versiontracker.com/dyn/moreinfo/win/35508} \\}
+Crea y simula aut\'omatas finitos y m\'aquinas de Turing, permite guardar la informaci\'on en archivo, y abrir varios de estos archivos a la vez
+\end{itemize}
+\begin{itemize}
+\item{ \url{http://www.cs.duke.edu/csed/jflap/} \\}
+Quiz\'a el programa m\'as conocido, puesto que se usa en la asignatura de TALF. Permite crear aut\'omatas finitos, expresiones regulares, algoritmos de conversi\'on entre aut\'omatas finitos y a expresi\'on regular, aut\'omatas de pila, gram\'aticas independientes de contexto y simulaci\'on de m\'aquinas de Turing.
+\end{itemize}
+\begin{itemize}
+\item{ \url{http://www.ucse.edu.ar/fma/sepa/} \\}
+Es espa\~{n}ol. Permite dise\~{n}ar, desarrollar y evaluar un conjunto de herramientas de software que ayude al personal docente en la ense\~{n}anza de las teor\'ias y tecnolog\'ias involucradas en los procesos de dise\~{n}o y construcci\'on de traductores de lenguajes formales.
+\end{itemize}
+\begin{itemize}
+\item{ \url{http://www.brics.dk/automaton/} \\}
+Trata aut\'omatas finitos, expresiones regulares, y operaciones de cierre sobre lenguajes regulares.
+\end{itemize}
 
 Todas estas versiones pueden ser descargadas gratuitamente.
 Obviamente, como antecedente m\'as directo contamos con la primera versi\'on de TALFi.
-A diferencia de los programas anteriormente mencionados, TALFi dispone de la posibilidad de ver paso a paso como se simplifica una gram\'atica, saber si una palabra puede ser reconocida por un aut\'omata de pila, generaci\'on de palabras que son reconocidas por un lenguaje y multitud de posibilidades que TALFi contempla a diferencia de sus antecedentes.
+A diferencia de los programas anteriormente mencionados, TALFi dispone de la posibilidad de ver paso a paso como se simplifica una gram\'atica, saber si una palabra puede ser reconocida por un aut\'omata de pila, generaci\'on de palabras que son reconocidas por un lenguaje y multitud de posibilidades que TALFi contempla a diferencia de sus antecedentes.\\
+Adem\'as, resaltar que los programas que trabajan con teor\'ia de aut\'omatas y lenguajes formales est\'an m\'as enfocados al estudiante que a los profesores que imparten esta ense\~{n}anza, y ninguno de los mencionados est\'a concebido para ser utilizado como una herramienta de comunicaci\'on y evaluaci\'on. Es el rasgo principal de TALFi, que diferencia dos perfiles de usuario, y m\'as que un apoyo en el estudio se enfoca a un posible uso real al impartir una asignatura. Y por \'ultimo lo que es \'unico en talfi es la salida que genera en HTML de los algoritmos aplicados, y por supuesto no tienen la opci\'on de generar c\'odigo en Latex.
 
-\section{Problemas encontrados y resueltos en TALFi 1.0}
+\section{Problemas encontrados y resueltos en TALFi}
 En un primer momento, tuvimos que dedicar mucho tiempo a entender el funcionamiento de la aplicaci\'on, y por tanto el c\'odigo creado por nuestros compa\~neros el a\~no pasado. A continuaci\'on describimos en que partes encontramos dificultades.
+
 \subsection{Minimizaci\'on}
- Mientras que nos dedic\'abamos a ir un paso m\'as all\'a con la minimizaci\'on, descubrimos varios fallos en este algoritmo, teni\'endolo que rehacer en parte, para poder cuadrarlo con los cambios que se nos hab\'ian pedido. Finalmente, conseguimos llegar a los objetivos en un primer momento propuestos. V\'ease un ejemplo de la ejecuci\'on actual de la minimizaci\'on de dos aut\'omatas finitos sobre uno de los ejemplos que el a\~no pasado se usaba para mostrar el funcionamiento de este algoritmo:
-Aqu\'i tenemos el aut\'omata sobre el que vamos a aplicar la minimizaci\'on, concretamente el ejemplo 7 de los aut\'omatas finitos no deterministas:
-\\
-\\
+
+Mientras nos dedic\'abamos a ir un paso m\'as all\'a con la minizaci\'on, descubrimos varios fallos en este algoritmo, teni\'endolo que rehacer en parte, para poder cuadrarlo con los cambios que se nos hab\'ian pedido.
+
+En primer lugar, introducimos un estado trampa llamado ``tramposo'', para aclarar el estado a d\'onde llegan las transiciones que no est\'an definidas ni tienen una arista equivalente en aut\'omatas finitos no deterministas y aut\'omatas finitos con transiciones vac\'ias.
+
+En segundo lugar, ampliamos la informaci\'on que aparece en las casillas de la tabla que se construye para comprobar que estados son colapsables en el algoritmo de minimizaci\'on. Anteriormente, dentro de las celdas pod\'iamos encontrar:
+
+\begin{itemize}
+
+\item Una ``X'' si los estados no se colapsaban.
+
+\item Una ``+'' si los estados son colapsables.
+
+\end{itemize}
+
+Ahora, ampliando la informaci\'on de la siguiente manera:
+
+\begin{itemize}
+
+\item Si los estados no son colapsables, damos los m\'otivos de por qu\'e: uno puede pertenecer a los estados finales y el otro no, o si es causado por otros dos estados que se sabe que no son colapsables y tienen tambi\'en su casilla marcada. Adem\'as, como la tabla la revisamos hasta que no hayamos marcado ninguna nueva casilla, incluimos en que n\'umero de vuelta hemos realizado el cambio en la celda.
+
+\item Si los estados son colapsables dejamos la casilla en blanco.
+
+\end{itemize}
+
+V\'ease un ejemplo de la ejecuci\'on actual de la minimizaci\'on de dos aut\'omatas finitos sobre uno de los ejemplos que el a\~no pasado se usaba para mostrar el funcionamiento de este algoritmo:
+
+Aqu\'i tenemos el aut\'omata sobre el que vamos a aplicar la minimizaci\'on, concretamente el ejemplo 7 de los aut\'omatas finitos no deterministas:\\
 \begin{center}
-\includegraphics[width=\textwidth]{auto1.jpg}
+\includegraphics[width=\textwidth]{auto1.jpg}\newline \newline 
+
 \end{center}
+
 
 Y la tabla que obtenemos en el HTML generado cuando queremos ver todos los pasos que hemos seguido en la minimizaci\'on, es la siguiente:
-
+\newline 
 \begin{center}
-\includegraphics{tabla1.jpg}
+\includegraphics[width=\textwidth]{tabla1.jpg}\\
 \end{center}
+
 
 En cada celda podemos ver:
 \begin{enumerate}
 \item Si el estado de la columna es final y el de la fila no final, o viceversa, los dos estados no podr\'an colapsarse, y lo indicamos con Final-No final.
-
-\item A partir de las casillas marcadas con estados que nunca podr\'an colapsarse, procedemos a comprobar que ocurre con el resto de casillas. El n\'umero que aparece nos indica en que ''vuelta'' hemos descubierto que los estados correspondientes a la fila y a la columna no se pueden colapsar. Y para terminar la explicaci\'on de por qu\'e se marca esa casilla, debajo o al lado indicamos que par de estados son los causantes.
+\item A partir de las casillas marcadas con estados que nunca podr\'an colapsarse, procedemos a comprobar que ocurre con el resto de casillas. Para terminar la explicaci\'on de por qu\'e se marca esa casilla, debajo o al lado indicamos que par de estados son los causantes.
 \end{enumerate}
-Si los estados pudieran colapsarse, la casilla no tendr\'a nada escrito dentro de ella, como ocurre en el ejemplo 10 de aut\'omatas finitos deterministas:
 
+Si los estados pudieran colapsarse, la casilla no tendr\'a nada escrito dentro de ella, como ocurre en el ejemplo 10 de aut\'omatas finitos deterministas:
 \begin{center}
-\includegraphics{auto2.jpg}
+\includegraphics[width=\textwidth]{auto2.jpg}\\
 \end{center}
 
 Cuya tabla de equivalencia es:
-
 \begin{center}
-\includegraphics{tabla2.jpg}
+\includegraphics[width=\textwidth]{tabla2.jpg}\\
 \end{center}
 
-Y por \'ultimo, en el HTML dibujamos el aut\'omata resultado de la minimizaci\'on, que ser\'a el mismo que se visualice en la aplicaci\'on.
 
+En el HTML dibujamos el aut\'omata resultado de la minimizaci\'on, que ser\'a el mismo que se visualice en la aplicaci\'on.
 \begin{center}
 \includegraphics{auto3.jpg}
 \end{center}
 
+Aqu\'i podemos ver qu\'e salida HTML se generaba para un ejemplo sencillo, el ejemplo 6 de aut\'omatas finitos deterministas en TALFi 1.0.\\
+Aut\'omata sobre el que aplicamos el algoritmo de minimizaci\'on:
+\begin{center}
+\includegraphics{autminiantigua.jpg}\\
+\end{center}
+Y la tabla que se generaba era la siguiente:
+\begin{center}
+\includegraphics{pasosminiantigua.jpg}
+\end{center}
 \newpage
-\subsection{Palabras reconocidas por un aut\'omata de pila}
-Al tener la aplicaci\'on un enfoque did\'actico, la primera idea que nos vino a la cabeza para saber si una palabra es reconocida por un aut\'omata de pila, fue seguir la misma metodolog\'ia que vimos en clase de TALF. No traduc\'iamos el aut\'omata de pila en una gram\'atica, sino que \'ibamos simulando el comportamiento que ten\'ia el aut\'omata seg\'un iba leyendo los s\'imbolos de la cadena. Conseguimos que este algoritmo funcionase correctamente, siempre que se cumpliera una condici\'on: que el aut\'omata no tuviera ciclos donde solo se lea la cadena vac\'ia sin modificar la pila o a\~nadiendo m\'as s\'imbolos a la misma.
+\subsection{Intento de reconocimiento de palabras simulando la ejecuci\'on de un Aut\'omata de Pila}
+Al tener la aplicaci\'on un enfoque did\'actico, la primera idea que nos vino a la cabeza para saber si una palabra es reconocida por un aut\'omata de pila, fue seguir la misma metodolog\'ia que vimos en clase de TALF. No traduc\'iamos el aut\'omata de pila en una gram\'atica, sino que \'ibamos simulando el comportamiento que ten\'ia el aut\'omata seg\'un iba leyendo los s\'imbolos de la cadena.
 
-B\'asicamente la idea de funcionamiento de este algoritmo es muy sencilla: Es un algoritmo recursivo, que posee backtracking, pues en muchos casos tenemos m\'as de un camino posible a seguir al procesar una cadena. Si en alg\'un momento, al terminar de consumir los s\'imbolos de la cadena, llegaba a un estado de aceptaci\'on, o se vaciaba la pila, se devolv\'ia un booleano que indicaba que la palabra era aceptada y la se terminaba la ejecuci\'on del algoritmo. En caso contrario, la palabra no se aceptaba y se devolv\'ia falso.
+B\'asicamente la idea de funcionamiento de este algoritmo es muy sencilla: Es un algoritmo recursivo, que posee backtracking, pues en muchos casos tenemos m\'as de un camino posible a seguir al procesar una cadena. Si en alg\'un momento, al terminar de consumir los s\'imbolos de la cadena, llegaba a un estado de aceptaci\'on, o se vaciaba la pila, se devolv\'ia un booleano que indicaba que la palabra era aceptada y se terminaba la ejecuci\'on del algoritmo. En caso contrario, la palabra no se aceptaba y se devolv\'ia falso.
 El procedimiento que conten\'ia este algoritmo recibe como par\'ametros:
 \begin{enumerate}
 \item Lista de estados posibles a los que podemos ir. Tiene prioridad si existe una transici\'on que no consume s\'imbolos. La idea es la siguiente: cuando vamos a procesar el primer s\'imbolo de la cadena, con transiciones vac\'ias es trivial, porque no hemos consumido a\'un ning\'un s\'imbolo, pero si no las hubiera, recopilar\'iamos todos los posibles estados destino, y asumir\'iamos que ya hemos consumido un s\'imbolo de la cadena a reconocer.
 \item Pila actual: El estado de la pila hasta el momento. En cada estado al que nos movemos va cambiando, as\'i que solo la modificamos si volvemos a llamar al procedimiento. Si en alg\'un momento se vac\'ia, y si estamos comprobando si la palabra es reconocida por estado, abortamos el procesamiento.
 \item N\'umero de elementos que tiene la pila: Inclu\'ido por si en alg\'un momento sirve para detectar los ciclos de los que hemos hablado anteriormente.
 \item Cima de la pila en el momento actual: Por comodidad, y por si se quiere comprobar el caso extremo de que si se ha desapilado el s\'imbolo de fondo de pila, y solo queda un s\'imbolo en la pila, pero no coinciden, se pare la simulaci\'on por no poder averiguar, si se ha terminado de vaciar la pila o no. Aqu\'i ser\'ia f\'acil averiguarlo, pero en la teor\'ia de aut\'omatas se restringe de esta manera.
+
 \item Palabra a procesar: Se podr\'ia haber pasado s\'olo como par\'ametro el s\'imbolo actual que se procesa, pero para posibles explicaciones se incluy\'o la palabra completa.
 \item \'Indice del s\'imbolo procesado: Se incluye para poder ubicar por cu\'al s\'imbolo de la cadena va la ejecuci\'on.
 \item Estado: Estado actual en el que estamos, que nos sirve para poder calcular los posibles movimientos que podemos hacer.
@@ -140,53 +223,137 @@ El procedimiento que conten\'ia este algoritmo recibe como par\'ametros:
 
 Este procedimiento se apoya en otros dos, que se intuyen seg\'un se ha explicado c\'omo funciona: el primero, que calcula como quedar\'a la pila para la siguiente llamada al procedimiento, y el segundo, que devuelve la lista de posibles estados a los que podemos seguir procesando con un s\'imbolo o no, si es que la transici\'on es vac\'ia, el estado actual, y la cima de pila actual.\\
 
-Quiz\'a en un futuro sean pautas que alguien pueda seguir para explicar el funcionamiento de los aut\'omatas de pila. Nosotros \'ibamos a utilizarlo para probar que una palabra pertenec\'ia al lenguaje de un aut\'omata de pila, pero el coste se disparaba si lo comparamos con el algoritmo llamado CYK, cuyo coste es c\'ubico sobre la longitud de la cadena.
+Nos dimos cuenta que el algoritmo no terminaba si inclu\'iamos ciclos de transiciones vac\'ias en los que la pila no se modificase o sufriera modificaciones que no acercaban la ejecuci\'on a su final. Esto se puede arreglar de dos maneras:
 
+\begin{itemize}
+
+\item Dando prioridad a las aristas que consuman s\'imbolos, pues si alguna sale de alguno de los estados que componen el ciclo tendremos la oportunidad de seguir el c\'omputo por otro camino, esperando que llegue a su fin. En algunos casos es una soluci\'on valida, pero no es suficiente pues podr\'ia no llevarnos a un estado que estuviera fuera de los estados que componen el ciclo, y seguir\'iamos teniendo el mismo problema.
+
+\item Fijando una cota que s\'olo utilizaremos en los casos en que simulando la ejecuci\'on del aut\'omata hayamos elegido seguir el camino marcado por una arista que no consuma s\'imbolos. Si entramos en un ciclo como los ya descritos, comenzamos a acumular las veces que ejecutamos el algoritmo. Si ejecutamos {\it (n\'umero de estados * n\'umero de aristas)} movimientos y no hemos avanzado en nuestro procesamiento de la cadena, asumimos que el algoritmo no terminar\'a forzando as\'i que finalize la ejecuci\'on.\\
+
+\end{itemize}
+
+
+El algoritmo se basa en dos m\'etodos: uno que indica si se reconoce o no una cierta cadena por estado final, y otro que realiza la misma acci\'on pero vaciando la pila. Los dividimos por un lado para mejorar la eficiencia, ya que se puede dar el caso de que el aut\'omata de pila no tenga ning\'un estado final, o ninguna arista desapile el s\'imbolo de fondo de pila, y devolver m\'as informaci\'on que \'unicamente concretar si la palabra es aceptada o no, dando a conocer al usuario por cu\'al de los dos m\'etodos reconoce una cadena el aut\'omata de pila. \\
+
+\begin{itemize}
+
+\item M\'etodo reconocedor de palabras por estado final: Se comprobar\'a que la cadena, que puede ser o si es $\epsilon$ o una cadena formada por uno o m\'as s\'imbolos del alfabeto de entrada es reconocida si hemos llegado a un estado a partir del cual no podemos ir a ning\'un otro comprobando la longitud de la cadena la cadena a reconocer, o en cambio si tiene transiciones posibles donde moverse pero hemos alcanzado el final de la cadena. En cualquier otro caso, se contin\'ua con la simulaci\'on.
+
+\item M\'etodo reconocedor de palabras por pila vac\'ia: Se comprobar\'a si cuando llegamos a un estado donde ya no podemos movernos m\'as la pila est\'a vac\'ia o no, y si hemos alcanzado la longitud de la cadena, que podr\'a ser tambi\'en $\epsilon$ o una cadena formada por uno o m\'as s\'imbolos del alfabeto de entrada . De forma id\'entica al m\'etodo reconocedor por estado final, si no estamos en ese caso, comprobamos c\'omo se quedar\'ia la pila para el siguiente paso a realizar, y si es vac\'ia revisamos la longitud de la cadena. En caso contrario la ejecuci\'on sigue su curso.
+
+\end{itemize}
+
+Quiz\'a en un futuro sean pautas que alguien pueda seguir para explicar el funcionamiento de los aut\'omatas de pila. Nosotros \'ibamos a utilizarlo para probar que una palabra pertenec\'ia al lenguaje de un aut\'omata de pila, pero el coste se disparaba a exponencial, volvi\'endose intratable.Optamos por el algoritmo llamado CYK, cuyo coste es mucho mejor, ya que es c\'ubico sobre la longitud de la cadena.
 \newpage
 \section{Introducci\'on a la ampliaci\'on de la aplicaci\'on}
-Repaso a la funcionalidad de TALFi 1.0: \\
 
-TALFi 1.0 es capaz de crear aut\'omatas finitos(deterministas, no deterministas y con transiciones vac\'ias)y expresiones regulares.
-Como algoritmos importantes cuenta con la transformaci\'on de un aut\'omata con transiciones vac\'ias a uno no determinista, la transformaci\'on de un aut\'omata no determinista a uno determinista, la transformaci\'on de aut\'omata finito determinista a expresi\'on regular y la minimizaci\'on de aut\'omatas finitos no deterministas.
+
+TALFi 1.0 es capaz de crear aut\'omatas finitos deterministas, no deterministas, con transiciones vac\'ias y expresiones regulares.
+Como algoritmos importantes cuenta con:
+\begin{itemize}
+\item Transformaci\'on de un aut\'omata con transiciones vac\'ias a uno no determinista.
+\item Transformaci\'on de un aut\'omata no determinista a uno determinista.
+\item Transformaci\'on de aut\'omata finito determinista a expresi\'on regular.
+\item Minimizaci\'on de aut\'omatas finitos no deterministas.\\
+\end{itemize}
 La interfaz de usuario de TALFi 1.0 cuenta con un \'arbol desplegable donde podemos encontrar ejemplos y ejercicios que la primera versi\'on de TALFi es capaz de llevar a cabo. Tambi\'en dispone de los usuales controles para modificar, copiar, pegar, borrar cualquier aspecto de la figura que creemos en la zona central de la interfaz.
 
+TALFi 2.0 respeta esta estructura y le a$~n$ade una colecci\'on de ejemplos de ejercicios de aut\'omatas de pila y m\'aquinas de Turing. Sobre los primeros, podremos realizar un estudio a fondo del lenguaje independiente del contexto que generan, obteniendo los siguientes resultados:
+\begin{itemize}
+\item Lista de palabras aleatorias que pertenecen al lenguaje.
+\item Gram\'atica libre de contexto que genera un aut\'omata de pil aplicando el algoritmo de transformaci\'on
+\item Simplificaci\'on detallada por pasos de la gram\'atica que se obtiene directamente de un aut\'omata de pila
+\item Transformaci\'on de una gram\'atica libre de contexto en Forma Normal de Greibach
+\item Transformaci\'on de una gram\'atica libre de contexto en Forma Normal de Chomsky\\
+\end{itemize}
+\newpage
+En lo que se refiere a m\'aquinas de Turing, podremos:
+\begin{itemize}
+\item Saber si una cadena de entrada es reconocida por una m\'aquina de Turing.
+\item Obtener la cinta de salida generada por una m\'aquina de Turing.
+\item Conocer si una cierta cinta de entrada hace que una m\'aquina de Turing cicle.
+\end{itemize}
+
+En cuanto a los ejercicios, sobretodo en los de m\'aquinas de Turing, los usuarios podr\'an comprobar f\'acilmente antes de mandar su soluci\'on al enunciado propuesto que realmente es correcto.
+El administrador de la aplicaci\'on, que ser\'a el creador de los ejercicios, determinar\'a la dificultad de los mismos, ya que adem\'as de dibujar la soluci\'on, debe incluir listas de palabras que se simular\'an internamente, sirviendo como filtro para la correcci\'on.
+\begin{itemize}
+\item En los aut\'omatas de pila,se deben rellenar la lista de palabras reconocidas por el aut\'omata soluci\'on, y tambi\'en la lista de palabras que deber\'an ser rechazadas
+\item En m\'aquinas de Turing, seg\'un sea necesaria la cinta resultante del c\'omputo o no, deber\'an especificarse la lista de palabras aceptadas con su correspondiente cinta de salida si procede, la lista de palabras rechazadas junto con la cinta de salida si es que hace falta, y por \'ultimo una lista de palabras con las que la m\'aquina nunca llegar\'ia a detenerse.
+
+Y destacamos la salida en Latex de cualquier tipo de aut\'omata y m\'aquinas de Turing, ya sea unicamente el diagrama que tienen asociados, como cualquier resultado de aplicaci\'on de algoritmos generada en HTML. 
+\end{itemize}
 \newpage
 \section{Conceptos te\'oricos de la ampliaci\'on}
-\subsection{Lenguaje Independiente de Contexto}
-Un lenguaje independiente de contexto es aquel generado por una gram\'atica \htmladdnormallink{independiente de contexto.}{http://es.wikipedia.org/wiki/Gramatica_independiente_de_contexto} Estos conceptos pertenecen a un \'area de la Ciencia de la
-Computaci\'on llamada Computaci\'on Te\'orica. No hay algoritmo que nos diga el lenguaje
-de la gram\'atica, por eso tenemos que ir viendo los s\'imbolos y cadenas que produce.
-
 \subsection{Aut\'omata de Pila}
-Un aut\'omata con pila o aut\'omata de pila o aut\'omata a pila o aut\'mata apilador es un
-modelo matem\'atico de un sistema que recibe una cadena constituida por s\'imbolos de un
-alfabeto y determina si esa \htmladdnormallink{cadena}{http://es.wikipedia.org/wiki/Cadena_de_caracteres} pertenece al \htmladdnormallink{lenguaje}{http://es.wikipedia.org/wiki/Lenguaje_formal} que el aut\'omata reconoce. El
-lenguaje que reconoce un \htmladdnormallink{aut\'omata}{http://es.wikipedia.org/wiki/Automata} a pila pertenece al grupo de los \htmladdnormallink{lenguajes de
-contexto libre}{http://es.wikipedia.org/wiki/Lenguaje_libre_de_contexto} en la clasificaci\'on de la \htmladdnormallink{Jerarqu\'ia de Chomsky.}{http://es.wikipedia.org/wiki/Jerarquia_de_Chomsky}
-\begin{itemize}
-\item Definici\'on formal:\\
-\newline
-Formalmente, un aut\'omata con pila puede ser descrito como una s\'eptupla \\
-M = (S,$\Sigma$ ,$\Gamma$ ,$\delta$ ,s,Z,F)
-\begin{itemize}
-\item $\Sigma$  y $\Gamma$ son alfabetos de entrada, de la cadena y de la pila respectivamente;\\
-\item S un conjunto de estados;\\
-\item $\delta$: S $\times$ ($\Sigma$ $\cup$ \{$\epsilon$\}) $\times$ $\Gamma$ $\rightarrow$ $\rho$(S $\times$ $\Gamma$*)\\
-\item s $\in$ S es el estado inicial;\\
-\item Z $\in$ $\Gamma$ es el s\'imbolo inicial de la pila;\\
-\item F $\subseteq$ S es un conjunto de estados de aceptaci\'on o finales.\\
-\end{itemize}
+El aut\'omata de pila es, en esencia, un aut\'omata finito no determinista en el que
+se permiten transiciones-$\epsilon$ y con una capacidad adicional: una pila en la
+que se puede almacenar una cadena de ``s\'imbolos de pila''. La presencia de una
+pila significa que, a diferencia de los aut\'omatas finitos, el aut\'omata de pila puede
+``recordar'' una cantidad infinita de informaci\'on.
+Al aut\'omata de pila se le permite observar el s\'imbolo de entrada y el s\'imbolo de lo
+alto de la pila. Alternativamente, podr\'ia hacer una transici\'on ``espont\'anea'' usando
+$\epsilon$ como entrada en vez de leer un s\'imbolo de entrada. En una transici\'on, el
+aut\'omata de pila:
+\begin{enumerate}
+\item Consume de la entrada el s\'imbolo que usa una transici\'on. Si se usa $\epsilon$
+como entrada no se consume ning\'un s\'imbolo.
+\item Pasa a un nuevo estado, que podr\'ia ser o no el mismo que el estado anterior.
+\item Reemplaza el s\'imbolo que est\'a en lo alto de la pila por cualquier cadena. La
+cadena puede ser $\epsilon$, que corresponde a una extracci\'on de la pila. Podr\'ia
+ser el mismo s\'imbolo que aparec\'ia anteriormente en lo alto de la pila; es decir, no
+se hace ning\'un cambio en la pila. Podr\'ia tambi\'en reemplazar el s\'imbolo de lo alto
+de la pila por cualquier otro s\'imbolo, lo que cambia la parte superior de la pila, pero
+no quita o a\~nade ning\'un elemento. Finalmente el s\'imbolo de lo alto de la pila podr\'ia
+ser reemplazado por dos o m\'as s\'imbolos, lo que tiene el efecto de cambiar o no el
+s\'imbolo de lo alto de la pila e introducir uno o m\'as s\'imbolos adicionales.\\
+\end{enumerate}
 \newpage
-La interpretaci\'on de $\delta$(s,a,Z) = \{($s_{1}$,$\gamma_{1}$),($s_{2}$,$\gamma_{2}$), \ldots ,($s_{n}$,$\gamma_{n}$)\}, con s, $p_{i}$ $\in$ Q, a $\in$ ($\Sigma$ $\cup$ \{$\epsilon$\}), $\gamma_{i}$ $\in$ $\Gamma$ es la siguiente:\\
-
-Cuando el estado del aut\'omata es s, el s\'imbolo que la cabeza lectora est\'a inspeccionando en ese momento es a, y en la cima de la pila nos encontramos el s\'imbolo Z, se realizan las siguientes acciones:\\
 \begin{itemize}
+\item Definici\'on formal de los Aut\'omatas de Pila:\\
+
+Nuestra notaci\'on formal para un aut\'omata de pila incluye siete componentes.
+Escribimos la especificaci\'on de un aut\'omata de pila P como sigue:\\
+
+P = ($\mathcal{Q}$,$\Sigma$,$\Gamma$,$\delta$,$q_{0}$,$Z_{0}$,F)
+Las componentes tienen los siguientes significados:
+\begin{itemize}
+\item $\mathcal{Q}$: Un conjunto finito de estados, como los estados de un aut\'omata finito.
+\item $\Sigma$: un conjunto finito de s\'imbolos de entrada, tambi\'en an\'alogo a la
+correspondiente componente de un aut\'omata finito.
+\item $\Gamma$: Un alfabeto de pila finito. Esta componente, que no tiene an\'alogo
+en un aut\'omata finito, es el conjunto de s\'imbolos que se permite introducir en la pila.
+\item $\delta$: La funci\'on de transici\'on. Como para un aut\'omata finito, $\delta$
+gobierna el comportamiento del aut\'omata. Formalmente, $\delta$ toma como
+argumento $\delta$(q,a,X), donde:
+\begin{enumerate}
+\item q es un estado en $\mathcal{Q}$.
+\item a es, o bien un s\'imbolo de entrada en $\Sigma$, o bien a = $\epsilon$, la
+cadena vac\'ia, que se supone que no es un s\'imbolo de entrada.
+\item X es un s\'imbolo de pila, es decir, un elemento de $\Gamma$.
+\end{enumerate}
+La salida de $\delta$ es un conjunto finito de pares (p, $\gamma$), donde p es el
+nuevo estado y $\gamma$ es la cadena de s\'imbolos de pila por los que se reemplaza
+X en lo alto de la pila. Por ejemplo, si $\gamma$ = $\epsilon$ se saca un elemento de
+la pila; si $\gamma$ = X la pila no se cambia, y si $\gamma$ = YZ X se reemplaza por
+Z y se mete Y en la pila.
+\item $q_{0}$: El estado inicial. El aut\'omata de pila est\'a en este estado antes de
+realizar cualquier transici\'on.
+\item $Z_{0}$: El s\'imbolo inicial. Inicialmente, la pila del aut\'omata de pila consta de
+este s\'imbolo y de nada m\'as.
+\item F: El conjunto de estados de aceptaci\'on o estados finales.
+\end{itemize}
+
+La interpretaci\'on intuitiva de $\delta$($q_{0}$,a,$Z_{0}$) = \{($q_{1}$,$\gamma_{1}$),($q_{2}$,$\gamma_{2}$), \ldots ,($q_{n}$,$\gamma_{n}$)\}, con q, $q_{i}$ $\in$ $\mathcal{Q}$, a $\in$ ($\Sigma$ $\cup$ \{$\epsilon$\}), $\gamma_{i}$ $\in$ $\Gamma^{*}$ es la siguiente:\\
+
+Cuando el estado del aut\'omata es $q_{0}$, el s\'imbolo que la cabeza lectora est\'a inspeccionando en ese momento es a, y en la cima de la pila nos encontramos el s\'imbolo Z, se realizan las siguientes acciones:\\
+\begin{enumerate}
 \item Si a $\in$ $\Sigma$, es decir no es la palabra vac\'ia, se avanza una posici\'on la cabeza lectora para inspeccionar el siguiente s\'imbolo.
 \item Se elimina el s\'imbolo Z de la pila del aut\'omata.
-\item Se selecciona un par ($p_{i}$,$\gamma_{i}$)  de entre los existentes en la definici\'on de $\delta$(s,A,Z), la funci\'on de transici\'on del aut\'omata.
+\item Se selecciona un par ($q_{i}$,$\gamma_{i}$)  de entre los existentes en la definici\'on de $\delta$($q_{0}$,A,Z), la funci\'on de transici\'on del aut\'omata.
 \item Se apila la cadena $\gamma_{i}$ = $A_{1}$$A_{2}$\ldots$A_{k}$  en la pila del aut\'omata, quedando el s\'imbolo $A_{1}$  en la cima de la pila.
-\item Se cambia el control del aut\'omata al estado $p_{i}$.
-\end{itemize}
+\item Se cambia el control del aut\'omata al estado $q_{i}$.\\
+\end{enumerate}
 
 \item Ejemplo
 Sea el siguiente lenguaje libre del contexto L = \{$a^{k}$$b^{k}$ $\mid$ k $\geq$ 0 \}; formado por las cadenas L = \{ $\epsilon$ , ab, aabb, aaabbb, aaaabbbb, \ldots \}\\
@@ -210,37 +377,61 @@ $\delta$($q_{0}$, a, $\epsilon$) = \{($q_{1}$, $\underline{A}$)\}
 
 donde q0 es el estado actual, a es el s\'imbolo en la entrada y $\epsilon$ se extrae de la cima de la pila. Entonces, el estado del aut\'omata cambia a q1 y el s\'imbolo $\underline{A}$ se coloca en la cima de la pila.
 
-La idea del funcionamiento del aut\'omata es que al ir leyendo los diferentes s\'imbolos a, estos pasan a la pila en forma de s\'imbolos A. Al aparecer el primer s\'imbolo b en la entrada, se comienza el proceso de desapilado, de forma que coincida el n\'umero de s\'imbolos b le\'idos con el n\'umero de s\'imbolos A que aparecen en la pila.\\
+La idea del funcionamiento del aut\'omata es que al ir leyendo los diferentes s\'imbolos del alfabeto de entrada $\Sigma$, estos pasan a la pila en forma de s\'imbolos del alfabeto de pila. Al aparecer el primer s\'imbolo b en la entrada, se comienza el proceso de desapilado, de forma que coincida el n\'umero de s\'imbolos b le\'idos con el n\'umero de s\'imbolos A que aparecen en la pila.\\
 \item Aut\'omata de Pila Determinista:\\
 \newline
-N\'otese que, a diferencia de un \htmladdnormallink{aut\'omata finito}{http://es.wikipedia.org/wiki/Automata_finito} o una \htmladdnormallink{m\'aquina de Turing}{http://es.wikipedia.org/wiki/Maquina_de_Turing}, la definici\'on b\'asica de un aut\'omata con pila es de naturaleza no determinista, pues la clase de los aut\'omatas con pila deterministas, a diferencia de lo que ocurr\'ia con aquellos modelos, tiene una potencia descriptiva estrictamente menor. Para calificar a un aut\'omata con pila como determinista deben darse dos circunstancias; en primer lugar, por supuesto, que en la definici\'on de cada componente de la funci\'on de transici\'on existan un \'unico elemento lo que da la naturaleza determinista. Pero eso no es suficiente, pues adem\'as puede darse la circunstancia de que el aut\'omata est\'e en el estado s y en la pila aparezca el s\'imbolo sZ, entonces, si existe una definici\'on de transici\'on posible para alg\'un s\'imbolo cualquiera a del alfabeto de entrada, pero, adem\'as existe otra alternativa para la palabra vac\'ia $\epsilon$, tambi\'en esto es una forma de no determinismo, pues podemos optar entre leer un s\'imbolo o no hacerlo. Por eso, en aut\'omata determinista no debe existir transici\'on posible con lectura de s\'imbolo si puede hacerse sin ella, ni al contrario.
+Aunque a los aut\'omatas de pila se les permite, por definici\'on, ser no deterministas,
+el subcaso determinista es bastante importante. En particular, los analizadores
+sint\'acticos se comportan generalmente como aut\'omatas de pila deterministas, por
+lo que el conjunto de lenguajes que pueden ser aceptados por estos aut\'omatas es
+interesante, por las ideas que nos da sobre qu\'e construcciones es adecuado usar en
+los lenguajes de programaci\'on. En esta secci\'on definiremos los auto\'omatas de pila
+deterministas e investigaremos algunas de las cosas que pueden hacer y no hacer.\\
 
-Para cada q $\in$ Q, Z $\in$ $\Gamma$, se d\'e que: $\mid$ $\delta$(q,$\epsilon$,Z)$\mid$ + $\mid$ $\delta$(q,a,Z)$\mid$ $\le$ 1 , para cada a $\in$ $\Sigma$.
+{\bf Definici\'on de un Aut\'omata de Pila Determinista:\\}
+\newline
+Intuitivamente, un aut\'omata de pila es determinista si en ninguna situaci\'on
+puede elegir entre dos o m\'as movimientos alternativos. Estas alternativas son
+de dos tipos. Si $\delta$(q,a,X) contiene m\'as de un par, el aut\'omata a pila es
+no determinista, porque se puede elegir entre estos pares al decidir el siguiente
+movimiento. Sin embargo, incluso aunque $\delta$(q,a,X) tenga siempre un
+\'unico elemento, aun ser\'ia posible elegir entre usar un s\'imbolo de entrada o
+hacer un movimiento sobre $\epsilon$. Decimos que un aut\'omata de pila P =
+($\mathcal{Q}$,$\Sigma$,$\Gamma$,$\delta$,$q_{0}$,$Z_{0}$,F) es determinista (y lo llamamos
+APD, iniciales de aut\'omata de pila determinista), si y solo si se cumplen las
+siguientes condiciones:
+\begin{enumerate}
+\item $\delta$(q,a,X) tiene como m\'aximo un elemento para cualquier q en $\mathcal{Q}$, a en
+$\Sigma$ o a = $\epsilon$, y X en $\Gamma$.
+\item Si $\delta$(q,a,X) no est\'a vac\'io para alg\'un a en $\Sigma$,
+$\delta$(q,$\epsilon$,X) debe estar vac\'io.
+\end{enumerate}
+\newpage
+{\bf Ejemplo de un Aut\'omata de Pila Determinista en TALFi:}
+\begin{center}
+\includegraphics[width=\textwidth]{apd.jpg}
+\end{center}
 \end{itemize}
 
-\subsection{Gram\'atica Libre de Contexto}
-En ling\"{u}\'istica e inform\'atica, una gram\'atica libre de contexto (o de contexto libre) es una \htmladdnormallink{gram\'atica formal}{http://es.wikipedia.org/wiki/Gramatica_formal} en la que cada regla de producci\'on es de la forma:\\
-\newline
-    V $\rightarrow$ w\\
-\newline
-Donde V es un s\'imbolo no terminal y w es una cadena de terminales y/o no terminales. El t\'ermino libre de contexto se refiere al hecho de que el no terminal V puede siempre ser sustituido por w sin tener en cuenta el contexto en el que ocurra. Un \htmladdnormallink{lenguaje formal}{http://es.wikipedia.org/wiki/Lenguaje_formal} es libre de contexto si hay una gram\'atica libre de contexto que lo genera.
+\subsection{Gram\'atica Independiente de Contexto}
+Una gram\'atica independiente del contexto es una notaci\'on formal que sirve para expresar las definiciones recursivas de los lenguajes. Una gram\'atica consta de una o m\'as variables que representan las clasesde cadenas, es decir, los lenguajes. Existen reglas que establecen c\'omo se construyen las cadenas de cada clase. La construcci\'on puede emplear s\'imbolos del alfabeto, cadenas que se sabe que pertenecen a una de las clases, o ambos elementos.
 
-Las gram\'aticas libres de contexto permiten describir la mayor\'ia de los lenguajes de programaci\'on, de hecho, la sintaxis de la mayor\'ia de lenguajes de programaci\'on est\'a definida mediante gram\'aticas libres de contexto. Por otro lado, estas gram\'aticas son suficientemente simples como para permitir el dise\~no de eficientes algoritmos de an\'alisis sint\'actico que, para una cadena de caracteres dada determinen como puede ser generada desde la gram\'atica. Los \htmladdnormallink{analizadores LL}{http://es.wikipedia.org/wiki/Analizador_sintactico_LL} y \htmladdnormallink{LR}{http://es.wikipedia.org/wiki/Analizador_sintactico_LR} tratan restringidos subconjuntos de gram\'aticas libres de contexto.
-
-La notaci\'on m\'as frecuentemente utilizada para expresar gram\'aticas libres de contexto es la forma \htmladdnormallink{Backus-Naur.}{http://es.wikipedia.org/wiki/Backus-Naur_form}
 \begin{itemize}
 \item Defini\'on Formal:\\
-As\'i como cualquier gram\'atica formal, una gram\'atica libre de contexto puede ser definida mediante la 4-tupla:\\
-
-G = ($V_{t}$,$V_{n}$,P,S) donde
+Existen cuatro componentes importantes en una descrici\'on gramatical de un lenguaje:
+\begin{enumerate}
+\item Un conjunto finito de s\'imbolos que forma las cadenas del lenguaje que se est\'a definiendo. Denominamos a este conjunto alfabeto terminal o alfabeto de s\'imbolos terminales.\\
+\item Un conjunto finito de variables, denominado tambi\'en en ocasiones s\'imbolos no terminales o categor\'ias sint\'acticas. Cada variable representa un lenguaje; es decir, un conjunto de cadenas.\\
+\item Una de las variables representa el lenguaje que se est\'a definiendo; se denomina s\'imbolo inicial. Otras variables representan las clases auxiliares de cadenas que se emplean para definir el lenguaje del s\'imbolo inicial.
+\item Un conjunto finito de producciones o reglas que representan la definici\'on recursiva de un lenguaje. Cada producci\'on consta de:\\
 \begin{itemize}
-\item $V_{t}$ es un conjunto finito de terminales
-\item $V_{n}$ es un conjunto finito de no terminales
-\item P es un conjunto finito de producciones
-\item S $\in$ $V_{n}$ el denominado S\'imbolo Inicial
-\item los elementos de P son de la forma:\\
-        $V_{n}$ $\rightarrow$ ($V_{t}$ $\cup$ $V_{n}$$)^{*}$\\
+\item Una variable a la que define (parcialmente) la producci\'on. Esta variable a menudo se denomina cabeza de producci\'on.\\
+\item El s\'imbolo de producci\'on $\rightarrow$ . \\
+\item Una cadena formada por cero o m\'as s\'imbolos terminales y variables. Esta cadena, denominada cuerpo de la producci\'on, representa una manera de formar cadenas pertenecientes al lenguaje de la variable de la cabeza. De este modo, dejamos los s\'imbolos terminales invariables y sustituimos cada una de las variables del cuerpo por una cadena que sabemos que pertenece al lenguaje de dicha variable.\\
 \end{itemize}
+\end{enumerate}
+
+Los cuatro componentes que acabamos de describir definen una gram\'atica independiente del contexto (GIC), o simplemente una gram\'atica. Representamos una gram\'atica independiente del contexto G mediante sus cuatro componentes, es decir, G=(V,T,P,S), donde V es el conjunto de variables, T son los s\'imbolos terminales, P es el conjunto de producciones y S es el s\'imbolo inicial.
 
 \item Ejemplos:
 \begin{enumerate}
@@ -249,7 +440,7 @@ G = ($V_{t}$,$V_{n}$,P,S) donde
     S $\rightarrow$ aSb $\mid$ $\epsilon$\\
 \end{center}
 donde $\mid$ es un o l\'ogico y es usado para separar m\'ultiples opciones para el mismo no terminal, $\epsilon$ indica una cadena vac\'ia. Esta gram\'atica genera el lenguaje no regular \{$a^{n} b^{n}$: n $\ge$ 0 \} .\\
-\item Aqu\'i hay una gram\'atica libre de contexto para expresiones enteras algebraicas sint\'acticamente correctas sobre las variables x, y  y z:
+\item Aqu\'i hay una gram\'atica libre de contexto para expresiones enteras algebraicas sint\'acticamente correctas sobre las variables algebraicas, que son s\'imbolos terminales en la gram\'atica, x, y, z:
 \begin{center}
     S $\rightarrow$ x $\mid$ y $\mid$ z $\mid$ S + S $\mid$ S - S $\mid$ S *S $\mid$ S/S $\mid$ (S)
 \end{center}
@@ -264,7 +455,7 @@ Generar\'ia, por ejemplo, la cadena (x + y) *x - z *y / (x + x)\\
 T genera todas las cadenas con la misma cantidad de letras a que b, U genera todas las cadenas con m\'as letras a, y V todas las cadenas con m\'as letras b.\\
 \item Otro ejemplo para un lenguaje es \{$a^{n} b^{m} c^{m+n}$: n $\ge$ 0, m $\ge$ 0 \} . No es un lenguaje regular, pero puede ser generado por la siguiente gram\'atica libre de contexto.\\
 
-    S  $\rightarrow$ aSc $\mid$ B
+    S  $\rightarrow$ aSc $\mid$ B\\
     B $\rightarrow$ bBc $\mid$ E\\
 \end{enumerate}
 \item Formas normales:
@@ -284,20 +475,25 @@ Existe un teorema que prueba que cualquier GIC, cuyo lenguaje no contiene a la p
 \newline
 Una gram\'atica formal est\'a en Forma normal de Chomsky si todas sus reglas de producci\'on son de alguna de las siguientes formas:
 \begin{center}
-A $\rightarrow$ BC \'o\\
+A $\rightarrow$ BC \'o\\ 
 A $\rightarrow$ a\\
 \end{center}
 donde A, B y C son s\'imbolos no terminales (o variables) y a es un s\'imbolo terminal.
-Todo lenguaje independiente del contexto que no posee a la cadena vac\'ia, es expresable por medio de una gram\'atica en forma normal de Chomsky (GFNCH) y rec\'iprocamente. Adem\'as, dada una gram\'atica independiente del contexto, es posible algor\'itmicamente producir una GFNCH equivalente, es decir, que genera el mismo lenguaje.
+Todo lenguaje independiente del contexto que no posee a la cadena vac\'ia, es expresable por medio de una gram\'atica en forma normal de Chomsky (FNC) y rec\'iprocamente. Adem\'as, dada una gram\'atica independiente del contexto, es posible algor\'itmicamente producir una FNC equivalente, es decir, que genera el mismo lenguaje.
 \end{itemize}
 \end{itemize}
+\subsection{Lenguaje Independiente de Contexto}
+Un lenguaje independiente de contexto es aquel generado por una gram\'atica \htmladdnormallink{independiente de contexto.}{http://es.wikipedia.org/wiki/Gramatica_independiente_de_contexto} Estos conceptos pertenecen a un \'area de la Ciencia de la
+Computaci\'on llamada Computaci\'on Te\'orica.\\
+Los lenguajes de programaci\'on son lenguajes independientes del contexto. Existe una forma mec\'anica de convertir la descripci\'on de un lenguaje como GIC en un analizador sint\'actico: el componente del compilador descubre la estructura del programa fuente y representa dicha estructura mediante un arbol de derivaci\'on.\\
+Otro ejemplo es el lenguaje  HTML, o tambi\'n el lenguaje XML, cuya parte fundamental es la DTD (Document Type Definition, definici\'on de tipo de documento), que principalmente es una gram\'atica independiente del contexto que describe las etiquetas permitidas y las formas en que dichas etiquetas pueden anidarse.
 
 \subsection{M\'aquina de Turing}
 \begin{itemize}
 \item Descripci\'on:\\
 \newline
 La m\'aquina de Turing es un modelo computacional introducido por Alan Turing en el trabajo ``On computable numbers, with an application to the Entscheidungsproblem'', publicado por la Sociedad Matem\'atica de Londres en 1936, en el cual se estudiaba la cuesti\'on planteada por David Hilbert sobre si las matem\'aticas son decidibles, es decir, si hay un m\'etodo definido que pueda aplicarse a cualquier sentencia matem\'atica y que nos diga si esa sentencia es cierta o no. Turing ide\'o un modelo formal de computador, la m\'aquina de Turing, y demostr\'o que exist\'ian problemas que una m\'aquina no pod\'ia resolver. La m\'aquina de Turing es un modelo matem\'atico abstracto que formaliza el concepto de \htmladdnormallink{algoritmo.}{http://es.wikipedia.org/wiki/Algoritmo}\\
-\newpage
+
 La m\'aquina de Turing consta de un cabezal lector/escritor y una cinta infinita en la que el cabezal lee el contenido, borra el contenido anterior y escribe un nuevo valor. Las operaciones que se pueden realizar en esta m\'aquina se limitan a:
 \begin{center}
 \begin{enumerate}
@@ -320,7 +516,7 @@ De hecho, se puede probar matem\'aticamente que para cualquier programa de compu
 La idea subyacente es el concepto de que una m\'aquina de Turing es una persona ejecutando un procedimiento efectivo definido formalmente, donde el espacio de memoria de trabajo es ilimitado, pero en un momento determinado s\'olo una parte finita es accesible. La memoria se divide en espacios de trabajo denominados celdas, donde se pueden escribir y leer s\'imbolos. Inicialmente todas las celdas contienen un s\'imbolo especial denominado ``blanco''. Las instrucciones que determinan el funcionamiento de la m\'aquina tienen la forma, ``si estamos en el estado x leyendo la posici\'on y, donde hay escrito el s\'imbolo z, entonces este s\'imbolo debe ser reemplazado por este otro s\'imbolo, y pasar a leer la celda siguiente, bien a la izquierda o bien a la derecha''. La m\'aquina de Turing puede considerarse como un aut\'omata capaz de reconocer lenguajes formales. En ese sentido es capaz de reconocer los lenguajes recursivamente enumerables, de acuerdo a la jerarqu\'ia de Chomsky. Su potencia es, por tanto, superior a otros tipos de aut\'omatas, como el aut\'omata finito, o el aut\'omata con pila, o igual a otros modelos con la misma potencia computacional.\\
 \item Definici\'on Formal:\\
 \newline
-Una m\'aquina de Turing con una sola cinta puede ser definida como una 7-tupla\\
+Una m\'aquina de Turing con una sola cinta puede ser definida como una 7-tupla\\ 
 \begin{center}
 M=(Q, $\Sigma$, $\Gamma$, s, b, F, $\delta$), donde
 \end{center}
@@ -368,7 +564,7 @@ $s_{5}$ & 0 & 1 & D & $s_{1}$ \\
 \hline
 \end{tabular}
 \end{center}
-\newpage
+\newpage 
 El funcionamiento de una computaci\'on de esta m\'aquina se puede mostrar con el siguiente ejemplo (en negrita se resalta la posici\'on de la cabeza lectora/escritora):\\
 \begin{center}
 \begin{tabular}{||c|c|c||}
@@ -412,14 +608,50 @@ Parada & &\\
 \newpage
 La m\'aquina realiza su proceso por medio de un bucle, en el estado inicial s1, reemplaza el primer 1 con un 0, y pasa al estado s2, con el que avanza hacia la derecha, saltando los s\'imbolos 1 hasta un 0 (que debe existir), cuando lo encuentra pasa al estado s3, con este estado avanza saltando los 1 hasta encontrar otro 0 (la primera vez no habr\'ia ning\'un 1). Una vez en el extremo derecho, a\~nade un 1. Despu\'es comienza el proceso de retorno; con s4 vuelve a la izquierda saltando los 1, cuando encuentra un 0 (en el medio de la secuencia), pasa a s5 que contin\'ua a la izquierda saltando los 1 hasta el 0 que se escribi\'o al principio. Se reemplaza de nuevo este 0 por 1, y pasa al s\'imbolo siguiente, si es un 1, se pasa a otra iteraci\'on del bucle, pasando al estado s1 de nuevo. Si es un s\'imbolo 0, ser\'a el s\'imbolo central, con lo que la m\'aquina se detiene al haber finalizado su c\'omputo.
 \end{itemize}
+\subsection{Algoritmo CYK}
+El algoritmo de Cocke-Younger-Kasami (CYK) determina si una cadena puede ser generada por una gram\'atica independiente de contexto y, si es posible, c\'omo puede ser generada. Este proceso es conocido como an\'alisis sintáctico de la cadena. 
+
+La versi\'on est\'andar CYK reconoce lenguajes definidos por una gram\'atica independiente de contexto escrita en la forma normal de Chomsky. Cualquier gram\'atica independiente de contexto puede ser convertida a FNC sin mucha dificultad, CYK puede usarse para reconocer cualquier palabra de lenguaje independiente de contexto. \\
+
+Consiste en crear una tabla, de tama\~{n}o como la cadena a reconocer, siempre que la cadena sea distinta de $\epsilon$, pues en ese caso solo basta comprobar si es una produccion de la variable inicial. Cada celda la rellenamos con la lista de variables que nos pueden permitir crear las subcadenas basadas en la cadena dada, hasta que llegamos a la celda de la primera columna y la fila de la longitud de la cadena. Si \'esta contiene a la variable inicial, es que a partir de ella podr\'iamos derivar la cadena original, y por tanto ser\'ia reconocida por la gram\'atica, y en consecuencia por el aut\'omata de pila.\\
+
+En el peor caso asint\'otico la complejidad temporal de CYK es c\'ubica sobre la longitud de la cadena analizada. Esto hace a \'este algoritmo uno de los m\'as eficientes en el reconocimiento de cadenas de los lenguajes independientes de contexto.
 \newpage
 \section{Lenguaje generado por un AP}
 Esta parte fue la que nos llevo m\'as tiempo, pues como hemos explicado antes, seguimos una l\'inea de trabajo que desafortunadamente nos llevo a un callej\'on sin salida. Nos centramos en palabras que pertenec\'ian al lenguaje, punto importante pero no el vital para el que sirven los aut\'omatas: definir un lenguaje.
+\subsection{Pasos de simplificac\'ion antes y despu\'es de realizar transformaciones FNC o FNG}
+Estamos acostumbrados en los ejemplos a ver gram\'aticas con pocos s\'imbolos de variable, y en general bastante simplificadas. Al aplicar el algoritmo que nos da la gram\'atica independiente de contexto asociada, vimos que aun teniendo pocos estados, en el momento que el n\'umero de aristas comienza a crecer, obtenemos unas gram\'aticas bastante grandes, y nos vimos en la obligaci\'on de reducirlas adaptando las reglas de simplificaci\'on de una gram\'atica:\\
+\begin{itemize}
+\item Eliminaci\'on de variables sin producciones
+\item Sustituci\'on de una variable por su producci\'on si s\'olo tiene asociada a ella una \'unica producci\'on y es $\epsilon$
+\item Sustituci\'on de una variable por su producci\'on si s\'olo tiene asociada a ella una \'unica producci\'on
+\item Eliminaci\'on de producciones para variables inalcanzables
+\item Eliminaci\'on de producciones $\epsilon$ que cuya cabeza no sea la variable inicial\\
+\item Renombramiento de variables
+\end{itemize}
+Las tres primeras normas se aplican antes de comentar la transformaci\'on en forma normal de una gram\'atica. Nos permiten reducir y dejar mucho mas claro el lenguaje que definen. Las dos siguientes las aplicamos para simplificar el resultado final, pues las formas normales tienen unas caracter\'isticas estrictas, por tanto en algunos casos no har\'a ni falta aplicarlas, y en otros es necesario porque no se aplicaron al principio.
+
+Como siempre, es m\'as sencillo con un ejemplo. A continuaci\'on mostramos un aut\'omata de pila y la aplicaci\'on de los pasos enunciados mostrados en el HTML de salida tras aplicar la simplificaci\'on en Forma Normal de Chomsky:
+\includegraphics{autparapasossimp.jpg} \\
+\includegraphics{paso1simp.jpg} \\
+\includegraphics{paso1simpprod.jpg} \\
+
+Y ahora comenzamos a reducirla:\\
+\includegraphics{detalle1simp.jpg}\\
+
+Se muestra el paso de simplificaci\'on a realizar, y sobre que variables se hace, y a continuaci\'on la gram\'atica resultante. As\'i hasta renombrar las variables para que la gram\'atica quede a la forma en la que estamos habituados a tratar.
+
+%FALTAN IMAGENES
+
+
+%FALTAN IMAGENES!
+
+
 \subsection{Algoritmo de paso de AP $\rightarrow$ Gram\'atica}
 Encontramos muchas dificultades, pues este algoritmo viene detallado muy formalmente y los ejemplos que pudimos encontrar no eran demasiado aclaratorios.
 Para realizar esta nueva funci\'on, hemos incluido en el men\'u de algoritmos el bot\'on ``Simplificaci\'on GIC'':\\
 \begin{center}
-\includegraphics{auto4.jpg}
+\includegraphics[width=\textwidth]{auto4.jpg}
 \end{center}
 En primer lugar, tenemos que distinguir si el aut\'omata de pila tiene estados finales o no. Si se da el primer caso, tenemos que convertir el aut\'omata dado en otro equivalente que reconozca el mismo lenguaje por pila vac\'ia que por estado final. Para ello, seguimos el algoritmo que nos dice c\'omo hacerlo:
 \begin{itemize}
@@ -429,7 +661,7 @@ En primer lugar, tenemos que distinguir si el aut\'omata de pila tiene estados f
 \end{itemize}
 Podemos verlo m\'as claro en la imagen:\\
 \begin{center}
-\includegraphics{roci1.jpg}
+\includegraphics[width=\textwidth]{roci1.jpg}
 \end{center}
 
 En ning\'un caso modificamos el aut\'omata que dibuje el usuario, haremos una copia de \'el. Creemos que no es necesario porque es una conversi\'on necesaria para ejecutar el algoritmo, y es bastante intuitivo el cambio, pero si en un futuro se desea se podr\'ia sustituir el original por el nuevo calculado a partir de \'el.\\
@@ -444,9 +676,9 @@ a\~nadimos la producci\'on [pZq] $\rightarrow$ a. Esta a puede ser tambi\'en $\e
 \end{itemize}
 Una vez que tenemos la gram\'atica, la simplificamos, pues en muchos casos ayuda a reducir los s\'imbolos de variable. Sustituimos todas las variables con producciones unitarias excepto con la variable inicial, y eliminamos las producciones que sean vac\'ias siempre y cuando no aparezcan en S. Para hacer m\'as f\'acil al usuario el entender la gram\'atica, cambiamos los s\'imbolos de producci\'on, que hasta el momento eran del tipo [qZp], por letras may\'usculas del abecedario. Creemos que es bastante grande y que no es probable que ninguna gram\'atica rebase ese n\'umero de variables.
 \newpage
-\subsection{Algoritmo de simplificaci\'on Gram\'atica tipo 2 a Gram\'atica de Greibach}
-Cuando ya tenemos la gram\'atica simplificada podemos dedicarnos a convertirla en una gram\'atica de Greibach. Se caracteriza porque las producciones empiezan por un s\'imbolo terminal, como ya sabemos.\\
-Para poder localizar que variables tienen producciones que comiencen por otra variable, construimos una tabla cuyas filas y columnas son las variables de la gram\'atica. Si alguna producci\'on de las variables de las filas comienza con alguna de las variables de las columnas, marcamos la casilla correspondiente.\\
+\subsection{Algoritmo de simplificaci\'on Gram\'atica Independiente del Contexto a Gram\'atica de Greibach}
+Cuando ya tenemos la gram\'atica simplificada podemos dedicarnos a convertirla en una gram\'atica de Greibach. Se caracteriza porque las producciones empiezan por un s\'imbolo terminal, como ya sabemos.\\ 
+Para poder localizar que variables tienen producciones que comiencen por otra variable, construimos una tabla cuyas filas y columnas son las variables de la gram\'atica. Si alguna producci\'on de las variables de las filas comienza con alguna de las variables de las columnas, marcamos la casilla correspondiente.\\ 
 Ve\'amoslo paso por paso, para el ejemplo de la \'ultima imagen:\\
 
 La gram\'atica que nos genera este aut\'omata, es la siguiente:\\
@@ -483,7 +715,7 @@ Momento en el que ya hemos terminado y devolvemos la gram\'atica final:\\
 \includegraphics{gram5.jpg}
 \end{center}
 
-A esta gram\'atica que devolvemos como final, le aplicamos otro algoritmo de simplificaci\'on, el de eliminar las producciones vac\'ias siempre que no sean producciones de la variable inicial.
+A esta gram\'atica que devolvemos como final, le aplicamos otro algoritmo de simplificaci\'on, el de eliminar las producciones vac\'ias siempre que no sean producciones de la variable inicial. 
 Este algoritmo consiste en lo siguiente:
 \begin{enumerate}
 \item Localizamos que variables, siempre que no sea la inicial, tiene una producci\'on vac\'ia. Eliminamos la producci\'on vac\'ia de sus producciones para cada una de las variables que cumplan esta caracter\'istica.
@@ -504,7 +736,7 @@ Siendo A, E variables de la gram\'atica. Si eliminamos las producciones vac\'ias
 \end{center}
 \item Volver\'iamos a estar en la misma situaci\'on, pues seguimos teniendo una variable con una producci\'on vac\'ia.
 \end{enumerate}
-Este problema no lo tenemos si la gram\'atica tiene la Forma Normal de Greibach, pues nos aseguramos que el primer s\'imbolo de la producci\'on es un terminal, y nunca ocurrir\'a el caso anterior.
+Este problema no lo tenemos si la gram\'atica tiene la Forma Normal de Greibach, pues nos aseguramos que el primer s\'imbolo de la producci\'on es un terminal, y nunca ocurrir\'a el caso anterior. 
 
 Por otro lado, puede ocurrir que se marque una casilla que est\'e en la diagonal de la tabla. En ese caso el proceso es algo m\'as delicado, pues hemos de incluir una nueva variable, ya que existe recursividad y por mucho que se sustituya una y otra vez no podr\'iamos eliminarla.
 %Pong\'amonos en esta situaci\'on. Tenemos esta gram\'atica:
@@ -517,7 +749,7 @@ Por otro lado, puede ocurrir que se marque una casilla que est\'e en la diagonal
 
 %Pues, lo que tenemos que hacer ahora es (NO RECUERDO MIRAR MA\~NANA LIBRO AZUL!)
 \newpage
-\subsection{Algoritmo de simplificaci\'on de gram\'atica de tipo 2 a gram\'atica de Chomsky}
+\subsection{Algoritmo de simplificaci\'on Gram\'atica Independiente de Contexto a Gram\'atica de Chomsky}
 Ya que hemos incluido simplificaciones de gram\'atica, no podemos no incluir otras de las simplificaciones, quiz\'a m\'as importante incluso que la Forma Normal de Greibach: La Forma Normal de Chomsky.\\
 \newline
 Convertir una gram\'atica en Forma Normal de Chomsky, consiste en dos pasos muy sencillos. En primer lugar, una gram\'atica est\'a en forma normal de Chomsky si las producciones son del tipo:
@@ -546,7 +778,7 @@ En teor\'ia habr\'iamos acabado aqu\'i, pero puede ocurrir, que la gram\'atica o
 \end{itemize}
 A continuaci\'on, vamos a mostrar cu\'al es el resultado de obtener la Forma Normal de Chomsky en un aut\'omata sencillo:\\
 \begin{center}
-\includegraphics{chom1.jpg}
+\includegraphics[width=\textwidth]{chom1.jpg}
 \end{center}
 
 Y la salida HTML mostrada con su Forma Normal de Chomsky, que tiene un formato id\'entico a la salida de la Forma Normal de Greibach excepto en los pasos que sigue para llegar al resultado final, es la siguiente:\\
@@ -580,41 +812,79 @@ Despu\'es de tener esta informaci\'on, cogemos las producciones de la variable i
 Mientras que la lista de palabras construidas no llegue a cinco, haremos lo siguiente:
 \begin{itemize}
 \item Cogemos la primera derivaci\'on de la producci\'on y la eliminamos de la lista.
-\item Si est\'a formada solamente por s\'imbolos terminales, la eliminamos de la lista y la metemos en la lista de palabras reconocidas por el aut\'omata.
+\item Si est\'a formada solamente por s\'imbolos terminales, la eliminamos de la lista y la metemos en la lista de palabras reconocidas por el aut\'omata. 
 \item Si no, buscamos el primer s\'imbolo de variable que aparezca por la izquierda. En caso de que esa variable pertenezca a la lista que calculamos antes de variables con producciones que son un terminal, la sustituimos por todas las producciones que tenga de ese tipo, y se a\~naden las diferentes derivaciones resultantes para cada sustituci\'on.
 \end{itemize}
 La longitud de la lista es un par\'ametro f\'acilmente modificable para futuras mejoras de la aplicaci\'on, pues est\'a definida como una constante. Consideramos no dejarla a la elecci\'on del usuario, porque la idea de mostrar esta lista es que el usuario tenga una ligera intuici\'on del lenguaje generado por el aut\'omata, animando a que sea \'el mismo el que profundice en las cadenas que pertenecen al lenguaje y tambi\'en en las que no.
+\newpage
+\subsection{Palabras reconocidas por un aut\'omata de pila}
+Ya explicamos al comienzo c\'omo fue nuestro primer intento de verificar cu\'ando una cadena es reconocida por un aut\'omata de pila, y c\'omo al final  optamos por utilizar el algoritmo CYK.\\
+La salida de la tabla que se genera se puede ver por consola \'unicamente pues consideramos que a el usuario no le importa c\'omo se obtiene el resultado, sino el valor del mismo. \\
+Para cada palabra que se va a comprobar en la correcci\'on de ejercicios de aut\'omata de pila, se guarda el resultado del CYK, por si en un futuro quiere devolverse esta informaci\'on para ampliar la funcionalidad de TALFi. Nosotros mismos pensamos que ser\'ia interesante incluir alg\'un aparatado en el men\'u con esta funci\'on, pero finalmente consideramos que la generaci\'on aleatoria de palabras era suficiente para comprender las cadenas aceptadas por un aut\'omata de pila.
+
 
 \newpage
 \section{M\'aquinas de Turing}
 \subsection{Nociones preliminares}
-El modelo de m\'aquina de Turing es equivalente en cuanto a potencia de c\'omputo a un ordenador.
-Las m\'aquinas de Turing han acabado siendo una definici\'on formal aceptada de algoritmo. Lo que no pueda computar ninguna m\'aquina de Turing no es computable.
-Por tanto, la potencia de estos aut\'omatas no es superable.\\
-
+Podemos imaginarnos una m\'aquina de Turing de la manera siguiente: la m\'aquina
+consta de una unidad de control, que puede estar en cualquier estado tomado de un
+conjunto finito. Hay una cinta dividida en casillas, que puede contener un s\'imbolo,
+tomado de otro conjunto finito.
 \begin{center}
 \includegraphics{turi1.jpg}
 \end{center}
-
-Alain Turing se plante\'o formalizar el comportamiento humano (como computadora) al usar l\'apiz y papel para resolver un problema mediante un algoritmo.\\
-Para ello descompuso todo en procesos muy simples:\\
-\begin{itemize}
-\item Un n\'umero finito de estados mentales (Q).
-\item Papel cuadriculado, cinta potencialmente infinita dividida en celdas.
-\item En un mismo paso de c\'omputo podemos:
+Inicialmente, se sit\'ua en la cinta de entrada, que es una cadena de s\'imbolos de
+longitud finita, elegidos del alfabeto de entrada. El resto de las casillas de la cinta,
+que se extiende infinitamente hacia la derecha y la izquierda, contiene, inicialmente,
+un s\'imbolo denominado espacio en blanco.\\ El espacio en blanco es un s\'imbolo de
+cinta, pero no un s\'imbolo de entrada, y puede haber tambi\'en otros s\'imbolos de
+cinta adem\'as de los s\'imbolos de entrada y del espacio en blanco.\\
+Existe una cabeza de cinta que siempre est\'a situada sobre una de las casillas de
+la cinta. Se dice que la m\'aquina de Turing est\'a se\~nalando dicha casilla. Al
+principio, la cabeza de la cinta se encuentra en la casilla de entrada que se encuentra
+m\'as a la izquierda y no es un blanco.\\
+Un movimiento de la m\'aquina de Turing es una funci\'on del estado de la unidad de
+control, del s\'imbolo de la cinta y de la direcci\'on. En un movimiento, la m\'aquina de
+Turing:
 \begin{enumerate}
-\item Cambiar de estado (mental).
-\item Alterar el contenido de la casilla de trabajo (borrar o escribir).
-\item Concentrarnos en otra casilla (la misma, derecha o izquierda).
+\item Cambiar\'a de estado. Opcionalmente, el siguiente estado puede ser el mismo
+que el actual.
+\item Escribir\'a un s\'imbolo de cinta en la casilla se\~nalada por la cabeza. Este
+s\'imbolo de cinta sustituye al s\'imbolo que estuviera anteriormente en la casilla.
+Opcionalmente, el s\'imbolo escrito puede ser el mismo que hab\'ia en dicha casilla.
+\item Mover\'a la cabeza de la cinta hacia la izquierda o hacia la derecha. En nuestro
+formalismo, no se exige que haya un movimiento, y se permite que la cabeza
+permanezca en el mismo lugar.
 \end{enumerate}
+La notaci\'on formal que utilizaremos para una m\'aquina de Turing es similar a la
+utilizada para los aut\'omatas finitos o para los aut\'omatas a pila.\\
+M = ($\mathcal{Q}$,$\Sigma$,$\Gamma$,$\delta$,$q_{0}$,\#,F)
+cuyas componentes tienen el siguiente significado:
+\begin{itemize}
+\item $\mathcal{Q}$: El conjunto finito de estados de la unidad de control.
+\item $\Sigma$: El conjunto finito de s\'imbolos de entrada.
+\item $\Gamma$: El conjunto completo de s\'imbolos de cinta; $\Sigma$ siempre es un
+subconjunto de $\Gamma$.
+\item $\delta$: La funci\'on de transici\'on. Los argumentos de $\delta$(q,X) son un
+estado q y un s\'imbolo de cinta X. El valor de $\delta$(q,X), si est\'a definido, es una
+tupla (p,Y,S), donde:
+\begin{enumerate}
+\item p es el estado siguiente de $\mathcal{Q}$.
+\item Y es el s\'imbolo de $\Gamma$, que se escribe en la casilla se\~nalada por la
+cabeza de la cinta y que sustituye al s\'imbolo que se encontraba en dicha casilla.
+\item S es un sentido, I, D o N (``izquierda'', ``derecha'' o ``ninguno'' respectivamente),
+que nos indica el sentido en el que se mueve la cabeza.
+\end{enumerate}
+\item $q_{0}$: El estado inicial (uno de los elementos de $\mathcal{Q}$) en el cual se encuentra
+inicialmente la unidad de control.
+\item \#: El s\'imbolo de espacio en blanco. Este s\'imbolo forma parte de $\Gamma$
+pero no de $\Sigma$; es decir, no es un s\'imbolo de entrada. El espacio en blanco
+aparece inicialmente en todas las casillas de la cinta, excepto en aqu\'ellas que
+contienen los s\'imbolos de la entrada.
+\item F: El conjunto de estados finales o de aceptaci\'on, que constituye un
+subconjunto de $\mathcal{Q}$.
 \end{itemize}
-Con esta definici\'on y sabiendo que un lenguaje es reconocido por una m\'aquina de Turing cuando:
-\begin{center}
-L(M) = \{x $\in$ $A^{*}$ $\mid$ M acepta  a x\}
-\end{center}
-Se ha creado un algoritmo para TALFi, el cual, dada una palabra y un aut\'omata que representa a una m\'aquina de Turing, nos dice si dicha palabra es reconocida por la m\'aquina.
 
-Para ello, se coloca la palabra en un archivo de texto (para poder trabajar de la manera m\'as parecida posible a una cinta con celdas infinitas), y se le pasa al algoritmo como argumento para que compruebe la palabra en cuesti\'on.
 
 \subsection{Algoritmo de reconocimiento}
 Una vez comprendida la formalizaci\'on de Turing, la hemos usado de una manera muy intuitiva, para comprobar si la palabra que introducimos puede ser reconocida por el lenguaje que denota la m\'aquina de Turing dise\~nada.
@@ -622,7 +892,7 @@ Una vez comprendida la formalizaci\'on de Turing, la hemos usado de una manera m
 Una vez hemos dise\~nado una m\'aquina de Turing en el \'area espec\'ifica para ello en TALFi, disponemos de un bot\'on con el cual abrir el archivo de texto que contiene la palabra a tratar.
 
 \begin{center}
-\includegraphics{turi2.jpg}
+\includegraphics[width=\textwidth]{turi2.jpg}
 \end{center}
 
 Una vez pulsado el bot\'on, se abrir\'a el usual di\'alogo de apertura de archivos. Seleccionado el archivo, el algoritmo pasa a realizar los siguientes pasos:
@@ -651,23 +921,67 @@ Dado que en un principio este problema no fue contemplado, era necesario a\~nadi
 \section{Ejercicios}
 Ahora tambi\'en es posible crear ejercicios de aut\'omatas de pila y m\'aquinas de Turing. Hemos incluido una peque\~na colecci\'on, pero el administrador puede ampliarla creando sus propios ejercicios y a\~nadi\'endolos a la base de datos de los mismos. A continuaci\'on detallaremos como crearlos, que informaci\'on interna generan, y la forma de corregirlos que hemos implementado.\\
 \subsection{Cambios en la interfaz gr\'afica e implementaci\'on interna para ejercicios de Aut\'omatas de Pila y M\'aquinas de Turing}
-Hasta el momento, el administrador solamente ten\'ia que escribir el aut\'omata o la expresi\'on regular que fuera soluci\'on, y el enunciado del ejercicio.\\
+Hasta el momento, el administrador solamente ten\'ia que escribir el aut\'omata o la expresi\'on regular que fuera soluci\'on, y el enunciado del ejercicio.\\ 
 \newline
 Para los nuevos ejercicios necesitamos m\'as informaci\'on para poder asegurar que la soluci\'on que proporcione el usuario es la suministrada por el administrador de la aplicaci\'on. Por este motivo, ahora se pueden suministrar dos listas de palabras, en el caso de aut\'omatas de pila, y una en el caso de Turing.\\
 \newline
 Se siguen creando de la misma manera que los anteriores ejercicios,\\ seleccion\'andolos de la lista de todos los posibles:\\
 \begin{center}
-\includegraphics{ejer1.jpg}
+\includegraphics[width=\textwidth]{ejer1.jpg}
 \end{center}
 \newpage
 Una contendr\'a las palabras que han de ser reconocidas o procesadas, y otra que contendr\'a palabras que deben ser rechazadas. Ninguna de las dos tiene l\'imite.  Al aut\'omata que pinte el usuario se le aplicar\'a el algoritmo de CYK en el caso de los aut\'omatas de pila, y si coinciden todos los resultados, se considerar\'a el ejercicio como apto, en otro caso no se dar\'a como v\'alido.\\
 \begin{center}
-\includegraphics{ejer2.jpg}
+\includegraphics[width=\textwidth]{ejer2.jpg}
 \end{center}
 
 En Turing s\'olo consideramos una lista, porque si las cadenas no son aceptadas no podemos asegurar que la m\'aquina pare. Internamente se simular\'a la salida de la cinta cuando la m\'aquina se detenga, y se comparar\'a con la salida de la cinta de la m\'aquina que proporcione el usuario. En caso de que coincidan, ocurre como en el otro tipo de ejemplos, se consideran aptos, y no aptos en otro caso.
 
-\chapter{Anexos}
+\newpage
+\section{Cambios destacables en TALFi 2.0}
+\subsection{Interfaz gr\'afica}
+\noindent
+{\bf Notaci\'on Gr\'afica para Autom\'atas de Pila:\\}
+
+Un diagrama que generaliza el diagrama de transici\'on de un aut\'omata finito
+aclara determinados aspectos del comportamiento de un aut\'omata a pila. Por lo
+tanto, introduciremos y usaremos a partir de ahora un diagrama de transici\'on para
+aut\'omatas de pila en el que:
+\begin{enumerate}
+\item Los nodos corresponden a los estados del aut\'omata de pila.
+\item Una tri\'angulo blanco indica el estado inicial, y los estados con un doble c\'irculo
+son de aceptaci\'on, igual que en la primera versi\'on de TALFi cuando se dibujan los
+aut\'omatas finitos.
+\item Los arcos corresponden a las transiciones del aut\'omata a pila en el sentido
+siguiente:\\ un arco con la etiqueta a/X/$\alpha$ desde el estado q al estado p significa
+que $\delta$(q,a,X) contiene el par (p,$\alpha$), quiz\'a entre otros pares. Es decir, la
+etiqueta del arco dice qu\'e entrada se usa y tambi\'en indica los elementos de lo alto
+de la pila, antiguo y nuevos.
+La \'unica cosa que el diagrama no nos dice es qu\'e s\'imbolo de la pila es el s\'imbolo
+inicial. Por convenio, ser\'a $Z_{0}$, a menos que se tenga que transformar un
+aut\'omata de pila que acepte un lenguaje por estado final en otro que acepte el mismo
+lenguaje por pila vac\'ia, siendo en ese caso $X_{0}$.\\
+\end{enumerate}
+{\bf Notaci\'on Gr\'afica para M\'aquinas de Turing:\\}
+
+Las transiciones de una m\'aquina de Turing pueden representarse visualmente de
+una forma muy parecida como se hace para los aut\'omatas de pila. Un diagrama de
+transici\'on est\'a formado por un conjunto de nodos que corresponden a los estados
+de la m\'aquina de Turing. En un arco que vaya del estado q al estado p, aparecer\'an
+una o varias etiquetas de la forma X/YS, d\'onde X e Y son s\'imbolos de cinta, y S
+indica un sentido, que puede der I, D o N. Es decir, si $\delta$(q,X) = (p,Y,S), en el
+arco que va de q a p se encontrar\'a la etiqueta X/Y/S.
+Como en el resto de diagramas de transici\'on, el estado inicial se indica mediante la
+colocaci\'on de un tri\'angulo blanco a su izquierda, y los estados se aceptaci\'on se
+indican mediante c\'irculos dobles.
+\newpage
+Por tanto, la \'unica informaci\'on sobre la m\'aquina
+de Turing que habr\'ia que a\~nadir al diagrama es el s\'imbolo que se utiliza para
+denotar el espacio en blanco. Dicho s\'imbolo es \#.
+
+\subsection{Implementaci\'on}
+
+\chapter{Entorno \LaTeX{}}
 \section{\LaTeX{}}
 
 La opci\'on de que TALFi imprimiese cualquier aut\'omata que se dibujase en {\LaTeX{}} o mostrase los pasos de una simplificaci\'on de gram\'aticas en dicho formato, no fue uno de los riquisitos de la especificaci\'on en un principio.\\
@@ -687,7 +1001,7 @@ Su c\'odigo abierto permiti\'o que muchos usuarios realizasen nuevas utilidades 
 
 Con todo, adem\'as de todas las nuevas extensiones, la caracter\'istica m\'as relevante de este esfuerzo de reestandarizaci\'on fue la arquitectura modular: se estableci\'o un n\'ucleo central (el compilador) que mantiene las funcionalidades de la versi\'on anterior pero permite incrementar su potencia y versatilidad por medio de diferentes paquetes que solo se cargan si son necesarios. De ese modo, \LaTeX{} dispone ahora de innumerables paquetes para todo tipo de objetivos, muchos dentro de la distribuci\'on oficial, y otros realizados por terceros, en algunos casos para usos especializados.
 
-\subsection{Uso}
+\section{Uso}
 \LaTeX{} presupone una filosof\'ia de trabajo diferente a la de los procesadores de texto habituales (conocidos como WYSIWYG, es decir, ``lo que ves es lo que obtienes'') y se basa en comandos. Tradicionalmente, este aspecto se ha considerado una desventaja (probablemente la \'unica). Sin embargo, \LaTeX{}, a diferencia de los procesadores de texto de tipo WYSIWYG, permite a quien escribe un documento centrarse exclusivamente en el contenido, sin tener que preocuparse de los detalles del formato. Adem\'as de sus capacidades gr\'aficas para representar ecuaciones, f\'ormulas complicadas, notaci\'on cient\'ifica e incluso musical, permite estructurar f\'acilmente el documento (con cap\'itulos, secciones, notas, bibliograf\'ia, \'indices anal\'iticos, etc.), lo cual brinda comodidad y lo hace \'util para art\'iculos acad\'emicos y libros t\'ecnicos.\\
 
 Con \LaTeX{}, la elaboraci\'on del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las \'ordenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las \'ordenes escritas en \'el y compila el documento, dej\'andolo preparado para que pueda ser enviado a la salida correspondiente, ya sea la pantalla o la impresora. Ahora bien, si se quiere a\~nadir o cambiar algo en el documento, se deber\'a hacer los cambios en el fichero fuente y procesarlo de nuevo. Esta idea, que puede parecer poco pr\'actica a priori, es conocida a los que est\'an familiarizados con el proceso de compilaci\'on que se realiza con los lenguajes de programaci\'on de alto nivel (C, C++, etc.), ya que es completamente an\'alogo.\\
@@ -697,14 +1011,14 @@ El modo en que \LaTeX{} interpreta la ``forma'' que debe tener el documento es m
 Una de las ventajas de \LaTeX{} es que la salida que ofrece es siempre la misma, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos tales como Postscript, PDF, SGML, HTML, RTF, etc. Existen distribuciones e IDEs de LaTeX para todos los sistemas operativos m\'as extendidos, que incluyen todo lo necesario para trabajar. Hay, por ejemplo, programas para Windows como TeXnicCenter, \htmladdnormallink{MikTeX}{http://miktex.org/} o \htmladdnormallink{WinEdt}{http://www.winedt.com/}, para Linux como Kile, o para MacOS como TeXShop, todos liberados bajo la Licencia GPL. Existe adem\'as un editor multiplataforma (para MacOS, Windows y Unix) llamado Texmaker, que tambi\'en tiene licencia \htmladdnormallink{GPL}{http://es.wikipedia.org/wiki/Licencia_publica_general_de_GNU}.
 
 \subsection{Uso de \LaTeX en la herramienta TALFi}
-Aunque \LaTeX es primordialmente un sistema de composici\'on de textos para la creaci\'on de documentos que contengan f\'ormulas matem\'aticas, en TALFi lo usaremos para poder colocar en nuestros textos aut\'omatas o simplificaciones paso a paso de gram\'aticas.
+Aunque \LaTeX es primordialmente un sistema de composici\'on de textos para la creaci\'on de documentos que contengan f\'ormulas matem\'aticas, en TALFi lo usaremos para poder colocar en nuestros textos aut\'omatas o simplificaciones paso a paso de gram\'aticas. 
 
 Esto es posible debido a una gran cantidad y diversidad de bibliotecas/paquetes que podemos a\~nadir a nuestro editor de \LaTeX{}.
 Gracias a esta amplitud de posibilidades para crear gr\'aficos complejos en \LaTeX{}, el trabajo inicial de poder imprimir los aut\'omatas o las simplificaciones acab\'o dando como resultado 3 posibles representaciones en \LaTeX{}. De esta manera y debido a las diferencias entre las representaciones, el usuario podr\'a elegir entre un dise\~no sobrio y con formas claras, un dise\~no colorido o un dise\~no en forma matricial para poder modificarlo de manera m\'as intuitiva.
 
 Sin embargo para la representaci\'on de los pasos en la simplificaci\'on de gram\'aticas, s\'olo disponemos de un dise\~no, puesto que la representaci\'on se hace mediante tablas y texto plano, siendo innecesaria la inclusi\'on de colores, formas, etc.
 \newpage
-\subsection{LatexCodeConverter}
+\section{LatexCodeConverter}
 Esta clase, es la encargada de traducir cualquier aut\'omata de TALFi en un archivo \TeX{} totalmente listo para ser compilado en cualquier entorno para \LaTeX{}.
 \newline
 \begin{itemize}
@@ -724,7 +1038,7 @@ La implementaci\'on del algoritmo consiste b\'asicamente en traducir los distint
 \newline
 Esta es la representaci\'on m\'as fiable y visualmente m\'as clara, puesto que siempre que se pueda dibujar un aut\'omata en TALFi, su representaci\'on en \LaTeX ser\'a pr\'acticamente id\'entica.\\
 \begin{center}
-\includegraphics{late1.jpg}
+\includegraphics[width=\textwidth]{late1.jpg}
 \end{center}
 
 \newpage
@@ -733,7 +1047,7 @@ Esta es la representaci\'on m\'as fiable y visualmente m\'as clara, puesto que s
 Esta biblioteca es visualmente muy atractiva, pero tiene el incoveniente de que el modo en el que los estados se colocan en el lienzo, se realiza especificando donde se encuentran cada uno de ellos, en relaci\'on a un estado dado.
 Como vemos en el c\'odigo, partimos del estado A ($q_{a}$ en el dibujo), para luego indicar que el estado B se encuentra arriba y a la derecha del estado A. Lo mismo ocurre con el estado C, que se indica que est\'a abajo y a la derecha del estado B,etc.\\
 \newline
-Aunque visualmente gane muchos enteros este tipo de representaci\'on, debido a que el algoritmo construye el dibujo de manera de autom\'atica, puede llevar a muchos problemas de superposici\'on de estados cuando los aut\'omatas contienen un n\'umero de estados elevado (inlcuso pord\'ia no poder visualizarse).\\
+Aunque visualmente gane muchos enteros este tipo de representaci\'on, debido a que el algoritmo construye el dibujo de manera de autom\'atica, puede llevar a muchos problemas de superposici\'on de estados cuando los aut\'omatas contienen un n\'umero de estados elevado (inlcuso pord\'ia no poder visualizarse).\\ 
 Conllevar\'ia una trabajo dificultoso de grafos para llevar a cabo una representaci\'on de aut\'omatas totalmente libre de errores para esta representaci\'n.
 No obstante, si se quieren incluir aut\'omatas en un texto \LaTeX{} de manera manual, este es el mejor m\'etodo posible.\\
 \newline
@@ -753,10 +1067,10 @@ En este caso el problema, ser\'a visual. Puesto que al haber tal cantidad de est
 \includegraphics{late.jpg}
 \end{center}
 \end{enumerate}
-\end{itemize}
+\end{itemize} 
 \newpage
 
-\subsection{TraductorHTML}
+\section{TraductorHTML}
 
 En TALFi 1.0 esta clase se encargaba de mostrar un archivo html en un navegador web, con los pasos de la minimizaci\'on de aut\'omatas finitos.\\
 \newline
@@ -770,11 +1084,11 @@ El resto es introducir texto plano y los atributos de las distintas gram\'aticas
 \includegraphics{late3.jpg}
 \end{center}
 \newpage
-\subsection{Entornos \LaTeX{} utilizados}
+\section{Entornos \LaTeX{} utilizados}
 \begin{itemize}
 \item Miktex:
 \begin{center}
-\includegraphics{prog1.jpg}
+\includegraphics[width=\textwidth]{prog1.jpg}
 \end{center}
 MiKTeX es una distribuci\'on \TeX{}/\LaTeX{} para Microsoft Windows que fue desarrollada por Christian Schenk.
 Las caracter\'isticas m\'as apreciables de MiKTeX son su habilidad de actualizarse por s\'i mismo descargando nuevas versiones de componentes y paquetes instalados previamente, y su f\'acil proceso de instalaci\'on.\\
@@ -792,19 +1106,20 @@ Caracter\'isticas:
 \newpage
 \item WinEdt:
 \begin{center}
-\includegraphics{prog2.jpg}
+\includegraphics[width=\textwidth]{prog2.jpg}
 \end{center}
-WinEdt es un editor de textos de gran alcance y versatilidad para Windows, con una fuerte predisposici\'on hacia la creaci\'on de documentos \LaTeX{}.
+WinEdt es un editor de textos de gran alcance y versatilidad para Windows, con una fuerte predisposici\'on hacia la creaci\'on de documentos \LaTeX{}. 
 La \htmladdnormallink{p\'agina de descargas}{http://www.winedt.com/index.html} del sitio web  tiene m\'as informaci\'on sobre WinEdt, \TeX{}, y enlaces a otros programas necesarios para hacer operativo WinEdt en la plataforma Windows.
 \end{itemize}
 
-\newpage
+
+\chapter{Anexos}
 \section{Ampliaci\'on del Manual de Usuario}
 Antes de que cualquier persona, administrador o no, quiera usar TALFi 2.0, debe conocer dos detalles para poder usar la aplicaci\'on correctamente:\\
 \begin{itemize}
-\item Si quiere incluir $\epsilon$ en las transiciones, tendr\'a que hacerlo de la misma forma que en TALFi 1.0, con el car\'acter /.
+\item Si quiere incluir $\epsilon$ en las transiciones, tendr\'a que hacerlo de forma distinta que en TALFi 1.0, con el car\'acter \~.
 \item Para especificar un blanco en m\'aquinas de Turing, tendr\'a que escribir $\#$.
-\item Las direcciones posibles de movimiento en m\'aquinas de Turing son I, D, N para espa\~nol, y L,R,N para ingl\'es. Ambas siempre en may\'usculas.
+\item Las direcciones posibles de movimiento en m\'aquinas de Turing son I, D, N para espa\~nol, y L,R,N para ingl\'es. Ambas siempre en may\'usculas. 
 \item Necesariamente el contenido de la cinta para simular una m\'aquina de Turing debe cargarse en un archivo con extensi\'on ``txt''.
 \end{itemize}
 Al igual que en la primera versi\'on de TALFi, cuando se pide introducir los s\'imbolos, ya sean de cinta o de alfabeto, en ning\'un caso deben contener espacios y tienen que ir separados por comas.
@@ -817,7 +1132,7 @@ Ampliaci\'on de paquetes:
 \begin{itemize}
 \item Modelo.algoritmos:
 \begin{itemize}
-\item Clases a\~nadidas:\\AceptaTuring, AutomataP\_to\_GramaticaIC, GIC\_to\_FNG, GIC\_to\_FNChomsky
+\item Clases a\~nadidas:\\AceptaTuring, AutomataP\_to\_GramaticaIC, GIC\_to\_FNG,\\GIC\_to\_FNChomsky
 \item AceptaTuring:\\Contiene el algoritmo que simular\'ia la ejecuci\'on de una m\'aquina de Turing. Recibe el objeto creado para m\'aquinas de Turing y la ruta del archivo que contiene la cinta. Aqu\'i se abre, si ocurriese alg\'un problema no se realiza la simulaci\'on.
 \item AutomataP\_to\_GramaticaIC:\\Dado un aut\'omata de pila aplicamos el algoritmo que nos genera su gram\'atica asociada.
 \item GIC\_to\_FNC:\\Recibe la gram\'atica que ha generado AutomataP\_to\_GramaticaIC, y la transforma en Forma Normal de Greibach con el algoritmo que utiliza las tablas de reemplazo.
@@ -875,52 +1190,50 @@ La segunda novedad son los tres botones para la generaci\'on aleatoria de palabr
 \newpage
 Men\'u al iniciar la aplicaci\'on:\\
 \begin{center}
-\includegraphics{roci3.jpg}
+\includegraphics[width=\textwidth]{roci3.jpg}
 \end{center}
 \begin{center}
 \includegraphics{roci4.jpg}
 \end{center}
 Muestra de los botones activos en un ejemplo de m\'aquina de Turing:\\
 \begin{center}
-\includegraphics{roci5.jpg}
+\includegraphics[width=\textwidth]{roci5.jpg}
 \end{center}
 \newpage
 \item Aristas:\\
 
-Ahora las aristas contendr\'an tres campos separados por el car\'acter / :\\
+Ahora las aristas contendr\'an tres campos separados por el car\'acter / :\\ 
 s\'imbolos de entrada o s\'imbolos de cinta, cima de pila actual o s\'imbolo que reemplazar\'a al que actualmente est\'a en la cinta, y la transici\'on de la pila o la direcci\'on hacia la que se desplazar\'a la cabeza lectora de la cinta de Turing, ya se trate de aut\'omatas de pila o m\'aquinas de Turing.\\ En consecuencia, necesitaremos tres campos distintos a modificar cuando necesitemos modificar una arista ya dibujada en el canvas.\\
 
 Cuadro de di\'alogo que aparece al modificar una arista de un aut\'omata de pila:\\
 \begin{center}
-\includegraphics{roci6.jpg}
+\includegraphics[width=\textwidth]{roci6.jpg}
 \end{center}
 \end{itemize}
 
-
-\backmatter
 \begin{thebibliography}{XXX}
 \bibitem{}Hopcraft, Motwani, Uliman.\\
 ``Introducci\'on a la teor\'ia de aut\'omatas. Lenguajes y computaci\'on''\\
 Addison Wesley 2002.
 \bibitem{}J. G. Brookshear.\\
-Teor\'ia de la Computaci\'on: Lenguajes Formales, Aut\'omatas y Complejidad.\\
+``Teor\'ia de la Computaci\'on: Lenguajes Formales, Aut\'omatas y Complejidad''\\
 Addison-Wesley Iberoamericana, 1993.
 \bibitem{}J.C. Martin.\\
-Introduction to Languages and the Theory of Computation\\
+``Introduction to Languages and the Theory of Computation''\\
 McGraw-Hill, 1997, (Segunda edici\'on).
 \bibitem{}D.C. Kozen\\
-Automata and Computability\\
+``Automata and Computability''\\
 Springer Verlag, 1997.
 \bibitem{}H.R. Lewis, C.H. Papadimitriou\\
-Elements of the Theory of Computation\\
+``Elements of the Theory of Computation''\\
 Prentice Hall, 1988, (Segunda edici\'on).
 \bibitem{}P. Isasi, P. Mart\'inez, D. Borrajo\\
-Lenguajes, Gram\'aticas y Aut\'omatas, un enfoque pr\'actico.\\
+``Lenguajes, Gram\'aticas y Aut\'omatas, un enfoque pr\'actico''\\
 Addison-Wesley, 1997.
 \bibitem{}Dean Kelley.\\
-``Teor\'ia de Aut\'omatas y Lenguajes Formales''.\\
+``Teor\'ia de Aut\'omatas y Lenguajes Formales''\\
 Prentice Hall, 1997.
 \bibitem{}\htmladdnormallink{http://es.wikipedia.org}{http://es.wikipedia.org}
 \end{thebibliography}
 
-\end{document} 
+\end{document}
