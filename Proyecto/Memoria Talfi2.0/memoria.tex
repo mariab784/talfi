@@ -53,27 +53,37 @@ Se autoriza a la Universidad Complutense de Madrid a difundir y utilizar con fin
 Fdo.:\\
 \newline
 Luis San Juan Germ\'an:\\
+
+\includegraphics{signature.jpg}\\
+
+
+\noindent Mario Jose Huete Jim\'enez:\\
 \newline
 \newline
 \newline
 \newline
-Mario Jose Huete Jim\'enez:\\
 \newline
 \newline
 \newline
-\newline
-Rocio Barrig\"{u}ete Ib\'a\~nez:\\
+Roc\'io Barrig\"{u}ete Ib\'a\~nez:\\
 \tableofcontents
 
 
 %%%%%%%%%%%%%%%%%%%%CAPITULO 1%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Resumen}
+\section{TALFi (Versi\'on en castellano)}
 TALFi naci\'o en el curso acad\'emico 2008-2009 como una aplicaci\'on de apoyo y consulta sobre teor\'ia de aut\'omatas y lenguajes formales.
 Su primera versi\'on conten\'ia funcionalidad acerca de aut\'omatas finitos (deterministas, no deterministas y con transiciones vac\'ias), y expresiones regulares, as\'i como su equivalencia, simplificaci\'on y dem\'as aspectos relacionados.
-Para TALFi 2.0 se han creado muchas m\'as caracter\'isticas adicionales, as\'i como la mejora de ciertos aspectos de la primera versi\'on, que no resultaban del todo intuitivos para el usuario y claros en la comprensi\'on.\\
-Como nueva funcionalidad podemos encontrar el tratamiento de aut\'omatas de pila, m\'aquinas de Turing y gram\'aticas independientes de contexto. Para ello, se han a\~nadido componentes gr\'aficos para poder manipular la representaci\'on de dichos aut\'omatas, as\'i como nuevas implementaciones para definir sus comportamientos, sus transiciones m\'as complejas, as\'i como m\'etodos para minimizar, conocer equivalencias o pertenencia de palabras.\\
-En cuanto a las mejoras, se mejorado la minimizaci\'on de aut\'omatas finitos, ya que detectamos fallos al aplicarlo y adem\'as hemos profundizado en los pasos que se siguen en este algoritmo, explic\'andolos de forma m\'as detallada. Por otra parte se ha diferenciado entre la apertura de un ejercicio. Esto ya lo hac\'ia la antigua versi\'on de TALFi, pero cab\'ia la posibilidad de abrir un ejercicio como un ejemplo y poder ver su soluci\'on (opci\'on no recomendable para el aprendizaje).
+Para TALFi 2.0 se han creado muchas m\'as caracter\'isticas adicionales, as\'i como la mejora de ciertos aspectos de la primera versi\'on, que no resultaban del todo intuitivos para el usuario y claros en la comprensi\'on.
+Como nueva funcionalidad podemos encontrar el tratamiento de aut\'omatas de pila, m\'aquinas de 
 Con esta nueva ampliaci\'on, TALFi se convierte en una herramienta de gran expresividad dentro del entorno de los aut\'omatas y la generaci\'on de lenguajes, a la altura de otras tecnolog\'ias ya conocidas como JFLAP, etc. 
+\section{TALFi (English version)}
+TALFi was created in the academic course of 2008-2009 as a student support program for automaton theories and formal lenguages. Its first version contained united-state automaton (deterministic, non-deterministic and generalized nondeterministic inite automaton) and regular expressions, so as their equivalence, simplificated and more related aspects. For TALFi 2.0 has
+been created a lot more of addicional options, as the improvement of some
+parts of the first version, which was not completely intuitive for the user and
+clear in its comprehension. With this new ampliation, TALFi turns into a
+great tool into the automaton world and the language generations, in the
+same leves as JFLAP, etc.
 
 
 \clearemptydoublepage
@@ -89,9 +99,9 @@ Esto era necesario porque, parte muy importante de TALFi (el algoritmo de recono
 \item Como parte importante de los objetivos, podemos mencionar las mejoras y arreglos realizados en TALFi 1.0:
 \begin{itemize}
 \item Minimizaci\'on: la minimizaci\'on en TALFi 1.0 tuvo que ser corregida, s\'olo se pod\'ia aplicar a aquellos aut\'omatas que fueran finitos y deterministas. Gracias a TALFi 2.0 la minimizaci\'on es posible adem\'as para aut\'omatas finitos no deterministas y aut\'omatas finitos no deterministas con transiciones vac\'ias, gracias al previo paso de transformaci\'on de estos dos \'ultimos tipos de aut\'omatas en un aut\'omata finito determinista.
-Para cerrar de manera final la minimizaci\'on se imprime en un archivo HTML de forma detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se van realizando.
-\item TALFi 1.0 diferenciaba entre ejercicios y ejemplos, pero era posible ver la soluci\'on de un ejercicio propuesto por el profesor, si lo abr\'iamos como ejemplo. Este comportamiento no nos pareci\'o muy adecuado debido al car\'acter docente y de aprendizaje de TALFi. Dicho comportamiento fue subsanado, adem\'as de incluir mayor n\'umero de ejemplos y ejercicios.
-\item Inclusi\'on de un modo \LaTeX{} con el que podemos obtener en dicho formato, tanto los aut\'omatas que se creen en TALFi, como los ejemplos, as\'i como la simplificaci\'on de las gram\'aticas anteriormente mencionadas.\\
+Para cerrar de manera final la minimizaci\'on se imprime en un archivo HTML de forma detallada las tablas que se generan en este algoritmo para que quedasen m\'as claros los pasos que se van realizando.\ref{sec:min}
+\item TALFi 1.0 diferenciaba entre ejercicios y ejemplos, pero era posible ver la soluci\'on de un ejercicio propuesto por el profesor, si lo abr\'iamos como ejemplo.\ref{sec:eje} Este comportamiento no nos pareci\'o muy adecuado debido al car\'acter docente y de aprendizaje de TALFi. Dicho comportamiento fue subsanado, adem\'as de incluir mayor n\'umero de ejemplos y ejercicios.
+\item Inclusi\'on de un modo \LaTeX{} \ref{sec:latex} con el que podemos obtener en dicho formato, tanto los aut\'omatas que se creen en TALFi, como los ejemplos, as\'i como la simplificaci\'on de las gram\'aticas anteriormente mencionadas.\\
 \end{itemize}
 \item Como posible mejora futura, proponemos incluir TALFi 2.0 como una aplicaci\'on web dentro de un entorno como, por ejemplo, el \htmladdnormallink{Campus Virtual UCM}{https://www.ucm.es/campusvirtual/CVUCM/index.php}. Evidentemente la herramienta segur\'ia teniendo las mismas aplicaciones, pero la identificaci\'on de usuario ya no ser\'ia necesaria dentro de la aplicaci\'on: estar\'ia ligada al tipo de login que se realizase en la web.
 No ser\'ia la \'unica adaptaci\'on necesaria, pues el env\'io de ejercicios propuestos tambi\'en requiere hacer uso de los medios de comunicaci\'on con tutor del Campus Virtual UCM, para poder hacer llegar al administrador de la aplicaci\'on la soluci\'on realizada por el alumno y terminar la correcci\'on.
@@ -135,7 +145,7 @@ TALFi}
 En un primer momento, tuvimos que dedicar mucho tiempo a entender el funcionamiento de la aplicaci\'on, y por tanto el c\'odigo creado por nuestros compa\~neros el a\~no pasado. A continuaci\'on describimos en que partes encontramos dificultades.
 
 \subsection{Minimizaci\'on}
-
+\label{sec:min}
 Mientras nos dedic\'abamos a ir un paso m\'as all\'a con la minizaci\'on, descubrimos varios fallos en este algoritmo, teni\'endolo que rehacer en parte, para poder cuadrarlo con los cambios que se nos hab\'ian pedido.
 
 En primer lugar, introducimos un estado trampa llamado ``tramposo'', para aclarar el estado a d\'onde llegan las transiciones que no est\'an definidas ni tienen una arista equivalente en aut\'omatas finitos no deterministas y aut\'omatas finitos con transiciones vac\'ias.
@@ -235,7 +245,7 @@ El algoritmo se basa en dos m\'etodos: uno que indica si se reconoce o no una ci
 
 \end{itemize}
 
-Quiz\'a en un futuro sean pautas que alguien pueda seguir para explicar el funcionamiento de los aut\'omatas de pila. Nosotros \'ibamos a utilizarlo para probar que una palabra pertenec\'ia al lenguaje de un aut\'omata de pila, pero el coste se disparaba a exponencial, volvi\'endose intratable. Optamos por el algoritmo llamado CYK, cuyo coste es mucho mejor, ya que es c\'ubico sobre la longitud de la cadena.
+Quiz\'a en un futuro sean pautas que alguien pueda seguir para explicar el funcionamiento de los aut\'omatas de pila. Nosotros \'ibamos a utilizarlo para probar que una palabra pertenec\'ia al lenguaje de un aut\'omata de pila, pero el coste se disparaba a exponencial, volvi\'endose intratable. Optamos por el algoritmo llamado CYK \ref{sec:cyk}, cuyo coste es mucho mejor, ya que es c\'ubico sobre la longitud de la cadena.
 
 \section{Introducci\'on a la ampliaci\'on de la aplicaci\'on}
 
@@ -246,7 +256,7 @@ Como algoritmos importantes cuenta con:
 \item Transformaci\'on de un aut\'omata con transiciones vac\'ias a uno no determinista.
 \item Transformaci\'on de un aut\'omata no determinista a uno determinista.
 \item Transformaci\'on de aut\'omata finito determinista a expresi\'on regular.
-\item Minimizaci\'on de aut\'omatas finitos no deterministas.\\
+\item Minimizaci\'on de aut\'omatas finitos no deterministas.\ref{sec:min}\\
 \end{itemize}
 La interfaz de usuario de TALFi 1.0 cuenta con un \'arbol desplegable donde podemos encontrar ejemplos y ejercicios que la primera versi\'on de TALFi es capaz de llevar a cabo. Tambi\'en dispone de los usuales controles para modificar, copiar, pegar, borrar cualquier aspecto de la figura que creemos en la zona central de la interfaz.
 
@@ -255,13 +265,13 @@ TALFi 2.0 respeta esta estructura y le a\~nade una colecci\'on de ejemplos de ej
 \item Lista de palabras aleatorias que pertenecen al lenguaje.
 \item Gram\'atica independiente de contexto que genera un aut\'omata de pila aplicando el algoritmo de transformaci\'on.
 \item Simplificaci\'on detallada por pasos de la gram\'atica que se obtiene directamente de un aut\'omata de pila.
-\item Transformaci\'on de una gram\'atica independiente de contexto en forma normal de Greibach.
-\item Transformaci\'on de una gram\'atica independiente de contexto en forma normal de Chomsky.\\
+\item Transformaci\'on de una gram\'atica independiente de contexto en forma normal de Greibach.\ref{sec:normal}
+\item Transformaci\'on de una gram\'atica independiente de contexto en forma normal de Chomsky.\ref{sec:normal}\\
 \end{itemize}
 
 En lo que se refiere a m\'aquinas de Turing, podremos:
 \begin{itemize}
-\item Saber si una cadena de entrada es reconocida por una m\'aquina de Turing.
+\item Saber si una cadena de entrada es reconocida por una m\'aquina de Turing. \ref{sec:tur}
 \item Obtener la cinta de salida generada por una m\'aquina de Turing.
 \item Conocer si una cierta cinta de entrada hace que una m\'aquina de Turing cicle.
 \end{itemize}
@@ -451,7 +461,7 @@ T genera todas las cadenas con la misma cantidad de letras a que b, U genera tod
     S  $\rightarrow$ aSc $\mid$ B\\
     B $\rightarrow$ bBc $\mid$ E\\
 \end{enumerate}
-\item Formas normales:
+\item Formas normales:\label{sec:normal}
 \begin{itemize}
 \item Forma normal de Greibach:\\
 \newline
@@ -654,6 +664,7 @@ Parada & &\\
 La m\'aquina realiza su proceso por medio de un bucle, en el estado inicial q1, reemplaza el primer 1 con un 0, y pasa al estado q2, con el que avanza hacia la derecha, saltando los s\'imbolos 1 hasta un 0 (que debe existir), cuando lo encuentra pasa al estado q3, con este estado avanza saltando los 1 hasta encontrar otro 0 (la primera vez no habr\'ia ning\'un 1). Una vez en el extremo derecho, a\~nade un 1. Despu\'es comienza el proceso de retorno; con q4 vuelve a la izquierda saltando los 1, cuando encuentra un 0 (en el medio de la secuencia), pasa a q5 que contin\'ua a la izquierda saltando los 1 hasta el 0 que se escribi\'o al principio. Se reemplaza de nuevo este 0 por 1, y pasa al s\'imbolo siguiente, si es un 1, se pasa a otra iteraci\'on del bucle, pasando al estado q1 de nuevo. Si es un s\'imbolo 0, ser\'a el s\'imbolo central, con lo que la m\'aquina se detiene al haber finalizado su c\'omputo.
 \end{itemize}
 \subsection{Algoritmo CYK\\}
+\label{sec:cyk}
 El algoritmo de Cocke-Younger-Kasami (CYK) determina si una cadena puede ser generada por una gram\'atica independiente de contexto y, si es posible, c\'omo puede ser generada. Este proceso es conocido como an\'alisis sint\'actico de la cadena. 
 
 La versi\'on est\'andar CYK reconoce lenguajes definidos por una gram\'atica independiente de contexto escrita en la forma normal de Chomsky. Cualquier gram\'atica independiente de contexto puede ser convertida a FNC sin mucha dificultad, CYK puede usarse para reconocer cualquier palabra de lenguaje independiente de contexto.\\
@@ -923,6 +934,7 @@ Para aquellas m\'aquinas de Turing que no contienen estados finales, devolvemos 
 En cambio, si existen estados finales, consideramos que el estado en el que quede la cinta no es relevante, y \'unicamente mostramos un mensaje al usuario inform\'andole de que su cinta de entrada se ha procesado con \'exito si ha finalizado la simulaci\'on en un estado final, o que ha fallado su reconocimiento en caso contrario.
 
 \subsection{Algoritmo de reconocimiento}
+\label{sec:tur}
 Una vez comprendida la formalizaci\'on de Turing, la hemos usado de una manera muy intuitiva, para comprobar si la palabra que introducimos puede ser reconocida por el lenguaje que denota la m\'aquina de Turing dise\~nada.
 
 Una vez hemos dise\~nado una m\'aquina de Turing en el \'area espec\'ifica para ello en TALFi, disponemos de un bot\'on con el cual abrir el archivo de texto que contiene la palabra a tratar.
@@ -1044,6 +1056,7 @@ Cuadro de di\'{a}logo que aparece al modificar una arista de un aut\'omata de pi
 
 
 \subsection{Ejercicios\\}
+\label{sec:eje}
 Ahora tambi\'en es posible crear ejercicios de aut\'omatas de pila y m\'aquinas de Turing. Hemos incluido una peque\~na colecci\'on, pero el administrador puede ampliarla creando sus propios ejercicios y a\~nadi\'endolos a la base de datos de los mismos. A continuaci\'on detallaremos como crearlos, que informaci\'on interna generan, y la forma de corregirlos que hemos implementado.\\
 Se siguen creando de la misma manera que los anteriores ejercicios,\\ seleccion\'andolos de la lista de todos los posibles:
 \begin{center}
@@ -1084,7 +1097,7 @@ No se generar\'an las cintas de salida obtenidas en el caso de que pare la simul
 
 \chapter{Entorno \LaTeX{}}
 \section{\LaTeX{}}
-
+\label{sec:latex}
 La opci\'on de que TALFi imprimiese cualquier aut\'omata que se dibujase en {\LaTeX{}} o mostrase los pasos de una simplificaci\'on de gram\'aticas en dicho formato, no fue uno de los riquisitos de la especificaci\'on en un principio.\\
 Pero la opci\'on concedida gracias a una beca del PIE (Programa de Iniciaci\'on a la Empresa), nos dio la oportunidad de a\~nadir esta funcionalidad a la aplicaci\'on y poder trabajar con este formato de texto tan usado entre profesionales.\\
 \subsection{Introducc\'on a \LaTeX{}}
@@ -1619,6 +1632,10 @@ $<$/output$>$\\
 $<$/ejercicio$>$\\
 
 }
+
+\clearemptydoublepage
+\chapter{Palabras clave}
+Aut\'omata, Turing, pila, Chomsky, Greibach, cinta, simplificaci\'on, \LaTeX{}, pila vac\'ia, determinista.
 
 \begin{thebibliography}{XXX}
 \bibitem{}Hopcraft, Motwani, Uliman.\\
