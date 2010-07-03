@@ -1,0 +1,11 @@
+#summary One-sentence summary of this page.
+#labels memoria,final,funcionamiento
+
+= Introduction =
+
+Memoria de TALFi 2.0.
+
+
+= Details =
+
+La memoria de este proyecto está disponible para descargar junto con el código de la aplicación. En ella explicamos conceptos teóricos, prácticos, e internos, junto con un pequeño manual de usuario, que explica el funcionamiento de TALFi 2.0.
