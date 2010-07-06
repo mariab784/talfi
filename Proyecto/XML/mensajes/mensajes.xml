@@ -470,5 +470,28 @@
 	<excep>
 		<palabrasSi>Revise la cinta y las palabras que se aceptan</palabrasSi>
 		<palabrasNo>Revise la cinta y las palabras que no se aceptan</palabrasNo>
+		<vacio>Introduzca alguna palabra a corregir</vacio>
+		<incompatibles>Automatas incompatibles</incompatibles>
 	</excep>
+	<simplificacionGICs>
+		<fase1>**************FASE 1**************</fase1>
+		<fase2>**************FASE 2**************</fase2>
+		<simp>**************SIMPLIFICACION**************</simp>
+		<fase1lat>Fase 1</fase1lat>
+		<fase2lat>Fase 2</fase2lat>
+		<aent>Aut\'{o}mata de entrada</aent>
+		<gramatica>Gramatica</gramatica>
+		<gramaticalat>Gr\'amatica</gramaticalat>
+		<gentradasimlatex>Gram\'{a}tica de entrada simplificada</gentradasimlatex>
+		<gentradasim>Gramatica de entrada simplificada</gentradasim>
+		<gsalidasimsimp>Gramatica final simplificada</gsalidasimsimp>
+		<gsalidasimsimplatex>Gram\'{a}tica final simplificada</gsalidasimsimplatex>
+		<quitvsimprod>Quitamos variables sin producciones: </quitvsimprod>
+		<noalc>Quitamos variables no alcanzables: </noalc>
+		<unicaprod>Quitamos variables con una unica produccion: </unicaprod>
+		<prodrec>Quitamos producciones recursivas: </prodrec>
+		<resulap>Gramatica Obtenida del Automata de Pila</resulap>
+		<varconpunit>Quitamos variables con producciones unitarias: </varconpunit>
+		<genttotalsimp>Gramatica de entrada simplificada totalmente</genttotalsimp>
+	</simplificacionGICs>
 </mensajes>
