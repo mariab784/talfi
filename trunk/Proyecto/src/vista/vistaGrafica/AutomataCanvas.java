@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,9 +19,16 @@ import java.util.StringTokenizer;
 
 import javax.swing.*;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+
 import accesoBD.Mensajero;
 import accesoBD.ParserXML;
 
@@ -35,6 +43,8 @@ import modelo.automatas.AlfabetoPila_imp;
 import modelo.automatas.Alfabeto_Pila;
 import modelo.automatas.Alfabeto_imp;
 import modelo.automatas.Automata;
+import modelo.automatas.AutomataFD;
+import modelo.automatas.AutomataFND;
 import modelo.automatas.AutomataFNDLambda;
 import modelo.automatas.AutomataPila;
 import modelo.automatas.MaquinaTuring;
@@ -1120,7 +1130,12 @@ public class AutomataCanvas extends JScrollPane {
 		}//llave si no AP
 		String brr=new Character((char)92).toString();
 		String ruta=System.getProperty("user.dir")+brr+"HTML"+brr+"imagen.jpg";
+		String ruta2=System.getProperty("user.dir")+"\\LaTeX\\Minimizacion\\imagenSalida.jpg";
+		//System.out.println("ruta html mini: " + ruta);
+		//System.out.println("ruta latex mini: " + ruta2);
+		generarImagenJPg(ruta2);
 		generarImagenJPg(ruta);
+		
 		//if (!(a instanceof AutomataPila) || !(a instanceof MaquinaTuring))
 			this.repaint();
 		
@@ -2166,6 +2181,62 @@ public class AutomataCanvas extends JScrollPane {
 	}
 	
 	public void setListaAristasTuring(ArrayList<AristaTuring> lista){listaAristasTuring = lista;}
+	
+	public void cargarAutomata2(String ruta, String tipo){
+		
+		Mensajero mensajero=Mensajero.getInstancia();
+		DOMParser parser = new DOMParser();
+		ParserXML parserxml=new ParserXML();	
+
+		try {
+			parser.parse(new InputSource(new FileInputStream(ruta)));
+			
+			
+
+
+		Document documento = parser.getDocument();
+		NodeList tipoE = documento.getElementsByTagName("type");
+
+		
+		String var = null;
+		for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
+			 var = tipoE.item(0).getChildNodes().item(i).getTextContent();
+			 i++;
+			 
+		}	
+		boolean b = (var.equals("AutomataFNDLambda") || var.equals("AutomataFD") || var.equals("AutomataFND"));
+		boolean c = var.equals("AutomataPila");
+		boolean d = var.equals("MaquinaTuring");
+		
+		boolean e = (tipo.equals("AutomataFNDLambda") || tipo.equals("AutomataFD") || tipo.equals("AutomataFND"));
+		boolean f = tipo.equals("AutomataPila");
+		boolean g = tipo.equals("MaquinaTuring");
+
+		if ((b && e) || (c && f) || (d && g)){
+			cargarAutomataNuevo(parserxml.extraerAutomata(ruta)/*,pintar*/);
+	    	vista.requestFocus();
+
+		}
+		else{
+			throw new AutomatasException(mensajero.devuelveMensaje("excep.incompatibles",2));
+		}
+
+		
+		}catch(AutomatasException e){
+	    	JOptionPane.showMessageDialog(null,e.getMensaje(),"Error",JOptionPane.ERROR_MESSAGE);
+	    } 		
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));	
+		}	
+		
+	};
  
 	public static void main(String[] args){
 		

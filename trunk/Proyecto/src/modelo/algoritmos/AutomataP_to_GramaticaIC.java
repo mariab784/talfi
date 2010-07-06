@@ -33,7 +33,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 	private String lambda;
 	private String fondoPila;
 	private String xml;
+	private String xmllatex;
 	private String html;
+	private String lat;
 	@SuppressWarnings("unused")
 	private Controlador controlador;
 	/**
@@ -46,17 +48,40 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		if (a.getEstadosFinales() == null || a.getEstadosFinales().isEmpty())
 			automataEntrada=((AutomataPila) a);
 		else automataEntrada=((AutomataPila) a).convertirPilaVacia();
-
-		System.out.println("AUT ENTRADA:\n" + automataEntrada);
-		System.out.println("AUT ORIGINAL:\n" + automataOriginal);
 		
 		mensajero=Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = ((AutomataPila) automataEntrada).getFondoPila();
-
+		xml="";
+		xml+="<pasos>\n";
 		controlador=Controlador_imp.getInstancia();
+		lat="";
+		lat+= "\\documentclass[a4paper,11pt]{article}\n" + 
+	     "\\usepackage[latin1]{inputenc}\n" +
+	     "\\usepackage{ulem}\n" +
+	     "\\usepackage{a4wide}\n" + 
+	     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
+	     "\\usepackage[pdftex]{graphicx}\n" + 
+	     "\\usepackage{hyperref}\n" +
+	     "\\usepackage{array}\n"+
+        "\n" +
+	     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
+	     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
+		 "\n" +
+		 "\\begin{document}\n" +
+		 "\n" +  
+	     "\\includegraphics{fdi.jpg}\n"+
+	     "\\newline\n"+
+	     "\\newline\n"+
+	     "\\newline\n" +
+	     "\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.aent", 2)+ "}\n"+
+	     "\\begin{center}\n" +
+	     "\\includegraphics[width=\\textwidth]{imagenEntrada.jpg}\n"+
+	     "\\end{center}\n" ;
+		xmllatex="<steps>\n<step>"+lat+"</step>\n";
 		AP_Gramatica();
 	}
+	
 	
 	public String getHTML(){return html;}
 	
@@ -142,11 +167,14 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			}
 		}
 		
-		xml = "GIC ANTES TRADUCE VARIABLES:\n" + gic.toString();
-		html="";
-		html+="<br><h2>Gramatica Obtenida del Automata de Pila</h2><center><table>" + gic.toHTML() + "</table></center><br>";
-		System.out.println("GIC ANTES TRADUCE VARIABLES:\n " + gic);
-		System.out.println("*************************************************************************");
+		//xml = "GIC ANTES TRADUCE VARIABLES:\n" + gic.toString();c
+		System.out.println("GIC ANTES TRADUCE VARIABLES:\n" + gic.toString());
+		html="";//resulap
+		html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.resulap",2)+
+		"</h2><center><table>" + gic.toHTML() + "</table></center><br>";
+		xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.resulap",2)+"</titulo>"
+		+gic.toXML()+"</paso>\n";
+		
 		traduceVariables();	
 	}
 	
@@ -302,21 +330,31 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		boolean d;
 		if(simp)d= this.getGic().dimeSiHayVariablesQueNoTienenProd();
 		else{ d = this.getGic().calculaAlcanzables();
-			System.out.println("***********D*************: " + d);
+			//System.out.println("***********D*************: " + d);
 			if(d) this.getGic().setVariablesSinProd(this.getGic().dameNoAlcanzables());
 		}
 		boolean e = this.getGic().dimeSiHayProdConProdUnitarias();
 		
 		boolean a = b || c || d || e;
-		if(simp && a) html+="<center>**************SIMPLIFICACION**************</center>";
+		if(simp && a){ 
+			html+="<center>"+mensajero.devuelveMensaje("simplificacionGICs.simp",2)+"</center>";
+			xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.simp",2)+"</titulo></paso>\n";
+			System.out.println(mensajero.devuelveMensaje("simplificacionGICs.simp",2));
+		}
 		
 		boolean hecho = false;
 		while(a){
 			
-			boolean escribe = d;
+			boolean escribe = d; //
 			if(escribe && simp){
-				html+="<br><h2>Quitamos variables sin producciones: </h2><h3>"+
+				html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.quitvsimprod",2)+"</h2><h3>"+
 			this.getGic().getVariablesSinProd().toString()+"</h3>";
+				xml+="<paso><titulo>"+
+				mensajero.devuelveMensaje("simplificacionGICs.quitvsimprod",2)+
+				this.getGic().getVariablesSinProd().toString()+"</titulo>";
+				
+				System.out.println(mensajero.devuelveMensaje("simplificacionGICs.quitvsimprod",2)+
+						this.getGic().getVariablesSinProd().toString());
 
 			}
 			if(escribe && !simp){
@@ -324,7 +362,11 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				html+="<br><h2>Quitamos variables no alcanzables: </h2><h3>" +
 			this.getGic().dameNoAlcanzables().toString()+"</h3>";
 				//}
+				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.noalc",2) +
+				this.getGic().dameNoAlcanzables().toString()+"</titulo>";
 				
+				System.out.println(mensajero.devuelveMensaje("simplificacionGICs.noalc",2) +
+						this.getGic().dameNoAlcanzables().toString());
 			}
 
 			while(d){
@@ -332,29 +374,47 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
 				if(!hecho)hecho = true;
 			}
-			if(escribe)html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+			if(escribe){
+				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				xml+= gic.toXML()+"</paso>\n";
+				System.out.println(gic);
+				
+			}
 
 			if(!hecho){
-				if(b){
-				html+="<br><h2>Quitamos variables con una unica produccion: </h2><h3>"+
+				if(b){//unicaprod
+				html+="<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+ "</h2><h3>"+
 				this.getGic().getProdUnit().toString()+"</h3>";
+				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+
+				this.getGic().getProdUnit().toString()+"</titulo>";
+				System.out.println(mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+
+						this.getGic().getProdUnit().toString());
+				
 				this.getGic().quitaProdUnitarias();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				xml+=gic.toXML()+"</paso>\n";
 				if(!hecho)hecho = true;
 				}
-				else if(!hecho && c) {
-				html+="<br><h2>Quitamos producciones recursivas: </h2><h3>"+
+				else if(!hecho && c) {//prodrec
+				html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.prodrec",2)+"</h2><h3>"+
 				this.getGic().getProdRecursivas().toString()+"</h3>";
+				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.prodrec",2)+
+				"</titulo>";
+				
 				this.getGic().quitaProdRecursivas();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				xml+=gic.toXML()+"</paso>\n";
 				if(!hecho)hecho = true;
 				}
 				else if (!hecho && e){ 
 				if(!this.getGic().getProdConProdUnit().isEmpty()){
-				html+="<br><h2>Quitamos variables con producciones unitarias: </h2><h3>"+
+				html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.varconpunit",2)+"</h2><h3>"+
 				this.getGic().getProdConProdUnit()+"</h3>";
+				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.varconpunit",2)+
+				"</titulo>";
 				this.getGic().quitaProdConProdUnitarias();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
+				xml+=gic.toXML()+"</paso>\n";
 				if(!hecho)hecho = true;
 				}
 				}
@@ -372,6 +432,9 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				a = b || c || d || e;
 				
 				hecho = false;
+				
+				
+				System.out.println("GIC EN CADA VUELTA:\n" + this.getGic().toString());
 		}
 	}
 	
@@ -437,11 +500,27 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 		
 		this.gic.setProducciones(nProduc);
 		this.gic.setVariables(nVariables);
-		
-		html+="<br><h2>Gramatica de entrada simplificada totalmente</h2>";
+
+		html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.genttotalsimp", 2)+"</h2>";
 		html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
-		System.out.println("GIC SIMPLIFICADA: " + gic);
+		lat="\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gentradasimlatex", 2) +
+
+		
+		/*Gram\\'{a}tica final simplificada*/ 
+		"\\newline\n"+ "\\newline\n"+"}\n"+
+	       gic.toLat() + "\\newpage";
+		xmllatex+="<step>"+lat+"</step>\n";
+		
+		xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.genttotalsimp", 2)+
+		"</titulo>"+gic.toXML()+"</paso>\n</pasos>\n";
+		gic.setXML(xml);
+		
+		System.out.println("XML LATEX APTOGRAMAT:\n" + xmllatex);
+		
+		gic.setXMLLatex(xmllatex);
 	}
+	
+	public String getLatex(){return lat;}
 	
 	private boolean iguales(ArrayList<String> a1, ArrayList<String> a2){
 		

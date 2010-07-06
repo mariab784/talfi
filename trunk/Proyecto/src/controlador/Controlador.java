@@ -46,4 +46,10 @@ public interface Controlador {
 	 * @return salidaxml fichero xml con el resultado del algoritmo
 	 */
 	public String salidaXML();
+	
+	/**
+	 * Devuelve la salidaxml de un algoritmo en latex
+	 * @return salidaxml fichero xml con el resultado del algoritmo
+	 */
+	public String salidaXMLLatex();
 }

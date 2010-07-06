@@ -69,7 +69,7 @@ public class C_Y_K {
 			
 			//b = construyeTabla(listaPalabrasNo.get(i));
 			//System.out.println(b);
-			listaResultadosNo.add(b);
+			listaResultadosNo.add(!b);
 			noAceptadas = (!b) && noAceptadas;
 
 		}

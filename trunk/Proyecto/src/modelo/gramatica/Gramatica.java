@@ -32,6 +32,8 @@ public abstract class Gramatica {
 	private ArrayList<String> prodParaAnadirEnProdUnit;
 	private ArrayList<String> alcanzables;
 	private ArrayList<String> noAlcanzables;
+	private String xml;
+	private String xmllatex;
 	
 	
 	public Gramatica(){
@@ -91,6 +93,15 @@ public abstract class Gramatica {
 	public void setVariablesSinProd(ArrayList<String> p){variablesSinProd = (ArrayList<String>) p.clone();}
 	public ArrayList<String> getVariablesSinProd(){return variablesSinProd;}
 	
+	public void setXML(String s){
+		xml = s;
+	}
+	public String getXML(){return xml;}
+	
+	public void setXMLLatex(String s){xmllatex=s;}
+	
+	public String getXMLLatex(){return xmllatex;}
+	
 	public ArrayList<String> dameNoAlcanzables(){
 		
 		noAlcanzables = new ArrayList<String>();
@@ -103,9 +114,7 @@ public abstract class Gramatica {
 			}
 		}
 		
-		System.out.println("alcanzables: " + alcanzables);
-		System.out.println("no alcanzables: " + noAlcanzables);
-		System.out.println("variables: " + variables);
+
 		return noAlcanzables;
 	}
 	
@@ -114,6 +123,9 @@ public abstract class Gramatica {
 		
 		alcanzables = new ArrayList<String>();
 		alcanzables.add(variableInicial);
+		
+		System.out.println("PRODUCCIONES KE PETAN: " + producciones);
+		System.out.println("PRODUCCIONES inic KE PETAN: " + producciones.get(variableInicial));
 		
 		Iterator<Produccion> itProd = producciones.get(variableInicial).iterator();
 		while(itProd.hasNext()){
@@ -161,10 +173,6 @@ public abstract class Gramatica {
 			else{copia = (ArrayList<String>) alcanzables.clone(); it = copia.iterator();}
 			}
 		}
-		
-		System.out.println("alcanzables: " + alcanzables);
-		System.out.println("no alcanzables: " + noAlcanzables);
-		System.out.println("variables: " + variables);
 		
 		return (alcanzables.size() != variables.size());
 	}
@@ -291,6 +299,97 @@ public abstract class Gramatica {
 			producciones.put(clave, nuevoP);
 			this.anadeVariable(clave);
 		}
+	}
+	
+	public String gramtoLat(){
+		String s ="";
+		HashMap<String, ArrayList<Produccion>> proc = getProducciones();
+		String p = proc.toString();
+		String fin = "";
+		int lon = p.length();
+		for(int i=0; i< lon; i++){
+			if(p.charAt(i) == '\\'){
+				fin+="/";
+			}	
+			else{
+				fin+=p.charAt(i);
+			}
+		}
+
+		s+="\\noindent {\\bf Variables: }" + getVariables() + " \\\\" +"\n"+
+		"{\\bf Variable Inicial: }" + getVariableInicial() + " \\\\ " + "\n"+
+		"{\\bf S\\'{i}mbolos Terminales: }" + getSimbolos() + " \\\\ " +"\n"+
+		"{\\bf Producciones: }" + fin + " \\\\ " + "\n";
+		
+		return s;
+	}
+	
+	//**********************
+	/*XXX XXX*/
+	public String toLat(){
+	//	System.out.println("PINTO LA GRAMATICA AKI");
+		String s = "";//añadir lo que sale en las lineas horizontales
+		HashMap<String, ArrayList<Produccion>> proc = getProducciones();
+		String p = proc.toString();
+		String fin = "";
+		int lon = p.length();
+		for(int i=0; i< lon; i++){
+			if(p.charAt(i) == '\\'){
+				fin+="/";
+			}	
+			else{
+				fin+=p.charAt(i);
+			}
+		}
+		s+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+		/*"\\hline\n"+*/gramtoLat()+/*"\n\\hline\n"+*/
+		"\\end{tabular}\n"+"\\end{center}\n";
+/*		"Variables: " + super.getVariables() + " \\\\" + "\\hline\n"+
+		"Variable Inicial: " + super.getVariableInicial() + " \\\\" + "\\hline\n"+
+		" S\'{i}mbolos Terminales: " + super.getSimbolos() + " \\\\" + "\\hline\n"+
+		"Producciones: " + fin + " \\\\" + "\\hline\n" + "\\end{tabular}\n"+"\\end{center}\n";*/
+		
+		/*s+="\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Variables: " + super.getVariables().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Variable Inicial: " + super.getVariableInicial().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "S\\'{i}mbolos Terminales: " + super.getSimbolos().toString() + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n" +
+           "\\begin{tabular}{||c||}\n"+
+           "\\hline\n" +
+           "\\hline\n" +
+           "Producciones: " + /*super.getProducciones() +*//*fin + " \\\\" +
+           "\n" +
+           "\\hline\n" +
+           "\\hline\n" +
+           "\\end{tabular}\n" +
+           "\\\\" +
+           "\n";*/
+		return s;
 	}
 	
 	
@@ -600,6 +699,7 @@ public abstract class Gramatica {
 			i++;
 			
 		}
+		System.out.println("nuevas producciones:" + np);
 		this.setProducciones(np);
 	}
 	
@@ -608,7 +708,6 @@ public abstract class Gramatica {
 
 		//Primero: Quitar el lambda de las prod que lo tienen.
 		Iterator<String> itMulti = prodMulti.iterator();
-		System.out.println("producciones antes de kitar lambdas: " + producciones);
 		while(itMulti.hasNext()){
 			String s = itMulti.next();
 			ArrayList<Produccion> np = new ArrayList<Produccion>();
@@ -618,10 +717,10 @@ public abstract class Gramatica {
 				ArrayList<String> concat = prod.getConcatenacion();
 				if(!(s.equals(this.getVariableInicial())) && (concat.size() == 1) 
 						&& concat.get(0).equals(lambda)){
-					System.out.println("veamos si la prod es lambda?: " + concat);
+
 				}
 				else{
-					System.out.println("veamos si la prod NO es lambda?estara bien?: " + concat);
+
 					np.add(prod);
 				}
 			}
@@ -630,7 +729,7 @@ public abstract class Gramatica {
 			producciones.put(s, np);
 		}
 		//hasta aki en principio bien
-		System.out.println("producciones despues de kitar lambdas: " + producciones);
+
 		//vamos ahora a sustituir por lambdas todas las apariciones de la variable
 		Iterator<String> itvariables = this.getVariables().iterator();
 		while(itvariables.hasNext()){
@@ -644,23 +743,22 @@ public abstract class Gramatica {
 				//si es null es ke no la hemos cambiado
 				if(nprod != null){
 					//es ke hemos sustituido algun lambda
-					System.out.println("ANTES!:" + lp);
+
 					if (nlp == null){ nlp = new ArrayList<Produccion>();}
-					if(!esta(nprod,nlp)){System.out.println("SIIII!SISISSI"); nlp.add(nprod);}
-				//	System.out.println("despues!:" + lp);
-				//	System.out.println("despues 2.0!:" + producciones);
+					if(!esta(nprod,nlp)){ nlp.add(nprod);}
+
 				}
 			}
 			if(nlp != null){
 				
 				for(int j = 0; j < nlp.size(); j++){
 					Produccion pp = nlp.get(j);
-					if(!esta(pp,lp)){System.out.println("SIIII!SISISSI"); lp.add(pp);}
+					if(!esta(pp,lp)){ lp.add(pp);}
 				}
 				
 			}
 		}
-		System.out.println("lo hemos hecho bien?: " + producciones);
+
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -677,10 +775,10 @@ public abstract class Gramatica {
 				ArrayList<String> concat = prod.getConcatenacion();
 				if(!(s.equals(this.getVariableInicial())) && (concat.size() == 1) 
 						&& !(concat.get(0).equals(s)) && (this.getVariables().contains(concat.get(0))) ){
-					System.out.println("veamos si la prod es var?: " + concat);
+
 				}
 				else{
-					System.out.println("veamos si la prod NO es var?estara bien?: " + concat);
+
 					np.add(prod);
 				}
 			}
@@ -706,7 +804,7 @@ public abstract class Gramatica {
 			}
 
 		}
-		System.out.println("lo hemos hecho bien?: " + producciones);
+
 	}
 	
 	
@@ -728,7 +826,7 @@ public abstract class Gramatica {
 		if(cambiado){
 			np = new Produccion();
 			np.setConcatenacion(concat);
-			System.out.println("CAMBIADO NUEVA PRODUCCION: " + np);
+
 		}
 		return np;
 	}
@@ -790,7 +888,7 @@ public abstract class Gramatica {
 			}			
 			i++;
 		}
-		System.out.println("KE TIENE PRODMULTI?" + prodMulti);
+
 		return ( (!prodMulti.isEmpty()) );
 	}
 
@@ -805,15 +903,18 @@ public abstract class Gramatica {
 			ArrayList<Produccion> prodParaV = producciones.get(v);
 			int tamListaProducciones = prodParaV.size();
 			if (tamListaProducciones == 1){
-				//if(producciones.get(v).get(0).getConcatenacion().size() == 1){
-					//if(producciones.get(v).get(0).getConcatenacion().get(0).equals(lambda)){
+				if(producciones.get(v).get(0).getConcatenacion().size() == 1){
+					if(producciones.get(v).get(0).getConcatenacion().get(0).equals(lambda)
+							|| this.getSimbolos().contains(producciones.get(v).get(0).getConcatenacion().get(0))){
 					
-						if (!v.equals(this.getVariableInicial()))
+						if (!v.equals(this.getVariableInicial())){
 							//no keremos tocar nada de la variable inicial, 
 							//porke no aparece en ningun lado a sust
-							prodUnit.add(new String(v));	
-					//}
-				//}
+						//	if(prodParaV.get(0).getConcatenacion().size() == 1)
+								prodUnit.add(new String(v));	
+						}
+					}
+				}
 			}
 			
 			i++;
@@ -997,7 +1098,6 @@ public abstract class Gramatica {
 
 				i++;
 			}
-			System.out.println("ke producciones son recursivas?");
 			return !this.prodRecursivas.isEmpty();
 		}
 
@@ -1080,5 +1180,18 @@ public abstract class Gramatica {
 		
 		
 		return s;
+	}
+	
+	public String toXML(){
+		
+		String s = "<table>";
+		s+="<fila>"+"Variables: " + getVariables().toString() +"</fila>";
+		s+="<fila>"+ "Variable Inicial: " + getVariableInicial().toString() +"</fila>";
+		s+="<fila>"+ "Simbolos Terminales: " + getSimbolos().toString() +"</fila>";
+		s+="<fila>"+ "Producciones: " + getProducciones() +"</fila>";
+		
+		s+= "</table>";
+		return s;
+		
 	}
 }

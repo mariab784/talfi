@@ -129,11 +129,12 @@ public class AceptaTuring {
         			}	
         			est = aristas.get(k).getDestino();
         			k = 0;
+        			numVueltas++;
         		}
         		else 
         			k++;
 
-        		numVueltas++;
+        		//numVueltas++;
         	}
         }
 

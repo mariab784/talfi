@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -71,15 +72,27 @@ private ArrayList<AristaTuring> listaAristasTuring;
 private ArrayList<String> listaFinales;
 private String estadoInicial;
 private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
+
+//private FileWriter ficheroLat;
+//private int contadorlat;
+//private int contadorlat2;
 //fin variables para la generacion de imagenes jpg
 
+/*	private TraductorHTML(){
+		contadorlat = 0; 
+		contadorlat2 = 0;
+	}*/
 
 	/**
 	 * El traductorHTML es un singleton por tanto tiene una instancia de si mismo de forma estatica, lo convierte en unico
 	 * @return TraductorHTML de la aplicaciñn
 	 */
 	public static TraductorHTML getInstancia(){
-		if(traductor==null) traductor=new TraductorHTML();
+		if(traductor==null){ 
+			traductor=new TraductorHTML(); 
+			
+		
+		}
 		return traductor;
 	}
 	
@@ -306,8 +319,16 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacion.html";
 		File fichero = new File (rutaHTML);
 		BufferedWriter bw;
+		PrintWriter pw = null;
 		try{
+
 			
+			
+			
+  //  		String rutaLatex = "LaTeX/FNG/"+"CLaTeX"+".tex";
+    	//	contadorlat2++;
+  //  		ficheroLat = new FileWriter(rutaLatex);
+	//		pw = new PrintWriter(ficheroLat);			
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			Document documento = parser.getDocument();
 			
@@ -478,8 +499,85 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 //			bw.append("</table><p>"+mensajero.devuelveMensaje("minimizacion.title",3)+"</p><p><img src='imagen.jpg' alt='Output'></p></div>");
 	
 			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
+
+			NodeList nodos1 = documento.getElementsByTagName("paso");
 			
-			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
+			for (int i = 0; i < nodos1.getLength(); i++) {
+				
+				
+				NodeList nodos2 = nodos1.item(i).getChildNodes();//cogemos cada paso
+
+				if(nodos2.getLength() >1){
+					
+				bw.append("<br><h2>"+ nodos2.item(0).getTextContent() +"</h2>");
+				
+				//para la tabla
+				bw.append("<table>");
+				for(int j = 0; j < nodos1.item(i).getChildNodes().item(1).getChildNodes().getLength(); j++){//filas
+					//bw.append("<tr>");
+					NodeList nodo3 = nodos1.item(i).getChildNodes().item(1).getChildNodes();
+						bw.append("<tr><td>"+nodo3.item(j).getTextContent()+"</td></tr>");
+					//bw.append("</tr>");						
+				}
+				bw.append("</table><br>");
+
+				}
+				else if(nodos2.getLength() == 1){
+
+					bw.append("<br><center>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</center>");
+					
+				}
+			}
+			
+			
+			
+			/**********************debajo OK***********************************************/
+			/*NodeList */nodos1 = documento.getElementsByTagName("step");
+		//	System.out.println("tam nodos step: " + nodos1.getLength());
+			
+			for (int i = 0; i < nodos1.getLength()/*.item(0).getChildNodes().getLength()*/; i++) {
+				
+				
+				NodeList nodos2 = nodos1.item(i).getChildNodes();
+			//	System.out.println("nodos2.getLength() greibach" + nodos2.getLength());
+				if(nodos2.getLength() >1){
+				
+				bw.append("<br><h2>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</h2>");
+				
+				//para la tabla
+				bw.append("<table>");
+				for(int j = 0; j < nodos1.item(i).getChildNodes().item(1).getChildNodes().getLength(); j++){
+					bw.append("<tr><td>");	
+					bw.append(nodos1.item(i).getChildNodes().item(1).getChildNodes().item(j).getTextContent());
+					bw.append("</td></tr>");						
+				}
+				bw.append("</table>");
+				}
+				else if(nodos2.getLength() == 1){
+					bw.append("<table>");
+					for(int j = 0; j < nodos2.item(0).getChildNodes().getLength(); j++){//filas
+						bw.append("<tr>");
+						NodeList nodo3 = nodos2.item(0).getChildNodes().item(j).getChildNodes();
+						for(int k = 0; k < nodo3.getLength(); k++){
+							
+							bw.append("<td>"+nodo3.item(k).getTextContent()+"</td>");
+						
+						}
+						bw.append("</tr>");						
+					}
+					bw.append("</table>");
+					
+				}
+			}	
+				
+//				bw.append("<table>");
+				
+//				bw.append("<table>");
+			
+			
+/*************************************************************************************************************/			
+			
+/*			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
 			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
 			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),true);
@@ -491,12 +589,18 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 
 			//System.out.println("dame html: " + gictofnc.getHTML());
-			System.out.println("dame latex:" + gictofnc.getLatex());
-			bw.append(gictofnc.getHTML());
+			//System.out.println("dame latex:" + gictofnc.getLatex());
+			bw.append(gictofnc.getHTML());*/
 			bw.append("</body></html>");
 			bw.close();
 
 			
+			
+/*			pw.append(agic.getLatex());
+			pw.append(gictofnc.getLatex());
+            //muestraTex(ruta);
+            pw.close();*/
+/*******************************************************************************************************/
 		
 		} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -517,14 +621,22 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 	
 	public String traducirPasosSimplificacionFNC(String ruta)throws AutomatasException  {
 		
-		System.out.println("RUTA PASOSFNC: " + ruta);
 		Mensajero mensajero=Mensajero.getInstancia();
 		DOMParser parser = new DOMParser(); 
 		String brr=new Character((char)92).toString();
 		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacionFNC.html";
 		File fichero = new File (rutaHTML);
 		BufferedWriter bw;
+		PrintWriter pw = null;
 		try{
+			
+			
+			
+ //   		String rutaLatex = "LaTeX/FNC/"+"CLaTeX"/*+contadorlat*/+".tex";
+    	//	contadorlat++;
+ //   		ficheroLat = new FileWriter(rutaLatex);
+//			pw = new PrintWriter(ficheroLat);
+			
 			
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			Document documento = parser.getDocument();
@@ -697,21 +809,91 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 	
 			//trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			
-			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
+			
+			NodeList nodos1 = documento.getElementsByTagName("paso");
+			
+			for (int i = 0; i < nodos1.getLength(); i++) {
+				
+				
+				NodeList nodos2 = nodos1.item(i).getChildNodes();//cogemos cada paso
+
+				if(nodos2.getLength() >1){
+					
+				bw.append("<br><h2>"+ nodos2.item(0).getTextContent() +"</h2>");
+				
+				//para la tabla
+				bw.append("<table>");
+				for(int j = 0; j < nodos1.item(i).getChildNodes().item(1).getChildNodes().getLength(); j++){//filas
+					//bw.append("<tr>");
+					NodeList nodo3 = nodos1.item(i).getChildNodes().item(1).getChildNodes();
+						bw.append("<tr><td>"+nodo3.item(j).getTextContent()+"</td></tr>");
+					//bw.append("</tr>");						
+				}
+				bw.append("</table><br>");
+
+				}
+				else if(nodos2.getLength() == 1){
+
+					bw.append("<br><center>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</center>");
+					
+				}
+			}
+			
+			
+			
+			/**********************debajo OK***********************************************/
+			/*NodeList */nodos1 = documento.getElementsByTagName("step");
+			//System.out.println("tam nodos step: " + nodos1.getLength());
+			
+			for (int i = 0; i < nodos1.getLength()/*.item(0).getChildNodes().getLength()*/; i++) {
+				
+				
+				NodeList nodos2 = nodos1.item(i).getChildNodes();
+				//System.out.println("nodos2.getLength() greibach" + nodos2.getLength());
+				if(nodos2.getLength() >1){
+				
+				bw.append("<br><h2>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</h2>");
+				
+				//para la tabla
+				bw.append("<table>");
+				for(int j = 0; j < nodos1.item(i).getChildNodes().item(1).getChildNodes().getLength(); j++){
+					bw.append("<tr><td>");	
+					bw.append(nodos1.item(i).getChildNodes().item(1).getChildNodes().item(j).getTextContent());
+					bw.append("</td></tr>");						
+				}
+				bw.append("</table>");
+				}
+				else if(nodos2.getLength() == 1){
+					
+					bw.append("<center>"+nodos2.item(0).getTextContent()+"</center><br>");
+					
+				}
+			}	
+			
+			
+			
+			
+			
+			
+/*			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
 			//agic.AP_Gramatica();
 			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),true);
+			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),true);*/
 			
 		//	gictofnc.registraControlador(this);
 		//	gictofnc.simplifica(true,false);
 			
-			bw.append(agic.getHTML());
-			System.out.println("dame html: " + gictofnc.getHTML());
+/*			bw.append(agic.getHTML());
+			//System.out.println("dame html: " + gictofnc.getHTML());
 			//System.out.println("dame latex:" + gictofnc.getLatex());
-			bw.append(gictofnc.getHTML());
+			bw.append(gictofnc.getHTML());*/
 			bw.append("</body></html>");
 			bw.close();
 
+/*			pw.append(agic.getLatex());
+			pw.append(gictofnc.getLatex());
+            //muestraTex(ruta);
+            pw.close();*/
 			
 		
 		} catch (FileNotFoundException e) {
@@ -859,6 +1041,7 @@ public String traducirPasosMinimizacion(String ruta)throws AutomatasException  {
 			
 			NodeList nodos1 = documento.getElementsByTagName("table");
 			bw.append("<p>"+mensajero.devuelveMensaje("minimizacion.steps",3)+"</p><table>");
+			
 			for (int i = 0; i < nodos1.item(0).getChildNodes().getLength(); i++) {
 				NodeList nodos2=nodos1.item(0).getChildNodes().item(i).getChildNodes();
 				HashMap<String,Registro> hs=new HashMap<String,Registro>();
@@ -908,6 +1091,7 @@ public String traducirPasosMinimizacion(String ruta)throws AutomatasException  {
 			
 			
 			Iterator<String> itEst=listaOrdenada.iterator();
+			
 			ArrayList<String> lEstadosAux=(ArrayList<String>) listaOrdenada.clone();
 			if (itEst.hasNext()) itEst.next();
 			while(itEst.hasNext()) {

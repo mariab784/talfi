@@ -388,8 +388,7 @@ public class ParserEjercicio {
 				}
 			}
 			output.setListaPalabrasEjNo(listaPalabras);
-			System.out.println("has guardado bien las ke no eh?" + ((AutomataPila)output).getListaPalabrasEjNo());
-		
+					
 		
 		
 		}

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,9 +29,12 @@ public class GIC_to_FNChomsky {
 	public static String constantVar = "C";
 	public static String constantVar2 = "D";
 	private int contador;
+	private int contadorlat;
 	private GramaticaIC gramaticaEntrada;
 	private Chomsky gramaticaSalida;
-	private String xml;
+	private String xml2;
+	private String xmllatex;
+	private String xmllatex2;
 	private String html;
 	@SuppressWarnings("unused")
 	private Controlador controlador;
@@ -43,42 +48,17 @@ public class GIC_to_FNChomsky {
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
+		contadorlat = 0;
 		//gramaticaSalida = new Chomsky(g.getVariables(),g.getSimbolos(),g.getVariableInicial());
-		xml= "<exit><steps>\n";
+		xml2= "<exit>";
+		xml2+=g.getXML();
+		xml2+="<steps>\n";
+
 		html="";
-/*		lat="";
-		lat+="\\documentclass[a4paper,11pt]{article}\n" + 
-		     "\\usepackage[latin1]{inputenc}\n" +
-		     "\\usepackage{ulem}\n" +
-		     "\\usepackage{a4wide}\n" + 
-		     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
-		     "\\usepackage[pdftex]{graphicx}\n" + 
-		     "\\usepackage{hyperref}\n" +
-             "\n" +
-		     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
-		     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
-			 "\n" +
-			 "\\begin{document}\n" +
-			 "\n" +
-		     "\\MYp{\n"+    
-		     "\\includegraphics{fdi.jpg}}\n"+
-		     "\n" +
-		     "\\begin{center}\n" +
-		     "\\MYp{\\Large Entrada}\n" +
-		     "\\includegraphics{}}\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\n" +
-		 //autómata a pila dibujo
-		 //String rutaimagen="HTML/imagen"+i+".jpg";
-		 //generarImagenJPG(rutaimagen, automata);
-		     "\\MYp{\\Huge Gram\\'{a}tica}\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\n" +
-		     gramaticaSalida.toLat() + "\n";*/
+		lat=g.getXMLLatex();
+		xmllatex=lat;
+		
+
 
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		relacionados = new HashMap<String,String>();
@@ -93,7 +73,14 @@ public class GIC_to_FNChomsky {
 	public GramaticaIC getGramaticaEntrada(){return gramaticaEntrada;}
 	public Chomsky getGramaticaSalida(){return gramaticaSalida;}
 	public String getHTML(){return html;}
-	public String getXML(){return xml;}
+	public String getXML(){
+		
+		return xml2;
+	}
+	public String getXMLLatex(){
+		
+		return xmllatex;
+	}
 	public void registraControlador(Controlador controlador) {
 		// TODO Auto-generated method stub
 		this.controlador=controlador;
@@ -104,9 +91,14 @@ public class GIC_to_FNChomsky {
 		Chomsky g1 = new Chomsky(gramaticaEntrada.getVariables(),gramaticaEntrada.getSimbolos(),
 				gramaticaEntrada.getVariableInicial());
 		
-		System.out.println("****************************FASE 1****************************");
-		//xml+="<step><br>****************************FASE 1****************************<br>";
-		html+="<center>**************FASE 1**************</center>";
+
+		xml2+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.fase1", 2)+"</titulo></step>\n";
+		
+		html+="<center>"+ mensajero.devuelveMensaje("simplificacionGICs.fase1", 2) +"</center>";
+		lat="\\newpage\n \\noindent \\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.fase1lat",2) + 
+		"\\newline" + "\\newline" +
+		"}\n";
+		xmllatex+="<step>"+lat+"</step>\n";
 /*		for(int i = 0; i < g1.getSimbolos().size();i++){
 			
 			String simb = g1.getSimbolos().get(i);
@@ -140,11 +132,26 @@ public class GIC_to_FNChomsky {
 			g1.getProducciones().remove(v);
 			g1.getProducciones().put(v, nprod);
 		}
-
-		html+="<br><h2>Gramatica</h2>" + g1.toHTML() + "<br>";
-		System.out.println("g1:\n" + g1);
-		System.out.println("****************************FASE 2****************************");
-		html+="<center>**************FASE 2**************</center>";
+		xml2+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gramatica",2)+"</titulo>"+
+		g1.toXML()+"</step>\n";
+		html+="<br><h2>" + mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) + "</h2>" + g1.toHTML() + "<br>";
+		lat= /*"\\newline\n" +
+			"\\newline\n" +
+			"\\newline\n" +
+			"\\newline\n" +
+			"\\newline\n" +*/
+				
+				"\\noindent \\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gramaticalat",2) + "}\n" +
+		     "\\newline\n" +
+		     "\n\\noindent" + g1.toLat() + "\n";
+		
+		html+="<center>"+ mensajero.devuelveMensaje("simplificacionGICs.fase2", 2) +"</center>";
+		xml2+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.fase2", 2) +"</titulo>"+
+		"</step>\n";
+		lat+="\\noindent \\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.fase2lat",2) + 
+		"\\newline" + "\\newline" +
+		"}\n";
+		xmllatex+="<step>"+lat+"</step>\n";
 		
 		boolean acabado = false;
 		Chomsky g2 = null;
@@ -153,7 +160,7 @@ public class GIC_to_FNChomsky {
 			gramaticaSalida = new Chomsky(g1.getVariables(),g1.getSimbolos(),g1.getProducciones(),
 					g1.getVariableInicial());
 			 g2 = gramaticaSalida;
-				System.out.println("g2:\n" + g2);
+
 			 relacionados = new HashMap<String,String>();
 			 
 			Iterator<String> its = g1.getVariables().iterator();
@@ -180,13 +187,21 @@ public class GIC_to_FNChomsky {
 			
 			g1 = new Chomsky(g2.getVariables(),g2.getSimbolos(),g2.getProducciones(),
 					g2.getVariableInicial());
-			html+="<br><h2>Gramatica</h2>" + g2.toHTML() + "<br>";
+			xml2+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gramatica",2)+"</titulo>"+
+			g2.toXML()+"</step>\n";
+			html+="<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) +"</h2>" + g2.toHTML() + "<br>";
+			lat= 
+					
+				 " \\noindent \\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gramaticalat",2) + "}\n" +
+			     "\\newline\n" +
+			     "\n\\noindent" + g2.toLat() + "\n";
+			xmllatex+="<step>"+lat+"</step>\n";
 		}
 		
 		
 		gramaticaSalida = new Chomsky(g2.getVariables(),g2.getSimbolos(),g2.getProducciones(),
 				g2.getVariableInicial());
-		System.out.println("ANTES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
+		//System.out.println("ANTES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
 		//quitamos las lambdas que no esten en S
 		boolean bol = gramaticaSalida.dimeSiHayProdMulti();
 		int i = 0;
@@ -195,21 +210,39 @@ public class GIC_to_FNChomsky {
 			gramaticaSalida.quitaProdMulti();
 			bol = gramaticaSalida.dimeSiHayProdMulti();
 			i++;
-			System.out.println("VUELTAS kita lambda: " + i);
-			System.out.println("GRAMATICA SALIDA EN VUELTAAS: " + gramaticaSalida);
+			//System.out.println("VUELTAS kita lambda: " + i);
+			//System.out.println("GRAMATICA SALIDA EN VUELTAAS: " + gramaticaSalida);
 			this.limpia();
 		}
-		System.out.println("DESPUES DE SIMPLIFICAR GSALIDA ES: " + gramaticaSalida);
+		
 		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
+		xml2+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimp", 2)+
+		"</titulo>"+gramaticaSalida.toXML()+"</step>\n"+"</steps>\n";
+		
+
+		
+		lat=/*"\\newline\n" +*/ "\\noindent \\MYp{\\Huge " 
+			+ mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimplatex", 2) +"}\n"+
+		"\\newline\n"+"\\newline\n" +
+       gramaticaSalida.toLat();
+	
+	lat+=/*"\\end{center}\n"+*/
+        "\n" +
+        "\\end{document}";
+		lat.replace("[\\,","[/,");
+		xmllatex+="<step>"+lat+"\n</step>\n</steps>\n";
+	
+//	creaArchivoLatex();
 		
 		gramaticaSalida.calculaAlcanzables();
-		System.out.println("ALCANZABLES: " + gramaticaSalida.getAlcanzables());
+//		System.out.println("ALCANZABLES: " + gramaticaSalida.getAlcanzables());
 		
 		calculaRelacionadosCYK();
 		gramaticaSalida.setRelacionados(relacionadosCYK);
-		System.out.println("RELACIONADOS: " + gramaticaSalida.getRelacionados());
+		System.out.println("dame latex\n:" + getLatex());
+//		System.out.println("RELACIONADOS: " + gramaticaSalida.getRelacionados());
 		
-		if (mostrarPasos){
+//		if (mostrarPasos){
 			
 			String rutaxmlconaut="XML/pruebas/ficheroC.xml";
 			File archivo = null;
@@ -229,7 +262,7 @@ public class GIC_to_FNChomsky {
 	        
 				br.close();
 				fr.close();
-				xml+="\n<result>"+cinta+"</result></steps></exit>";
+				xml2+="\n<result>"+cinta+"</result>\n</exit>\n";
 			}
 			//xml+="</exit>";
 			catch(FileNotFoundException e){
@@ -241,8 +274,34 @@ public class GIC_to_FNChomsky {
 	    		System.out.println("TROCOTRO");
 	    		e.printStackTrace();
 	    	}
-	    }
+//	    }
 	}
+	
+	public String getLatex(){return lat;}
+	
+/*	private void creaArchivoLatex(){
+		
+		
+	    try {
+	    	// Apertura del fichero y creacion de BufferedReader para poder
+	        // hacer una lectura comoda (disponer del metodo readLine()).
+    		
+    		PrintWriter pw = null;
+    		String ruta = "LaTeX/FNC/"+"CLaTeX"+contadorlat+".tex";
+    		contadorlat++;
+    		FileWriter fichero = new FileWriter(ruta);
+			pw = new PrintWriter(fichero);
+
+            pw.println(this.getLatex());
+            //muestraTex(ruta);
+            pw.close();
+	    }
+
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
+	
+}*/
 	
 	private String dameCadena(ArrayList<String> c){
 		
@@ -391,18 +450,17 @@ public class GIC_to_FNChomsky {
 		nconcat.add(new String(p.getConcatenacion().get(0)));
 
 		String nvar = null;
-		System.out.println("p: " + p);
+
 		ArrayList<String> ss = copiaSubconcat(arreglaConcatenacion(p.getConcatenacion()));
 		String s = ss.toString();
-		System.out.println("relacionados: " + relacionados);
-		System.out.println("s: " + s);
+
 		if(relacionados.containsKey(s)){
-			System.out.println("AHA");
+
 			nvar = relacionados.get(s);
 			
 		}
 		else{
-			System.out.println("nuuuuuuuuuuuuu");
+
 			nvar = "["+constantVar2+contador+"]";
 			contador++;
 			relacionados.put(s, nvar);
@@ -411,10 +469,10 @@ public class GIC_to_FNChomsky {
 		ArrayList<Produccion> nnp = convertir(ss);
 
 		g2.getProducciones().put(nvar,nnp );
-		System.out.println("g2.getProducciones().put(nvar,nnp ) " + g2.getProducciones());
+
 		nconcat.add(nvar);
 		np.setConcatenacion(nconcat);
-		System.out.println("np???: " + np);
+
 		return np;
 	}
 	
