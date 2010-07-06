@@ -743,7 +743,8 @@ public class VistaGrafica extends JFrame implements Vista{
 					if(!dibujar) return;
 					if(panelCentral.getPanel().getListaEstados().size()==0){
 						CopiarPegar cp=CopiarPegar.getInstancia();
-						panelCentral.getPanel().cargarAutomata(cp.getAutomata());
+						System.out.println("canvas.getTipoAutomata()" + panelCentral.getPanel().getTipoAutomata());
+						panelCentral.getPanel().cargarAutomata2(cp.getAutomata(),panelCentral.getPanel().getTipoAutomata());
 					} else {
 						JOptionPane.showMessageDialog(null,m.devuelveMensaje("vista.yaauto", 2),"Error",JOptionPane.ERROR_MESSAGE);
 					}
@@ -1145,6 +1146,7 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	private void ejecuta(int algoritmo,boolean pasos){
 		String rutahtml=new String();
+		String rutaLatex=new String();
 		Mensajero m=Mensajero.getInstancia();
 		try{
 			if (algoritmo==GRAMATICA){
@@ -1185,13 +1187,16 @@ public class VistaGrafica extends JFrame implements Vista{
 				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
-					String ruta2="LaTeX/imagenEntrada.jpg";
+					String ruta2="LaTeX/FNG/imagenEntrada.jpg";
 					panelCentral.getPanel().generarImagenJPg(ruta);
 					panelCentral.getPanel().generarImagenJPg(ruta2);
 					controlador.ejecutaQuery("TALF -gr-p "+rutaxml);						
 					TraductorHTML trhtml=TraductorHTML.getInstancia();
+					LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);
 					String xmlSalida=controlador.salidaXML();
+					String xmlSalidaLatex=controlador.salidaXMLLatex();
 					rutahtml=trhtml.traducirPasosSimplificacion(xmlSalida);
+					lcc.traducirPasosSimplificacion(xmlSalidaLatex);
 				}
 				else controlador.ejecutaQuery("TALF -gr "+rutaxml);
 				
@@ -1209,13 +1214,19 @@ public class VistaGrafica extends JFrame implements Vista{
 				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
+					String ruta2="LaTeX/FNC/imagenEntrada.jpg";
 					System.out.println("rutaxmlfnc" + rutaxml);
 					panelCentral.getPanel().generarImagenJPg(ruta);
+					panelCentral.getPanel().generarImagenJPg(ruta2);
 					controlador.ejecutaQuery("TALF -grfnc-p "+rutaxml);						
 					TraductorHTML trhtml=TraductorHTML.getInstancia();
+					LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);
 					String xmlSalida=controlador.salidaXML();
-					System.out.println("xmlsalidaes: " + xmlSalida);
+					String xmlSalidaLatex=controlador.salidaXMLLatex();
+					//System.out.println("xmlsalidaes: " + xmlSalida);
 					rutahtml=trhtml.traducirPasosSimplificacionFNC(xmlSalida);
+					lcc.traducirPasosSimplificacionFNC(xmlSalidaLatex);
+
 				}
 				else controlador.ejecutaQuery("TALF -grfnc "+rutaxml);
 				
@@ -1233,11 +1244,22 @@ public class VistaGrafica extends JFrame implements Vista{
 					preparadoEquivalencia=false;
 					if (pasos){
 						String ruta="HTML/imagenEntrada.jpg";
+						String ruta2="LaTeX/Minimizacion/imagenEntrada.jpg";
 						panelCentral.getPanel().generarImagenJPg(ruta);
+						panelCentral.getPanel().generarImagenJPg(ruta2);
 						controlador.ejecutaQuery("TALF -m-p "+rutaxml);						
 						TraductorHTML trhtml=TraductorHTML.getInstancia();
+																
+						LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);
+						
+					//	String xmlLatexSalida=controlador.salidaXMLLatex();
+						
+						
 						String xmlSalida=controlador.salidaXML();
+						String xmlSalidaLatex=controlador.salidaXMLLatex();
+						lcc.traducirPasosMinimizacion(xmlSalidaLatex);
 						rutahtml=trhtml.traducirPasosMinimizacion(xmlSalida);
+
 					}
 					else controlador.ejecutaQuery("TALF -m "+rutaxml);
 					Automata a=(AutomataFD)controlador.getSalida();
@@ -2280,7 +2302,7 @@ public class VistaGrafica extends JFrame implements Vista{
         	File archivo = _fileChooser.getSelectedFile (); 
         	archivo = _fileChooser.getSelectedFile ();
         	String ruta = archivo.getAbsolutePath();
-        	System.out.println(ruta);
+
         	//try catch XXX
 			AutomataCanvas c = panelCentral.getCanvas();
 			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),

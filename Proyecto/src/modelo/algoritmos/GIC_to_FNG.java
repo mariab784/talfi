@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +38,8 @@ public class GIC_to_FNG {
 	//ATRIBUTOS:**************************************************
 	private GramaticaIC gramaticaEntrada;
 	private Greibach gramaticaSalida;
-	private String xml;
+	private String xml2;
+	private String xmllatex;
 	private String html;
 	private boolean tabla[][];
 	private int lon;
@@ -48,49 +51,49 @@ public class GIC_to_FNG {
 	private Mensajero mensajero;
 	private String lambda;
 	private String lat;
+
 	//************************************************************
 	public GIC_to_FNG(GramaticaIC g,boolean b){
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
-		xml= "<exit><steps>\n";
+
+		xml2= "<exit>";
+		xml2+=g.getXML();
+		xml2+="<steps>\n";
+		xmllatex=g.getXMLLatex();
 		html="";
 		lat="";
-		lat+="\\documentclass[a4paper,11pt]{article}\n" + 
+		
+		/*lat+= "\\documentclass[a4paper,11pt]{article}\n" + 
 		     "\\usepackage[latin1]{inputenc}\n" +
 		     "\\usepackage{ulem}\n" +
 		     "\\usepackage{a4wide}\n" + 
 		     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
 		     "\\usepackage[pdftex]{graphicx}\n" + 
 		     "\\usepackage{hyperref}\n" +
+		     "\\usepackage{array}\n"+
              "\n" +
 		     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
 		     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
 			 "\n" +
 			 "\\begin{document}\n" +
-			 "\n" +
-		     "\\MYp{\n"+    
-		     "\\includegraphics{fdi.jpg}}\n"+
-		     "\n" +
+			 "\n" +  
+		     "\\includegraphics{fdi.jpg}\n"+
+		     "\\newline\n"+
+		     "\\newline\n"+
+		     "\\newline\n" +
+		     "\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.aent", 2)+ "}\n"+
 		     "\\begin{center}\n" +
-		     "\\MYp{\n" +
-		     "\\includegraphics[scale=0.7]{imagenEntrada.jpg}}\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\n" +
-		 //autómata a pila dibujo
-		 //String rutaimagen="HTML/imagen"+i+".jpg";
-		 //generarImagenJPG(rutaimagen, automata);
-		     "\\MYp{\\Huge Gram\\'{a}tica}\n" +
-		     "\\newline\n" +
-		     "\\newline\n" +
-		     "\n" +
-		     gramaticaSalida.toLat() + "\n";
+		     "\\includegraphics[width=\\textwidth]{imagenEntrada.jpg}\n"+
+		     "\\end{center}\n" ;*/
+
+		     
+		     
 
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
+
 		transforma_FNG(b);
 
 	}
@@ -117,11 +120,11 @@ public class GIC_to_FNG {
 	}
 	//------------------------------------------------------------
 	public void setXml(String xml) {
-		this.xml = xml;
+		this.xml2 = xml;
 	}
 	//------------------------------------------------------------
 	public String getXML() {
-		return xml;
+		return xml2;
 	}
 	//------------------------------------------------------------
 	public boolean getTablaTieneMarcas() {
@@ -179,9 +182,21 @@ public class GIC_to_FNG {
 		tabla = new boolean[lon][lon]; 
 		inicializarTabla();
 		tablaTieneMarcas=false;
+		xml2+="<step>"+"<titulo>" + mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) + 
+		"</titulo>"+gramaticaSalida.toXML()+"</step>\n";
+		html+= "<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) +"</h2>" + gramaticaSalida.toHTML() + "<br>";
 
-		html+= "<br><h2>Gramatica</h2>" + gramaticaSalida.toHTML() + "<br>";
+		lat= /*"\\newline\n" +
+		"\\newline\n" +
+		"\\newline\n" +
+		"\\newline\n" +
+		"\\newline\n" +*/
+			
+			"\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gramaticalat",2) + "}\n" +
+	     "\\newline\n" +
+	     "\n" + gramaticaSalida.toLat() + "\n" /*+ "\\newpage\n"*/;
 		
+		xmllatex+="<step>"+lat+"</step>\n";
 		
 		for(int i=0; i<lon; i++){ //recorre variables fila
 			String simboloFila = variables.get(i);
@@ -200,15 +215,10 @@ public class GIC_to_FNG {
 					Produccion aux = it.next();
 					int k = 0;
 
-							//	System.out.println("aux.getConcatenacion(): " + aux.getConcatenacion());
-								String primerSimbolo = aux.getConcatenacion().get(0)/*.toString();*//*.charAt(0) + ""*/;
-							//	System.out.println("simboloColumna: " + simboloColumna);
-							//	System.out.println("primerSimbolo: " + primerSimbolo);
+								String primerSimbolo = aux.getConcatenacion().get(0);
 								if (simboloColumna.equals(primerSimbolo)){
 									tabla[i][j] = true; enc = true;
 									tablaTieneMarcas=true;
-									//System.out.println("**I J MARCADAS**: " + i + "," + j);
-									//if (!hayMarcadas){
 								}
 								k++;
 				}
@@ -247,7 +257,7 @@ public class GIC_to_FNG {
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 	public void pintaTabla(){
 		
-		lat += "\\begin{tabular}{||";
+		lat = "\\begin{center}\n" + "\\begin{tabular}{||";
 		for(int i = 0; i <lon; i++){
 			lat += "c||";
 		}
@@ -256,7 +266,7 @@ public class GIC_to_FNG {
 		       "\\hline\n" +
 		       "-";
 		for(int i = 1; i <lon; i++){
-				lat += " & "+this.getGramaticaSalida().getVariables().get(i);
+				lat += " &amp; "+this.getGramaticaSalida().getVariables().get(i);
 		}
 		lat += " \\\\"+
 			   "\n"+
@@ -268,10 +278,10 @@ public class GIC_to_FNG {
 					lat += this.getGramaticaSalida().getVariables().get(i);
 				}
 				if (tabla[i][j]) {
-					lat += " & X";
+					lat += " &amp; X";
 				}
 				else {
-					lat += " & -";
+					lat += " &amp; -";
 				}
 			}
 			lat += " \\\\"+
@@ -279,56 +289,70 @@ public class GIC_to_FNG {
 			   "\\hline\n" + 
 	           "\\hline\n";
 		}
-		lat += "\\end{tabular}\n" + 
-		       "\\\\" +
+		lat += "\\end{tabular}\n" + "\\end{center}\n" +
+		       /*"\\newline\n" +
+		       "\\newline\n" +*/
 		       "\n";
 
+		xmllatex+="<step>"+lat+"</step>\n";
 		html +="<table>";
-		//xml+="<exit>";
-		//xml+="<steps>\n";
-		xml+="<step><table>";
-		xml+="<column>";
+
 		html +="<tr>";
+		
+		xml2+="<step><table>";
+		xml2+="<fila>";
+		
 		for(int i = 0; i <lon; i++){
-			xml+="<fila>"; //html +="<td>";
-			if (i == 0) {xml+="  "; html +="<td> - </td>"; System.out.print("  ");}
-			//xml+="<step>";
-			xml+=this.getGramaticaSalida().getVariables().get(i) + " ";
+			
+			
+
+			if (i == 0) {
+				xml2+="<item>"+" - "+"</item>";
+				System.out.print("  ");
+			}
+
 			html +="<td>" + this.getGramaticaSalida().getVariables().get(i) + " </td>";
-			//xml+="</step>";
-			xml+="</fila>"; //html +="</td>";
+		
 			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+			xml2+="<item>"+ this.getGramaticaSalida().getVariables().get(i) +"</item>";
 		}
-		xml+="</column>";
+		xml2+="</fila>";
 		html +="</tr><br>";
 		System.out.println();
 		for(int i=0; i<lon; i++){
 			html+="<tr>";
+			xml2+="<fila>";
 			for(int j=0; j<lon; j++){
-			//	String s;
-	//			xml+="<step>";
+
 				if (j == 0){
-					xml+=(this.getGramaticaSalida().getVariables().get(i) + " ");
+
 					html+="<td>"+this.getGramaticaSalida().getVariables().get(i) + " " + "</td>";
 					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+					xml2+="<item>"+this.getGramaticaSalida().getVariables().get(i) + " "+"</item>";
 				}
 				if (tabla[i][j]) {
-					xml+="X ";System.out.print("X ");
+
+					System.out.print("X ");
 					html+="<td> X </td>";
+					xml2+="<item> X </item>";
 				}
 				else {
-					xml+="- ";System.out.print("- ");
+					System.out.print("- ");
 					html+="<td> - </td>";
+					xml2+="<item> - </item>";
 				
 				}
 				//xml+="</step>";
 				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
 			System.out.println();html+="</tr>";
+			xml2+="</fila>";
 		}
-		xml+="</table></step>\n";
+
+		xml2+="</table></step>\n";
 		//xml+="</exit>";
 		html +="</table>";
+		
 		//System.out.println("XML PINTATABLA: " + xml);
 	}
 	
@@ -340,7 +364,6 @@ public class GIC_to_FNG {
 	//************************************************************
 	public boolean diagonalMarcada(){
 		
-		System.out.println("COLUMNA: " + columna);
 		ArrayList<Integer> aa = columna.get(clave);
 		return aa.contains(clave);
 	}
@@ -416,7 +439,7 @@ public class GIC_to_FNG {
 		//AÑADIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 		limpia();
 		
-		System.out.println("GRAMATICA eres tu?: " + gramaticaSalida.getProducciones());
+	//	System.out.println("GRAMATICA eres tu?: " + gramaticaSalida.getProducciones());
 	//	System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
 
 	}
@@ -523,7 +546,7 @@ public class GIC_to_FNG {
 				//				System.out.println("produccionesNuevas " + produccionesNuevas);
 			}
 		}
-		System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
+	//	System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
 		if(produccionesNuevas.size() == 1 || produccionesNuevas.isEmpty()){
 						System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
 			//			System.out.println("NO ME AÑADAS!!");
@@ -542,7 +565,7 @@ public class GIC_to_FNG {
 
 
 		
-		System.out.println("GRAMATICA salida diagonal: " + gramaticaSalida.getProducciones());
+	//	System.out.println("GRAMATICA salida diagonal: " + gramaticaSalida.getProducciones());
 	}
 	
 	private ArrayList<Produccion> quitaProdRecursiva(ArrayList<Produccion> p,String var){
@@ -558,7 +581,7 @@ public class GIC_to_FNG {
 			i++;
 			
 		}
-		System.out.println("KE DEVUELVE QUITAPRODREC?"+ pp);
+		//System.out.println("KE DEVUELVE QUITAPRODREC?"+ pp);
 		return pp;
 	}
 	
@@ -566,8 +589,8 @@ public class GIC_to_FNG {
 		
 		while(getTablaTieneMarcas()){
 			
-			if (!diagonalMarcada()){ System.out.println("DIAGONAL NO "); sustituir();}
-			else{ System.out.println("DIAGONAL SI "); sustituirDiagonal();}
+			if (!diagonalMarcada()){ /*System.out.println("DIAGONAL NO ");*/ sustituir();}
+			else{ /*System.out.println("DIAGONAL SI ");*/ sustituirDiagonal();}
 			transforma_FNG(b);
 			
 		}
@@ -578,14 +601,25 @@ public class GIC_to_FNG {
 			gramaticaSalida.quitaProdMulti();
 			bol = gramaticaSalida.dimeSiHayProdMulti();
 			i++;
-			System.out.println("VUELTAS kita lambda: " + i);
+			//System.out.println("VUELTAS kita lambda: " + i);
 			this.limpia();
 		}
 		
 		
-		html+="<br><h2>Gramatica final simplificada</h2>" + gramaticaSalida.toHTML();
-		lat += "\\MYp{\\Huge Gram\\'{a}tica final simplificada}\n"+
+		html+="<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimp", 2) +"</h2>" + gramaticaSalida.toHTML();
+		lat="\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimplatex", 2) +/*Gram\\'{a}tica final simplificada*/"}\n"+
+			"\\newline"+
 	       gramaticaSalida.toLat();
+		
+		lat+=/*"\\end{center}\n"+*/
+	        "\n" +
+	        "\\end{document}";
+			lat.replace("[\\,","[/,");
+		
+		xmllatex+="<step>"+lat+"</step>\n</steps>\n";	
+		xml2+="\n<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimp", 2)+
+		"</titulo>"+gramaticaSalida.toXML()+"</step>\n";
+//		creaArchivoLatex();
 		
 		if (pasarXml){
 			
@@ -596,7 +630,7 @@ public class GIC_to_FNG {
 			String cinta = "";
 			try {
 				// Apertura del fichero y creacion de BufferedReader para poder
-				// hacer una lectura comoda (disponer del metodo readLine()).
+				// hacer una lectura comoda (disponer del metodo readLine()).		
 				archivo = new File(rutaxmlconaut);
 				fr = new FileReader (archivo);
 				br = new BufferedReader(fr);
@@ -607,7 +641,8 @@ public class GIC_to_FNG {
 	        
 				br.close();
 				fr.close();
-				xml+="\n<result>"+cinta+"</result></steps></exit>";
+				xml2+="\n</steps>\n<result>"+cinta+"</result></exit>";
+				
 			}
 			//xml+="</exit>";
 			catch(FileNotFoundException e){
@@ -625,9 +660,9 @@ public class GIC_to_FNG {
 	}
 	
 	//************************************************************
-	public String getLatex(){
-		lat+="\\end{center}\n"+
-        "\n" +
+	public String getXMLLatex(){
+/*		lat+=/*"\\end{center}\n"+*/
+ /*       "\n" +
         "\\end{document}";
 		lat.replace("[\\,","[/,");
 		/*lat.replaceAll("[ \\,","[/,");
@@ -641,8 +676,33 @@ public class GIC_to_FNG {
 		lat.replaceAll(", \\]",",/]");
 		lat.replaceAll(",\\ ]",",/]");
 		lat.replaceAll(", \\ ]",",/]");*/
-		return lat;
+		//return lat;
+		return xmllatex;
 	}
+	
+/*	private void creaArchivoLatex(){
+		
+			
+		    try {
+		    	// Apertura del fichero y creacion de BufferedReader para poder
+		        // hacer una lectura comoda (disponer del metodo readLine()).
+	    		
+	    		PrintWriter pw = null;
+	    		String ruta = "LaTeX/FNG/"+"CLaTeX"+contador+".tex";
+	    		contador++;
+	    		FileWriter fichero = new FileWriter(ruta);
+				pw = new PrintWriter(fichero);
+
+	            pw.println(this.getLatex());
+	            //muestraTex(ruta);
+	            pw.close();
+		    }
+
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+		
+	}*/
 	
 	public String getHTML(){
 		

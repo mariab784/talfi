@@ -512,7 +512,7 @@ public class PanelCentral extends JPanel {
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
-	    			System.out.println("cambiate!!");
+	    			//System.out.println("cambiate!!");
 	    			this.vista.setPila(true);
 	    			this.vista.setTuring(false);
 	    		}
@@ -1201,29 +1201,30 @@ public class PanelCentral extends JPanel {
 			try {
 				
 				if(tipo.equals("MaquinaTuring")){
-					System.out.println("palabrasSi: " +  cajitaPalabrasSi.getText());
-					System.out.println("palabrasCintaSi: " +  cajitaCintaPalabrasSi.getText());
-					System.out.println("palabrasNo: " +  cajitaPalabrasNo.getText());
-					System.out.println("palabrasCintaNo: " +  cajitaCintaPalabrasNo.getText());
-					System.out.println("palabrasBucle: " +  cajitaPalabrasBucle.getText());
 
 					if(panel.getListaFinales().isEmpty()){
 						
-						if(numPalabras(cajitaPalabrasSi.getText())/*.length()*/ != 
-							numPalabras(cajitaCintaPalabrasSi.getText())/*.length()*/){
+						if(numPalabras(cajitaPalabrasSi.getText()) != 
+							numPalabras(cajitaCintaPalabrasSi.getText())){
 							throw new AutomatasException(m.devuelveMensaje("excep.palabrasSi",2));
 						}
-						else if(numPalabras(cajitaPalabrasNo.getText())/*.length()*/ != 
-							numPalabras(cajitaCintaPalabrasNo.getText())/*.length()*/
+						else if(numPalabras(cajitaPalabrasNo.getText()) != 
+							numPalabras(cajitaCintaPalabrasNo.getText())
 							){
 							throw new AutomatasException(m.devuelveMensaje("excep.palabrasNo",2));
 						}
-						else{
 
-							System.out.println("oooooook");
-						}
 					}
 
+				}
+				if(tipo.equals("AutomatasDePila")){
+					
+					System.out.println("palabrasSi: " +  cajitaPalabrasSi.getText());
+					System.out.println("palabrasNo: " +  cajitaPalabrasNo.getText());
+					if(cajitaPalabrasSi.getText().isEmpty() && cajitaPalabrasNo.getText().isEmpty()){
+						throw new AutomatasException(m.devuelveMensaje("excep.vacio",2));						
+					}
+					
 				}
 				
 				String texto=traducirXMLEjercicio(tipo);

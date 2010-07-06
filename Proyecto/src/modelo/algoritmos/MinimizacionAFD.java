@@ -38,6 +38,7 @@ public class MinimizacionAFD implements Algoritmo{
 	private Mensajero mensajero;
 	private String xml;
 	private boolean soloEquivalencia;
+	private String xmllatex;
 	
 	
 	public boolean isSoloEquivalencia() {
@@ -74,7 +75,7 @@ public class MinimizacionAFD implements Algoritmo{
 				}
 			}
 		}
-		System.out.println(nuevo.toString());
+	//	System.out.println(nuevo.toString());
 			return nuevo;
 		
 	}
@@ -194,48 +195,48 @@ public class MinimizacionAFD implements Algoritmo{
 		System.out.println(tabla.toString());
 		ArrayList<String> listaVertices=automataEntrada.getEstados();
 		Iterator<String> it=listaVertices.iterator();
-		System.out.println("Lista de vertices: "+listaVertices);
+	//	System.out.println("Lista de vertices: "+listaVertices);
 		numPasos = 2;
 		while (it.hasNext()){
 			String v1=it.next();
 			HashMap<String,Registro> fila=tabla.get(v1);
 			Iterator<String> itClaves=fila.keySet().iterator();
-			System.out.println("vamos a mirar el puto estado " +v1);
+
             while (itClaves.hasNext()){	
 				String v2=itClaves.next();
-				System.out.println("Comparandolo con " +v2);
+	/*			System.out.println("Comparandolo con " +v2);
 				System.out.println(tabla.get(v1).get(v2).getMarcado());
 				System.out.println(tabla.get(v1).get(v2).getPaso());
-				System.out.println(tabla.get(v1).get(v2).getEstados());
+				System.out.println(tabla.get(v1).get(v2).getEstados());*/
             }
 		}
 		
 		//A partir de aquñ vamos a marcar los pares no marcados al inicializar
 		//HashMap<String,HashMap<String,Registro>> tablaCopia = (HashMap<String,HashMap<String,Registro>>) tabla.clone();
 		Iterator<String> pares=listaVertices.iterator();
-		System.out.println(pares);
+	//	System.out.println(pares);
 		boolean cambios = false;
 		do{//Si no son iguales al final de la iteracion, no he acabado
 			//tablaCopia = (HashMap<String,HashMap<String,Registro>>) tabla.clone(); //en caso contrario he minimizado
 			pares=listaVertices.iterator();
 			cambios = false;
 			while (pares.hasNext()){
-				System.out.println("paso por esta mierda de sitio");
+
 				String primera = pares.next();
 				System.out.println(primera);
 				HashMap<String,Registro> fila = tabla.get(primera);
 				Iterator<String> segundo = fila.keySet().iterator();
 				while (segundo.hasNext()){
-					System.out.println("y tambiñn paso por esta mierda de sitio");
+
 					String segunda = segundo.next();
-					System.out.println(segunda);
+
 					if (tabla.get(primera).get(segunda).getMarcado()){
 						ArrayList<String> aristas=automataEntrada.getAristasVertice(primera);
-						System.out.println("aki no tamos marcados");
+
 						ArrayList<String> aristas2 =automataEntrada.getAristasVertice(segunda);
-						System.out.println("aquñ vamos a ver que son las putas aristas");
-						System.out.println(primera);
-						System.out.println(segunda);
+
+//						System.out.println(primera);
+//						System.out.println(segunda);
 						/* tengo que mirar si donde va la primera componente de cada una de las aristas
 						 * y despuñs de mirar eso mirar si esos estados estñn marcados, si estñn marcados
 						 * marco los nuevos estados, si no estan marcados paso de ellos y lo dejo para el siguiente paso
@@ -538,7 +539,7 @@ public class MinimizacionAFD implements Algoritmo{
 				}
 			}
 		}
-		System.out.println("EST-Reagrupables:"+estadosReagrupables.toString());
+//		System.out.println("EST-Reagrupables:"+estadosReagrupables.toString());
 		ArrayList<String> nuevosEstadosAgrupados=seagrupaMas(estadosReagrupables);
 		if (nuevosEstadosAgrupados!=null) {
 			//generadas las parejas de 4 o mas!
@@ -547,7 +548,7 @@ public class MinimizacionAFD implements Algoritmo{
 			//(esto ultimo fuera de aqui)
 			//usar un booleano para indicar que habra transiciones de 4 o mas!!!!!!!!!!!
 			//para el metodo externo
-			System.out.println("ANTES:"+nuevosEstadosAgrupados);
+//			System.out.println("ANTES:"+nuevosEstadosAgrupados);
 			Iterator<String> itNuevosAgrupados=nuevosEstadosAgrupados.iterator();
 			while(itNuevosAgrupados.hasNext()) {
 				String nuevoEstadoAgrupado=itNuevosAgrupados.next();
@@ -574,7 +575,7 @@ public class MinimizacionAFD implements Algoritmo{
 					}
 				}
 				nuevosEstados.add(nuevoEstadoAgrupado);
-				System.out.println("LISTA NUEVA:"+listaEstadosAsociados);
+//				System.out.println("LISTA NUEVA:"+listaEstadosAsociados);
 				
 				
 			}
@@ -591,7 +592,7 @@ public class MinimizacionAFD implements Algoritmo{
 				nuevosEstados.add(est);
 			}
 		}
-		System.out.println("ESTA SI: "+nuevosEstados);
+//		System.out.println("ESTA SI: "+nuevosEstados);
 		controlador.trataMensaje(nuevosEstados.toString());
 		controlador.trataMensaje(nuevosEstadosFinales.toString());
 	}
@@ -638,10 +639,10 @@ public class MinimizacionAFD implements Algoritmo{
 					coincidenciasSt.add(cst);
 				}
 			}
-			System.out.println("COINCIDENCIAS DE "+st+" "+coincidenciasSt.toString());
+//			System.out.println("COINCIDENCIAS DE "+st+" "+coincidenciasSt.toString());
 			if (coincidenciasSt.size()==6) {
 				//he encontrado un conjunto de estados que se agrupan en 4 o mas
-				System.out.println("Hay reagrupamiento de 4 o mas estados");
+//				System.out.println("Hay reagrupamiento de 4 o mas estados");
 				//GENERACION DE LA LISTA NUEVA
 				String macroEstadoReagrupado="[";
 				Iterator<String> itmer=coincidenciasSt.iterator();
@@ -665,13 +666,13 @@ public class MinimizacionAFD implements Algoritmo{
 					}
 				}
 				macroEstadoReagrupado+="]";
-				System.out.println("MACRO ESTADO:"+macroEstadoReagrupado);
+//				System.out.println("MACRO ESTADO:"+macroEstadoReagrupado);
 				if (noRepite(macroEstadoReagrupado,nestados))
 					nestados.add(macroEstadoReagrupado);
 			}
 			
 		}
-		System.out.println("NUEVOS ESTADOS:::"+nestados);
+//		System.out.println("NUEVOS ESTADOS:::"+nestados);
 		if (nestados.size()>=1) return nestados;
 		return null;
 	}
@@ -806,7 +807,7 @@ public class MinimizacionAFD implements Algoritmo{
 		}*/
 		//-------------------------------------------------------------------
 		Iterator<String> it=nuevosEstados.iterator();
-		System.out.println(nuevosEstados);
+//		System.out.println(nuevosEstados);
 		String vestado=null;
 		while(it.hasNext()){
 			String estado=it.next();
@@ -820,11 +821,11 @@ public class MinimizacionAFD implements Algoritmo{
 				if (automataSalida.getEstados().contains(estado)) {
 					//ya estaba a pesar de ser reducido
 					delta=automataSalida.getAristasVertice(estado);
-					System.out.println("MIRAR AQUI TMB:"+estado+"  "+"["+delta+"]");
+//					System.out.println("MIRAR AQUI TMB:"+estado+"  "+"["+delta+"]");
 					vestado=null;
 				}
 				else {
-					System.out.println("MIRAR ESTO:"+estado);
+//					System.out.println("MIRAR ESTO:"+estado);
 					//caso de nuevo estado reducido
 					//debemos obtener la delta del estado compuesto
 					String aux=estado.replace("[","");
@@ -834,27 +835,27 @@ public class MinimizacionAFD implements Algoritmo{
 					String s2=st.nextToken();
 					vestado="["+s1+","+s2+"]";
 					delta=automataSalida.getAristasVertice(vestado);//suficiente no???
-					System.out.println(delta);
+	//				System.out.println(delta);
 					if (delta.size()==0) {
 						vestado="["+s2+","+s1+"]";
-						System.out.println(vestado);
+	//					System.out.println(vestado);
 						delta=automataSalida.getAristasVertice(vestado);//suficiente no???
-						System.out.println(delta);
+	//					System.out.println(delta);
 					}
 				
 				}
 			}
 			Iterator<String> it2=delta.iterator();
 			while(it2.hasNext()) {
-				System.out.println("ESTADO:"+estado);
+		//		System.out.println("ESTADO:"+estado);
 				String letra=it2.next();
 				String destino=null;
 				if (vestado==null) {
-					System.out.println("Destino:"+destino+"  estado:"+estado);
+	//				System.out.println("Destino:"+destino+"  estado:"+estado);
 					destino=automataSalida.funcion_delta(estado, letra);
 				}
 				else {
-					System.out.println("VESTADO:"+vestado);
+	//				System.out.println("VESTADO:"+vestado);
 					destino=automataSalida.funcion_delta(vestado, letra);
 				}
 				if (nuevaSalida.getEstados().contains(destino)) {
@@ -945,13 +946,13 @@ public class MinimizacionAFD implements Algoritmo{
 			controlador.trataMensaje(mensajero.devuelveMensaje("minimizacion.tablaPasos",2));
 			controlador.trataMensaje(tabla.toString());
 			if (pasos) {
-				xml+="<step>";
+				xml+="<step>\n";
 				xml+=traducirTablaMinimizacion(tabla);
-				xml+="</step>";
+				xml+="</step>\n";
 			}
 		}
 		if (pasos) {
-			xml+="</steps>";
+			xml+="</steps>\n";
 		}
 		//ahora hay que generar el nuevo automata
 		controlador.trataMensaje("______________________________________________________________________________");
@@ -967,7 +968,7 @@ public class MinimizacionAFD implements Algoritmo{
 			controlador.trataMensaje(mensajero.devuelveMensaje("minimizacion.noAgrupa",2));
 		}
 		else {
-			System.out.println("Nuevos estados:"+nuevosEstados.toString());
+	//		System.out.println("Nuevos estados:"+nuevosEstados.toString());
 			//hay cambios se debe generar el nuevo automata!!
 			controlador.trataMensaje(mensajero.devuelveMensaje("minimizacion.agrupa",2));
 			//Automata aux=renombrar(automataSalida);
@@ -981,7 +982,8 @@ public class MinimizacionAFD implements Algoritmo{
 		//generacion del xml de salida
 		automataSalida.setAlfabeto(automataEntrada.getAlfabeto());
 		automataSalida=renombrarSufijos(automataSalida);
-		xml+="<result>"+traducirXML(automataSalida)+"</result></exit>";
+		
+		xml+="<result>\n"+traducirXML(automataSalida)+"</result>\n</exit>\n";
 		//fin generacion xml salida
 		//automataSalida=renombrar(automataSalida);
 		return automataSalida;
@@ -1135,10 +1137,12 @@ private String traducirXML(Automata automata) {
 
 	private String traducirTablaMinimizacion(HashMap<String,HashMap<String,Registro>> tabla) {
 		String salida="<table>";
+		xmllatex="<steps>\n<step><table>";
 		Iterator<String> itc=tabla.keySet().iterator();
 		while(itc.hasNext()) {
 			String clave=itc.next();
 			salida+="<column><key>"+clave+"</key>";
+			xmllatex+="<column><key>"+clave+"</key>";
 			HashMap<String,Registro> hs=tabla.get(clave);
 			Iterator<String> itf=tabla.keySet().iterator();
 			while(itf.hasNext()) {
@@ -1147,14 +1151,21 @@ private String traducirXML(Automata automata) {
 				salida+="<fila><state>"+fila+"</state>"+"<compatible>"+hs.get(fila)+"</compatible></fila>";
 				else{
 					salida+="<fila><state>"+fila+"</state><compatible>"+hs.get(fila).getMarcado()+"</compatible>";
+					xmllatex+="<fila><state>"+fila+"</state><compatible>"+hs.get(fila).getMarcado()+"</compatible>";
 					salida+="<paso>"+hs.get(fila).getPaso()+"</paso>";
+					xmllatex+="<paso>"+hs.get(fila).getPaso()+"</paso>";
 					salida+="<estado>"+hs.get(fila).getEstados()+"</estado></fila>";
+					xmllatex+="<estado>"+hs.get(fila).getEstados()+"</estado></fila>";
 				}
 			}
+			xmllatex+="</column>";
 			salida+="</column>";
 		}
+		xmllatex+="</table></step>\n</steps>\n";
 		return salida+"</table>";
 	}
+	
+	public String getXMLLatex(){return xmllatex;}
 	
 	private Automata a�adirIndices(Automata a) {
 		Automata automata=new AutomataFD();

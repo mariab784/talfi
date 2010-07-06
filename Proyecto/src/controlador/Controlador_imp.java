@@ -39,6 +39,8 @@ public class Controlador_imp implements Controlador{
 	private ArrayList<String> query;
 	private Object salida;
 	private String xmlSalida;
+	private String xmlSalidaLatex;
+	private String latexSalida;
 	private boolean pasos;
 	private ArrayList<Vista> vistas;
 	private Mensajero mensajero;
@@ -267,30 +269,40 @@ public class Controlador_imp implements Controlador{
 		trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 		try {
 			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(a);
-			System.out.println("AGIC getgic: " + agic.getGic());
+	
 			
 			String xml = null;
+			String latex = null;
 			if (tipo == 0){
 				GIC_to_FNG gictofng = new GIC_to_FNG(agic.getGic(),pasos);
 				gictofng.registraControlador(this);
 				gictofng.simplifica(pasos,true);
 				salida=agic.ejecutar(pasos);
 				xml=gictofng.getXML();
+				latex=gictofng.getXMLLatex();
+				System.out.println("latex controlador xml greibach:" + latex);
+
 			}
 			else if(tipo == 1){
 				GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),pasos);			
 				gictofnc.registraControlador(this);			
 				salida=agic.ejecutar(pasos); 
 				xml=gictofnc.getXML();
+				latex=gictofnc.getXMLLatex();
+				System.out.println("latex controlador xml chomsky:" + latex);
+
 			}
 
 			String brr=new Character((char)92).toString();
 			String rutaxml=null;
+			String rutalatex=null;
 			if(tipo == 0){
 				rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"prueba.xml";
+				rutalatex=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"pruebaLatex.xml";
 			}
 			else if (tipo ==1){
 				rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"pruebaFNC.xml";
+				rutalatex=System.getProperty("user.dir")+brr+"XML"+brr+"simplificacionGIC"+brr+"pruebaFNCLatex.xml";
 			}
 
 			File fichero = new File (rutaxml);
@@ -298,7 +310,14 @@ public class Controlador_imp implements Controlador{
 			bw.append(xml);
 			bw.close();
 			
+			fichero = new File (rutalatex);
+			bw = new BufferedWriter(new FileWriter(fichero));
+			bw.append(latex);
+			bw.close();
+			
 			xmlSalida=rutaxml;
+			xmlSalidaLatex=rutalatex;
+			//latexSalida=
 			}
 			catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -310,6 +329,7 @@ public class Controlador_imp implements Controlador{
 		//OJO A LOS PASOS
 		Automata aux2=null;
 		aux2=a;
+		String latex = null;
 		if (aux2 instanceof AutomataFD && !(aux2 instanceof AutomataFND)) {
 			trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			MinimizacionAFD algMinimizacion = null;
@@ -325,20 +345,31 @@ public class Controlador_imp implements Controlador{
 			/*
 			 * Obtencion del xml de salida del algoritmo
 			 */
+			latex=algMinimizacion.getXMLLatex();
 			String xml=algMinimizacion.getXML();
-			System.out.println("XML MINIMIZACION:\n" + xml);
+			String xmllatex=algMinimizacion.getXMLLatex();
+			
+			System.out.println("XML MINIMIZACION latex:\n" + xmllatex);
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionMinimizacion"+brr+"prueba.xml";
+			String rutaxmllatex=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionMinimizacion"+brr+"pruebaLatex.xml";
+
 			File fichero = new File (rutaxml);
+			File ficheroLatex = new File (rutaxmllatex);
 			try {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 				bw.append(xml);
+				bw.close();
+				
+				bw = new BufferedWriter(new FileWriter(ficheroLatex));
+				bw.append(xmllatex);
 				bw.close();
 			} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
 			xmlSalida=rutaxml;
+			xmlSalidaLatex=rutaxmllatex;
 			salida.toString();
 			//se recargarña y se llmarña a la clase de pintado en la interfaz grafica con el objeto salida
 			//eso fuera de ese metodo, serña despues del ejecuta query con la salida obtenida
@@ -494,5 +525,8 @@ public class Controlador_imp implements Controlador{
 
 	public String salidaXML() {
 		return xmlSalida;
+	}
+	public String salidaXMLLatex() {
+		return xmlSalidaLatex;
 	}
 }
