@@ -427,5 +427,28 @@
 	<excep>
 		<palabrasSi>Check the tape and the accepted words</palabrasSi>
 		<palabrasNo>Check the tape and the non-accepted words</palabrasNo>
+		<vacio>Introduce at least one word to correct</vacio>
+		<incompatibles>Incompatible automata</incompatibles>
 	</excep>
+		<simplificacionGICs>
+		<fase1>**************STEP 1**************</fase1>
+		<fase2>**************STEP 2**************</fase2>
+		<simp>**************SIMPLIFICATION**************</simp>
+		<fase1lat>Step 1</fase1lat>
+		<fase2lat>Step 2</fase2lat>
+		<gramaticalat>Context-Free Grammar</gramaticalat>
+		<aent>Input Automaton</aent>
+		<gramatica>Context-Free Grammar</gramatica>
+		<gentradasimlatex>Simplified Input Context-Free Grammar</gentradasimlatex>
+		<gentradasim>Simplified Input Context-Free Grammar</gentradasim>
+		<gsalidasimsimp>Simplified Output Context-Free Grammar</gsalidasimsimp>
+		<gsalidasimsimplatex>Simplified Output Context-Free Grammar</gsalidasimsimplatex>
+		<quitvsimprod>Removing variables without productions: </quitvsimprod>
+		<noalc>Removing unreacheable variables: </noalc>
+		<unicaprod>Removing variables with just one production: </unicaprod>
+		<prodrec>Removing recursive productions: </prodrec>
+		<resulap>Context-Free Grammar from the automaton</resulap>
+		<varconpunit>Removing variables with productions with one element: </varconpunit>
+		<genttotalsimp>Final simplified Context-Free Grammar</genttotalsimp>
+	</simplificacionGICs>
 </mensajes>
