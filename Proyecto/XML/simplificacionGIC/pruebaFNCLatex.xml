@@ -1,0 +1,81 @@
+<steps>
+<step>\documentclass[a4paper,11pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{a4wide}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\usepackage{array}
+
+\newcommand{\MYp}[1]{ {\color[rgb]{0.392,0.392,0.392}#1} }
+\newcommand{\MYunder}[1]{ {\color[rgb]{0.2,0.209,0.3}\underline{#1}} }
+
+\begin{document}
+
+\includegraphics{fdi.jpg}
+\newline
+\newline
+\newline
+\MYp{\Huge Aut\'{o}mata de entrada}
+\begin{center}
+\includegraphics[width=\textwidth]{imagenEntrada.jpg}
+\end{center}
+</step>
+<step>\MYp{\Huge Gram\'{a}tica de entrada simplificada\newline
+\newline
+}
+\begin{center}\begin{tabular}{ m{15cm} }
+
+\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
+{\bf Variable Inicial: }S \\ 
+{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
+{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+\end{tabular}
+\end{center}
+\newpage</step>
+<step>\newpage
+ \noindent \MYp{\Huge Fase 1\newline\newline}
+</step>
+<step>\noindent \MYp{\Huge Gr\'amatica}
+\newline
+
+\noindent\begin{center}\begin{tabular}{ m{15cm} }
+
+\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
+{\bf Variable Inicial: }S \\ 
+{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
+{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, /], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, /], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]} \\ 
+\end{tabular}
+\end{center}
+
+\noindent \MYp{\Huge Fase 2\newline\newline}
+</step>
+<step> \noindent \MYp{\Huge Gr\'amatica}
+\newline
+
+\noindent\begin{center}\begin{tabular}{ m{15cm} }
+
+\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
+{\bf Variable Inicial: }S \\ 
+{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
+{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, /], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, /], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]} \\ 
+\end{tabular}
+\end{center}
+
+</step>
+<step>\noindent \MYp{\Huge Gram\'{a}tica final simplificada}
+\newline
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
+{\bf Variable Inicial: }S \\ 
+{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
+{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, [Ca],I], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G, b], [Ca]=[a], S=[F,A, F,B, F,C, F,D, [Ca],H, [Ca],J, /, [Ca],I], [Cb]=[b]} \\ 
+\end{tabular}
+\end{center}
+
+\end{document}
+</step>
+</steps>
