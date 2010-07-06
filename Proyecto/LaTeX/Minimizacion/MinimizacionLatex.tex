@@ -1,0 +1,42 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{a4wide}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\usepackage{array}
+
+\newcommand{\MYp}[1]{ {\color[rgb]{0.392,0.392,0.392}#1} }
+\newcommand{\MYunder}[1]{ {\color[rgb]{0.2,0.209,0.3}\underline{#1}} }
+
+\begin{document}
+
+\includegraphics{fdi.jpg}
+\newline
+\newline
+\newline
+\MYp{\Huge Aut\'{o}mata de entrada}
+\begin{center}
+\includegraphics[width=\textwidth]{imagenEntrada.jpg}
+\end{center}
+EntradaPasos-Tabla de minimizacion
+\noindent\begin{center}
+ \begin{tabular}{||c||m{1.2cm}||m{1.2cm}||m{1.2cm}||m{1.2cm}||m{1.2cm}||m{1.2cm}||m{1.2cm}||}\hline
+t2 &2 t3-tramp& & & & & & \\ \hline 
+t3 &1 Final-NoFinal&1 Final-NoFinal& & & & & \\ \hline 
+t4 &3 t3-t5&2 tramp-t5&1 Final-NoFinal& & & & \\ \hline 
+t5 &1 Final-NoFinal&1 Final-NoFinal&2 tramp-t7&1 Final-NoFinal& & & \\ \hline 
+t6 &3 t3-t5&2 tramp-t5&1 Final-NoFinal& &1 Final-NoFinal& & \\ \hline 
+t7 &1 Final-NoFinal&1 Final-NoFinal&2 tramp-t7&1 Final-NoFinal& &1 Final-NoFinal& \\ \hline 
+tramposo &2 t3-tramp&3 t4-tramp&1 Final-NoFinal&2 t5-tramp&1 Final-NoFinal&2 t5-tramp&1 Final-NoFinal\\ \hline 
+ & t1&t2&t3&t4&t5&t6&t7\\ \hline
+
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\includegraphics[width=\textwidth]{imagenSalida.jpg}
+\end{center}
+\end{document}
