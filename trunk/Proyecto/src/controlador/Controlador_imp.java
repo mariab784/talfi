@@ -40,7 +40,6 @@ public class Controlador_imp implements Controlador{
 	private Object salida;
 	private String xmlSalida;
 	private String xmlSalidaLatex;
-	private String latexSalida;
 	private boolean pasos;
 	private ArrayList<Vista> vistas;
 	private Mensajero mensajero;
@@ -253,7 +252,6 @@ public class Controlador_imp implements Controlador{
 			case 10: {
 				Automata a=obtenerAutomata();
 				salida = a;
-				System.out.println("M D TURING: " + a + "y ahora ke??");
 				break;
 			}
 			case 11: {
@@ -276,11 +274,10 @@ public class Controlador_imp implements Controlador{
 			if (tipo == 0){
 				GIC_to_FNG gictofng = new GIC_to_FNG(agic.getGic(),pasos);
 				gictofng.registraControlador(this);
-				gictofng.simplifica(pasos,true);
+				gictofng.ejecuta(pasos,true);
 				salida=agic.ejecutar(pasos);
 				xml=gictofng.getXML();
 				latex=gictofng.getXMLLatex();
-				System.out.println("latex controlador xml greibach:" + latex);
 
 			}
 			else if(tipo == 1){
@@ -289,7 +286,6 @@ public class Controlador_imp implements Controlador{
 				salida=agic.ejecutar(pasos); 
 				xml=gictofnc.getXML();
 				latex=gictofnc.getXMLLatex();
-				System.out.println("latex controlador xml chomsky:" + latex);
 
 			}
 
@@ -317,7 +313,6 @@ public class Controlador_imp implements Controlador{
 			
 			xmlSalida=rutaxml;
 			xmlSalidaLatex=rutalatex;
-			//latexSalida=
 			}
 			catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -329,8 +324,9 @@ public class Controlador_imp implements Controlador{
 		//OJO A LOS PASOS
 		Automata aux2=null;
 		aux2=a;
-		String latex = null;
+		
 		if (aux2 instanceof AutomataFD && !(aux2 instanceof AutomataFND)) {
+			//String latex = null;
 			trataMensaje(mensajero.devuelveMensaje("minimizacion.iniciar",2));
 			MinimizacionAFD algMinimizacion = null;
 			try {
@@ -345,11 +341,10 @@ public class Controlador_imp implements Controlador{
 			/*
 			 * Obtencion del xml de salida del algoritmo
 			 */
-			latex=algMinimizacion.getXMLLatex();
+			//latex=algMinimizacion.getXMLLatex();
 			String xml=algMinimizacion.getXML();
 			String xmllatex=algMinimizacion.getXMLLatex();
 			
-			System.out.println("XML MINIMIZACION latex:\n" + xmllatex);
 			String brr=new Character((char)92).toString();
 			String rutaxml=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionMinimizacion"+brr+"prueba.xml";
 			String rutaxmllatex=System.getProperty("user.dir")+brr+"XML"+brr+"ejecucionMinimizacion"+brr+"pruebaLatex.xml";
