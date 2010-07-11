@@ -97,7 +97,6 @@ public class PanelCentral extends JPanel {
 			public void actionPerformed(ActionEvent e){
 				JOptionPane pane=new JOptionPane();
 				Mensajero m=Mensajero.getInstancia();
-				System.out.println("tipo para corregirte: " + ejercicio.getTipo());
 				if(ejercicio.getTipo().equals("TURING")){
 					panel.borrarPanel();
 					VistaGrafica.setPila(false);

@@ -63,10 +63,10 @@ public class OyenteCopiarPegar implements KeyListener {
 			Mensajero m=Mensajero.getInstancia();
 			try {
 				CopiarPegar cp=CopiarPegar.getInstancia();
-				if(!cp.sePuedePegar()){System.out.println("canvas.getTipoAutomata()" + canvas.getTipoAutomata()); return;}
-				if(!canvas.getVista().dibujar()){System.out.println("canvas.getTipoAutomata()" + canvas.getTipoAutomata()); return;}
+				if(!cp.sePuedePegar()){ return;}
+				if(!canvas.getVista().dibujar()){ return;}
 				if(canvas.getListaEstados().size()==0){
-					System.out.println("canvas.getTipoAutomata()" + canvas.getTipoAutomata());
+
 					canvas.cargarAutomata(cp.getAutomata());
 				} else {
 					JOptionPane.showMessageDialog(null,m.devuelveMensaje("vista.yaauto", 2),"Error",JOptionPane.ERROR_MESSAGE);

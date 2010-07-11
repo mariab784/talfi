@@ -192,10 +192,6 @@ public class CanvasMouseAdapter extends MouseAdapter {
 					AristaGeneral arist=canvas.aristaEn(e.getPoint());
 					if(arist!=null){
 						if (arist instanceof AristaAP){ 
-							//System.out.println("YEAHYEAHYEAH");
-							/***********************************************/
-							//REVISAR DETERMINISMO
-							/***********************************************/
 							canvas.getListaAristasPila().remove((AristaAP)arist);
 							modificarRelacionesArista((AristaAP)arist); 
 						}
