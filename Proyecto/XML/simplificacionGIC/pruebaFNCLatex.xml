@@ -1,5 +1,6 @@
 <steps>
-<step>\documentclass[a4paper,11pt]{article}
+<cabecera>
+\documentclass[a4paper,11pt]{article}
 \usepackage[latin1]{inputenc}
 \usepackage{ulem}
 \usepackage{a4wide}
@@ -10,72 +11,19 @@
 
 \newcommand{\MYp}[1]{ {\color[rgb]{0.392,0.392,0.392}#1} }
 \newcommand{\MYunder}[1]{ {\color[rgb]{0.2,0.209,0.3}\underline{#1}} }
-
-\begin{document}
-
-\includegraphics{fdi.jpg}
-\newline
-\newline
-\newline
-\MYp{\Huge Aut\'{o}mata de entrada}
-\begin{center}
-\includegraphics[width=\textwidth]{imagenEntrada.jpg}
-\end{center}
-</step>
-<step>\MYp{\Huge Gram\'{a}tica de entrada simplificada\newline
-\newline
-}
-\begin{center}\begin{tabular}{ m{15cm} }
-
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
-\end{tabular}
-\end{center}
-\newpage</step>
-<step>\newpage
- \noindent \MYp{\Huge Fase 1\newline\newline}
-</step>
-<step>\noindent \MYp{\Huge Gr\'amatica}
-\newline
-
-\noindent\begin{center}\begin{tabular}{ m{15cm} }
-
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, /], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, /], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]} \\ 
-\end{tabular}
-\end{center}
-
-\noindent \MYp{\Huge Fase 2\newline\newline}
-</step>
-<step> \noindent \MYp{\Huge Gr\'amatica}
-\newline
-
-\noindent\begin{center}\begin{tabular}{ m{15cm} }
-
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, /], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, /], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]} \\ 
-\end{tabular}
-\end{center}
-
-</step>
-<step>\noindent \MYp{\Huge Gram\'{a}tica final simplificada}
-\newline
-\newline
-\begin{center}\begin{tabular}{ m{15cm} }
-
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, [Ca],H, [Ca],J, [Ca],I], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G, b], [Ca]=[a], S=[F,A, F,B, F,C, F,D, [Ca],H, [Ca],J, /, [Ca],I], [Cb]=[b]} \\ 
-\end{tabular}
-\end{center}
-
-\end{document}
-</step>
+</cabecera>
+<ocultar>
+<oculto><titulo>Gramatica Obtenida del Aut\'omata de Pila</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[auxZaux]=[$\lambda$], [iniauxXiniaux]=[[s0Zs0],[s0Xiniaux], [s0Zs1],[s1Xiniaux], [s0Ziniaux],[iniauxXiniaux], [s0Zaux],[auxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Zs1],[s1Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Zs0],[s0Xs1], [s0Zs1],[s1Xs1], [s0Ziniaux],[iniauxXs1], [s0Zaux],[auxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Zs0],[s0Xs0], [s0Zs1],[s1Xs0], [s0Ziniaux],[iniauxXs0], [s0Zaux],[auxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>SIMPLIFICACION</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[auxZaux]=[$\lambda$], [iniauxXiniaux]=[[s0Zs0],[s0Xiniaux], [s0Zs1],[s1Xiniaux], [s0Ziniaux],[iniauxXiniaux], [s0Zaux],[auxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Zs1],[s1Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Zs0],[s0Xs1], [s0Zs1],[s1Xs1], [s0Ziniaux],[iniauxXs1], [s0Zaux],[auxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Zs0],[s0Xs0], [s0Zs1],[s1Xs0], [s0Ziniaux],[iniauxXs0], [s0Zaux],[auxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>Quitamos variables sin producciones: [[s0Xs0], [s1Xs0], [auxXs0], [s0Xs1], [s1Xs1], [auxXs1], [s0Xiniaux], [s1Xiniaux], [auxXiniaux], [s1Xaux]]</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [auxZaux]=[$\lambda$], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>Quitamos variables con una \'unica produccion: [[auxXaux], [auxZaux], [s0Xaux]]</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0], [s0Ziniaux],[iniauxXaux], [s0Zaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>Quitamos variables sin producciones: [[auxXaux], [auxZaux], [s0Xaux]]</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0], [s0Ziniaux],[iniauxXaux], [s0Zaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>Quitamos variables con producciones unitarias: </titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Ziniaux],[iniauxXaux], a,[s1Zs0], a,[s1Zaux], $\lambda$], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]}</fila></tabla></oculto>
+<oculto><titulo>Quitamos variables no alcanzables: [[s0Zs1], [s1Zs1]]</titulo><tabla><fila>Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Ziniaux], [s1Zaux]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s1Zaux]=[b,[s0Zaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Ziniaux]=[b,[s0Ziniaux]], [s0Zs0]=[a,[s1Zs0]], [iniauxXaux]=[[s0Ziniaux],[iniauxXaux], a,[s1Zs0], a,[s1Zaux], $\lambda$], [s0Ziniaux]=[a,[s1Ziniaux]]}</fila></tabla></oculto>
+</ocultar>
+<step><titulo>Gram\'{a}tica de entrada simplificada</titulo><tabla><fila>Variables: [S, A, B, C, D, E, F, G, H, I, J]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]}</fila></tabla></step>
+<step><titulo>Fase 1</titulo></step>
+<step><titulo>Gr\'amatica</titulo><tabla><fila>Variables: [S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {D=[F,D, [Ca],H, [Ca],J, $\lambda$], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, $\lambda$], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]}</fila></tabla></step>
+<step><titulo>Fase 2</titulo></step><step><titulo>Gr\'amatica</titulo><tabla><fila>Variables: [S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {D=[F,D, [Ca],H, [Ca],J, $\lambda$], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J, $\lambda$], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G], [Ca]=[a], S=[A, B, C, D], [Cb]=[b]}</fila></tabla></step>
+<step><titulo>Gram\'{a}tica final simplificada</titulo><tabla><fila>Variables: [S, A, B, C, D, E, F, G, H, I, J, [Ca], [Cb]]</fila><fila>Variable Inicial: S</fila><fila>Simbolos Terminales: [a, b]</fila><fila>Producciones: {D=[F,D, [Ca],H, [Ca],J, [Ca],I], E=[[Ca],H], F=[[Ca],I], G=[[Ca],J], A=[F,A], B=[F,B], C=[F,C], H=[[Cb],E], I=[[Cb],F], J=[[Cb],G, b], [Ca]=[a], S=[F,A, F,B, F,C, F,D, [Ca],H, [Ca],J, $\lambda$, [Ca],I], [Cb]=[b]}</fila></tabla></step>
 </steps>
