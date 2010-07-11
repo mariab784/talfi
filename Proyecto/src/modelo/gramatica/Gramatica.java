@@ -124,25 +124,17 @@ public abstract class Gramatica {
 		alcanzables = new ArrayList<String>();
 		alcanzables.add(variableInicial);
 		
-		System.out.println("PRODUCCIONES KE PETAN: " + producciones);
-		System.out.println("PRODUCCIONES inic KE PETAN: " + producciones.get(variableInicial));
-		
 		Iterator<Produccion> itProd = producciones.get(variableInicial).iterator();
 		while(itProd.hasNext()){
 			Produccion p = itProd.next();
-			//ArrayList<String> as = p.getConcatenacion();
-			//if(p.getConcatenacion().size() != 1){
 				for(int i = 0; i < p.getConcatenacion().size(); i++){
 					String s = p.getConcatenacion().get(i);
 					if(variables.contains(s)){
 						if(!alcanzables.contains(s))alcanzables.add(s);
 					}
 				}
-			//}
-			
 		}
-		
-		
+				
 		ArrayList<String> copia = (ArrayList<String>) alcanzables.clone();
 		Iterator<String> it = copia.iterator();
 		boolean acabado = false;
@@ -290,12 +282,15 @@ public abstract class Gramatica {
 	 * Nuestro método para combinar dentro de la tabla
 	 */
 	public void anadeProduccion (String clave, Produccion p){
+		Produccion np = new Produccion();
+		np.anadeConcatenacion(arreglaConcatenacion(p.getConcatenacion()));
 		if (producciones.containsKey(clave)){
-			if(!this.esta(p, producciones.get(clave)))producciones.get(clave).add(p);
+			
+			if(!this.esta(np, producciones.get(clave)))producciones.get(clave).add(np);
 		}
 		else {
 			ArrayList<Produccion> nuevoP = new ArrayList<Produccion>();
-			nuevoP.add(p);
+			nuevoP.add(np);
 			producciones.put(clave, nuevoP);
 			this.anadeVariable(clave);
 		}
@@ -328,7 +323,7 @@ public abstract class Gramatica {
 	/*XXX XXX*/
 	public String toLat(){
 	//	System.out.println("PINTO LA GRAMATICA AKI");
-		String s = "";//añadir lo que sale en las lineas horizontales
+/*		String s = "";//añadir lo que sale en las lineas horizontales
 		HashMap<String, ArrayList<Produccion>> proc = getProducciones();
 		String p = proc.toString();
 		String fin = "";
@@ -342,54 +337,20 @@ public abstract class Gramatica {
 			}
 		}
 		s+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
-		/*"\\hline\n"+*/gramtoLat()+/*"\n\\hline\n"+*/
-		"\\end{tabular}\n"+"\\end{center}\n";
-/*		"Variables: " + super.getVariables() + " \\\\" + "\\hline\n"+
-		"Variable Inicial: " + super.getVariableInicial() + " \\\\" + "\\hline\n"+
-		" S\'{i}mbolos Terminales: " + super.getSimbolos() + " \\\\" + "\\hline\n"+
-		"Producciones: " + fin + " \\\\" + "\\hline\n" + "\\end{tabular}\n"+"\\end{center}\n";*/
+		/*"\\hline\n"+*//*gramtoLat()+/*"\n\\hline\n"+*/
+		/*"\\end{tabular}\n"+"\\end{center}";
+
+		return s;*/
 		
-		/*s+="\\begin{tabular}{||c||}\n"+
-           "\\hline\n" +
-           "\\hline\n" +
-           "Variables: " + super.getVariables().toString() + " \\\\" +
-           "\n" +
-           "\\hline\n" +
-           "\\hline\n" +
-           "\\end{tabular}\n" +
-           "\\\\" +
-           "\n" +
-           "\\begin{tabular}{||c||}\n"+
-           "\\hline\n" +
-           "\\hline\n" +
-           "Variable Inicial: " + super.getVariableInicial().toString() + " \\\\" +
-           "\n" +
-           "\\hline\n" +
-           "\\hline\n" +
-           "\\end{tabular}\n" +
-           "\\\\" +
-           "\n" +
-           "\\begin{tabular}{||c||}\n"+
-           "\\hline\n" +
-           "\\hline\n" +
-           "S\\'{i}mbolos Terminales: " + super.getSimbolos().toString() + " \\\\" +
-           "\n" +
-           "\\hline\n" +
-           "\\hline\n" +
-           "\\end{tabular}\n" +
-           "\\\\" +
-           "\n" +
-           "\\begin{tabular}{||c||}\n"+
-           "\\hline\n" +
-           "\\hline\n" +
-           "Producciones: " + /*super.getProducciones() +*//*fin + " \\\\" +
-           "\n" +
-           "\\hline\n" +
-           "\\hline\n" +
-           "\\end{tabular}\n" +
-           "\\\\" +
-           "\n";*/
+		String s = "<tabla>";
+		s+="<fila>"+"Variables: " + getVariables().toString() +"</fila>";
+		s+="<fila>"+ "Variable Inicial: " + getVariableInicial().toString() +"</fila>";
+		s+="<fila>"+ "Simbolos Terminales: " + getSimbolos().toString() +"</fila>";
+		s+="<fila>"+ "Producciones: " + getProducciones() +"</fila>";
+		s=s.replace("\\",mensajero.devuelveMensaje("simbolos.lambdalatex",4) );
+		s+= "</tabla>";
 		return s;
+
 	}
 	
 	
@@ -699,7 +660,6 @@ public abstract class Gramatica {
 			i++;
 			
 		}
-		System.out.println("nuevas producciones:" + np);
 		this.setProducciones(np);
 	}
 	

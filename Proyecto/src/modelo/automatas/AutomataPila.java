@@ -15,8 +15,8 @@ import vista.vistaGrafica.AristaAP;
 
 public class AutomataPila extends AutomataFND implements Automata{
 	
-	private final  static String nombreAux = "aux";
-	private final  static String iniNombreAux = "iniaux";
+	private final String nombreAux;
+	private final String iniNombreAux;
 	private String estadoInicial;
 	private ArrayList<String> estadosFinales;
 	private Alfabeto alfabeto;
@@ -48,6 +48,8 @@ public class AutomataPila extends AutomataFND implements Automata{
 		mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+		nombreAux = mensajero.devuelveMensaje("simbolos.nombreAux",4);
+		iniNombreAux = mensajero.devuelveMensaje("simbolos.iniNombreAux",4);
 		alfabetoPila = new AlfabetoPila_imp();
 		alfabetoPila.aniadirLetra(fondoPila);
 		aristasQueDesapilan = new ArrayList<Integer>();
@@ -69,7 +71,9 @@ public class AutomataPila extends AutomataFND implements Automata{
 		aristasPilaVacia = new ArrayList<AristaAP>();		
 		mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);	
+		fondoPila = mensajero.devuelveMensaje("simbolos.cima",4);
+		nombreAux = mensajero.devuelveMensaje("simbolos.nombreAux",4);
+		iniNombreAux = mensajero.devuelveMensaje("simbolos.iniNombreAux",4);
 	}
 	
 	private ArrayList<AristaAP> convierte(ArrayList<AristaAP> aut){

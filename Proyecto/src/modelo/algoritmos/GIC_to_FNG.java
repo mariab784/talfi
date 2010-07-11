@@ -5,8 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +34,12 @@ import modelo.gramatica.Produccion;
  */
 public class GIC_to_FNG {
 	//ATRIBUTOS:**************************************************
+	private final String auxvariable;
+	private int contadoraux;
 	private GramaticaIC gramaticaEntrada;
 	private Greibach gramaticaSalida;
 	private String xml2;
 	private String xmllatex;
-	private String html;
 	private boolean tabla[][];
 	private int lon;
 	private HashMap<Integer,ArrayList<Integer>> columna;
@@ -50,7 +49,7 @@ public class GIC_to_FNG {
 	private Controlador controlador;
 	private Mensajero mensajero;
 	private String lambda;
-	private String lat;
+
 
 	//************************************************************
 	public GIC_to_FNG(GramaticaIC g,boolean b){
@@ -58,43 +57,15 @@ public class GIC_to_FNG {
 		controlador=Controlador_imp.getInstancia();
 		gramaticaEntrada = g; 
 		gramaticaSalida = new Greibach(g.getVariables(),g.getSimbolos(),g.getProducciones(),g.getVariableInicial());
-
+		contadoraux = 0;
 		xml2= "<exit>";
 		xml2+=g.getXML();
 		xml2+="<steps>\n";
 		xmllatex=g.getXMLLatex();
-		html="";
-		lat="";
-		
-		/*lat+= "\\documentclass[a4paper,11pt]{article}\n" + 
-		     "\\usepackage[latin1]{inputenc}\n" +
-		     "\\usepackage{ulem}\n" +
-		     "\\usepackage{a4wide}\n" + 
-		     "\\usepackage[dvipsnames,svgnames]{xcolor}\n" +
-		     "\\usepackage[pdftex]{graphicx}\n" + 
-		     "\\usepackage{hyperref}\n" +
-		     "\\usepackage{array}\n"+
-             "\n" +
-		     "\\newcommand{\\MYp}[1]{ {\\color[rgb]{0.392,0.392,0.392}#1} }\n" +
-		     "\\newcommand{\\MYunder}[1]{ {\\color[rgb]{0.2,0.209,0.3}\\underline{#1}} }\n" +
-			 "\n" +
-			 "\\begin{document}\n" +
-			 "\n" +  
-		     "\\includegraphics{fdi.jpg}\n"+
-		     "\\newline\n"+
-		     "\\newline\n"+
-		     "\\newline\n" +
-		     "\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.aent", 2)+ "}\n"+
-		     "\\begin{center}\n" +
-		     "\\includegraphics[width=\\textwidth]{imagenEntrada.jpg}\n"+
-		     "\\end{center}\n" ;*/
-
-		     
-		     
-
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-
+		auxvariable = mensajero.devuelveMensaje("simbolos.auxvariable",4);
 		transforma_FNG(b);
+		
 
 	}
 	//MÉTODOS:****************************************************
@@ -138,7 +109,7 @@ public class GIC_to_FNG {
 	
 	private void limpia(){
 
-//		System.out.println("LIMPIA AL PRINCIPIO GRAMATICASALIDA ES: " + gramaticaSalida);
+
 		Greibach gramsal = this.gramaticaSalida;
 		ArrayList<String> vargram = gramsal.getVariables();
 		HashMap<String,ArrayList<Produccion>> gramsalprod = gramsal.getProducciones();
@@ -146,8 +117,6 @@ public class GIC_to_FNG {
 		int i = 0; int tam = vargram.size();
 		while(i < tam){
 			String s = vargram.get(i);
-			//System.out.println("SE KE PETA " + s);
-			//System.out.println("vars " + gramsal.getVariables());
 			ArrayList<Produccion> aprod = gramsalprod.get(s);
 			ArrayList<Produccion> naprod = new ArrayList<Produccion>();
 			int j = 0; int tamProd = aprod.size();
@@ -165,16 +134,12 @@ public class GIC_to_FNG {
 			i++;
 		}
 		this.gramaticaSalida.setProducciones(ngramsalprod);
-//		System.out.println("GRAMATICASALIDA LIMPITA ES: " + gramaticaSalida);
 		
 	}
 	//------------------------------------------------------------
-	public void transforma_FNG(boolean mostrarPasos){
+	private/*public*/ void transforma_FNG(boolean mostrarPasos){
 
-		//vamos a limpiar a ver si consigo ke funcione de una puta vez
 		limpia();
-//		this.gramaticaSalida.dimeSiHayProdRecursivas();
-		//this.gramaticaSalida.quitaProdRecursivas();
 
 		ArrayList<String> variables = gramaticaSalida.getVariables();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
@@ -182,32 +147,20 @@ public class GIC_to_FNG {
 		tabla = new boolean[lon][lon]; 
 		inicializarTabla();
 		tablaTieneMarcas=false;
+
 		xml2+="<step>"+"<titulo>" + mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) + 
 		"</titulo>"+gramaticaSalida.toXML()+"</step>\n";
-		html+= "<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.gramatica",2) +"</h2>" + gramaticaSalida.toHTML() + "<br>";
-
-		lat= /*"\\newline\n" +
-		"\\newline\n" +
-		"\\newline\n" +
-		"\\newline\n" +
-		"\\newline\n" +*/
-			
-			"\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gramaticalat",2) + "}\n" +
-	     "\\newline\n" +
-	     "\n" + gramaticaSalida.toLat() + "\n" /*+ "\\newpage\n"*/;
-		
-		xmllatex+="<step>"+lat+"</step>\n";
+		xmllatex+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gramaticalat",2)+"</titulo>"+
+		gramaticaSalida.toLat()+"</step>\n";
 		
 		for(int i=0; i<lon; i++){ //recorre variables fila
 			String simboloFila = variables.get(i);
 			String simboloColumna = null;
 			ArrayList<Produccion> produccionesDeFila = producciones.get(simboloFila);
-		//	System.out.println("PROD FILA: " + produccionesDeFila);
+
 			for(int j=0; j<lon; j++) { //recorre variables columna
 				simboloColumna = variables.get(j);
 				
-			//	System.out.println("simboloColumna: " + simboloColumna);
-			//	System.out.println("PROD FILA: " + produccionesDeFila);
 				Iterator<Produccion> it = produccionesDeFila.iterator();
 				boolean enc = false;
 				
@@ -255,52 +208,12 @@ public class GIC_to_FNG {
 		if (columna != null )columna.put(clave, f);
 	}
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
-	public void pintaTabla(){
-		
-		lat = "\\begin{center}\n" + "\\begin{tabular}{||";
-		for(int i = 0; i <lon; i++){
-			lat += "c||";
-		}
-		lat += "}\n" +
-			"\\hline\n" + 
-		       "\\hline\n" +
-		       "-";
-		for(int i = 1; i <lon; i++){
-				lat += " &amp; "+this.getGramaticaSalida().getVariables().get(i);
-		}
-		lat += " \\\\"+
-			   "\n"+
-			   "\\hline\n" + 
-	           "\\hline\n";
-		for(int i=0; i<lon; i++){
-			for(int j=0; j<lon-1; j++){
-				if (j == 0){
-					lat += this.getGramaticaSalida().getVariables().get(i);
-				}
-				if (tabla[i][j]) {
-					lat += " &amp; X";
-				}
-				else {
-					lat += " &amp; -";
-				}
-			}
-			lat += " \\\\"+
-			   "\n"+
-			   "\\hline\n" + 
-	           "\\hline\n";
-		}
-		lat += "\\end{tabular}\n" + "\\end{center}\n" +
-		       /*"\\newline\n" +
-		       "\\newline\n" +*/
-		       "\n";
-
-		xmllatex+="<step>"+lat+"</step>\n";
-		html +="<table>";
-
-		html +="<tr>";
+	private/*public*/ void pintaTabla(){
 		
 		xml2+="<step><table>";
 		xml2+="<fila>";
+		xmllatex+="<step><table>";
+		xmllatex+="<fila>";
 		
 		for(int i = 0; i <lon; i++){
 			
@@ -308,61 +221,57 @@ public class GIC_to_FNG {
 
 			if (i == 0) {
 				xml2+="<item>"+" - "+"</item>";
-				System.out.print("  ");
+				xmllatex+="<item>"+" - "+"</item>";
+
 			}
 
-			html +="<td>" + this.getGramaticaSalida().getVariables().get(i) + " </td>";
-		
-			System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
 			xml2+="<item>"+ this.getGramaticaSalida().getVariables().get(i) +"</item>";
+			xmllatex+="<item>"+ this.getGramaticaSalida().getVariables().get(i) +"</item>";
 		}
 		xml2+="</fila>";
-		html +="</tr><br>";
-		System.out.println();
+		xmllatex+="</fila>";
+
 		for(int i=0; i<lon; i++){
-			html+="<tr>";
+
 			xml2+="<fila>";
+			xmllatex+="<fila>";
 			for(int j=0; j<lon; j++){
 
 				if (j == 0){
 
-					html+="<td>"+this.getGramaticaSalida().getVariables().get(i) + " " + "</td>";
-					System.out.print(this.getGramaticaSalida().getVariables().get(i) + " ");
+
 					xml2+="<item>"+this.getGramaticaSalida().getVariables().get(i) + " "+"</item>";
+					xmllatex+="<item>"+this.getGramaticaSalida().getVariables().get(i) + " "+"</item>";
 				}
 				if (tabla[i][j]) {
 
-					System.out.print("X ");
-					html+="<td> X </td>";
 					xml2+="<item> X </item>";
+					xmllatex+="<item> X </item>";
 				}
 				else {
-					System.out.print("- ");
-					html+="<td> - </td>";
+
 					xml2+="<item> - </item>";
+					xmllatex+="<item> - </item>";
 				
 				}
-				//xml+="</step>";
-				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
-			System.out.println();html+="</tr>";
+
 			xml2+="</fila>";
+			xmllatex+="</fila>";
 		}
 
 		xml2+="</table></step>\n";
-		//xml+="</exit>";
-		html +="</table>";
-		
-		//System.out.println("XML PINTATABLA: " + xml);
+		xmllatex+="</table></step>\n";
+
 	}
 	
-	public void inicializarTabla() {
+	private/*public*/ void inicializarTabla() {
 		for(int i=0; i<lon; i++)
 			for(int j=0; j<lon; j++) 
 				tabla[i][j] = false;
 	}
 	//************************************************************
-	public boolean diagonalMarcada(){
+	private/*public*/ boolean diagonalMarcada(){
 		
 		ArrayList<Integer> aa = columna.get(clave);
 		return aa.contains(clave);
@@ -372,7 +281,7 @@ public class GIC_to_FNG {
 	
 	
 	@SuppressWarnings("unchecked")
-	public void sustituir(){
+	private/*public*/ void sustituir(){
 		limpia();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();		
 		ArrayList<Produccion> produccionesDeColumna = producciones.get(gramaticaSalida.getVariables().get(clave));
@@ -386,7 +295,6 @@ public class GIC_to_FNG {
 			Integer indice = itFilas.next();
 			String var = gramaticaSalida.getVariables().get(indice);
 			ArrayList<Produccion> produccionesDeFilas = producciones.get(gramaticaSalida.getVariables().get(indice.intValue()));
-//			System.out.println("produccionesDeFilas " + produccionesDeFilas);
 			int i = 0;int tam = produccionesDeFilas.size();
 			
 			while( i < tam){ //recorre las producciones filas marcadas
@@ -395,11 +303,9 @@ public class GIC_to_FNG {
 				ArrayList<String> ayay = ((ArrayList<String>)aux2.getConcatenacion().clone());
 				String p = new String(ayay.get(0));
 				String pp = p/*"" +  p.charAt(0)*/;
-//				System.out.println("p " + p);
+
 				Produccion nueva = null;
 				if (pp.equals(gramaticaSalida.getVariables().get(clave))){
-//					System.out.println("produccionesDeFilasDespues " + produccionesDeFilas);
-//					System.out.println("produccionesDeColumnaNocambian?" + produccionesDeColumna);
 					Iterator<Produccion> itProdCol = produccionesDeColumna/*.get(0).getConcatenacion()*/.iterator();
 					aux2.getConcatenacion().remove(0);
 					while (itProdCol.hasNext()){ //recorre las producciones de las columnas
@@ -407,28 +313,19 @@ public class GIC_to_FNG {
 						Produccion aux3 = itProdCol.next();
 						
 						ArrayList<String> nueva2 = (ArrayList<String>)aux3.getConcatenacion().clone();
-						
-						
-						
-//						System.out.println("nueva2: "+ nueva2);
-//						System.out.println("aux3: "+ aux3);
-						
-//						System.out.println("aux2: "+ aux2);
+
 						for(int k = 0; k< aux2.getConcatenacion().size();k++){
 							nueva2.add(aux2.getConcatenacion().get(k));
 							
 						}
 						nueva.setConcatenacion(/*arreglaConcatenacion(*/nueva2/*)*/); //XXX CAMBIADO CMBIADOOOOOOOOOO
-//						System.out.println("nueva: "+ nueva);
 						
 						if (!esta(nueva,pnueva))pnueva.add(nueva);
-						//System.out.println("produccionesDeFilasfinal: "+ produccionesDeFilas);
-						//System.out.println("GRAMATICA: " + gramaticaSalida.getProducciones());
+
 					}					
 				}
 				else{
-					pnueva.add(aux2);
-//					System.out.println("temporal: " + pnueva);					
+					pnueva.add(aux2);					
 				}
 				i++;
 			}
@@ -436,11 +333,7 @@ public class GIC_to_FNG {
 			gramaticaSalida.getProducciones().put(var, pnueva);
 		}
 		
-		//AÑADIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 		limpia();
-		
-	//	System.out.println("GRAMATICA eres tu?: " + gramaticaSalida.getProducciones());
-	//	System.out.println("GRAMATICA ENTRADA: " + gramaticaEntrada.getProducciones());
 
 	}
 	//************************************************************
@@ -467,23 +360,10 @@ public class GIC_to_FNG {
 		}
 		return true;
 	}
-	
-	private String dameEntreCorchetes(String ultVar){
-		
-		String s = "";
-		int i = 0; int tam = ultVar.length();
-		while(i < tam){
-			String aux = ultVar.charAt(i)+"";
-			if(!aux.equals("[") && !aux.equals("]"))
-				s +=aux;
-			i++;
-		}
-		System.out.println("ke devuelve entrecorchetes?" + s);
-		return new String(s);
-	}
+
 	
 	@SuppressWarnings("unchecked")
-	public void sustituirDiagonal(){
+	private/*public*/ void sustituirDiagonal(){
 		
 		limpia();
 		HashMap<String, ArrayList<Produccion>> producciones = gramaticaSalida.getProducciones();
@@ -495,11 +375,15 @@ public class GIC_to_FNG {
 		String nVar = null;
 		int tam = gramaticaSalida.getVariables().size()-1;
 		String ultVar = gramaticaSalida.getVariables().get(tam);
-		
-		char nVarAux = new Character ((char)(ultVar.charAt(0)+1) ) ;
-
-		nVar =  nVarAux + "";
-
+		System.out.println("tam ultvar: " + ultVar.length());
+		if(ultVar.length() > 1){
+			nVar = "[" + auxvariable + contadoraux + "]";
+			contadoraux++;
+		}
+		else{
+			char nVarAux = new Character ((char)(ultVar.charAt(0)+1) ) ;
+			nVar =  nVarAux + "";
+		}
 		/**************************************************************************************/
 		/**nueva variable creada,ahora hay ke crear las producciones de la nueva variable**/
 		ArrayList<Produccion> p = new ArrayList<Produccion>();		
@@ -521,32 +405,22 @@ public class GIC_to_FNG {
 				pod = new Produccion();
 
 				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//		System.out.println("ke es pod?1" + pod);
 				p.add(pod);
-		//		System.out.println("ke es p?1" + p);
-//				System.out.println("p " + p);
 			}
 			else{
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
 				pod = new Produccion();
 				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-				//				System.out.println("ke es pod? 1" + pod);
 				if (!concat.isEmpty())produccionesNuevas.add(pod);
-//				System.out.println("pod1 " + pod);
-				//pod = new Produccion();
 				pod = new Produccion();
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
 				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 				pod.anadeCadena(nVar);
-//				System.out.println("pod2 " + pod);
-				//				System.out.println("ke es pod? 2" + pod);
 				produccionesNuevas.add(pod);
-				//				System.out.println("produccionesNuevas " + produccionesNuevas);
 			}
 		}
-	//	System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
 		if(produccionesNuevas.size() == 1 || produccionesNuevas.isEmpty()){
 						System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
 			//			System.out.println("NO ME AÑADAS!!");
@@ -565,7 +439,6 @@ public class GIC_to_FNG {
 
 
 		
-	//	System.out.println("GRAMATICA salida diagonal: " + gramaticaSalida.getProducciones());
 	}
 	
 	private ArrayList<Produccion> quitaProdRecursiva(ArrayList<Produccion> p,String var){
@@ -581,11 +454,15 @@ public class GIC_to_FNG {
 			i++;
 			
 		}
-		//System.out.println("KE DEVUELVE QUITAPRODREC?"+ pp);
+
 		return pp;
 	}
 	
-	public void simplifica(boolean b,boolean pasarXml){
+	public void ejecuta(boolean b,boolean pasarXml){
+		simplifica(b,pasarXml);
+	}
+	
+	private/*public*/ void simplifica(boolean b,boolean pasarXml){
 		
 		while(getTablaTieneMarcas()){
 			
@@ -596,30 +473,17 @@ public class GIC_to_FNG {
 		}
 		//quitamos las lambdas que no esten en S
 		boolean bol = gramaticaSalida.dimeSiHayProdMulti();
-		int i = 0;
+
 		while(bol){
 			gramaticaSalida.quitaProdMulti();
 			bol = gramaticaSalida.dimeSiHayProdMulti();
-			i++;
-			//System.out.println("VUELTAS kita lambda: " + i);
 			this.limpia();
 		}
 		
-		
-		html+="<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimp", 2) +"</h2>" + gramaticaSalida.toHTML();
-		lat="\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimplatex", 2) +/*Gram\\'{a}tica final simplificada*/"}\n"+
-			"\\newline"+
-	       gramaticaSalida.toLat();
-		
-		lat+=/*"\\end{center}\n"+*/
-	        "\n" +
-	        "\\end{document}";
-			lat.replace("[\\,","[/,");
-		
-		xmllatex+="<step>"+lat+"</step>\n</steps>\n";	
+		xmllatex+="<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimplatex", 2)+
+		"</titulo>"+gramaticaSalida.toLat()+"</step>\n</steps>\n";
 		xml2+="\n<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gsalidasimsimp", 2)+
 		"</titulo>"+gramaticaSalida.toXML()+"</step>\n";
-//		creaArchivoLatex();
 		
 		if (pasarXml){
 			
@@ -644,14 +508,13 @@ public class GIC_to_FNG {
 				xml2+="\n</steps>\n<result>"+cinta+"</result></exit>";
 				
 			}
-			//xml+="</exit>";
+
 			catch(FileNotFoundException e){
 				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 				
 				
 			}
 	    	catch(Exception e){
-	    		System.out.println("TROCOTRO");
 	    		e.printStackTrace();
 	    	}
 	    }
@@ -661,52 +524,8 @@ public class GIC_to_FNG {
 	
 	//************************************************************
 	public String getXMLLatex(){
-/*		lat+=/*"\\end{center}\n"+*/
- /*       "\n" +
-        "\\end{document}";
-		lat.replace("[\\,","[/,");
-		/*lat.replaceAll("[ \\,","[/,");
-		lat.replaceAll("[\\ ,","[/,");
-		lat.replaceAll("[ \\ ,","[/,");
-		lat.replaceAll(",\\,",",/,");
-		lat.replaceAll(", \\,",",/,");
-		lat.replaceAll(",\\ ,",",/,");
-		lat.replaceAll(", \\ ,",",/,");
-		lat.replaceAll(",\\]",",/]");
-		lat.replaceAll(", \\]",",/]");
-		lat.replaceAll(",\\ ]",",/]");
-		lat.replaceAll(", \\ ]",",/]");*/
-		//return lat;
+
 		return xmllatex;
-	}
-	
-/*	private void creaArchivoLatex(){
-		
-			
-		    try {
-		    	// Apertura del fichero y creacion de BufferedReader para poder
-		        // hacer una lectura comoda (disponer del metodo readLine()).
-	    		
-	    		PrintWriter pw = null;
-	    		String ruta = "LaTeX/FNG/"+"CLaTeX"+contador+".tex";
-	    		contador++;
-	    		FileWriter fichero = new FileWriter(ruta);
-				pw = new PrintWriter(fichero);
-
-	            pw.println(this.getLatex());
-	            //muestraTex(ruta);
-	            pw.close();
-		    }
-
-	    	catch(Exception e){
-	    		e.printStackTrace();
-	    	}
-		
-	}*/
-	
-	public String getHTML(){
-		
-		return html;
 	}
 	
 	private ArrayList<String> arreglaConcatenacion(ArrayList<String> nconcat){
@@ -783,13 +602,7 @@ public class GIC_to_FNG {
 		pod.anadeCadena("a"); pod.anadeCadena("b");
 		p.add(pod); 
 		lala.put("T",p);
-
-//		System.out.println("GRAMATICA: " + lala);
-
-
-		
-
-		
+	
 		p = new ArrayList<Produccion>();
 		pod = new Produccion();
 		pod.anadeCadena("T"); pod.anadeCadena("T");
@@ -798,131 +611,68 @@ public class GIC_to_FNG {
 		pod.anadeCadena("b"); pod.anadeCadena("b"); pod.anadeCadena("b"); 
 		p.add(pod); 
 		lala.put("U",p);
-		
-//		System.out.println("GRAMATICA: " + lala);
-		
-
-		
+				
 		g.setProducciones(lala);
 		
-/*		HashMap<Integer,ArrayList<ArrayList<Integer>>> prueba = new HashMap<Integer,ArrayList<ArrayList<Integer>>>();
-		ArrayList<Integer> gr = new ArrayList<Integer>();
-		ArrayList<ArrayList<Integer>> gr2 = new ArrayList<ArrayList<Integer>>();
-		gr.add(new Integer(2));
-		gr2.add(gr); 
-		prueba.put(2, gr2); gr2.add(gr); prueba.put(3, gr2); prueba.put(4, gr2);
-
-		System.out.println("veamos: " + prueba);*/
 		
-		System.out.println("GRAMATICA: " + g);
+
 		GIC_to_FNG piticli = new GIC_to_FNG(g,true);
 		piticli.simplifica(true,false);
-//		System.out.println("XML MAIN: \n" + piticli.getXML());
+
 		System.out.println("ENTRADA!" + piticli.gramaticaEntrada);
 		System.out.println("salida!" + piticli.gramaticaSalida);
 		
 		piticli.getGramaticaSalida().creaListaPalabras();
 		
-/*		while(piticli.getTablaTieneMarcas()){
-			
-			if (!piticli.diagonalMarcada()){ System.out.println("DIAGONAL NO "); piticli.sustituir();}
-			else{ System.out.println("DIAGONAL SI "); piticli.sustituirDiagonal();}
-			piticli.transforma_FNG(false);
-			
-		}*/
-	//	System.out.println("gram.getProducciones() " + piticli.getGramaticaEntrada().getProducciones());
-		
-		
 	
 		AutomataPila aut = new AutomataPila();
-//		AutomataPila aut2 = new AutomataPila();
-		//a.listaEstados.add(new Estado(0,0,"s1"));
-aut.getEstados().add("s0");//		aut.getEstados().add("s1");
-aut.getEstados().add("s1");//		aut.getEstados().add("s2");
-aut.getEstados().add("s2");//		aut.getEstados().add("s3");
 
-		//		aut.getEstados().add("s4");
+		aut.getEstados().add("s0");
+		aut.getEstados().add("s1");
+		aut.getEstados().add("s2");
 
-aut.setEstadoInicial("s0");//		aut.setEstadoInicial("s1");
-//aut.setEstadoFinal("s1");//		aut.setEstadoFinal("s3");
+		aut.setEstadoInicial("s0");
 		aut.setEstadoFinal("s2");
 
-/*		aut2.getEstados().add("s1");
-		aut2.getEstados().add("s2");
-		aut2.setEstadoInicial("s1");
-		aut2.setEstadoFinal("s2");*/
-		//System.out.println("ESTADOS: " + aut.getEstados());
-		
 		AristaAP arist;
 		
-		
-		/*******/
 
 		
-/*		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("\\");
-		arist.setCimaPila("Z");
-		arist.anadirPila("\\");//		arist.anadirPila("Z");
-		
-		aut.anadeArista(arist);*/
-	/******/
-		
-		arist = new AristaAP(0,0,0,0,"s0","s0");//		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");
 		arist.anadirSimbolo("a");
 		arist.setCimaPila("Z");
-
-		arist.anadirPila("AZ");//		arist.anadirPila("Z");
+		arist.anadirPila("AZ");
 		
 		aut.anadeArista(arist);
 		
-
-		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist = new AristaAP(0,0,0,0,"s0","s0");		
 		arist.anadirSimbolo("a");
-		arist.setCimaPila("A");//		arist.setCimaPila("Z");
-		arist.anadirPila("AA");//		arist.anadirPila("CZ");
+		arist.setCimaPila("A");
+		arist.anadirPila("AA");
 		
 		aut.anadeArista(arist);	
 		
-		//añadido//
-/*		arist = new AristaAP(0,0,0,0,"s0","s0");		//arist = new AristaAP(0,0,0,0,"s1","s1");
+		
+		arist = new AristaAP(0,0,0,0,"s0","s1");
 		arist.anadirSimbolo("b");
-		arist.setCimaPila("Z");//		arist.setCimaPila("Z");
-		arist.anadirPila("\\");//		arist.anadirPila("CZ");
-		
-		aut.anadeArista(arist);	*/
-		
-		arist = new AristaAP(0,0,0,0,"s0","s1");//		arist = new AristaAP(0,0,0,0,"s1","s1");
-		arist.anadirSimbolo("b");//		arist.anadirSimbolo("0");
-		arist.setCimaPila("A");//		arist.setCimaPila("C");
-		arist.anadirPila("\\");//		arist.anadirPila("CC");
+		arist.setCimaPila("A");
+		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);	
 	
-		arist = new AristaAP(0,0,0,0,"s1","s1");//		arist = new AristaAP(0,0,0,0,"s2","s2");
-		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("A");		//arist.setCimaPila("C");
+		arist = new AristaAP(0,0,0,0,"s1","s1");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("A");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);
 		
-		arist = new AristaAP(0,0,0,0,"s1","s2");//		arist = new AristaAP(0,0,0,0,"s1","s3");
-//		arist.anadirSimbolo("0");
-		arist.anadirSimbolo("b");		//arist.anadirSimbolo("1");
-		arist.setCimaPila("Z");		//arist.setCimaPila("C");
+		arist = new AristaAP(0,0,0,0,"s1","s2");
+		arist.anadirSimbolo("b");
+		arist.setCimaPila("Z");
 		arist.anadirPila("\\");
 		
 		aut.anadeArista(arist);		
-
-
-//		AutomataP_to_GramaticaIC a = new AutomataP_to_GramaticaIC(aut);
-		
-//		System.out.println("aut :\n" + aut);
-//		System.out.println(a.AP_Gramatica()/*.getProducciones().toString()*/);
-		
-
-
-//		piticli.getGramaticaSalida().creaListaPalabras();
-
 
 	}
 }

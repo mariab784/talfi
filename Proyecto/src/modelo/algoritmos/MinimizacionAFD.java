@@ -203,6 +203,7 @@ public class MinimizacionAFD implements Algoritmo{
 			Iterator<String> itClaves=fila.keySet().iterator();
 
             while (itClaves.hasNext()){	
+				@SuppressWarnings("unused")
 				String v2=itClaves.next();
 	/*			System.out.println("Comparandolo con " +v2);
 				System.out.println(tabla.get(v1).get(v2).getMarcado());
