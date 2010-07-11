@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<formatos>
+<cabecera>
+\documentclass[a4paper,11pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{a4wide}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\usepackage{array}
+
+\newcommand{\MYp}[1]{ {\color[rgb]{0.392,0.392,0.392}#1} }
+\newcommand{\MYunder}[1]{ {\color[rgb]{0.2,0.209,0.3}\underline{#1}} }
+</cabecera>
+<cabecerados>
+\begin{document}
+\includegraphics{fdi.jpg}
+\newline
+\newline
+\newline
+\MYp{\Huge Aut\'{o}mata de entrada}
+\begin{center}
+\includegraphics[width=\textwidth]{imagenEntrada.jpg}
+\end{center}
+</cabecerados>
+	<ocultar>\newenvironment{miitemize}</ocultar>
+</formatos>
