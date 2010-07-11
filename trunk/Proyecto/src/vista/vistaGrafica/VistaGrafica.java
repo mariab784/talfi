@@ -534,7 +534,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			
 			GIC_to_FNG piticli = new GIC_to_FNG(g.getGic(),b);
 
-							piticli.simplifica(true,false);
+							piticli.ejecuta(true,false);
 			
 			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
 			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
@@ -743,7 +743,6 @@ public class VistaGrafica extends JFrame implements Vista{
 					if(!dibujar) return;
 					if(panelCentral.getPanel().getListaEstados().size()==0){
 						CopiarPegar cp=CopiarPegar.getInstancia();
-						System.out.println("canvas.getTipoAutomata()" + panelCentral.getPanel().getTipoAutomata());
 						panelCentral.getPanel().cargarAutomata2(cp.getAutomata(),panelCentral.getPanel().getTipoAutomata());
 					} else {
 						JOptionPane.showMessageDialog(null,m.devuelveMensaje("vista.yaauto", 2),"Error",JOptionPane.ERROR_MESSAGE);
@@ -1146,7 +1145,6 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	private void ejecuta(int algoritmo,boolean pasos){
 		String rutahtml=new String();
-		String rutaLatex=new String();
 		Mensajero m=Mensajero.getInstancia();
 		try{
 			if (algoritmo==GRAMATICA){
@@ -1163,7 +1161,6 @@ public class VistaGrafica extends JFrame implements Vista{
 				BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
 				bw.append(panelCentral.getPanel().traducirXML());
 				bw.close();
-				//System.out.println("xmlfnc: " + panelCentral.getPanel().traducirXML());
 				
 			}
 			else if(preparadoEquivalencia || algoritmo!=EQUIVALENCIA){

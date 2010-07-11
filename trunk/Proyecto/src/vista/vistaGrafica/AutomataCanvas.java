@@ -55,6 +55,7 @@ import modelo.automatas.MaquinaTuring;
  *  @author Miguel Ballesteros, Jose Antonio Blanes, Samer Nabhan
  *
  */
+@SuppressWarnings("unused")
 public class AutomataCanvas extends JScrollPane {
 
 	
@@ -316,7 +317,6 @@ public class AutomataCanvas extends JScrollPane {
 
 	public void creaListaPalabras(String l,int ind){
 		
-		System.out.println("DIMEKETIENE EL LISTAPALABRAS A RECONOCER: " + l);
 		if(ind == 0)this.listaPalabras = new ArrayList<String>();
 		else if(ind == 1)this.listaPalabrasNo = new ArrayList<String>();
 		else if(ind == 2)this.listaCintaPalabras = new ArrayList<String>();
@@ -326,9 +326,7 @@ public class AutomataCanvas extends JScrollPane {
 		StringTokenizer st=new StringTokenizer(l,",");
 		while(st.hasMoreTokens()){
 			String ss=st.nextToken().trim();
-			//if (ss.equals(m.devuelveMensaje("simbolos.blanco",4))) ss = " ";
 			if(ind == 0){
-				System.out.println("dimepalabra:"+ss+"uo");
 				if(!listaPalabras.contains(ss))listaPalabras.add(ss);
 			}
 			else if (ind == 1){
@@ -1578,7 +1576,6 @@ public class AutomataCanvas extends JScrollPane {
 				else {
 					int angulo=2;
 					if (a instanceof Arista) if (esUnica((Arista)a)) angulo=0;
-					//if (a instanceof AristaAP) System.out.println("MUAHAHAHAAH");
 					if (a.getY()>a.getFy())
 						curva=new CurvedArrow(a.getX()-15,a.getY()-15,a.getFx()+15,a.getFy()+15, angulo);
 					else curva=new CurvedArrow(a.getX()-15,a.getY()+15,a.getFx()+15,a.getFy()-15, angulo);
@@ -1589,16 +1586,15 @@ public class AutomataCanvas extends JScrollPane {
 				else {
 					int angulo=1;
 					if (a instanceof Arista) if (esUnica((Arista)a)) angulo=0;
-					if ((a instanceof AristaAP) || (a instanceof AristaTuring)){angulo=0; /*System.out.println("MUAHAHAHAAH");*/}
+					if ((a instanceof AristaAP) || (a instanceof AristaTuring)){angulo=0;}
 					if (a.getY()>a.getFy()) 
 						curva=new CurvedArrow(a.getX()+15,a.getY()-15,a.getFx()-15,a.getFy()+15, angulo);
 					else curva=new CurvedArrow(a.getX()+15,a.getY()+15,a.getFx()-15,a.getFy()-15,angulo);
 				}
 			}
-		//	System.out.println("PUNTO RAYANTE: " + point);
 			if(curva.isNear(point,2)){  
 				
-				return /*(Arista)*/ a; 
+				return a; 
 			}
 		}	
 		return null;
