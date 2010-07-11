@@ -48,7 +48,6 @@ public class C_Y_K {
 			}
 			else{
 				b = construyeTabla(pal);
-				//System.out.println(b);
 			}
 			listaResultadosSi.add(b);
 			aceptadas =  b && aceptadas ;
@@ -63,19 +62,13 @@ public class C_Y_K {
 			}
 			else{
 				b = construyeTabla(pal);
-				//System.out.println(b);
 			}
-			
-			
-			//b = construyeTabla(listaPalabrasNo.get(i));
-			//System.out.println(b);
+
 			listaResultadosNo.add(!b);
 			noAceptadas = (!b) && noAceptadas;
 
 		}
-		
-		System.out.println("LISTAACEPTADAS: " + listaResultadosSi);
-		System.out.println("LISTAACEPTADASNO: " + listaResultadosNo);
+
 	}
 
 	private boolean compruebaLambda(){
@@ -106,9 +99,7 @@ public class C_Y_K {
 
 		 for(int i =1;i<=tam;i++){
 		 	Produccion p = new Produccion();
-		 	String s = /*"["+*/palabra.charAt(i-1)/*+""+"]"*/+"";
-		 	//System.out.println("estas? " + s);
-		 	//System.out.println("en esto: " + g.getRelacionados());
+		 	String s = palabra.charAt(i-1)+"";
 		 		if(!g.getRelacionados().containsKey(s)){return false;}
 		 		else{
 		 			p.setConcatenacion(g.getRelacionados().get(s));
@@ -123,26 +114,20 @@ public class C_Y_K {
 				 tabla[i][j] = p;
 				 for(int k = 1; k<=j-1; k++){
 					 ArrayList<String> vik = tabla[i][k].getConcatenacion();
-					 //System.out.println("V"+i+k+": " + vik);
 					 ArrayList<String> vimaskjmenosk = tabla[i+k][j-k].getConcatenacion();
-					 //System.out.println("V"+(i+k)+","+(j-k)+": " + vimaskjmenosk);
 					 for(int m = 0; m < vimaskjmenosk.size(); m++){
 						 for(int s = 0; s < vik.size(); s++){
 							 ArrayList<String> acentinel = new ArrayList<String>();
 							 acentinel.add(vik.get(s)); acentinel.add(vimaskjmenosk.get(m));
 							 String centinel = dameCadena(acentinel);
-							// System.out.println("centinel: " + centinel/*acentinel.toString()*/);
-							// System.out.println("relacionados: " + g.getRelacionados());
-							 ArrayList<String> existe = g.getRelacionados().get(centinel/*acentinel.toString()*/);
-							// System.out.println("existe: " + existe);
+							 ArrayList<String> existe = g.getRelacionados().get(centinel);
 							 if(existe == null){
 								 
 							 }
 							 else{
-							//	 System.out.println("EXISTE!: ");
 								 for(int mm = 0; mm < existe.size(); mm++){
-									 if(!p.getConcatenacion().contains(existe.get(mm)/*existe.toString()*/))
-										 p.anadeCadena(/*existe.toString()*/existe.get(mm));
+									 if(!p.getConcatenacion().contains(existe.get(mm)))
+										 p.anadeCadena(existe.get(mm));
 								 }
 								 
 							 }
@@ -150,7 +135,6 @@ public class C_Y_K {
 						 }
 						 
 					 }
-					 //System.out.println("tabla " + i + "," + j +": " + p);
 					 tabla[i][j] = p;
 				 }
 
@@ -171,18 +155,13 @@ public class C_Y_K {
 			for(int i=1; i<=lon; i++){		
 			
 				System.out.print(" j=" + j +" ");
-				System.out.print("i=" + i);
-				
+				System.out.print("i=" + i);				
 				System.out.print("   " +tabla[i][j]);
 
-
-				//xml+="</step>";
-				//System.out.println("I: " + i + " J: " + j + "VALOR: " + tabla[i][j]);
 			}
 			System.out.println();
 		}
 
-		//System.out.println("XML PINTATABLA: " + xml);
 	}
 	
 	

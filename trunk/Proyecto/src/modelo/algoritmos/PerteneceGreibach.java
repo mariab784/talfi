@@ -5,7 +5,7 @@ package modelo.algoritmos;
 
 import accesoBD.Mensajero;
 import controlador.Controlador;
-import controlador.Controlador_imp;
+
 import modelo.Algoritmo;
 import modelo.automatas.Automata;
 import java.util.*;
@@ -21,7 +21,6 @@ public class PerteneceGreibach implements Algoritmo {
 	private Greibach gramatica;
 	private ArrayList<String> palabra;
 	private String lambda;
-	private Controlador controlador;
 	private Mensajero mensajero;
 	/**
 	 * 
@@ -29,7 +28,7 @@ public class PerteneceGreibach implements Algoritmo {
 	public PerteneceGreibach(Greibach g, ArrayList<String> s) {
 		// TODO Auto-generated constructor stub
 		if (mensajero == null) mensajero=Mensajero.getInstancia();
-		controlador=Controlador_imp.getInstancia();
+
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
 		gramatica = g;
 		palabra = s;
