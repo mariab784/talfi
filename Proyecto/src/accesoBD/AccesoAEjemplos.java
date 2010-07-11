@@ -77,7 +77,6 @@ public class AccesoAEjemplos {
 		//primero los afd
 		ArrayList<String> ejemplosAfd=new ArrayList<String>();
 		NodeList tipo=documento.getElementsByTagName("afd");
-		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
 			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
@@ -90,7 +89,6 @@ public class AccesoAEjemplos {
 		//los afn
 		ArrayList<String> ejemplosAfn=new ArrayList<String>();
 		tipo=documento.getElementsByTagName("afn");
-		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
 			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
@@ -103,7 +101,6 @@ public class AccesoAEjemplos {
 		//los afnlambda
 		ArrayList<String> ejemplosAfnlambda=new ArrayList<String>();
 		tipo=documento.getElementsByTagName("afnlambda");
-		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
 			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
@@ -116,7 +113,6 @@ public class AccesoAEjemplos {
 		/*********************************************************/
 		ArrayList<String> ejemplosAP = new ArrayList<String>();
 		tipo=documento.getElementsByTagName("autompila");
-		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
 			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
@@ -128,7 +124,6 @@ public class AccesoAEjemplos {
 		
 		ArrayList<String> ejemplosMT = new ArrayList<String>();
 		tipo=documento.getElementsByTagName("maqturing");
-		//System.out.println(tipo.item(0).getChildNodes().item(1).getTextContent());
 		
 		for (int j = 1; j <tipo.item(0).getChildNodes().getLength(); j++) {
 			 String var = tipo.item(0).getChildNodes().item(j).getTextContent();
@@ -670,7 +665,6 @@ public class AccesoAEjemplos {
 			/*********************************************************/
 			
 			xml=devolverListadoEjercicios();
-			System.out.println("XML EJERCICIOS: " + xml);
 			array=xml.get("Lenguaje");
 			it=array.iterator();
 			i=1;
@@ -874,8 +868,7 @@ public class AccesoAEjemplos {
 				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
 				i++;
 			}
-			System.out.println("TIPO EJS: " + tipo);
-			if(tipo.equals(/*"TransformacionPila"*/"AutomatasDePila")){
+			if(tipo.equals("AutomatasDePila")){
 				String nombre="Ejercicio"+i;
 				String rutaFichero="XML/ejercicios/Transformacion_Pila/"+nombre+".xml";
 				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));
@@ -896,8 +889,8 @@ public class AccesoAEjemplos {
 				fich+="\t\t\t<ejemplo>"+s+"</ejemplo>\n";
 				i++;
 			}
-			//System.out.println("TIPO EJS: " + tipo);
-			if(tipo.equals(/*"TransformacionPila"*/"MaquinaTuring")){
+
+			if(tipo.equals("MaquinaTuring")){
 				String nombre="Ejercicio"+i;
 				String rutaFichero="XML/ejercicios/Maquina_Turing/"+nombre+".xml";
 				BufferedWriter bw = new BufferedWriter(new FileWriter(rutaFichero));

@@ -14,7 +14,6 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 
 import vista.vistaGrafica.VistaGrafica;
-import vista.vistaGrafica.events.AutomataException;
 
 
 import com.sun.org.apache.xerces.internal.parsers.*;
@@ -132,7 +131,6 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 			
 			automata = new MaquinaTuring();		
 			esTuring = true;
-			//System.out.println("SOY UN TURING!!");
 			VistaGrafica.setOpcionesMT();
 
 		}
@@ -144,9 +142,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 				alf.aniadirLetra(nodos.item(0).getChildNodes().item(i).getTextContent());
 			i++;
 		}
-		//if (automata instanceof AutomataPila) ((AutomataPila)automata).setAlfabeto(alf);
-		//if (automata instanceof Turing) ((Turing)automata).setAlfabeto(alf);
-		/*else*/ automata.setAlfabeto(alf);
+		
+		automata.setAlfabeto(alf);
 		
 		nodos = documento.getElementsByTagName("alphabetP");
 		if (nodos.item(0) != null){
@@ -217,23 +214,12 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 							String ss= "" + s5.charAt(indice);//st.nextToken();
 							salida.add(ss);
 							indice++;
-					//	System.out.println("TRANS: "+ss);
-						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
 						}
 					}
 					else { salida.add("\\");}
 					
-					/*System.out.println("S1: " + s1);
-					System.out.println("S2: " + s2);
-					System.out.println("S3: " + s3);
-					System.out.println("S4: " + s4);
-					System.out.println("S5: " + s5);*/
-					
-
-					
-					
+			
 					x = x+ 10;
-					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
 					((AutomataPila)automata).insertaArista2(s1,s2,entrada,s4,salida);				
 				}
 					
@@ -259,31 +245,8 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					
 					String s4 = nodos.item(i).getChildNodes().item(x+6).getTextContent();
 					String s5 = nodos.item(i).getChildNodes().item(x+8).getTextContent();
-					
-					
-					
-					//StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
-				/*	int indice = 0;
-					ArrayList<String> salida = new ArrayList<String>();
-					if (s5.compareTo("#") != 0){
-						while(/*st.hasMoreTokens()*//*indice < s5.length()){
-					/*		String ss= "" + s5.charAt(indice);//st.nextToken();
-							salida.add(ss);
-							indice++; */
-					//	System.out.println("TRANS: "+ss);
-						//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
-				/*		}
-					}
-					else { salida.add("#");} */
-					
-					/*System.out.println("S1: " + s1);
-					System.out.println("S2: " + s2);
-					System.out.println("S3: " + s3);
-					System.out.println("S4: " + s4);
-					System.out.println("S5: " + s5);*/
-					
+				
 					x = x+ 10;
-					//insertaArista(String origen,String destino,ArrayList<String> simbolos,String cima,ArrayList<String> salida)
 					((MaquinaTuring)automata).insertaArista2(s1,s2,entrada,s4,s5);				
 				}
 					
@@ -303,7 +266,6 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 					(Integer.parseInt(nodos.item(i).getChildNodes().item(2).getTextContent())));
 			automata.setCoordenadas(nodos.item(i).getChildNodes().item(0).getTextContent(), coord);
 		}
-//		System.out.println("AUTOMATA PARSER XML: " + automata);
 		
 		if ((automata instanceof MaquinaTuring) || (automata instanceof AutomataPila)){
 			nodos = documento.getElementsByTagName("listaPalabras");
@@ -315,7 +277,6 @@ public Automata extraerAutomata(String ruta)throws AutomatasException  {
 				}
 				if(automata instanceof AutomataPila)((AutomataPila)automata).setListaPalabrasEj(listaPalabras);
 				else if(automata instanceof MaquinaTuring){((MaquinaTuring)automata).setListaPalabrasEj(listaPalabras);
-				System.out.println("listapalabras XML: "+ listaPalabras);
 				
 				}
 			}

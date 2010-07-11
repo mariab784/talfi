@@ -79,6 +79,11 @@ public class Mensajero {
 				break;				
 				
 			}
+			case 5: {
+				xml="XML/formatoLatex/formatolatex.xml";
+				break;				
+				
+			}
 		}
 		DOMParser parser = new DOMParser();
 		try {
@@ -97,10 +102,6 @@ public class Mensajero {
 		StringTokenizer st=new StringTokenizer(campo,".");
 		String seccion=st.nextToken();
 		String busco=st.nextToken();
-		//System.out.println("seccion: " + seccion);
-		//System.out.println("compara: " + compara);
-		//System.out.println("busco: " + busco);
-		//System.out.println("*******************");
 
 		NodeList nodos = documento.getElementsByTagName(seccion);
 		for (int i = 0; i <nodos.item(0).getChildNodes().getLength(); i++) {
@@ -109,8 +110,6 @@ public class Mensajero {
 			aux=aux.replace("]","");
 			StringTokenizer tk=new StringTokenizer(aux,":");
 			String compara=tk.nextToken();
-			//System.out.println("compara: " + compara);
-			//System.out.println("busco: " + busco);
 			if (compara.equals(busco)) return nodos.item(0).getChildNodes().item(i).getTextContent();	
 		}
 		return null;

@@ -60,13 +60,8 @@ public class ParserEjercicio {
 			NodeList tipoE = documento.getElementsByTagName(/*"type"*/"tipo");
 			 
 			String tipo = null;
-//			for (int i = 1; i <tipoE.item(0).getChildNodes().getLength(); i++) {
+
 				 tipo = tipoE.item(0).getChildNodes().item(/*i*/0).getTextContent();
-//				 i++;
-				 
-//			}			
-			
-			System.out.println("TIPO: " + tipo);
 			
 			if(tipo.equals("Lenguaje")){
 				return extraerEjercicioLenguaje(ruta);
@@ -551,7 +546,7 @@ public class ParserEjercicio {
 			e.printStackTrace();
 			throw new AutomatasException(mensajero.devuelveMensaje("parser.entsalida",2));
 		}
-		System.out.println("marronazo");
+
 		Document documento = parser.getDocument();
 		String pintar = null;
 		
@@ -698,10 +693,6 @@ public class ParserEjercicio {
 			}
 			output.setListaPalabrasBucleEj(listaPalabrasBucle);
 			
-			System.out.println("TURING alf: " + alf);
-			System.out.println("TURING: " + output);
-			System.out.println("cinta ke si: " + ((MaquinaTuring)output).getListaPalabrasEj());
-			System.out.println("cinta ke no: " + ((MaquinaTuring)output).getListaPalabrasEjNo());
 			return new Ejercicio_imp(enunciado,input,output,alf,alfCinta,"TURING",ruta,pintar); //XXX
 
 	}
