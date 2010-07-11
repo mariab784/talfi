@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,9 +34,6 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.org.apache.xerces.internal.parsers.*;
 import modelo.AutomatasException;
-import modelo.algoritmos.AutomataP_to_GramaticaIC;
-import modelo.algoritmos.GIC_to_FNChomsky;
-import modelo.algoritmos.GIC_to_FNG;
 import modelo.algoritmos.Registro;
 import modelo.automatas.Alfabeto;
 import modelo.automatas.AlfabetoPila_imp;
@@ -72,16 +68,6 @@ private ArrayList<AristaTuring> listaAristasTuring;
 private ArrayList<String> listaFinales;
 private String estadoInicial;
 private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
-
-//private FileWriter ficheroLat;
-//private int contadorlat;
-//private int contadorlat2;
-//fin variables para la generacion de imagenes jpg
-
-/*	private TraductorHTML(){
-		contadorlat = 0; 
-		contadorlat2 = 0;
-	}*/
 
 	/**
 	 * El traductorHTML es un singleton por tanto tiene una instancia de si mismo de forma estatica, lo convierte en unico
@@ -319,16 +305,8 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacion.html";
 		File fichero = new File (rutaHTML);
 		BufferedWriter bw;
-		PrintWriter pw = null;
 		try{
-
 			
-			
-			
-  //  		String rutaLatex = "LaTeX/FNG/"+"CLaTeX"+".tex";
-    	//	contadorlat2++;
-  //  		ficheroLat = new FileWriter(rutaLatex);
-	//		pw = new PrintWriter(ficheroLat);			
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			Document documento = parser.getDocument();
 			
@@ -533,13 +511,12 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 			/**********************debajo OK***********************************************/
 			/*NodeList */nodos1 = documento.getElementsByTagName("step");
-		//	System.out.println("tam nodos step: " + nodos1.getLength());
+
 			
-			for (int i = 0; i < nodos1.getLength()/*.item(0).getChildNodes().getLength()*/; i++) {
+			for (int i = 0; i < nodos1.getLength(); i++) {
 				
 				
 				NodeList nodos2 = nodos1.item(i).getChildNodes();
-			//	System.out.println("nodos2.getLength() greibach" + nodos2.getLength());
 				if(nodos2.getLength() >1){
 				
 				bw.append("<br><h2>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</h2>");
@@ -569,37 +546,10 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 					
 				}
 			}	
-				
-//				bw.append("<table>");
-				
-//				bw.append("<table>");
-			
-			
-/*************************************************************************************************************/			
-			
-/*			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
-			//agic.AP_Gramatica();
-			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNG gictofnc = new GIC_to_FNG(agic.getGic(),true);
-			
-			
-			
-		//	gictofnc.registraControlador(this);
-			gictofnc.simplifica(true,false);
-			
 
-			//System.out.println("dame html: " + gictofnc.getHTML());
-			//System.out.println("dame latex:" + gictofnc.getLatex());
-			bw.append(gictofnc.getHTML());*/
 			bw.append("</body></html>");
 			bw.close();
 
-			
-			
-/*			pw.append(agic.getLatex());
-			pw.append(gictofnc.getLatex());
-            //muestraTex(ruta);
-            pw.close();*/
 /*******************************************************************************************************/
 		
 		} catch (FileNotFoundException e) {
@@ -627,17 +577,8 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 		String rutaHTML=System.getProperty("user.dir")+brr+"HTML"+brr+"saleSimplificacionFNC.html";
 		File fichero = new File (rutaHTML);
 		BufferedWriter bw;
-		PrintWriter pw = null;
 		try{
-			
-			
-			
- //   		String rutaLatex = "LaTeX/FNC/"+"CLaTeX"/*+contadorlat*/+".tex";
-    	//	contadorlat++;
- //   		ficheroLat = new FileWriter(rutaLatex);
-//			pw = new PrintWriter(ficheroLat);
-			
-			
+					
 			parser.parse(new InputSource(new FileInputStream(ruta)));
 			Document documento = parser.getDocument();
 			
@@ -843,13 +784,11 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 			
 			/**********************debajo OK***********************************************/
 			/*NodeList */nodos1 = documento.getElementsByTagName("step");
-			//System.out.println("tam nodos step: " + nodos1.getLength());
 			
-			for (int i = 0; i < nodos1.getLength()/*.item(0).getChildNodes().getLength()*/; i++) {
+			for (int i = 0; i < nodos1.getLength(); i++) {
 				
 				
 				NodeList nodos2 = nodos1.item(i).getChildNodes();
-				//System.out.println("nodos2.getLength() greibach" + nodos2.getLength());
 				if(nodos2.getLength() >1){
 				
 				bw.append("<br><h2>"+ nodos1.item(i).getChildNodes().item(0).getTextContent() +"</h2>");
@@ -869,33 +808,10 @@ private static Stroke STROKE = new java.awt.BasicStroke(2.4f);
 					
 				}
 			}	
-			
-			
-			
-			
-			
-			
-/*			AutomataP_to_GramaticaIC agic = new AutomataP_to_GramaticaIC(automata);
-			//agic.AP_Gramatica();
-			System.out.println("AGIC getgic: " + agic.getGic());
-			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(agic.getGic(),true);*/
-			
-		//	gictofnc.registraControlador(this);
-		//	gictofnc.simplifica(true,false);
-			
-/*			bw.append(agic.getHTML());
-			//System.out.println("dame html: " + gictofnc.getHTML());
-			//System.out.println("dame latex:" + gictofnc.getLatex());
-			bw.append(gictofnc.getHTML());*/
+
 			bw.append("</body></html>");
 			bw.close();
 
-/*			pw.append(agic.getLatex());
-			pw.append(gictofnc.getLatex());
-            //muestraTex(ruta);
-            pw.close();*/
-			
-		
 		} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 			throw new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
@@ -2229,7 +2145,6 @@ private void generarImgArbolAux(int x,int y,ArbolER arbol,Graphics gimg,int nive
 						}
 						else {
 							CurvedArrow curva=null;
-							//System.out.println("ARISTA A PINTAR: " + aristaAP);
 							if(aristaAP.getOrigen().equals(aristaAP.getDestino()))curva=new CurvedArrow(aristaAP.getX()+20,aristaAP.getY()+8,aristaAP.getFx()-20,aristaAP.getFy()+8, 3);
 							else {
 								int angulo=0;
