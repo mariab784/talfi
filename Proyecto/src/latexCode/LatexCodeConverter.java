@@ -1962,12 +1962,90 @@ public class LatexCodeConverter {
 			Document documento = parser.getDocument();
 			
 			bw = new BufferedWriter(new FileWriter(fichero));
-			NodeList nodos1 = documento.getElementsByTagName("step");
 			
+			NodeList nodos1 = null;
+			nodos1 = documento.getElementsByTagName("cabecera");
+			contenido+=nodos1.item(0).getChildNodes().item(0).getTextContent();
+			
+			nodos1 = documento.getElementsByTagName("oculto");
+
+			contenido+="\n"+ mensajero.devuelveMensaje("formatos.ocultar",5)+"{";
+	
 			for(int i =0; i < nodos1.getLength(); i++){
-				contenido+=nodos1.item(i).getChildNodes().item(0).getTextContent();
-				//System.out.println("contenido:\n " + contenido);
+				NodeList noculto = nodos1.item(i).getChildNodes();
+
+				contenido+="\\MYp{\\Huge " + 
+				noculto.item(0).getChildNodes().item(0).getTextContent() + "}\n" + "\\newline\n";
+				//contenido+=noculto.item(1).getTextContent()+ "\n";
+				
+				int tam = noculto.item(1).getChildNodes().getLength();
+				
+				contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+				/*"\\hline*/"\n";
+				for(int j = 0; j < tam; j++){
+					
+					contenido+= noculto.item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
+				}
+				
+				contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}\n";
+				
+			} 
+			 contenido+="}\n";
+			/***************************************************************************************/
+			 contenido+=mensajero.devuelveMensaje("formatos.cabecerados",5);
+			 
+			
+			
+			
+			/*NodeList*/ nodos1 = documento.getElementsByTagName("step");
+			
+			contenido+="\\MYp{\\Huge "+nodos1.item(0).getChildNodes().item(0).getTextContent()
+			+"\\newline\n"+ "\\newline\n"+"}\n";
+			
+			int tam = nodos1.item(0).getChildNodes().item(1).getChildNodes().getLength();
+			System.out.println("tam filas: " + tam);
+			
+			contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+			/*"\\hline*/"\n";
+			for(int j = 0; j < tam; j++){
+				
+				contenido+= nodos1.item(0).getChildNodes().item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
 			}
+			
+			contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}";
+			
+			
+			
+			contenido+="\\newpage\n";
+			
+			for(int i =1; i < nodos1.getLength(); i++){
+				NodeList noculto = nodos1.item(i).getChildNodes();
+				
+				if(nodos1.item(i).getChildNodes().getLength() >1){					
+					contenido+="\\MYp{\\Huge " + 
+					noculto.item(0).getChildNodes().item(0).getTextContent() + "}\n" + "\\newline\n";
+					//contenido+=noculto.item(1).getTextContent()+ "\n";
+					
+					int tamano = noculto.item(1).getChildNodes().getLength();
+					
+					contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+					/*"\\hline*/"\n";
+					for(int j = 0; j < tamano; j++){
+						
+						contenido+= noculto.item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
+					}
+					
+					contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}\n";
+					
+				}
+				else{
+					contenido+="\\MYp{\\Huge " + 
+					noculto.item(0).getChildNodes().item(0).getTextContent() + "}\n" + "\\newline\\newline\n";
+					
+				}
+			}
+			
+			contenido+="\\end{document}";
 			bw.append(contenido);
 			bw.close();
 		
@@ -2002,11 +2080,120 @@ public class LatexCodeConverter {
 			Document documento = parser.getDocument();
 			
 			bw = new BufferedWriter(new FileWriter(fichero));
-			NodeList nodos1 = documento.getElementsByTagName("step");
 			
+			NodeList nodos1 = null;
+			nodos1 = documento.getElementsByTagName("cabecera");
+			contenido+=nodos1.item(0).getChildNodes().item(0).getTextContent();
+			
+			nodos1 = documento.getElementsByTagName("oculto");
+
+			contenido+="\n"+ mensajero.devuelveMensaje("formatos.ocultar",5)+"{";
+	
 			for(int i =0; i < nodos1.getLength(); i++){
-				contenido+=nodos1.item(i).getChildNodes().item(0).getTextContent();
+				NodeList noculto = nodos1.item(i).getChildNodes();
+
+				contenido+="\\MYp{\\Huge " + 
+				noculto.item(0).getChildNodes().item(0).getTextContent() + "}\n" + "\\newline\n";
+				//contenido+=noculto.item(1).getTextContent()+ "\n";
+				
+				int tam = noculto.item(1).getChildNodes().getLength();
+				
+				contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+				/*"\\hline*/"\n";
+				for(int j = 0; j < tam; j++){
+					
+					contenido+= noculto.item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
+				}
+				
+				contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}\n";
+				
+			} 
+			 contenido+="}\n";
+			/***************************************************************************************/
+			 contenido+=mensajero.devuelveMensaje("formatos.cabecerados",5);
+			 
+			 
+			nodos1 = documento.getElementsByTagName("step");
+			
+			contenido+="\\MYp{\\Huge "+nodos1.item(0).getChildNodes().item(0).getTextContent()
+			+"\\newline\n"+ "\\newline\n"+"}\n";
+			
+			int tam = nodos1.item(0).getChildNodes().item(1).getChildNodes().getLength();
+			System.out.println("tam filas: " + tam);
+			
+			contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+			/*"\\hline*/"\n";
+			for(int j = 0; j < tam; j++){
+				
+				contenido+= nodos1.item(0).getChildNodes().item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
 			}
+			
+			contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}";
+			
+			
+			
+			contenido+="\\newpage\n";
+			
+			for(int i =1; i < nodos1.getLength(); i++){
+				NodeList noculto = nodos1.item(i).getChildNodes();
+				
+				if(nodos1.item(i).getChildNodes().getLength() >1){					
+					contenido+="\\MYp{\\Huge " + 
+					noculto.item(0).getChildNodes().item(0).getTextContent() + "}\n" + "\\newline\n";
+					//contenido+=noculto.item(1).getTextContent()+ "\n";
+					
+					int tamano = noculto.item(1).getChildNodes().getLength();
+					
+					contenido+="\\begin{center}"+"\\begin{tabular}{ m{15cm} }\n\n"+
+					/*"\\hline*/"\n";
+					for(int j = 0; j < tamano; j++){
+						
+						contenido+= noculto.item(1).getChildNodes().item(j).getTextContent() + " \\\\" +"\n";
+					}
+					
+					contenido+=/*"\\hline*/"\n"+"\\end{tabular}\n"+"\\end{center}\n";
+					
+				}
+				else{
+					
+					NodeList nodotabla = noculto.item(0).getChildNodes();
+					int lon = nodotabla.getLength();
+					System.out.println("lon: " + lon);
+					String lat = "\\begin{center}\n" + "\\begin{tabular}{||";
+					for(int k = 0; k <lon; k++){
+						lat += "c||";
+					}
+					lat += "}\n";
+					lat+="\\hline\n" + 
+				       "\\hline\n";
+					
+					for(int n = 0; n < lon; n++){
+						NodeList nodofila = nodotabla.item(n).getChildNodes();
+					//	System.out.println("nodofila:" + nodotabla.item(n).getTextContent());
+					/*	System.out.println("nodotabla.item(n).getChildNodes().getLength()" +
+								nodotabla.item(n).getChildNodes().getLength());*///12
+						for(int m = 0; m < nodotabla.item(n).getChildNodes().getLength(); m++){
+					/*		System.out.println("itemfila:" + 
+									nodofila.item(m).getTextContent());*/
+						
+							lat += " " + nodofila.item(m).getTextContent() + " ";
+							if(m == lon -1) lat += "\\\\ \n"+"\\hline\n" + 
+								"\\hline\n";
+							else lat +=  "&" ;
+						}
+					}
+					
+					contenido+=lat;
+					contenido += "\\end{tabular}\n" + "\\end{center}\n";// +
+				       /*"\\newline\n" +
+				       "\\newline\n" +*//*
+				       "\n";*/
+					//contenido+=lat;
+					
+				}
+			}
+			
+			contenido+="\\end{document}";
 			bw.append(contenido);
 			bw.close();
 		
@@ -2015,6 +2202,7 @@ public class LatexCodeConverter {
 			new AutomatasException(mensajero.devuelveMensaje("parser.noarchivo",2));
 		} catch (SAXException e) {
 		// TODO Auto-generated catch block
+			e.printStackTrace();
 			new AutomatasException(mensajero.devuelveMensaje("parser.sax",2));
 		} catch (IOException e) {
 		// TODO Auto-generated catch block
