@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,11pt]{article}
 \usepackage[latin1]{inputenc}
 \usepackage{ulem}
@@ -10,8 +11,94 @@
 \newcommand{\MYp}[1]{ {\color[rgb]{0.392,0.392,0.392}#1} }
 \newcommand{\MYunder}[1]{ {\color[rgb]{0.2,0.209,0.3}\underline{#1}} }
 
-\begin{document}
+\newenvironment{miitemize}{\MYp{\Huge Gramatica Obtenida del Aut\'omata de Pila}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
 
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[auxZaux]=[$\lambda$], [iniauxXiniaux]=[[s0Zs0],[s0Xiniaux], [s0Zs1],[s1Xiniaux], [s0Ziniaux],[iniauxXiniaux], [s0Zaux],[auxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Zs1],[s1Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Zs0],[s0Xs1], [s0Zs1],[s1Xs1], [s0Ziniaux],[iniauxXs1], [s0Zaux],[auxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Zs0],[s0Xs0], [s0Zs1],[s1Xs0], [s0Ziniaux],[iniauxXs0], [s0Zaux],[auxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+
+\MYp{\Huge SIMPLIFICACION}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[auxZaux]=[$\lambda$], [iniauxXiniaux]=[[s0Zs0],[s0Xiniaux], [s0Zs1],[s1Xiniaux], [s0Ziniaux],[iniauxXiniaux], [s0Zaux],[auxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Zs1],[s1Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Zs0],[s0Xs1], [s0Zs1],[s1Xs1], [s0Ziniaux],[iniauxXs1], [s0Zaux],[auxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Zs0],[s0Xs0], [s0Zs1],[s1Xs0], [s0Ziniaux],[iniauxXs0], [s0Zaux],[auxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+\MYp{\Huge Quitamos variables sin producciones: [[s0Xs0], [s1Xs0], [auxXs0], [s0Xs1], [s1Xs1], [auxXs1], [s0Xiniaux], [s1Xiniaux], [auxXiniaux], [s1Xaux]]}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [auxZaux]=[$\lambda$], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0],[s0Xaux], [s0Ziniaux],[iniauxXaux], [s0Zaux],[auxXaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [auxXaux]=[$\lambda$], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Xaux]=[$\lambda$], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+\MYp{\Huge Quitamos variables con una \'unica produccion: [[auxXaux], [auxZaux], [s0Xaux]]}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [auxXaux], [auxZaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s0Xaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0], [s0Ziniaux],[iniauxXaux], [s0Zaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+\MYp{\Huge Quitamos variables sin producciones: [[auxXaux], [auxZaux], [s0Xaux]]}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Zs0], [s0Ziniaux],[iniauxXaux], [s0Zaux]], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+\MYp{\Huge Quitamos variables con producciones unitarias: }
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Zs1], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Zs1], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s0Zs1]=[a,[s1Zs1]], [s1Zaux]=[b,[s0Zaux]], [s1Ziniaux]=[b,[s0Ziniaux]], [iniauxXaux]=[[s0Ziniaux],[iniauxXaux], a,[s1Zs0], a,[s1Zaux], $\lambda$], [s0Ziniaux]=[a,[s1Ziniaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Zs1]=[b,[s0Zs1]], [s0Zs0]=[a,[s1Zs0]]} \\
+
+\end{tabular}
+\end{center}
+\MYp{\Huge Quitamos variables no alcanzables: [[s0Zs1], [s1Zs1]]}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
+
+
+Variables: [S, [iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux], [s0Zs0], [s0Ziniaux], [s0Zaux], [s1Zs0], [s1Ziniaux], [s1Zaux]] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {[iniauxXiniaux]=[[s0Ziniaux],[iniauxXiniaux]], [s1Zaux]=[b,[s0Zaux]], [s1Zs0]=[b,[s0Zs0]], S=[[iniauxXs0], [iniauxXs1], [iniauxXiniaux], [iniauxXaux]], [s0Zaux]=[a,[s1Zaux], $\lambda$], [iniauxXs1]=[[s0Ziniaux],[iniauxXs1]], [iniauxXs0]=[[s0Ziniaux],[iniauxXs0]], [s1Ziniaux]=[b,[s0Ziniaux]], [s0Zs0]=[a,[s1Zs0]], [iniauxXaux]=[[s0Ziniaux],[iniauxXaux], a,[s1Zs0], a,[s1Zaux], $\lambda$], [s0Ziniaux]=[a,[s1Ziniaux]]} \\
+
+\end{tabular}
+\end{center}
+}
+
+\begin{document}
 \includegraphics{fdi.jpg}
 \newline
 \newline
@@ -20,354 +107,357 @@
 \begin{center}
 \includegraphics[width=\textwidth]{imagenEntrada.jpg}
 \end{center}
+
+\begin{miitemize}
+\end{miitemize}
+
 \MYp{\Huge Gram\'{a}tica de entrada simplificada\newline
 \newline
 }
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
-\end{center}
-\newpage\MYp{\Huge Gr\'amatica}
-\newline
-
-\begin{center}\begin{tabular}{ m{15cm} }
-
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
-\hline
-\hline
-- & A & B & C & D & E & F & G & H & I & J \\
-\hline
-\hline
-S & - & X & X & X & X & - & - & - & - & - \\
-\hline
-\hline
-A & - & - & - & - & - & - & X & - & - & - \\
-\hline
-\hline
-B & - & - & - & - & - & - & X & - & - & - \\
-\hline
-\hline
-C & - & - & - & - & - & - & X & - & - & - \\
-\hline
-\hline
-D & - & - & - & - & - & - & X & - & - & - \\
-\hline
-\hline
-E & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-F & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-G & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-H & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-I & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-J & - & - & - & - & - & - & - & - & - & - \\
-\hline
-\hline
-\end{tabular}
-\end{center}
-
+\end{center}\newpage
 \MYp{\Huge Gr\'amatica}
 \newline
-
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[F,A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
 \end{center}
-
 \begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
 \hline
 \hline
-- & A & B & C & D & E & F & G & H & I & J \\
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
 \hline
 \hline
-S & - & - & X & X & X & - & X & - & - & - \\
+ S  &  -  &  X  &  X  &  X  &  X  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-A & - & - & - & - & - & - & X & - & - & - \\
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-B & - & - & - & - & - & - & X & - & - & - \\
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-C & - & - & - & - & - & - & X & - & - & - \\
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-D & - & - & - & - & - & - & X & - & - & - \\
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-E & - & - & - & - & - & - & - & - & - & - \\
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-F & - & - & - & - & - & - & - & - & - & - \\
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-G & - & - & - & - & - & - & - & - & - & - \\
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-H & - & - & - & - & - & - & - & - & - & - \\
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-I & - & - & - & - & - & - & - & - & - & - \\
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-J & - & - & - & - & - & - & - & - & - & - \\
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
 \end{tabular}
 \end{center}
-
 \MYp{\Huge Gr\'amatica}
 \newline
-
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[F,A, F,B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[F,A, B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
 \end{center}
-
 \begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
 \hline
 \hline
-- & A & B & C & D & E & F & G & H & I & J \\
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
 \hline
 \hline
-S & - & - & - & X & X & - & X & - & - & - \\
+ S  &  -  &  -  &  X  &  X  &  X  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-A & - & - & - & - & - & - & X & - & - & - \\
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-B & - & - & - & - & - & - & X & - & - & - \\
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-C & - & - & - & - & - & - & X & - & - & - \\
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-D & - & - & - & - & - & - & X & - & - & - \\
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-E & - & - & - & - & - & - & - & - & - & - \\
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-F & - & - & - & - & - & - & - & - & - & - \\
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-G & - & - & - & - & - & - & - & - & - & - \\
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-H & - & - & - & - & - & - & - & - & - & - \\
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-I & - & - & - & - & - & - & - & - & - & - \\
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-J & - & - & - & - & - & - & - & - & - & - \\
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
 \end{tabular}
 \end{center}
-
 \MYp{\Huge Gr\'amatica}
 \newline
-
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[F,A, F,B, F,C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[F,A, F,B, C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
 \end{center}
-
 \begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
 \hline
 \hline
-- & A & B & C & D & E & F & G & H & I & J \\
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
 \hline
 \hline
-S & - & - & - & - & X & - & X & - & - & - \\
+ S  &  -  &  -  &  -  &  X  &  X  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-A & - & - & - & - & - & - & X & - & - & - \\
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-B & - & - & - & - & - & - & X & - & - & - \\
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-C & - & - & - & - & - & - & X & - & - & - \\
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-D & - & - & - & - & - & - & X & - & - & - \\
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-E & - & - & - & - & - & - & - & - & - & - \\
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-F & - & - & - & - & - & - & - & - & - & - \\
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-G & - & - & - & - & - & - & - & - & - & - \\
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-H & - & - & - & - & - & - & - & - & - & - \\
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-I & - & - & - & - & - & - & - & - & - & - \\
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-J & - & - & - & - & - & - & - & - & - & - \\
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
 \end{tabular}
 \end{center}
-
 \MYp{\Huge Gr\'amatica}
 \newline
-
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[F,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[F,A], B=[F,B], S=[F,A, F,B, F,C, F,D, a,H, a,J, /], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[F,A, F,B, F,C, D], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
 \end{center}
-
 \begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
 \hline
 \hline
-- & A & B & C & D & E & F & G & H & I & J \\
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
 \hline
 \hline
-S & - & - & - & - & - & - & X & - & - & - \\
+ S  &  -  &  -  &  -  &  -  &  X  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-A & - & - & - & - & - & - & X & - & - & - \\
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-B & - & - & - & - & - & - & X & - & - & - \\
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-C & - & - & - & - & - & - & X & - & - & - \\
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-D & - & - & - & - & - & - & X & - & - & - \\
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-E & - & - & - & - & - & - & - & - & - & - \\
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-F & - & - & - & - & - & - & - & - & - & - \\
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-G & - & - & - & - & - & - & - & - & - & - \\
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-H & - & - & - & - & - & - & - & - & - & - \\
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-I & - & - & - & - & - & - & - & - & - & - \\
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-J & - & - & - & - & - & - & - & - & - & - \\
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
 \end{tabular}
 \end{center}
-
 \MYp{\Huge Gr\'amatica}
 \newline
-
 \begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[a,I,D, a,H, a,J, /], E=[a,H], F=[a,I], G=[a,J, /], A=[a,I,A], B=[a,I,B], S=[a,I,A, a,I,B, a,I,C, a,I,D, a,H, a,J, /], C=[a,I,C], H=[b,E], I=[b,F], J=[b,G]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[F,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[F,A], B=[F,B], S=[F,A, F,B, F,C, F,D, a,H, a,J, $\lambda$], C=[F,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
 \end{tabular}
 \end{center}
-
 \begin{center}
-\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
 \hline
 \hline
-- & A & B & C & D & E & F & G & H & I & J \\
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
 \hline
 \hline
-S & - & - & - & - & - & - & - & - & - & - \\
+ S  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-A & - & - & - & - & - & - & - & - & - & - \\
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-B & - & - & - & - & - & - & - & - & - & - \\
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-C & - & - & - & - & - & - & - & - & - & - \\
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-D & - & - & - & - & - & - & - & - & - & - \\
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  X  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-E & - & - & - & - & - & - & - & - & - & - \\
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-F & - & - & - & - & - & - & - & - & - & - \\
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-G & - & - & - & - & - & - & - & - & - & - \\
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-H & - & - & - & - & - & - & - & - & - & - \\
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-I & - & - & - & - & - & - & - & - & - & - \\
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
-J & - & - & - & - & - & - & - & - & - & - \\
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
 \hline
 \hline
 \end{tabular}
 \end{center}
+\MYp{\Huge Gr\'amatica}
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[a,I,D, a,H, a,J, $\lambda$], E=[a,H], F=[a,I], G=[a,J, $\lambda$], A=[a,I,A], B=[a,I,B], S=[a,I,A, a,I,B, a,I,C, a,I,D, a,H, a,J, $\lambda$], C=[a,I,C], H=[b,E], I=[b,F], J=[b,G]} \\
+
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{||c||c||c||c||c||c||c||c||c||c||c||c||}
+\hline
+\hline
+  -  & S & A & B & C & D & E & F & G & H & I & J \\ 
+\hline
+\hline
+ S  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ A  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ B  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ C  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ D  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ E  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ F  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ G  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ H  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ I  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+ J  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  &  -  \\ 
+\hline
+\hline
+\end{tabular}
+\end{center}
 \MYp{\Huge Gram\'{a}tica final simplificada}
-\newline\begin{center}\begin{tabular}{ m{15cm} }
+\newline
+\begin{center}\begin{tabular}{ m{15cm} }
 
-\noindent {\bf Variables: }[S, A, B, C, D, E, F, G, H, I, J] \\
-{\bf Variable Inicial: }S \\ 
-{\bf S\'{i}mbolos Terminales: }[a, b] \\ 
-{\bf Producciones: }{D=[a,I,D, a,H, a,J, a,I], E=[a,H], F=[a,I], G=[a,J], A=[a,I,A], B=[a,I,B], S=[a,I,A, a,I,B, a,I,C, a,I,D, a,H, a,J, /, a,I], C=[a,I,C], H=[b,E], I=[b,F], J=[b,G, b]} \\ 
+
+Variables: [S, A, B, C, D, E, F, G, H, I, J] \\
+Variable Inicial: S \\
+Simbolos Terminales: [a, b] \\
+Producciones: {D=[a,I,D, a,H, a,J, a,I], E=[a,H], F=[a,I], G=[a,J], A=[a,I,A], B=[a,I,B], S=[a,I,A, a,I,B, a,I,C, a,I,D, a,H, a,J, $\lambda$, a,I], C=[a,I,C], H=[b,E], I=[b,F], J=[b,G, b]} \\
+
 \end{tabular}
 \end{center}
 
