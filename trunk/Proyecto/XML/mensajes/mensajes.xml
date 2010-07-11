@@ -477,6 +477,7 @@
 		<fase1>**************FASE 1**************</fase1>
 		<fase2>**************FASE 2**************</fase2>
 		<simp>**************SIMPLIFICACION**************</simp>
+		<simplatex>SIMPLIFICACION</simplatex>
 		<fase1lat>Fase 1</fase1lat>
 		<fase2lat>Fase 2</fase2lat>
 		<aent>Aut\'{o}mata de entrada</aent>
@@ -487,11 +488,18 @@
 		<gsalidasimsimp>Gramatica final simplificada</gsalidasimsimp>
 		<gsalidasimsimplatex>Gram\'{a}tica final simplificada</gsalidasimsimplatex>
 		<quitvsimprod>Quitamos variables sin producciones: </quitvsimprod>
+		<quitvsimprodlatex>Quitamos variables sin producciones: </quitvsimprodlatex>
 		<noalc>Quitamos variables no alcanzables: </noalc>
+		<noalclatex>Quitamos variables no alcanzables: </noalclatex>
 		<unicaprod>Quitamos variables con una unica produccion: </unicaprod>
+		<unicaprodlatex>Quitamos variables con una \'unica produccion: </unicaprodlatex>
 		<prodrec>Quitamos producciones recursivas: </prodrec>
+		<prodreclatex>Quitamos producciones recursivas: </prodreclatex>
 		<resulap>Gramatica Obtenida del Automata de Pila</resulap>
+		<resulaplatex>Gramatica Obtenida del Aut\'omata de Pila</resulaplatex>
 		<varconpunit>Quitamos variables con producciones unitarias: </varconpunit>
+		<varconpunitlatex>Quitamos variables con producciones unitarias: </varconpunitlatex>
 		<genttotalsimp>Gramatica de entrada simplificada totalmente</genttotalsimp>
+		<genttotalsimplatex>Gram\'atica de entrada simplificada totalmente</genttotalsimplatex>
 	</simplificacionGICs>
 </mensajes>

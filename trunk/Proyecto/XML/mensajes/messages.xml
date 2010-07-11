@@ -434,6 +434,7 @@
 		<fase1>**************STEP 1**************</fase1>
 		<fase2>**************STEP 2**************</fase2>
 		<simp>**************SIMPLIFICATION**************</simp>
+		<simplatex>SIMPLIFICATION</simplatex>
 		<fase1lat>Step 1</fase1lat>
 		<fase2lat>Step 2</fase2lat>
 		<gramaticalat>Context-Free Grammar</gramaticalat>
@@ -444,11 +445,18 @@
 		<gsalidasimsimp>Simplified Output Context-Free Grammar</gsalidasimsimp>
 		<gsalidasimsimplatex>Simplified Output Context-Free Grammar</gsalidasimsimplatex>
 		<quitvsimprod>Removing variables without productions: </quitvsimprod>
+		<quitvsimprodlatex>Removing variables without productions: </quitvsimprodlatex>
 		<noalc>Removing unreacheable variables: </noalc>
+		<noalclatex>Removing unreacheable variables: </noalclatex>
 		<unicaprod>Removing variables with just one production: </unicaprod>
+		<unicaprodlatex>Removing variables with just one production: </unicaprodlatex>
 		<prodrec>Removing recursive productions: </prodrec>
+		<prodreclatex>Removing recursive productions: </prodreclatex>
 		<resulap>Context-Free Grammar from the automaton</resulap>
+		<resulaplatex>Context-Free Grammar from the automaton</resulaplatex>
 		<varconpunit>Removing variables with productions with one element: </varconpunit>
+		<varconpunitlatex>Removing variables with productions with one element: </varconpunitlatex>
 		<genttotalsimp>Final simplified Context-Free Grammar</genttotalsimp>
+		<genttotalsimplatex>Final simplified Context-Free Grammar</genttotalsimplatex>
 	</simplificacionGICs>
 </mensajes>
