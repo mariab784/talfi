@@ -56,8 +56,7 @@ public class OyenteEditar extends MouseAdapter {
 				}
 			} else {
 				arista=canvas.aristaEn(e.getPoint());
-				//if (arista instanceof AristaAP) System.out.println("yeahyeahyeah OYENTE EDITAR");
-				//if (arista instanceof Arista){
+
 					if(arista!=null){
 						punto=e.getPoint();
 					} else {
@@ -65,7 +64,6 @@ public class OyenteEditar extends MouseAdapter {
 						canvas.deseleccionaEstados();
 						count=0;
 					}
-				//}	
 			}
 		}
 	}
@@ -96,7 +94,7 @@ public class OyenteEditar extends MouseAdapter {
 	 * moviendo y pintando según se mueve, sino no hace nada
 	 * @param e evento de movimiento minetras pulsa tecla
 	 */
-	public void mouseDragged(MouseEvent e) { //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(canvas.getEstadoB()!=editar) return;
 		if(estado!=null){
@@ -153,8 +151,6 @@ public class OyenteEditar extends MouseAdapter {
 			if (tipo == 0) a=canvas.getListaAristas().get(i);
 			else if (tipo == 1) a=canvas.getListaAristasPila().get(i);
 			else if (tipo == 2) a=canvas.getListaAristasTuring().get(i);
-			//else a=canvas.getListaAristasTuring().get(i);
-			//Arista a=canvas.getListaAristas().get(i);
 			if(a.getOrigen().equals(origen2.getEtiqueta())){
 				a.setX(newPoint.x);
 				a.setY(newPoint.y);

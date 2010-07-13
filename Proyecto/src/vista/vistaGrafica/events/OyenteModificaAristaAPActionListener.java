@@ -65,9 +65,8 @@ public class OyenteModificaAristaAPActionListener implements ActionListener{
 				mouse.setEstadoDestino(mouse.getHasta().getSelectedItem().toString());
 				Estado o=mouse.getCanvas().buscaEstado(mouse.getEstadoOrigen());
 				Estado d=mouse.getCanvas().buscaEstado(mouse.getEstadoDestino());
-				mouse.getCanvas().getListaAristasPila().remove(arista); //int x,int y,int fx, int fy,String origen,String destino)
+				mouse.getCanvas().getListaAristasPila().remove(arista); 
 
-				//System.out.println("LISTARISTAS: " + mouse.getCanvas().getListaAristas());
 				AristaAP arist = new AristaAP(o.getX(),o.getY(),d.getX(),d.getY(), o.getEtiqueta(),d.getEtiqueta());
 				arist.setSimbolos(ass);
 				ss = mouse.getNomCima().getText();

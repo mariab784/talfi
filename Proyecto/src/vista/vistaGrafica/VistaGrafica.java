@@ -88,9 +88,6 @@ public class VistaGrafica extends JFrame implements Vista{
 	private String rutaxml2;
 	private boolean preparadoEquivalencia;
 	private JDialog dialog;
-	/****/
-//	private JDialog d;
-	/****/
 	private JMenuBar menu;
 	private PanelCentral panelCentral;
 	private BarraHerramientas tool;
@@ -127,15 +124,10 @@ public class VistaGrafica extends JFrame implements Vista{
 	private JButton copiar;
 	private JButton pegar;
 	private JButton cortar;
-	
-
 	private Mensajero mensajero;
 	private static boolean pila;
 	private static boolean turing;
-//	private JTextField nomArs;
-	/********************************/
 	private JMenuItem grama;
-	//private JMenuItem gramaC;
 	private JMenuItem AFNDLambda_to_AFND;
 	private JMenuItem AFN_to_AFD;
 	private JMenuItem MinimizacionAFD;
@@ -195,14 +187,12 @@ public class VistaGrafica extends JFrame implements Vista{
 		panelCentral=new PanelCentral(this);
 		panelNorte=creaPanelNorte();
 		/***/
-		//panelCentral=new PanelCentral(this);
 		controlador=Controlador_imp.getInstancia();
 		menu=creaMenu();
 		preparadoEquivalencia=false;
 		panel=new JPanel(new BorderLayout());
 		this.setJMenuBar(menu);
 		panel.add(new JScrollPane(panelCentral),BorderLayout.CENTER);
-		//panelNorte=creaPanelNorte();
 		panel.add(panelNorte,BorderLayout.NORTH);
 		panel.add(panelIzquierda,BorderLayout.WEST);
 		this.setContentPane(panel);
@@ -516,42 +506,43 @@ public class VistaGrafica extends JFrame implements Vista{
 	private ArrayList<String> construir(boolean b){
 		
 		try{
-
-			AutomataCanvas c = panelCentral.getCanvas();
 			
+			AutomataCanvas c = panelCentral.getCanvas();	
+			if(c.getListaAristasPila().isEmpty()){
+				
+				throw new AutomatasException(mensajero.devuelveMensaje("canvas.noarrows", 2));
+			}
+			else if ((c.getEstadoInicial().equals("")) || (c.getEstadoInicial() == null)){
+				
+				throw new AutomatasException(mensajero.devuelveMensaje("canvas.noinicial", 2));
+				
+			}
 			AutomataPila ap = new AutomataPila(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoPila(),c.getNombreEstados(),c.getListaAristasPila());
-
-			System.out.println("**********************************************************");
-			System.out.println("AP CONSTRUIDO BOTON::: \n" + ap);
-			System.out.println("**********************************************************");
 			AutomataP_to_GramaticaIC g = new AutomataP_to_GramaticaIC(ap);
-			//System.out.println("producciones: " + g.getGic());
-			//g.AP_Gramatica();
-			
-//		System.out.println("gramatica boton: \n" + g.getGic());
-			
-			
 			GIC_to_FNG piticli = new GIC_to_FNG(g.getGic(),b);
-
-							piticli.ejecuta(true,false);
-			
-			System.out.println("ENTRADA:\n" + piticli.getGramaticaEntrada());
-			System.out.println("SALIDA:\n" + piticli.getGramaticaSalida());
-
+			piticli.ejecuta(true,false);
 			piticli.getGramaticaSalida().creaListaPalabras(); 
-
 			ArrayList<String> pg = null;
 			pg = piticli.getGramaticaSalida().dameListaPalabras();
-			return pg;
-	 	
+			System.out.println("pg: " + pg);
+			if((pg == null) || pg.isEmpty()){ 
+				
+				throw new AutomatasException("lista de palabras vacia");
+				
+			}
+			return pg;	 	
+		}
+		catch(AutomatasException e){
+			
+			JOptionPane.showMessageDialog(this,e.getMensaje(),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 		}
 		catch(Exception ex){
 			if ( panelCentral.getCanvas().getListaEstados().isEmpty() ) //XXX
 				JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
+			//ex.printStackTrace();
 		}
-		return null; //para ke no pete
+		return null; 
 		
 	}
 	
@@ -563,33 +554,23 @@ public class VistaGrafica extends JFrame implements Vista{
 		estaPalabra=new JToggleButton(new ImageIcon("imagenes/estaPalabra.jpg"));
 
 		estaPalabra.setMargin(new java.awt.Insets(0,0,0,0));
-		estaPalabra.setName("estaPalabra");
-//		estaPalabra.setToolTipText("ASDJAKDFJSAHJ"); //XXX
-		
+		estaPalabra.setName("estaPalabra");		
 		botonLatex=new JToggleButton(new ImageIcon("imagenes/botonltx.jpg"));
 		botonLatex.setMargin(new java.awt.Insets(0,0,0,0));
 		botonLatex.setName("gordaLatex");
-//		estaPalabra.setToolTipText("LTX"); //XXX		
-		
 		botonTuring=new JToggleButton(new ImageIcon("imagenes/MT.jpg"));
 		botonTuring.setMargin(new java.awt.Insets(0,0,0,0));
 		botonTuring.setName("gordaLatex");
-//		estaPalabra.setToolTipText("LTX"); //XXX	
-
-		tool2.add(estaPalabra); //aniadirBotton
-		tool2.add(botonLatex); //aniadirBotton
-		tool2.add(botonTuring); //aniadirBotton
+		tool2.add(estaPalabra);
+		tool2.add(botonLatex);
+		tool2.add(botonTuring);
 		
 		botonTuring.addActionListener(new ActionListener(){
-			
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				actionPerformedOpenDialog(e);
-
 			}
-			
-			
 		});
 		
 		botonLatex.addActionListener(new ActionListener(){
@@ -600,10 +581,6 @@ public class VistaGrafica extends JFrame implements Vista{
 				codLatex = LatexCodeConverter.getInstancia(panelCentral);
 				codLatex.convertir();
             }
-
-
-         
-         
         });
 		
 		estaPalabra.addActionListener(new ActionListener(){
@@ -617,61 +594,38 @@ public class VistaGrafica extends JFrame implements Vista{
 				dialog=pane.createDialog(null);
 				JPanel panelD=new JPanel(new GridLayout(4,1));
 				JPanel panelC=new JPanel(new GridLayout(1,4));
-				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXX XXX
-				JLabel etiqN=new JLabel(mensajero.devuelveMensaje("vista.listaPalabras",2) + construir(true).toString()); //XXX
+				ArrayList<String> lps = construir(true);
+				JLabel etiqN;
 				
-				//	nomArs=new JTextField();
-				
-				/*nomArs.addKeyListener(new KeyAdapter(){
-					public void keyPressed(KeyEvent e){
-						if(e.getKeyCode()==KeyEvent.VK_ENTER){
-							actionAceptar();
-						
-						}
-					}
-				});*/
-				
+				if(lps!=null && (!lps.isEmpty())){
+				etiqN=new JLabel(mensajero.devuelveMensaje("vista.listaPalabras",2) + lps.toString());
 				JPanel panelB=  new JPanel();
 				JButton aceptar=new JButton(mensajero.devuelveMensaje("vista.aceptar",2));
 				aceptar.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						//actionAceptar();
-			//			construir(/*true*/false);
 						dialog.setVisible(false);
 					}
 				});
-				//JButton cancelar=new JButton(mensajero.devuelveMensaje("vista.cancelar",2));
-				
-		/*		cancelar.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						construir(false);
-						dialog.setVisible(false);
-					}
-				});*/
 				panelB.add(aceptar);
-				//panelB.add(cancelar);
 				panelD.add(etiqN);
-				//panelD.add(nomArs);
 				panelD.add(panelC);
 				panelD.add(panelB);
 				dialog.setContentPane(panelD);
 				dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 				dialog.setSize(new Dimension(400,150));
 				dialog.setVisible(true);
-				
+				}
+				else{
+					JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("simplificacionGIC.error1", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+
+				}
 
 			}
-			
-			
-		});
-		
+		});		
 	}
 	
 	private JPanel creaPanelNorte(){
 		Mensajero mensajero=Mensajero.getInstancia();
-		
-
-		
 		JPanel n= new JPanel();
 		n.setBackground(Color.BLUE);
 		nuevos= new JToolBar();
@@ -782,12 +736,9 @@ public class VistaGrafica extends JFrame implements Vista{
 		tool.aniadirBotton(estado);
 		tool.aniadirBotton(arista);
 		tool.aniadirBotton(borrar);
-
-
 		setBotonLatex(false);
 		setEstaPalabra(false);
-		setBotonTuring(false);
-		
+		setBotonTuring(false);		
 		JToolBar expr=new JToolBar();
 		JPanel panelEr=new JPanel();
 		JLabel e =new JLabel(mensajero.devuelveMensaje("algoritmos.er",1));
@@ -1181,7 +1132,6 @@ public class VistaGrafica extends JFrame implements Vista{
 			}
 			switch(algoritmo){
 			case GRAMATICA:{
-				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
 					String ruta2="LaTeX/FNG/imagenEntrada.jpg";
@@ -1208,11 +1158,9 @@ public class VistaGrafica extends JFrame implements Vista{
 				break;
 			}
 			case FNC:{
-				//preparadoEquivalencia=false;
 				if (pasos){
 					String ruta="HTML/imagenEntrada.jpg";
 					String ruta2="LaTeX/FNC/imagenEntrada.jpg";
-					System.out.println("rutaxmlfnc" + rutaxml);
 					panelCentral.getPanel().generarImagenJPg(ruta);
 					panelCentral.getPanel().generarImagenJPg(ruta2);
 					controlador.ejecutaQuery("TALF -grfnc-p "+rutaxml);						
@@ -1220,7 +1168,6 @@ public class VistaGrafica extends JFrame implements Vista{
 					LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);
 					String xmlSalida=controlador.salidaXML();
 					String xmlSalidaLatex=controlador.salidaXMLLatex();
-					//System.out.println("xmlsalidaes: " + xmlSalida);
 					rutahtml=trhtml.traducirPasosSimplificacionFNC(xmlSalida);
 					lcc.traducirPasosSimplificacionFNC(xmlSalidaLatex);
 
@@ -1245,13 +1192,8 @@ public class VistaGrafica extends JFrame implements Vista{
 						panelCentral.getPanel().generarImagenJPg(ruta);
 						panelCentral.getPanel().generarImagenJPg(ruta2);
 						controlador.ejecutaQuery("TALF -m-p "+rutaxml);						
-						TraductorHTML trhtml=TraductorHTML.getInstancia();
-																
-						LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);
-						
-					//	String xmlLatexSalida=controlador.salidaXMLLatex();
-						
-						
+						TraductorHTML trhtml=TraductorHTML.getInstancia();																
+						LatexCodeConverter lcc = LatexCodeConverter.getInstancia(panelCentral);					
 						String xmlSalida=controlador.salidaXML();
 						String xmlSalidaLatex=controlador.salidaXMLLatex();
 						lcc.traducirPasosMinimizacion(xmlSalidaLatex);
@@ -1446,8 +1388,6 @@ public class VistaGrafica extends JFrame implements Vista{
 	
 	public void setAutomata(Automata a) {
 		panelCentral.getPanel().cargarAutomataNuevo(a);
-		//consola.append(a.toString()); //XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX XXX
-		//System.out.println("SET AUTOMATA: " + a);
 	}
 
 	/**
@@ -1670,11 +1610,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 		public void actionPerformed(ActionEvent e){
 
-	/*		panelCentral.getPanel().borrarPanel();
-			activaToogleButtons();
-			rutaVista=null;
-			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			requestFocus();*/
 			super.actionPerformed(e);
 			VistaGrafica.setPila(true);
 			VistaGrafica.setTuring(false);
@@ -1695,11 +1630,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		
 		public void actionPerformed(ActionEvent e){
 
-		/*	panelCentral.getPanel().borrarPanel();
-			activaToogleButtons();
-			rutaVista=null;
-			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			requestFocus();*/
 			super.actionPerformed(e);
 			VistaGrafica.setPila(false);
 			VistaGrafica.setTuring(true);
@@ -1803,22 +1733,7 @@ public class VistaGrafica extends JFrame implements Vista{
 			}
 		}
 	}
-	
-	
-	
 
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
 	/**
 	 * Clase que se encarga de las gestiones del usuario para gusrdar automtas en
 	 * archivos xml
@@ -1888,20 +1803,6 @@ public class VistaGrafica extends JFrame implements Vista{
 		            
 		            
 		            }
-		            
-/*		            if(a instanceof AutomataFNDLambda) {
-		            	panelCentral.getPanel().setTipoAutomata("AutomataFNDLambda");}
-		            else if(a instanceof AutomataFND) {
-		            	panelCentral.getPanel().setTipoAutomata("AutomataFND");}
-		            else if(a instanceof AutomataFD) {
-		            	panelCentral.getPanel().setTipoAutomata("AutomataFD");}
-		            /*********************************************************/	            		
-/*		            if(a instanceof AutomataPila){
-		            	panelCentral.getPanel().setTipoAutomata("AutomataPila");}
-		            else if(a instanceof MaquinaTuring){
-		            	panelCentral.getPanel().setTipoAutomata("MaquinaTuring");}  
-		            /*********************************************************/
-		            
 		            
 		            activaToogleButtons();
 		            rutaVista=ruta;
@@ -2304,8 +2205,6 @@ public class VistaGrafica extends JFrame implements Vista{
 			AutomataCanvas c = panelCentral.getCanvas();
 			MaquinaTuring m = new MaquinaTuring(c.getEstadoInicial(),c.getListaFinales(),c.getAlfabeto(),
 					c.getAlfabetoCinta(),c.getNombreEstados(),c.getListaAristasTuring());
-			
-			System.out.println("ACTIONPERFORMED: " + m);
 			
 			AceptaTuring aceptacion = new AceptaTuring(ruta,m);
 			aceptacion.acepta();
