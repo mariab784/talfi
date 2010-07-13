@@ -35,7 +35,7 @@
 			ALGORITMO DE SIMPLIFICACION
 		</iniciar>
 		<error1>
-			error, El automata no está bien formado
+			error, el automata no está bien formado
 		</error1>
 		<estNuevos>
 			Lista de estados nuevos:
