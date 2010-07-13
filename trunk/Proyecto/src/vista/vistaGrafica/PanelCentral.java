@@ -381,7 +381,6 @@ public class PanelCentral extends JPanel {
 		});
 		panelB.add(corregir);
 		panelB.add(mandar);
-//		panelB.add(expr);//XXX
 		
 		center.add(new JScrollPane(enunciado));
 		aux.add(center,BorderLayout./*CENTER*/NORTH);
@@ -484,7 +483,6 @@ public class PanelCentral extends JPanel {
 	    			vista.requestFocus();
 	    			this.vista.getPanelCentral().getCanvas().setPila(false);
 	    			this.vista.getPanelCentral().getCanvas().setTuring(false);
-	    			System.out.println("EKIVALENCIA");
 	    		}
 	    		if (rutaXml.contains("Equivalencia_Automata_Expresion")) {
 	    			setEjercicio(parser.extraerEjercicioEquivAutoER(rutaXml));
@@ -505,20 +503,17 @@ public class PanelCentral extends JPanel {
 	    		}
 	    		if (rutaXml.contains("Transformacion_Pila")) {
 	    			setEjercicio(parser.extraerEjercicioPila(rutaXml));
-	 //   			System.out.println("getentradaess: " + ejercicio.getEntrada());
 	    			if (ejercicio.getEntrada() != null)
 	    				panel.cargarAutomataNuevo((AutomataPila)ejercicio.getEntrada());
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
 	    			vista.desactivaToogleButtons();
 	    			vista.requestFocus();
-	    			//System.out.println("cambiate!!");
 	    			this.vista.setPila(true);
 	    			this.vista.setTuring(false);
 	    		}
 	    		if (rutaXml.contains("Maquina_Turing")) {
 
 	    			setEjercicio(parser.extraerEjercicioTuring(rutaXml));
-	    			System.out.println("getentradaess: " + ejercicio.getEntrada());
 	    			if (ejercicio.getEntrada() != null)
 	    				panel.cargarAutomataNuevo((MaquinaTuring)ejercicio.getEntrada());
 	    			corregir.setText(m.devuelveMensaje("ejercicio.dibujar",2));
@@ -695,10 +690,10 @@ public class PanelCentral extends JPanel {
 				corregir.setText(m.devuelveMensaje("ejercicio.escribirAut",2));
 				guardar.addActionListener(new OyenteGuardarEjercicio("AutomatasDePila",vista));
 			}
-			//p=new JPanel();			
-			/*p*//*panelB*/pbotones.add(guardar);
+			
+			pbotones.add(guardar);
 						
-			/*JToolBar*/JPanel expr=new JPanel();//JToolBar();
+			JPanel expr=new JPanel();//JToolBar();
 			JPanel panelPalabras=new JPanel();JLabel e;JLabel e1;
 			if (tipo.equals("AutomatasDePila")){
 			e =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
@@ -706,13 +701,7 @@ public class PanelCentral extends JPanel {
 			e1 =new JLabel("<"+"html"+">"+m.devuelveMensaje("ejercicio.palabra",2)+
 					"<"+"br"+">"+m.devuelveMensaje("ejercicio.nrec",2)+"<!--"+"html"+"-->");
 			cajitaPalabrasSi= new JTextField(20);
-//			cajitaPalabrasSi.setEditable(true);
-//			cajitaPalabrasSi.setEnabled(true);
-//			cajitaPalabrasSi.setVisible(true);
 			cajitaPalabrasNo= new JTextField(20);
-//			cajitaPalabrasNo.setEditable(true);
-//			cajitaPalabrasNo.setEnabled(true);
-//			cajitaPalabrasNo.setVisible(true);
 			panelPalabras.add(e);
 			panelPalabras.add(cajitaPalabrasSi);
 			
@@ -761,10 +750,8 @@ public class PanelCentral extends JPanel {
 			JPanel panelPalabrasTotal=new JPanel();
 			panelPalabrasTotal.add(panelPalabras);
 
-			//expr.add(panelPalabrasTotal,BorderLayout/*.SOUTH*/.WEST);
-		//	panelB.add(p,BorderLayout.SOUTH); //p es var de clase
 			aux.add(panelPalabrasTotal,BorderLayout.CENTER);
-			panelB/*aux*/.add(expr,BorderLayout.CENTER);
+			panelB.add(expr,BorderLayout.CENTER);
 			
 			
 			vista.activaToogleButtons();
@@ -1001,7 +988,6 @@ public class PanelCentral extends JPanel {
 			Controlador controlador=vista.getControlador();
 			controlador.ejecutaQuery("TALF -ejmt "+rutaxml);	
 			Automata a=(MaquinaTuring)controlador.getSalida();
-			System.out.println("AUTOMATA GUARDA EJ:" + (MaquinaTuring)a);
 			panel.cargarAutomataNuevo(a);
 			panel.setTipoAutomata("MaquinaTuring");
 			return fich;
@@ -1023,7 +1009,6 @@ public class PanelCentral extends JPanel {
 			
 			panel.creaListaPalabras(cajitaPalabrasNo.getText(),1);
 			lp += "<listaPalabrasNo>";
-			System.out.println();
 			if(!panel.getListaPalabrasNo().isEmpty()){
 				Iterator<String> itLp = panel.getListaPalabrasNo().iterator();
 				while(itLp.hasNext()){
@@ -1043,7 +1028,6 @@ public class PanelCentral extends JPanel {
 			Controlador controlador=vista.getControlador();
 			controlador.ejecutaQuery("TALF -ejap "+rutaxml);	
 			Automata a=(AutomataPila)controlador.getSalida();
-			System.out.println("AUTOMATA GUARDA EJ:" + (AutomataPila)a);
 			panel.cargarAutomataNuevo(a);
 			panel.setTipoAutomata("AutomataPila");
 			return fich;
@@ -1217,9 +1201,6 @@ public class PanelCentral extends JPanel {
 
 				}
 				if(tipo.equals("AutomatasDePila")){
-					
-					System.out.println("palabrasSi: " +  cajitaPalabrasSi.getText());
-					System.out.println("palabrasNo: " +  cajitaPalabrasNo.getText());
 					if(cajitaPalabrasSi.getText().isEmpty() && cajitaPalabrasNo.getText().isEmpty()){
 						throw new AutomatasException(m.devuelveMensaje("excep.vacio",2));						
 					}

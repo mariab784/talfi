@@ -280,7 +280,7 @@ public class OyenteArista extends MouseAdapter {
 			if(origen==null)return;
 			destino=canvas.estadoEn(e.getPoint());
 			if(destino!=null){
-					if(canvas.getPila()){/*System.out.println("OK!!!!");*/dialog=createDialogAristaAP();}
+					if(canvas.getPila()){dialog=createDialogAristaAP();}
 					else if(canvas.getTuring() ){dialog=createDialogAristaTuring();}
 					else {dialog=createDialogArista();}
 				dialog.setSize(new Dimension(400,150));
@@ -422,8 +422,7 @@ public class OyenteArista extends MouseAdapter {
 								canvas.setAlfabeto(new Alfabeto_imp());
 							if(!canvas.getAlfabeto().estaLetra(ss)){
 								canvas.getAlfabeto().aniadirLetra(ss);
-							} //System.out.println(ss);//XXX
-							//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
+							} 
 							canvas.anadeArista(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));	
 						}
 						dialog.setVisible(false);
@@ -588,12 +587,7 @@ public class OyenteArista extends MouseAdapter {
 		try{
 			nombreArista=nomArs.getText().trim();
 			if(nombreArista.isEmpty()) throw new NullPointerException();
-				/*if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-				if(!canvas.getAlfabetoPila().estaLetra(nombreArista)){
-					canvas.getAlfabetoPila().aniadirLetra(nombreArista);
-				}*/ //System.out.println(nombreArista);//XXX
-				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
-				aristaTuring.setDireccion(nombreArista);
+								aristaTuring.setDireccion(nombreArista);
 				canvas.anadeAristaTuring(aristaTuring); //REVISAR
 				
 				Iterator<String> its = aristaTuring.getEntradaCinta().iterator();
@@ -625,8 +619,6 @@ public class OyenteArista extends MouseAdapter {
 		try{
 			nombreArista=nomArs.getText();
 			if(nombreArista.isEmpty()) throw new NullPointerException();
-				 //System.out.println(nombreArista);//XXX
-				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
 				aristaAP.setCimaPila(nombreArista.toUpperCase());
 			dialog.setVisible(false);
 			dialogTransicionPila();
@@ -691,9 +683,7 @@ public class OyenteArista extends MouseAdapter {
 		try{
 			nombreArista=nomArs.getText();
 			if(nombreArista.isEmpty()) throw new NullPointerException();
- //System.out.println(nombreArista);//XXX
-				//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),nombreArista,origen.getEtiqueta(),destino.getEtiqueta()));
-				aristaTuring.setSimboloCinta(nombreArista);
+ 				aristaTuring.setSimboloCinta(nombreArista);
 			dialog.setVisible(false);
 			dialogDireccionTuring();
 		} catch(NullPointerException ex){ //METER ERROR NUEVO
@@ -748,33 +738,6 @@ public class OyenteArista extends MouseAdapter {
 		
 	}
 	
-/*	private void meteSimbolosAPTuring(int caso) throws NullPointerException {
-		
-		nombreArista=nomArs.getText();
-		StringTokenizer st=new StringTokenizer(nomArs.getText(),",");
-		
-		while(st.hasMoreTokens()){
-			String ss=st.nextToken();
-			if(canvas.getAlfabetoPila()==null) canvas.setAlfabetoPila(new AlfabetoPila_imp());
-			if(!canvas.getAlfabetoPila().estaLetra(ss)){
-				canvas.getAlfabetoPila().aniadirLetra(ss);
-			} //System.out.println(ss);//XXX
-
-			if (caso == 0)aristaAP.anadirPila(ss);
-			else if (caso == 1){
-				//aristaTuring = new AristaTuring(origen.getX(),origen.getY(),destino.getX(),destino.getY(),origen.getEtiqueta(),destino.getEtiqueta());
-
-				aristaTuring.anadirSimboloCintaEntrada(ss);
-				
-				}
-					//	System.out.println("TRANS: "+ss);
-			//canvas.getListaAristas().add(new Arista(origen.getX(),origen.getY(),destino.getX(),destino.getY(),ss,origen.getEtiqueta(),destino.getEtiqueta()));
-		}
-		
-	}*/
-	
-	
-	
 	/**
 	 * Extraer la informacion de las transiciones de la pila en una transicion automata de pila
 	 * @author Rocío Barrigüete, Mario Huete, Luis San Juan
@@ -819,17 +782,6 @@ public class OyenteArista extends MouseAdapter {
 
 			canvas.anadeAristaAP(aristaAP);
 
-	/*		System.out.println("ESTADO INICIAL: " + canvas.getEstadoInicial());
-			
-			System.out.println("ALF: " + canvas.getAlfabeto());
-			
-			System.out.println("ALF PILA: " + canvas.getAlfabetoPila());
-			
-			System.out.println("ARISTAS: " + canvas.getListaAristasPila());
-			
-			System.out.println("ESTADOS: " + canvas.getNombreEstados());
-			
-			System.out.println("ESTADOS FINALES: " + canvas.getListaFinales());*/
 
 		} catch(NullPointerException ex){
 			JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("canvas.aristavaciaM",2),mensajero.devuelveMensaje("canvas.aristavaciaT",2),JOptionPane.ERROR_MESSAGE);

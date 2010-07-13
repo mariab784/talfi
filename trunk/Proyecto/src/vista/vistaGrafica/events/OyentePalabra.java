@@ -29,50 +29,42 @@ public class OyentePalabra extends MouseAdapter /*implements ActionListener*/{
 	private JDialog dialog;
 	@SuppressWarnings("unused")
 	private AutomataCanvas canvas;
-	//private String nombreArista;
 	private JTextField nomArs;
 	
 	
 	public OyentePalabra(AutomataCanvas c){canvas = c;}
 	
-	public void mouseClicked(MouseEvent e) {System.out.println("BIEEEN!");}
+	public void mouseClicked(MouseEvent e) {}
 	
-//	public void mouseDragged(MouseEvent e) {System.out.println("uHH!");}
-	public void mousePressed(MouseEvent e) {System.out.println("aHH!");}
-//	public void mouseReleased(MouseEvent e) { System.out.println("OHH!");}
+	public void mousePressed(MouseEvent e) {}
 	
 		public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		//hay ke meter una cajita para meter la palabra.. COMO????
-
 		JOptionPane pane=new JOptionPane();
 		//mensajero=Mensajero.getInstancia();
 		dialog=pane.createDialog("ARISTA");
 		JPanel panelD=new JPanel(new GridLayout(4,1));
 		JPanel panelC=new JPanel(new GridLayout(1,4));
 		JLabel etiqN=new JLabel("JLABEL");
-		/*JTextField*/ nomArs=new JTextField();
+		nomArs=new JTextField();
 		nomArs.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				if(e.getKeyCode()==KeyEvent.VK_ENTER){
 					palabra = nomArs.getText();
-					
-				 	//if (AutomataCanvas.getAP().reconocePalabra(palabra)) System.out.println("BIEEEN!");
 					dialog.setVisible(false);
 				}
 			}
 		});
 		JPanel panelB=  new JPanel();
-		JButton aceptar=new JButton("ACEPTAR"/*mensajero.devuelveMensaje("vista.aceptar",2)*/);
+		JButton aceptar=new JButton("ACEPTAR");
 		aceptar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				palabra = nomArs.getText();
-				//if (canvas.compruebaPalabra(palabra)) System.out.println("BIEEEN!");
 				dialog.setVisible(false);
 			}
 		});
-		JButton cancelar=new JButton("CANCELAR"/*mensajero.devuelveMensaje("vista.cancelar",2)*/);
+		JButton cancelar=new JButton("CANCELAR");
 		
 		cancelar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -89,8 +81,6 @@ public class OyentePalabra extends MouseAdapter /*implements ActionListener*/{
 		dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		dialog.setSize(new Dimension(400,150));
 		dialog.setVisible(true);
-		//return d;
-
 	}
 	
 	
