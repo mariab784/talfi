@@ -22,11 +22,10 @@ public class Greibach extends GramaticaIC{
 		prodConTerminal = new HashMap<String,ArrayList<Integer>>();
 		Mensajero mensajero = Mensajero.getInstancia();
 		lambda = mensajero.devuelveMensaje("simbolos.lambda",4);
-//		palabrasCompletadas = new ArrayList<Integer>();
 		listaProdPalabras = new ArrayList<Produccion>();
 	}
 	
-	private boolean todosTerminales(ArrayList<Produccion> prod){ //XXX
+	private boolean todosTerminales(ArrayList<Produccion> prod){
 		
 		for(int i = 0; i < prod.size(); i++){
 			
@@ -36,8 +35,6 @@ public class Greibach extends GramaticaIC{
 			}
 			else return false;
 		}
-		
-		
 		return true;
 	}
 	
@@ -48,16 +45,13 @@ public class Greibach extends GramaticaIC{
 		
 		String variableActual = this.getVariableInicial();
 		ArrayList<Produccion> listaProd = this.getProducciones().get(variableActual);
-//		ArrayList<Produccion> listaProdPalabras = new ArrayList<Produccion>();
-//		ArrayList<String> pal;
-
 		int i = 0; int tam = listaProd.size();
 			//idea: coger las producciones de S. Coger la primera produccion, y sustituir la variable.
 			//si tiene terminal, prioridad?
 		buscaDondeHayTerminales();
 		
 		if (this.getProdConTerminal().isEmpty()){
-			System.out.println("NO HAY TERMINALES = NO PODEMOS CREAR CADENAS");
+			//System.out.println("NO HAY TERMINALES = NO PODEMOS CREAR CADENAS");
 		}
 		else{
 		while(i < tam){
@@ -71,12 +65,7 @@ public class Greibach extends GramaticaIC{
 
 			i++;
 		}
-		
-//		System.out.println("LISTAprodPALABRAS: " + listaProdPalabras);
-		//aki tenemos las producciones de S que vamos a empezar a sustituir
-		
-		
-		//completamos la lista de palabras si es que no hemos llegado al maximo
+	//completamos la lista de palabras si es que no hemos llegado al maximo
 		if (  todosTerminales(listaProd) ){
 			
 			System.out.println("NO HAY PRODUCCIONES CON VARIABLES EN S. SOLO TERMINALES");
@@ -90,13 +79,11 @@ public class Greibach extends GramaticaIC{
 		else{
 			tam = listaProdPalabras.size(); i = 0;		
 			while (tam < numPalabras){
-		//		System.out.println("LISTAPRODPALABRAS: " + listaProdPalabras);
 				Produccion prod = listaProdPalabras.get(0);	
 				listaProdPalabras.remove(0);
-				int j = 1; //CAMBIADO!! XXX XXX
+				int j = 1;
 				ArrayList<String> concat = (ArrayList<String>) prod.getConcatenacion();
 				int tamConcat = concat.size();
-		//		if (tamConcat > 1){			CUIDADO!!!!!!!!
 					boolean enc = false; String s = null;
 					while(j < tamConcat && !enc){
 						s = concat.get(j);
@@ -115,21 +102,15 @@ public class Greibach extends GramaticaIC{
 						principio.add(trozo);
 					}
 				
-//				System.out.println("PRINCIPIO: " + principio);
+
 					ArrayList<Produccion> prodVar = null;
-					if (s == null) System.out.println("ERROR!ERROR!");
+					if (s == null) {}
 					else{
 						prodVar = this.getProducciones().get(s);
-			//			System.out.println("NO HAY ERROR!");	
-			//			System.out.println("prodVar : " + prodVar);
-			//			System.out.println("s : " + s);
 					}
 				//si prodvar == null cadena terminada
 					
 					if (prodVar == null){
-						
-						//this.listaPalabras.add(prod.getConcatenacion().toString());
-						System.out.println("prod? : " + prod);
 						this.listaProdPalabras.add(prod);
 					}
 					else{
@@ -166,13 +147,11 @@ public class Greibach extends GramaticaIC{
 
 							while(m < tamConcat-1){		
 								String letrita = concat.get(m);
-						//	System.out.println("letrita: " + letrita);
 								nueva2.add(letrita);
 								m++;
 							}							
 							nueva.setConcatenacion(nueva2);
 							if (!esta(nueva,listaProdPalabras)){
-						//		System.out.println("nueva : " + nueva);
 								listaProdPalabras.add(nueva);
 							}					
 						}	
@@ -180,17 +159,11 @@ public class Greibach extends GramaticaIC{
 						tam = listaProdPalabras.size();
 					}
 				}
-					
-		//		} //llave else creo	
+
 				tam = listaProdPalabras.size();
-	//			System.out.println("listaProdPalabras FINAL BUCLE ANTES DE SUBIR : " + listaProdPalabras);
 			}
-		
-//			System.out.println("vamos bien al final?" + listaProdPalabras);
-		//----------------------------hasta aki bien ya------------------------------/
+
 			while ((listaPalabras.size() < numPalabras)){
-	//			System.out.println("Lista en cada vuelta!: " + listaPalabras);
-	//			System.out.println("Listaprodpalabras en cada vuelta!: " + listaProdPalabras);
 				
 				boolean enc = false; 
 				ArrayList<String> concat = (ArrayList<String>) listaProdPalabras.get(0).getConcatenacion().clone();
@@ -205,20 +178,14 @@ public class Greibach extends GramaticaIC{
 					listaProdPalabras.remove(0);
 					
 					int j = 0;String s = null;
-		//			if (tamConcat > 1){
-					//boolean enc = false; 
-						while(j < tamConcat && !enc){
-							
+						while(j < tamConcat && !enc){							
 							s = concat.get(j);
-				//			System.out.println("S del bucle!!!!!!" + s);
 							if (!this.getVariables().contains(s)){
 								j++;						
 							}
 							else enc = true;
 						}
-		//			}
-				
-				//		System.out.println("S FUERA del bucle!!!!!!" + s);
+						
 					ArrayList<String> principio = new ArrayList<String>();
 					for(int k = 0; k <j; k++){
 						String trozo = new String(concat.get(k));
@@ -228,7 +195,6 @@ public class Greibach extends GramaticaIC{
 						construyePosibles(s,enc,concat,j,tam,principio,tamConcat);					
 				}
 			}
-			System.out.println("Lista: " + listaPalabras);
 		}
 		
 		}
@@ -239,9 +205,7 @@ public class Greibach extends GramaticaIC{
 	@SuppressWarnings("unchecked")
 	private void construyePosibles(String s,boolean enc,ArrayList<String> concat,int j,int tam, 
 			ArrayList<String> principio,int tamConcat){
-		
-	//	ArrayList<String> concat= (ArrayList<String>) concat2.clone();
-		//System.out.println("PRINCIPIO: " + principio);
+
 		Produccion repetir = new Produccion(); //AÑADIDO
 		repetir.setConcatenacion((ArrayList<String>) concat.clone());
 		listaProdPalabras.add(repetir);
@@ -269,22 +233,15 @@ public class Greibach extends GramaticaIC{
 				ArrayList<String> concatProd = (ArrayList<String>) itProdVar.getConcatenacion().clone();
 
 			
-				int m = 0; //concatProd = itProdVar.getConcatenacion();
+				int m = 0;
 				int tamConcatProd = concatProd.size();
 				
 				while(m < tamConcatProd){
 					String saux = new String(concatProd.get(m));
-					
 
-					//System.out.println("saux:" + lambda+"fin");
-					//System.out.println("saux indexof: " + saux.indexOf(lambda));
 					if (!saux.equals(lambda)){
-						//System.out.println("saux:" + saux);
-					//	System.out.println("lambda:" + lambda+"fin");
-					//	System.out.println("distintas!");
 						nueva2.add(saux);
 					}
-					//else{ System.out.println("iguales!!"); }
 					m++;
 				}
 
@@ -302,10 +259,6 @@ public class Greibach extends GramaticaIC{
 			tam = listaProdPalabras.size();
 		}
 	}
-//	tam = listaProdPalabras.size();
-		
-		
-//	}
 
 	
 	private boolean esta(Produccion pnueva, ArrayList<Produccion >lprod){
@@ -344,32 +297,23 @@ public class Greibach extends GramaticaIC{
 	
 	
 	private void buscaDondeHayTerminales(){
-//		System.out.println("Ke hay en variables?: " + this.getVariables());
-//		System.out.println("Ke hay en terminales?: " + this.getSimbolos());
 		Iterator<String> itLetras = this.getVariables().iterator();
 
 		while (itLetras.hasNext()){
 			
 			String variableActual = itLetras.next();
-		//	System.out.println("Ke hay en variableActual?: " + variableActual);
 			ArrayList<Produccion> prod = this.getProducciones().get(variableActual);
-		//	System.out.println("Ke hay en rrayList<Produccion> prod?: " + prod);
 			int i = 0; int tam = prod.size();
 			while(i < tam){
 				Produccion produc = prod.get(i);
-		//		System.out.println("Ke hay en produc?: " + produc);
 				ArrayList<String> concat = produc.getConcatenacion();
-		//		System.out.println("Ke hay en concat?: " + produc);
 				if (concat.size() == 1 && !this.getVariables().contains(concat.get(0))){
-		//			System.out.println("TERMINAL!");
 					if (!prodConTerminal.containsKey(variableActual)){
-		//				System.out.println("NO ESTOY!");
 						ArrayList<Integer> aInt = new ArrayList<Integer>();
 						aInt.add(i);
 						prodConTerminal.put(variableActual, aInt);							
 					}
 					else{
-		//				System.out.println("YA ESTOY!");
 						ArrayList<Integer> aInt = prodConTerminal.get(variableActual);
 						prodConTerminal.remove(variableActual);
 						aInt.add(i);
@@ -379,8 +323,6 @@ public class Greibach extends GramaticaIC{
 				i++;
 			}
 		}
-//		System.out.println("KE HAY EN prodConTerminal?" + prodConTerminal);
-//		System.out.println("FIN BUSCAR TERMINALES");
 	}
 	
 	

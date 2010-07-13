@@ -77,7 +77,7 @@ public class AceptaTuring {
         int k = 0;
         int j = 0;
         String est = maquina.getEstadoIni();//estado de cada pasada
-        char sim = cinta.charAt(/*k*/j);//simbolo de cada pasada
+        char sim = cinta.charAt(j);//simbolo de cada pasada
         int numAristas = aristas.size();
         
         maquina.creaAlfEntrada(cinta);
@@ -98,7 +98,7 @@ public class AceptaTuring {
         		ArrayList<String> entradaCinta = arist.getEntradaCinta();
      
         		String sims = sim+"";
-        		boolean b2 = entradaCinta.contains(/*(sim+"")*/sims);
+        		boolean b2 = entradaCinta.contains(sims);
 
         		if(b1 && b2 )   {
         			String primero = "";	        		
@@ -131,8 +131,6 @@ public class AceptaTuring {
         		}
         		else 
         			k++;
-
-        		//numVueltas++;
         	}
         }
 
@@ -155,29 +153,24 @@ public class AceptaTuring {
             	pw.close();
             	
             	if(cf != null){
-            		if(cf.equals(cinta)){/*System.out.println("devuelvo 1 sin finales");*/ return 1;}
-            		else{/*System.out.println("devuelvo 2 sin finales");*/ return 2;}
+            		if(cf.equals(cinta)){return 1;}
+            		else{return 2;}
             	}
             	else{
-            		//System.out.println("devuelvo 0 sin finales");
             		return 0;
             	}
             }
     		else{
     			if(!maquina.getEstadosFinales().contains(est)){
-    				//System.out.println("La cinta de entrada no es reconocida por la Maquina de Turing.");
     				if(!corregir) JOptionPane.showMessageDialog(
                     		null,mensajero.devuelveMensaje("vista.turingno", 2),mensajero.devuelveMensaje("vista.ejecucion", 2)
                     		,JOptionPane.PLAIN_MESSAGE);
-    			//	System.out.println("devuelvo 2 con finales");
     				return 2;
     			}
     			else{
-    			//	System.out.println("La cinta de entrada es reconocida por la Maquina de Turing.");
     				if(!corregir) JOptionPane.showMessageDialog(
                     		null,mensajero.devuelveMensaje("vista.turingsi", 2),mensajero.devuelveMensaje("vista.ejecucion", 2)
                     		,JOptionPane.PLAIN_MESSAGE);
-    	//			System.out.println("devuelvo 1 con finales");
     				return 1;
     			}
     			
@@ -190,32 +183,23 @@ public class AceptaTuring {
 	    	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("vista.nocinta", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 	    }
 	    catch(AutomatasException e){
-	    	JOptionPane.showMessageDialog(null,/*mensajero.devuelveMensaje("canvas.noinicial", 2)*/e.getMensaje(),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
+	    	JOptionPane.showMessageDialog(null,e.getMensaje(),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 	    }
 	    catch (IOException e) {
 			// TODO Auto-generated catch block
 	    	JOptionPane.showMessageDialog(null,mensajero.devuelveMensaje("parser.noarchivo", 2),mensajero.devuelveMensaje("vista.ejecucion", 2),JOptionPane.ERROR_MESSAGE);
 		}
 
-	    return-2;//para que no pete
+	    return-2;
 	}
 	
-//MÉTODOS*********************************************************
-	
-	public void acepta() {
-		
+	public void acepta() {		
 		cargaArchivo();
-		
-
-    
 	} 
 
-//****************************************************************	
-
 public String salidaCinta(String cinta,int j){
-//	System.out.println("J SALIDACINTA: "+ j);
-	if (j == -1) return new String(cinta);
-	
+
+	if (j == -1) return new String(cinta);	
 	else return new String(cinta.substring(j));
 	
 }
@@ -245,7 +229,6 @@ public boolean todoBlancos(String cinta, int pos){
 		if(!blanco.equals(car))return false;
 		pos++;
 	}
-	System.out.println("TODO BLANCOS!!");
 	return true;
 	
 }

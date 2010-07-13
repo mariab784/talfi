@@ -141,7 +141,7 @@ public class C_Y_K {
 			 }	 
 			 
 		 }
-		 pintaTabla(tam,tabla);
+//		 pintaTabla(tam,tabla);
 		 tablas.put(palabra, tabla);
 		 return (tabla[1][tam].getConcatenacion().contains(g.getVariableInicial()));
 	}

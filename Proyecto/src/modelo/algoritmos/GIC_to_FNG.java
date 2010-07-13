@@ -375,7 +375,7 @@ public class GIC_to_FNG {
 		String nVar = null;
 		int tam = gramaticaSalida.getVariables().size()-1;
 		String ultVar = gramaticaSalida.getVariables().get(tam);
-		System.out.println("tam ultvar: " + ultVar.length());
+
 		if(ultVar.length() > 1){
 			nVar = "[" + auxvariable + contadoraux + "]";
 			contadoraux++;
@@ -399,31 +399,29 @@ public class GIC_to_FNG {
 				ArrayList<String> copiaConcat = (ArrayList<String>) paux.getConcatenacion().clone();
 				Produccion ppaux = new Produccion();
 				ppaux.setConcatenacion(copiaConcat);
-				p.add(/*paux*/ppaux);
+				p.add(ppaux);
 				concat = (ArrayList<String>)a.clone();
 				concat.add(nVar);
 				pod = new Produccion();
 
-				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+				pod.setConcatenacion(concat);
 				p.add(pod);
 			}
 			else{
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
 				pod = new Produccion();
-				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+				pod.setConcatenacion(concat);
 				if (!concat.isEmpty())produccionesNuevas.add(pod);
 				pod = new Produccion();
 				concat = (ArrayList<String>)a.clone();
 				concat.remove(0);
-				pod.setConcatenacion(/*arreglaConcatenacion(*/concat/*)*/); //XXX CAMBIADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+				pod.setConcatenacion(concat);
 				pod.anadeCadena(nVar);
 				produccionesNuevas.add(pod);
 			}
 		}
 		if(produccionesNuevas.size() == 1 || produccionesNuevas.isEmpty()){
-						System.out.println("produccionesNuevas ke es? " + produccionesNuevas);
-			//			System.out.println("NO ME AÑADAS!!");
 			gramaticaSalida.getProducciones().remove(var); //CAMBIADO
 			ArrayList<Produccion> pajus = quitaProdRecursiva(produccionesDiagonal,var);
 			gramaticaSalida.getProducciones().put(var, pajus);		
@@ -466,8 +464,8 @@ public class GIC_to_FNG {
 		
 		while(getTablaTieneMarcas()){
 			
-			if (!diagonalMarcada()){ /*System.out.println("DIAGONAL NO ");*/ sustituir();}
-			else{ /*System.out.println("DIAGONAL SI ");*/ sustituirDiagonal();}
+			if (!diagonalMarcada()){sustituir();}
+			else{ sustituirDiagonal();}
 			transforma_FNG(b);
 			
 		}

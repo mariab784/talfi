@@ -624,16 +624,16 @@ public class AutomataPila extends AutomataFND implements Automata{
 	public void reconocePalabra(final String palabra){
 
 		try{		
-			apd = compruebaAPD();
+			/*apd = compruebaAPD();
 			if (this.apd)System.out.println("DETERMINISTA!!!");
-			else System.out.println("SH*T!!!");
+			else System.out.println("SH*T!!!");*/
 		
 			if (!this.estadosFinales.isEmpty()) convertirPilaVacia();
 		
-			if (this.aristasQueDesapilan.isEmpty() && this.estadosFinales.isEmpty()) 
-				System.out.println("LENGUAJE VACIO");
+/*			if (this.aristasQueDesapilan.isEmpty() && this.estadosFinales.isEmpty()) 
+				System.out.println("LENGUAJE VACIO");*/
 		}
-		catch (StackOverflowError e){System.out.println("FALLO grrrrrrrr");}
+		catch (StackOverflowError e){e.printStackTrace();}
 	}
 		
 	/**

@@ -22,7 +22,6 @@ public class TuringResultado {
 	public TuringResultado(ArrayList<String> listaPal,ArrayList<String> listaCintaPal,
 			ArrayList<String> listaPalNo,ArrayList<String> listaCintaPalNo,ArrayList<String> listaBucle,
 			MaquinaTuring mt){
-		System.out.println("mt turing resultado: " + mt);
 		resultPal = new ArrayList<Boolean>();
 		resultPalNo = new ArrayList<Boolean>();
 		resultBucle = new ArrayList<Boolean>();
@@ -47,12 +46,6 @@ public class TuringResultado {
 		boolean r3 = true;
 		int tam = 0;
 		boolean b = true;
-		System.out.println("tieneFinales: " + tieneFinales);
-		System.out.println("listaPal: " + listaPal);
-		System.out.println("listaCintaPal: " + listaCintaPal);
-		System.out.println("listaPalNo: " + listaPalNo);
-		System.out.println("listaCintaPalNo: " + listaCintaPalNo);
-		System.out.println("listaBucle: " + listaBucle);
 		
 		if(listaPal != null){
 		tam = listaPal.size();
@@ -61,18 +54,13 @@ public class TuringResultado {
 
 			String s = listaPal.get(i);
 			if(tieneFinales){
-
 				b =  (aceptaTuring.simulaEjecucion(s,null) == 1);
 			}
 			else{
-				System.out.println("sin finales 1 ");
 				b =  (aceptaTuring.simulaEjecucion(s,listaCintaPal.get(i)) == 1);
 			}
-			System.out.println("sin finales 1 b: " + b);
-			resultPal.add(b);
-			
+			resultPal.add(b);			
 			r1 = b&&r1;
-			System.out.println("r1 me trae de cabeza : " + r1);
 			}
 		}
 		
@@ -88,11 +76,9 @@ public class TuringResultado {
 			else{
 				b =  (aceptaTuring.simulaEjecucion(s,listaCintaPalNo.get(i)) == 2);
 			}
-			System.out.println("sin finales 2 b: " + b);
 			resultPalNo.add(b);
 			
 			r2 = b&&r2;
-			System.out.println("r2 me trae de cabeza : " + r2);
 		}
 		}
 		
@@ -107,12 +93,6 @@ public class TuringResultado {
 			r3 = b&&r3;
 		}
 		}
-
-		System.out.println("r1 me trae de cabeza : " + r1);
-		System.out.println("r2 me trae de cabeza : " + r2);
-		System.out.println("r3 me trae de cabeza : " + r3);
 		result = r1&&r2&&r3;
-		System.out.println("result : " + result);
-
 	}
 }
