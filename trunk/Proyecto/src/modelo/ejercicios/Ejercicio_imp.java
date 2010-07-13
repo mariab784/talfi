@@ -121,31 +121,20 @@ public class Ejercicio_imp implements Ejercicio{
 		// TODO Auto-generated method stub
 
 		if(respuesta instanceof AutomataPila){
-//			System.out.println("imprimeme respuesta a ver..." + respuesta);
-			System.out.println("listaPalabraskesi: " + ((AutomataPila)resultado).getListaPalabrasEj());
-			System.out.println("listaPalabraskeno: " + ((AutomataPila)resultado).getListaPalabrasEjNo());
+
 			AutomataP_to_GramaticaIC algapgic = new AutomataP_to_GramaticaIC((Automata)respuesta);
 			GIC_to_FNChomsky gictofnc = new GIC_to_FNChomsky(algapgic.getGic(),true);
 			C_Y_K cyk = new C_Y_K(((AutomataPila)resultado).getListaPalabrasEj(),
 					((AutomataPila)resultado).getListaPalabrasEjNo(),gictofnc.getGramaticaSalida());
 			
-			System.out.println(cyk.getAceptadas()&& cyk.getNoAceptadas());
 			return cyk.getAceptadas()&& cyk.getNoAceptadas();
 		}
 		else if(respuesta instanceof MaquinaTuring){
 			MaquinaTuring mt = (MaquinaTuring)resultado;
-//			System.out.println("imprimeme respuesta a ver..." + respuesta);
-//			System.out.println("imprimeme resultado a ver..." + resultado);
-	//		System.out.println("listaPalabraskesi: " + ((MaquinaTuring)resultado).getListaPalabrasEj());
-	//		System.out.println("listaPalabraskeno: " + ((MaquinaTuring)resultado).getListaPalabrasEjNo());
-			/*ArrayList<String> listaPal,ArrayList<String> listaCintaPal,
-			ArrayList<String> listaPalNo,ArrayList<String> listaCintaPalNo,ArrayList<String> listaBucle,
-			MaquinaTuring mt*/
 			TuringResultado tr = new TuringResultado(mt.getListaPalabrasEj(),mt.getListaCintaPalabrasEj(),
 					mt.getListaPalabrasEjNo(), mt.getListaCintaPalabrasEjNo(),mt.getListaPalabrasBucleEj(),
 					(MaquinaTuring)respuesta);
-			
-	//		System.out.println("SIIIIIIIIIIIIIITURING buscameke estoy sin comprobar");
+
 		return tr.getResult();
 		}
 		else{
@@ -186,15 +175,6 @@ public class Ejercicio_imp implements Ejercicio{
 					algEquivalencia.ejecutar(false);
 					return algEquivalencia.getResultado();//devuelve el resultado de la correcion
 				}
-				/*if(resultado instanceof MaquinaTuring){
-					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
-					deTuring = true;
-				}
-				if(resultado instanceof AutomataPila){
-					System.out.println("ESTOY EN EJERCICIO_IMP CORREGIR SIN HACER");
-					dePila = true;
-					
-				}*/
 				
 				
 				if(resultado instanceof AutomataFNDLambda){

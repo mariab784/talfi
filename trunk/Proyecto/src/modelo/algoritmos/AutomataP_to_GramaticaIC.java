@@ -180,7 +180,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			
 		for(int j = 0; j < tamSimbolos; j++){
 			String sim = simbolos.get(j);
-			p.anadeCadena(sim); //por si acaso no diferenciamos al principio
+			p.anadeCadena(sim); 
 			for(int i = 0; i < tamListaConcreta; i++){
 				String cadProd = "[";
 				if (i == 0) cadProd += destino;
@@ -190,7 +190,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 						sigEstado = rk;
 				}
 				else{
-					 sigEstado = lista.get(i/*+1*/);
+					 sigEstado = lista.get(i);
 				}	
 					
 				cadProd += salidaPila.get(i)+sigEstado+"]";
@@ -343,9 +343,7 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				xmllatex+="<oculto><titulo>"+
 				mensajero.devuelveMensaje("simplificacionGICs.quitvsimprodlatex",2)+
 				this.getGic().getVariablesSinProd().toString()+"</titulo>";
-				
-				/*System.out.println(mensajero.devuelveMensaje("simplificacionGICs.quitvsimprod",2)+
-						this.getGic().getVariablesSinProd().toString());*/
+
 
 			}
 			if(escribe && !simp){
@@ -359,8 +357,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				xmllatex+="<oculto><titulo>"+
 				mensajero.devuelveMensaje("simplificacionGICs.noalclatex",2)+
 				this.getGic().dameNoAlcanzables().toString()+"</titulo>";
-				/*System.out.println(mensajero.devuelveMensaje("simplificacionGICs.noalc",2) +
-						this.getGic().dameNoAlcanzables().toString());*/
 			}
 
 			while(d){
@@ -371,29 +367,24 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 			if(escribe){
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
 				xml+= gic.toXML()+"</paso>\n";
-				xmllatex+=gic.toLat()+"</oculto>\n";
-				//System.out.println(gic);
-				
+				xmllatex+=gic.toLat()+"</oculto>\n";				
 			}
 
 			if(!hecho){
-				if(b){//unicaprod
+				if(b){
 				html+="<br><h2>"+ mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+ "</h2><h3>"+
 				this.getGic().getProdUnit().toString()+"</h3>";
 				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+
 				this.getGic().getProdUnit().toString()+"</titulo>";
 				xmllatex+="<oculto><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.unicaprodlatex",2)+
-				this.getGic().getProdUnit().toString()+"</titulo>";
-				/*System.out.println(mensajero.devuelveMensaje("simplificacionGICs.unicaprod",2)+
-						this.getGic().getProdUnit().toString());*/
-				
+				this.getGic().getProdUnit().toString()+"</titulo>";			
 				this.getGic().quitaProdUnitarias();
 				html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
 				xml+=gic.toXML()+"</paso>\n";
 				xmllatex+=gic.toLat()+"</oculto>\n";
 				if(!hecho)hecho = true;
 				}
-				else if(!hecho && c) {//prodrec
+				else if(!hecho && c) {
 				html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.prodrec",2)+"</h2><h3>"+
 				this.getGic().getProdRecursivas().toString()+"</h3>";
 				xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.prodrec",2)+
@@ -424,7 +415,6 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 				}
 			}
 
-			//d = this.getGic().dimeSiHayVariablesQueNoTienenProd();
 			if(simp)d= this.getGic().dimeSiHayVariablesQueNoTienenProd();
 			else{ d = this.getGic().calculaAlcanzables();}
 			if(!d){
@@ -521,25 +511,13 @@ public class AutomataP_to_GramaticaIC implements Algoritmo {
 
 		html+="<br><h2>"+mensajero.devuelveMensaje("simplificacionGICs.genttotalsimp", 2)+"</h2>";
 		html+="<br><center><table>" + gic.toHTML() + "</table></center><br>";
-/*		lat="\\MYp{\\Huge " + mensajero.devuelveMensaje("simplificacionGICs.gentradasimlatex", 2) +
-
-		
-
-		"\\newline\n"+ "\\newline\n"+"}\n"+
-	       gic.toLat() + "\\newpage";*/
 		xmllatex+="</ocultar>";
 		xmllatex+="\n<step><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.gentradasimlatex", 2)
-		+"</titulo>"+gic.toLat()+"</step>\n";
-		
+		+"</titulo>"+gic.toLat()+"</step>\n";		
 		xml+="<paso><titulo>"+mensajero.devuelveMensaje("simplificacionGICs.genttotalsimp", 2)+
 		"</titulo>"+gic.toXML()+"</paso>\n</pasos>\n";
 		gic.setXML(xml);
-		
-/*		xmllatex+="\n<item>"+"<titulo>"+mensajero.devuelveMensaje("simplificacionGICs.genttotalsimp", 2)+
-		"</titulo>"+"<tabla>"+gic.toLat()+"</tabla>"+"</item>\n</ocultar>\n"*/;
-		System.out.println("XML LATEX APTOGRAMAT:\n" + xmllatex);
-		
-		gic.setXMLLatex(xmllatex);//XXX
+		gic.setXMLLatex(xmllatex);
 	}
 	
 	public String getLatex(){return lat;}
